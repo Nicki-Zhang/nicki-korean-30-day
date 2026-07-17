@@ -1,27 +1,23 @@
-window.LEARNING_COURSES=[
-{id:'korean-30',icon:'🇰🇷',title:'韩语30天',subtitle:'零基础到基础会话',category:'语言',level:'入门',days:30,minutes:30,lang:'ko-KR',source:'index.html.html',status:'ready',description:'完整30天韩语课程，包含发音、词汇、语法、会话、笔记和打卡。'},
-{id:'japanese-starter',icon:'🇯🇵',title:'日语入门',subtitle:'五十音与基础表达',category:'语言',level:'入门',days:5,minutes:25,lang:'ja-JP',status:'starter',description:'可直接学习的日语示范课程，可继续扩展为30天。',lessons:[
-{title:'五十音与日语发音',body:'<h3>今日目标</h3><div class="card">认识平假名的作用，掌握 あ・い・う・え・お。</div><div class="krow"><div><div class="ko">あ い う え お</div><div class="roman">a · i · u · e · o</div><div class="zh">日语五个基本元音</div></div><button data-speak="あ い う え お">▶ 发音</button></div>'},
-{title:'基础问候',body:'<h3>重点表达</h3><div class="krow"><div><div class="ko">こんにちは</div><div class="roman">konnichiwa</div><div class="zh">你好</div></div><button data-speak="こんにちは">▶ 发音</button></div><div class="krow"><div><div class="ko">ありがとうございます</div><div class="roman">arigatou gozaimasu</div><div class="zh">非常感谢</div></div><button data-speak="ありがとうございます">▶ 发音</button></div>'},
-{title:'自我介绍',body:'<h3>核心句型</h3><div class="krow"><div><div class="ko">私はニッキーです。</div><div class="roman">Watashi wa Nicki desu.</div><div class="zh">我是Nicki。</div></div><button data-speak="私はニッキーです">▶ 发音</button></div>'},
-{title:'数字与时间',body:'<h3>基础数字</h3><div class="krow"><div><div class="ko">一、二、三、四、五</div><div class="roman">ichi, ni, san, yon, go</div><div class="zh">1、2、3、4、5</div></div><button data-speak="いち、に、さん、よん、ご">▶ 发音</button></div>'},
-{title:'工作场景表达',body:'<h3>会议表达</h3><div class="krow"><div><div class="ko">確認してください。</div><div class="roman">Kakunin shite kudasai.</div><div class="zh">请确认。</div></div><button data-speak="確認してください">▶ 发音</button></div>'}]},
-{id:'english-business',icon:'🇺🇸',title:'商务英语',subtitle:'会议、汇报与客户沟通',category:'语言',level:'进阶',days:5,minutes:30,lang:'en-US',status:'starter',description:'围绕制造业项目管理和客户会议设计的英语示范课程。',lessons:[
-{title:'Opening a Meeting',body:'<h3>核心表达</h3><div class="krow"><div><div class="ko">Let’s start with today’s key topics.</div><div class="zh">我们先从今天的重点议题开始。</div></div><button data-speak="Let’s start with today’s key topics.">▶ 发音</button></div>'},
-{title:'Explaining a Gap',body:'<div class="krow"><div><div class="ko">The gap was mainly caused by minor adjustments and material variation.</div><div class="zh">差距主要由轻微调机和材料波动造成。</div></div><button data-speak="The gap was mainly caused by minor adjustments and material variation.">▶ 发音</button></div>'},
-{title:'Presenting Actions',body:'<div class="krow"><div><div class="ko">We have standardized the operation and strengthened shift alignment.</div><div class="zh">我们已标准化操作并加强班次对齐。</div></div><button data-speak="We have standardized the operation and strengthened shift alignment.">▶ 发音</button></div>'},
-{title:'Handling Challenges',body:'<div class="krow"><div><div class="ko">We will verify the trend before making a firm commitment.</div><div class="zh">我们会先验证趋势，再做明确承诺。</div></div><button data-speak="We will verify the trend before making a firm commitment.">▶ 发音</button></div>'},
-{title:'Closing a Meeting',body:'<div class="krow"><div><div class="ko">We will follow up with the updated data and action status.</div><div class="zh">我们会跟进更新后的数据和行动状态。</div></div><button data-speak="We will follow up with the updated data and action status.">▶ 发音</button></div>'}]},
-{id:'faca-8d',icon:'📋',title:'FACA 与 8D',subtitle:'客诉分析与问题闭环',category:'专业',level:'实战',days:5,minutes:35,lang:'zh-CN',status:'starter',description:'从问题定义、临时措施到根因、永久对策和验证的结构化课程。',lessons:[
-{title:'问题定义与事实确认',body:'<h3>学习重点</h3><div class="card">用 What、Where、When、Who、How many 描述问题，区分事实、推断和待验证假设。</div>'},
-{title:'D3 临时措施',body:'<div class="card">先控制风险和阻止不良继续流出。临时措施必须说明范围、责任人、开始时间和解除条件。</div>'},
-{title:'根因与流出原因',body:'<div class="card">发生根因解释为什么产生；流出根因解释为什么没有被现有控制发现。</div>'},
-{title:'永久对策与验证',body:'<div class="card">对策应直接对应已验证根因，并通过数据、批量、时间和边界条件证明有效。</div>'},
-{title:'One-pager 输出',body:'<div class="card">一页中浓缩问题、围堵、根因、对策、验证和风险状态，图文优先，避免堆叠文字。</div>'}]},
-{id:'excel-practical',icon:'📊',title:'Excel 实战',subtitle:'函数、图表与数据处理',category:'工具',level:'入门',days:5,minutes:30,lang:'zh-CN',status:'starter',description:'面向日常办公和制造业数据分析的Excel示范课程。',lessons:[
-{title:'数据清洗基础',body:'<div class="card">掌握 TRIM、SUBSTITUTE、VALUE 和文本分列，清理单位、空格和异常字符。</div>'},
-{title:'条件判断',body:'<div class="card">使用 IF、IFS、AND、OR 建立状态判断和异常提示。</div>'},
-{title:'查找与匹配',body:'<div class="card">优先掌握 XLOOKUP，并理解 INDEX + MATCH 的灵活应用。</div>'},
-{title:'数据汇总',body:'<div class="card">通过 SUMIFS、COUNTIFS 和数据透视表快速汇总制程数据。</div>'},
-{title:'可视化',body:'<div class="card">根据目的选择趋势图、Pareto、箱线图和散点图，避免只追求颜色和装饰。</div>'}]}
+window.LANGUAGES=[
+{id:'ko',icon:'🇰🇷',name:'韩语',native:'한국어',lang:'ko-KR',accent:'#4d7cfe',hello:'안녕하세요',sample:'저는 오늘 한국어를 공부해요.'},
+{id:'ja',icon:'🇯🇵',name:'日语',native:'日本語',lang:'ja-JP',accent:'#e25b62',hello:'こんにちは',sample:'今日は日本語を勉強します。'},
+{id:'en',icon:'🇺🇸',name:'英语',native:'English',lang:'en-US',accent:'#27a36a',hello:'Hello',sample:'I am studying English today.'},
+{id:'zh',icon:'🇨🇳',name:'中文',native:'中文',lang:'zh-CN',accent:'#e09b27',hello:'你好',sample:'我今天学习中文。'},
+{id:'vi',icon:'🇻🇳',name:'越南语',native:'Tiếng Việt',lang:'vi-VN',accent:'#b54bd1',hello:'Xin chào',sample:'Hôm nay tôi học tiếng Việt.'}
 ];
+window.STAGES=[
+{id:'starter',name:'零基础',cefr:'Pre-A1',days:'1–30',goal:'掌握文字、发音和最基本生存表达',topics:['文字与声音','基础问候','数字与时间','身份与国家','家庭与人物','食物与饮料','地点与方向','日常动作','购物基础','阶段复习']},
+{id:'basic',name:'基础交流',cefr:'A1',days:'31–60',goal:'能够完成常见生活场景交流',topics:['自我介绍','日程安排','餐厅点餐','交通出行','购物询价','天气与季节','兴趣爱好','身体与健康','邀请与约会','阶段复习']},
+{id:'elementary',name:'独立表达',cefr:'A2',days:'61–90',goal:'能够描述经历、计划和个人观点',topics:['过去经历','未来计划','比较选择','原因结果','工作与学习','旅行住宿','电话沟通','问题处理','文化与礼貌','阶段复习']},
+{id:'intermediate',name:'流畅会话',cefr:'B1',days:'91–120',goal:'就熟悉主题持续交流并处理意外情况',topics:['讲述故事','表达意见','同意与反对','新闻与社会','职场协作','投诉与解决','正式与非正式表达','听力策略','自然连接表达','阶段复习']},
+{id:'advanced',name:'进阶表达',cefr:'B2',days:'121–150',goal:'准确讨论复杂话题并理解自然语速',topics:['抽象观点','论证与举例','语气与细微差别','演讲与汇报','谈判与说服','跨文化交流','长篇阅读','影视听力','写作与改写','阶段复习']},
+{id:'fluent',name:'流利交流',cefr:'C1',days:'151–180',goal:'在生活和工作中自然、灵活、准确表达',topics:['即兴表达','专业会议','主持讨论','冲突管理','幽默与习语','高阶听辨','观点辩论','专业写作','真实情景挑战','毕业评估']}
+];
+window.TEST_BANK={
+ko:[['“안녕하세요”是什么意思？','你好',['谢谢','你好','再见'],1],['选择正确表达：我是学生。','저는 학생입니다.',['학생 좋아요','저는 학생입니다.','학생 어디예요'],1],['“어제”表示什么时间？','昨天',['明天','今天','昨天'],2],['哪一句适合礼貌请求？','확인해 주세요.',['확인해 주세요.','확인했어요?','확인 안 해요.'],0],['选择最自然的表达：因为下雨，所以没去。','비가 와서 안 갔어요.',['비가 오지만 갔어요.','비가 와서 안 갔어요.','비가 오면 갔어요.'],1]],
+ja:[['“こんにちは”是什么意思？','你好',['谢谢','你好','晚安'],1],['选择正确表达：我是学生。','私は学生です。',['学生をです','私は学生です。','学生があります'],1],['“昨日”表示什么时间？','昨天',['昨天','今天','明天'],0],['哪一句是礼貌请求？','確認してください。',['確認です','確認してください。','確認しない'],1],['选择自然表达：因为下雨，所以没去。','雨が降ったので、行きませんでした。',['雨ですが、行きました。','雨が降ったので、行きませんでした。','雨なら、行きます。'],1]],
+en:[['“How are you?”最常见的意思是？','你好吗',['你是谁','你好吗','你去哪'],1],['选择正确句子。','I am a student.',['I student am.','I am a student.','I is student.'],1],['“yesterday”表示？','昨天',['昨天','今天','明天'],0],['哪一句最适合礼貌请求？','Could you check this, please?',['Check this now.','Could you check this, please?','You check?'],1],['选择自然表达。','I stayed home because it was raining.',['I stayed home because it was raining.','Although raining, I stay home yesterday.','Because rain, I will stayed.'],0]],
+zh:[['“你好”通常用于？','问候',['道歉','问候','告别'],1],['选择正确句子。','我是学生。',['我学生是。','我是学生。','学生我有。'],1],['“昨天”表示？','过去的一天',['过去的一天','今天','未来的一天'],0],['哪一句更礼貌？','请帮我确认一下。',['你确认。','请帮我确认一下。','确认没有？'],1],['选择自然表达。','因为下雨，所以我没去。',['虽然下雨，所以我去了。','因为下雨，所以我没去。','如果下雨，我昨天去。'],1]],
+vi:[['“Xin chào”是什么意思？','你好',['谢谢','你好','再见'],1],['选择正确表达：我是学生。','Tôi là học sinh.',['Tôi học sinh là.','Tôi là học sinh.','Là tôi học sinh.'],1],['“hôm qua”表示？','昨天',['明天','昨天','今天'],1],['哪一句是礼貌请求？','Bạn vui lòng kiểm tra giúp tôi.',['Kiểm tra ngay.','Bạn vui lòng kiểm tra giúp tôi.','Bạn không kiểm tra.'],1],['选择自然表达。','Vì trời mưa nên tôi không đi.',['Vì trời mưa nên tôi không đi.','Tuy trời mưa nên tôi đã đi.','Nếu mưa hôm qua tôi đi.'],0]]
+};
+window.buildLessons=function(language){return STAGES.flatMap((stage,si)=>Array.from({length:30},(_,di)=>{const day=si*30+di+1,topic=stage.topics[Math.floor(di/3)],cycle=di%3;const focus=['理解核心输入','进行控制练习','完成真实输出'][cycle];return{id:`${language.id}-${day}`,day,stage:si,title:`${topic} · ${focus}`,goal:`围绕“${topic}”完成${focus}，逐步达到${stage.goal}。`,body:`<div class="lessonMeta"><span>${stage.cefr}</span><span>Day ${day}</span><span>约 30 分钟</span></div><h3>今日目标</h3><div class="card">${focus}：${topic}。先听和模仿，再替换关键词，最后独立表达。</div><h3>输入练习</h3><div class="krow"><div><div class="ko">${language.sample}</div><div class="zh">使用今日主题替换人物、时间、地点或动作。</div></div><button data-speak="${language.sample}">▶ 发音</button></div><h3>每日任务</h3><ol><li>跟读示例 5 次，注意节奏与重音。</li><li>学习 8 个与“${topic}”相关的高频词。</li><li>仿写或口述 5 个新句子。</li><li>完成 3 分钟情景独白或对话。</li><li>记录今天最容易出错的一点。</li></ol><h3>完成标准</h3><div class="card">不看提示说出至少 5 句，并能听懂示例句的主要意思。</div><h3>学习笔记</h3><textarea class="note" data-note placeholder="记录新词、错误和自己的例句…"></textarea>`}}))};
