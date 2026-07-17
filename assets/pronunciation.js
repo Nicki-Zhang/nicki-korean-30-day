@@ -27,7 +27,7 @@
     if(score>=85)return '很好，再注意一下尾音和语速会更自然。';
     if(score>=70)return '基本正确，建议放慢速度后再跟读一次。';
     if(score>=50)return '已识别到部分内容，请先分词练习再读整句。';
-    return '暂未准确识别，请靠近麦克风并清晰地再读一次。';
+    return '暂未准确识别。低分也可能是识别问题，请靠近麦克风、放慢语速再试一次。';
   }
 
   function bestKey(target){return `nicki-pronunciation-best-${normalize(target)}`}
@@ -43,7 +43,7 @@
       const best=Number(localStorage.getItem(bestKey(target))||0);
       box.innerHTML=`
         <button type="button" class="recordBtn" aria-label="开始跟读录音">🎤 开始跟读</button>
-        <span class="recordStatus">${best?`历史最佳 ${best} 分`:'录音后自动评分'}</span>
+        <span class="recordStatus">${best?`历史最佳 ${best} 分`:SpeechRecognition?'录音后自动评分':'本浏览器不支持自动评分，可录音回放对比'}</span>
         <div class="recordResult" hidden></div>`;
       btn.insertAdjacentElement('afterend',box);
     });
@@ -76,6 +76,21 @@
       recorder.onstop=()=>{
         const blob=new Blob(chunks,{type:recorder.mimeType||'audio/webm'});
         const url=URL.createObjectURL(blob);
+        if(!SpeechRecognition){
+          result.hidden=false;
+          result.innerHTML=`
+            <div class="scoreCopy">
+              <b>已保存录音。</b>
+              <p>当前浏览器不支持语音识别，无法自动评分。请回放录音，与示范发音逐句对比节奏和尾音。</p>
+              <p>目标：<span lang="ko">${target}</span></p>
+            </div>
+            <audio controls src="${url}"></audio>`;
+          status.textContent='录音完成，可回放对比';
+          button.disabled=false;
+          button.textContent='🎤 再读一次';
+          active=null;
+          return;
+        }
         const score=scoreText(target,transcript);
         const oldBest=Number(localStorage.getItem(bestKey(target))||0);
         const best=Math.max(oldBest,score);
@@ -97,7 +112,7 @@
       };
       if(SpeechRecognition){
         recognition=new SpeechRecognition();
-        recognition.lang='ko-KR';
+        recognition.lang=document.documentElement.dataset.speakLang||'ko-KR';
         recognition.interimResults=true;
         recognition.continuous=true;
         recognition.onresult=e=>{

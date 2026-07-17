@@ -1,3 +1,5 @@
+// 每种语言已开放（有完整内容）的阶段数；用于限制水平测试推荐范围
+window.CONTENT_STAGES={ko:1,ja:1,en:1,zh:1,vi:1};
 window.LANGUAGES=[
 {id:'ko',icon:'🇰🇷',name:'韩语',native:'한국어',lang:'ko-KR',accent:'#4d7cfe'},
 {id:'ja',icon:'🇯🇵',name:'日语',native:'日本語',lang:'ja-JP',accent:'#e25b62'},

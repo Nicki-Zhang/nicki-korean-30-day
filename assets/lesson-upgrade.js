@@ -2,8 +2,20 @@
   const shuffle=a=>[...a].sort(()=>Math.random()-.5);
   const qs=(s,r=document)=>r.querySelector(s),qsa=(s,r=document)=>[...r.querySelectorAll(s)];
   const txt=(el,sel)=>el?.querySelector(sel)?.textContent.trim()||'';
-  const lessonId=()=>qs('.lessonView .eyebrow')?.textContent.trim()||qs('.lessonView h2')?.textContent.trim()||'lesson';
+  const legacyId=()=>qs('.lessonView .eyebrow')?.textContent.trim()||qs('.lessonView h2')?.textContent.trim()||'lesson';
+  const lessonId=()=>window.currentLessonId||legacyId();
   const key=s=>`nicki-v4-${lessonId()}-${s}`;
+  const legacyKey=s=>`nicki-v4-${legacyId()}-${s}`;
+  function migrateLegacy(){
+    if(!window.currentLessonId)return;
+    ['shadow-state','quiz-score'].forEach(s=>{
+      const nk=key(s),ok=legacyKey(s);
+      if(nk!==ok&&localStorage.getItem(nk)===null){
+        const v=localStorage.getItem(ok);
+        if(v!==null)localStorage.setItem(nk,v);
+      }
+    });
+  }
   const heading=name=>qsa('.lessonView h3').find(h=>h.textContent.trim()===name);
   const readJSON=(k,d=[])=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch{return d}};
   const saveJSON=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
@@ -18,8 +30,9 @@
   }
 
   function speak(text){
+    if(window.nikigoSpeak)return window.nikigoSpeak(text);
     if(!('speechSynthesis'in window))return alert('当前浏览器不支持发音');
-    speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='ko-KR';u.rate=.78;u.pitch=1;speechSynthesis.speak(u);
+    speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=document.documentElement.dataset.speakLang||'ko-KR';u.rate=.78;u.pitch=1;speechSynthesis.speak(u);
   }
 
   function upgradeTraining(){
@@ -103,7 +116,7 @@
     function result(){const pct=Math.round(score/questions.length*100),training=readJSON(key('shadow-state'),{}).completed?.length||0,pass=pct>=80&&training>=4;localStorage.setItem(key('quiz-score'),String(pct));box.innerHTML=`<div class="quizResult"><div class="quizScore">${pct}</div><h4>${pass?'本课达标':'继续练习后再挑战'}</h4><p>答对 ${score} / ${questions.length} 题 · 跟读完成 ${training} / 5 项</p><span class="passBadge">${pass?'✓ 已达到完成标准':pct<80?'小测需达到 80 分':'跟读训练需完成至少 4 项'}</span><br><button class="retryQuiz" type="button">重新测试</button></div>`;qs('.retryQuiz',box).onclick=()=>{index=0;score=0;render()}}
     render();
   }
-  function upgrade(){if(!qs('.lessonView'))return;upgradeTraining();upgradeQuiz()}
+  function upgrade(){if(!qs('.lessonView'))return;migrateLegacy();upgradeTraining();upgradeQuiz()}
   new MutationObserver(upgrade).observe(document.documentElement,{subtree:true,childList:true});
   document.addEventListener('click',e=>{const b=e.target.closest('.speak');if(!b)return;b.classList.add('is-playing');setTimeout(()=>b.classList.remove('is-playing'),1200)});
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',upgrade);else upgrade();
