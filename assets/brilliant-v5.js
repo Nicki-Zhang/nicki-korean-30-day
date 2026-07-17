@@ -1,46 +1,18 @@
 (()=>{
-  const qs=(s,r=document)=>r.querySelector(s),qsa=(s,r=document)=>[...r.querySelectorAll(s)];
-  const doneSet=()=>{try{return new Set(JSON.parse(localStorage.getItem('nicki-v3-ko-done')||'[]'))}catch{return new Set()}};
-  function enhanceStage(){
-    const grid=qs('.dayGrid');if(!grid||grid.dataset.v5)return;grid.dataset.v5='1';
-    const cards=qsa('.dayCard',grid),done=doneSet();
-    const current=Math.min(cards.length-1,[...Array(cards.length).keys()].find(i=>!done.has(+cards[i].dataset.day))??cards.length-1);
-    const title=qs('.sectionHead h2')?.textContent||'韩语课程';
-    const goal=qs('.sectionHead p:last-child')?.textContent||'逐步完成每天的学习任务';
-    const wrap=document.createElement('div');wrap.className='v5Journey';
-    const left=document.createElement('aside');left.className='v5CourseCard';left.innerHTML=`<div class="v5CourseIcon">🇰🇷</div><h2>${title}</h2><p>${goal}</p><div class="v5Stats"><span>◉ ${cards.length} Lessons</span><span>✦ ${cards.length*5} Missions</span></div>`;
-    const map=document.createElement('div');map.className='v5Map';
-    map.innerHTML=`<div class="v5LevelBanner"><small>Level ${Math.floor((+cards[0]?.dataset.day||0)/30)+1}</small><b>${title}</b></div>`+cards.map((c,i)=>{
-      const d=+c.dataset.day,isDone=done.has(d),isCurrent=i===current,isLocked=!isDone&&!isCurrent;
-      const label=c.querySelector('b')?.textContent||`Day ${d+1}`;
-      return `<div class="v5NodeRow ${isDone?'complete':isCurrent?'current':'locked'}"><button class="v5Node ${isDone?'complete':isCurrent?'current':'locked'}" data-open-day="${d}" ${isLocked?'disabled':''}>${isDone?'✓':isCurrent?'▶':'🔒'}</button><div class="v5NodeLabel"><b>${label}</b><small>${isDone?'已完成':isCurrent?'当前课程':'完成上一课后解锁'}</small></div></div>`
-    }).join('');
-    const dock=document.createElement('div');dock.className='v5StartDock';const curCard=cards[current];dock.innerHTML=`<h3>${curCard?.querySelector('b')?.textContent||'继续学习'}</h3><button type="button" data-start-day="${curCard?.dataset.day||0}">Start</button>`;
-    grid.replaceWith(wrap);wrap.append(left,map);map.append(dock);
-    qsa('[data-open-day]',wrap).forEach(b=>b.onclick=()=>curCardClick(cards,+b.dataset.openDay));
-    qs('[data-start-day]',wrap).onclick=()=>curCardClick(cards,+qs('[data-start-day]',wrap).dataset.startDay);
-  }
-  function curCardClick(cards,day){const card=cards.find(c=>+c.dataset.day===day);card?.click()}
-  function enhanceLesson(){
-    const lesson=qs('.lessonView');if(!lesson||lesson.dataset.v5)return;lesson.dataset.v5='1';
-    const h2=qs('h2',lesson);if(!h2)return;
-    const strip=document.createElement('div');strip.className='v5MissionStrip';
-    const names=['词汇','发音','对话','跟读','小测'];
-    strip.innerHTML=names.map((n,i)=>`<div class="v5Mission ${i===0?'active':''}"><span>${i+1}</span><br>${n}</div>`).join('');
-    h2.insertAdjacentElement('afterend',strip);
-    const heads=qsa('h3',lesson);
-    const missionMap={'发音与词汇':0,'语言要点':0,'核心表达':1,'情景对话':2,'跟读训练':3,'每日小测':4};
-    const obs=new IntersectionObserver(entries=>{
-      const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(!visible)return;
-      const idx=missionMap[visible.target.textContent.trim()];if(idx===undefined)return;
-      qsa('.v5Mission',strip).forEach((m,i)=>m.classList.toggle('active',i===idx));
-    },{threshold:.35,rootMargin:'-15% 0px -55%'});
-    heads.forEach(h=>{if(missionMap[h.textContent.trim()]!==undefined)obs.observe(h)});
-  }
-  function enhanceDashboard(){
-    qsa('.stageRow').forEach((r,i)=>{if(r.dataset.v5)return;r.dataset.v5='1';const small=r.querySelector('small');if(small&&!small.textContent.includes('Missions'))small.textContent+=' · 150 Missions'});
-  }
-  function run(){enhanceDashboard();enhanceStage();enhanceLesson()}
-  new MutationObserver(run).observe(document.documentElement,{childList:true,subtree:true});
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+const qs=(s,r=document)=>r.querySelector(s),qsa=(s,r=document)=>[...r.querySelectorAll(s)];
+const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch{return d}};
+function icon(name){const map={home:'⌂',flame:'♨',star:'★',book:'▤',mic:'●',chat:'◌',wave:'≋',quiz:'✓',back:'←',record:'▣',trophy:'♕',settings:'⚙'};return map[name]||'•'}
+function enhanceHeader(){const bar=qs('.topbar');if(!bar||bar.dataset.v5)return;bar.dataset.v5='1';const home=qs('#homeBtn',bar),theme=qs('#themeBtn',bar);if(home){home.innerHTML=`<span>${icon('home')}</span><small>首页</small>`;home.classList.add('v5HomeBtn')}
+const brand=bar.children[1];if(brand){brand.classList.add('v5Brand');const small=brand.querySelector('small');if(small)small.textContent='V5 · Interactive Learning Journey'}
+const stats=document.createElement('div');stats.className='v5TopStats';stats.innerHTML=`<span><i>${icon('flame')}</i><b>${localStorage.getItem('nicki-v5-streak')||'1'}</b><small>连续天数</small></span><span><i>${icon('star')}</i><b>${localStorage.getItem('nicki-v5-xp')||'0'}</b><small>总积分</small></span>`;bar.insertBefore(stats,theme);if(theme){theme.classList.add('v5Profile');theme.textContent='N'}}
+function enhanceHero(){const hero=qs('.hero');if(!hero||hero.dataset.v5)return;hero.dataset.v5='1';hero.classList.add('v5Hero');const h=hero.querySelector('h1');if(h)h.textContent='选择一门语言，开启你的互动学习旅程';const p=hero.querySelector('h1+p');if(p)p.textContent='沿着学习路径逐步完成词汇、发音、对话、跟读和小测。每完成一天，即可解锁下一站。';const btn=qs('#continueBtn',hero);if(btn)btn.innerHTML='🚀 继续学习旅程';const art=document.createElement('div');art.className='v5HeroPath';art.innerHTML=['book','mic','chat','wave','quiz'].map((x,i)=>`<div class="v5HeroNode"><span>${icon(x)}</span><small>${['词汇','发音','对话','跟读','小测'][i]}</small></div>`).join('<i></i>');hero.append(art)}
+function enhanceLesson(){const lesson=qs('.lessonView');if(!lesson||lesson.dataset.v5)return;lesson.dataset.v5='1';const back=qs('.backBtn',lesson);if(back){back.classList.add('v5Back');back.innerHTML=`${icon('back')} 返回课程`}
+const h2=qs('h2',lesson);if(!h2)return;const tools=document.createElement('div');tools.className='v5LessonTools';tools.innerHTML=`<button type="button">${icon('book')} 学习记录</button><button type="button">${icon('trophy')} 成就</button><button type="button">${icon('settings')} 设置</button>`;back?.insertAdjacentElement('afterend',tools);
+const names=[['book','词汇'],['mic','发音'],['chat','对话'],['wave','跟读'],['quiz','小测']];const strip=document.createElement('div');strip.className='v5MissionStrip';strip.innerHTML=names.map((n,i)=>`<button class="v5Mission ${i===0?'active':''}" data-mission="${i}" type="button"><span>${icon(n[0])}</span><b>${i+1}</b><small>${n[1]}</small></button>`).join('<i></i>');h2.insertAdjacentElement('afterend',strip);
+const progress=document.createElement('div');progress.className='v5LessonProgress';progress.innerHTML=`<span>今日学习进度</span><div><i style="width:20%"></i></div><b>20%</b><em>${icon('star')} 完成全部可得 100 积分</em>`;strip.insertAdjacentElement('afterend',progress);
+const map={'发音与词汇':0,'语言要点':0,'核心表达':1,'情景对话':2,'跟读训练':3,'每日小测':4};const heads=qsa('h3',lesson);qsa('.v5Mission',strip).forEach((b,i)=>b.onclick=()=>{const target=heads.find(h=>map[h.textContent.trim()]===i);target?.scrollIntoView({behavior:'smooth',block:'start'})});const obs=new IntersectionObserver(es=>{const v=es.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(!v)return;const idx=map[v.target.textContent.trim()];if(idx===undefined)return;qsa('.v5Mission',strip).forEach((m,i)=>m.classList.toggle('active',i===idx));const pct=(idx+1)*20;qs('.v5LessonProgress i',lesson).style.width=pct+'%';qs('.v5LessonProgress b',lesson).textContent=pct+'%';},{threshold:.25,rootMargin:'-20% 0px -55%'});heads.forEach(h=>map[h.textContent.trim()]!==undefined&&obs.observe(h))}
+function enhanceStage(){const grid=qs('.dayGrid');if(!grid||grid.dataset.v5)return;grid.dataset.v5='1';qsa('.dayCard',grid).forEach((c,i)=>{c.classList.add('v5DayCard');const s=c.querySelector('small');if(s&&!s.textContent.includes('5 Missions'))s.textContent+=' · 5 Missions'});}
+function enhanceDashboard(){qsa('.stageRow').forEach(r=>{if(r.dataset.v5)return;r.dataset.v5='1';r.classList.add('v5StageRow')})}
+function run(){enhanceHeader();enhanceHero();enhanceDashboard();enhanceStage();enhanceLesson()}
+new MutationObserver(run).observe(document.documentElement,{childList:true,subtree:true});if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
 })();
