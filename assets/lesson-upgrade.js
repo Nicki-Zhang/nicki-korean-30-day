@@ -26,42 +26,71 @@
     const h=heading('跟读训练');if(!h||h.dataset.upgraded)return;h.dataset.upgraded='1';
     const old=h.nextElementSibling,pairs=collectPairs(),task=old?.querySelector('li:nth-child(4)')?.textContent.trim()||'使用本课表达完成一次独立输出。';
     const targets=pairs.slice(0,Math.min(5,pairs.length));
-    const state=readJSON(key('shadow-state'),{listen:0,repeat:{},blind:0,output:'',record:0,completed:[]});
-    state.repeat=state.repeat||{};state.completed=state.completed||[];
+    const state=readJSON(key('shadow-state'),{listen:[],repeat:{},blind:[],output:'',record:0,completed:[],open:'repeat'});
+    state.listen=Array.isArray(state.listen)?state.listen:[];
+    state.blind=Array.isArray(state.blind)?state.blind:[];
+    state.repeat=state.repeat||{};state.completed=state.completed||[];state.open=state.open||'repeat';
+    const repeatDone=i=>Boolean(state.repeat[i]);
     const steps=[
-      {id:'listen',title:'① 听音辨形',desc:'先不看罗马音和中文，只听本课目标内容。每条至少播放 1 次。',pass:()=>state.listen>=targets.length},
-      {id:'repeat',title:'② 逐条模仿',desc:'听一句、暂停、跟读一句。每条累计跟读 3 次后自动达标。',pass:()=>targets.length>0&&targets.every((_,i)=>(state.repeat[i]||0)>=3)},
-      {id:'blind',title:'③ 脱离辅助',desc:'遮住罗马音和中文，只看韩文朗读并回忆意思。至少完成 3 条。',pass:()=>state.blind>=Math.min(3,targets.length)},
+      {id:'listen',title:'① 听音辨形',desc:'先不看罗马音和中文，只听本课目标内容。每条至少播放 1 次。',pass:()=>targets.length>0&&targets.every((_,i)=>state.listen.includes(i))},
+      {id:'repeat',title:'② 逐条模仿',desc:'先播放示范，再完整跟读一次。每条只需点击一次“我已跟读”。',pass:()=>targets.length>0&&targets.every((_,i)=>repeatDone(i))},
+      {id:'blind',title:'③ 脱离辅助',desc:'遮住罗马音和中文，只看韩文朗读并回忆意思。至少完成 3 条。',pass:()=>state.blind.length>=Math.min(3,targets.length)},
       {id:'output',title:'④ 情景输出',desc:task+' 请写下或口头说出至少 3 句，再进行自检。',pass:()=>state.output.trim().length>=8},
-      {id:'record',title:'⑤ 录音复盘',desc:'使用下方任意“开始跟读”按钮录音并评分。达到 80 分，或完成两次录音比较。',pass:()=>state.record>=1}
+      {id:'record',title:'⑤ 录音复盘',desc:'使用下方任意“开始跟读”按钮录音并评分，完成后在这里确认一次。',pass:()=>state.record>=1}
     ];
     const wrap=document.createElement('div');wrap.className='shadowTrainer';old?.replaceWith(wrap);
 
-    function persist(){state.completed=steps.filter(s=>s.pass()).map(s=>s.id);saveJSON(key('shadow-state'),state);renderHeader();renderSteps();}
-    function renderHeader(){
-      const done=steps.filter(s=>s.pass()).length;
-      const head=qs('.shadowHeader',wrap);if(head)head.innerHTML=`<div><b>互动跟读训练</b><small>完成操作后自动解锁，不需要手动勾选</small></div><strong>${done} / 5</strong>`;
-      const bar=qs('.shadowBar i',wrap);if(bar)bar.style.width=`${done/5*100}%`;
+    const completed=()=>steps.filter(s=>s.pass()).map(s=>s.id);
+    function save(){state.completed=completed();saveJSON(key('shadow-state'),state)}
+    function updateHeader(){
+      const done=completed().length;
+      qs('.shadowHeader strong',wrap).textContent=`${done} / 5`;
+      qs('.shadowBar i',wrap).style.width=`${done/5*100}%`;
     }
-    function targetRows(mode){return targets.map((p,i)=>{
-      const count=state.repeat[i]||0;
-      if(mode==='listen')return `<div class="shadowTarget"><span lang="ko">${p.ko}</span><button class="miniAction listenAction" data-i="${i}" type="button">▶ 播放</button></div>`;
-      if(mode==='repeat')return `<div class="shadowTarget repeatTarget"><div><span lang="ko">${p.ko}</span><small>${p.zh}</small></div><div class="repeatControls"><button class="miniAction playRepeat" data-i="${i}" type="button">▶ 听</button><button class="repeatTap" data-i="${i}" type="button">我已跟读 <b>${count}/3</b></button></div></div>`;
-      return `<button class="blindCard ${i<state.blind?'revealed':''}" data-i="${i}" type="button"><span lang="ko">${p.ko}</span><small>${i<state.blind?p.zh:'先说意思，再点击核对'}</small></button>`
-    }).join('')}
-    function renderSteps(){
-      const body=qs('.shadowSteps',wrap);if(!body)return;
-      body.innerHTML=steps.map((s,idx)=>`<section class="shadowStep ${s.pass()?'done':''}" data-step="${s.id}"><button class="shadowStepHead" type="button"><span>${s.title}</span><em>${s.pass()?'✓ 已达标':'展开训练'}</em></button><div class="shadowStepBody" ${idx?'hidden':''}><p>${s.desc}</p>${s.id==='listen'?`<div class="targetList">${targetRows('listen')}</div><div class="stepStatus">已播放 ${state.listen} / ${targets.length} 条</div>`:''}${s.id==='repeat'?`<div class="targetList">${targetRows('repeat')}</div>`:''}${s.id==='blind'?`<div class="blindGrid">${targetRows('blind')}</div><div class="stepStatus">已核对 ${state.blind} / ${Math.min(3,targets.length)} 条</div>`:''}${s.id==='output'?`<textarea class="outputPractice" placeholder="例如：写下3句使用本课表达的韩语…">${state.output||''}</textarea><button class="saveOutput primaryMini" type="button">保存并检查</button><div class="stepStatus">至少输入 8 个字符</div>`:''}${s.id==='record'?`<div class="recordGuide"><p>请滚动到任意句子的录音按钮，完成一次录音评分后返回这里。</p><button class="confirmRecord primaryMini" type="button">我已完成录音练习</button></div>`:''}</div></section>`).join('');
-      qsa('.shadowStepHead',body).forEach(b=>b.onclick=()=>{const panel=b.nextElementSibling;panel.hidden=!panel.hidden});
-      qsa('.listenAction',body).forEach(b=>b.onclick=()=>{const i=+b.dataset.i;speak(targets[i].ko);if(!b.dataset.done){b.dataset.done='1';state.listen++;b.textContent='✓ 已播放';persist()}});
-      qsa('.playRepeat',body).forEach(b=>b.onclick=()=>speak(targets[+b.dataset.i].ko));
-      qsa('.repeatTap',body).forEach(b=>b.onclick=()=>{const i=+b.dataset.i;state.repeat[i]=Math.min(3,(state.repeat[i]||0)+1);persist()});
-      qsa('.blindCard',body).forEach(b=>b.onclick=()=>{const i=+b.dataset.i;if(i>=state.blind)state.blind=Math.min(targets.length,state.blind+1);persist()});
-      const out=qs('.outputPractice',body),save=qs('.saveOutput',body);if(save)save.onclick=()=>{state.output=out.value.trim();persist()};
-      const rec=qs('.confirmRecord',body);if(rec)rec.onclick=()=>{state.record=Math.max(1,state.record+1);persist()};
+    function updateStep(id){
+      const step=steps.find(s=>s.id===id),section=qs(`[data-step="${id}"]`,wrap);if(!step||!section)return;
+      const passed=step.pass();section.classList.toggle('done',passed);
+      qs('.shadowStepHead em',section).textContent=passed?'✓ 已达标':'训练中';
+      if(id==='listen')qs('.stepStatus',section).textContent=`已播放 ${state.listen.length} / ${targets.length} 条`;
+      if(id==='blind')qs('.stepStatus',section).textContent=`已核对 ${state.blind.length} / ${Math.min(3,targets.length)} 条`;
+      save();updateHeader();
     }
-    wrap.innerHTML='<div class="shadowHeader"></div><div class="shadowBar"><i></i></div><div class="shadowSteps"></div><div class="lessonStandard">达标规则：互动跟读完成至少 4/5 项，并在每日小测达到 80 分。</div>';
-    renderHeader();renderSteps();
+    function panelMarkup(s,idx){
+      const open=state.open===s.id||(!state.open&&idx===0);
+      const listenRows=targets.map((p,i)=>`<div class="shadowTarget"><span lang="ko">${p.ko}</span><button class="miniAction listenAction ${state.listen.includes(i)?'completedAction':''}" data-i="${i}" type="button" ${state.listen.includes(i)?'disabled':''}>${state.listen.includes(i)?'✓ 已播放':'▶ 播放'}</button></div>`).join('');
+      const repeatRows=targets.map((p,i)=>`<div class="shadowTarget repeatTarget"><div><span lang="ko">${p.ko}</span><small>${p.zh}</small></div><div class="repeatControls"><button class="miniAction playRepeat" data-i="${i}" type="button">▶ 听</button><button class="repeatTap ${repeatDone(i)?'completedAction':''}" data-i="${i}" type="button" ${repeatDone(i)?'disabled':''}>${repeatDone(i)?'✓ 已跟读':'我已跟读'}</button></div></div>`).join('');
+      const blindRows=targets.map((p,i)=>`<button class="blindCard ${state.blind.includes(i)?'revealed':''}" data-i="${i}" type="button"><span lang="ko">${p.ko}</span><small>${state.blind.includes(i)?p.zh:'先说意思，再点击核对'}</small></button>`).join('');
+      return `<section class="shadowStep ${s.pass()?'done':''}" data-step="${s.id}"><button class="shadowStepHead" type="button"><span>${s.title}</span><em>${s.pass()?'✓ 已达标':open?'训练中':'展开训练'}</em></button><div class="shadowStepBody" ${open?'':'hidden'}><p>${s.desc}</p>${s.id==='listen'?`<div class="targetList">${listenRows}</div><div class="stepStatus">已播放 ${state.listen.length} / ${targets.length} 条</div>`:''}${s.id==='repeat'?`<div class="targetList">${repeatRows}</div><div class="stepStatus">每条只需确认一次，确认后按钮锁定。</div>`:''}${s.id==='blind'?`<div class="blindGrid">${blindRows}</div><div class="stepStatus">已核对 ${state.blind.length} / ${Math.min(3,targets.length)} 条</div>`:''}${s.id==='output'?`<textarea class="outputPractice" placeholder="例如：写下3句使用本课表达的韩语…">${state.output||''}</textarea><button class="saveOutput primaryMini ${s.pass()?'completedAction':''}" type="button">${s.pass()?'✓ 已保存':'保存并检查'}</button><div class="stepStatus">至少输入 8 个字符</div>`:''}${s.id==='record'?`<div class="recordGuide"><p>请滚动到任意句子的录音按钮，完成一次录音评分后返回这里。</p><button class="confirmRecord primaryMini ${s.pass()?'completedAction':''}" type="button" ${s.pass()?'disabled':''}>${s.pass()?'✓ 已完成录音练习':'我已完成录音练习'}</button></div>`:''}</div></section>`;
+    }
+    wrap.innerHTML=`<div class="shadowHeader"><div><b>互动跟读训练</b><small>完成操作后自动记录；点击按钮不会关闭当前训练框</small></div><strong>0 / 5</strong></div><div class="shadowBar"><i></i></div><div class="shadowSteps">${steps.map(panelMarkup).join('')}</div><div class="lessonStandard">达标规则：互动跟读完成至少 4/5 项，并在每日小测达到 80 分。</div>`;
+
+    qsa('.shadowStepHead',wrap).forEach(b=>b.onclick=()=>{
+      const section=b.closest('.shadowStep'),panel=b.nextElementSibling,id=section.dataset.step;
+      panel.hidden=!panel.hidden;
+      if(!panel.hidden){state.open=id;save()}else if(state.open===id){state.open='';save()}
+      if(!section.classList.contains('done'))qs('em',b).textContent=panel.hidden?'展开训练':'训练中';
+    });
+    qsa('.listenAction',wrap).forEach(b=>b.onclick=e=>{
+      e.stopPropagation();const i=+b.dataset.i;speak(targets[i].ko);
+      if(state.listen.includes(i))return;
+      state.listen.push(i);b.disabled=true;b.classList.add('completedAction');b.textContent='✓ 已播放';updateStep('listen');
+    });
+    qsa('.playRepeat',wrap).forEach(b=>b.onclick=e=>{e.stopPropagation();speak(targets[+b.dataset.i].ko)});
+    qsa('.repeatTap',wrap).forEach(b=>b.onclick=e=>{
+      e.stopPropagation();const i=+b.dataset.i;if(repeatDone(i))return;
+      state.repeat[i]=true;b.disabled=true;b.classList.add('completedAction');b.textContent='✓ 已跟读';updateStep('repeat');
+    });
+    qsa('.blindCard',wrap).forEach(b=>b.onclick=e=>{
+      e.stopPropagation();const i=+b.dataset.i;if(state.blind.includes(i))return;
+      state.blind.push(i);b.classList.add('revealed');qs('small',b).textContent=targets[i].zh;updateStep('blind');
+    });
+    const out=qs('.outputPractice',wrap),saveOut=qs('.saveOutput',wrap);if(saveOut)saveOut.onclick=e=>{
+      e.stopPropagation();state.output=out.value.trim();saveOut.textContent=state.output.length>=8?'✓ 已保存':'内容还不够，请继续补充';saveOut.classList.toggle('completedAction',state.output.length>=8);updateStep('output');out.focus();
+    };
+    const rec=qs('.confirmRecord',wrap);if(rec)rec.onclick=e=>{
+      e.stopPropagation();if(state.record>=1)return;state.record=1;rec.disabled=true;rec.classList.add('completedAction');rec.textContent='✓ 已完成录音练习';updateStep('record');
+    };
+    save();updateHeader();
   }
 
   function makeQuestions(pairs){const usable=pairs.slice(0,8);if(usable.length<2)return[];return shuffle(usable).slice(0,3).map((p,i)=>{const d=shuffle(usable.filter(x=>x.zh!==p.zh)).slice(0,2).map(x=>x.zh);return{type:i===1?'listen':'meaning',prompt:i===1?'点击播放后，选择你听到句子的意思：':`“${p.ko}”是什么意思？`,target:p.ko,answer:p.zh,options:shuffle([p.zh,...d])}})}
