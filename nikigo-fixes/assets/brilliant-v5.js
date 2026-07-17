@@ -1,0 +1,56 @@
+(()=>{
+const qs=(s,r=document)=>r.querySelector(s),qsa=(s,r=document)=>[...r.querySelectorAll(s)];
+let viewMode='home';
+const svg=(body,viewBox='0 0 24 24')=>`<svg viewBox="${viewBox}" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
+function icon(name){const map={
+home:svg('<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9.5 20v-6h5v6"/>'),
+courses:svg('<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5a2.5 2.5 0 0 1 2.5 2.5z"/>'),
+flame:svg('<path d="M12 22c4.4 0 8-3.2 8-7.7 0-3.1-1.6-5.8-4.8-8.3.1 2.3-.7 4-2.2 5.1.2-3.4-1.5-6.4-4.7-9.1.2 4.7-4.3 6.5-4.3 12.3C4 18.8 7.6 22 12 22Z"/><path d="M9.5 16.5c0 1.7 1.1 3 2.5 3s2.5-1.3 2.5-3c0-1.2-.6-2.3-1.8-3.3 0 1-.4 1.7-1.1 2.2.1-1.4-.6-2.6-1.8-3.7.1 1.9-1.8 2.7-1.8 4.8Z"/>'),
+star:svg('<path d="m12 2.8 2.8 5.7 6.3.9-4.6 4.4 1.1 6.2-5.6-2.9L6.4 20l1.1-6.2-4.6-4.4 6.3-.9z"/>'),
+book:svg('<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6M9 11h6M9 15h4"/>'),
+mic:svg('<rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/>'),
+chat:svg('<path d="M21 15a4 4 0 0 1-4 4H9l-5 3 1.5-4A7.5 7.5 0 1 1 21 15Z"/>'),
+wave:svg('<path d="M4 14v-4M8 18V6M12 21V3M16 18V6M20 14v-4"/>'),
+quiz:svg('<path d="M20 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9.5"/><path d="m9 12 2 2 7-8"/>'),
+back:'←',trophy:'♕',settings:'⚙',search:'⌕',bolt:'ϟ',arrow:'→',trend:'↗'};return map[name]||'•'}
+function json(k,d=[]){try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch{return d}}
+function setNav(active){qsa('.v5NavBtn').forEach(b=>b.classList.toggle('active',b.dataset.view===active))}
+function syncLessonBar(){const lesson=!!qs('.lessonView');document.body.classList.toggle('lesson-active',lesson);const bar=qs('#lessonBar');if(bar)bar.hidden=!lesson}
+function enhanceHeader(){
+ const bar=qs('.topbar');if(!bar||bar.dataset.v5)return;bar.dataset.v5='1';
+ const home=qs('#homeBtn',bar),theme=qs('#themeBtn',bar),brand=bar.children[1];
+ if(brand){brand.classList.add('v5Brand');const strong=brand.querySelector('strong'),small=brand.querySelector('small');if(strong)strong.textContent='Nikigo';if(small)small.textContent='Interactive Language Learning'}
+ const originalHome=home?.onclick;
+ const nav=document.createElement('nav');nav.className='v5MainNav';nav.setAttribute('aria-label','主导航');
+ if(home){home.innerHTML=`<span>${icon('home')}</span><b>Home</b>`;home.className='v5NavBtn active';home.dataset.view='home';home.removeAttribute('style');nav.append(home)}
+ const courses=document.createElement('button');courses.type='button';courses.className='v5NavBtn';courses.dataset.view='courses';courses.innerHTML=`<span>${icon('courses')}</span><b>Courses</b>`;nav.append(courses);
+ const done=json('nicki-v3-ko-done'),streak=window.nikigoActivity?window.nikigoActivity.streak():+(localStorage.getItem('nicki-v5-streak')||0),xp=done.length*100;
+ const stats=document.createElement('div');stats.className='v5TopStats';stats.innerHTML=`<span class="streak"><i>${icon('flame')}</i><b>${streak}</b><small>连续天数</small></span><span class="xp"><i>${icon('star')}</i><b>${xp}</b><small>总积分</small></span>`;
+ if(theme){theme.className='v5Profile';theme.textContent='N';theme.setAttribute('aria-label','个人设置')}
+ const inner=document.createElement('div');inner.className='v5HeaderInner';const spacer=document.createElement('span');spacer.className='v5HeaderSpacer';
+ if(brand)inner.append(brand);inner.append(nav,spacer,stats);if(theme)inner.append(theme);bar.replaceChildren(inner);
+ if(home)home.onclick=()=>{viewMode='home';setNav('home');const screen=qs('#screen');if(screen){delete screen.dataset.v5home;delete screen.dataset.v5courses}originalHome?.call(home);queueMicrotask(run)};
+ courses.onclick=()=>{viewMode='courses';setNav('courses');const screen=qs('#screen');if(screen){delete screen.dataset.v5home;delete screen.dataset.v5courses}originalHome?.call(home);queueMicrotask(run)};
+}
+function enhanceHero(){const hero=qs('.hero');if(!hero||hero.dataset.v5)return;hero.dataset.v5='1';hero.classList.add('v5Hero')}
+function renderHome(){
+ const grid=qs('.languageGrid'),screen=qs('#screen'),hero=qs('.hero');if(!grid||!screen||viewMode!=='home'||qs('.v5HomeLanding',screen))return;
+ if(hero)hero.hidden=true;setNav('home');
+ const cards=qsa('.languageCard',grid),ko=cards.find(c=>c.dataset.lang==='ko')||cards[0];
+ const done=json('nicki-v3-ko-done'),current=+(localStorage.getItem('nicki-v3-ko-current')||0),streak=window.nikigoActivity?window.nikigoActivity.streak():+(localStorage.getItem('nicki-v5-streak')||0),xp=done.length*100,level=Math.max(1,Math.floor(xp/100)+1),levelPct=xp%100;const actDays=window.nikigoActivity?window.nikigoActivity.days():json('nicki-activity-days');const monday=new Date();monday.setDate(monday.getDate()-((monday.getDay()+6)%7));const weekDone=Array.from({length:7},(_,i)=>{const d=new Date(monday);d.setDate(monday.getDate()+i);const s=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;return actDays.includes(s)});
+ const week=['周一','周二','周三','周四','周五','周六','周日'];
+ const landing=document.createElement('div');landing.className='v5HomeLanding';
+ landing.innerHTML=`<section class="v5LandingHero"><div class="v5LandingCopy"><p class="eyebrow">LEARN · TEST · PERSONALIZE · SPEAK</p><h1>选择一门语言，开启你的互动学习旅程</h1><p>完成词汇、发音、对话、跟读和小测，持续积累学习进度。</p><button class="v5HeroContinue" type="button">继续学习 ${icon('arrow')}</button></div><article class="v5ContinueCard"><small>继续你的学习之旅</small><h2>韩语 · 零基础到入门</h2><div class="v5LevelTag">PRE-A1 · DAY ${current+1}</div><div class="v5CurrentMission"><span>${icon('book')}</span><div><b>1. 词汇学习</b><small>学习核心词汇，建立基础词汇量</small></div></div><button class="v5ContinuePrimary" type="button">继续学习　${icon('arrow')}</button></article></section><section class="v5Overview"><article class="v5Metric streak"><span>${icon('flame')}</span><div><b>${streak} 天</b><small>连续学习</small></div></article><article class="v5WeekCard"><b>本周学习情况</b><div>${week.map((d,i)=>`<span class="${weekDone[i]?'done':''}"><small>${d}</small><i>${weekDone[i]?'✓':''}</i></span>`).join('')}</div></article><article class="v5Metric xp"><span>${icon('star')}</span><div><b>${xp} XP</b><small>总积分</small></div></article><article class="v5LevelCard"><span>${icon('trend')}</span><div><b>Level ${level}</b><small>学习进阶</small><i><em style="width:${levelPct}%"></em></i><strong>${levelPct} / 100 XP</strong></div></article></section><section class="v5Explore"><h2>探索语言课程</h2><div class="v5ExploreGrid"></div></section>`;
+ const explore=qs('.v5ExploreGrid',landing);cards.forEach(c=>{const clone=c.cloneNode(true);clone.className='v5ExploreCard';clone.innerHTML=`<span class="flag">${c.querySelector('.flag')?.textContent||''}</span><div><b>${c.querySelector('b')?.textContent||''}</b><small>零基础到入门</small></div><em>${icon('arrow')}</em>`;clone.onclick=()=>c.click();explore.append(clone)});
+ screen.innerHTML='';screen.append(landing);const start=()=>{ko?.click();setTimeout(()=>qs('#resume')?.click(),80)};qs('.v5HeroContinue',landing).onclick=start;qs('.v5ContinuePrimary',landing).onclick=start;
+}
+function renderCourses(){const grid=qs('.languageGrid'),screen=qs('#screen'),hero=qs('.hero');if(!grid||!screen||viewMode!=='courses')return;setNav('courses');if(hero)hero.hidden=true;screen.classList.add('v5CoursesView');qsa('.languageCard',grid).forEach(c=>c.classList.add('v5CourseSelectCard'))}
+function restoreHero(){const hero=qs('.hero'),screen=qs('#screen');if(!hero||!screen)return;if(!qs('.v5HomeLanding',screen)&&!qs('.languageGrid',screen))hero.hidden=false}
+function enhanceLesson(){const lesson=qs('.lessonView');if(!lesson||lesson.dataset.v5)return;lesson.dataset.v5='1';const back=qs('.backBtn',lesson);if(back){back.classList.add('v5Back');back.innerHTML=`${icon('back')} 返回课程`}const h2=qs('h2',lesson);if(!h2)return;const tools=document.createElement('div');tools.className='v5LessonTools';tools.innerHTML=`<button type="button">${icon('book')} 学习记录</button><button type="button">${icon('trophy')} 成就</button><button type="button">${icon('settings')} 设置</button>`;back?.insertAdjacentElement('afterend',tools);const names=[['book','词汇'],['mic','发音'],['chat','对话'],['wave','跟读'],['quiz','小测']];const strip=document.createElement('div');strip.className='v5MissionStrip';strip.innerHTML=names.map((n,i)=>`<button class="v5Mission ${i===0?'active':''}" data-mission="${i}" type="button"><span>${icon(n[0])}</span><b>${i+1}</b><small>${n[1]}</small></button>`).join('<i></i>');h2.insertAdjacentElement('afterend',strip);const progress=document.createElement('div');progress.className='v5LessonProgress';progress.innerHTML=`<span>今日学习进度</span><div><i style="width:20%"></i></div><b>20%</b><em>★ 完成全部可得 100 积分</em>`;strip.insertAdjacentElement('afterend',progress);const map={'发音与词汇':0,'语言要点':0,'核心表达':1,'情景对话':2,'跟读训练':3,'每日小测':4},heads=qsa('h3',lesson);qsa('.v5Mission',strip).forEach((b,i)=>b.onclick=()=>heads.find(h=>map[h.textContent.trim()]===i)?.scrollIntoView({behavior:'smooth',block:'start'}));const obs=new IntersectionObserver(es=>{const v=es.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(!v)return;const idx=map[v.target.textContent.trim()];if(idx===undefined)return;qsa('.v5Mission',strip).forEach((m,i)=>m.classList.toggle('active',i===idx));const pct=(idx+1)*20;qs('.v5LessonProgress i',lesson).style.width=pct+'%';qs('.v5LessonProgress b',lesson).textContent=pct+'%'},{threshold:.25,rootMargin:'-20% 0px -55%'});heads.forEach(h=>map[h.textContent.trim()]!==undefined&&obs.observe(h))}
+function enhanceStage(){const grid=qs('.dayGrid');if(!grid||grid.dataset.v5)return;grid.dataset.v5='1';qsa('.dayCard',grid).forEach(c=>{c.classList.add('v5DayCard');const s=c.querySelector('small');if(s&&!s.textContent.includes('5 Missions'))s.textContent+=' · 5 Missions'})}
+function enhanceDashboard(){qsa('.stageRow').forEach(r=>{if(r.dataset.v5)return;r.dataset.v5='1';r.classList.add('v5StageRow')})}
+function run(){enhanceHeader();enhanceHero();renderHome();renderCourses();restoreHero();enhanceDashboard();enhanceStage();enhanceLesson();syncLessonBar()}
+const observer=new MutationObserver(()=>requestAnimationFrame(run));
+observer.observe(document.documentElement,{childList:true,subtree:true});
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
+})();
