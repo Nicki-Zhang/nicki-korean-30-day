@@ -1,0 +1,32 @@
+name: Generate lesson audio
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Generate Korean female audio
+        env:
+          NCP_CLOVA_API_KEY_ID: ${{ secrets.NCP_CLOVA_API_KEY_ID }}
+          NCP_CLOVA_API_KEY: ${{ secrets.NCP_CLOVA_API_KEY }}
+        run: node scripts/generate-lesson-audio.mjs
+      - name: Commit generated MP3 files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add audio/lesson-01/*.mp3
+          if git diff --cached --quiet; then
+            echo "No audio changes"
+          else
+            git commit -m "Generate lesson 1 Korean female audio"
+            git push
+          fi
