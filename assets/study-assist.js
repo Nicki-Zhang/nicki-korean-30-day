@@ -115,6 +115,7 @@
   function inject(root=document){
     root.querySelectorAll('[data-speak]:not([data-roman-ready])').forEach(btn=>{
       btn.dataset.romanReady='1';
+      if(!btn.closest('.lessonView'))return;
       const target=(btn.dataset.speak||'').trim();
       if(!target||!/[가-힣]/.test(target))return;
       const row=btn.closest('.krow')||btn.parentElement;

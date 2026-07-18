@@ -35,6 +35,7 @@
   function inject(root=document){
     root.querySelectorAll('[data-speak]:not([data-practice-ready])').forEach(btn=>{
       btn.dataset.practiceReady='1';
+      if(!btn.closest('.lessonView'))return;
       const target=(btn.dataset.speak||'').trim();
       if(!target)return;
       const box=document.createElement('div');

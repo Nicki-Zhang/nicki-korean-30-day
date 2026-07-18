@@ -36,7 +36,7 @@
   }
 
   function upgradeTraining(){
-    const h=heading('跟读训练');if(!h||h.dataset.upgraded)return;h.dataset.upgraded='1';
+    const h=heading('跟读训练')||heading('互动跟读');if(!h||h.dataset.upgraded)return;h.dataset.upgraded='1';
     const old=h.nextElementSibling,pairs=collectPairs(),task=old?.querySelector('li:nth-child(4)')?.textContent.trim()||'使用本课表达完成一次独立输出。';
     const targets=pairs.slice(0,Math.min(5,pairs.length));
     const state=readJSON(key('shadow-state'),{listen:[],repeat:{},blind:[],output:'',record:0,completed:[],open:'repeat'});
