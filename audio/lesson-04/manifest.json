@@ -9,22 +9,26 @@
     {
       "id": "an",
       "text": "안",
-      "file": "an.mp3"
+      "file": "an.mp3",
+      "instructions": "Say only the single Korean syllable 안 (romanized: an), exactly once, in a slow, clear teaching voice. It must end with the tongue-tip nasal final consonant ㄴ. Do not say any other word or sound."
     },
     {
       "id": "am",
       "text": "암",
-      "file": "am.mp3"
+      "file": "am.mp3",
+      "instructions": "Say only the single Korean syllable 암 (romanized: am), exactly once, in a slow, clear teaching voice. It must end with both lips fully closed on the final consonant ㅁ, like the English m. Do not say any other word or sound."
     },
     {
       "id": "ang",
       "text": "앙",
-      "file": "ang.mp3"
+      "file": "ang.mp3",
+      "instructions": "Say only the single Korean syllable 앙 (romanized: ang), exactly once, in a slow, clear teaching voice. It must end with the back nasal final consonant ㅇ, like the English ng in 'song'. Do not say any other word or sound."
     },
     {
       "id": "al",
       "text": "알",
-      "file": "al.mp3"
+      "file": "al.mp3",
+      "instructions": "Say only the single Korean syllable 알 (romanized: al), exactly once, in a slow, clear teaching voice. It must end with the Korean liquid final consonant ㄹ, tongue tip touching the roof of the mouth. Do not say any other word or sound."
     },
     {
       "id": "ma",
