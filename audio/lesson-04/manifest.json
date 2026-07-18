@@ -1,0 +1,120 @@
+{
+  "lesson": "lesson-04",
+  "provider": "openai",
+  "model": "gpt-4o-mini-tts",
+  "voice": "marin",
+  "format": "mp3",
+  "instructions": "Speak with a clear, warm, feminine-presenting Korean teaching voice. Use natural standard Seoul Korean at a slow but not exaggerated pace. Pronounce each input as one complete Korean utterance, applying standard Korean phonological rules (including nasalization, e.g. 합니다 as 함니다) and natural phrase intonation. Do not spell out Hangul blocks and do not read punctuation aloud.",
+  "items": [
+    {
+      "id": "an",
+      "text": "안",
+      "file": "an.mp3"
+    },
+    {
+      "id": "am",
+      "text": "암",
+      "file": "am.mp3"
+    },
+    {
+      "id": "ang",
+      "text": "앙",
+      "file": "ang.mp3"
+    },
+    {
+      "id": "al",
+      "text": "알",
+      "file": "al.mp3"
+    },
+    {
+      "id": "ma",
+      "text": "마",
+      "file": "ma.mp3"
+    },
+    {
+      "id": "man",
+      "text": "만",
+      "file": "man.mp3"
+    },
+    {
+      "id": "mam",
+      "text": "맘",
+      "file": "mam.mp3"
+    },
+    {
+      "id": "mal",
+      "text": "말",
+      "file": "mal.mp3"
+    },
+    {
+      "id": "mu",
+      "text": "무",
+      "file": "mu.mp3"
+    },
+    {
+      "id": "mun",
+      "text": "문",
+      "file": "mun.mp3"
+    },
+    {
+      "id": "mum",
+      "text": "뭄",
+      "file": "mum.mp3"
+    },
+    {
+      "id": "mul",
+      "text": "물",
+      "file": "mul.mp3"
+    },
+    {
+      "id": "ba",
+      "text": "바",
+      "file": "ba.mp3"
+    },
+    {
+      "id": "ban",
+      "text": "반",
+      "file": "ban.mp3"
+    },
+    {
+      "id": "bam",
+      "text": "밤",
+      "file": "bam.mp3"
+    },
+    {
+      "id": "bal",
+      "text": "발",
+      "file": "bal.mp3"
+    },
+    {
+      "id": "bu",
+      "text": "부",
+      "file": "bu.mp3"
+    },
+    {
+      "id": "bun",
+      "text": "분",
+      "file": "bun.mp3"
+    },
+    {
+      "id": "bum",
+      "text": "붐",
+      "file": "bum.mp3"
+    },
+    {
+      "id": "bul",
+      "text": "불",
+      "file": "bul.mp3"
+    },
+    {
+      "id": "hanguk",
+      "text": "한국",
+      "file": "hanguk.mp3"
+    },
+    {
+      "id": "gamsahamnida",
+      "text": "감사합니다",
+      "file": "gamsahamnida.mp3"
+    }
+  ]
+}
