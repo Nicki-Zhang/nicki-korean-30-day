@@ -16,8 +16,7 @@ jobs:
           node-version: 20
       - name: Generate Korean female audio
         env:
-          NCP_CLOVA_API_KEY_ID: ${{ secrets.NCP_CLOVA_API_KEY_ID }}
-          NCP_CLOVA_API_KEY: ${{ secrets.NCP_CLOVA_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: node scripts/generate-lesson-audio.mjs
       - name: Commit generated MP3 files
         run: |
