@@ -24,13 +24,26 @@ function createRuntime(seed) {
 
 const migration = createRuntime({
   schemaVersion: 1,
+  name: '  민지  ',
+  avatar: '🌱',
   xp: 25,
   reviewItems: ['lesson01:vowels', 'lesson01:vowels', 'lesson02:words']
 });
-assert.equal(migration.api.version, 2);
+assert.equal(migration.api.version, 3);
+assert.equal(migration.api.get().name, '민지');
+assert.equal(migration.api.get().avatar, '🌱');
+assert.equal(migration.api.get().path, 'K0');
 assert.equal(migration.api.get().reviewItems.length, 2);
 assert.equal(migration.api.get().reviewItems[0].lessonId, 'lesson-01');
-assert.equal(JSON.parse(migration.storage.get('nikigoProfile')).schemaVersion, 2);
+assert.equal(JSON.parse(migration.storage.get('nikigoProfile')).schemaVersion, 3);
+
+const profileDefaults = createRuntime({ name: '   ', avatar: 'unsupported' });
+assert.equal(profileDefaults.api.get().name, 'Nicki');
+assert.equal(profileDefaults.api.get().avatar, 'initial');
+assert.equal(profileDefaults.api.get().path, '');
+
+const placedProfile = createRuntime({ path: 'K2' });
+assert.equal(placedProfile.api.get().path, 'K2');
 
 const runtime = createRuntime({ xp: 0, reviewItems: [] });
 runtime.api.addReview('lesson03:greeting', { lessonId: 'lesson-03', dueNow: true });

@@ -152,11 +152,12 @@
     }
 
     function progress() {
-      return Math.round(index / (screens.length - 1) * 100);
+      return Math.round((index + 1) / screens.length * 100);
     }
 
     function shell(body) {
-      return `${body}<p class="aiDisclosure">ⓘ ${copy('aiVoice')}</p><div class="foot"><button class="ghost" data-action="previous">← ${copy('back')}</button><button class="primary" id="nextButton" data-action="next">${copy(index === screens.length - 2 ? 'finish' : 'continue')} →</button></div>`;
+      const previousLabel = index === 0 ? copy('returnHome') : copy('back');
+      return `${body}<p class="aiDisclosure">ⓘ ${copy('aiVoice')}</p><div class="foot"><button class="ghost" data-action="previous">← ${previousLabel}</button><button class="primary" id="nextButton" data-action="next">${copy(index === screens.length - 2 ? 'finish' : 'continue')} →</button></div>`;
     }
 
     function renderIntro() {
@@ -266,6 +267,11 @@
       element('#progressLabel').textContent = copy('progress');
       element('#progressCount').textContent = `${index + 1} / ${screens.length}`;
       element('#progressBar').style.width = `${progress()}%`;
+      element('#progressTrack').setAttribute('aria-valuenow', String(progress()));
+      const returnHomeLabel = copy('returnHome');
+      element('#homeButton').setAttribute('aria-label', returnHomeLabel);
+      element('#homeButton').setAttribute('title', returnHomeLabel);
+      element('#homeLogo').setAttribute('aria-label', returnHomeLabel);
       const screen = screens[index];
       let html = '';
       if (screen.type === 'intro') html = renderIntro();

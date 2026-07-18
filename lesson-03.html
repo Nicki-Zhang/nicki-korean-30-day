@@ -9,14 +9,14 @@
 </head>
 <body>
   <header class="top">
-    <button class="logo" onclick="exitLesson()"><b>✦</b> Nikigo</button>
+    <button class="logo" id="homeLogo" onclick="exitLesson()" aria-label="Return to learning home"><b>✦</b> Nikigo</button>
     <span class="lessonName" id="lessonName"></span>
     <div class="topActions">
       <label class="languagePicker"><span aria-hidden="true">🌐</span><select id="language" aria-label="Choose interface language" onchange="changeLanguage(this.value)"><option value="zh">简体中文</option><option value="en">English</option><option value="vi">Tiếng Việt</option><option value="ja">日本語</option></select></label>
-      <button class="close" onclick="exitLesson()" aria-label="Close">×</button>
+      <button class="homeButton" id="homeButton" onclick="exitLesson()" aria-label="Return to learning home" title="Return to learning home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.2 12 4l9 7.2v8.3a.5.5 0 0 1-.5.5H15v-6H9v6H3.5a.5.5 0 0 1-.5-.5z"/></svg></button>
     </div>
   </header>
-  <div class="progressWrap"><div class="progressMeta"><span id="progressLabel"></span><b id="progressCount"></b></div><div class="track"><i id="progressBar"></i></div></div>
+  <div class="progressWrap"><div class="progressMeta"><span id="progressLabel"></span><b id="progressCount"></b></div><div class="track" id="progressTrack" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-labelledby="progressLabel"><i id="progressBar"></i></div></div>
   <main class="stage"><article class="card" id="content"></article></main>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="app-state.js"></script>

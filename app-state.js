@@ -2,10 +2,14 @@
   'use strict';
 
   const STORAGE_KEY = 'nikigoProfile';
-  const SCHEMA_VERSION = 2;
+  const SCHEMA_VERSION = 3;
   const SUPPORTED_LANGUAGES = ['zh', 'en', 'vi', 'ja'];
+  const AVATAR_CHOICES = ['initial', '🌱', '📚', '✨', '🐰'];
   const DEFAULTS = Object.freeze({
     schemaVersion: SCHEMA_VERSION,
+    name: 'Nicki',
+    avatar: 'initial',
+    path: '',
     interfaceLanguage: '',
     learningLanguage: '',
     time: '10',
@@ -78,6 +82,8 @@
       ...DEFAULTS,
       ...source,
       schemaVersion: SCHEMA_VERSION,
+      name: typeof source.name === 'string' && source.name.trim() ? source.name.trim().slice(0, 24) : DEFAULTS.name,
+      avatar: AVATAR_CHOICES.includes(source.avatar) ? source.avatar : DEFAULTS.avatar,
       interfaceLanguage: SUPPORTED_LANGUAGES.includes(source.interfaceLanguage) ? source.interfaceLanguage : '',
       learningLanguage: SUPPORTED_LANGUAGES.includes(source.learningLanguage) ? source.learningLanguage : '',
       time: ['5', '10', '15', '20'].includes(String(source.time)) ? String(source.time) : DEFAULTS.time,
@@ -94,6 +100,11 @@
     Object.keys(normalized.lessonProgress).forEach(key => {
       normalized.lessonProgress[key] = finiteNumber(normalized.lessonProgress[key], 0, 0, 100);
     });
+    const hasLearningActivity = normalized.completedLessons.length > 0
+      || normalized.reviewItems.length > 0
+      || Object.keys(normalized.lessonProgress).length > 0
+      || normalized.xp > 0;
+    normalized.path = /^K[0-4]$/.test(source.path) ? source.path : (hasLearningActivity ? 'K0' : '');
     return normalized;
   }
 
@@ -217,6 +228,7 @@
     version: SCHEMA_VERSION,
     defaults: DEFAULTS,
     supportedLanguages: SUPPORTED_LANGUAGES,
+    avatarChoices: AVATAR_CHOICES,
     get: () => state,
     save: (next, source) => commit(next || state, source || 'save'),
     update,

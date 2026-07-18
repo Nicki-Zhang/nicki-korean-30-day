@@ -4,6 +4,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node scripts/test-app-state.mjs && node scripts/validate-lessons.mjs"
+    "test": "node scripts/test-app-state.mjs && node scripts/validate-lessons.mjs && node scripts/validate-app-shell.mjs"
   }
 }

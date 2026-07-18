@@ -1,0 +1,47 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+
+const index = fs.readFileSync('index.html', 'utf8');
+const app = fs.readFileSync('nikigo-app.html', 'utf8');
+const manifest = JSON.parse(fs.readFileSync('manifest.webmanifest', 'utf8'));
+const worker = fs.readFileSync('sw.js', 'utf8');
+
+assert.match(index, /new URL\('nikigo-app\.html', location\.href\)/);
+assert.match(index, /target\.search = location\.search/);
+assert.match(index, /target\.hash = location\.hash/);
+assert.equal(manifest.start_url, './nikigo-app.html');
+assert.match(worker, /\.\/nikigo-app\.html/);
+
+for (const requiredId of [
+  'avatar',
+  'profile',
+  'profileAvatar',
+  'profileCompleted',
+  'profileStreak',
+  'settingName',
+  'avatarChoices',
+  'settingLanguage',
+  'settingDaily',
+  'settingAudioRate',
+  'autoplaySwitch'
+]) {
+  assert.match(app, new RegExp(`id=["']${requiredId}["']`), `Missing #${requiredId}`);
+}
+
+assert.match(app, /onclick="goHome\(\)"/);
+assert.doesNotMatch(app, /class="logo"[^>]+onclick="go\('welcome'\)"/);
+assert.match(app, /function saveProfileName\(\)/);
+assert.match(app, /function updateAvatar\(value\)/);
+
+const ids = [...app.matchAll(/\sid=["']([^"']+)["']/g)].map(match => match[1]);
+const duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);
+assert.deepEqual(duplicateIds, [], `Duplicate ids: ${duplicateIds.join(', ')}`);
+
+const inlineScripts = [...app.matchAll(/<script(?: [^>]*)?>([\s\S]*?)<\/script>/g)]
+  .map(match => match[1])
+  .filter(Boolean);
+assert.ok(inlineScripts.length, 'Missing inline app script.');
+new vm.Script(inlineScripts.at(-1), { filename: 'nikigo-app.html:inline-script' });
+
+console.log('Validated unified app entry and profile center.');
