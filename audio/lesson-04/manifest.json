@@ -1,0 +1,64 @@
+{
+  "lesson": "lesson-04",
+  "provider": "openai",
+  "model": "gpt-4o-mini-tts",
+  "voice": "marin",
+  "format": "mp3",
+  "instructions": "Speak with a clear, warm, feminine-presenting Korean teaching voice. Use natural standard Seoul Korean at a calm teaching pace. Say only the Korean input exactly once. Keep the final consonant audible through the correct mouth closure, but do not exaggerate it and never add a trailing vowel. Do not spell Hangul, translate, explain, or read punctuation aloud.",
+  "items": [
+    {
+      "id": "san",
+      "text": "산",
+      "file": "san.mp3",
+      "instructions": "Say only the Korean word 산, meaning mountain, exactly once. End cleanly on final ㄴ with the tongue tip at the alveolar ridge. Do not add a vowel after ㄴ."
+    },
+    {
+      "id": "mom",
+      "text": "몸",
+      "file": "mom.mp3",
+      "instructions": "Say only the Korean word 몸, meaning body, exactly once. Close both lips fully on final ㅁ and stop there. Do not release into an extra vowel."
+    },
+    {
+      "id": "gong",
+      "text": "공",
+      "file": "gong.mp3",
+      "instructions": "Say only the Korean word 공, meaning ball, exactly once. End on the back nasal final ㅇ, like ng in song, without an added vowel."
+    },
+    {
+      "id": "mul",
+      "text": "물",
+      "file": "mul.mp3",
+      "instructions": "Say only the Korean word 물, meaning water, exactly once. Finish with the Korean final ㄹ, tongue tip touching the roof of the mouth, without an added vowel."
+    },
+    {
+      "id": "ban",
+      "text": "반",
+      "file": "ban.mp3",
+      "instructions": "Say only the Korean word 반, meaning half, exactly once. Keep ㅂ + ㅏ clear and finish on final ㄴ without a trailing vowel."
+    },
+    {
+      "id": "bam",
+      "text": "밤",
+      "file": "bam.mp3",
+      "instructions": "Say only the Korean word 밤, meaning night, exactly once. Keep ㅂ + ㅏ clear and close both lips on final ㅁ without a trailing vowel."
+    },
+    {
+      "id": "bang",
+      "text": "방",
+      "file": "bang.mp3",
+      "instructions": "Say only the Korean word 방, meaning room, exactly once. Keep ㅂ + ㅏ clear and finish with the back nasal final ㅇ without a trailing vowel."
+    },
+    {
+      "id": "bal",
+      "text": "발",
+      "file": "bal.mp3",
+      "instructions": "Say only the Korean word 발, meaning foot, exactly once. Keep ㅂ + ㅏ clear and finish on the Korean final ㄹ without a trailing vowel."
+    },
+    {
+      "id": "gamsahamnida",
+      "text": "감사합니다",
+      "file": "gamsahamnida.mp3",
+      "instructions": "Say only 감사합니다 exactly once as a natural, polite thank-you. Use standard Seoul pronunciation and apply the natural nasalization in 합니다, which sounds like 함니다."
+    }
+  ]
+}

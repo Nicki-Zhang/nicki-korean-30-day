@@ -29,6 +29,14 @@
   define('lesson03:quiz:3', { lessonId: 'lesson-03', kind: 'listen', audio: '안녕하세요', options: ['안녕', '안녕하세요', '사람', '바다'], answer: 1 });
   define('lesson03:quiz:4', { lessonId: 'lesson-03', kind: 'recognize', cue: 'ㅇ · initial', options: ['∅ (silent)', 'm', 's', 'b'], answer: 0 });
 
+  define('lesson04:batchim', { lessonId: 'lesson-04', kind: 'listen', cue: '받침', audio: '방', options: ['반', '밤', '방', '발'], answer: 2 });
+  define('lesson04:thanks', { lessonId: 'lesson-04', kind: 'listen', cue: '감사합니다', audio: '감사합니다', options: ['감사합니다', '안녕하세요', '안녕', '바다'], answer: 0 });
+  define('lesson04:quiz:0', { lessonId: 'lesson-04', kind: 'listen', audio: '밤', options: ['반', '밤', '방', '발'], answer: 1 });
+  define('lesson04:quiz:1', { lessonId: 'lesson-04', kind: 'build', cue: 'ㅂ + ㅏ + ㅇ', options: ['반', '밤', '방', '발'], answer: 2 });
+  define('lesson04:quiz:2', { lessonId: 'lesson-04', kind: 'listen', audio: '물', options: ['산', '몸', '공', '물'], answer: 3 });
+  define('lesson04:quiz:3', { lessonId: 'lesson-04', kind: 'listen', audio: '감사합니다', options: ['안녕하세요', '감사합니다', '안녕', '바다'], answer: 1 });
+  define('lesson04:quiz:4', { lessonId: 'lesson-04', kind: 'recognize', cue: 'ㅇ · final', options: ['ng', '∅ (silent)', 'm', 'b'], answer: 0 });
+
   global.NIKIGO_REVIEW_CATALOG = Object.freeze({
     all: Object.freeze(items),
     get: id => items[id] || null

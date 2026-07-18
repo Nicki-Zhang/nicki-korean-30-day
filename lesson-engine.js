@@ -36,6 +36,7 @@
     let earnedXp = false;
     let builderConsonant = config.builder.initialConsonant || config.builder.consonants[0];
     let builderVowel = config.builder.initialVowel || config.builder.vowels[0];
+    let builderFinal = config.builder.finals ? (config.builder.initialFinal ?? config.builder.finals[0]) : '';
     let koreanVoices = [];
     let currentAudio = null;
     let currentUtterance = null;
@@ -171,7 +172,7 @@
     }
 
     function renderWords() {
-      return shell(`<span class="eyebrow">${copy('wordsTag')}</span><h1>${copy('wordsTitle')}</h1><p class="lead">${copy('wordsLead')}</p><div class="wordGrid">${config.words.map((word, wordIndex) => `<button class="wordCard ${heard.words.has(wordIndex) ? 'done' : ''}" data-action="hear" data-kind="words" data-index="${wordIndex}"><span class="wordIcon">${word[4]} · ▶</span><strong>${word[0]}</strong><span>${word[1]}</span><p>${copy(word[3])}</p></button>`).join('')}</div>${heard.words.size < config.words.length ? `<div class="note">🎧 ${copy('tapWords')} · ${heard.words.size}/${config.words.length}</div>` : ''}`);
+      return shell(`<span class="eyebrow">${copy('wordsTag')}</span><h1>${copy('wordsTitle')}</h1><p class="lead">${copy('wordsLead')}</p><div class="wordGrid" style="--word-count:${config.words.length}">${config.words.map((word, wordIndex) => `<button class="wordCard ${heard.words.has(wordIndex) ? 'done' : ''}" data-action="hear" data-kind="words" data-index="${wordIndex}"><span class="wordIcon">${word[4]} · ▶</span><strong>${word[0]}</strong><span>${word[1]}</span><p>${copy(word[3])}</p></button>`).join('')}</div>${heard.words.size < config.words.length ? `<div class="note">🎧 ${copy('tapWords')} · ${heard.words.size}/${config.words.length}</div>` : ''}`);
     }
 
     function renderPhrase() {
@@ -179,8 +180,9 @@
     }
 
     function renderBuilder() {
-      const result = config.syllables[builderConsonant + builderVowel];
-      return shell(`<span class="eyebrow">${copy('builderTag')}</span><h1>${copy('builderTitle')}</h1><p class="lead">${copy('builderLead')}</p><div class="builder"><div class="pickGroup"><label>${copy('consonant')}</label><div class="picks">${config.builder.consonants.map(value => `<button class="pick ${builderConsonant === value ? 'on' : ''}" data-action="builder-pick" data-kind="consonant" data-value="${value}">${value}</button>`).join('')}</div></div><b class="operator">+</b><div class="pickGroup"><label>${copy('vowel')}</label><div class="picks">${config.builder.vowels.map(value => `<button class="pick ${builderVowel === value ? 'on' : ''}" data-action="builder-pick" data-kind="vowel" data-value="${value}">${value}</button>`).join('')}</div></div><b class="operator">=</b><button class="buildResult" data-action="build"><span><small>${copy('yourSyllable')} · ▶</small><strong>${result}</strong></span></button></div><div class="builtList"><b>${copy('built')}:</b>${[...built].map(value => `<span>${value}</span>`).join('')}</div>${config.builder.required.every(value => built.has(value)) ? '' : `<div class="note">🧩 ${copy('buildMore')}</div>`}`);
+      const result = config.syllables[builderConsonant + builderVowel + builderFinal] || '';
+      const finalsGroup = config.builder.finals ? `<b class="operator">+</b><div class="pickGroup"><label>${copy('final')}</label><div class="picks">${config.builder.finals.map(value => `<button class="pick ${builderFinal === value ? 'on' : ''}" data-action="builder-pick" data-kind="final" data-value="${value}">${value || '–'}</button>`).join('')}</div></div>` : '';
+      return shell(`<span class="eyebrow">${copy('builderTag')}</span><h1>${copy('builderTitle')}</h1><p class="lead">${copy('builderLead')}</p><div class="builder ${config.builder.finals ? 'withFinal' : ''}"><div class="pickGroup"><label>${copy('consonant')}</label><div class="picks">${config.builder.consonants.map(value => `<button class="pick ${builderConsonant === value ? 'on' : ''}" data-action="builder-pick" data-kind="consonant" data-value="${value}">${value}</button>`).join('')}</div></div><b class="operator">+</b><div class="pickGroup"><label>${copy('vowel')}</label><div class="picks">${config.builder.vowels.map(value => `<button class="pick ${builderVowel === value ? 'on' : ''}" data-action="builder-pick" data-kind="vowel" data-value="${value}">${value}</button>`).join('')}</div></div>${finalsGroup}<b class="operator">=</b><button class="buildResult" data-action="build" ${result ? '' : 'disabled'}><span><small>${copy('yourSyllable')} · ▶</small><strong>${result || '—'}</strong></span></button></div><div class="builtList"><b>${copy('built')}:</b>${[...built].map(value => `<span>${value}</span>`).join('')}</div>${config.builder.required.every(value => built.has(value)) ? '' : `<div class="note">🧩 ${copy('buildMore')}</div>`}`);
     }
 
     function renderQuestion(question, isQuiz, questionIndex) {
@@ -346,11 +348,13 @@
       }
       if (action === 'builder-pick') {
         if (button.dataset.kind === 'consonant') builderConsonant = button.dataset.value;
+        else if (button.dataset.kind === 'final') builderFinal = button.dataset.value;
         else builderVowel = button.dataset.value;
         render();
       }
       if (action === 'build') {
-        const result = config.syllables[builderConsonant + builderVowel];
+        const result = config.syllables[builderConsonant + builderVowel + builderFinal];
+        if (!result) return;
         built.add(result);
         speak(result);
         render();
