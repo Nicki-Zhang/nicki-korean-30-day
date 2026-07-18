@@ -22,7 +22,7 @@ The OpenAI API project must have available API billing or credits. A ChatGPT sub
 
 ## Generate audio
 
-Open **Actions → Generate lesson audio → Run workflow**. The workflow generates the files listed in `audio/lesson-01/manifest.json` and commits the MP3 files to the repository.
+Open **Actions → Generate lesson audio → Run workflow**, then select `lesson-01`, `lesson-02`, or `lesson-03`. The workflow generates the files listed in that lesson's manifest and commits the MP3 files to the repository.
 
 Before release, a Korean native speaker should check every generated file, especially full words and phrases affected by liaison, nasalization, tensification, or other sound changes.
 

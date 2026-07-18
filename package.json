@@ -1,0 +1,9 @@
+{
+  "name": "nikigo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node scripts/test-app-state.mjs && node scripts/validate-lessons.mjs"
+  }
+}

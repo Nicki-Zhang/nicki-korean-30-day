@@ -1,0 +1,21 @@
+{
+  "lesson": "lesson-03",
+  "provider": "openai",
+  "model": "gpt-4o-mini-tts",
+  "voice": "marin",
+  "format": "mp3",
+  "instructions": "Speak with a clear, warm, feminine-presenting Korean teaching voice. Use natural standard Seoul Korean at a slow but not exaggerated pace. Pronounce each input as one complete Korean utterance, applying standard Korean phonological rules and natural phrase intonation. Do not spell out Hangul blocks and do not read punctuation aloud.",
+  "items": [
+    { "id": "ya", "text": "야", "file": "ya.mp3" },
+    { "id": "yeo", "text": "여", "file": "yeo.mp3" },
+    { "id": "ba", "text": "바", "file": "ba.mp3" },
+    { "id": "byeo", "text": "벼", "file": "byeo.mp3" },
+    { "id": "sa", "text": "사", "file": "sa.mp3" },
+    { "id": "syeo", "text": "셔", "file": "syeo.mp3" },
+    { "id": "a", "text": "아", "file": "a.mp3" },
+    { "id": "bada", "text": "바다", "file": "bada.mp3" },
+    { "id": "saram", "text": "사람", "file": "saram.mp3" },
+    { "id": "annyeong", "text": "안녕", "file": "annyeong.mp3" },
+    { "id": "annyeonghaseyo", "text": "안녕하세요", "file": "annyeonghaseyo.mp3" }
+  ]
+}

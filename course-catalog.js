@@ -43,6 +43,28 @@
         vi: 'Nguyên âm mới · Phụ âm mới · Từ vựng · Đọc theo · Thử thách',
         ja: '新しい母音 · 新しい子音 · 単語 · 音読 · チャレンジ'
       }
+    },
+    {
+      id: 'lesson-03',
+      order: 3,
+      path: 'K0',
+      template: 'hangul-to-scenario',
+      duration: 14,
+      xp: 50,
+      icon: '👋',
+      prerequisites: ['lesson-02'],
+      title: {
+        zh: '第一次打招呼',
+        en: 'Your First Greeting',
+        vi: 'Lời chào đầu tiên',
+        ja: '最初のあいさつ'
+      },
+      parts: {
+        zh: '新字母 · 真实词汇 · 礼貌问候 · 跟读 · 挑战',
+        en: 'New letters · Real words · Polite greeting · Shadow · Challenge',
+        vi: 'Chữ mới · Từ thật · Lời chào lịch sự · Đọc theo · Thử thách',
+        ja: '新しい文字 · 単語 · 丁寧なあいさつ · 音読 · チャレンジ'
+      }
     }
   ];
 

@@ -11,6 +11,7 @@ on:
         options:
           - lesson-01
           - lesson-02
+          - lesson-03
 
 permissions:
   contents: write

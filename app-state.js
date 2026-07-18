@@ -2,7 +2,7 @@
   'use strict';
 
   const STORAGE_KEY = 'nikigoProfile';
-  const SCHEMA_VERSION = 1;
+  const SCHEMA_VERSION = 2;
   const SUPPORTED_LANGUAGES = ['zh', 'en', 'vi', 'ja'];
   const DEFAULTS = Object.freeze({
     schemaVersion: SCHEMA_VERSION,
@@ -34,8 +34,46 @@
     return Array.isArray(value) ? [...new Set(value.filter(item => typeof item === 'string'))] : [];
   }
 
-  function normalize(raw) {
+  function isoDate(value, fallback) {
+    const parsed = typeof value === 'string' ? Date.parse(value) : NaN;
+    return Number.isFinite(parsed) ? new Date(parsed).toISOString() : fallback;
+  }
+
+  function lessonIdFromReviewId(id) {
+    const match = String(id || '').match(/^lesson(\d{2}):/);
+    return match ? `lesson-${match[1]}` : '';
+  }
+
+  function normalizeReviewItems(value, now) {
+    const fallbackDate = new Date(now).toISOString();
+    const byId = new Map();
+    (Array.isArray(value) ? value : []).forEach(raw => {
+      const source = typeof raw === 'string' ? { id: raw } : safeObject(raw, {});
+      const id = typeof source.id === 'string' ? source.id.trim() : '';
+      if (!id) return;
+      const normalized = {
+        id,
+        lessonId: typeof source.lessonId === 'string' ? source.lessonId : lessonIdFromReviewId(id),
+        status: source.status === 'mastered' ? 'mastered' : 'active',
+        mastery: finiteNumber(source.mastery, 0, 0, 5),
+        intervalDays: finiteNumber(source.intervalDays, 0, 0, 3650),
+        attempts: finiteNumber(source.attempts, 0, 0, 100000),
+        correctStreak: finiteNumber(source.correctStreak, 0, 0, 100000),
+        lapses: finiteNumber(source.lapses, 0, 0, 100000),
+        createdAt: isoDate(source.createdAt, fallbackDate),
+        dueAt: isoDate(source.dueAt, fallbackDate),
+        lastReviewedAt: source.lastReviewedAt ? isoDate(source.lastReviewedAt, null) : null,
+        lastResult: source.lastResult === 'correct' || source.lastResult === 'incorrect' ? source.lastResult : null
+      };
+      const existing = byId.get(id);
+      if (!existing || Date.parse(normalized.dueAt) < Date.parse(existing.dueAt)) byId.set(id, normalized);
+    });
+    return [...byId.values()];
+  }
+
+  function normalize(raw, now) {
     const source = safeObject(raw, {});
+    const currentTime = Number.isFinite(Number(now)) ? Number(now) : Date.now();
     const normalized = {
       ...DEFAULTS,
       ...source,
@@ -47,7 +85,7 @@
       autoplayAudio: source.autoplayAudio === true,
       memberTier: source.memberTier === 'plus' ? 'plus' : 'free',
       completedLessons: uniqueStrings(source.completedLessons),
-      reviewItems: uniqueStrings(source.reviewItems),
+      reviewItems: normalizeReviewItems(source.reviewItems, currentTime),
       lessonProgress: { ...safeObject(source.lessonProgress, {}) },
       weeklyProgress: finiteNumber(source.weeklyProgress, 0, 0, 7),
       xp: finiteNumber(source.xp, 0, 0, 10000000),
@@ -68,6 +106,11 @@
   }
 
   const state = readStorage();
+  try {
+    global.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (error) {
+    // Migration can remain in memory when storage is unavailable.
+  }
 
   function commit(next, source) {
     const normalized = normalize(next);
@@ -87,6 +130,66 @@
   function update(patch, source) {
     const changes = typeof patch === 'function' ? patch({ ...state }) : patch;
     return commit({ ...state, ...safeObject(changes, {}) }, source || 'update');
+  }
+
+  function addReview(id, metadata) {
+    if (typeof id !== 'string' || !id.trim()) return state;
+    const now = Date.now();
+    const details = safeObject(metadata, {});
+    const existing = state.reviewItems.find(item => item.id === id);
+    const item = existing ? { ...existing } : normalizeReviewItems([{
+      id,
+      lessonId: details.lessonId,
+      createdAt: new Date(now).toISOString(),
+      dueAt: new Date(now).toISOString()
+    }], now)[0];
+    if (!item) return state;
+    item.status = 'active';
+    if (details.dueNow === true || !existing) item.dueAt = new Date(now).toISOString();
+    const items = state.reviewItems.filter(review => review.id !== id);
+    items.push(item);
+    return commit({ ...state, reviewItems: items }, details.source || 'review:add');
+  }
+
+  function recordReview(id, correct, options) {
+    const details = safeObject(options, {});
+    const now = Number.isFinite(Number(details.now)) ? Number(details.now) : Date.now();
+    const reviewedAt = new Date(now).toISOString();
+    const intervals = [1, 3, 7, 14, 30];
+    let earnedXp = 0;
+    const items = state.reviewItems.map(item => {
+      if (item.id !== id) return item;
+      const next = { ...item, attempts: item.attempts + 1, lastReviewedAt: reviewedAt };
+      if (correct === true) {
+        next.lastResult = 'correct';
+        next.correctStreak += 1;
+        next.mastery = Math.min(5, next.mastery + 1);
+        next.intervalDays = intervals[Math.min(next.correctStreak - 1, intervals.length - 1)];
+        next.dueAt = new Date(now + next.intervalDays * 86400000).toISOString();
+        if (next.mastery >= 5) next.status = 'mastered';
+        earnedXp = 5;
+      } else {
+        next.lastResult = 'incorrect';
+        next.correctStreak = 0;
+        next.mastery = Math.max(0, next.mastery - 1);
+        next.intervalDays = 0;
+        next.lapses += 1;
+        next.status = 'active';
+        next.dueAt = new Date(now + 10 * 60000).toISOString();
+      }
+      return next;
+    });
+    return commit({ ...state, reviewItems: items, xp: (Number(state.xp) || 0) + earnedXp }, 'review:answer');
+  }
+
+  function dueReviews(options) {
+    const details = safeObject(options, {});
+    const now = Number.isFinite(Number(details.now)) ? Number(details.now) : Date.now();
+    const limit = finiteNumber(details.limit, 20, 1, 100);
+    return state.reviewItems
+      .filter(item => item.status === 'active' && Date.parse(item.dueAt) <= now)
+      .sort((a, b) => Date.parse(a.dueAt) - Date.parse(b.dueAt))
+      .slice(0, limit);
   }
 
   function reset(options) {
@@ -117,6 +220,10 @@
     get: () => state,
     save: (next, source) => commit(next || state, source || 'save'),
     update,
+    addReview,
+    recordReview,
+    dueReviews,
+    normalize: (raw, now) => normalize(raw, now),
     reset
   });
 })(window);
