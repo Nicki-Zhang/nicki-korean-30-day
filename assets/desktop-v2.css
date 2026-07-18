@@ -4,47 +4,49 @@
   .brand strong{font-size:27px}.brand small{font-size:13px;margin-top:7px}
   .app{width:min(1440px,calc(100% - 64px));margin:0 auto;padding:34px 0 132px}
 
-  /* Homepage becomes a desktop dashboard instead of a stretched phone screen */
-  #screen:has(> .heroV2){display:grid;grid-template-columns:minmax(0,1.4fr) minmax(360px,.72fr);gap:22px 26px;align-items:start}
-  #screen:has(> .heroV2)>.heroV2{grid-column:1;grid-row:1 / span 2;min-height:410px;padding:48px 52px;border-radius:34px;display:flex;flex-direction:column;justify-content:center}
+  #screen:has(> .heroV2){display:grid;grid-template-columns:minmax(0,1.45fr) minmax(390px,.78fr);grid-template-areas:"hero journey" "hero mission" "pathsTitle pathsTitle" "paths paths" "review review";gap:20px 26px;align-items:stretch}
+  #screen:has(> .heroV2)>.heroV2{grid-area:hero;min-width:0;min-height:566px;padding:48px 52px;border-radius:34px;display:flex;flex-direction:column;justify-content:center}
   #screen:has(> .heroV2)>.heroV2 h1{font-size:44px;max-width:760px}
   #screen:has(> .heroV2)>.heroV2 p{font-size:17px;max-width:700px}
   #screen:has(> .heroV2)>.heroV2 .heroStats{max-width:720px;margin-top:30px}
   #screen:has(> .heroV2)>.heroV2 .heroStats div{padding:20px 12px}
   #screen:has(> .heroV2)>.heroV2 .heroStats b{font-size:30px}
   #screen:has(> .heroV2)>.heroV2 .resumeBtn{max-width:720px;margin-top:24px}
-  #screen:has(> .heroV2)>.sectionTitle:nth-of-type(2){grid-column:2;margin:2px 4px 10px}
-  #screen:has(> .heroV2)>.dailyMission{grid-column:2;grid-template-columns:1fr;padding:25px;min-height:318px;align-content:center}
-  #screen:has(> .heroV2)>.dailyMission .missionVisual{width:96px;height:96px;margin:0 auto 6px}
-  #screen:has(> .heroV2)>.dailyMission .missionCopy{text-align:center}
-  #screen:has(> .heroV2)>.dailyMission .missionCopy strong{font-size:22px}
+  #screen:has(> .heroV2)>.journeyStrip{grid-area:journey;min-width:0;margin:0;padding:25px;display:block;border-radius:28px;overflow:hidden}
+  #screen:has(> .heroV2)>.sectionTitle:nth-of-type(2){display:none}
+  #screen:has(> .heroV2)>.dailyMission{grid-area:mission;min-width:0;grid-template-columns:90px minmax(0,1fr);padding:22px;min-height:190px;align-items:center}
+  #screen:has(> .heroV2)>.dailyMission .missionVisual{width:76px;height:76px;margin:0}
+  #screen:has(> .heroV2)>.dailyMission .missionCopy{text-align:left;min-width:0}
+  #screen:has(> .heroV2)>.dailyMission .missionCopy strong{font-size:19px;line-height:1.35}
   #screen:has(> .heroV2)>.dailyMission .missionCopy button{max-width:none}
-  #screen:has(> .heroV2)>.sectionTitle:nth-of-type(3){grid-column:1/-1;margin:18px 4px 0}
-  #screen:has(> .heroV2)>.pathScroller{grid-column:1/-1;grid-auto-flow:initial;grid-template-columns:repeat(6,minmax(0,1fr));overflow:visible;gap:14px}
+  #screen:has(> .heroV2)>.sectionTitle:nth-of-type(3){grid-area:pathsTitle;margin:18px 4px 0}
+  #screen:has(> .heroV2)>.pathScroller{grid-area:paths;grid-auto-flow:initial;grid-template-columns:repeat(6,minmax(0,1fr));overflow:visible;gap:14px}
   #screen:has(> .heroV2)>.pathScroller .pathMini{min-height:164px;padding:20px 14px}
-  #screen:has(> .heroV2)>.reviewCard{grid-column:1/-1;margin-top:0;padding:20px 24px}
+  #screen:has(> .heroV2)>.reviewCard{grid-area:review;margin-top:0;padding:20px 24px}
   #screen:has(> .heroV2)>.homeNav{width:min(860px,calc(100% - 80px));bottom:20px}
 
-  /* Learning paths and ordinary missions */
+  .journeyHead h2{margin:8px 0 6px;font-size:25px;line-height:1.15}.journeyHead p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.journeyFacts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:18px 0}.journeyFacts>div{display:grid;grid-template-columns:auto minmax(0,1fr);gap:1px 9px;align-items:center;padding:11px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.78);min-width:0}.journeyFacts>div>span{grid-row:1/3;font-size:22px}.journeyFacts small,.journeyFacts b{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.journeyFacts small{font-size:10px;color:var(--muted)}.journeyFacts b{font-size:12px}.journeyDashboard .journeyRoute{width:100%;justify-content:space-between;gap:5px;overflow:hidden}.journeyDashboard .journeyRoute span{min-width:42px}.journeyDashboard .journeyRoute i{flex:1;min-width:10px}.journeyProgress{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;margin-top:15px}.journeyProgress>span{height:7px;border-radius:99px;background:#e9e5fb;overflow:hidden}.journeyProgress>span i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--brand),#9c83ff)}.journeyProgress small{color:var(--muted);font-size:10px;white-space:nowrap}
+
   .missionHero{padding:22px 4px 18px}.missionHero h1{font-size:40px;max-width:850px}.missionHero p{font-size:16px;max-width:850px}
   .missionList{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
   .missionRow{min-height:88px;padding:16px}
   .lessonView{padding:34px;border-radius:30px}
   .bottomNav{bottom:20px;width:min(780px,calc(100vw - 80px))}
 
-  /* Mission 1 desktop learning workspace */
   .goldHero{grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr);padding:44px 48px;min-height:300px}
   .goldHero h1{font-size:46px}.goldHero p{font-size:17px;max-width:720px}.goldScene{justify-content:center;font-size:78px}.goldScene span:nth-child(2){font-size:44px}
   .goldOverview{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:20px 0 24px}.goldOverview>div{padding:21px}
-  .goldSteps{position:sticky;top:96px;z-index:12;grid-template-columns:repeat(7,minmax(0,1fr));overflow:visible;padding:10px;margin:0 0 24px;background:rgba(247,248,252,.95);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:22px;box-shadow:0 10px 28px rgba(35,27,78,.08)}
-  .goldModules{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}.goldModules article{min-height:100%;padding:25px}.goldModules article#dialogue,.goldModules article#summary{grid-column:1/-1}.goldModules article#dialogue{display:grid;grid-template-columns:230px minmax(0,1fr);column-gap:30px}.goldModules article#dialogue header{margin:0}.goldModules article#summary{display:grid;grid-template-columns:minmax(0,1fr) minmax(340px,.72fr);column-gap:30px}.goldModules article#summary header{grid-column:1/-1}.goldReward{margin-top:0}
+  .goldSteps{position:sticky;top:96px;z-index:12;grid-template-columns:repeat(8,minmax(0,1fr));overflow:visible;padding:10px;margin:0 0 24px;background:rgba(247,248,252,.95);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:22px;box-shadow:0 10px 28px rgba(35,27,78,.08)}
 }
 
 @media (min-width:1280px){
-  #screen:has(> .heroV2){grid-template-columns:minmax(0,1.55fr) minmax(380px,.7fr)}
+  #screen:has(> .heroV2){grid-template-columns:minmax(0,1.5fr) minmax(410px,.76fr)}
 }
 
 @media (min-width:1600px){
   .app{width:min(1520px,calc(100% - 96px))}
   .topbar{padding-left:max(48px,calc((100vw - 1520px)/2));padding-right:max(48px,calc((100vw - 1520px)/2))}
 }
+
+@media (min-width:700px) and (max-width:899px){.journeyFacts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.journeyDashboard .journeyRoute{justify-content:space-between}.journeyDashboard .journeyRoute i{flex:1}}
+@media (max-width:699px){.journeyFacts{display:grid;grid-template-columns:1fr;gap:8px;margin:16px 0}.journeyFacts>div{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;align-items:center;padding:11px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.75)}.journeyFacts>div>span{grid-row:1/3;font-size:21px}.journeyFacts small,.journeyFacts b{display:block}.journeyFacts small{font-size:10px;color:var(--muted)}.journeyFacts b{font-size:12px}.journeyProgress{display:grid;grid-template-columns:1fr auto;gap:9px;align-items:center;margin-top:13px}.journeyProgress>span{height:6px;border-radius:99px;background:#e9e5fb;overflow:hidden}.journeyProgress>span i{display:block;height:100%;background:var(--brand)}}
