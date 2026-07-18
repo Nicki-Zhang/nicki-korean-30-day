@@ -1,0 +1,24 @@
+{
+  "lesson": "lesson-02",
+  "provider": "openai",
+  "model": "gpt-4o-mini-tts",
+  "voice": "marin",
+  "format": "mp3",
+  "instructions": "Speak with a clear, warm, feminine-presenting Korean teaching voice. Use natural standard Seoul Korean at a slow but not exaggerated pace. Pronounce the input as one complete Korean utterance, follow standard Korean phonological rules, and do not read punctuation aloud.",
+  "items": [
+    { "id": "eu", "text": "으", "file": "eu.mp3" },
+    { "id": "i", "text": "이", "file": "i.mp3" },
+    { "id": "ae", "text": "애", "file": "ae.mp3" },
+    { "id": "e", "text": "에", "file": "e.mp3" },
+    { "id": "da", "text": "다", "file": "da.mp3" },
+    { "id": "di", "text": "디", "file": "di.mp3" },
+    { "id": "ra", "text": "라", "file": "ra.mp3" },
+    { "id": "ri", "text": "리", "file": "ri.mp3" },
+    { "id": "ma", "text": "마", "file": "ma.mp3" },
+    { "id": "mi", "text": "미", "file": "mi.mp3" },
+    { "id": "namu", "text": "나무", "file": "namu.mp3" },
+    { "id": "dari", "text": "다리", "file": "dari.mp3" },
+    { "id": "meori", "text": "머리", "file": "meori.mp3" },
+    { "id": "words", "text": "나무. 다리. 머리.", "file": "words.mp3" }
+  ]
+}
