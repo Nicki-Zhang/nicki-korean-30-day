@@ -66,6 +66,28 @@
         ja: '新しい文字 · 単語 · 丁寧なあいさつ · 音読 · チャレンジ'
       }
     }
+    ,{
+      id: 'lesson-04',
+      order: 4,
+      path: 'K0',
+      template: 'hangul-batchim',
+      duration: 13,
+      xp: 50,
+      icon: '🧱',
+      prerequisites: ['lesson-03'],
+      title: {
+        zh: '收音：音节的最后一块',
+        en: 'Batchim: The Final Block',
+        vi: 'Batchim: Khối cuối của âm tiết',
+        ja: 'パッチム：音節の最後のブロック'
+      },
+      parts: {
+        zh: '收音 ㄴㅁㅇㄹ · 真实词汇 · 감사합니다 · 跟读 · 挑战',
+        en: 'Finals ㄴㅁㅇㄹ · Real words · 감사합니다 · Shadow · Challenge',
+        vi: 'Âm cuối ㄴㅁㅇㄹ · Từ thật · 감사합니다 · Đọc theo · Thử thách',
+        ja: 'パッチム ㄴㅁㅇㄹ · 実際の単語 · 감사합니다 · 音読 · チャレンジ'
+      }
+    }
   ];
 
   window.NIKIGO_COURSES = Object.freeze(lessons);
