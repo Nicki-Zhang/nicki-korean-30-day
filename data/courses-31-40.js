@@ -139,7 +139,7 @@
       <h3>情景对话</h3><div class="krow"><div><div class="ko">${d.dialogue.join('<br>')}</div><div class="zh">${d.dialogueZh.replace(/\n/g,'<br>')}</div></div>${speak(dialogueText)}</div>
       <h3>互动跟读</h3><ol><li>逐句听一遍，只关注节奏。</li><li>每句跟读3次，并模仿停顿。</li><li>遮住中文，完成对话中的“我”这一角色。</li><li>录下自己的完整对话，再听一遍进行对比。</li></ol>
       <h3>自己说</h3><div class="card">${d.task}</div>
-      <h3>每日小测</h3><div class="card"><b>${d.quiz[0]}</b><div style="margin-top:10px">A. ${d.quiz[1]}</div><div>B. ${d.quiz[2]}</div><div>C. ${d.quiz[3]}</div><details style="margin-top:10px"><summary>查看答案</summary><p>${d.quiz[1]}</p></details></div>
+      <h3>每日小测</h3><div class="card"><b>${d.quiz[0]}</b>${(()=>{const o=[d.quiz[1],d.quiz[2],d.quiz[3]].map(v=>[v,Math.random()]).sort((a,b)=>a[1]-b[1]).map(v=>v[0]);return o.map((v,i)=>`<div style="margin-top:${i?0:10}px">${'ABC'[i]}. ${v}</div>`).join('')})()}<details style="margin-top:10px"><summary>查看答案</summary><p>${d.quiz[1]}</p></details></div>
       <h3>今日彩蛋 🌟</h3><div class="card">${d.egg}</div>
       <h3>完成标准</h3><div class="card">✓ 词汇正确率达到80%　✓ 能说出至少4个实用表达　✓ 能独立完成今日情景任务</div>
       <h3>学习笔记</h3><textarea class="note" data-note placeholder="记录新词、错误和自己的例句…"></textarea>`;
