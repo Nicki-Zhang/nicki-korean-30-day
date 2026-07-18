@@ -2,6 +2,15 @@ name: Generate lesson audio
 
 on:
   workflow_dispatch:
+    inputs:
+      lesson:
+        description: Lesson audio to generate
+        required: true
+        default: lesson-02
+        type: choice
+        options:
+          - lesson-01
+          - lesson-02
 
 permissions:
   contents: write
@@ -10,22 +19,23 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 24
+          package-manager-cache: false
       - name: Generate Korean female audio
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: node scripts/generate-lesson-audio.mjs
+        run: node scripts/generate-lesson-audio.mjs "audio/${{ inputs.lesson }}/manifest.json"
       - name: Commit generated MP3 files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add audio/lesson-01/*.mp3
+          git add "audio/${{ inputs.lesson }}"/*.mp3 "audio/${{ inputs.lesson }}/.generation-cache.json"
           if git diff --cached --quiet; then
             echo "No audio changes"
           else
-            git commit -m "Generate lesson 1 Korean female audio"
+            git commit -m "Generate ${{ inputs.lesson }} Korean female audio"
             git push
           fi
