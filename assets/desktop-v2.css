@@ -1,41 +1,50 @@
 @media (min-width:900px){
-  body{background:linear-gradient(180deg,#fafbff 0,#f5f6fb 100%)}
-  .topbar{position:sticky;top:0;z-index:50;min-height:84px;padding:14px 36px;background:rgba(250,251,255,.9);backdrop-filter:blur(18px);border-bottom:1px solid rgba(227,229,240,.85)}
-  .topbar>.brand,.topbar>.headerActions{position:relative;z-index:1}
-  .brand strong{font-size:28px}.brand small{font-size:13px;margin-top:7px}
-  .app{width:calc(100% - 72px);max-width:1600px;padding:34px 0 140px}
-  .heroV2{padding:46px 52px;border-radius:34px;min-height:360px}.heroV2 h1{font-size:46px}.heroV2 p{font-size:18px;max-width:none}.heroStats{max-width:none}.resumeBtn{max-width:none}
-  .dailyMission{grid-template-columns:180px minmax(0,1fr);padding:30px 36px}.missionVisual{width:150px;height:150px;font-size:64px}.missionCopy strong{font-size:26px}.missionCopy p{font-size:16px}.missionCopy button{max-width:none}
-  .pathScroller{grid-auto-flow:initial;grid-template-columns:repeat(6,minmax(0,1fr));overflow:visible}.pathMini{min-height:168px}
-  .reviewCard{max-width:none;padding:22px 28px}
-  .homeNav{width:min(980px,calc(100% - 72px));bottom:22px}
-  .missionList{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-  .missionHero{padding:28px 8px 20px}.missionHero h1{font-size:42px;max-width:none}.missionHero p{font-size:17px;max-width:none}
-  .lessonView{padding:36px;border-radius:30px}
-  .bottomNav{bottom:22px;width:min(900px,calc(100vw - 72px))}
-  .sectionTitle{margin-top:34px}.sectionTitle h2{font-size:28px}
+  body{background:linear-gradient(180deg,#fbfcff 0%,#f4f6fb 100%)}
+  .topbar{position:sticky;top:0;z-index:50;min-height:82px;padding:13px max(32px,calc((100vw - 1440px)/2));background:rgba(251,252,255,.9);backdrop-filter:blur(18px);border-bottom:1px solid rgba(226,229,239,.9)}
+  .brand strong{font-size:27px}.brand small{font-size:13px;margin-top:7px}
+  .app{width:min(1440px,calc(100% - 64px));margin:0 auto;padding:34px 0 132px}
 
-  /* Mission 1 desktop workspace */
-  .goldHero{grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr);padding:48px 54px;min-height:310px}.goldHero h1{font-size:50px}.goldHero p{font-size:18px;max-width:none}.goldScene{justify-content:center;font-size:84px}.goldScene span:nth-child(2){font-size:48px}
-  .goldOverview{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:22px 0 26px}.goldOverview>div{padding:22px}.goldOverview>div>span{width:56px;height:56px;font-size:27px}.goldOverview b{font-size:16px}.goldOverview small{font-size:14px}
-  .goldSteps{position:sticky;top:100px;z-index:12;grid-template-columns:repeat(7,minmax(0,1fr));overflow:visible;padding:12px;margin:0 0 24px;background:rgba(247,248,252,.94);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:22px;box-shadow:0 10px 28px rgba(35,27,78,.08)}
-  .goldSteps button{padding:14px 9px}.goldSteps span{width:44px;height:44px}
-  .goldModules{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start}.goldModules article{min-height:100%;padding:26px}.goldModules article#dialogue,.goldModules article#summary{grid-column:span 2}.goldModules article#dialogue{display:grid;grid-template-columns:220px minmax(0,1fr);column-gap:28px}.goldModules article#dialogue header{margin:0}.goldModules article#summary{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.7fr);column-gap:28px}.goldModules article#summary header{grid-column:1/-1}.goldWordGrid{grid-template-columns:repeat(3,minmax(0,1fr))}.goldChoices{grid-template-columns:repeat(3,minmax(0,1fr))}.goldChat p{max-width:76%}.goldReward{margin-top:0}
+  /* Homepage becomes a desktop dashboard instead of a stretched phone screen */
+  #screen:has(> .heroV2){display:grid;grid-template-columns:minmax(0,1.4fr) minmax(360px,.72fr);gap:22px 26px;align-items:start}
+  #screen:has(> .heroV2)>.heroV2{grid-column:1;grid-row:1 / span 2;min-height:410px;padding:48px 52px;border-radius:34px;display:flex;flex-direction:column;justify-content:center}
+  #screen:has(> .heroV2)>.heroV2 h1{font-size:44px;max-width:760px}
+  #screen:has(> .heroV2)>.heroV2 p{font-size:17px;max-width:700px}
+  #screen:has(> .heroV2)>.heroV2 .heroStats{max-width:720px;margin-top:30px}
+  #screen:has(> .heroV2)>.heroV2 .heroStats div{padding:20px 12px}
+  #screen:has(> .heroV2)>.heroV2 .heroStats b{font-size:30px}
+  #screen:has(> .heroV2)>.heroV2 .resumeBtn{max-width:720px;margin-top:24px}
+  #screen:has(> .heroV2)>.sectionTitle:nth-of-type(2){grid-column:2;margin:2px 4px 10px}
+  #screen:has(> .heroV2)>.dailyMission{grid-column:2;grid-template-columns:1fr;padding:25px;min-height:318px;align-content:center}
+  #screen:has(> .heroV2)>.dailyMission .missionVisual{width:96px;height:96px;margin:0 auto 6px}
+  #screen:has(> .heroV2)>.dailyMission .missionCopy{text-align:center}
+  #screen:has(> .heroV2)>.dailyMission .missionCopy strong{font-size:22px}
+  #screen:has(> .heroV2)>.dailyMission .missionCopy button{max-width:none}
+  #screen:has(> .heroV2)>.sectionTitle:nth-of-type(3){grid-column:1/-1;margin:18px 4px 0}
+  #screen:has(> .heroV2)>.pathScroller{grid-column:1/-1;grid-auto-flow:initial;grid-template-columns:repeat(6,minmax(0,1fr));overflow:visible;gap:14px}
+  #screen:has(> .heroV2)>.pathScroller .pathMini{min-height:164px;padding:20px 14px}
+  #screen:has(> .heroV2)>.reviewCard{grid-column:1/-1;margin-top:0;padding:20px 24px}
+  #screen:has(> .heroV2)>.homeNav{width:min(860px,calc(100% - 80px));bottom:20px}
+
+  /* Learning paths and ordinary missions */
+  .missionHero{padding:22px 4px 18px}.missionHero h1{font-size:40px;max-width:850px}.missionHero p{font-size:16px;max-width:850px}
+  .missionList{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  .missionRow{min-height:88px;padding:16px}
+  .lessonView{padding:34px;border-radius:30px}
+  .bottomNav{bottom:20px;width:min(780px,calc(100vw - 80px))}
+
+  /* Mission 1 desktop learning workspace */
+  .goldHero{grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr);padding:44px 48px;min-height:300px}
+  .goldHero h1{font-size:46px}.goldHero p{font-size:17px;max-width:720px}.goldScene{justify-content:center;font-size:78px}.goldScene span:nth-child(2){font-size:44px}
+  .goldOverview{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:20px 0 24px}.goldOverview>div{padding:21px}
+  .goldSteps{position:sticky;top:96px;z-index:12;grid-template-columns:repeat(7,minmax(0,1fr));overflow:visible;padding:10px;margin:0 0 24px;background:rgba(247,248,252,.95);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:22px;box-shadow:0 10px 28px rgba(35,27,78,.08)}
+  .goldModules{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}.goldModules article{min-height:100%;padding:25px}.goldModules article#dialogue,.goldModules article#summary{grid-column:1/-1}.goldModules article#dialogue{display:grid;grid-template-columns:230px minmax(0,1fr);column-gap:30px}.goldModules article#dialogue header{margin:0}.goldModules article#summary{display:grid;grid-template-columns:minmax(0,1fr) minmax(340px,.72fr);column-gap:30px}.goldModules article#summary header{grid-column:1/-1}.goldReward{margin-top:0}
 }
 
-@media (min-width:1400px){
-  .app{width:calc(100% - 96px);max-width:1720px}
-  .topbar{padding-left:48px;padding-right:48px}
-  .heroV2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(520px,.85fr);column-gap:48px;align-items:center}
-  .heroV2 .eyebrow,.heroV2>h1,.heroV2>p,.heroV2>.resumeBtn{grid-column:1}
-  .heroStats{grid-column:2;grid-row:1/5;align-self:center;margin-top:0;grid-template-columns:1fr;gap:14px}
-  .heroStats div{padding:24px 18px}.heroStats b{font-size:32px}.heroStats span{font-size:13px}
-  .dailyMission{grid-template-columns:200px minmax(0,1fr)}
-  .missionVisual{width:170px;height:170px}
-  .homeNav{width:min(1100px,calc(100% - 96px))}
+@media (min-width:1280px){
+  #screen:has(> .heroV2){grid-template-columns:minmax(0,1.55fr) minmax(380px,.7fr)}
 }
 
-@media (min-width:1800px){
-  .app{max-width:none;width:calc(100% - 128px)}
-  .topbar{padding-left:64px;padding-right:64px}
+@media (min-width:1600px){
+  .app{width:min(1520px,calc(100% - 96px))}
+  .topbar{padding-left:max(48px,calc((100vw - 1520px)/2));padding-right:max(48px,calc((100vw - 1520px)/2))}
 }
