@@ -1,0 +1,18 @@
+{
+  "lesson": "lesson-01",
+  "provider": "naver-clova-voice",
+  "speaker": "nara",
+  "format": "mp3",
+  "volume": 0,
+  "speed": 0,
+  "pitch": 0,
+  "items": [
+    { "id": "a", "text": "아", "file": "a.mp3" },
+    { "id": "eo", "text": "어", "file": "eo.mp3" },
+    { "id": "o", "text": "오", "file": "o.mp3" },
+    { "id": "u", "text": "우", "file": "u.mp3" },
+    { "id": "ga", "text": "가", "file": "ga.mp3" },
+    { "id": "na", "text": "나", "file": "na.mp3" },
+    { "id": "ga-na", "text": "가. 나.", "file": "ga-na.mp3" }
+  ]
+}
