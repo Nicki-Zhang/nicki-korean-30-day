@@ -1,11 +1,10 @@
 {
   "lesson": "lesson-01",
-  "provider": "naver-clova-voice",
-  "speaker": "nara",
+  "provider": "openai",
+  "model": "gpt-4o-mini-tts",
+  "voice": "marin",
   "format": "mp3",
-  "volume": 0,
-  "speed": 0,
-  "pitch": 0,
+  "instructions": "Speak with a clear, warm, feminine-presenting Korean teaching voice. Use natural standard Seoul Korean at a slow but not exaggerated pace. Pronounce the input as one complete Korean utterance, follow standard Korean phonological rules, and do not read punctuation aloud.",
   "items": [
     { "id": "a", "text": "아", "file": "a.mp3" },
     { "id": "eo", "text": "어", "file": "eo.mp3" },
