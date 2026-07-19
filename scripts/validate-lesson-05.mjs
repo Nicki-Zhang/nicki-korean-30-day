@@ -17,7 +17,7 @@ assert.match(css, /@media\(max-width:760px\)/);
 assert.match(css, /min-height:(?:44|46|48)px/);
 assert.match(html, /\.lesson05Card:has\(\.challengeHeader\)/, 'Desktop challenge cards should not inherit the tall lesson-card minimum height.');
 for (const marker of ['390 builder', '390 challenge', '768 split', '1440 challenge', 'getBoundingClientRect', 'scrollWidth', 'smallControls']) assert.match(layoutFixture, new RegExp(marker));
-for (const marker of ["params.get('fresh')", "params.get('locked')", "id !== 'lesson-05'", "id !== 'k0-consonant-contrast'"]) assert.match(previewFixture, new RegExp(marker.replaceAll('(', '\\(').replaceAll(')', '\\)')));
+for (const marker of ["params.get('fresh')", "id !== 'lesson-05'"]) assert.match(previewFixture, new RegExp(marker.replaceAll('(', '\\(').replaceAll(')', '\\)')));
 for (const marker of ["params.get('width')", "params.get('height')", "params.get('step')", "frame.width = width", "frame.height = height"]) assert.ok(screenshotFixture.includes(marker));
 assert.doesNotMatch(source, /speechSynthesis|SpeechSynthesisUtterance|openai|fetch\s*\(/i);
 assert.doesNotMatch(source, /[ㄱ-ㅎ]\s*\+\s*[ㅏ-ㅣ]\s*\+\s*[ㄱ-ㅎ]/u, 'Lesson 5 must not introduce CVC/batchim construction.');
@@ -55,7 +55,7 @@ const api = lessonWindow.NikigoLesson05;
 
 assert.ok(api);
 assert.equal(api.LESSON_ID, 'lesson-05');
-assert.equal(api.PREREQUISITE, 'k0-consonant-contrast');
+assert.equal(api.PREREQUISITE, undefined);
 assert.equal(api.SCREENS.length, 16);
 assert.deepEqual([...api.SCREENS], ['intro', 'block', 'left-concept', 'left-examples', 'left-practice', 'top-concept', 'top-examples', 'top-practice', 'ieung-concept', 'ieung-examples', 'builder', 'split', 'challenge', 'retry', 'summary', 'complete']);
 
@@ -63,6 +63,8 @@ const englishKeys = Object.keys(api.UI.en);
 for (const language of languages) {
   for (const key of englishKeys) assert.notEqual(api.UI[language]?.[key], undefined, `${language}.${key} is undefined`);
   assert.match(api.UI[language].ieungRule, /ㅇ/);
+  assert.equal(api.UI[language].lockedTitle, undefined);
+  assert.equal(api.UI[language].lockedLead, undefined);
 }
 
 const expectedCompleteTags = {
@@ -108,8 +110,6 @@ assert.equal(restored.challengeStarted, true);
 assert.deepEqual([...restored.built], ['가', '어']);
 assert.deepEqual(JSON.parse(JSON.stringify(restored.optionOrders)), JSON.parse(JSON.stringify(session.optionOrders)));
 
-assert.equal(api.isUnlocked({ completedLessons: [] }), false);
-assert.equal(api.isUnlocked({ completedLessons: ['k0-consonant-contrast'] }), true);
 const completed = api.completionPatch(oldProfile);
 assert.equal(completed.xp, 250);
 assert.equal(completed.lessonProgress['lesson-05'], 100);
@@ -133,10 +133,10 @@ vm.runInNewContext(fs.readFileSync('course-catalog.js', 'utf8'), catalogContext,
 const course = catalogContext.window.NIKIGO_COURSES.find(item => item.stableId === 'lesson-05');
 assert.equal(course.displayNumber, 5);
 assert.equal(course.file, 'lesson-05.html');
-assert.deepEqual([...course.prerequisites], ['k0-consonant-contrast']);
-assert.equal(catalogContext.window.NIKIGO_COURSE_UNLOCKED(course, []), false);
+assert.deepEqual([...course.recommendedPrerequisites], ['k0-consonant-contrast']);
 assert.equal(catalogContext.window.NIKIGO_COURSE_UNLOCKED(course, ['k0-consonant-contrast']), true);
+assert.equal(catalogContext.window.NIKIGO_COURSE_UNLOCKED(course, []), true);
 assert.equal(catalogContext.window.NIKIGO_NEXT_LESSON(['lesson-00', 'lesson-01', 'lesson-02', 'lesson-03']).stableId, 'k0-consonant-contrast');
 assert.equal(catalogContext.window.NIKIGO_NEXT_LESSON(['lesson-00', 'lesson-01', 'lesson-02', 'lesson-03', 'k0-consonant-contrast']).stableId, 'lesson-05');
 
-console.log('Validated Lesson 5: 16 steps, four languages, CV composition/splitting, silent onset ㅇ, persisted challenge state, prerequisite unlock, exact hosted audio reuse, migration safety, and one-time +50 XP.');
+console.log('Validated Lesson 5: 16 steps, four languages, direct access, CV composition/splitting, silent onset ㅇ, persisted state, exact hosted audio reuse, migration safety, and one-time +50 XP.');

@@ -2,7 +2,8 @@
 const params=new URLSearchParams(location.search);
 const step=Math.max(0,Math.min(17,Number(params.get('step'))||0));
 const lang=['zh','en','vi','ja'].includes(params.get('lang'))?params.get('lang'):'zh';
-const profile={schemaVersion:4,name:'Preview',path:'K0',interfaceLanguage:lang,learningLanguage:lang,audioRate:1,autoplayAudio:false,completedLessons:['lesson-00','lesson-01','lesson-02','lesson-03','k0-consonant-contrast','lesson-05'],lessonProgress:{'lesson-05':100},weeklyProgress:0,xp:250};
+const completed=params.get('completed')==='1';
+const profile={schemaVersion:4,name:'Preview',path:'K0',interfaceLanguage:lang,learningLanguage:lang,audioRate:1,autoplayAudio:false,completedLessons:completed?['lesson-06']:[],lessonProgress:completed?{'lesson-06':100}:{},weeklyProgress:0,xp:completed?50:0};
 const session={step,completed:false,challengeStarted:params.get('challenge')==='1'};
 localStorage.setItem('nikigoProfile',JSON.stringify(profile));
 localStorage.setItem('nikigoLessonSession:lesson-06',JSON.stringify(session));

@@ -1,6 +1,6 @@
 # Nikigo course audio
 
-Nikigo uses pre-generated Korean MP3 files first and the device voice only as a fallback.
+Nikigo only enables exact, pre-generated Korean files after Korean native-speaker approval. Device speech, similar-text substitutions, and answer-text fallback are forbidden.
 
 ## Provider
 
@@ -22,8 +22,8 @@ The OpenAI API project must have available API billing or credits. A ChatGPT sub
 
 ## Generate audio
 
-Open **Actions → Generate lesson audio → Run workflow**, then select `lesson-01`, `lesson-02`, or `lesson-03`. The workflow generates the files listed in that lesson's manifest and commits the MP3 files to the repository.
+Open **Actions → Generate lesson audio → Run workflow**, then explicitly select the lesson. The manual job reads the secret only in the generation step, validates the repository, and uploads the selected lesson directory as a seven-day Artifact. It does not commit or push generated files. Ordinary pushes only validate schema/mappings and run the full test suite; they do not read the secret or generate audio.
 
-Before release, a Korean native speaker should check every generated file, especially full words and phrases affected by liaison, nasalization, tensification, or other sound changes.
+Before release, record `voiceSource`, `model`, `generationDate`, commercial-use basis and a Korean native-speaker review for every generated file, especially words and phrases affected by liaison, nasalization, tensification, or other sound changes. Files remain disabled until `reviewStatus` is `approved`.
 
 The app must clearly disclose that the lesson voice is AI-generated.

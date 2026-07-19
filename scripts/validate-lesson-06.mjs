@@ -14,8 +14,8 @@ for(const asset of ['lesson-06.js','lesson-06.css','course-catalog.js','audio-ca
 assert.match(css,/@media\(max-width:760px\)/);
 assert.match(css,/overflow-x:hidden/);
 assert.match(css,/min-height:(?:44|46|48)px/);
-for(const marker of ["params.get('step')","params.get('lang')","completedLessons","lesson-05","nikigoLessonSession:lesson-06"])assert.ok(preview.includes(marker));
-for(const marker of ["get('state')","releaseStatus:'released'","NIKIGO_COURSE_UNLOCKED","'lesson-06'","开发验收 · 音频未发布"])assert.ok(catalogPreview.includes(marker));
+for(const marker of ["params.get('step')","params.get('lang')","completed=params.get('completed')","nikigoLessonSession:lesson-06"])assert.ok(preview.includes(marker));
+for(const marker of ["get('state')","'lesson-06'","'lesson-02':45","qaCatalog","#courses"])assert.ok(catalogPreview.includes(marker));
 assert.doesNotMatch(source,/speechSynthesis|SpeechSynthesisUtterance|new Audio\s*\(|fetch\s*\(/i);
 assert.doesNotMatch(source,/再次播放\s*[가-힣]|Play again\s*[가-힣]/u);
 assert.doesNotMatch(source,/Object\.assign\(UI|"milk"|“牛奶”|“sữa”|「牛乳」/u,'Deprecated milk copy or runtime translation overrides remain.');
@@ -37,7 +37,7 @@ const api=lessonWindow.NikigoLesson06;
 
 assert.ok(api);
 assert.equal(api.LESSON_ID,'lesson-06');
-assert.equal(api.PREREQUISITE,'lesson-05');
+assert.equal(api.PREREQUISITE,undefined);
 assert.equal(api.SCREENS.length,18);
 assert.deepEqual([...api.SCREENS],['intro','review','structure','oa','ueo','i-family','combine-practice','carrier','builder','split','near-group','spelling-practice','extended','words','challenge','retry','summary','complete']);
 const englishKeys=Object.keys(api.UI.en);
@@ -76,8 +76,6 @@ session=api.applyRetryAnswer(session,api.CHALLENGE[0],'ㅘ');
 assert.deepEqual([...session.mistakes],[]);
 const restored=api.normalizeSession({...session,step:14,built:['와','뭐','위'],challengeStarted:true});
 assert.equal(restored.step,14);assert.equal(restored.challengeStarted,true);assert.deepEqual([...restored.built],['와','뭐','위']);
-assert.equal(api.isUnlocked({completedLessons:[]}),false);
-assert.equal(api.isUnlocked({completedLessons:['lesson-05']}),true);
 const completed=api.completionPatch(oldProfile);
 assert.equal(completed.xp,300);
 assert.equal(completed.lessonProgress['lesson-06'],100);
@@ -99,6 +97,7 @@ const wordSpeech=['뭐','과자','여우','의자'];
 assert.deepEqual(manifest.items.filter(item=>item.audioType==='syllable').map(item=>item.speechText).sort(),syllableSpeech.sort());
 assert.deepEqual(manifest.items.filter(item=>item.audioType==='word').map(item=>item.speechText).sort(),wordSpeech.sort());
 for(const item of manifest.items){
+  assert.equal(item.lessonId,'lesson-06');
   assert.equal(item.reviewStatus,'pending');
   assert.ok(item.displayText&&item.speechText&&item.expectedPronunciation&&item.pronunciationRule&&item.file&&item.voiceSource&&item.model&&item.commercialUseBasis);
   assert.ok(Object.hasOwn(item,'targetSymbol')&&Object.hasOwn(item,'generationDate')&&Object.hasOwn(item,'nativeReviewer')&&Object.hasOwn(item,'reviewNotes'));
@@ -113,11 +112,12 @@ for(const item of manifest.items){
 const catalogContext={window:{}};catalogContext.window.window=catalogContext.window;
 vm.runInNewContext(fs.readFileSync('course-catalog.js','utf8'),catalogContext,{filename:'course-catalog.js'});
 const course=catalogContext.window.NIKIGO_COURSES.find(item=>item.stableId==='lesson-06');
-assert.equal(course.displayNumber,6);assert.equal(course.file,'lesson-06.html');assert.equal(course.status,'available');assert.equal(course.releaseStatus,'audioPending');assert.deepEqual([...course.prerequisites],['lesson-05']);assert.equal(course.requiresCompletion,true);
+assert.equal(course.displayNumber,6);assert.equal(course.file,'lesson-06.html');assert.equal(course.status,'available');assert.equal(course.accessStatus,'available');assert.equal(course.releaseStatus,'preview');assert.equal(course.audioStatus,'pending');assert.deepEqual([...course.prerequisites],[]);assert.deepEqual([...course.recommendedPrerequisites],['lesson-05']);assert.equal(course.requiresCompletion,false);
 assert.equal(catalogContext.window.NIKIGO_COURSES.some(item=>item.stableId==='k0-lesson-06-plan'),false);
-assert.equal(catalogContext.window.NIKIGO_COURSE_UNLOCKED(course,[]),false);
-assert.equal(catalogContext.window.NIKIGO_COURSE_UNLOCKED(course,['lesson-05']),false,'Pending audio must keep the formal catalog entry closed.');
+assert.equal(catalogContext.window.NIKIGO_COURSE_UNLOCKED(course,[]),true,'Audio-pending Lesson 6 must remain available as a structural preview.');
+assert.match(source,/releaseNotice/);
+assert.match(source,/lesson06ReleaseNotice/);
 const lesson7=catalogContext.window.NIKIGO_COURSES.find(item=>item.stableId==='lesson-04');
 assert.equal(lesson7.displayNumber,7);assert.equal(lesson7.file,'lesson-04.html');
 
-console.log('Validated Lesson 6: 18 steps, four languages, compound-vowel spelling, no fake listening, safe CV scope, resume state, exact-audio policy, Lesson 5 prerequisite, migration safety, and one-time +50 XP.');
+console.log('Validated Lesson 6: 18 steps, four languages, direct structural-preview access, compound-vowel spelling, no fake listening, resume state, exact-audio policy, migration safety, and one-time +50 XP.');

@@ -93,7 +93,7 @@ const course=catalog.find(item=>item.stableId==='k0-consonant-contrast');
 assert.equal(course.displayNumber,4);
 assert.equal(course.file,'lesson-consonant-contrast.html');
 assert.notEqual(course.stableId,'lesson-04');
-assert.deepEqual([...catalog.find(item=>item.stableId==='lesson-05').prerequisites],['k0-consonant-contrast']);
+assert.deepEqual([...catalog.find(item=>item.stableId==='lesson-05').recommendedPrerequisites],['k0-consonant-contrast']);
 
 assert.doesNotMatch(source,/playSequence\(\s*\[['"][ㄱ-ㅎ]['"]\]\s*\)/u);
 assert.match(source,/global\.setTimeout\(next,260\)/);
@@ -102,4 +102,4 @@ assert.match(source,/aria-label="\$\{text\('listenSound'/);
 const workflow=fs.readFileSync('.github/workflows/generate-lesson-audio.yml','utf8');
 assert.match(workflow,/audio\/k0-\*\/manifest\.json/);
 assert.match(workflow,/k0-consonant-contrast/);
-console.log('Validated 15-step K0 consonant contrast lesson, 14 safe full-syllable mappings, four languages, retry flow, resume state, completion compatibility, and next-course prerequisite.');
+console.log('Validated 15-step K0 consonant contrast lesson, 14 safe full-syllable mappings, four languages, retry flow, resume state, completion compatibility, and direct course access.');

@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nikigo visual cache reset</title></head>
+<body><p id="status">Preparing a clean visual acceptance session…</p><script>
+(async()=>{
+  const target=new URLSearchParams(location.search).get('target')||'lesson-06-preview.html?step=0&lang=zh';
+  if('serviceWorker' in navigator){for(const registration of await navigator.serviceWorker.getRegistrations())await registration.unregister();}
+  if('caches' in window){for(const key of await caches.keys())await caches.delete(key);}
+  location.replace(target);
+})().catch(error=>{document.getElementById('status').textContent=`CACHE RESET FAILED: ${error.message}`;});
+</script></body>
+</html>

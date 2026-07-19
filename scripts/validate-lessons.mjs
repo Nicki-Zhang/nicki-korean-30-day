@@ -47,7 +47,12 @@ for (const [index, item] of (catalog || []).entries()) {
   if (item.displayOrder !== index) errors.push(`${stableId} has unexpected display order ${item.displayOrder}.`);
   if (item.displayNumber !== index) errors.push(`${stableId} has unexpected display number ${item.displayNumber}.`);
   if (!['available', 'comingSoon'].includes(item.status)) errors.push(`${stableId} has invalid status ${item.status}.`);
-  for (const prerequisite of item.prerequisites || []) {
+  if (!['development', 'preview', 'released', 'comingSoon'].includes(item.releaseStatus)) errors.push(`${stableId} has invalid releaseStatus ${item.releaseStatus}.`);
+  if (!['available', 'unavailable'].includes(item.accessStatus)) errors.push(`${stableId} has invalid accessStatus ${item.accessStatus}.`);
+  if (!['pending', 'generated', 'underReview', 'approved', 'rejected'].includes(item.audioStatus)) errors.push(`${stableId} has invalid audioStatus ${item.audioStatus}.`);
+  if ((item.prerequisites || []).length) errors.push(`${stableId} retains a hard prerequisite.`);
+  if (item.requiresCompletion !== false) errors.push(`${stableId} must not require prior completion.`);
+  for (const prerequisite of item.recommendedPrerequisites || []) {
     if (!ids.has(prerequisite)) errors.push(`${stableId} references a missing or later prerequisite: ${prerequisite}`);
   }
   for (const language of languages) {

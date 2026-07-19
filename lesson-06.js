@@ -2,7 +2,6 @@
   'use strict';
 
   const LESSON_ID = 'lesson-06';
-  const PREREQUISITE = 'lesson-05';
   const SESSION_KEY = `nikigoLessonSession:${LESSON_ID}`;
   const LANGUAGES = ['zh', 'en', 'vi', 'ja'];
   const SCREENS = ['intro','review','structure','oa','ueo','i-family','combine-practice','carrier','builder','split','near-group','spelling-practice','extended','words','challenge','retry','summary','complete'];
@@ -56,6 +55,7 @@
       "listenSyllable": "听完整音节 {text}",
       "listenWord": "听完整单词 {text}",
       "audioPending": "音频待生成/待审核",
+      "releaseNotice": "音频待审核 · 本课仅供结构预览，课程尚未正式发布。",
       "audioNote": "当前没有完全匹配且已审核的托管音频，因此按钮保持禁用；不会使用设备TTS、相似文字或答案替代。",
       "builderTag": "互动 · 拼合器",
       "builderTitle": "把初声和复合元音放进一个音节块",
@@ -123,9 +123,7 @@
       "xpEarned": "本次获得 +50 XP",
       "xpAlreadyClaimed": "首次完成奖励已领取，本次不重复发放XP",
       "progressSaved": "学习进度已保存",
-      "returnCourses": "返回课程主页",
-      "lockedTitle": "完成第5课后开放",
-      "lockedLead": "请先完成“看懂韩语音节块”，再学习复合元音。"
+      "returnCourses": "返回课程主页"
     },
     "en": {
       "lessonName": "Lesson 6 · Compound Vowels",
@@ -167,6 +165,7 @@
       "listenSyllable": "Listen to full syllable {text}",
       "listenWord": "Listen to full word {text}",
       "audioPending": "Audio pending generation/review",
+      "releaseNotice": "Audio pending review · This lesson is a structural preview and is not formally published.",
       "audioNote": "No exact, reviewed hosted match is available yet. Buttons stay disabled; device TTS, similar text, and answer substitution are not used.",
       "builderTag": "INTERACT · BUILDER",
       "builderTitle": "Put an onset and compound vowel into one block",
@@ -234,9 +233,7 @@
       "xpEarned": "You earned +50 XP this time",
       "xpAlreadyClaimed": "The first-completion reward was already claimed; no extra XP this time",
       "progressSaved": "Learning progress saved",
-      "returnCourses": "Return to Courses",
-      "lockedTitle": "Opens after Lesson 5",
-      "lockedLead": "Complete “Understand Korean Syllable Blocks” before compound vowels."
+      "returnCourses": "Return to Courses"
     },
     "vi": {
       "lessonName": "Bài 6 · Nguyên âm ghép",
@@ -278,6 +275,7 @@
       "listenSyllable": "Nghe âm tiết đầy đủ {text}",
       "listenWord": "Nghe từ đầy đủ {text}",
       "audioPending": "Âm thanh chờ tạo/duyệt",
+      "releaseNotice": "Âm thanh chờ duyệt · Bài này chỉ là bản xem trước cấu trúc và chưa phát hành chính thức.",
       "audioNote": "Chưa có tệp lưu trữ khớp chính xác và đã duyệt. Nút bị vô hiệu; không dùng TTS thiết bị, văn bản gần giống hay đáp án thay thế.",
       "builderTag": "TƯƠNG TÁC · GHÉP KHỐI",
       "builderTitle": "Đặt phụ âm đầu và nguyên âm ghép vào một khối",
@@ -345,9 +343,7 @@
       "xpEarned": "Lần này nhận +50 XP",
       "xpAlreadyClaimed": "Đã nhận thưởng lần đầu; lần này không cộng thêm XP",
       "progressSaved": "Đã lưu tiến độ",
-      "returnCourses": "Trở về Bài học",
-      "lockedTitle": "Mở sau Bài 5",
-      "lockedLead": "Hoàn thành bài khối âm tiết trước khi học nguyên âm ghép."
+      "returnCourses": "Trở về Bài học"
     },
     "ja": {
       "lessonName": "第6課 · 複合母音",
@@ -389,6 +385,7 @@
       "listenSyllable": "完全な音節{text}を聞く",
       "listenWord": "単語{text}全体を聞く",
       "audioPending": "音声は生成・確認待ち",
+      "releaseNotice": "音声確認待ち · このレッスンは構造プレビューで、まだ正式公開されていません。",
       "audioNote": "完全一致し、確認済みのホスト音声はまだありません。ボタンは無効で、端末TTS・類似テキスト・答えの代用はしません。",
       "builderTag": "操作 · 組み立て",
       "builderTitle": "初声と複合母音を1ブロックにする",
@@ -456,9 +453,7 @@
       "xpEarned": "今回 +50 XPを獲得",
       "xpAlreadyClaimed": "初回報酬は受取済みです。今回はXPを追加しません",
       "progressSaved": "進捗を保存しました",
-      "returnCourses": "コースへ戻る",
-      "lockedTitle": "第5課完了後に開きます",
-      "lockedLead": "音節ブロックの課を完了してから複合母音を学んでください。"
+      "returnCourses": "コースへ戻る"
     }
   };
 
@@ -504,9 +499,8 @@
   function normalizeSession(raw){const base=blankSession(),source=raw&&typeof raw==='object'?raw:{};return{...base,...source,step:Math.max(0,Math.min(SCREENS.length-1,Number(source.step)||0)),completed:source.completed===true,combineAnswers:{...(source.combineAnswers||{})},built:[...new Set((source.built||[]).filter(value=>Object.values(SAFE_SYLLABLES).includes(value)))],builderInitial:['ㅇ','ㅁ'].includes(source.builderInitial)?source.builderInitial:'ㅇ',builderVowel:['ㅘ','ㅙ','ㅚ','ㅝ','ㅞ','ㅟ','ㅢ'].includes(source.builderVowel)?source.builderVowel:'ㅘ',splitAnswers:{...(source.splitAnswers||{})},spellingAnswers:{...(source.spellingAnswers||{})},challengeStarted:source.challengeStarted===true,challengeIndex:Math.max(0,Math.min(CHALLENGE.length-1,Number(source.challengeIndex)||0)),challengeAnswers:{...(source.challengeAnswers||{})},mistakes:[...new Set((source.mistakes||[]).filter(id=>CHALLENGE.some(q=>q.id===id)))],retryAnswers:{...(source.retryAnswers||{})},optionOrders:Object.fromEntries(CHALLENGE.map(q=>[q.id,Array.isArray(source.optionOrders?.[q.id])&&source.optionOrders[q.id].length===q.options.length?[...source.optionOrders[q.id]]:optionOrders()[q.id]]))};}
   function readSession(){try{return normalizeSession(JSON.parse(global.localStorage.getItem(SESSION_KEY)||'{}'));}catch{return blankSession();}}
   let session=readSession();
-  function isUnlocked(source){return new Set(source?.completedLessons||[]).has(PREREQUISITE);}
   function completionPatch(source){const completed=new Set(source.completedLessons||[]),first=!completed.has(LESSON_ID);completed.add(LESSON_ID);return{...source,completedLessons:[...completed],lessonProgress:{...(source.lessonProgress||{}),[LESSON_ID]:100},xp:(Number(source.xp)||0)+(first?50:0)};}
-  function saveSession(){global.localStorage.setItem(SESSION_KEY,JSON.stringify(session));if(!session.completed&&isUnlocked(profile)){const percent=Math.min(99,Math.round(session.step/(SCREENS.length-1)*100));profile=global.NikigoState?.update?.(current=>({...current,lessonProgress:{...(current.lessonProgress||{}),[LESSON_ID]:Math.max(Number(current.lessonProgress?.[LESSON_ID])||0,percent)}}),'lesson-06:progress')||profile;}}
+  function saveSession(){global.localStorage.setItem(SESSION_KEY,JSON.stringify(session));if(!session.completed){const percent=Math.min(99,Math.round(session.step/(SCREENS.length-1)*100));profile=global.NikigoState?.update?.(current=>({...current,lessonProgress:{...(current.lessonProgress||{}),[LESSON_ID]:Math.max(Number(current.lessonProgress?.[LESSON_ID])||0,percent)}}),'lesson-06:progress')||profile;}}
   function compoundFromParts(first,second){return COMBINATIONS[`${first}+${second}`]||'';}
   function carrierSyllable(vowel){return CARRIERS[vowel]||'';}
   function compose(initial,vowel){return SAFE_SYLLABLES[`${initial}+${vowel}`]||'';}
@@ -540,12 +534,11 @@
   function renderSummary(){return`<span class="eyebrow">${text('summaryTag')}</span><h1>${text('summaryTitle')}</h1><p class="lead">${text('summaryLead')}</p><div class="summaryList">${[1,2,3,4,5].map(i=>`<div>${i} · ${text(`summary${i}`)}</div>`).join('')}</div>${footer({label:text('finish')})}`;}
   function completeLesson(){if(session.completed)return false;const first=!new Set(profile.completedLessons||[]).has(LESSON_ID);session.completed=true;session.step=SCREENS.length-1;profile=global.NikigoState?.update?.(completionPatch,'lesson-06:complete')||completionPatch(profile);global.localStorage.setItem(SESSION_KEY,JSON.stringify(session));completionAwardedThisView=first;return first;}
   function renderComplete(){completeLesson();return`<div class="complete"><div class="completeMark">✓</div><span class="eyebrow">${text('completeTag')}</span><h1>${text('completeTitle')}</h1><p class="lead centered">${text('completeLead')}</p><div class="rewards"><span class="reward">✦ ${text(completionAwardedThisView?'xpEarned':'xpAlreadyClaimed')}</span><span class="reward">✓ ${text('progressSaved')}</span></div><button class="primary" data-action="home">${text('returnCourses')} →</button></div>`;}
-  function renderLocked(){return`<div class="lockedPanel"><div class="completeMark">6</div><h1>${text('lockedTitle')}</h1><p class="lead centered">${text('lockedLead')}</p><button class="primary" data-action="home">${text('returnCourses')} →</button></div>`;}
   function allowed(type){if(type==='combine-practice')return allCorrect(COMBINE_QUESTIONS,'combineAnswers');if(type==='builder')return builderComplete();if(type==='split')return allCorrect(SPLIT_QUESTIONS,'splitAnswers');if(type==='spelling-practice')return allCorrect(SPELLING_QUESTIONS,'spellingAnswers');if(type==='retry')return session.mistakes.length===0;return true;}
-  function render(){document.documentElement.lang=language==='zh'?'zh-CN':language;document.getElementById('language').value=language;document.getElementById('lessonName').textContent=text('lessonName');document.getElementById('progressLabel').textContent=text('progress');for(const id of ['homeButton','homeLogo']){document.getElementById(id).setAttribute('aria-label',text('home'));document.getElementById(id).title=text('home');}if(!isUnlocked(profile)){document.getElementById('progressCount').textContent='0 / 18';document.getElementById('progressBar').style.width='0%';document.getElementById('progressTrack').setAttribute('aria-valuenow','0');document.getElementById('lessonStage').innerHTML=renderLocked();return;}const percent=Math.round(session.step/(SCREENS.length-1)*100);document.getElementById('progressCount').textContent=`${session.step+1} / ${SCREENS.length}`;document.getElementById('progressBar').style.width=`${percent}%`;document.getElementById('progressTrack').setAttribute('aria-valuenow',String(percent));const type=SCREENS[session.step];const renderers={intro:renderIntro,review:renderReview,structure:renderStructure,oa:()=>renderEquationScreen('oa'),ueo:()=>renderEquationScreen('ueo'),'i-family':renderIFamily,'combine-practice':renderCombinePractice,carrier:renderCarrier,builder:renderBuilder,split:renderSplit,'near-group':renderNearGroup,'spelling-practice':renderSpelling,extended:renderExtended,words:renderWords,challenge:renderChallenge,retry:renderRetry,summary:renderSummary,complete:renderComplete};document.getElementById('lessonStage').innerHTML=renderers[type]();}
+  function render(){document.documentElement.lang=language==='zh'?'zh-CN':language;document.getElementById('language').value=language;document.getElementById('lessonName').textContent=text('lessonName');document.getElementById('progressLabel').textContent=text('progress');for(const id of ['homeButton','homeLogo']){document.getElementById(id).setAttribute('aria-label',text('home'));document.getElementById(id).title=text('home');}const percent=Math.round(session.step/(SCREENS.length-1)*100);document.getElementById('progressCount').textContent=`${session.step+1} / ${SCREENS.length}`;document.getElementById('progressBar').style.width=`${percent}%`;document.getElementById('progressTrack').setAttribute('aria-valuenow',String(percent));const type=SCREENS[session.step];const renderers={intro:renderIntro,review:renderReview,structure:renderStructure,oa:()=>renderEquationScreen('oa'),ueo:()=>renderEquationScreen('ueo'),'i-family':renderIFamily,'combine-practice':renderCombinePractice,carrier:renderCarrier,builder:renderBuilder,split:renderSplit,'near-group':renderNearGroup,'spelling-practice':renderSpelling,extended:renderExtended,words:renderWords,challenge:renderChallenge,retry:renderRetry,summary:renderSummary,complete:renderComplete};document.getElementById('lessonStage').innerHTML=`<aside class="lesson06ReleaseNotice" role="status">${text('releaseNotice')}</aside>${renderers[type]()}`;}
   function goHome(){global.location.href=`nikigo-app.html?lang=${language}#courses`;}
-  document.addEventListener('click',event=>{const button=event.target.closest('button');if(!button)return;const action=button.dataset.action;if(button.id==='homeButton'||button.id==='homeLogo'||action==='home'){goHome();return;}if(!isUnlocked(profile))return;if(action==='back'){session.step=Math.max(0,session.step-1);}else if(action==='next'){const type=SCREENS[session.step];if(!allowed(type))return;session.step=Math.min(SCREENS.length-1,session.step+1);}else if(action==='combine-answer'){const q=COMBINE_QUESTIONS.find(item=>item.id===button.dataset.question);if(q&&!session.combineAnswers[q.id]?.correct)session=answerQuestion(session,q,button.dataset.value,'combineAnswers');}else if(action==='builder-pick'){if(button.dataset.kind==='initial')session.builderInitial=button.dataset.value;else session.builderVowel=button.dataset.value;}else if(action==='build'){const value=compose(session.builderInitial,session.builderVowel);if(value&&!session.built.includes(value))session.built.push(value);}else if(action==='split-answer'){const q=SPLIT_QUESTIONS.find(item=>item.id===button.dataset.question);if(q&&!session.splitAnswers[q.id]?.correct)session=answerQuestion(session,q,button.dataset.value,'splitAnswers');}else if(action==='spelling-answer'){const q=SPELLING_QUESTIONS.find(item=>item.id===button.dataset.question);if(q&&!session.spellingAnswers[q.id]?.correct)session=answerQuestion(session,q,button.dataset.value,'spellingAnswers');}else if(action==='start-challenge'){session.challengeStarted=true;}else if(action==='challenge-answer'){const q=CHALLENGE.find(item=>item.id===button.dataset.question);if(q&&!session.challengeAnswers[q.id])session=applyChallengeAnswer(session,q,button.dataset.value);}else if(action==='next-question'){if(!session.challengeAnswers[CHALLENGE[session.challengeIndex].id])return;session.challengeIndex=Math.min(4,session.challengeIndex+1);}else if(action==='previous-question'){session.challengeIndex=Math.max(0,session.challengeIndex-1);}else if(action==='retry-answer'){const q=CHALLENGE.find(item=>item.id===button.dataset.question);if(q&&!session.retryAnswers[q.id])session=applyRetryAnswer(session,q,button.dataset.value);}else if(action==='retry-reset'){delete session.retryAnswers[button.dataset.question];}saveSession();render();global.scrollTo(0,0);});
+  document.addEventListener('click',event=>{const button=event.target.closest('button');if(!button)return;const action=button.dataset.action;if(button.id==='homeButton'||button.id==='homeLogo'||action==='home'){goHome();return;}if(action==='back'){session.step=Math.max(0,session.step-1);}else if(action==='next'){const type=SCREENS[session.step];if(!allowed(type))return;session.step=Math.min(SCREENS.length-1,session.step+1);}else if(action==='combine-answer'){const q=COMBINE_QUESTIONS.find(item=>item.id===button.dataset.question);if(q&&!session.combineAnswers[q.id]?.correct)session=answerQuestion(session,q,button.dataset.value,'combineAnswers');}else if(action==='builder-pick'){if(button.dataset.kind==='initial')session.builderInitial=button.dataset.value;else session.builderVowel=button.dataset.value;}else if(action==='build'){const value=compose(session.builderInitial,session.builderVowel);if(value&&!session.built.includes(value))session.built.push(value);}else if(action==='split-answer'){const q=SPLIT_QUESTIONS.find(item=>item.id===button.dataset.question);if(q&&!session.splitAnswers[q.id]?.correct)session=answerQuestion(session,q,button.dataset.value,'splitAnswers');}else if(action==='spelling-answer'){const q=SPELLING_QUESTIONS.find(item=>item.id===button.dataset.question);if(q&&!session.spellingAnswers[q.id]?.correct)session=answerQuestion(session,q,button.dataset.value,'spellingAnswers');}else if(action==='start-challenge'){session.challengeStarted=true;}else if(action==='challenge-answer'){const q=CHALLENGE.find(item=>item.id===button.dataset.question);if(q&&!session.challengeAnswers[q.id])session=applyChallengeAnswer(session,q,button.dataset.value);}else if(action==='next-question'){if(!session.challengeAnswers[CHALLENGE[session.challengeIndex].id])return;session.challengeIndex=Math.min(4,session.challengeIndex+1);}else if(action==='previous-question'){session.challengeIndex=Math.max(0,session.challengeIndex-1);}else if(action==='retry-answer'){const q=CHALLENGE.find(item=>item.id===button.dataset.question);if(q&&!session.retryAnswers[q.id])session=applyRetryAnswer(session,q,button.dataset.value);}else if(action==='retry-reset'){delete session.retryAnswers[button.dataset.question];}saveSession();render();global.scrollTo(0,0);});
   document.getElementById('language').addEventListener('change',event=>{language=LANGUAGES.includes(event.target.value)?event.target.value:'en';profile=global.NikigoState?.update?.({interfaceLanguage:language,learningLanguage:language},'lesson-06:language')||profile;saveSession();render();});
-  global.NikigoLesson06=Object.freeze({LESSON_ID,PREREQUISITE,SCREENS,UI,COMPOUND_VOWELS,COMBINATIONS,CARRIERS,SAFE_SYLLABLES,AUDIO_FILES,COMBINE_QUESTIONS,SPLIT_QUESTIONS,SPELLING_QUESTIONS,WORDS,CHALLENGE,compoundFromParts,carrierSyllable,compose,splitSyllable,blankSession,normalizeSession,applyChallengeAnswer,applyRetryAnswer,completionPatch,isUnlocked,getSession:()=>JSON.parse(JSON.stringify(session))});
+  global.NikigoLesson06=Object.freeze({LESSON_ID,SCREENS,UI,COMPOUND_VOWELS,COMBINATIONS,CARRIERS,SAFE_SYLLABLES,AUDIO_FILES,COMBINE_QUESTIONS,SPLIT_QUESTIONS,SPELLING_QUESTIONS,WORDS,CHALLENGE,compoundFromParts,carrierSyllable,compose,splitSyllable,blankSession,normalizeSession,applyChallengeAnswer,applyRetryAnswer,completionPatch,getSession:()=>JSON.parse(JSON.stringify(session))});
   render();
 })(window);
