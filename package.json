@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node scripts/test-app-state.mjs && node scripts/validate-k0-roadmap.mjs && node scripts/validate-sound-objects.mjs && node scripts/validate-consonant-contrast.mjs && node scripts/validate-lesson-05.mjs && node scripts/validate-lesson-06.mjs && node scripts/validate-player-privacy.mjs && node scripts/validate-k0-regression.mjs && node scripts/validate-lessons.mjs && node scripts/validate-audio.mjs && node scripts/validate-app-shell.mjs",
+    "test": "node scripts/test-app-state.mjs && node scripts/validate-k0-roadmap.mjs && node scripts/validate-sound-objects.mjs && node scripts/validate-consonant-contrast.mjs && node scripts/validate-lesson-05.mjs && node scripts/validate-lesson-06.mjs && node scripts/validate-player-privacy.mjs && node scripts/validate-k0-regression.mjs && node scripts/validate-lessons.mjs && node scripts/validate-audio.mjs && node scripts/validate-app-shell.mjs && node scripts/validate-service-worker.mjs && node scripts/validate-repository-safety.mjs",
     "audio:audit": "node scripts/validate-audio.mjs && node scripts/generate-audio-audit.mjs",
     "audio:system": "node scripts/generate-system-audio.mjs",
     "telegram:setup": "node scripts/configure-telegram.mjs",

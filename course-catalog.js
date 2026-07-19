@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  const available = ({ stableId, displayOrder, displayNumber, file, duration, xp, icon, template, title, parts, prerequisites = [], requiresCompletion = false }) => ({
+  const available = ({ stableId, displayOrder, displayNumber, file, duration, xp, icon, template, title, parts, prerequisites = [], requiresCompletion = false, releaseStatus = 'released' }) => ({
     id: stableId,
     stableId,
     displayOrder,
@@ -16,6 +16,7 @@
     icon,
     prerequisites,
     requiresCompletion,
+    releaseStatus,
     title,
     parts
   });
@@ -70,7 +71,7 @@
       parts: { zh: '左右结构 · 上下结构 · 拼合与拆分', en: 'Left–right · Top–bottom · Build and split', vi: 'Trái–phải · Trên–dưới · Ghép và tách', ja: '左右構造 · 上下構造 · 組み立てと分解' }
     }),
     available({
-      stableId: 'lesson-06', displayOrder: 6, displayNumber: 6, file: 'lesson-06.html', duration: 14, xp: 50, icon: '🌈', template: 'compound-vowels', prerequisites: ['lesson-05'], requiresCompletion: true,
+      stableId: 'lesson-06', displayOrder: 6, displayNumber: 6, file: 'lesson-06.html', duration: 14, xp: 50, icon: '🌈', template: 'compound-vowels', prerequisites: ['lesson-05'], requiresCompletion: true, releaseStatus: 'audioPending',
       title: { zh: '复合元音', en: 'Compound Vowels', vi: 'Nguyên âm ghép', ja: '複合母音' },
       parts: { zh: 'ㅒㅖㅘㅙㅚㅝㅞㅟㅢ · 拼写结构 · 无收音词汇', en: 'ㅒㅖㅘㅙㅚㅝㅞㅟㅢ · Spelling structure · Words without finals', vi: 'ㅒㅖㅘㅙㅚㅝㅞㅟㅢ · Cấu trúc chữ · Từ không âm cuối', ja: 'ㅒㅖㅘㅙㅚㅝㅞㅟㅢ · 綴り構造 · 終声のない語' }
     }),
@@ -93,7 +94,7 @@
 
   window.NIKIGO_COURSES = Object.freeze(lessons.map(lesson => Object.freeze(lesson)));
   window.NIKIGO_COURSE_UNLOCKED = function (lesson, completedLessons) {
-    if (!lesson || lesson.status !== 'available') return false;
+    if (!lesson || lesson.status !== 'available' || lesson.releaseStatus === 'audioPending') return false;
     if (!lesson.requiresCompletion) return true;
     const completed = new Set(completedLessons || []);
     return lesson.prerequisites.every(stableId => completed.has(stableId));

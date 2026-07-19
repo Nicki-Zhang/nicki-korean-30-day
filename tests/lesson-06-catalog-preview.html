@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Nikigo Lesson 6 catalog state preview</title>
+  <style>
+    :root{--p:#6d4aff;--ink:#211b3b;--muted:#746e8c;--line:#e7e2f2;--lav:#f4f0ff;--bg:#fbfaff}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 8% 8%,#eee7ff,transparent 28%),var(--bg);color:var(--ink);font-family:Inter,"Noto Sans KR","Noto Sans SC",system-ui,sans-serif}.top{height:72px;max-width:1180px;margin:auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}.logo{color:var(--p);font-size:24px;font-weight:900}.badge{padding:8px 12px;border-radius:999px;background:#fff8dd;color:#735711;font-size:12px}.main{max-width:1180px;margin:auto;padding:28px 24px 80px}.main h1{font-size:34px;margin:0 0 8px}.lead{color:var(--muted);margin:0 0 22px}.courseList{display:grid;gap:14px}.courseRow{background:#fff;border:1px solid var(--line);border-radius:22px;padding:20px;display:grid;grid-template-columns:58px 1fr auto;gap:16px;align-items:center}.courseRow.locked{opacity:.82}.courseIcon{width:56px;height:56px;border-radius:17px;background:var(--lav);display:grid;place-items:center;font-size:24px}.courseRow h2{font-size:18px;margin:0 0 5px}.courseRow p{margin:0;color:var(--muted);font-size:12px}.courseMeta{display:flex;gap:9px;flex-wrap:wrap;margin-top:9px}.courseMeta span{background:#f5f2fa;border-radius:999px;padding:5px 9px;color:var(--muted);font-size:10px;font-weight:800}.courseRow button{min-height:44px;border-radius:15px;padding:12px 18px;font-weight:850;border:0;background:var(--p);color:#fff}.courseRow button[disabled]{border:1px solid var(--line);background:#f2eef8;color:var(--muted)}.miniTrack{height:7px;background:#eeeaf4;border-radius:99px;overflow:hidden;margin-top:9px}.miniTrack i{display:block;height:100%;background:var(--p)}@media(max-width:620px){.top{height:auto;padding:16px}.main{padding:20px 14px}.courseRow{grid-template-columns:52px 1fr}.courseRow button{grid-column:1/-1;width:100%}}
+  </style>
+</head>
+<body>
+  <header class="top"><div class="logo">✦ Nikigo</div><div class="badge">开发验收 · 音频未发布</div></header>
+  <main class="main"><h1>课程</h1><p class="lead">第6课内部状态预览；正式目录在音频审核前保持“即将开放”。</p><div id="courseList" class="courseList"></div></main>
+  <script src="../course-catalog.js"></script>
+  <script>
+    const state=new URLSearchParams(location.search).get('state')||'locked';
+    const completed=state==='locked'?['lesson-00','lesson-01','lesson-02','lesson-03','k0-consonant-contrast']:['lesson-00','lesson-01','lesson-02','lesson-03','k0-consonant-contrast','lesson-05',...(state==='completed'?['lesson-06']:[])];
+    const progress=state==='completed'?100:0;
+    const lesson=window.NIKIGO_COURSES.find(item=>item.stableId==='lesson-06');
+    const previewLesson={...lesson,releaseStatus:'released'};
+    const unlocked=window.NIKIGO_COURSE_UNLOCKED(previewLesson,completed);
+    const done=completed.includes('lesson-06');
+    const status=!unlocked?'完成第5课后解锁':done?'已完成':'尚未开始';
+    const action=!unlocked?'完成第5课后解锁':done?'复习':'开始';
+    document.getElementById('courseList').innerHTML=`<article class="courseRow ${unlocked?'':'locked'}"><div class="courseIcon">${lesson.icon}</div><div><h2>6. ${lesson.title.zh}</h2><p>${lesson.parts.zh}</p><div class="courseMeta"><span>${lesson.duration} min</span><span>+${lesson.xp} XP</span><span>${status}</span></div>${progress?`<div class="miniTrack" aria-label="100%"><i style="width:100%"></i></div>`:''}</div><button ${unlocked?'':'disabled'}>${action}</button></article>`;
+  </script>
+</body>
+</html>

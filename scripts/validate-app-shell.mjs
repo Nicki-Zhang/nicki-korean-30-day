@@ -37,6 +37,8 @@ assert.match(app, /function saveProfileName\(\)/);
 assert.match(app, /function updateAvatar\(value\)/);
 assert.match(app, /Coming soon/);
 assert.match(app, /lesson\.status==='available'/);
+assert.match(app, /lesson\.releaseStatus!=='audioPending'/);
+assert.match(app, /lesson\.releaseStatus==='audioPending'/);
 assert.match(app, /!lesson\|\|lesson\.status!==/);
 assert.match(app, /NIKIGO_COURSE_UNLOCKED/);
 assert.doesNotMatch(app, /lesson\.prerequisites\.every/);

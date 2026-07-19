@@ -41,6 +41,8 @@ const lesson06 = catalog.find(item => item.stableId === 'lesson-06');
 assert.equal(lesson06.prerequisites[0], 'lesson-05');
 assert.equal(lesson06.file, 'lesson-06.html');
 assert.equal(lesson06.requiresCompletion, true);
+assert.equal(lesson06.releaseStatus, 'audioPending');
+assert.equal(catalogContext.window.NIKIGO_COURSE_UNLOCKED(lesson06, ['lesson-05']), false);
 assert.equal(catalog.some(item => item.stableId === 'k0-lesson-06-plan'), false);
 assert.equal(catalog.find(item => item.stableId === 'lesson-04').displayNumber, 7);
 

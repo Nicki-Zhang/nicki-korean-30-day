@@ -7,6 +7,7 @@ const html=fs.readFileSync('lesson-06.html','utf8');
 const source=fs.readFileSync('lesson-06.js','utf8');
 const css=fs.readFileSync('lesson-06.css','utf8');
 const preview=fs.readFileSync('tests/lesson-06-preview.html','utf8');
+const catalogPreview=fs.readFileSync('tests/lesson-06-catalog-preview.html','utf8');
 const manifest=JSON.parse(fs.readFileSync('audio/lesson-06/manifest.json','utf8'));
 
 for(const asset of ['lesson-06.js','lesson-06.css','course-catalog.js','audio-catalog.js','app-state.js'])assert.ok(html.includes(asset),`Missing ${asset}`);
@@ -14,8 +15,12 @@ assert.match(css,/@media\(max-width:760px\)/);
 assert.match(css,/overflow-x:hidden/);
 assert.match(css,/min-height:(?:44|46|48)px/);
 for(const marker of ["params.get('step')","params.get('lang')","completedLessons","lesson-05","nikigoLessonSession:lesson-06"])assert.ok(preview.includes(marker));
+for(const marker of ["get('state')","releaseStatus:'released'","NIKIGO_COURSE_UNLOCKED","'lesson-06'","开发验收 · 音频未发布"])assert.ok(catalogPreview.includes(marker));
 assert.doesNotMatch(source,/speechSynthesis|SpeechSynthesisUtterance|new Audio\s*\(|fetch\s*\(/i);
 assert.doesNotMatch(source,/再次播放\s*[가-힣]|Play again\s*[가-힣]/u);
+assert.doesNotMatch(source,/Object\.assign\(UI|"milk"|“牛奶”|“sữa”|「牛乳」/u,'Deprecated milk copy or runtime translation overrides remain.');
+assert.match(source,/\['ㅑ','ㅣ','ㅒ','얘'\]/u);
+assert.match(source,/\['ㅕ','ㅣ','ㅖ','예'\]/u);
 assert.doesNotMatch(source,/[ㄱ-ㅎ]\s*\+\s*[ㅏ-ㅣ]\s*\+\s*[ㄱ-ㅎ]/u,'Lesson 6 must not introduce CVC or finals.');
 
 const element=()=>({value:'',textContent:'',innerHTML:'',title:'',style:{},dataset:{},classList:{add(){},remove(){},toggle(){}},setAttribute(){},addEventListener(){},closest(){return null;}});
@@ -38,7 +43,8 @@ assert.deepEqual([...api.SCREENS],['intro','review','structure','oa','ueo','i-fa
 const englishKeys=Object.keys(api.UI.en);
 for(const language of languages){for(const key of englishKeys)assert.notEqual(api.UI[language]?.[key],undefined,`${language}.${key} undefined`);assert.match(`${api.UI[language].nearTitle} ${api.UI[language].nearLead}`,/ㅙ|ㅚ|ㅞ/);assert.match(`${api.UI[language].extendedTitle} ${api.UI[language].extendedLead}`,/ㅒ|ㅖ/);assert.ok(api.UI[language].completeTag.length>8);assert.match(api.UI[language].xpEarned,/50 XP/);assert.match(api.UI[language].xpAlreadyClaimed,/XP/);}
 
-const combinations={'ㅗ+ㅏ':'ㅘ','ㅜ+ㅓ':'ㅝ','ㅗ+ㅣ':'ㅚ','ㅜ+ㅣ':'ㅟ','ㅡ+ㅣ':'ㅢ'};
+const combinations={'ㅑ+ㅣ':'ㅒ','ㅕ+ㅣ':'ㅖ','ㅗ+ㅏ':'ㅘ','ㅗ+ㅐ':'ㅙ','ㅗ+ㅣ':'ㅚ','ㅜ+ㅓ':'ㅝ','ㅜ+ㅔ':'ㅞ','ㅜ+ㅣ':'ㅟ','ㅡ+ㅣ':'ㅢ'};
+assert.equal(Object.keys(api.COMBINATIONS).length,9);
 for(const [parts,result] of Object.entries(combinations)){const [first,second]=parts.split('+');assert.equal(api.compoundFromParts(first,second),result);}
 assert.equal(api.compoundFromParts('ㅏ','ㅗ'),'');
 for(const [vowel,syllable] of Object.entries({'ㅒ':'얘','ㅖ':'예','ㅘ':'와','ㅙ':'왜','ㅚ':'외','ㅝ':'워','ㅞ':'웨','ㅟ':'위','ㅢ':'의'}))assert.equal(api.carrierSyllable(vowel),syllable);
@@ -50,8 +56,13 @@ assert.equal(api.splitSyllable('산'),null);
 
 assert.equal(api.CHALLENGE.length,5);
 assert.ok(api.CHALLENGE.every(question=>!('audio' in question)&&!('transcript' in question)),'Lesson 6 challenge must not fake listening before audio review.');
-assert.equal(api.CHALLENGE.find(question=>question.id==='c5')?.correct,'과자','Required word questions must stay inside the learned-vowel scope.');
+const fifthQuestion=api.CHALLENGE.find(question=>question.id==='c5');
+assert.equal(fifthQuestion?.correct,'과자','Required word questions must stay inside the learned-vowel scope.');
+assert.equal(fifthQuestion.options.filter(option=>option===fifthQuestion.correct).length,1,'Challenge 5 must contain exactly one correct option.');
+assert.deepEqual(JSON.parse(JSON.stringify({zh:api.UI.zh.snack,en:api.UI.en.snack,vi:api.UI.vi.snack,ja:api.UI.ja.snack})),{zh:'零食',en:'snack',vi:'đồ ăn vặt',ja:'お菓子'});
+for(const language of languages)assert.equal(api.UI[language].c5.includes(api.UI[language].snack),true,`${language} Challenge 5 prompt drifted from its translation.`);
 assert.ok(api.UI.zh.wordsLead.includes('우유')&&api.UI.zh.wordsLead.includes('不作为必学词'));
+assert.equal(api.WORDS.some(word=>word.text==='우유'),false,'우유 must not become required Lesson 6 vocabulary.');
 assert.ok(api.UI.zh.noFakeListening.includes('不设置'));
 assert.ok(api.UI.en.noFakeListening.includes('does not force'));
 assert.ok(api.UI.vi.noFakeListening.includes('không ép'));
@@ -83,15 +94,29 @@ assert.equal(new Set(manifest.items.map(item=>item.id)).size,13);
 assert.equal(new Set(manifest.items.map(item=>item.file)).size,13);
 assert.ok(manifest.items.some(item=>item.displayText==='과자'));
 assert.equal(manifest.items.some(item=>item.displayText==='우유'),false,'우유 uses ㅠ and must not be a required Lesson 6 audio item.');
-for(const item of manifest.items){assert.equal(item.reviewStatus,'pending');assert.ok(item.displayText&&item.speechText&&item.expectedPronunciation&&item.pronunciationRule);assert.ok(['vowel-sound','word'].includes(item.audioType));assert.equal(fs.existsSync(`audio/lesson-06/${item.file}`),false,'Lesson 6 must not generate audio in this task.');}
+const syllableSpeech=['와','왜','외','워','웨','위','의','얘','예'];
+const wordSpeech=['뭐','과자','여우','의자'];
+assert.deepEqual(manifest.items.filter(item=>item.audioType==='syllable').map(item=>item.speechText).sort(),syllableSpeech.sort());
+assert.deepEqual(manifest.items.filter(item=>item.audioType==='word').map(item=>item.speechText).sort(),wordSpeech.sort());
+for(const item of manifest.items){
+  assert.equal(item.reviewStatus,'pending');
+  assert.ok(item.displayText&&item.speechText&&item.expectedPronunciation&&item.pronunciationRule&&item.file&&item.voiceSource&&item.model&&item.commercialUseBasis);
+  assert.ok(Object.hasOwn(item,'targetSymbol')&&Object.hasOwn(item,'generationDate')&&Object.hasOwn(item,'nativeReviewer')&&Object.hasOwn(item,'reviewNotes'));
+  assert.ok(['syllable','word'].includes(item.audioType));
+  assert.equal(item.pronunciationType,item.audioType==='syllable'?'full-syllable':'full-word');
+  assert.equal(item.displayText,item.speechText,'Visible and generated text must match exactly.');
+  if(item.audioType==='syllable')assert.equal(api.CARRIERS[item.targetSymbol],item.speechText);
+  else assert.equal(item.targetSymbol,null);
+  assert.equal(fs.existsSync(`audio/lesson-06/${item.file}`),false,'Lesson 6 must not generate audio in this task.');
+}
 
 const catalogContext={window:{}};catalogContext.window.window=catalogContext.window;
 vm.runInNewContext(fs.readFileSync('course-catalog.js','utf8'),catalogContext,{filename:'course-catalog.js'});
 const course=catalogContext.window.NIKIGO_COURSES.find(item=>item.stableId==='lesson-06');
-assert.equal(course.displayNumber,6);assert.equal(course.file,'lesson-06.html');assert.equal(course.status,'available');assert.deepEqual([...course.prerequisites],['lesson-05']);assert.equal(course.requiresCompletion,true);
+assert.equal(course.displayNumber,6);assert.equal(course.file,'lesson-06.html');assert.equal(course.status,'available');assert.equal(course.releaseStatus,'audioPending');assert.deepEqual([...course.prerequisites],['lesson-05']);assert.equal(course.requiresCompletion,true);
 assert.equal(catalogContext.window.NIKIGO_COURSES.some(item=>item.stableId==='k0-lesson-06-plan'),false);
 assert.equal(catalogContext.window.NIKIGO_COURSE_UNLOCKED(course,[]),false);
-assert.equal(catalogContext.window.NIKIGO_COURSE_UNLOCKED(course,['lesson-05']),true);
+assert.equal(catalogContext.window.NIKIGO_COURSE_UNLOCKED(course,['lesson-05']),false,'Pending audio must keep the formal catalog entry closed.');
 const lesson7=catalogContext.window.NIKIGO_COURSES.find(item=>item.stableId==='lesson-04');
 assert.equal(lesson7.displayNumber,7);assert.equal(lesson7.file,'lesson-04.html');
 
