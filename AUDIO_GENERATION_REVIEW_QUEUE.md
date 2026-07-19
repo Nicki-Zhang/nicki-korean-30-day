@@ -2,6 +2,8 @@
 
 | id | lessonId | targetSymbol | displayText | speechText | audioType | pronunciationType | pronunciationRule | file | voiceSource | model | generationDate | commercialUseBasis | reviewStatus | assetStatus | nativeReviewer | reviewNotes |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| yo | lesson-00 | ㅛ | ㅛ（发音载体：요） | 요 | vowel | full-syllable |  | yo.mp3 | openai-gpt-4o-mini-tts | gpt-4o-mini-tts |  | pending-documentation | pending | missing |  | Batch 1 item; Korean native-speaker review required. |
+| yu | lesson-00 | ㅠ | ㅠ（发音载体：유） | 유 | vowel | full-syllable |  | yu.mp3 | openai-gpt-4o-mini-tts | gpt-4o-mini-tts |  | pending-documentation | pending | missing |  | Batch 1 item; Korean native-speaker review required. |
 | a | lesson-01 |  | ㅏ（发音载体：아） | 아 | vowel | 单个元音 |  | a.mp3 | openai-gpt-4o-mini-tts | gpt-4o-mini-tts |  | pending-documentation | pending | available |  | legacy-unreviewed |
 | eo | lesson-01 |  | ㅓ（发音载体：어） | 어 | vowel | 单个元音 |  | eo.mp3 | openai-gpt-4o-mini-tts | gpt-4o-mini-tts |  | pending-documentation | pending | available |  | legacy-unreviewed |
 | o | lesson-01 |  | ㅗ（发音载体：오） | 오 | vowel | 单个元音 |  | o.mp3 | openai-gpt-4o-mini-tts | gpt-4o-mini-tts |  | pending-documentation | pending | available |  | legacy-unreviewed |

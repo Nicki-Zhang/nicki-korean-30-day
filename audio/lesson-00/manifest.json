@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 2,
+  "lesson": "lesson-00",
+  "reviewPolicy": "New or regenerated audio remains pending until a Korean native-speaker review is recorded.",
+  "generationDefaults": {
+    "provider": "openai",
+    "model": "gpt-4o-mini-tts",
+    "voice": "marin",
+    "format": "mp3",
+    "instructions": "Speak only the supplied Korean speechText exactly once in natural standard Seoul Korean. Do not spell Hangul, translate, explain, read punctuation, or add a trailing vowel."
+  },
+  "rightsFields": {
+    "voiceTalent": null,
+    "consentRecord": null,
+    "commercialUseRecord": null
+  },
+  "items": [
+    {
+      "id": "yo",
+      "lessonId": "lesson-00",
+      "targetSymbol": "ㅛ",
+      "displayText": "ㅛ（发音载体：요）",
+      "speechText": "요",
+      "expectedPronunciation": "요",
+      "pronunciationRule": "",
+      "audioType": "vowel",
+      "type": "vowel",
+      "pronunciationType": "full-syllable",
+      "screen": "第0课字母地图元音详情",
+      "teachingGoal": "用无声初声 ㅇ 承载元音 ㅛ",
+      "file": "yo.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "model": "gpt-4o-mini-tts",
+      "generationDate": null,
+      "commercialUseBasis": "pending-documentation",
+      "reviewStatus": "pending",
+      "assetStatus": "missing",
+      "nativeReviewer": null,
+      "reviewNotes": "Batch 1 item; Korean native-speaker review required.",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "yu",
+      "lessonId": "lesson-00",
+      "targetSymbol": "ㅠ",
+      "displayText": "ㅠ（发音载体：유）",
+      "speechText": "유",
+      "expectedPronunciation": "유",
+      "pronunciationRule": "",
+      "audioType": "vowel",
+      "type": "vowel",
+      "pronunciationType": "full-syllable",
+      "screen": "第0课字母地图元音详情",
+      "teachingGoal": "用无声初声 ㅇ 承载元音 ㅠ",
+      "file": "yu.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "model": "gpt-4o-mini-tts",
+      "generationDate": null,
+      "commercialUseBasis": "pending-documentation",
+      "reviewStatus": "pending",
+      "assetStatus": "missing",
+      "nativeReviewer": null,
+      "reviewNotes": "Batch 1 item; Korean native-speaker review required.",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    }
+  ]
+}

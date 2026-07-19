@@ -34,6 +34,21 @@
   });
 
   const lessons = {
+    'lesson-00': Object.freeze({
+      title: '韩文字母地图',
+      items: Object.freeze([
+        item('yo', 'ㅛ（发音载体：요）', '요', 'yo.mp3', {
+          targetSymbol:'ㅛ', type:'vowel', pronunciationType:'full-syllable',
+          screen:'第0课字母地图元音详情', teachingGoal:'用无声初声 ㅇ 承载元音 ㅛ',
+          assetStatus:'missing', reviewNotes:'Batch 1 item; Korean native-speaker review required.'
+        }),
+        item('yu', 'ㅠ（发音载体：유）', '유', 'yu.mp3', {
+          targetSymbol:'ㅠ', type:'vowel', pronunciationType:'full-syllable',
+          screen:'第0课字母地图元音详情', teachingGoal:'用无声初声 ㅇ 承载元音 ㅠ',
+          assetStatus:'missing', reviewNotes:'Batch 1 item; Korean native-speaker review required.'
+        })
+      ])
+    }),
     'lesson-01': Object.freeze({
       title: '韩文字母：第一步',
       items: Object.freeze([

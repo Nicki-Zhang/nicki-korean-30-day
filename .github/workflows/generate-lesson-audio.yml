@@ -16,6 +16,7 @@ on:
         default: lesson-02
         type: choice
         options:
+          - lesson-00
           - lesson-01
           - lesson-02
           - lesson-03

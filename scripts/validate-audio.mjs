@@ -43,7 +43,9 @@ for (const [lessonId, lesson] of Object.entries(audio.lessons)) {
   }
 }
 
-assert.equal(count,75);
+assert.equal(count,77);
+assert.deepEqual(audio.lessons['lesson-00'].items.map(entry=>entry.id),['yo','yu'],'Batch 1 must contain only yo and yu.');
+assert.ok(audio.lessons['lesson-00'].items.every(entry=>entry.reviewStatus==='pending'),'Generated Batch 1 audio must remain pending.');
 assert.equal(audio.lessons['k0-consonant-contrast'].items.length,14);
 assert.equal(audio.lessons['lesson-06'].items.length,15);
 for(const text of ['왜','예']) assert.deepEqual(audio.lessons['lesson-06'].items.filter(x=>x.speechText===text).map(x=>x.audioType).sort(),['syllable','word']);
@@ -60,4 +62,4 @@ assert.equal(audio.canPlayAudio(complete.speechText,{...complete,assetStatus:'de
 assert.doesNotMatch(fs.readFileSync('review-catalog.js','utf8'),/audio:\s*['"][^'"]*[,，][^'"]*['"]/, 'review sequence is comma-batched');
 assert.match(fs.readFileSync('review.html','utf8'),/currentAudio\.onended=next/,'review sequence is not file-by-file');
 const worker=fs.readFileSync('sw.js','utf8'); assert.match(worker,/nikigo-v15-reviewed-audio-gate/); assert.match(worker,/audio\/deprecated/);
-console.log('Validated 75 strict catalog records, zero playable pending/missing records, typed Lesson 6 records, and zero device-TTS calls in production JS/HTML.');
+console.log('Validated 77 strict catalog records, the exact 2-item Batch 1 scope, zero playable pending records, typed Lesson 6 records, and zero device-TTS calls in production JS/HTML.');
