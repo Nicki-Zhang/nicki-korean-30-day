@@ -24,14 +24,14 @@ for (const selector of ['.soundPlay','.sequenceButton','.quizOption']) assert.ma
 assert.equal(manifest.lesson,'k0-consonant-contrast');
 assert.equal(manifest.items.length,14);
 assert.equal(new Set(manifest.items.map(item=>item.id)).size,14);
-assert.equal(new Set(manifest.items.map(item=>item.audioFile)).size,14);
+assert.equal(new Set(manifest.items.map(item=>item.file)).size,14);
 for (const [index,item] of manifest.items.entries()) {
   const [symbol,category,spokenSyllable,audioFile]=expected[index];
-  assert.deepEqual([item.symbol,item.category,item.spokenSyllable,item.audioFile],[symbol,category,spokenSyllable,audioFile]);
-  for (const field of ['symbol','category','spokenSyllable','audioFile','expectedPronunciation','reviewStatus']) assert.ok(String(item[field]||'').trim(),`${item.id} missing ${field}`);
-  assert.equal(item.speechText,item.spokenSyllable);
-  assert.equal(item.file,item.audioFile);
+  assert.deepEqual([item.targetSymbol,item.speechText,item.file],[symbol,spokenSyllable,audioFile]);
+  for (const field of ['targetSymbol','speechText','file','expectedPronunciation','reviewStatus','assetStatus']) assert.ok(String(item[field]||'').trim(),`${item.id} missing ${field}`);
+  assert.equal(item.audioType,'initial-example');
   assert.equal(item.reviewStatus,'pending');
+  assert.equal(item.assetStatus,'missing');
   assert.doesNotMatch(item.speechText,/^[ㄱ-ㅎ]$/u);
   assert.doesNotMatch(item.speechText,/^[A-Za-z]+$/);
 }
@@ -49,10 +49,10 @@ const lessonWindow = {
   location:{search:'?lang=en',href:''},navigator:{language:'en'},document:documentStub,
   localStorage:{getItem:key=>storage.get(key)||null,setItem:(key,value)=>storage.set(key,String(value))},
   NikigoState:{get:()=>profile,update:(patch)=>{profile=typeof patch==='function'?patch(profile):{...profile,...patch};return profile;}},
-  setTimeout(){},scrollTo(){},speechSynthesis:null
+  setTimeout(){},scrollTo(){},NikigoAudio:{lessons:{},canPlayAudio(){return false}}
 };
 lessonWindow.window=lessonWindow;
-vm.runInNewContext(source,{window:lessonWindow,document:documentStub,URLSearchParams,Audio:class{},SpeechSynthesisUtterance:class{}},{filename:'lesson-consonant-contrast.js'});
+vm.runInNewContext(source,{window:lessonWindow,document:documentStub,URLSearchParams,Audio:class{}},{filename:'lesson-consonant-contrast.js'});
 const api=lessonWindow.NikigoContrastLesson;
 assert.ok(api);
 assert.equal(api.LESSON_ID,'k0-consonant-contrast');
@@ -98,7 +98,8 @@ assert.deepEqual([...catalog.find(item=>item.stableId==='lesson-05').recommended
 assert.doesNotMatch(source,/playSequence\(\s*\[['"][ㄱ-ㅎ]['"]\]\s*\)/u);
 assert.match(source,/global\.setTimeout\(next,260\)/);
 assert.match(source,/min\(SCREENS\.length-1/);
-assert.match(source,/aria-label="\$\{text\('listenSound'/);
+assert.match(source,/HOSTED_AUDIO\[item\.syllable\]\?text\('listenSound'/);
+assert.doesNotMatch(source,/speechSynthesis|SpeechSynthesisUtterance|getVoices/);
 const workflow=fs.readFileSync('.github/workflows/generate-lesson-audio.yml','utf8');
 assert.match(workflow,/audio\/k0-\*\/manifest\.json/);
 assert.match(workflow,/k0-consonant-contrast/);

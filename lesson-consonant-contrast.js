@@ -4,7 +4,9 @@
   const LESSON_ID = 'k0-consonant-contrast';
   const SESSION_KEY = `nikigoLessonSession:${LESSON_ID}`;
   const LANGUAGES = ['zh', 'en', 'vi', 'ja'];
-  const HOSTED_AUDIO = Object.freeze({});
+  const HOSTED_AUDIO = Object.freeze(Object.fromEntries((global.NikigoAudio?.lessons?.[LESSON_ID]?.items || [])
+    .filter(entry => global.NikigoAudio.canPlayAudio(entry.speechText, entry, 'initial-example'))
+    .map(entry => [entry.speechText, `audio/${LESSON_ID}/${entry.file}`])));
   const CATEGORY_KEYS = ['plain', 'aspirated', 'tense'];
 
   const UI = {
@@ -21,7 +23,7 @@
       retryTitle:'易错音重播', retryLead:'刚才答错的音会在这里再次出现。听对以后再进入总结。', retryEmpty:'本轮没有需要重练的音；你仍可以返回任意对比组复听。', retryAgain:'重播并再试', retryRemaining:'还需重练 {count} 项',
       summaryTitle:'今天先建立听辨起点', summaryLead:'继续在真实语速里反复比较，辨音会逐渐稳定。', summary1:'普通音：自然气流', summary2:'送气音：明显气流', summary3:'紧音：先收紧、气流较少', summary4:'所有声音都通过完整音节学习',
       completeTitle:'第4课完成', completeLead:'你已经完成第一轮普通音、送气音和紧音对比。下一课“音节块”仍在开发中。', xp:'+50 XP', earned:'已保存学习进度', returnCourses:'返回课程主页',
-      audioDisclosure:'当前为测试音频，正式发布前将完成韩语发音审核。', resumed:'已恢复上次学习位置。', aiVoice:'测试音频', noVoice:'设备中没有可用的韩语语音。', pendingNext:'下一课即将开放'
+      audioDisclosure:'音频尚未发布，托管文件需完成韩语母语者审核。', resumed:'已恢复上次学习位置。', aiVoice:'音频尚未发布', noVoice:'音频尚未发布。', pendingNext:'下一课即将开放'
     },
     en: {
       lessonName:'Lesson 4 · Plain, Aspirated, and Tense Sounds', progress:'Course progress', home:'Return to learning home', back:'Back', next:'Continue', finish:'Complete lesson',
@@ -32,7 +34,7 @@
       quizTag:'Listening practice', replay:'Play again', replaySequence:'Play the sequence again', chooseSyllable:'Play one full syllable and choose what you hear.', chooseAspirated:'Play three separate syllables and choose the aspirated one.', chooseCategory:'Play one full syllable and decide whether it is plain, aspirated, or tense.', correct:'Correct. {detail}', incorrect:'Listen again. {detail}', detailPlain:'Plain sounds use natural airflow without extra aspiration or tension.', detailAspirated:'Aspirated sounds release a clear puff after the consonant.', detailTense:'Tense sounds begin tight, release briefly, and use less air.', answerWas:'The correct answer is {answer}.',
       retryTitle:'Replay tricky sounds', retryLead:'Sounds missed earlier return here. Identify each one correctly before the summary.', retryEmpty:'No sounds need another round. You can still go back to replay any contrast.', retryAgain:'Replay and try again', retryRemaining:'{count} item(s) left',
       summaryTitle:'Build a listening starting point today', summaryLead:'Keep comparing these sounds in natural speech; your distinctions will become steadier.', summary1:'Plain: natural airflow', summary2:'Aspirated: noticeable airflow', summary3:'Tense: tighten first, less airflow', summary4:'Every sound is learned in a complete syllable',
-      completeTitle:'Lesson 4 complete', completeLead:'You completed a first round of plain, aspirated, and tense contrasts. The next syllable-block lesson is still in development.', xp:'+50 XP', earned:'Progress saved', returnCourses:'Return to Courses', audioDisclosure:'Hosted audio is pending generation and human review. Buttons currently use the device Korean voice for complete syllables.', resumed:'Your previous position was restored.', aiVoice:'Device Korean voice · human review pending', noVoice:'No Korean system voice is available on this device.', pendingNext:'Next lesson coming soon'
+      completeTitle:'Lesson 4 complete', completeLead:'You completed a first round of plain, aspirated, and tense contrasts. The next syllable-block lesson is still in development.', xp:'+50 XP', earned:'Progress saved', returnCourses:'Return to Courses', audioDisclosure:'Audio not released yet. Hosted files require Korean native-speaker review.', resumed:'Your previous position was restored.', aiVoice:'Audio not released yet', noVoice:'Audio not released yet.', pendingNext:'Next lesson coming soon'
     },
     vi: {
       lessonName:'Bài 4 · Âm thường, bật hơi và căng', progress:'Tiến độ bài học', home:'Về trang học tập', back:'Quay lại', next:'Tiếp tục', finish:'Hoàn thành bài',
@@ -43,7 +45,7 @@
       quizTag:'Luyện nghe phân biệt', replay:'Phát lại', replaySequence:'Phát lại chuỗi âm', chooseSyllable:'Phát một âm tiết đầy đủ rồi chọn âm bạn nghe thấy.', chooseAspirated:'Phát liên tiếp ba âm tiết riêng biệt rồi chọn âm bật hơi.', chooseCategory:'Phát một âm tiết đầy đủ rồi xác định âm thường, bật hơi hay căng.', correct:'Đúng. {detail}', incorrect:'Hãy nghe lại. {detail}', detailPlain:'Âm thường dùng luồng hơi tự nhiên, không thêm bật hơi hay siết.', detailAspirated:'Âm bật hơi có luồng hơi rõ sau khi bật âm.', detailTense:'Âm căng siết trước, bật ngắn và dùng ít hơi hơn.', answerWas:'Đáp án đúng là {answer}.',
       retryTitle:'Nghe lại âm dễ nhầm', retryLead:'Các âm trả lời sai sẽ xuất hiện lại ở đây. Hãy nghe đúng trước khi sang phần tổng kết.', retryEmpty:'Không có âm nào cần luyện lại. Bạn vẫn có thể quay lại nghe bất kỳ nhóm nào.', retryAgain:'Phát lại và thử lại', retryRemaining:'Còn {count} mục',
       summaryTitle:'Hôm nay xây nền tảng nghe phân biệt', summaryLead:'Tiếp tục so sánh trong tốc độ nói tự nhiên để khả năng phân biệt ổn định dần.', summary1:'Âm thường: luồng hơi tự nhiên', summary2:'Âm bật hơi: luồng hơi rõ', summary3:'Âm căng: siết trước, ít hơi hơn', summary4:'Mọi âm đều được học qua âm tiết đầy đủ',
-      completeTitle:'Đã hoàn thành Bài 4', completeLead:'Bạn đã hoàn thành vòng đầu so sánh âm thường, bật hơi và căng. Bài tiếp theo về khối âm tiết vẫn đang phát triển.', xp:'+50 XP', earned:'Đã lưu tiến độ', returnCourses:'Trở về Bài học', audioDisclosure:'Âm thanh lưu trữ đang chờ tạo và duyệt thủ công. Hiện các nút dùng giọng Hàn trên thiết bị để phát âm tiết đầy đủ.', resumed:'Đã khôi phục vị trí học trước đó.', aiVoice:'Giọng Hàn trên thiết bị · chờ duyệt', noVoice:'Thiết bị không có giọng hệ thống tiếng Hàn.', pendingNext:'Bài tiếp theo sắp ra mắt'
+      completeTitle:'Đã hoàn thành Bài 4', completeLead:'Bạn đã hoàn thành vòng đầu so sánh âm thường, bật hơi và căng. Bài tiếp theo về khối âm tiết vẫn đang phát triển.', xp:'+50 XP', earned:'Đã lưu tiến độ', returnCourses:'Trở về Bài học', audioDisclosure:'Âm thanh chưa được phát hành; tệp lưu trữ cần người bản ngữ Hàn duyệt.', resumed:'Đã khôi phục vị trí học trước đó.', aiVoice:'Âm thanh chưa được phát hành', noVoice:'Âm thanh chưa được phát hành.', pendingNext:'Bài tiếp theo sắp ra mắt'
     },
     ja: {
       lessonName:'第4課 · 平音・激音・濃音', progress:'レッスン進捗', home:'学習ホームへ戻る', back:'戻る', next:'続ける', finish:'レッスン完了',
@@ -54,13 +56,18 @@
       quizTag:'聞き分け練習', replay:'もう一度再生', replaySequence:'もう一度連続再生', chooseSyllable:'完全な音節を一つ再生し、聞こえた音節を選びます。', chooseAspirated:'3つの独立した音節を連続再生し、その中の激音を選びます。', chooseCategory:'完全な音節を一つ再生し、平音・激音・濃音を判断します。', correct:'正解です。{detail}', incorrect:'もう一度聞きましょう。{detail}', detailPlain:'平音は余分な送気や緊張を加えず、自然な気流を使います。', detailAspirated:'激音は破裂後に明確な気流があります。', detailTense:'濃音は先に締め、短く破裂し、気流が少なめです。', answerWas:'正解は {answer} です。',
       retryTitle:'間違えやすい音を再生', retryLead:'先ほど間違えた音をここでもう一度練習します。正しく聞き分けてからまとめへ進みます。', retryEmpty:'再練習が必要な音はありません。戻ってどの比較でも聞き直せます。', retryAgain:'再生してもう一度', retryRemaining:'残り {count} 項目',
       summaryTitle:'今日は聞き分けの出発点を作る', summaryLead:'自然な速さでも繰り返し比べると、聞き分けが徐々に安定します。', summary1:'平音：自然な気流', summary2:'激音：明確な気流', summary3:'濃音：先に締め、気流は少なめ', summary4:'すべて完全な音節で学習',
-      completeTitle:'第4課 完了', completeLead:'平音・激音・濃音の最初の比較を完了しました。次の音節ブロックの課は開発中です。', xp:'+50 XP', earned:'学習進捗を保存しました', returnCourses:'コースへ戻る', audioDisclosure:'ホスト音声は生成と人による確認待ちです。現在は端末の韓国語音声で完全な音節を再生します。', resumed:'前回の学習位置を復元しました。', aiVoice:'端末の韓国語音声 · 確認待ち', noVoice:'この端末に利用可能な韓国語音声がありません。', pendingNext:'次のレッスンは近日公開'
+      completeTitle:'第4課 完了', completeLead:'平音・激音・濃音の最初の比較を完了しました。次の音節ブロックの課は開発中です。', xp:'+50 XP', earned:'学習進捗を保存しました', returnCourses:'コースへ戻る', audioDisclosure:'音声は未公開です。ホスト音声は韓国語母語話者の確認が必要です。', resumed:'前回の学習位置を復元しました。', aiVoice:'音声はまだ公開されていません', noVoice:'音声はまだ公開されていません。', pendingNext:'次のレッスンは近日公開'
     }
   };
   Object.assign(UI.zh,{playerPlay:'播放听力题音频',playerPlaying:'正在播放',playerReplay:'再次播放',playerLoading:'音频加载中',playerError:'音频暂时无法播放，请重试',playerAriaPlay:'播放本题韩语音频',playerAriaReplay:'再次播放本题韩语音频',testAudio:'当前为测试音频，正式发布前将完成韩语发音审核。',transcriptLabel:'音频原文',categoryResult:'发音类别',correctAnswerLabel:'正确答案',teachingPointLabel:'学习提示',approximationLabel:'近似提示'});
   Object.assign(UI.en,{playerPlay:'Play listening audio',playerPlaying:'Playing',playerReplay:'Play again',playerLoading:'Loading audio',playerError:'Audio is temporarily unavailable. Try again.',playerAriaPlay:'Play this Korean audio question',playerAriaReplay:'Play this Korean audio question again',testAudio:'Test audio. Korean pronunciation will be reviewed before release.',transcriptLabel:'Audio transcript',categoryResult:'Pronunciation category',correctAnswerLabel:'Correct answer',teachingPointLabel:'Learning tip',approximationLabel:'Approximate hint'});
   Object.assign(UI.vi,{playerPlay:'Phát âm thanh bài nghe',playerPlaying:'Đang phát',playerReplay:'Phát lại',playerLoading:'Đang tải âm thanh',playerError:'Tạm thời không thể phát âm thanh. Hãy thử lại.',playerAriaPlay:'Phát âm thanh tiếng Hàn của câu này',playerAriaReplay:'Phát lại âm thanh tiếng Hàn của câu này',testAudio:'Âm thanh thử nghiệm. Phát âm tiếng Hàn sẽ được duyệt trước khi phát hành.',transcriptLabel:'Nội dung âm thanh',categoryResult:'Loại phát âm',correctAnswerLabel:'Đáp án đúng',teachingPointLabel:'Gợi ý học tập',approximationLabel:'Gợi ý gần đúng'});
   Object.assign(UI.ja,{playerPlay:'聞き取り問題の音声を再生',playerPlaying:'再生中',playerReplay:'もう一度再生',playerLoading:'音声を読み込み中',playerError:'音声を一時的に再生できません。もう一度お試しください。',playerAriaPlay:'この問題の韓国語音声を再生',playerAriaReplay:'この問題の韓国語音声をもう一度再生',testAudio:'テスト音声です。公開前に韓国語発音の確認を完了します。',transcriptLabel:'音声の原文',categoryResult:'発音カテゴリー',correctAnswerLabel:'正解',teachingPointLabel:'学習ポイント',approximationLabel:'近似ヒント'});
+
+  Object.assign(UI.zh,{audioNotReleased:'音频尚未发布',previewSkip:'跳过听辨并继续结构预览',previewOnly:'结构预览不会记录答案、完成状态或XP。'});
+  Object.assign(UI.en,{audioNotReleased:'Audio not released yet',previewSkip:'Skip listening and continue structure preview',previewOnly:'Structure preview does not record answers, completion, or XP.'});
+  Object.assign(UI.vi,{audioNotReleased:'Âm thanh chưa được phát hành',previewSkip:'Bỏ qua phần nghe và tiếp tục xem trước cấu trúc',previewOnly:'Bản xem trước không ghi nhận đáp án, hoàn thành hay XP.'});
+  Object.assign(UI.ja,{audioNotReleased:'音声はまだ公開されていません',previewSkip:'聞き取りをスキップして構造プレビューを続ける',previewOnly:'構造プレビューでは回答・完了・XPを記録しません。'});
 
   const GROUPS = Object.freeze([
     { id:'g', sequence:['가','카','까'], items:[{symbol:'ㄱ',letterName:'기역',category:'plain',syllable:'가',approximation:'k/g'},{symbol:'ㅋ',letterName:'키읔',category:'aspirated',syllable:'카',approximation:''},{symbol:'ㄲ',letterName:'쌍기역',category:'tense',syllable:'까',approximation:'kk'}] },
@@ -87,7 +94,9 @@
   let language = normalizeLanguage(params.get('lang') || profile.interfaceLanguage || global.navigator.language);
   let session = loadSession();
   let activeAudio = '';
+  let currentAudio = null;
   let playbackToken = 0;
+  let previewSkipped = false;
   let retryFeedback = null;
   const autoplayed = new Set();
   const questionPlayerStates = new Map();
@@ -107,7 +116,7 @@
   }
   function blankSession() {
     const optionOrders = Object.fromEntries(Object.values(QUESTIONS).map(question => [question.id, shuffled(question.options)]));
-    return {version:1,step:0,answers:{},mistakes:[],optionOrders,completed:false};
+    return {version:1,step:0,answers:{},mistakes:[],optionOrders,completed:false,previewSkipped:false};
   }
   function applyAnswer(current, question, value) {
     if (current.answers[question.id]) return current;
@@ -158,30 +167,19 @@
     return Object.freeze({label:player.label,aria:player.aria,transcript:answered?transcript:'',correctAnswer:answered?question.correct:'',category:answered?category:''});
   }
 
-  function koreanVoice() {
-    const voices = global.speechSynthesis?.getVoices?.() || [];
-    return voices.find(voice => /^ko(?:-|_)/i.test(voice.lang)) || voices.find(voice => /Korean|한국/i.test(voice.name));
-  }
   function playOne(syllable, done) {
     const token = playbackToken;
-    activeAudio = syllable; render();
     const hosted = HOSTED_AUDIO[syllable];
-    if (hosted) {
-      const audio = new Audio(hosted); audio.playbackRate = Number(profile.audioRate)||1; audio.preservesPitch = true;
-      audio.onended = () => { if (token === playbackToken) { activeAudio=''; render(); done?.('played'); } };
-      audio.onerror = () => playSystem(syllable,done,token); audio.play().catch(() => playSystem(syllable,done,token)); return;
-    }
-    playSystem(syllable,done,token);
-  }
-  function playSystem(syllable, done, token) {
-    if (!global.speechSynthesis || !global.SpeechSynthesisUtterance) { showToast(text('playerError')); activeAudio=''; render(); done?.('error'); return; }
-    const utterance = new SpeechSynthesisUtterance(syllable); utterance.lang='ko-KR'; utterance.rate=Number(profile.audioRate)||1; const voice=koreanVoice(); if(voice) utterance.voice=voice;
-    utterance.onend = () => { if (token === playbackToken) { activeAudio=''; render(); done?.('played'); } };
-    utterance.onerror = () => { if (token === playbackToken) { activeAudio=''; render(); showToast(text('playerError')); done?.('error'); } };
-    global.speechSynthesis.speak(utterance);
+    if (!hosted) { showToast(text('audioNotReleased')); done?.('error'); return; }
+    activeAudio = syllable; render();
+    currentAudio = new Audio(hosted); currentAudio.playbackRate = Number(profile.audioRate)||1; currentAudio.preservesPitch = true;
+    currentAudio.onended = () => { if (token === playbackToken) { activeAudio=''; render(); done?.('played'); } };
+    currentAudio.onerror = () => { if (token === playbackToken) { activeAudio=''; render(); showToast(text('playerError')); done?.('error'); } };
+    currentAudio.play().catch(() => currentAudio.onerror());
   }
   function playSequence(sequence, onEnd) {
-    playbackToken += 1; global.speechSynthesis?.cancel?.(); const token=playbackToken; let index=0;
+    if (!sequence.every(syllable => HOSTED_AUDIO[syllable])) { showToast(text('audioNotReleased')); onEnd?.('error'); return; }
+    playbackToken += 1; if (currentAudio) currentAudio.pause(); const token=playbackToken; let index=0;
     const next = () => { if(token!==playbackToken)return;if(index>=sequence.length){activeAudio='';render();onEnd?.('played');return;} playOne(sequence[index],result=>{if(result==='error'){onEnd?.('error');return;}index+=1;global.setTimeout(next,260);}); };
     next();
   }
@@ -190,7 +188,7 @@
     questionPlayerStates.set(question.id,autoplay?'autoplay':'playing');render();
     playSequence(question.audio,result=>{questionPlayerStates.set(question.id,result==='error'?'error':'played');render();});
   }
-  function stopAudio() { playbackToken += 1; global.speechSynthesis?.cancel?.(); activeAudio=''; }
+  function stopAudio() { playbackToken += 1; if (currentAudio) currentAudio.pause(); activeAudio=''; }
   function showToast(message) { const toast=document.getElementById('toast'); toast.textContent=message; toast.classList.add('show'); global.setTimeout(()=>toast.classList.remove('show'),1800); }
 
   function footer({nextDisabled=false,nextLabel=null,back=true}={}) {
@@ -204,22 +202,24 @@
   }
   function renderGroup(groupId) {
     const group=GROUPS.find(item=>item.id===groupId); const sequence=group.sequence.join('—');
-    const cards=group.items.map(item=>`<article class="contrastSound ${activeAudio===item.syllable?'playing':''}"><span class="soundSymbol">${item.symbol}</span><span class="soundCategory">${categoryLabel(item.category)}</span><strong class="soundSyllable">${item.syllable}</strong><div class="soundMeta"><span>${text('letterName')}：${item.letterName}</span><span>${text('example')}：${item.syllable}</span></div><p class="soundTip">${categoryTip(item.category)}</p><button class="soundPlay" data-action="play" data-syllable="${item.syllable}" aria-label="${text('listenSound',{category:categoryLabel(item.category),syllable:item.syllable})}">▶ ${text('listenSound',{category:categoryLabel(item.category),syllable:item.syllable})}</button></article>`).join('');
+    const cards=group.items.map(item=>`<article class="contrastSound ${activeAudio===item.syllable?'playing':''}"><span class="soundSymbol">${item.symbol}</span><span class="soundCategory">${categoryLabel(item.category)}</span><strong class="soundSyllable">${item.syllable}</strong><div class="soundMeta"><span>${text('letterName')}：${item.letterName}</span><span>${text('example')}：${item.syllable}</span></div><p class="soundTip">${categoryTip(item.category)}</p><button class="soundPlay" data-action="play" data-syllable="${item.syllable}" aria-label="${HOSTED_AUDIO[item.syllable]?text('listenSound',{category:categoryLabel(item.category),syllable:item.syllable}):text('audioNotReleased')}" ${HOSTED_AUDIO[item.syllable]?'':'disabled aria-disabled="true"'}>▶ ${HOSTED_AUDIO[item.syllable]?text('listenSound',{category:categoryLabel(item.category),syllable:item.syllable}):text('audioNotReleased')}</button></article>`).join('');
     const embeddedQuiz=group.id==='s'?renderQuestion(QUESTIONS.qs,false,true):'';
     const hints=group.items.map(item=>`<div class="approxRow"><b>${item.syllable}</b><span>${categoryLabel(item.category)}</span>${item.approximation?`<span>${text('approximationLabel')}：${item.approximation}</span>`:''}<small>${categoryTip(item.category)}</small></div>`).join('');
-    return `<span class="eyebrow">${group.sequence.join(' / ')}</span><h1>${sequence}</h1><p class="lead">${text('groupLead')}</p><div class="contrastGrid" style="--contrast-count:${group.items.length}">${cards}</div><button class="sequenceButton" data-action="sequence" data-sequence="${group.sequence.join(',')}" aria-label="${text('listenSequence',{sequence})}">▶ ${text('listenSequence',{sequence})}</button><details class="romanDetails"><summary>${text('romanSummary')}</summary><div class="approxList">${hints}</div><p>${text('romanNote')}</p></details><p class="audioDisclosure">ⓘ ${text('testAudio')}</p>${embeddedQuiz}${footer({nextDisabled:group.id==='s'&&!session.answers.qs})}`;
+    const sequenceReady=group.sequence.every(value=>HOSTED_AUDIO[value]);
+    return `<span class="eyebrow">${group.sequence.join(' / ')}</span><h1>${sequence}</h1><p class="lead">${text('groupLead')}</p><div class="contrastGrid" style="--contrast-count:${group.items.length}">${cards}</div><button class="sequenceButton" data-action="sequence" data-sequence="${group.sequence.join(',')}" aria-label="${sequenceReady?text('listenSequence',{sequence}):text('audioNotReleased')}" ${sequenceReady?'':'disabled aria-disabled="true"'}>▶ ${sequenceReady?text('listenSequence',{sequence}):text('audioNotReleased')}</button><details class="romanDetails"><summary>${text('romanSummary')}</summary><div class="approxList">${hints}</div><p>${text('romanNote')}</p></details><p class="audioDisclosure">ⓘ ${text('audioNotReleased')}</p>${embeddedQuiz}${footer()}`;
   }
   function renderQuestion(question, retry=false, embedded=false) {
     const answer=retry?retryFeedback:session.answers[question.id]; const options=session.optionOrders[question.id]||question.options; const playerState=questionPlayerStates.get(question.id)||'initial'; const player=questionPlayerModel(question,playerState,Boolean(answer));
-    const optionButtons=options.map(option=>{let cls='';if(answer){if(option===question.correct)cls='correct';else if(option===answer.choice)cls='wrong';}return `<button class="quizOption ${cls}" data-action="${retry?'retry-answer':'answer'}" data-question="${question.id}" data-value="${option}" ${answer?'disabled':''}>${optionLabel(option)}${answer&&option===question.correct?' ✓':answer&&option===answer.choice?' ✕':''}</button>`;}).join('');
+    const audioReady=question.audio.every(value=>HOSTED_AUDIO[value]);
+    const optionButtons=options.map(option=>{let cls='';if(answer){if(option===question.correct)cls='correct';else if(option===answer.choice)cls='wrong';}return `<button class="quizOption ${cls}" data-action="${retry?'retry-answer':'answer'}" data-question="${question.id}" data-value="${option}" ${answer||!audioReady?'disabled aria-disabled="true"':''}>${optionLabel(option)}${answer&&option===question.correct?' ✓':answer&&option===answer.choice?' ✕':''}</button>`;}).join('');
     const category=SOUND_CATEGORY[question.correct]||question.correct;
     const reveal=answer?`<div class="answerReveal"><b>${text('transcriptLabel')}：${player.transcript}</b><span>${text('categoryResult')}：${categoryLabel(player.category)}</span><span>${text('correctAnswerLabel')}：${optionLabel(player.correctAnswer)}</span><span>${text('teachingPointLabel')}：${categoryDetail(category)}</span></div>`:'';
     const feedback=answer?`<div class="feedback ${answer.correct?'good':'try'}" role="status"><strong>${text(answer.correct?'correct':'incorrect',{detail:categoryDetail(category)})}</strong>${answer.correct?'':`<span>${text('answerWas',{answer:optionLabel(question.correct)})}</span>`}${retry&&!answer.correct?`<button class="replayButton" data-action="retry-again" data-question="${question.id}">↻ ${text('retryAgain')}</button>`:`<button class="replayButton" data-action="question-audio" data-question="${question.id}" aria-label="${text('playerAriaReplay')}">▶ ${text('playerReplay')}</button>`}</div>`:'';
-    return `${embedded?'<hr class="sectionDivider">':`<span class="eyebrow">${text('quizTag')}</span>`}<${embedded?'h2':'h1'}>${questionInstruction(question)}</${embedded?'h2':'h1'}><div class="questionAudioPlayer quizAudio" data-player-state="${playerState}"><button class="soundPlay" data-action="question-audio" data-question="${question.id}" aria-label="${player.aria}">▶ ${player.label}</button>${playerState==='error'?`<p class="playerError" role="status">${text('playerError')}</p>`:''}</div>${embedded?'':`<p class="testAudioDisclosure">ⓘ ${text('testAudio')}</p>`}<div class="quizOptions">${optionButtons}</div>${feedback}${reveal}`;
+    return `${embedded?'<hr class="sectionDivider">':`<span class="eyebrow">${text('quizTag')}</span>`}<${embedded?'h2':'h1'}>${questionInstruction(question)}</${embedded?'h2':'h1'}><div class="questionAudioPlayer quizAudio" data-player-state="${playerState}"><button class="soundPlay" data-action="question-audio" data-question="${question.id}" aria-label="${audioReady?player.aria:text('audioNotReleased')}" ${audioReady?'':'disabled aria-disabled="true"'}>▶ ${audioReady?player.label:text('audioNotReleased')}</button>${playerState==='error'?`<p class="playerError" role="status">${text('playerError')}</p>`:''}</div>${embedded?'':`<p class="testAudioDisclosure">ⓘ ${text('audioNotReleased')}</p>`}<div class="quizOptions">${optionButtons}</div>${feedback}${reveal}`;
   }
   function renderQuiz(questionId) {
     const question=QUESTIONS[questionId]; const answered=Boolean(session.answers[questionId]);
-    return `${renderQuestion(question)}${footer({nextDisabled:!answered})}`;
+    return `${renderQuestion(question)}<p class="note">${text('previewOnly')}</p>${footer()}`;
   }
   function renderRetry() {
     const pending=session.mistakes[0];
@@ -230,12 +230,12 @@
     return `<span class="eyebrow">14 · K0</span><h1>${text('summaryTitle')}</h1><p class="lead">${text('summaryLead')}</p><div class="summaryList"><div>① ${text('summary1')}</div><div>② ${text('summary2')}</div><div>③ ${text('summary3')}</div><div>④ ${text('summary4')}</div></div>${footer({nextLabel:text('finish')})}`;
   }
   function completeLesson() {
-    if(session.completed)return; session.completed=true; session.step=SCREENS.length-1;
+    if(previewSkipped||session.previewSkipped||Object.keys(HOSTED_AUDIO).length<14)return; if(session.completed)return; session.completed=true; session.step=SCREENS.length-1;
     if(global.NikigoState)global.NikigoState.update(completionPatch,'contrast:complete');
     global.localStorage.setItem(SESSION_KEY,JSON.stringify(session));
   }
   function renderComplete() {
-    completeLesson();
+    if(Object.keys(HOSTED_AUDIO).length<14){previewSkipped=true;session.previewSkipped=true;saveSession()} completeLesson();
     return `<div class="complete"><div class="completeMark">✓</div><span class="eyebrow">K0 · COMPLETE</span><h1>${text('completeTitle')}</h1><p class="lead centered">${text('completeLead')}</p><div class="rewards"><span class="reward">✦ ${text('xp')}</span><span class="reward">✓ ${text('earned')}</span><span class="reward">⏳ ${text('pendingNext')}</span></div><div class="repeatActions"><button class="primary" data-action="home">${text('returnCourses')} →</button></div></div>`;
   }
   function render() {
@@ -243,7 +243,7 @@
     document.documentElement.lang=language==='zh'?'zh-CN':language; document.getElementById('language').value=language; document.getElementById('lessonName').textContent=text('lessonName'); document.getElementById('progressLabel').textContent=text('progress');
     const percent=Math.round(session.step/(SCREENS.length-1)*100); document.getElementById('progressCount').textContent=`${session.step+1} / ${SCREENS.length}`; document.getElementById('progressBar').style.width=`${percent}%`; document.getElementById('progressTrack').setAttribute('aria-valuenow',String(percent)); document.getElementById('homeButton').setAttribute('aria-label',text('home')); document.getElementById('homeButton').title=text('home'); document.getElementById('homeLogo').setAttribute('aria-label',text('home'));
     if(type==='intro')stage.innerHTML=renderIntro(); if(type==='concept')stage.innerHTML=renderConcept(); if(type==='group')stage.innerHTML=renderGroup(id); if(type==='quiz')stage.innerHTML=renderQuiz(id); if(type==='retry')stage.innerHTML=renderRetry(); if(type==='summary')stage.innerHTML=renderSummary(); if(type==='complete')stage.innerHTML=renderComplete();
-    if(type==='quiz'&&profile.autoplayAudio===true&&!autoplayed.has(session.step)){autoplayed.add(session.step);global.setTimeout(()=>playQuestionAudio(QUESTIONS[id],true),250);}
+    if(type==='quiz'&&profile.autoplayAudio===true&&!autoplayed.has(session.step)&&QUESTIONS[id].audio.every(value=>HOSTED_AUDIO[value])){autoplayed.add(session.step);global.setTimeout(()=>playQuestionAudio(QUESTIONS[id],true),250);}
   }
   function answerQuestion(questionId,value,retry) {
     const question=QUESTIONS[questionId]; const correct=value===question.correct;
@@ -262,10 +262,9 @@
     if(action==='retry-answer'){answerQuestion(button.dataset.question,button.dataset.value,true);return;}
     if(action==='retry-again'){retryFeedback=null;stopAudio();const question=QUESTIONS[button.dataset.question];render();if(question)playQuestionAudio(question);return;}
     if(action==='back'){stopAudio();session.step=Math.max(0,session.step-1);retryFeedback=null;saveSession();render();global.scrollTo(0,0);return;}
-    if(action==='next'){stopAudio();session.step=Math.min(SCREENS.length-1,session.step+1);retryFeedback=null;saveSession();render();global.scrollTo(0,0);}
+    if(action==='next'){stopAudio();if(Object.keys(HOSTED_AUDIO).length<14)session.previewSkipped=true;session.step=Math.min(SCREENS.length-1,session.step+1);retryFeedback=null;saveSession();render();global.scrollTo(0,0);}
   });
   document.getElementById('language').addEventListener('change',event=>{language=LANGUAGES.includes(event.target.value)?event.target.value:'en';saveSession();render();});
-  global.speechSynthesis?.addEventListener?.('voiceschanged',()=>{});
   global.NikigoContrastLesson=Object.freeze({LESSON_ID,GROUPS,QUESTIONS,SCREENS,UI,HOSTED_AUDIO,blankSession,applyAnswer,applyRetryAnswer,completionPatch,neutralPlayerCopy,questionPlayerModel,getSession:()=>JSON.parse(JSON.stringify(session))});
   render();
 })(window);

@@ -9,22 +9,31 @@
 
   const item = (id, displayText, speechText, file, options) => Object.freeze({
     id,
+    lessonId: options.lessonId,
+    targetSymbol: options.targetSymbol ?? null,
     displayText,
     speechText,
     expectedPronunciation: options.expectedPronunciation || speechText,
     pronunciationRule: options.pronunciationRule || '',
-    type: options.type,
+    audioType: options.audioType || options.type,
+    type: options.audioType || options.type,
     pronunciationType: options.pronunciationType,
     screen: options.screen,
     teachingGoal: options.teachingGoal,
     file,
-    voiceSource: options.voiceSource || 'openai-gpt-4o-mini-tts',
+    voiceSource: String(options.voiceSource || '').startsWith('apple-') ? 'legacy-system-export' : (options.voiceSource || 'openai-gpt-4o-mini-tts'),
+    model: options.model ?? (String(options.voiceSource || '').startsWith('apple-') ? null : 'gpt-4o-mini-tts'),
+    generationDate: options.generationDate ?? null,
+    commercialUseBasis: options.commercialUseBasis ?? 'pending-documentation',
     reviewStatus: 'pending',
+    assetStatus: options.assetStatus || 'available',
+    nativeReviewer: null,
+    reviewNotes: options.reviewNotes || 'legacy-unreviewed',
     needsNativeReview: true,
     rights: RIGHTS_TEMPLATE
   });
 
-  const lessons = Object.freeze({
+  const lessons = {
     'lesson-01': Object.freeze({
       title: '韩文字母：第一步',
       items: Object.freeze([
@@ -91,14 +100,72 @@
         item('gamsahamnida', '감사합니다', '감사합니다', 'gamsahamnida-v2.wav', { type: 'sound-change', pronunciationType: '音变、完整句子或对话', screen: '场景短语、跟读、挑战 4', teachingGoal: '自然说出正式感谢', expectedPronunciation: '감사함니다', pronunciationRule: '鼻音化：합니다 → [함니다]', voiceSource: 'apple-system-ko-KR-yuna' })
       ])
     })
+  };
+
+  Object.entries(lessons).forEach(([lessonId, lesson]) => {
+    lessons[lessonId] = Object.freeze({ ...lesson, items:Object.freeze(lesson.items.map(entry => Object.freeze({ ...entry, lessonId }))) });
   });
+
+  const contrastSpecs = [
+    ['ga','ㄱ','plain','가'],['ka','ㅋ','aspirated','카'],['kka','ㄲ','tense','까'],
+    ['da','ㄷ','plain','다'],['ta','ㅌ','aspirated','타'],['tta','ㄸ','tense','따'],
+    ['ba','ㅂ','plain','바'],['pa','ㅍ','aspirated','파'],['ppa','ㅃ','tense','빠'],
+    ['ja','ㅈ','plain','자'],['cha','ㅊ','aspirated','차'],['jja','ㅉ','tense','짜'],
+    ['sa','ㅅ','plain','사'],['ssa','ㅆ','tense','싸']
+  ];
+  lessons['k0-consonant-contrast'] = Object.freeze({
+    title:'听懂普通音、送气音和紧音',
+    items:Object.freeze(contrastSpecs.map(([id, targetSymbol, category, syllable]) => item(id, syllable, syllable, `${id}.mp3`, {
+      lessonId:'k0-consonant-contrast', targetSymbol, audioType:'initial-example', pronunciationType:'full-syllable',
+      pronunciationRule:`${category} onset in a complete syllable`, screen:'对比卡片、听辨练习', teachingGoal:'通过完整音节比较普通音、送气音和紧音',
+      voiceSource:'openai-gpt-4o-mini-tts', assetStatus:'missing', reviewNotes:'Not generated; Korean native-speaker review required.'
+    })))
+  });
+
+  const lesson6Specs = [
+    ['wa-syllable','ㅘ','ㅘ（承载音节：와）','와','syllable','wa.mp3'],
+    ['wae-syllable','ㅙ','ㅙ（承载音节：왜）','왜','syllable','wae-syllable.mp3'],
+    ['oe-syllable','ㅚ','ㅚ（承载音节：외）','외','syllable','oe.mp3'],
+    ['wo-syllable','ㅝ','ㅝ（承载音节：워）','워','syllable','wo.mp3'],
+    ['we-syllable','ㅞ','ㅞ（承载音节：웨）','웨','syllable','we.mp3'],
+    ['wi-syllable','ㅟ','ㅟ（承载音节：위）','위','syllable','wi.mp3'],
+    ['ui-syllable','ㅢ','ㅢ（承载音节：의）','의','syllable','ui.mp3'],
+    ['yae-syllable','ㅒ','ㅒ（承载音节：얘）','얘','syllable','yae.mp3'],
+    ['ye-syllable','ㅖ','ㅖ（承载音节：예）','예','syllable','ye-syllable.mp3'],
+    ['mwo-word',null,'뭐','뭐','word','mwo.mp3'],
+    ['gwaja-word',null,'과자','과자','word','gwaja.mp3'],
+    ['yeou-word',null,'여우','여우','word','yeou.mp3'],
+    ['uija-word',null,'의자','의자','word','uija.mp3'],
+    ['wae-word',null,'왜','왜','word','wae-word.mp3'],
+    ['ye-word',null,'예','예','word','ye-word.mp3']
+  ];
+  lessons['lesson-06'] = Object.freeze({
+    title:'复合元音',
+    items:Object.freeze(lesson6Specs.map(([id,targetSymbol,displayText,speechText,audioType,file]) => item(id, displayText, speechText, file, {
+      lessonId:'lesson-06', targetSymbol, audioType, pronunciationType:audioType === 'word' ? 'full-word' : 'full-syllable',
+      pronunciationRule:audioType === 'word' ? 'complete word without final consonant' : `compound-vowel carrier ${targetSymbol}`,
+      screen:audioType === 'word' ? '无收音真实词汇' : '复合元音承载音节', teachingGoal:audioType === 'word' ? `完整单词“${speechText}”` : `用完整音节教学复合元音 ${targetSymbol}`,
+      assetStatus:'missing', reviewNotes:'Not generated; Korean native-speaker review required.'
+    })))
+  });
+
+  Object.freeze(lessons);
+
+  const REQUIRED_RELEASE_FIELDS = ['voiceSource','model','generationDate','commercialUseBasis','nativeReviewer','reviewNotes'];
+  function canPlayAudio(requestedSpeechText, entry, expectedAudioType) {
+    if (!entry || entry.reviewStatus !== 'approved' || entry.assetStatus !== 'available') return false;
+    if (!entry.file || entry.speechText !== requestedSpeechText) return false;
+    if (expectedAudioType && entry.audioType !== expectedAudioType) return false;
+    if (entry.type === 'deprecated' || entry.assetStatus === 'deprecated') return false;
+    return REQUIRED_RELEASE_FIELDS.every(field => entry[field] !== null && String(entry[field]).trim() !== '' && entry[field] !== 'pending-documentation');
+  }
 
   function forLesson(lessonId) {
     const lesson = lessons[lessonId];
     if (!lesson) return { items: [], audioFiles: {}, pronunciationText: {} };
     const audioFiles = {};
     const pronunciationText = {};
-    lesson.items.forEach(entry => {
+    lesson.items.filter(entry => canPlayAudio(entry.speechText, entry)).forEach(entry => {
       audioFiles[entry.speechText] = `audio/${lessonId}/${entry.file}`;
       pronunciationText[entry.speechText] = entry.speechText;
     });
@@ -109,10 +176,11 @@
     };
   }
 
-  function findSpeech(speechText) {
+  function findSpeech(speechText, expectedAudioType, requestedLessonId) {
     for (const [lessonId, lesson] of Object.entries(lessons)) {
-      const entry = lesson.items.find(candidate => candidate.speechText === speechText);
-      if (entry) return Object.freeze({ ...entry, lessonId, path: `audio/${lessonId}/${entry.file}` });
+      if (requestedLessonId && requestedLessonId !== lessonId) continue;
+      const typed = lesson.items.find(candidate => candidate.speechText === speechText && (!expectedAudioType || candidate.audioType === expectedAudioType));
+      if (typed) return Object.freeze({ ...typed, lessonId, path: `audio/${lessonId}/${typed.file}` });
     }
     return null;
   }
@@ -135,5 +203,10 @@
     };
   }
 
-  global.NikigoAudio = Object.freeze({ lessons, forLesson, findSpeech, forSpeechTexts });
+  function resolve(requestedSpeechText, expectedAudioType, lessonId) {
+    const entry = findSpeech(requestedSpeechText, expectedAudioType, lessonId);
+    return Object.freeze({ entry, playable:canPlayAudio(requestedSpeechText, entry, expectedAudioType), path:entry?.path || null });
+  }
+
+  global.NikigoAudio = Object.freeze({ lessons, forLesson, findSpeech, forSpeechTexts, canPlayAudio, resolve });
 })(typeof window === 'undefined' ? globalThis : window);

@@ -112,7 +112,7 @@ for (const [index, item] of (catalog || []).entries()) {
     const manifestFile = `audio/${stableId}/manifest.json`;
     if (fs.existsSync(manifestFile)) {
       const manifest = JSON.parse(fs.readFileSync(manifestFile, 'utf8'));
-      const manifestPaths = new Set((manifest.items || []).map(audio => `audio/${stableId}/${audio.file}`));
+      const manifestPaths = new Set((manifest.items || []).filter(audio => globalThis.NikigoAudio.canPlayAudio(audio.speechText,audio,audio.audioType)).map(audio => `audio/${stableId}/${audio.file}`));
       const mappedPaths = new Set(Object.values(config.audioFiles || {}));
       for (const path of mappedPaths) {
         if (!manifestPaths.has(path)) errors.push(`${file}: audio mapping is missing from ${manifestFile}: ${path}`);

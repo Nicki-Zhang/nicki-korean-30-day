@@ -1,4 +1,4 @@
-const CACHE = 'nikigo-v14-lesson-06-structure';
+const CACHE = 'nikigo-v15-reviewed-audio-gate';
 const ASSETS = [
   './', './index.html', './nikigo-app.html', './app-state.js', './course-catalog.js',
   './hangul-sound-data.js', './audio-catalog.js', './review.html', './review.css',
@@ -22,6 +22,11 @@ self.addEventListener('activate', event => event.waitUntil(
 
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
+  const url = new URL(event.request.url);
+  if (url.pathname.includes('/audio/deprecated/')) {
+    event.respondWith(Promise.resolve(Response.error()));
+    return;
+  }
   event.respondWith(
     fetch(event.request).then(response => {
       const copy = response.clone();

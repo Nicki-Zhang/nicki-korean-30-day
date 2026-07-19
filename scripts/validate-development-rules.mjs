@@ -34,7 +34,7 @@ for(const course of catalog.filter(course=>course.status==='comingSoon')){
 
 const queue=fs.readFileSync('AUDIO_GENERATION_REVIEW_QUEUE.md','utf8');
 const manifest=JSON.parse(fs.readFileSync('audio/lesson-06/manifest.json','utf8'));
-assert.equal(manifest.items.length,13);
+assert.equal(manifest.items.length,15);
 for(const item of manifest.items){
   assert.equal(item.lessonId,'lesson-06');
   assert.equal(item.reviewStatus,'pending');
@@ -44,5 +44,5 @@ for(const item of manifest.items){
   assert.equal(fs.existsSync(`audio/lesson-06/${item.file}`),false,`${item.file} must not exist before generation`);
 }
 assert.equal(manifest.items.filter(item=>item.audioType==='syllable').length,9);
-assert.equal(manifest.items.filter(item=>item.audioType==='word').length,4);
-console.log('Validated fixed development rules, independent course states, direct access, recommendation path, and 13 pending Lesson 6 audio records.');
+assert.equal(manifest.items.filter(item=>item.audioType==='word').length,6);
+console.log('Validated fixed development rules, independent course states, direct access, recommendation path, and 15 pending typed Lesson 6 audio records.');

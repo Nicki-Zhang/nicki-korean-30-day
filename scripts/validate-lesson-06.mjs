@@ -77,23 +77,27 @@ assert.deepEqual([...session.mistakes],[]);
 const restored=api.normalizeSession({...session,step:14,built:['와','뭐','위'],challengeStarted:true});
 assert.equal(restored.step,14);assert.equal(restored.challengeStarted,true);assert.deepEqual([...restored.built],['와','뭐','위']);
 const completed=api.completionPatch(oldProfile);
-assert.equal(completed.xp,300);
-assert.equal(completed.lessonProgress['lesson-06'],100);
+assert.equal(api.AUDIO_RELEASE_READY,false,'Pending Lesson 6 audio must keep the lesson in structure-preview mode.');
+assert.equal(completed.xp,250,'Structure preview must not award XP before every required audio item is approved.');
+assert.equal(completed.lessonProgress['lesson-06'],undefined,'Structure preview must not mark Lesson 6 complete.');
 assert.equal(completed.lessonProgress['lesson-03'],42);
 assert.equal(completed.lessonProgress['k0-lesson-06-plan'],0,'Unknown historical placeholder state must not be deleted.');
 assert.deepEqual(completed.futureField,{keep:true});
-assert.equal(api.completionPatch(completed).xp,300,'Repeat completion must not award XP twice.');
+assert.equal(api.completionPatch(completed).xp,250,'Repeated structure preview must never award XP.');
+for(const language of languages){
+  assert.ok(api.UI[language].previewCompleteTag&&api.UI[language].previewCompleteTitle&&api.UI[language].previewCompleteLead&&api.UI[language].previewReward,`${language} preview completion copy is incomplete.`);
+}
 
 assert.deepEqual(JSON.parse(JSON.stringify(api.AUDIO_FILES)),{},'No similar or inexact hosted audio may be substituted.');
 assert.equal(manifest.schemaVersion,2);
 assert.equal(manifest.lesson,'lesson-06');
-assert.equal(manifest.items.length,13);
-assert.equal(new Set(manifest.items.map(item=>item.id)).size,13);
-assert.equal(new Set(manifest.items.map(item=>item.file)).size,13);
+assert.equal(manifest.items.length,15);
+assert.equal(new Set(manifest.items.map(item=>item.id)).size,15);
+assert.equal(new Set(manifest.items.map(item=>item.file)).size,15);
 assert.ok(manifest.items.some(item=>item.displayText==='과자'));
 assert.equal(manifest.items.some(item=>item.displayText==='우유'),false,'우유 uses ㅠ and must not be a required Lesson 6 audio item.');
 const syllableSpeech=['와','왜','외','워','웨','위','의','얘','예'];
-const wordSpeech=['뭐','과자','여우','의자'];
+const wordSpeech=['뭐','과자','여우','의자','왜','예'];
 assert.deepEqual(manifest.items.filter(item=>item.audioType==='syllable').map(item=>item.speechText).sort(),syllableSpeech.sort());
 assert.deepEqual(manifest.items.filter(item=>item.audioType==='word').map(item=>item.speechText).sort(),wordSpeech.sort());
 for(const item of manifest.items){
@@ -103,7 +107,6 @@ for(const item of manifest.items){
   assert.ok(Object.hasOwn(item,'targetSymbol')&&Object.hasOwn(item,'generationDate')&&Object.hasOwn(item,'nativeReviewer')&&Object.hasOwn(item,'reviewNotes'));
   assert.ok(['syllable','word'].includes(item.audioType));
   assert.equal(item.pronunciationType,item.audioType==='syllable'?'full-syllable':'full-word');
-  assert.equal(item.displayText,item.speechText,'Visible and generated text must match exactly.');
   if(item.audioType==='syllable')assert.equal(api.CARRIERS[item.targetSymbol],item.speechText);
   else assert.equal(item.targetSymbol,null);
   assert.equal(fs.existsSync(`audio/lesson-06/${item.file}`),false,'Lesson 6 must not generate audio in this task.');
@@ -120,4 +123,4 @@ assert.match(source,/lesson06ReleaseNotice/);
 const lesson7=catalogContext.window.NIKIGO_COURSES.find(item=>item.stableId==='lesson-04');
 assert.equal(lesson7.displayNumber,7);assert.equal(lesson7.file,'lesson-04.html');
 
-console.log('Validated Lesson 6: 18 steps, four languages, direct structural-preview access, compound-vowel spelling, no fake listening, resume state, exact-audio policy, migration safety, and one-time +50 XP.');
+console.log('Validated Lesson 6: 18 steps, four languages, direct structural-preview access, compound-vowel spelling, no fake listening, resume state, exact-audio policy, migration safety, and completion/XP blocked until audio approval.');

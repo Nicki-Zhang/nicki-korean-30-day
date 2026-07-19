@@ -71,13 +71,13 @@ for (const [lessonId, symbols] of Object.entries(expected)) {
   assert.deepEqual([...config.consonants.map(item => item.symbol)], symbols.consonants);
   for (const item of config.vowels) {
     assert.equal(item.type, 'vowel');
-    assert.equal(config.audioFiles[item.vowelCarrierSyllable], item.vowelAudio, `${lessonId} ${item.symbol} mapping mismatch`);
+    assert.equal(config.audioFiles[item.vowelCarrierSyllable], undefined, `${lessonId} ${item.symbol} pending audio must be gated`);
     buttonMappings.push({ lessonId, label:`听元音${item.symbol}`, speechText:item.vowelCarrierSyllable, file:item.vowelAudio });
   }
   for (const item of config.consonants) {
     assert.equal(item.type, 'consonant');
     assert.equal(item.letterNameAudio, null);
-    assert.equal(config.audioFiles[item.demoSyllable], item.demoAudio, `${lessonId} ${item.symbol} demo mapping mismatch`);
+    assert.equal(config.audioFiles[item.demoSyllable], undefined, `${lessonId} ${item.symbol} pending demo must be gated`);
     buttonMappings.push({ lessonId, label:`听示例音节 ${item.demoSyllable}`, speechText:item.demoSyllable, file:item.demoAudio });
   }
 }
@@ -87,7 +87,7 @@ const lesson00Source = fs.readFileSync('lesson-00.js', 'utf8');
 assert.equal((lesson00Html.match(/data-category=/g) || []).length, 5);
 assert.match(lesson00Source, /data-symbol/);
 assert.match(lesson00Source, /letterNamePending/);
-assert.match(lesson00Source, /if \(!file\) return/);
+assert.match(lesson00Source, /if \(!resolved\.playable\) return/);
 assert.match(lesson00Source, /preservesPitch = true/);
 assert.match(lesson00Source, /vowelCarrierRule/);
 assert.match(lesson00Source, /silentIeung/);

@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  const available = ({ stableId, displayOrder, displayNumber, file, duration, xp, icon, template, title, parts, recommendedPrerequisites = [], releaseStatus = 'released', audioStatus = 'underReview' }) => ({
+  const available = ({ stableId, displayOrder, displayNumber, file, duration, xp, icon, template, title, parts, recommendedPrerequisites = [], releaseStatus = 'preview', audioStatus = 'pending' }) => ({
     id: stableId,
     stableId,
     displayOrder,
