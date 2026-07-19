@@ -2,6 +2,7 @@
 ._*
 __MACOSX/
 node_modules/
+staging/
 .env
 .env.*
 !.env.example

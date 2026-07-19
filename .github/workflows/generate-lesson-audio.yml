@@ -1,84 +1,132 @@
-name: Generate lesson audio
+name: Generate staged lesson audio
 
 on:
-  push:
-    paths:
-      - audio/lesson-*/manifest.json
-      - audio/k0-*/manifest.json
-      - audio-catalog.js
-      - scripts/generate-lesson-audio.mjs
-      - scripts/validate-audio.mjs
   workflow_dispatch:
     inputs:
-      lesson:
-        description: Lesson audio to generate
+      mode:
+        description: No-cost validation or explicitly confirmed paid generation
         required: true
-        default: lesson-02
+        default: dry-run
         type: choice
         options:
-          - lesson-00
-          - lesson-01
-          - lesson-02
-          - lesson-03
-          - lesson-04
-          - k0-consonant-contrast
+          - dry-run
+          - generate
+      batchId:
+        description: Reviewed audio batch allowlist
+        required: true
+        default: audio-batch-01
+        type: choice
+        options:
+          - audio-batch-01
+      expectedCount:
+        description: Must exactly match the reviewed batch allowlist
+        required: true
+        default: 2
+        type: number
+      confirmation:
+        description: Generate mode requires exactly "GENERATE audio-batch-01 2"
+        required: false
+        default: DRY-RUN
+        type: string
 
 permissions:
   contents: read
 
+concurrency:
+  group: paid-audio-${{ inputs.batchId }}
+  cancel-in-progress: false
+
 jobs:
-  validate:
-    if: github.event_name == 'push'
-    permissions:
-      contents: read
+  stage-audio:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - name: Checkout authorized commit
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
         with:
           node-version: 24
           package-manager-cache: false
-      - name: Validate audio schema and lesson mappings
-        run: node scripts/validate-audio.mjs --allow-missing-openai
-      - name: Run complete test suite
+
+      - name: Capture non-sensitive run metadata
+        id: metadata
+        shell: bash
+        run: echo "short_sha=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+
+      - name: Preflight inputs and formal manifest isolation
+        run: >-
+          node scripts/preflight-audio-batch.mjs
+          --batch-id "${{ inputs.batchId }}"
+          --mode "${{ inputs.mode }}"
+          --expected-count "${{ inputs.expectedCount }}"
+          --confirmation "${{ inputs.confirmation }}"
+          --staging-dir "staging/${{ inputs.batchId }}"
+
+      - name: Run complete tests before any generation
         run: npm test
 
-  generate:
-    if: github.event_name == 'workflow_dispatch'
-    permissions:
-      contents: read
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    concurrency:
-      group: paid-audio-${{ inputs.lesson }}
-      cancel-in-progress: false
-    steps:
-      - name: Require an explicit lesson selection
-        env:
-          SELECTED_LESSON: ${{ inputs.lesson }}
-        run: |
-          if [ -z "$SELECTED_LESSON" ]; then
-            echo "::error::A lesson must be selected before paid audio generation."
-            exit 1
-          fi
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
-        with:
-          node-version: 24
-          package-manager-cache: false
-      - name: Validate audio schema and lesson mappings before generation
-        run: node scripts/validate-audio.mjs --allow-missing-openai
-      - name: Generate Korean female audio
+      - name: Validate exact batch allowlist before API access
+        run: >-
+          node scripts/preflight-audio-batch.mjs
+          --batch-id "${{ inputs.batchId }}"
+          --mode "${{ inputs.mode }}"
+          --expected-count "${{ inputs.expectedCount }}"
+          --confirmation "${{ inputs.confirmation }}"
+          --staging-dir "staging/${{ inputs.batchId }}"
+
+      - name: Create no-cost dry-run staging fixtures
+        if: inputs.mode == 'dry-run'
+        run: >-
+          node scripts/generate-lesson-audio.mjs
+          --batch-id "${{ inputs.batchId }}"
+          --mode dry-run
+          --expected-count "${{ inputs.expectedCount }}"
+          --staging-dir "staging/${{ inputs.batchId }}"
+          --workflow-run-id "${{ github.run_id }}"
+          --commit "${{ github.sha }}"
+
+      - name: Generate paid audio into staging
+        if: inputs.mode == 'generate'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: node scripts/generate-lesson-audio.mjs "audio/${{ inputs.lesson }}/manifest.json"
-      - name: Validate generated files before publication
-        run: npm test
-      - name: Upload generated lesson audio for review
+        run: >-
+          node scripts/generate-lesson-audio.mjs
+          --batch-id "${{ inputs.batchId }}"
+          --mode generate
+          --expected-count "${{ inputs.expectedCount }}"
+          --staging-dir "staging/${{ inputs.batchId }}"
+          --workflow-run-id "${{ github.run_id }}"
+          --commit "${{ github.sha }}"
+
+      - name: Validate staging files and build Artifact manifest
+        if: always()
+        run: >-
+          node scripts/validate-audio-staging.mjs
+          --batch-id "${{ inputs.batchId }}"
+          --mode "${{ inputs.mode }}"
+          --expected-count "${{ inputs.expectedCount }}"
+          --staging-dir "staging/${{ inputs.batchId }}"
+
+      - name: Upload staged audio and reports
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: nikigo-audio-${{ inputs.lesson }}-${{ github.run_number }}
-          path: audio/${{ inputs.lesson }}/
+          name: nikigo-${{ inputs.batchId }}-${{ inputs.mode == 'dry-run' && 'dry-run-' || '' }}run-${{ github.run_id }}-${{ steps.metadata.outputs.short_sha }}
+          path: staging/${{ inputs.batchId }}/
           retention-days: 7
           if-no-files-found: error
+
+      - name: Write non-blocking post-run summary
+        if: always()
+        continue-on-error: true
+        shell: bash
+        run: |
+          echo "### Nikigo staged audio run" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Batch: ${{ inputs.batchId }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Mode: ${{ inputs.mode }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Expected count: ${{ inputs.expectedCount }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Formal App manifests were not modified." >> "$GITHUB_STEP_SUMMARY"

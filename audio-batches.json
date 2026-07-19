@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "batches": {
+    "audio-batch-01": {
+      "lessonId": "lesson-00",
+      "expectedCount": 2,
+      "model": "gpt-4o-mini-tts",
+      "voice": "marin",
+      "format": "mp3",
+      "items": [
+        {
+          "id": "yo",
+          "speechText": "요",
+          "audioType": "vowel",
+          "outputFile": "yo.mp3"
+        },
+        {
+          "id": "yu",
+          "speechText": "유",
+          "audioType": "vowel",
+          "outputFile": "yu.mp3"
+        }
+      ]
+    }
+  }
+}
