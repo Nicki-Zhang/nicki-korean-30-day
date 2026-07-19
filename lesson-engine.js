@@ -3,6 +3,12 @@
 
   const SUPPORTED = ['zh', 'en', 'vi', 'ja'];
   const FEMALE_KOREAN_VOICE = /Yuna|SunHi|Heami|Sora|Jimin|Seoyeon|Kyuri|Female|여성|한국.*여/i;
+  const COMPLETION_ACTIONS = Object.freeze({
+    zh: { next: '下一课', home: '返回学习主页' },
+    en: { next: 'Next lesson', home: 'Return to learning home' },
+    vi: { next: 'Bài tiếp theo', home: 'Về trang học tập' },
+    ja: { next: '次のレッスン', home: '学習ホームへ戻る' }
+  });
 
   function mount(config) {
     if (!config || !config.id || !config.copy) throw new Error('Nikigo lesson config is incomplete.');
@@ -41,9 +47,17 @@
     let currentAudio = null;
     let currentUtterance = null;
     let audioUnlocked = false;
+    let playbackGeneration = 0;
 
     const element = selector => document.querySelector(selector);
     const copy = key => config.copy[language]?.[key] || config.copy.en?.[key] || key;
+    const completionCopy = key => COMPLETION_ACTIONS[language]?.[key] || COMPLETION_ACTIONS.en[key];
+
+    function nextCourse() {
+      const lessons = global.NIKIGO_COURSES || [];
+      const currentIndex = lessons.findIndex(lesson => lesson.id === config.id);
+      return currentIndex >= 0 ? (lessons[currentIndex + 1] || null) : null;
+    }
 
     function normalizeLanguage(value) {
       const normalized = String(value || '').toLowerCase();
@@ -115,9 +129,10 @@
       }
     }
 
-    function systemSpeech(value) {
+    function systemSpeech(value, onEnd) {
       if (!('speechSynthesis' in global) || typeof global.SpeechSynthesisUtterance === 'undefined') {
         toast(copy('audioUnavailable'));
+        if (onEnd) onEnd();
         return;
       }
       const synth = global.speechSynthesis;
@@ -129,17 +144,19 @@
       currentUtterance.pitch = 1;
       const voice = preferredKoreanVoice();
       if (voice) currentUtterance.voice = voice;
+      currentUtterance.onend = () => { if (onEnd) onEnd(); };
       currentUtterance.onerror = event => {
         if (!['canceled', 'interrupted'].includes(event.error)) toast(copy('audioError'));
+        if (onEnd) onEnd();
       };
       synth.speak(currentUtterance);
     }
 
-    function speak(value) {
+    function playOne(value, onEnd) {
       unlockAudio();
       const file = config.audioFiles?.[value];
       if (!file) {
-        systemSpeech(value);
+        systemSpeech(value, onEnd);
         return;
       }
       if (currentAudio) currentAudio.pause();
@@ -149,7 +166,22 @@
       currentAudio.preservesPitch = true;
       currentAudio.mozPreservesPitch = true;
       currentAudio.webkitPreservesPitch = true;
-      currentAudio.play().catch(() => systemSpeech(value));
+      currentAudio.onended = () => { if (onEnd) onEnd(); };
+      currentAudio.play().catch(() => systemSpeech(value, onEnd));
+    }
+
+    function speak(value) {
+      const sequence = (Array.isArray(value) ? value : [value]).filter(Boolean);
+      const generation = ++playbackGeneration;
+      let sequenceIndex = 0;
+      const playNext = () => {
+        if (generation !== playbackGeneration || sequenceIndex >= sequence.length) return;
+        playOne(sequence[sequenceIndex], () => {
+          sequenceIndex += 1;
+          playNext();
+        });
+      };
+      playNext();
     }
 
     function progress() {
@@ -194,7 +226,7 @@
     }
 
     function renderRepeat() {
-      return shell(`<span class="eyebrow">${copy('repeatTag')}</span><h1>${copy('repeatTitle')}</h1><p class="lead">${copy('repeatLead')}</p><div class="repeatBox"><small>${copy('listenPhrase')}</small><div class="repeatText">${config.repeat.display}</div><div class="repeatActions"><button class="primary" data-action="speak" data-value="${config.repeat.audio}">▶ ${copy('again')}</button></div><div class="selfCheck"><button class="${selfCheck === 'practice' ? 'on' : ''}" data-action="self-check" data-value="practice">↻ ${copy('needPractice')}</button><button class="${selfCheck === 'good' ? 'on' : ''}" data-action="self-check" data-value="good">✓ ${copy('soundsGood')}</button></div></div>${selfCheck ? '' : `<div class="note">${copy('chooseCheck')}</div>`}`);
+      return shell(`<span class="eyebrow">${copy('repeatTag')}</span><h1>${copy('repeatTitle')}</h1><p class="lead">${copy('repeatLead')}</p><div class="repeatBox"><small>${copy('listenPhrase')}</small><div class="repeatText">${config.repeat.display}</div><div class="repeatActions"><button class="primary" data-action="repeat-audio">▶ ${copy('again')}</button></div><div class="selfCheck"><button class="${selfCheck === 'practice' ? 'on' : ''}" data-action="self-check" data-value="practice">↻ ${copy('needPractice')}</button><button class="${selfCheck === 'good' ? 'on' : ''}" data-action="self-check" data-value="good">✓ ${copy('soundsGood')}</button></div></div>${selfCheck ? '' : `<div class="note">${copy('chooseCheck')}</div>`}`);
     }
 
     function renderChallenge() {
@@ -235,7 +267,11 @@
       finishLesson();
       const score = Object.values(quizAnswers).filter(answer => answer.correct).length;
       const perfect = score === config.quiz.length;
-      return `<div class="complete"><span class="eyebrow">${copy('completeTag')}</span><h1>${copy('completeTitle')}</h1><p class="lead centered">${copy('completeLead')}</p><div class="scoreRing" style="--score:${score / config.quiz.length * 100}%"><div><span><strong>${score}/${config.quiz.length}</strong><small>${copy('score')}</small></span></div></div><div class="rewards"><span class="reward">✦ ${earnedXp ? copy('xp') : '+0 XP'}</span><span class="reward">↻ ${copy('reviewAdded')}</span></div><div class="reviewBox"><b>${copy('reviewTitle')}</b><br>${copy(perfect ? 'reviewPerfect' : 'reviewNeeds')}</div><div class="repeatActions"><button class="secondary" data-action="restart">↻ ${copy('replay')}</button><button class="primary" data-action="exit">${copy('returnHome')} →</button></div></div>`;
+      const next = nextCourse();
+      const nextActions = next
+        ? `<button class="secondary" data-action="exit">${completionCopy('home')}</button><button class="primary" data-action="next-lesson">${completionCopy('next')} →</button>`
+        : `<button class="primary" data-action="exit">${completionCopy('home')} →</button>`;
+      return `<div class="complete"><span class="eyebrow">${copy('completeTag')}</span><h1>${copy('completeTitle')}</h1><p class="lead centered">${copy('completeLead')}</p><div class="scoreRing" style="--score:${score / config.quiz.length * 100}%"><div><span><strong>${score}/${config.quiz.length}</strong><small>${copy('score')}</small></span></div></div><div class="rewards"><span class="reward">✦ ${earnedXp ? copy('xp') : '+0 XP'}</span><span class="reward">↻ ${copy('reviewAdded')}</span></div><div class="reviewBox"><b>${copy('reviewTitle')}</b><br>${copy(perfect ? 'reviewPerfect' : 'reviewNeeds')}</div><div class="repeatActions"><button class="secondary" data-action="restart">↻ ${copy('replay')}</button>${nextActions}</div></div>`;
     }
 
     function currentScreenAllowed(screen) {
@@ -315,6 +351,16 @@
       global.location.href = `nikigo-app.html?lang=${language}#dashboard`;
     }
 
+    function goNextLesson() {
+      const next = nextCourse();
+      if (!next) {
+        exitLesson();
+        return;
+      }
+      saveProfile();
+      global.location.href = `${next.id}.html?lang=${language}`;
+    }
+
     function restart() {
       index = 0;
       selfCheck = null;
@@ -337,8 +383,10 @@
       if (action === 'next' && index < screens.length - 1) { index += 1; recordProgress(); render(); global.scrollTo(0, 0); }
       if (action === 'previous') { if (index === 0) exitLesson(); else { index -= 1; render(); global.scrollTo(0, 0); } }
       if (action === 'exit') exitLesson();
+      if (action === 'next-lesson') goNextLesson();
       if (action === 'restart') restart();
       if (action === 'speak') speak(button.dataset.value);
+      if (action === 'repeat-audio') speak(config.repeat.audio);
       if (action === 'phrase') { phraseHeard = true; speak(config.phrase.audio); render(); }
       if (action === 'hear') {
         const items = button.dataset.kind === 'words' ? config.words : config[button.dataset.kind];

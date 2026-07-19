@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Nikigo · 音频审核工具</title>
+  <style>
+    :root{--p:#6d4aff;--ink:#211b3b;--muted:#746e8c;--line:#e7e2f2;--bg:#f8f7fc;--ok:#23845a;--bad:#bd3f52}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Noto Sans KR","Noto Sans SC",system-ui,sans-serif}.wrap{width:min(1500px,100%);margin:auto;padding:28px 22px 80px}.dev{display:inline-block;padding:5px 9px;border-radius:999px;background:#fff0c7;color:#735711;font-size:11px;font-weight:900}.head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:12px 0 22px}.head h1{font-size:clamp(28px,5vw,48px);margin:0 0 8px}.head p{margin:0;color:var(--muted);line-height:1.6}.filters{display:flex;gap:9px;flex-wrap:wrap}.filters select{min-height:44px;border:1px solid var(--line);border-radius:12px;background:#fff;padding:8px 30px 8px 10px}.summary{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:15px}.summary span{padding:9px 12px;border-radius:12px;background:#fff;border:1px solid var(--line);font-size:12px;font-weight:800}.tableWrap{overflow:auto;background:#fff;border:1px solid var(--line);border-radius:20px}table{border-collapse:collapse;width:100%;min-width:1320px}th,td{padding:13px 12px;border-bottom:1px solid #eeeaf4;text-align:left;vertical-align:top;font-size:12px;line-height:1.45}th{position:sticky;top:0;background:#f2eff9;color:#595171;z-index:2}td strong.korean{font-size:20px}.path{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#5e5578}.status{font-weight:900}.status.pending{color:#9a6d00}.status.approved{color:var(--ok)}.status.rejected{color:var(--bad)}.play{border:0;border-radius:11px;background:var(--p);color:#fff;min-width:44px;min-height:44px;cursor:pointer}.review{display:flex;gap:5px}.review button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 8px;cursor:pointer;font-size:11px}.review button.on{border-color:var(--p);background:#f0ebff;color:var(--p);font-weight:900}.note{margin-top:15px;padding:14px 16px;border-radius:15px;background:#fff8dd;color:#735711;line-height:1.55;font-size:12px}@media(max-width:760px){.wrap{padding:18px 12px 60px}.head{display:block}.filters{margin-top:15px}.tableWrap{border-radius:15px}th,td{padding:11px 9px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <span class="dev">仅供开发审核 · 不在正式导航中</span>
+    <div class="head"><div><h1>Nikigo 音频审核</h1><p>逐条核对页面文字、TTS 输入、预期读音、文件和人工审核状态。</p></div><div class="filters"><select id="lessonFilter"><option value="all">全部课程</option></select><select id="typeFilter"><option value="all">全部发音类型</option></select><select id="statusFilter"><option value="all">全部状态</option><option value="pending">待审核</option><option value="approved">正确</option><option value="rejected">错误</option></select><select id="rate"><option value="0.8">0.8×</option><option value="1" selected>1.0×</option><option value="1.2">1.2×</option></select></div></div>
+    <div class="summary" id="summary"></div>
+    <div class="tableWrap"><table><thead><tr><th>课程</th><th>页面/教学目标</th><th>页面文字</th><th>TTS 输入</th><th>预期读音/规则</th><th>类型</th><th>文件</th><th>来源</th><th>播放</th><th>审核状态</th><th>本机试听标记</th></tr></thead><tbody id="rows"></tbody></table></div>
+    <p class="note">“正确/错误”按钮只保存在本浏览器的开发审核记录中，不会自动把 manifest 改成 approved。正式批准仍需由开发者核对并记录韩语母语者结论。播放失败时会使用设备的 ko-KR 系统语音。</p>
+  </main>
+  <script src="audio-catalog.js"></script>
+  <script>
+    const storageKey='nikigoAudioAuditReviewsV1';
+    const localReviews=JSON.parse(localStorage.getItem(storageKey)||'{}');
+    const entries=Object.entries(NikigoAudio.lessons).flatMap(([lessonId,lesson])=>lesson.items.map(item=>({...item,lessonId,lessonTitle:lesson.title,path:`audio/${lessonId}/${item.file}`})));
+    const lessonFilter=document.getElementById('lessonFilter'),typeFilter=document.getElementById('typeFilter'),statusFilter=document.getElementById('statusFilter'),rate=document.getElementById('rate');
+    Object.entries(NikigoAudio.lessons).forEach(([id,lesson])=>lessonFilter.add(new Option(`${id} · ${lesson.title}`,id)));
+    [...new Set(entries.map(item=>item.pronunciationType))].forEach(type=>typeFilter.add(new Option(type,type)));
+    const effectiveStatus=item=>localReviews[`${item.lessonId}:${item.id}`]||item.reviewStatus;
+    function play(item){
+      const audio=new Audio(item.path);audio.playbackRate=Number(rate.value);audio.preservesPitch=true;audio.mozPreservesPitch=true;audio.webkitPreservesPitch=true;
+      audio.play().catch(()=>{if(!('speechSynthesis'in window))return;const utterance=new SpeechSynthesisUtterance(item.speechText);utterance.lang='ko-KR';utterance.rate=.78*Number(rate.value);utterance.pitch=1;const voices=speechSynthesis.getVoices().filter(voice=>/^ko(?:-|_|$)/i.test(voice.lang||''));utterance.voice=voices.find(voice=>/Yuna|SunHi|Heami|Sora|Jimin|Seoyeon|Kyuri|Female|여성/i.test(voice.name||''))||voices[0]||null;speechSynthesis.cancel();speechSynthesis.speak(utterance)});
+    }
+    function mark(item,status){const key=`${item.lessonId}:${item.id}`;if(status==='pending')delete localReviews[key];else localReviews[key]=status;localStorage.setItem(storageKey,JSON.stringify(localReviews));render()}
+    function render(){
+      const filtered=entries.filter(item=>(lessonFilter.value==='all'||item.lessonId===lessonFilter.value)&&(typeFilter.value==='all'||item.pronunciationType===typeFilter.value)&&(statusFilter.value==='all'||effectiveStatus(item)===statusFilter.value));
+      const counts={pending:0,approved:0,rejected:0};entries.forEach(item=>counts[effectiveStatus(item)]++);document.getElementById('summary').innerHTML=`<span>活动音频 ${entries.length}</span><span>待审核 ${counts.pending}</span><span>本机标记正确 ${counts.approved}</span><span>本机标记错误 ${counts.rejected}</span><span>当前显示 ${filtered.length}</span>`;
+      document.getElementById('rows').innerHTML=filtered.map(item=>{const status=effectiveStatus(item);return `<tr><td><b>${item.lessonId}</b><br>${item.lessonTitle}</td><td>${item.screen}<br><small>${item.teachingGoal}</small></td><td><strong class="korean">${item.displayText}</strong></td><td><strong class="korean">${item.speechText}</strong></td><td><strong class="korean">${item.expectedPronunciation}</strong><br><small>${item.pronunciationRule||'—'}</small></td><td>${item.pronunciationType}<br><small>${item.type}</small></td><td class="path">${item.path}</td><td>${item.voiceSource}</td><td><button class="play" data-play="${item.lessonId}:${item.id}" aria-label="播放 ${item.speechText}">▶</button></td><td><span class="status ${status}">${status}</span></td><td><div class="review"><button data-mark="approved" data-key="${item.lessonId}:${item.id}" class="${status==='approved'?'on':''}">正确</button><button data-mark="rejected" data-key="${item.lessonId}:${item.id}" class="${status==='rejected'?'on':''}">错误</button><button data-mark="pending" data-key="${item.lessonId}:${item.id}" class="${status==='pending'?'on':''}">待审</button></div></td></tr>`}).join('');
+    }
+    document.addEventListener('click',event=>{const playButton=event.target.closest('[data-play]');if(playButton){const [lessonId,id]=playButton.dataset.play.split(':');play(entries.find(item=>item.lessonId===lessonId&&item.id===id));return}const markButton=event.target.closest('[data-mark]');if(markButton){const [lessonId,id]=markButton.dataset.key.split(':');mark(entries.find(item=>item.lessonId===lessonId&&item.id===id),markButton.dataset.mark)}});
+    [lessonFilter,typeFilter,statusFilter].forEach(control=>control.addEventListener('change',render));render();
+  </script>
+</body>
+</html>

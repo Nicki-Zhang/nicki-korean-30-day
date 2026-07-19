@@ -3,7 +3,10 @@ name: Generate lesson audio
 on:
   push:
     paths:
-      - audio/lesson-04/manifest.json
+      - audio/lesson-*/manifest.json
+      - audio-catalog.js
+      - scripts/generate-lesson-audio.mjs
+      - scripts/validate-audio.mjs
   workflow_dispatch:
     inputs:
       lesson:
@@ -23,23 +26,42 @@ permissions:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    env:
-      LESSON_AUDIO_DIR: ${{ github.event_name == 'workflow_dispatch' && format('audio/{0}', inputs.lesson) || 'audio/lesson-04' }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
         with:
           node-version: 24
           package-manager-cache: false
+      - name: Validate audio schema and lesson mappings before generation
+        run: node scripts/validate-audio.mjs --allow-missing-openai
+      - name: Select manifests that require generation
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          SELECTED_LESSON: ${{ inputs.lesson }}
+          BEFORE_SHA: ${{ github.event.before }}
+          CURRENT_SHA: ${{ github.sha }}
+        run: |
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "audio/$SELECTED_LESSON/manifest.json" > /tmp/nikigo-audio-manifests
+          else
+            git diff --name-only "$BEFORE_SHA" "$CURRENT_SHA" | grep -E '^audio/lesson-[0-9]+/manifest\.json$' > /tmp/nikigo-audio-manifests || true
+          fi
+          echo "Manifests selected:"
+          sed 's/^/- /' /tmp/nikigo-audio-manifests
       - name: Generate Korean female audio
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: node scripts/generate-lesson-audio.mjs "$LESSON_AUDIO_DIR/manifest.json"
+        run: |
+          while IFS= read -r manifest; do
+            [ -n "$manifest" ] && node scripts/generate-lesson-audio.mjs "$manifest"
+          done < /tmp/nikigo-audio-manifests
+      - name: Validate generated files before publication
+        run: npm test
       - name: Commit generated MP3 files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "$LESSON_AUDIO_DIR"/*.mp3 "$LESSON_AUDIO_DIR/.generation-cache.json"
+          git add audio
           if git diff --cached --quiet; then
             echo "No audio changes"
           else

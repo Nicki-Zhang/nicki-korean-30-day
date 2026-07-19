@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node scripts/test-app-state.mjs && node scripts/validate-lessons.mjs && node scripts/validate-app-shell.mjs",
+    "test": "node scripts/test-app-state.mjs && node scripts/validate-lessons.mjs && node scripts/validate-audio.mjs && node scripts/validate-app-shell.mjs",
+    "audio:audit": "node scripts/validate-audio.mjs && node scripts/generate-audio-audit.mjs",
+    "audio:system": "node scripts/generate-system-audio.mjs",
     "telegram:setup": "node scripts/configure-telegram.mjs",
     "telegram:test": "node scripts/telegram-notify.mjs \"🧪 Nikigo Telegram 测试通知发送成功。\""
   }

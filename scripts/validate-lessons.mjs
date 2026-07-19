@@ -1,6 +1,8 @@
 import fs from 'node:fs';
 import vm from 'node:vm';
 
+await import(new URL('../audio-catalog.js', import.meta.url));
+
 const languages = ['zh', 'en', 'vi', 'ja'];
 const errors = [];
 const reviewWindow = {};
@@ -15,6 +17,7 @@ function loadInlineConfig(file) {
     .filter(Boolean);
   let config;
   vm.runInNewContext(scripts.at(-1), {
+    window: { NikigoAudio: globalThis.NikigoAudio },
     NikigoLesson: { mount: value => { config = value; } }
   }, { filename: file });
   if (!config) throw new Error(`${file} did not mount a lesson config.`);
@@ -54,6 +57,7 @@ for (const [index, item] of (catalog || []).entries()) {
   try {
     const { config, html } = loadInlineConfig(file);
     if (config.id !== item.id) errors.push(`${file} mounts ${config.id} instead of ${item.id}.`);
+    if (!html.includes('course-catalog.js')) errors.push(`${file} does not load course-catalog.js.`);
     if (!html.includes('lesson-engine.js')) errors.push(`${file} does not use lesson-engine.js.`);
     if (!html.includes('lesson-player.css')) errors.push(`${file} does not use lesson-player.css.`);
     const englishKeys = new Set(Object.keys(config.copy.en || {}));

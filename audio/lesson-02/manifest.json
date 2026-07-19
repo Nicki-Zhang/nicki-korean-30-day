@@ -1,24 +1,279 @@
 {
+  "schemaVersion": 2,
   "lesson": "lesson-02",
-  "provider": "openai",
-  "model": "gpt-4o-mini-tts",
-  "voice": "marin",
-  "format": "mp3",
-  "instructions": "Speak with a clear, warm, feminine-presenting Korean teaching voice. Use natural standard Seoul Korean at a slow but not exaggerated pace. Pronounce the input as one complete Korean utterance, follow standard Korean phonological rules, and do not read punctuation aloud.",
+  "reviewPolicy": "New or regenerated audio remains pending until a Korean native-speaker review is recorded.",
+  "generationDefaults": {
+    "provider": "openai",
+    "model": "gpt-4o-mini-tts",
+    "voice": "marin",
+    "format": "mp3",
+    "instructions": "Speak only the supplied Korean speechText exactly once in natural standard Seoul Korean. Do not spell Hangul, translate, explain, read punctuation, or add a trailing vowel."
+  },
+  "rightsFields": {
+    "voiceTalent": null,
+    "consentRecord": null,
+    "commercialUseRecord": null
+  },
   "items": [
-    { "id": "eu", "text": "으", "file": "eu.mp3" },
-    { "id": "i", "text": "이", "file": "i.mp3" },
-    { "id": "ae", "text": "애", "file": "ae.mp3" },
-    { "id": "e", "text": "에", "file": "e.mp3" },
-    { "id": "da", "text": "다", "file": "da.mp3" },
-    { "id": "di", "text": "디", "file": "di.mp3" },
-    { "id": "ra", "text": "라", "file": "ra.mp3" },
-    { "id": "ri", "text": "리", "file": "ri.mp3" },
-    { "id": "ma", "text": "마", "file": "ma.mp3" },
-    { "id": "mi", "text": "미", "file": "mi.mp3" },
-    { "id": "namu", "text": "나무", "file": "namu.mp3" },
-    { "id": "dari", "text": "다리", "file": "dari.mp3" },
-    { "id": "meori", "text": "머리", "file": "meori.mp3" },
-    { "id": "words", "text": "나무. 다리. 머리.", "file": "words.mp3" }
+    {
+      "id": "eu",
+      "displayText": "ㅡ（发音载体：으）",
+      "speechText": "으",
+      "expectedPronunciation": "으",
+      "pronunciationRule": "",
+      "type": "vowel",
+      "pronunciationType": "单个元音",
+      "screen": "元音卡片、练习 1",
+      "teachingGoal": "用完整音节教学元音 ㅡ",
+      "file": "eu.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "i",
+      "displayText": "ㅣ（发音载体：이）",
+      "speechText": "이",
+      "expectedPronunciation": "이",
+      "pronunciationRule": "",
+      "type": "vowel",
+      "pronunciationType": "单个元音",
+      "screen": "元音卡片、挑战 1",
+      "teachingGoal": "用完整音节教学元音 ㅣ",
+      "file": "i.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "ae",
+      "displayText": "ㅐ（发音载体：애）",
+      "speechText": "애",
+      "expectedPronunciation": "애",
+      "pronunciationRule": "",
+      "type": "vowel",
+      "pronunciationType": "单个元音",
+      "screen": "元音卡片",
+      "teachingGoal": "识别 ㅐ 的字形与现代首尔音",
+      "file": "ae.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "e",
+      "displayText": "ㅔ（发音载体：에）",
+      "speechText": "에",
+      "expectedPronunciation": "에",
+      "pronunciationRule": "",
+      "type": "vowel",
+      "pronunciationType": "单个元音",
+      "screen": "元音卡片",
+      "teachingGoal": "识别 ㅔ 的字形与现代首尔音",
+      "file": "e.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "da",
+      "displayText": "ㄷ（示例：다）",
+      "speechText": "다",
+      "expectedPronunciation": "다",
+      "pronunciationRule": "",
+      "type": "initial-example",
+      "pronunciationType": "初声辅音",
+      "screen": "辅音卡片、拼音节",
+      "teachingGoal": "在 다 中听 ㄷ 初声",
+      "file": "da.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "di",
+      "displayText": "디",
+      "speechText": "디",
+      "expectedPronunciation": "디",
+      "pronunciationRule": "",
+      "type": "syllable",
+      "pronunciationType": "完整音节",
+      "screen": "拼音节",
+      "teachingGoal": "验证 ㄷ + ㅣ",
+      "file": "di.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "ra",
+      "displayText": "ㄹ（示例：라）",
+      "speechText": "라",
+      "expectedPronunciation": "라",
+      "pronunciationRule": "",
+      "type": "initial-example",
+      "pronunciationType": "初声辅音",
+      "screen": "辅音卡片、拼音节",
+      "teachingGoal": "在 라 中听 ㄹ 初声",
+      "file": "ra.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "ri",
+      "displayText": "리",
+      "speechText": "리",
+      "expectedPronunciation": "리",
+      "pronunciationRule": "",
+      "type": "syllable",
+      "pronunciationType": "完整音节",
+      "screen": "拼音节",
+      "teachingGoal": "验证 ㄹ + ㅣ",
+      "file": "ri.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "ma",
+      "displayText": "ㅁ（示例：마）",
+      "speechText": "마",
+      "expectedPronunciation": "마",
+      "pronunciationRule": "",
+      "type": "initial-example",
+      "pronunciationType": "初声辅音",
+      "screen": "辅音卡片、拼音节",
+      "teachingGoal": "在 마 中听 ㅁ 初声",
+      "file": "ma.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "mi",
+      "displayText": "미",
+      "speechText": "미",
+      "expectedPronunciation": "미",
+      "pronunciationRule": "",
+      "type": "syllable",
+      "pronunciationType": "完整音节",
+      "screen": "拼音节",
+      "teachingGoal": "验证 ㅁ + ㅣ",
+      "file": "mi.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "namu",
+      "displayText": "나무",
+      "speechText": "나무",
+      "expectedPronunciation": "나무",
+      "pronunciationRule": "",
+      "type": "word",
+      "pronunciationType": "单词",
+      "screen": "真实词汇、练习 3、跟读",
+      "teachingGoal": "读出真实词汇“树”",
+      "file": "namu.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "dari",
+      "displayText": "다리",
+      "speechText": "다리",
+      "expectedPronunciation": "다리",
+      "pronunciationRule": "",
+      "type": "word",
+      "pronunciationType": "单词",
+      "screen": "真实词汇、跟读",
+      "teachingGoal": "读出真实词汇“腿/桥”",
+      "file": "dari.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "meori",
+      "displayText": "머리",
+      "speechText": "머리",
+      "expectedPronunciation": "머리",
+      "pronunciationRule": "",
+      "type": "word",
+      "pronunciationType": "单词",
+      "screen": "真实词汇、挑战 4、跟读",
+      "teachingGoal": "读出真实词汇“头”",
+      "file": "meori.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    }
   ]
 }

@@ -20,6 +20,8 @@
   <main class="stage"><article class="card" id="content"></article></main>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="app-state.js"></script>
+  <script src="course-catalog.js"></script>
+  <script src="audio-catalog.js"></script>
   <script src="lesson-engine.js"></script>
   <script>
     const COPY={
@@ -34,14 +36,13 @@
     const syllables={'ㄷㅏ':'다','ㄷㅣ':'디','ㄹㅏ':'라','ㄹㅣ':'리','ㅁㅏ':'마','ㅁㅣ':'미'};
     const practice=[{prompt:'practice1',audio:'으',options:['ㅣ','ㅡ','ㅐ','ㅔ'],answer:1},{prompt:'practice2',options:['마','리','미','디'],answer:2},{prompt:'practice3',audio:'나무',options:['다리','머리','나무','나리'],answer:2}];
     const quiz=[{prompt:'q1',audio:'이',options:['ㅡ','ㅐ','ㅣ','ㅔ'],answer:2},{prompt:'q2',options:['디','다','라','마'],answer:1},{prompt:'q3',options:['머리','나무','다리','미리'],answer:1},{prompt:'q4',audio:'머리',options:['나무','다리','머리','마리'],answer:2},{prompt:'q5',options:['ㅔ','ㅣ','ㅐ','ㅡ'],answer:2}];
-    const AUDIO_FILES=Object.freeze({'으':'audio/lesson-02/eu.mp3','이':'audio/lesson-02/i.mp3','애':'audio/lesson-02/ae.mp3','에':'audio/lesson-02/e.mp3','다':'audio/lesson-02/da.mp3','디':'audio/lesson-02/di.mp3','라':'audio/lesson-02/ra.mp3','리':'audio/lesson-02/ri.mp3','마':'audio/lesson-02/ma.mp3','미':'audio/lesson-02/mi.mp3','나무':'audio/lesson-02/namu.mp3','다리':'audio/lesson-02/dari.mp3','머리':'audio/lesson-02/meori.mp3','나무, 다리, 머리':'audio/lesson-02/words.mp3'});
+    const lessonAudio=window.NikigoAudio.forLesson('lesson-02');
     const FEMALE_KOREAN_VOICE=/Yuna|SunHi|Heami|Sora|Jimin|Seoyeon|Kyuri|Female|여성|한국.*여/i;
-    const PRONUNCIATION_TEXT=Object.freeze({'으':'으.','이':'이.','애':'애.','에':'에.','다':'다.','디':'디.','라':'라.','리':'리.','마':'마.','미':'미.','나무':'나무.','다리':'다리.','머리':'머리.','나무, 다리, 머리':'나무. 다리. 머리.'});
     NikigoLesson.mount({
-      id:'lesson-02',order:2,xp:50,copy:COPY,vowels,consonants,words,syllables,practice,quiz,audioFiles:AUDIO_FILES,pronunciationText:PRONUNCIATION_TEXT,
+      id:'lesson-02',order:2,xp:50,copy:COPY,vowels,consonants,words,syllables,practice,quiz,audioFiles:lessonAudio.audioFiles,pronunciationText:lessonAudio.pronunciationText,
       vowelPromptKey:'tapVowels',consonantPromptKey:'tapConsonants',
       builder:{consonants:['ㄷ','ㄹ','ㅁ'],vowels:['ㅏ','ㅣ'],required:['다','리','미'],initialConsonant:'ㄷ',initialVowel:'ㅏ'},
-      repeat:{display:'나무 · 다리 · 머리',audio:'나무, 다리, 머리',reviewId:'lesson02:shadowing'},baseReviewIds:['lesson02:words','lesson02:ae-e-spelling'],reviewPrefix:'lesson02',goalIcons:['👂','🧩','📖'],abilityMinimums:[34,16,18,0,10,0]
+      repeat:{display:'나무 · 다리 · 머리',audio:['나무','다리','머리'],reviewId:'lesson02:shadowing'},baseReviewIds:['lesson02:words','lesson02:ae-e-spelling'],reviewPrefix:'lesson02',goalIcons:['👂','🧩','📖'],abilityMinimums:[34,16,18,0,10,0]
     });
   </script>
 </body>

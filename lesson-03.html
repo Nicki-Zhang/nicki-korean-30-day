@@ -20,6 +20,8 @@
   <main class="stage"><article class="card" id="content"></article></main>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="app-state.js"></script>
+  <script src="course-catalog.js"></script>
+  <script src="audio-catalog.js"></script>
   <script src="lesson-engine.js"></script>
   <script>
     const COPY={
@@ -34,10 +36,9 @@
     const syllables={'ㅂㅏ':'바','ㅂㅕ':'벼','ㅅㅏ':'사','ㅅㅕ':'셔','ㅇㅏ':'아','ㅇㅕ':'여'};
     const practice=[{prompt:'practice1',audio:'여',options:['야','여','사','아'],answer:1},{prompt:'practice2',options:['바','사','셔','아'],answer:1},{prompt:'practice3',options:['바다','안녕','사람','나무'],answer:2}];
     const quiz=[{prompt:'q1',audio:'야',options:['여','야','아','사'],answer:1},{prompt:'q2',options:['사','바','벼','아'],answer:1},{prompt:'q3',options:['사람','나무','바다','머리'],answer:2},{prompt:'q4',audio:'안녕하세요',options:['안녕','안녕하세요','사람','바다'],answer:1},{prompt:'q5',options:['∅ (silent)','m','s','b'],answer:0}];
-    const audioFiles=Object.freeze({'야':'audio/lesson-03/ya.mp3','여':'audio/lesson-03/yeo.mp3','바':'audio/lesson-03/ba.mp3','벼':'audio/lesson-03/byeo.mp3','사':'audio/lesson-03/sa.mp3','셔':'audio/lesson-03/syeo.mp3','아':'audio/lesson-03/a.mp3','바다':'audio/lesson-03/bada.mp3','사람':'audio/lesson-03/saram.mp3','안녕':'audio/lesson-03/annyeong.mp3','안녕하세요':'audio/lesson-03/annyeonghaseyo.mp3'});
-    const pronunciationText=Object.freeze({'야':'야.','여':'여.','바':'바.','벼':'벼.','사':'사.','셔':'셔.','아':'아.','바다':'바다.','사람':'사람.','안녕':'안녕.','안녕하세요':'안녕하세요.'});
+    const lessonAudio=window.NikigoAudio.forLesson('lesson-03');
     NikigoLesson.mount({
-      id:'lesson-03',order:3,xp:50,copy:COPY,vowels,consonants,words,syllables,practice,quiz,audioFiles,pronunciationText,
+      id:'lesson-03',order:3,xp:50,copy:COPY,vowels,consonants,words,syllables,practice,quiz,audioFiles:lessonAudio.audioFiles,pronunciationText:lessonAudio.pronunciationText,
       vowelPromptKey:'tapVowels',consonantPromptKey:'tapConsonants',
       builder:{consonants:['ㅂ','ㅅ','ㅇ'],vowels:['ㅏ','ㅕ'],required:['바','사','여'],initialConsonant:'ㅂ',initialVowel:'ㅏ'},
       phrase:{korean:'안녕하세요',romanization:'annyeonghaseyo',translationKey:'formalHello',audio:'안녕하세요'},

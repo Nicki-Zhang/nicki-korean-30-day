@@ -1,17 +1,259 @@
 {
+  "schemaVersion": 2,
   "lesson": "lesson-01",
-  "provider": "openai",
-  "model": "gpt-4o-mini-tts",
-  "voice": "marin",
-  "format": "mp3",
-  "instructions": "Speak with a clear, warm, feminine-presenting Korean teaching voice. Use natural standard Seoul Korean at a slow but not exaggerated pace. Pronounce the input as one complete Korean utterance, follow standard Korean phonological rules, and do not read punctuation aloud.",
+  "reviewPolicy": "New or regenerated audio remains pending until a Korean native-speaker review is recorded.",
+  "generationDefaults": {
+    "provider": "openai",
+    "model": "gpt-4o-mini-tts",
+    "voice": "marin",
+    "format": "mp3",
+    "instructions": "Speak only the supplied Korean speechText exactly once in natural standard Seoul Korean. Do not spell Hangul, translate, explain, read punctuation, or add a trailing vowel."
+  },
+  "rightsFields": {
+    "voiceTalent": null,
+    "consentRecord": null,
+    "commercialUseRecord": null
+  },
   "items": [
-    { "id": "a", "text": "아", "file": "a.mp3" },
-    { "id": "eo", "text": "어", "file": "eo.mp3" },
-    { "id": "o", "text": "오", "file": "o.mp3" },
-    { "id": "u", "text": "우", "file": "u.mp3" },
-    { "id": "ga", "text": "가", "file": "ga.mp3" },
-    { "id": "na", "text": "나", "file": "na.mp3" },
-    { "id": "ga-na", "text": "가. 나.", "file": "ga-na.mp3" }
+    {
+      "id": "a",
+      "displayText": "ㅏ（发音载体：아）",
+      "speechText": "아",
+      "expectedPronunciation": "아",
+      "pronunciationRule": "",
+      "type": "vowel",
+      "pronunciationType": "单个元音",
+      "screen": "元音卡片、练习 1",
+      "teachingGoal": "用无声初声 ㅇ 承载元音 ㅏ",
+      "file": "a.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "eo",
+      "displayText": "ㅓ（发音载体：어）",
+      "speechText": "어",
+      "expectedPronunciation": "어",
+      "pronunciationRule": "",
+      "type": "vowel",
+      "pronunciationType": "单个元音",
+      "screen": "元音卡片、练习 2",
+      "teachingGoal": "用完整音节教学元音 ㅓ",
+      "file": "eo.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "o",
+      "displayText": "ㅗ（发音载体：오）",
+      "speechText": "오",
+      "expectedPronunciation": "오",
+      "pronunciationRule": "",
+      "type": "vowel",
+      "pronunciationType": "单个元音",
+      "screen": "元音卡片、挑战 1",
+      "teachingGoal": "用完整音节教学元音 ㅗ",
+      "file": "o.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "u",
+      "displayText": "ㅜ（发音载体：우）",
+      "speechText": "우",
+      "expectedPronunciation": "우",
+      "pronunciationRule": "",
+      "type": "vowel",
+      "pronunciationType": "单个元音",
+      "screen": "元音卡片、挑战 2",
+      "teachingGoal": "用完整音节教学元音 ㅜ",
+      "file": "u.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "ga",
+      "displayText": "ㄱ（示例：가）",
+      "speechText": "가",
+      "expectedPronunciation": "가",
+      "pronunciationRule": "",
+      "type": "initial-example",
+      "pronunciationType": "初声辅音",
+      "screen": "辅音卡片、拼音节、挑战 5",
+      "teachingGoal": "在完整音节 가 中听 ㄱ 的初声",
+      "file": "ga.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "na",
+      "displayText": "ㄴ（示例：나）",
+      "speechText": "나",
+      "expectedPronunciation": "나",
+      "pronunciationRule": "",
+      "type": "initial-example",
+      "pronunciationType": "初声辅音",
+      "screen": "辅音卡片、拼音节、跟读",
+      "teachingGoal": "在完整音节 나 中听 ㄴ 的初声",
+      "file": "na.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "geo",
+      "displayText": "거",
+      "speechText": "거",
+      "expectedPronunciation": "거",
+      "pronunciationRule": "",
+      "type": "syllable",
+      "pronunciationType": "完整音节",
+      "screen": "拼音节",
+      "teachingGoal": "验证 ㄱ + ㅓ 的拼读",
+      "file": "geo-v2.wav",
+      "voiceSource": "apple-system-ko-KR-yuna",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "go",
+      "displayText": "고",
+      "speechText": "고",
+      "expectedPronunciation": "고",
+      "pronunciationRule": "",
+      "type": "syllable",
+      "pronunciationType": "完整音节",
+      "screen": "拼音节",
+      "teachingGoal": "验证 ㄱ + ㅗ 的拼读",
+      "file": "go-v2.wav",
+      "voiceSource": "apple-system-ko-KR-yuna",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "gu",
+      "displayText": "구",
+      "speechText": "구",
+      "expectedPronunciation": "구",
+      "pronunciationRule": "",
+      "type": "syllable",
+      "pronunciationType": "完整音节",
+      "screen": "拼音节",
+      "teachingGoal": "验证 ㄱ + ㅜ 的拼读",
+      "file": "gu-v2.wav",
+      "voiceSource": "apple-system-ko-KR-yuna",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "neo",
+      "displayText": "너",
+      "speechText": "너",
+      "expectedPronunciation": "너",
+      "pronunciationRule": "",
+      "type": "syllable",
+      "pronunciationType": "完整音节",
+      "screen": "拼音节",
+      "teachingGoal": "验证 ㄴ + ㅓ 的拼读",
+      "file": "neo-v2.wav",
+      "voiceSource": "apple-system-ko-KR-yuna",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "no",
+      "displayText": "노",
+      "speechText": "노",
+      "expectedPronunciation": "노",
+      "pronunciationRule": "",
+      "type": "syllable",
+      "pronunciationType": "完整音节",
+      "screen": "拼音节",
+      "teachingGoal": "验证 ㄴ + ㅗ 的拼读",
+      "file": "no-v2.wav",
+      "voiceSource": "apple-system-ko-KR-yuna",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "nu",
+      "displayText": "누",
+      "speechText": "누",
+      "expectedPronunciation": "누",
+      "pronunciationRule": "",
+      "type": "syllable",
+      "pronunciationType": "完整音节",
+      "screen": "拼音节",
+      "teachingGoal": "验证 ㄴ + ㅜ 的拼读",
+      "file": "nu-v2.wav",
+      "voiceSource": "apple-system-ko-KR-yuna",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    }
   ]
 }

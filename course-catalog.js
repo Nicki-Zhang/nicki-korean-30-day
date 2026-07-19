@@ -93,8 +93,6 @@
   window.NIKIGO_COURSES = Object.freeze(lessons);
   window.NIKIGO_NEXT_LESSON = function (completedLessons) {
     const completed = new Set(completedLessons || []);
-    return lessons.find(lesson =>
-      !completed.has(lesson.id) && lesson.prerequisites.every(id => completed.has(id))
-    ) || lessons[lessons.length - 1];
+    return lessons.find(lesson => !completed.has(lesson.id)) || lessons[lessons.length - 1];
   };
 })();

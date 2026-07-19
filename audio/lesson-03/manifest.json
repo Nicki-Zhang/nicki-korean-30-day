@@ -1,21 +1,239 @@
 {
+  "schemaVersion": 2,
   "lesson": "lesson-03",
-  "provider": "openai",
-  "model": "gpt-4o-mini-tts",
-  "voice": "marin",
-  "format": "mp3",
-  "instructions": "Speak with a clear, warm, feminine-presenting Korean teaching voice. Use natural standard Seoul Korean at a slow but not exaggerated pace. Pronounce each input as one complete Korean utterance, applying standard Korean phonological rules and natural phrase intonation. Do not spell out Hangul blocks and do not read punctuation aloud.",
+  "reviewPolicy": "New or regenerated audio remains pending until a Korean native-speaker review is recorded.",
+  "generationDefaults": {
+    "provider": "openai",
+    "model": "gpt-4o-mini-tts",
+    "voice": "marin",
+    "format": "mp3",
+    "instructions": "Speak only the supplied Korean speechText exactly once in natural standard Seoul Korean. Do not spell Hangul, translate, explain, read punctuation, or add a trailing vowel."
+  },
+  "rightsFields": {
+    "voiceTalent": null,
+    "consentRecord": null,
+    "commercialUseRecord": null
+  },
   "items": [
-    { "id": "ya", "text": "야", "file": "ya.mp3" },
-    { "id": "yeo", "text": "여", "file": "yeo.mp3" },
-    { "id": "ba", "text": "바", "file": "ba.mp3" },
-    { "id": "byeo", "text": "벼", "file": "byeo.mp3" },
-    { "id": "sa", "text": "사", "file": "sa.mp3" },
-    { "id": "syeo", "text": "셔", "file": "syeo.mp3" },
-    { "id": "a", "text": "아", "file": "a.mp3" },
-    { "id": "bada", "text": "바다", "file": "bada.mp3" },
-    { "id": "saram", "text": "사람", "file": "saram.mp3" },
-    { "id": "annyeong", "text": "안녕", "file": "annyeong.mp3" },
-    { "id": "annyeonghaseyo", "text": "안녕하세요", "file": "annyeonghaseyo.mp3" }
+    {
+      "id": "ya",
+      "displayText": "ㅑ（发音载体：야）",
+      "speechText": "야",
+      "expectedPronunciation": "야",
+      "pronunciationRule": "",
+      "type": "vowel",
+      "pronunciationType": "单个元音",
+      "screen": "元音卡片、挑战 1",
+      "teachingGoal": "用完整音节教学元音 ㅑ",
+      "file": "ya.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "yeo",
+      "displayText": "ㅕ（发音载体：여）",
+      "speechText": "여",
+      "expectedPronunciation": "여",
+      "pronunciationRule": "",
+      "type": "vowel",
+      "pronunciationType": "单个元音",
+      "screen": "元音卡片、练习 1、拼音节",
+      "teachingGoal": "用完整音节教学元音 ㅕ",
+      "file": "yeo.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "ba",
+      "displayText": "ㅂ（示例：바）",
+      "speechText": "바",
+      "expectedPronunciation": "바",
+      "pronunciationRule": "",
+      "type": "initial-example",
+      "pronunciationType": "初声辅音",
+      "screen": "辅音卡片、拼音节",
+      "teachingGoal": "在 바 中听 ㅂ 初声",
+      "file": "ba.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "byeo",
+      "displayText": "벼",
+      "speechText": "벼",
+      "expectedPronunciation": "벼",
+      "pronunciationRule": "",
+      "type": "syllable",
+      "pronunciationType": "完整音节",
+      "screen": "拼音节",
+      "teachingGoal": "验证 ㅂ + ㅕ",
+      "file": "byeo.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "sa",
+      "displayText": "ㅅ（示例：사）",
+      "speechText": "사",
+      "expectedPronunciation": "사",
+      "pronunciationRule": "",
+      "type": "initial-example",
+      "pronunciationType": "初声辅音",
+      "screen": "辅音卡片、拼音节",
+      "teachingGoal": "在 사 中听 ㅅ 初声",
+      "file": "sa.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "syeo",
+      "displayText": "셔",
+      "speechText": "셔",
+      "expectedPronunciation": "셔",
+      "pronunciationRule": "",
+      "type": "syllable",
+      "pronunciationType": "完整音节",
+      "screen": "拼音节",
+      "teachingGoal": "验证 ㅅ + ㅕ",
+      "file": "syeo.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "a",
+      "displayText": "ㅇ（初声无声示例：아）",
+      "speechText": "아",
+      "expectedPronunciation": "아",
+      "pronunciationRule": "",
+      "type": "initial-example",
+      "pronunciationType": "初声辅音",
+      "screen": "辅音卡片、拼音节",
+      "teachingGoal": "在 아 中听出初声 ㅇ 不发音",
+      "file": "a.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "bada",
+      "displayText": "바다",
+      "speechText": "바다",
+      "expectedPronunciation": "바다",
+      "pronunciationRule": "",
+      "type": "word",
+      "pronunciationType": "单词",
+      "screen": "真实词汇",
+      "teachingGoal": "读出“海”",
+      "file": "bada.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "saram",
+      "displayText": "사람",
+      "speechText": "사람",
+      "expectedPronunciation": "사람",
+      "pronunciationRule": "",
+      "type": "word",
+      "pronunciationType": "单词",
+      "screen": "真实词汇",
+      "teachingGoal": "读出“人”",
+      "file": "saram.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "annyeong",
+      "displayText": "안녕",
+      "speechText": "안녕",
+      "expectedPronunciation": "안녕",
+      "pronunciationRule": "",
+      "type": "word",
+      "pronunciationType": "单词",
+      "screen": "真实词汇",
+      "teachingGoal": "识别简短问候",
+      "file": "annyeong.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "annyeonghaseyo",
+      "displayText": "안녕하세요",
+      "speechText": "안녕하세요",
+      "expectedPronunciation": "안녕하세요",
+      "pronunciationRule": "",
+      "type": "sentence",
+      "pronunciationType": "完整句子或对话",
+      "screen": "场景短语、跟读、挑战 4",
+      "teachingGoal": "自然说出礼貌问候",
+      "file": "annyeonghaseyo.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    }
   ]
 }

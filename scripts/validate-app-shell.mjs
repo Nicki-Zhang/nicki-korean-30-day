@@ -4,6 +4,7 @@ import vm from 'node:vm';
 
 const index = fs.readFileSync('index.html', 'utf8');
 const app = fs.readFileSync('nikigo-app.html', 'utf8');
+const lessonEngine = fs.readFileSync('lesson-engine.js', 'utf8');
 const manifest = JSON.parse(fs.readFileSync('manifest.webmanifest', 'utf8'));
 const worker = fs.readFileSync('sw.js', 'utf8');
 
@@ -33,6 +34,12 @@ assert.match(app, /onclick="goHome\(\)"/);
 assert.doesNotMatch(app, /class="logo"[^>]+onclick="go\('welcome'\)"/);
 assert.match(app, /function saveProfileName\(\)/);
 assert.match(app, /function updateAvatar\(value\)/);
+assert.match(app, /Every lesson is open/);
+assert.doesNotMatch(app, /lesson\.prerequisites\.every/);
+assert.doesNotMatch(app, />\ud83d\udd12<\/button>/);
+assert.match(lessonEngine, /data-action="next-lesson"/);
+assert.match(lessonEngine, /global\.NIKIGO_COURSES/);
+assert.match(lessonEngine, /function goNextLesson\(\)/);
 
 const ids = [...app.matchAll(/\sid=["']([^"']+)["']/g)].map(match => match[1]);
 const duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);

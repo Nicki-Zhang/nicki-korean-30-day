@@ -1,64 +1,219 @@
 {
+  "schemaVersion": 2,
   "lesson": "lesson-04",
-  "provider": "openai",
-  "model": "gpt-4o-mini-tts",
-  "voice": "marin",
-  "format": "mp3",
-  "instructions": "Speak with a clear, warm, feminine-presenting Korean teaching voice. Use natural standard Seoul Korean at a calm teaching pace. Say only the Korean input exactly once. Keep the final consonant audible through the correct mouth closure, but do not exaggerate it and never add a trailing vowel. Do not spell Hangul, translate, explain, or read punctuation aloud.",
+  "reviewPolicy": "New or regenerated audio remains pending until a Korean native-speaker review is recorded.",
+  "generationDefaults": {
+    "provider": "openai",
+    "model": "gpt-4o-mini-tts",
+    "voice": "marin",
+    "format": "mp3",
+    "instructions": "Speak only the supplied Korean speechText exactly once in natural standard Seoul Korean. Do not spell Hangul, translate, explain, read punctuation, or add a trailing vowel."
+  },
+  "rightsFields": {
+    "voiceTalent": null,
+    "consentRecord": null,
+    "commercialUseRecord": null
+  },
   "items": [
     {
       "id": "san",
-      "text": "산",
-      "file": "san.mp3",
-      "instructions": "Say only the Korean word 산, meaning mountain, exactly once. End cleanly on final ㄴ with the tongue tip at the alveolar ridge. Do not add a vowel after ㄴ."
+      "displayText": "산",
+      "speechText": "산",
+      "expectedPronunciation": "산",
+      "pronunciationRule": "받침 ㄴ",
+      "type": "batchim-example",
+      "pronunciationType": "收音",
+      "screen": "收音卡片、真实词汇",
+      "teachingGoal": "在完整单词中听 ㄴ 收音",
+      "file": "san-v2.wav",
+      "voiceSource": "apple-system-ko-KR-yuna",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
     },
     {
       "id": "mom",
-      "text": "몸",
-      "file": "mom.mp3",
-      "instructions": "Say only the Korean word 몸, meaning body, exactly once. Close both lips fully on final ㅁ and stop there. Do not release into an extra vowel."
+      "displayText": "몸",
+      "speechText": "몸",
+      "expectedPronunciation": "몸",
+      "pronunciationRule": "받침 ㅁ",
+      "type": "batchim-example",
+      "pronunciationType": "收音",
+      "screen": "收音卡片、真实词汇",
+      "teachingGoal": "在完整单词中听 ㅁ 收音",
+      "file": "mom-v2.wav",
+      "voiceSource": "apple-system-ko-KR-yuna",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
     },
     {
       "id": "gong",
-      "text": "공",
-      "file": "gong.mp3",
-      "instructions": "Say only the Korean word 공, meaning ball, exactly once. End on the back nasal final ㅇ, like ng in song, without an added vowel."
+      "displayText": "공",
+      "speechText": "공",
+      "expectedPronunciation": "공",
+      "pronunciationRule": "받침 ㅇ",
+      "type": "batchim-example",
+      "pronunciationType": "收音",
+      "screen": "收音卡片、真实词汇",
+      "teachingGoal": "在完整单词中听 ㅇ 收音",
+      "file": "gong-v2.wav",
+      "voiceSource": "apple-system-ko-KR-yuna",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
     },
     {
       "id": "mul",
-      "text": "물",
-      "file": "mul.mp3",
-      "instructions": "Say only the Korean word 물, meaning water, exactly once. Finish with the Korean final ㄹ, tongue tip touching the roof of the mouth, without an added vowel."
+      "displayText": "물",
+      "speechText": "물",
+      "expectedPronunciation": "물",
+      "pronunciationRule": "받침 ㄹ",
+      "type": "batchim-example",
+      "pronunciationType": "收音",
+      "screen": "收音卡片、真实词汇、挑战 3",
+      "teachingGoal": "在完整单词中听 ㄹ 收音",
+      "file": "mul-v2.wav",
+      "voiceSource": "apple-system-ko-KR-yuna",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    },
+    {
+      "id": "ba",
+      "displayText": "바",
+      "speechText": "바",
+      "expectedPronunciation": "바",
+      "pronunciationRule": "",
+      "type": "syllable",
+      "pronunciationType": "完整音节",
+      "screen": "拼音节",
+      "teachingGoal": "对比无收音的基础音节",
+      "file": "ba-v2.wav",
+      "voiceSource": "apple-system-ko-KR-yuna",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
     },
     {
       "id": "ban",
-      "text": "반",
-      "file": "ban.mp3",
-      "instructions": "Say only the Korean word 반, meaning half, exactly once. Keep ㅂ + ㅏ clear and finish on final ㄴ without a trailing vowel."
+      "displayText": "반",
+      "speechText": "반",
+      "expectedPronunciation": "반",
+      "pronunciationRule": "받침 ㄴ",
+      "type": "batchim-example",
+      "pronunciationType": "收音",
+      "screen": "收音对比、拼音节",
+      "teachingGoal": "对比 바 + ㄴ",
+      "file": "ban-v2.wav",
+      "voiceSource": "apple-system-ko-KR-yuna",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
     },
     {
       "id": "bam",
-      "text": "밤",
-      "file": "bam.mp3",
-      "instructions": "Say only the Korean word 밤, meaning night, exactly once. Keep ㅂ + ㅏ clear and close both lips on final ㅁ without a trailing vowel."
+      "displayText": "밤",
+      "speechText": "밤",
+      "expectedPronunciation": "밤",
+      "pronunciationRule": "받침 ㅁ",
+      "type": "batchim-example",
+      "pronunciationType": "收音",
+      "screen": "收音对比、拼音节、挑战 1",
+      "teachingGoal": "对比 바 + ㅁ",
+      "file": "bam-v2.wav",
+      "voiceSource": "apple-system-ko-KR-yuna",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
     },
     {
       "id": "bang",
-      "text": "방",
-      "file": "bang.mp3",
-      "instructions": "Say only the Korean word 방, meaning room, exactly once. Keep ㅂ + ㅏ clear and finish with the back nasal final ㅇ without a trailing vowel."
+      "displayText": "방",
+      "speechText": "방",
+      "expectedPronunciation": "방",
+      "pronunciationRule": "받침 ㅇ",
+      "type": "batchim-example",
+      "pronunciationType": "收音",
+      "screen": "收音对比、拼音节、练习 1",
+      "teachingGoal": "对比 바 + ㅇ",
+      "file": "bang-v2.wav",
+      "voiceSource": "apple-system-ko-KR-yuna",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
     },
     {
       "id": "bal",
-      "text": "발",
-      "file": "bal.mp3",
-      "instructions": "Say only the Korean word 발, meaning foot, exactly once. Keep ㅂ + ㅏ clear and finish on the Korean final ㄹ without a trailing vowel."
+      "displayText": "발",
+      "speechText": "발",
+      "expectedPronunciation": "발",
+      "pronunciationRule": "받침 ㄹ",
+      "type": "batchim-example",
+      "pronunciationType": "收音",
+      "screen": "收音对比、拼音节",
+      "teachingGoal": "对比 바 + ㄹ",
+      "file": "bal-v2.wav",
+      "voiceSource": "apple-system-ko-KR-yuna",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
     },
     {
       "id": "gamsahamnida",
-      "text": "감사합니다",
-      "file": "gamsahamnida.mp3",
-      "instructions": "Say only 감사합니다 exactly once as a natural, polite thank-you. Use standard Seoul pronunciation and apply the natural nasalization in 합니다, which sounds like 함니다."
+      "displayText": "감사합니다",
+      "speechText": "감사합니다",
+      "expectedPronunciation": "감사함니다",
+      "pronunciationRule": "鼻音化：합니다 → [함니다]",
+      "type": "sound-change",
+      "pronunciationType": "音变、完整句子或对话",
+      "screen": "场景短语、跟读、挑战 4",
+      "teachingGoal": "自然说出正式感谢",
+      "file": "gamsahamnida-v2.wav",
+      "voiceSource": "apple-system-ko-KR-yuna",
+      "reviewStatus": "pending",
+      "needsNativeReview": true,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
     }
   ]
 }
