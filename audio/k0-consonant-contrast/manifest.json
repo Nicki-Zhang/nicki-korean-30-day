@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 3,
+  "lesson": "k0-consonant-contrast",
+  "reviewPolicy": "Every generated file remains pending until a Korean native-speaker review is recorded.",
+  "generationDefaults": {
+    "provider": "openai",
+    "model": "gpt-4o-mini-tts",
+    "voice": "marin",
+    "format": "mp3",
+    "instructions": "Speak only the supplied complete Korean syllable exactly once in natural standard Seoul Korean. Do not spell the letter name, translate, explain, read punctuation, add a trailing vowel, or pronounce Latin text."
+  },
+  "items": [
+    {"id":"ga","symbol":"ㄱ","category":"plain","spokenSyllable":"가","audioFile":"ga.mp3","displayText":"가","speechText":"가","file":"ga.mp3","expectedPronunciation":"가","type":"onset-example","reviewStatus":"pending"},
+    {"id":"ka","symbol":"ㅋ","category":"aspirated","spokenSyllable":"카","audioFile":"ka.mp3","displayText":"카","speechText":"카","file":"ka.mp3","expectedPronunciation":"카","type":"onset-example","reviewStatus":"pending"},
+    {"id":"kka","symbol":"ㄲ","category":"tense","spokenSyllable":"까","audioFile":"kka.mp3","displayText":"까","speechText":"까","file":"kka.mp3","expectedPronunciation":"까","type":"onset-example","reviewStatus":"pending"},
+    {"id":"da","symbol":"ㄷ","category":"plain","spokenSyllable":"다","audioFile":"da.mp3","displayText":"다","speechText":"다","file":"da.mp3","expectedPronunciation":"다","type":"onset-example","reviewStatus":"pending"},
+    {"id":"ta","symbol":"ㅌ","category":"aspirated","spokenSyllable":"타","audioFile":"ta.mp3","displayText":"타","speechText":"타","file":"ta.mp3","expectedPronunciation":"타","type":"onset-example","reviewStatus":"pending"},
+    {"id":"tta","symbol":"ㄸ","category":"tense","spokenSyllable":"따","audioFile":"tta.mp3","displayText":"따","speechText":"따","file":"tta.mp3","expectedPronunciation":"따","type":"onset-example","reviewStatus":"pending"},
+    {"id":"ba","symbol":"ㅂ","category":"plain","spokenSyllable":"바","audioFile":"ba.mp3","displayText":"바","speechText":"바","file":"ba.mp3","expectedPronunciation":"바","type":"onset-example","reviewStatus":"pending"},
+    {"id":"pa","symbol":"ㅍ","category":"aspirated","spokenSyllable":"파","audioFile":"pa.mp3","displayText":"파","speechText":"파","file":"pa.mp3","expectedPronunciation":"파","type":"onset-example","reviewStatus":"pending"},
+    {"id":"ppa","symbol":"ㅃ","category":"tense","spokenSyllable":"빠","audioFile":"ppa.mp3","displayText":"빠","speechText":"빠","file":"ppa.mp3","expectedPronunciation":"빠","type":"onset-example","reviewStatus":"pending"},
+    {"id":"ja","symbol":"ㅈ","category":"plain","spokenSyllable":"자","audioFile":"ja.mp3","displayText":"자","speechText":"자","file":"ja.mp3","expectedPronunciation":"자","type":"onset-example","reviewStatus":"pending"},
+    {"id":"cha","symbol":"ㅊ","category":"aspirated","spokenSyllable":"차","audioFile":"cha.mp3","displayText":"차","speechText":"차","file":"cha.mp3","expectedPronunciation":"차","type":"onset-example","reviewStatus":"pending"},
+    {"id":"jja","symbol":"ㅉ","category":"tense","spokenSyllable":"짜","audioFile":"jja.mp3","displayText":"짜","speechText":"짜","file":"jja.mp3","expectedPronunciation":"짜","type":"onset-example","reviewStatus":"pending"},
+    {"id":"sa","symbol":"ㅅ","category":"plain","spokenSyllable":"사","audioFile":"sa.mp3","displayText":"사","speechText":"사","file":"sa.mp3","expectedPronunciation":"사","type":"onset-example","reviewStatus":"pending"},
+    {"id":"ssa","symbol":"ㅆ","category":"tense","spokenSyllable":"싸","audioFile":"ssa.mp3","displayText":"싸","speechText":"싸","file":"ssa.mp3","expectedPronunciation":"싸","type":"onset-example","reviewStatus":"pending"}
+  ]
+}

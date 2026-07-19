@@ -147,7 +147,7 @@ try {
 if (fs.readFileSync('nikigo-app.html', 'utf8').includes('audio-audit.html')) error('Development audio audit page appears in the formal app shell.');
 
 const worker = fs.readFileSync('sw.js', 'utf8');
-if (!/CACHE\s*=\s*'nikigo-v(?:6-audio-audit-1|7-k0-roadmap-1|8-sound-objects-1|9-letter-audio-types-1)'/.test(worker)) error('Service worker cache was not versioned for the audio repair.');
+if (!/CACHE\s*=\s*'nikigo-v(?:6-audio-audit-1|7-k0-roadmap-1|8-sound-objects-1|9-letter-audio-types-1|10-consonant-contrast-1)'/.test(worker)) error('Service worker cache was not versioned for the audio repair.');
 if (!worker.includes("'./audio-catalog.js'")) error('Service worker does not cache the canonical audio catalog.');
 
 if (errors.length) {

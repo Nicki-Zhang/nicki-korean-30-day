@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - audio/lesson-*/manifest.json
+      - audio/k0-*/manifest.json
       - audio-catalog.js
       - scripts/generate-lesson-audio.mjs
       - scripts/validate-audio.mjs
@@ -19,6 +20,7 @@ on:
           - lesson-02
           - lesson-03
           - lesson-04
+          - k0-consonant-contrast
 
 permissions:
   contents: write
@@ -44,7 +46,7 @@ jobs:
           if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
             echo "audio/$SELECTED_LESSON/manifest.json" > /tmp/nikigo-audio-manifests
           else
-            git diff --name-only "$BEFORE_SHA" "$CURRENT_SHA" | grep -E '^audio/lesson-[0-9]+/manifest\.json$' > /tmp/nikigo-audio-manifests || true
+            git diff --name-only "$BEFORE_SHA" "$CURRENT_SHA" | grep -E '^audio/(lesson-[0-9]+|k0-[a-z0-9-]+)/manifest\.json$' > /tmp/nikigo-audio-manifests || true
           fi
           echo "Manifests selected:"
           sed 's/^/- /' /tmp/nikigo-audio-manifests

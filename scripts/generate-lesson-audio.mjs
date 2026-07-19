@@ -34,7 +34,7 @@ for (const item of manifest.items || []) {
   }
 }
 
-const openAiItems = (manifest.items || []).filter(item => item.voiceSource === 'openai-gpt-4o-mini-tts');
+const openAiItems = (manifest.items || []).filter(item => (item.voiceSource || 'openai-gpt-4o-mini-tts') === 'openai-gpt-4o-mini-tts');
 const apiKey = process.env.OPENAI_API_KEY;
 if (openAiItems.length && !apiKey) {
   throw new Error('Missing OPENAI_API_KEY. Store it as a GitHub Actions repository secret.');
@@ -49,7 +49,8 @@ try {
 
 for (const item of manifest.items) {
   const outputPath = resolve(outputDir, item.file);
-  if (item.voiceSource !== 'openai-gpt-4o-mini-tts') {
+  const voiceSource = item.voiceSource || 'openai-gpt-4o-mini-tts';
+  if (voiceSource !== 'openai-gpt-4o-mini-tts') {
     try {
       await access(outputPath);
       console.log(`Verified external audio ${item.id} -> ${item.file}`);

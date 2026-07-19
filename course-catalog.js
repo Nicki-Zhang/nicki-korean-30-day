@@ -19,7 +19,7 @@
     parts
   });
 
-  const comingSoon = ({ stableId, displayOrder, displayNumber, icon, title, parts }) => ({
+  const comingSoon = ({ stableId, displayOrder, displayNumber, icon, title, parts, prerequisites = [] }) => ({
     id: stableId,
     stableId,
     displayOrder,
@@ -32,7 +32,7 @@
     duration: null,
     xp: 0,
     icon,
-    prerequisites: [],
+    prerequisites,
     title,
     parts
   });
@@ -58,13 +58,13 @@
       title: { zh: '高频基础辅音：通过完整音节学习', en: 'High-frequency Consonants in Full Syllables', vi: 'Phụ âm thường gặp trong âm tiết đầy đủ', ja: '完全な音節で学ぶ基本子音' },
       parts: { zh: 'ㅂㅅㅇ · 完整音节 · 问候预览', en: 'ㅂㅅㅇ · Full syllables · Greeting preview', vi: 'ㅂㅅㅇ · Âm tiết đầy đủ · Xem trước lời chào', ja: 'ㅂㅅㅇ · 完全な音節 · あいさつの予習' }
     }),
-    comingSoon({
-      stableId: 'k0-lesson-04-plan', displayOrder: 4, displayNumber: 4, icon: '💨',
-      title: { zh: '送气音和紧音对比', en: 'Aspirated and Tense Consonants', vi: 'So sánh phụ âm bật hơi và căng', ja: '激音と濃音の比較' },
-      parts: { zh: 'ㅋㅌㅍㅊ · ㄲㄸㅃㅆㅉ · 完整音节对比', en: 'ㅋㅌㅍㅊ · ㄲㄸㅃㅆㅉ · Full-syllable contrasts', vi: 'ㅋㅌㅍㅊ · ㄲㄸㅃㅆㅉ · Đối chiếu âm tiết', ja: 'ㅋㅌㅍㅊ · ㄲㄸㅃㅆㅉ · 音節で比較' }
+    available({
+      stableId: 'k0-consonant-contrast', displayOrder: 4, displayNumber: 4, file: 'lesson-consonant-contrast.html', duration: 10, xp: 50, icon: '💨', template: 'consonant-contrast', prerequisites: ['lesson-03'],
+      title: { zh: '听懂普通音、送气音和紧音', en: 'Hear Plain, Aspirated, and Tense Sounds', vi: 'Nghe âm thường, bật hơi và căng', ja: '平音・激音・濃音を聞き分ける' },
+      parts: { zh: '完整音节 · 气流对比 · 初步听辨', en: 'Full syllables · Airflow contrasts · First listening distinctions', vi: 'Âm tiết đầy đủ · So sánh luồng hơi · Nghe phân biệt bước đầu', ja: '完全な音節 · 気流の比較 · はじめての聞き分け' }
     }),
     comingSoon({
-      stableId: 'k0-lesson-05-plan', displayOrder: 5, displayNumber: 5, icon: '🧱',
+      stableId: 'k0-lesson-05-plan', displayOrder: 5, displayNumber: 5, icon: '🧱', prerequisites: ['k0-consonant-contrast'],
       title: { zh: '辅音与元音组成音节块', en: 'Build Syllable Blocks', vi: 'Ghép phụ âm và nguyên âm thành khối', ja: '子音と母音で音節ブロックを作る' },
       parts: { zh: '横向结构 · 纵向结构 · 拼读规律', en: 'Horizontal · Vertical · Decoding patterns', vi: 'Cấu trúc ngang · Dọc · Quy tắc ghép đọc', ja: '横型 · 縦型 · 読み方の規則' }
     }),
