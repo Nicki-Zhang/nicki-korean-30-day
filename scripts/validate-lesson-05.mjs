@@ -21,6 +21,7 @@ for (const marker of ["params.get('fresh')", "params.get('locked')", "id !== 'le
 for (const marker of ["params.get('width')", "params.get('height')", "params.get('step')", "frame.width = width", "frame.height = height"]) assert.ok(screenshotFixture.includes(marker));
 assert.doesNotMatch(source, /speechSynthesis|SpeechSynthesisUtterance|openai|fetch\s*\(/i);
 assert.doesNotMatch(source, /[ㄱ-ㅎ]\s*\+\s*[ㅏ-ㅣ]\s*\+\s*[ㄱ-ㅎ]/u, 'Lesson 5 must not introduce CVC/batchim construction.');
+assert.doesNotMatch(source, /K0 · COMPLETE/, 'The completion tag must identify Lesson 5, not the whole K0 level.');
 
 const element = () => ({
   value: '', textContent: '', innerHTML: '', title: '', style: {}, dataset: {},
@@ -63,6 +64,23 @@ for (const language of languages) {
   for (const key of englishKeys) assert.notEqual(api.UI[language]?.[key], undefined, `${language}.${key} is undefined`);
   assert.match(api.UI[language].ieungRule, /ㅇ/);
 }
+
+const expectedCompleteTags = {
+  zh: 'K0 · 第5课完成',
+  en: 'K0 · LESSON 5 COMPLETE',
+  vi: 'K0 · HOÀN THÀNH BÀI 5',
+  ja: 'K0 · 第5課完了'
+};
+for (const language of languages) {
+  const copy = api.COMPLETE_COPY[language];
+  assert.equal(copy.completeTag, expectedCompleteTags[language]);
+  assert.match(copy.xpEarned, /50 XP/);
+  assert.ok(copy.xpAlreadyClaimed.length > 12);
+  assert.notEqual(copy.xpEarned, copy.xpAlreadyClaimed);
+}
+assert.equal(api.completionRewardKey(true), 'xpEarned');
+assert.equal(api.completionRewardKey(false), 'xpAlreadyClaimed');
+assert.match(source, /let completionAwardedThisView=false/, 'A refresh must default to the already-claimed completion message.');
 
 const compositions = { 가: ['ㄱ', 'ㅏ'], 너: ['ㄴ', 'ㅓ'], 미: ['ㅁ', 'ㅣ'], 고: ['ㄱ', 'ㅗ'], 누: ['ㄴ', 'ㅜ'], 그: ['ㄱ', 'ㅡ'], 아: ['ㅇ', 'ㅏ'], 어: ['ㅇ', 'ㅓ'], 오: ['ㅇ', 'ㅗ'] };
 for (const [syllable, [initial, vowel]] of Object.entries(compositions)) {
