@@ -45,6 +45,8 @@ jobs:
     steps:
       - name: Checkout authorized commit
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v5
@@ -57,6 +59,12 @@ jobs:
         shell: bash
         run: echo "short_sha=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
 
+      - name: Fetch and verify remote main baseline
+        shell: bash
+        run: |
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          node scripts/validate-repository-safety.mjs --base-ref origin/main --baseline-only
+
       - name: Preflight inputs and formal manifest isolation
         run: >-
           node scripts/preflight-audio-batch.mjs
@@ -67,6 +75,8 @@ jobs:
           --staging-dir "staging/${{ inputs.batchId }}"
 
       - name: Run complete tests before any generation
+        env:
+          NIKIGO_BASE_REF: origin/main
         run: npm test
 
       - name: Validate exact batch allowlist before API access
