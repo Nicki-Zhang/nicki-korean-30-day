@@ -1,0 +1,10 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lesson 6 preview launcher</title></head><body><script>
+const params=new URLSearchParams(location.search);
+const step=Math.max(0,Math.min(17,Number(params.get('step'))||0));
+const lang=['zh','en','vi','ja'].includes(params.get('lang'))?params.get('lang'):'zh';
+const profile={schemaVersion:4,name:'Preview',path:'K0',interfaceLanguage:lang,learningLanguage:lang,audioRate:1,autoplayAudio:false,completedLessons:['lesson-00','lesson-01','lesson-02','lesson-03','k0-consonant-contrast','lesson-05'],lessonProgress:{'lesson-05':100},weeklyProgress:0,xp:250};
+const session={step,completed:false,challengeStarted:params.get('challenge')==='1'};
+localStorage.setItem('nikigoProfile',JSON.stringify(profile));
+localStorage.setItem('nikigoLessonSession:lesson-06',JSON.stringify(session));
+location.replace(`../lesson-06.html?lang=${lang}&preview=1`);
+</script></body></html>

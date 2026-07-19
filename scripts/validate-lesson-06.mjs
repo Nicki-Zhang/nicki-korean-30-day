@@ -1,0 +1,98 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+
+const languages=['zh','en','vi','ja'];
+const html=fs.readFileSync('lesson-06.html','utf8');
+const source=fs.readFileSync('lesson-06.js','utf8');
+const css=fs.readFileSync('lesson-06.css','utf8');
+const preview=fs.readFileSync('tests/lesson-06-preview.html','utf8');
+const manifest=JSON.parse(fs.readFileSync('audio/lesson-06/manifest.json','utf8'));
+
+for(const asset of ['lesson-06.js','lesson-06.css','course-catalog.js','audio-catalog.js','app-state.js'])assert.ok(html.includes(asset),`Missing ${asset}`);
+assert.match(css,/@media\(max-width:760px\)/);
+assert.match(css,/overflow-x:hidden/);
+assert.match(css,/min-height:(?:44|46|48)px/);
+for(const marker of ["params.get('step')","params.get('lang')","completedLessons","lesson-05","nikigoLessonSession:lesson-06"])assert.ok(preview.includes(marker));
+assert.doesNotMatch(source,/speechSynthesis|SpeechSynthesisUtterance|new Audio\s*\(|fetch\s*\(/i);
+assert.doesNotMatch(source,/再次播放\s*[가-힣]|Play again\s*[가-힣]/u);
+assert.doesNotMatch(source,/[ㄱ-ㅎ]\s*\+\s*[ㅏ-ㅣ]\s*\+\s*[ㄱ-ㅎ]/u,'Lesson 6 must not introduce CVC or finals.');
+
+const element=()=>({value:'',textContent:'',innerHTML:'',title:'',style:{},dataset:{},classList:{add(){},remove(){},toggle(){}},setAttribute(){},addEventListener(){},closest(){return null;}});
+const elements=new Map(['lessonStage','language','lessonName','progressLabel','progressCount','progressBar','progressTrack','homeButton','homeLogo'].map(id=>[id,element()]));
+const storage=new Map();
+const oldProfile={xp:250,completedLessons:['lesson-05'],lessonProgress:{'lesson-05':100,'lesson-03':42,'k0-lesson-06-plan':0},weeklyProgress:4,audioRate:.9,autoplayAudio:false,interfaceLanguage:'vi',guest:true,futureField:{keep:true}};
+let profile=structuredClone(oldProfile);
+const documentStub={getElementById:id=>elements.get(id)||element(),addEventListener(){},documentElement:{lang:''}};
+const lessonWindow={location:{search:'?lang=en',href:''},navigator:{language:'en'},document:documentStub,localStorage:{getItem:key=>storage.get(key)??null,setItem:(key,value)=>storage.set(key,String(value))},NikigoState:{get:()=>profile,update:patch=>{profile=typeof patch==='function'?patch(profile):{...profile,...patch};return profile;}},scrollTo(){}};
+lessonWindow.window=lessonWindow;
+vm.runInNewContext(fs.readFileSync('audio-catalog.js','utf8'),lessonWindow,{filename:'audio-catalog.js'});
+vm.runInNewContext(source,{window:lessonWindow,document:documentStub,URLSearchParams},{filename:'lesson-06.js'});
+const api=lessonWindow.NikigoLesson06;
+
+assert.ok(api);
+assert.equal(api.LESSON_ID,'lesson-06');
+assert.equal(api.PREREQUISITE,'lesson-05');
+assert.equal(api.SCREENS.length,18);
+assert.deepEqual([...api.SCREENS],['intro','review','structure','oa','ueo','i-family','combine-practice','carrier','builder','split','near-group','spelling-practice','extended','words','challenge','retry','summary','complete']);
+const englishKeys=Object.keys(api.UI.en);
+for(const language of languages){for(const key of englishKeys)assert.notEqual(api.UI[language]?.[key],undefined,`${language}.${key} undefined`);assert.match(`${api.UI[language].nearTitle} ${api.UI[language].nearLead}`,/ㅙ|ㅚ|ㅞ/);assert.match(`${api.UI[language].extendedTitle} ${api.UI[language].extendedLead}`,/ㅒ|ㅖ/);assert.ok(api.UI[language].completeTag.length>8);assert.match(api.UI[language].xpEarned,/50 XP/);assert.match(api.UI[language].xpAlreadyClaimed,/XP/);}
+
+const combinations={'ㅗ+ㅏ':'ㅘ','ㅜ+ㅓ':'ㅝ','ㅗ+ㅣ':'ㅚ','ㅜ+ㅣ':'ㅟ','ㅡ+ㅣ':'ㅢ'};
+for(const [parts,result] of Object.entries(combinations)){const [first,second]=parts.split('+');assert.equal(api.compoundFromParts(first,second),result);}
+assert.equal(api.compoundFromParts('ㅏ','ㅗ'),'');
+for(const [vowel,syllable] of Object.entries({'ㅒ':'얘','ㅖ':'예','ㅘ':'와','ㅙ':'왜','ㅚ':'외','ㅝ':'워','ㅞ':'웨','ㅟ':'위','ㅢ':'의'}))assert.equal(api.carrierSyllable(vowel),syllable);
+assert.equal(api.compose('ㅇ','ㅘ'),'와');
+assert.equal(api.compose('ㅁ','ㅝ'),'뭐');
+assert.equal(api.compose('ㅁ','ㅘ'),'','Out-of-scope combinations must not be generated.');
+assert.deepEqual(JSON.parse(JSON.stringify(api.splitSyllable('뭐'))),{initial:'ㅁ',vowel:'ㅝ'});
+assert.equal(api.splitSyllable('산'),null);
+
+assert.equal(api.CHALLENGE.length,5);
+assert.ok(api.CHALLENGE.every(question=>!('audio' in question)&&!('transcript' in question)),'Lesson 6 challenge must not fake listening before audio review.');
+assert.equal(api.CHALLENGE.find(question=>question.id==='c5')?.correct,'과자','Required word questions must stay inside the learned-vowel scope.');
+assert.ok(api.UI.zh.wordsLead.includes('우유')&&api.UI.zh.wordsLead.includes('不作为必学词'));
+assert.ok(api.UI.zh.noFakeListening.includes('不设置'));
+assert.ok(api.UI.en.noFakeListening.includes('does not force'));
+assert.ok(api.UI.vi.noFakeListening.includes('không ép'));
+assert.ok(api.UI.ja.noFakeListening.includes('無理に'));
+assert.ok(api.SPELLING_QUESTIONS.some(q=>q.correct==='ㅙ')&&api.SPELLING_QUESTIONS.some(q=>q.correct==='ㅚ')&&api.SPELLING_QUESTIONS.some(q=>q.correct==='ㅞ'));
+
+let session=api.blankSession();
+session=api.applyChallengeAnswer(session,api.CHALLENGE[0],'ㅝ');
+assert.deepEqual([...session.mistakes],['c1']);
+session=api.applyRetryAnswer(session,api.CHALLENGE[0],'ㅘ');
+assert.deepEqual([...session.mistakes],[]);
+const restored=api.normalizeSession({...session,step:14,built:['와','뭐','위'],challengeStarted:true});
+assert.equal(restored.step,14);assert.equal(restored.challengeStarted,true);assert.deepEqual([...restored.built],['와','뭐','위']);
+assert.equal(api.isUnlocked({completedLessons:[]}),false);
+assert.equal(api.isUnlocked({completedLessons:['lesson-05']}),true);
+const completed=api.completionPatch(oldProfile);
+assert.equal(completed.xp,300);
+assert.equal(completed.lessonProgress['lesson-06'],100);
+assert.equal(completed.lessonProgress['lesson-03'],42);
+assert.equal(completed.lessonProgress['k0-lesson-06-plan'],0,'Unknown historical placeholder state must not be deleted.');
+assert.deepEqual(completed.futureField,{keep:true});
+assert.equal(api.completionPatch(completed).xp,300,'Repeat completion must not award XP twice.');
+
+assert.deepEqual(JSON.parse(JSON.stringify(api.AUDIO_FILES)),{},'No similar or inexact hosted audio may be substituted.');
+assert.equal(manifest.schemaVersion,2);
+assert.equal(manifest.lesson,'lesson-06');
+assert.equal(manifest.items.length,13);
+assert.equal(new Set(manifest.items.map(item=>item.id)).size,13);
+assert.equal(new Set(manifest.items.map(item=>item.file)).size,13);
+assert.ok(manifest.items.some(item=>item.displayText==='과자'));
+assert.equal(manifest.items.some(item=>item.displayText==='우유'),false,'우유 uses ㅠ and must not be a required Lesson 6 audio item.');
+for(const item of manifest.items){assert.equal(item.reviewStatus,'pending');assert.ok(item.displayText&&item.speechText&&item.expectedPronunciation&&item.pronunciationRule);assert.ok(['vowel-sound','word'].includes(item.audioType));assert.equal(fs.existsSync(`audio/lesson-06/${item.file}`),false,'Lesson 6 must not generate audio in this task.');}
+
+const catalogContext={window:{}};catalogContext.window.window=catalogContext.window;
+vm.runInNewContext(fs.readFileSync('course-catalog.js','utf8'),catalogContext,{filename:'course-catalog.js'});
+const course=catalogContext.window.NIKIGO_COURSES.find(item=>item.stableId==='lesson-06');
+assert.equal(course.displayNumber,6);assert.equal(course.file,'lesson-06.html');assert.equal(course.status,'available');assert.deepEqual([...course.prerequisites],['lesson-05']);assert.equal(course.requiresCompletion,true);
+assert.equal(catalogContext.window.NIKIGO_COURSES.some(item=>item.stableId==='k0-lesson-06-plan'),false);
+assert.equal(catalogContext.window.NIKIGO_COURSE_UNLOCKED(course,[]),false);
+assert.equal(catalogContext.window.NIKIGO_COURSE_UNLOCKED(course,['lesson-05']),true);
+const lesson7=catalogContext.window.NIKIGO_COURSES.find(item=>item.stableId==='lesson-04');
+assert.equal(lesson7.displayNumber,7);assert.equal(lesson7.file,'lesson-04.html');
+
+console.log('Validated Lesson 6: 18 steps, four languages, compound-vowel spelling, no fake listening, safe CV scope, resume state, exact-audio policy, Lesson 5 prerequisite, migration safety, and one-time +50 XP.');

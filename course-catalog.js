@@ -69,10 +69,10 @@
       title: { zh: '看懂韩语音节块', en: 'Understand Korean Syllable Blocks', vi: 'Hiểu khối âm tiết tiếng Hàn', ja: '韓国語の音節ブロックを理解する' },
       parts: { zh: '左右结构 · 上下结构 · 拼合与拆分', en: 'Left–right · Top–bottom · Build and split', vi: 'Trái–phải · Trên–dưới · Ghép và tách', ja: '左右構造 · 上下構造 · 組み立てと分解' }
     }),
-    comingSoon({
-      stableId: 'k0-lesson-06-plan', displayOrder: 6, displayNumber: 6, icon: '🌈',
+    available({
+      stableId: 'lesson-06', displayOrder: 6, displayNumber: 6, file: 'lesson-06.html', duration: 14, xp: 50, icon: '🌈', template: 'compound-vowels', prerequisites: ['lesson-05'], requiresCompletion: true,
       title: { zh: '复合元音', en: 'Compound Vowels', vi: 'Nguyên âm ghép', ja: '複合母音' },
-      parts: { zh: 'ㅘㅙㅚㅝㅞㅟㅢ · 真实音节', en: 'ㅘㅙㅚㅝㅞㅟㅢ · Real syllables', vi: 'ㅘㅙㅚㅝㅞㅟㅢ · Âm tiết thật', ja: 'ㅘㅙㅚㅝㅞㅟㅢ · 実際の音節' }
+      parts: { zh: 'ㅒㅖㅘㅙㅚㅝㅞㅟㅢ · 拼写结构 · 无收音词汇', en: 'ㅒㅖㅘㅙㅚㅝㅞㅟㅢ · Spelling structure · Words without finals', vi: 'ㅒㅖㅘㅙㅚㅝㅞㅟㅢ · Cấu trúc chữ · Từ không âm cuối', ja: 'ㅒㅖㅘㅙㅚㅝㅞㅟㅢ · 綴り構造 · 終声のない語' }
     }),
     available({
       stableId: 'lesson-04', displayOrder: 7, displayNumber: 7, file: 'lesson-04.html', duration: 13, xp: 50, icon: '🏁', template: 'hangul-batchim', prerequisites: ['lesson-03'],
