@@ -150,10 +150,43 @@ const worker = fs.readFileSync('sw.js', 'utf8');
 if (!/CACHE\s*=\s*'nikigo-v(?:6-audio-audit-1|7-k0-roadmap-1|8-sound-objects-1|9-letter-audio-types-1|10-consonant-contrast-1|11-player-privacy-1|12-quality-layout-1|13-lesson-05)'/.test(worker)) error('Service worker cache was not versioned for the audio repair.');
 if (!worker.includes("'./audio-catalog.js'")) error('Service worker does not cache the canonical audio catalog.');
 
+const audioWorkflow = fs.readFileSync('.github/workflows/generate-lesson-audio.yml', 'utf8');
+const jobsMarker = '\njobs:\n';
+const validateMarker = '\n  validate:\n';
+const generateMarker = '\n  generate:\n';
+const jobsIndex = audioWorkflow.indexOf(jobsMarker);
+const validateIndex = audioWorkflow.indexOf(validateMarker);
+const generateIndex = audioWorkflow.indexOf(generateMarker);
+if (!(jobsIndex >= 0 && validateIndex > jobsIndex && generateIndex > validateIndex)) {
+  error('Audio workflow must contain separate validate and generate jobs.');
+} else {
+  const workflowHeader = audioWorkflow.slice(0, jobsIndex);
+  const validateJob = audioWorkflow.slice(validateIndex, generateIndex);
+  const generateJob = audioWorkflow.slice(generateIndex);
+  if (!/permissions:\s*\n\s+contents: read/.test(workflowHeader)) error('Audio workflow default permissions must be contents: read.');
+  if (!/if: github\.event_name == 'push'/.test(validateJob)) error('Audio validation job must be restricted to push events.');
+  if (!/permissions:\s*\n\s+contents: read/.test(validateJob)) error('Push validation job must use contents: read.');
+  if (!/node scripts\/validate-audio\.mjs --allow-missing-openai/.test(validateJob)) error('Push validation job must validate the audio schema.');
+  if (!/run: npm test/.test(validateJob)) error('Push validation job must run the complete test suite.');
+  for (const forbidden of ['generate-lesson-audio.mjs', 'OPENAI_API_KEY', 'secrets.OPENAI_API_KEY', 'git push', 'contents: write']) {
+    if (validateJob.includes(forbidden)) error(`Push validation job must not contain ${forbidden}.`);
+  }
+  if (!/if: github\.event_name == 'workflow_dispatch'/.test(generateJob)) error('Paid audio generation job must be restricted to workflow_dispatch.');
+  if (!/permissions:\s*\n\s+contents: write/.test(generateJob)) error('Manual generation job must explicitly request contents: write.');
+  if (!/OPENAI_API_KEY: \$\{\{ secrets\.OPENAI_API_KEY \}\}/.test(generateJob)) error('Manual generation step must receive OPENAI_API_KEY from GitHub Secrets.');
+  if (!/node scripts\/generate-lesson-audio\.mjs "audio\/\$\{\{ inputs\.lesson \}\}\/manifest\.json"/.test(generateJob)) error('Manual generation job must generate only the selected lesson manifest.');
+  if (!/run: npm test/.test(generateJob)) error('Manual generation job must test generated files before commit.');
+  if (!/git add audio/.test(generateJob) || !/git push/.test(generateJob)) error('Generated audio may only be committed by the manual generation job.');
+  if (/echo[^\n]*(OPENAI_API_KEY|secrets\.)|printenv|env\s*\|/.test(generateJob)) error('Manual generation job must not print secrets or the environment.');
+  for (const lesson of ['lesson-01', 'lesson-02', 'lesson-03', 'lesson-04', 'k0-consonant-contrast']) {
+    if (!workflowHeader.includes(`- ${lesson}`)) error(`Audio workflow is missing manual lesson option ${lesson}.`);
+  }
+}
+
 if (errors.length) {
   console.error(errors.map(value => `- ${value}`).join('\n'));
   process.exitCode = 1;
 } else {
   const itemCount = Object.values(catalog).reduce((sum, lesson) => sum + lesson.items.length, 0);
-  console.log(`Validated ${itemCount} active audio items across ${Object.keys(catalog).length} lessons.`);
+  console.log(`Validated ${itemCount} active audio items across ${Object.keys(catalog).length} lessons and isolated paid generation to workflow_dispatch.`);
 }
