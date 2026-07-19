@@ -166,20 +166,32 @@ if (!(jobsIndex >= 0 && validateIndex > jobsIndex && generateIndex > validateInd
   if (!/permissions:\s*\n\s+contents: read/.test(workflowHeader)) error('Audio workflow default permissions must be contents: read.');
   if (!/if: github\.event_name == 'push'/.test(validateJob)) error('Audio validation job must be restricted to push events.');
   if (!/permissions:\s*\n\s+contents: read/.test(validateJob)) error('Push validation job must use contents: read.');
+  if (!/timeout-minutes: 15/.test(validateJob)) error('Push validation job must have a 15-minute timeout.');
   if (!/node scripts\/validate-audio\.mjs --allow-missing-openai/.test(validateJob)) error('Push validation job must validate the audio schema.');
   if (!/run: npm test/.test(validateJob)) error('Push validation job must run the complete test suite.');
   for (const forbidden of ['generate-lesson-audio.mjs', 'OPENAI_API_KEY', 'secrets.OPENAI_API_KEY', 'git push', 'contents: write']) {
     if (validateJob.includes(forbidden)) error(`Push validation job must not contain ${forbidden}.`);
   }
   if (!/if: github\.event_name == 'workflow_dispatch'/.test(generateJob)) error('Paid audio generation job must be restricted to workflow_dispatch.');
-  if (!/permissions:\s*\n\s+contents: write/.test(generateJob)) error('Manual generation job must explicitly request contents: write.');
+  if (!/permissions:\s*\n\s+contents: read/.test(generateJob)) error('Manual generation job must use contents: read.');
+  if (!/timeout-minutes: 15/.test(generateJob)) error('Manual generation job must have a 15-minute timeout.');
+  if (!/concurrency:\s*\n\s+group: paid-audio-\$\{\{ inputs\.lesson \}\}\s*\n\s+cancel-in-progress: false/.test(generateJob)) error('Manual generation concurrency must be scoped to the selected lesson.');
+  if (!/SELECTED_LESSON: \$\{\{ inputs\.lesson \}\}/.test(generateJob) || !/if \[ -z "\$SELECTED_LESSON" \]/.test(generateJob) || !/exit 1/.test(generateJob)) error('Manual generation must fail when the lesson selection is missing.');
   if (!/OPENAI_API_KEY: \$\{\{ secrets\.OPENAI_API_KEY \}\}/.test(generateJob)) error('Manual generation step must receive OPENAI_API_KEY from GitHub Secrets.');
+  if ((audioWorkflow.match(/OPENAI_API_KEY/g) || []).length !== 2) error('OPENAI_API_KEY must appear only as the generation-step environment key and secret reference.');
   if (!/node scripts\/generate-lesson-audio\.mjs "audio\/\$\{\{ inputs\.lesson \}\}\/manifest\.json"/.test(generateJob)) error('Manual generation job must generate only the selected lesson manifest.');
-  if (!/run: npm test/.test(generateJob)) error('Manual generation job must test generated files before commit.');
-  if (!/git add audio/.test(generateJob) || !/git push/.test(generateJob)) error('Generated audio may only be committed by the manual generation job.');
+  if (!/run: npm test/.test(generateJob)) error('Manual generation job must test generated files before artifact upload.');
+  if (!/uses: actions\/upload-artifact@v4/.test(generateJob)) error('Manual generation job must upload an artifact for review.');
+  if (!/name: nikigo-audio-\$\{\{ inputs\.lesson \}\}-\$\{\{ github\.run_number \}\}/.test(generateJob)) error('Audio artifact name must include the lesson and run number.');
+  if (!/path: audio\/\$\{\{ inputs\.lesson \}\}\//.test(generateJob)) error('Audio artifact must contain only the selected lesson directory.');
+  if (!/retention-days: 7/.test(generateJob) || !/if-no-files-found: error/.test(generateJob)) error('Audio artifact must expire after seven days and fail when empty.');
   if (/echo[^\n]*(OPENAI_API_KEY|secrets\.)|printenv|env\s*\|/.test(generateJob)) error('Manual generation job must not print secrets or the environment.');
+  if (/speechSynthesis|generate-system-audio|fallback/i.test(generateJob)) error('Manual generation job must not create fallback audio or text substitutes.');
   for (const lesson of ['lesson-01', 'lesson-02', 'lesson-03', 'lesson-04', 'k0-consonant-contrast']) {
     if (!workflowHeader.includes(`- ${lesson}`)) error(`Audio workflow is missing manual lesson option ${lesson}.`);
+  }
+  for (const forbidden of ['contents: write', 'git config', 'git add', 'git commit', 'git push']) {
+    if (audioWorkflow.includes(forbidden)) error(`Audio workflow must not contain ${forbidden}.`);
   }
 }
 
