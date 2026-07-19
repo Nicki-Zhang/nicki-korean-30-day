@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Lesson 5 test entry</title>
+<script>
+  const params = new URLSearchParams(location.search);
+  const step = Math.max(0, Math.min(15, Number(params.get('step')) || 0));
+  const lang = ['zh', 'en', 'vi', 'ja'].includes(params.get('lang')) ? params.get('lang') : 'zh';
+  const fresh = params.get('fresh') === '1';
+  const locked = params.get('locked') === '1';
+  const profile = JSON.parse(localStorage.getItem('nikigoProfile') || '{}');
+  profile.path = profile.path || 'K0';
+  profile.interfaceLanguage = lang;
+  profile.completedLessons = (profile.completedLessons || []).filter(id => id !== 'lesson-05');
+  profile.completedLessons = locked
+    ? profile.completedLessons.filter(id => id !== 'k0-consonant-contrast')
+    : [...new Set([...profile.completedLessons, 'k0-consonant-contrast'])];
+  if (fresh && profile.lessonProgress) delete profile.lessonProgress['lesson-05'];
+  localStorage.setItem('nikigoProfile', JSON.stringify(profile));
+  localStorage.setItem('nikigoLessonSession:lesson-05', JSON.stringify({
+    version: 1,
+    step,
+    practiceAnswers: fresh ? {} : { left: { choice: 'left', correct: true }, top: { choice: 'top', correct: true } },
+    splitAnswers: fresh ? {} : { splitNa: { choice: 'ㄴ + ㅏ', correct: true }, splitGo: { choice: 'ㄱ + ㅗ', correct: true }, splitEo: { choice: 'ㅇ + ㅓ', correct: true } },
+    built: fresh ? [] : ['가', '고', '어'],
+    builderInitial: 'ㄱ',
+    builderVowel: 'ㅏ',
+    challengeStarted: !fresh && step >= 12,
+    challengeIndex: 0,
+    challengeAnswers: {},
+    mistakes: [],
+    retryAnswers: {},
+    completed: false
+  }));
+  location.replace(`../lesson-05.html?lang=${lang}`);
+</script>
+</html>

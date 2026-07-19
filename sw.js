@@ -1,11 +1,12 @@
-const CACHE = 'nikigo-v12-quality-layout-1';
+const CACHE = 'nikigo-v13-lesson-05';
 const ASSETS = [
   './', './index.html', './nikigo-app.html', './app-state.js', './course-catalog.js',
   './hangul-sound-data.js', './audio-catalog.js', './review.html', './review.css',
   './review-catalog.js', './lesson-00.html', './lesson-00.js', './lesson-01.html',
   './lesson-02.html', './lesson-03.html', './lesson-04.html', './lesson-engine.js',
   './lesson-player.css', './player-privacy.css', './lesson-consonant-contrast.html', './lesson-consonant-contrast.js',
-  './lesson-consonant-contrast.css', './manifest.webmanifest'
+  './lesson-consonant-contrast.css', './lesson-05.html', './lesson-05.js',
+  './lesson-05.css', './manifest.webmanifest'
 ];
 
 self.addEventListener('install', event => event.waitUntil(

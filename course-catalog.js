@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  const available = ({ stableId, displayOrder, displayNumber, file, duration, xp, icon, template, title, parts, prerequisites = [] }) => ({
+  const available = ({ stableId, displayOrder, displayNumber, file, duration, xp, icon, template, title, parts, prerequisites = [], requiresCompletion = false }) => ({
     id: stableId,
     stableId,
     displayOrder,
@@ -15,6 +15,7 @@
     xp,
     icon,
     prerequisites,
+    requiresCompletion,
     title,
     parts
   });
@@ -63,10 +64,10 @@
       title: { zh: '听懂普通音、送气音和紧音', en: 'Hear Plain, Aspirated, and Tense Sounds', vi: 'Nghe âm thường, bật hơi và căng', ja: '平音・激音・濃音を聞き分ける' },
       parts: { zh: '完整音节 · 气流对比 · 初步听辨', en: 'Full syllables · Airflow contrasts · First listening distinctions', vi: 'Âm tiết đầy đủ · So sánh luồng hơi · Nghe phân biệt bước đầu', ja: '完全な音節 · 気流の比較 · はじめての聞き分け' }
     }),
-    comingSoon({
-      stableId: 'k0-lesson-05-plan', displayOrder: 5, displayNumber: 5, icon: '🧱', prerequisites: ['k0-consonant-contrast'],
-      title: { zh: '辅音与元音组成音节块', en: 'Build Syllable Blocks', vi: 'Ghép phụ âm và nguyên âm thành khối', ja: '子音と母音で音節ブロックを作る' },
-      parts: { zh: '横向结构 · 纵向结构 · 拼读规律', en: 'Horizontal · Vertical · Decoding patterns', vi: 'Cấu trúc ngang · Dọc · Quy tắc ghép đọc', ja: '横型 · 縦型 · 読み方の規則' }
+    available({
+      stableId: 'lesson-05', displayOrder: 5, displayNumber: 5, file: 'lesson-05.html', duration: 10, xp: 50, icon: '🧱', template: 'syllable-blocks', prerequisites: ['k0-consonant-contrast'], requiresCompletion: true,
+      title: { zh: '看懂韩语音节块', en: 'Understand Korean Syllable Blocks', vi: 'Hiểu khối âm tiết tiếng Hàn', ja: '韓国語の音節ブロックを理解する' },
+      parts: { zh: '左右结构 · 上下结构 · 拼合与拆分', en: 'Left–right · Top–bottom · Build and split', vi: 'Trái–phải · Trên–dưới · Ghép và tách', ja: '左右構造 · 上下構造 · 組み立てと分解' }
     }),
     comingSoon({
       stableId: 'k0-lesson-06-plan', displayOrder: 6, displayNumber: 6, icon: '🌈',
@@ -91,9 +92,15 @@
   ].sort((a, b) => a.displayOrder - b.displayOrder);
 
   window.NIKIGO_COURSES = Object.freeze(lessons.map(lesson => Object.freeze(lesson)));
+  window.NIKIGO_COURSE_UNLOCKED = function (lesson, completedLessons) {
+    if (!lesson || lesson.status !== 'available') return false;
+    if (!lesson.requiresCompletion) return true;
+    const completed = new Set(completedLessons || []);
+    return lesson.prerequisites.every(stableId => completed.has(stableId));
+  };
   window.NIKIGO_NEXT_LESSON = function (completedLessons) {
     const completed = new Set(completedLessons || []);
-    const availableLessons = lessons.filter(lesson => lesson.status === 'available');
+    const availableLessons = lessons.filter(lesson => window.NIKIGO_COURSE_UNLOCKED(lesson, completedLessons));
     return availableLessons.find(lesson => !completed.has(lesson.stableId)) || availableLessons[availableLessons.length - 1];
   };
 })();

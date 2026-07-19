@@ -109,5 +109,31 @@
     };
   }
 
-  global.NikigoAudio = Object.freeze({ lessons, forLesson });
+  function findSpeech(speechText) {
+    for (const [lessonId, lesson] of Object.entries(lessons)) {
+      const entry = lesson.items.find(candidate => candidate.speechText === speechText);
+      if (entry) return Object.freeze({ ...entry, lessonId, path: `audio/${lessonId}/${entry.file}` });
+    }
+    return null;
+  }
+
+  function forSpeechTexts(speechTexts) {
+    const items = [];
+    const audioFiles = {};
+    const pronunciationText = {};
+    [...new Set(speechTexts || [])].forEach(speechText => {
+      const entry = findSpeech(speechText);
+      if (!entry) return;
+      items.push(entry);
+      audioFiles[speechText] = entry.path;
+      pronunciationText[speechText] = speechText;
+    });
+    return {
+      items: Object.freeze(items),
+      audioFiles: Object.freeze(audioFiles),
+      pronunciationText: Object.freeze(pronunciationText)
+    };
+  }
+
+  global.NikigoAudio = Object.freeze({ lessons, forLesson, findSpeech, forSpeechTexts });
 })(typeof window === 'undefined' ? globalThis : window);

@@ -38,6 +38,7 @@ assert.match(app, /function updateAvatar\(value\)/);
 assert.match(app, /Coming soon/);
 assert.match(app, /lesson\.status==='available'/);
 assert.match(app, /!lesson\|\|lesson\.status!==/);
+assert.match(app, /NIKIGO_COURSE_UNLOCKED/);
 assert.doesNotMatch(app, /lesson\.prerequisites\.every/);
 assert.doesNotMatch(app, />\ud83d\udd12<\/button>/);
 assert.match(lessonEngine, /data-action="next-lesson"/);
@@ -49,6 +50,9 @@ assert.match(worker, /\.\/hangul-sound-data\.js/);
 assert.match(worker, /\.\/lesson-consonant-contrast\.html/);
 assert.match(worker, /\.\/lesson-consonant-contrast\.js/);
 assert.match(worker, /\.\/lesson-consonant-contrast\.css/);
+assert.match(worker, /\.\/lesson-05\.html/);
+assert.match(worker, /\.\/lesson-05\.js/);
+assert.match(worker, /\.\/lesson-05\.css/);
 assert.match(worker, /\.\/player-privacy\.css/);
 
 const ids = [...app.matchAll(/\sid=["']([^"']+)["']/g)].map(match => match[1]);
