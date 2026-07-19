@@ -93,7 +93,7 @@ const course=catalog.find(item=>item.stableId==='k0-consonant-contrast');
 assert.equal(course.displayNumber,4);
 assert.equal(course.file,'lesson-consonant-contrast.html');
 assert.notEqual(course.stableId,'lesson-04');
-assert.deepEqual([...catalog.find(item=>item.stableId==='k0-lesson-05-plan').prerequisites],['k0-consonant-contrast']);
+assert.deepEqual([...catalog.find(item=>item.stableId==='lesson-05').prerequisites],['k0-consonant-contrast']);
 
 assert.doesNotMatch(source,/playSequence\(\s*\[['"][ㄱ-ㅎ]['"]\]\s*\)/u);
 assert.match(source,/global\.setTimeout\(next,260\)/);

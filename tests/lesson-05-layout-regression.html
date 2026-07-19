@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lesson 5 real DOM layout regression</title>
+<style>
+  body{font:14px system-ui;margin:20px;background:#f7f5fc;color:#241f3b}iframe{display:block;border:1px solid #d9d2ea;background:#fff;margin:12px 0 28px}.pass{color:#08783f}.fail{color:#b4233d}pre{white-space:pre-wrap;background:#fff;padding:16px;border-radius:12px}
+</style>
+<h1>Lesson 5 real DOM layout regression</h1>
+<pre id="result">Running…</pre>
+<script>
+  const result = document.getElementById('result');
+  const failures = [];
+  const reports = [];
+  const cases = [
+    { name: '390 builder', width: 390, height: 844, step: 10, lang: 'zh' },
+    { name: '390 challenge', width: 390, height: 844, step: 12, lang: 'zh' },
+    { name: '390 challenge English', width: 390, height: 844, step: 12, lang: 'en' },
+    { name: '390 challenge Vietnamese', width: 390, height: 844, step: 12, lang: 'vi' },
+    { name: '390 challenge Japanese', width: 390, height: 844, step: 12, lang: 'ja' },
+    { name: '768 split', width: 768, height: 1024, step: 11, lang: 'zh' },
+    { name: '1440 challenge', width: 1440, height: 900, step: 12, lang: 'zh' }
+  ];
+  const profile = JSON.parse(localStorage.getItem('nikigoProfile') || '{}');
+  profile.completedLessons = [...new Set([...(profile.completedLessons || []), 'k0-consonant-contrast'])];
+  localStorage.setItem('nikigoProfile', JSON.stringify(profile));
+
+  function session(step) {
+    return { version:1, step, practiceAnswers:{left:{choice:'left',correct:true},top:{choice:'top',correct:true}}, splitAnswers:{splitNa:{choice:'ㄴ + ㅏ',correct:true},splitGo:{choice:'ㄱ + ㅗ',correct:true},splitEo:{choice:'ㅇ + ㅓ',correct:true}}, built:['가','고','어'], builderInitial:'ㄱ', builderVowel:'ㅏ', challengeStarted:step>=12, challengeIndex:0, challengeAnswers:{}, mistakes:[], retryAnswers:{}, completed:false };
+  }
+
+  async function run(testCase) {
+    localStorage.setItem('nikigoLessonSession:lesson-05', JSON.stringify(session(testCase.step)));
+    const frame = document.createElement('iframe');
+    frame.width = testCase.width;
+    frame.height = testCase.height;
+    frame.src = `../lesson-05.html?lang=${testCase.lang}&layoutCase=${encodeURIComponent(testCase.name)}`;
+    document.body.append(frame);
+    await new Promise((resolve, reject) => { frame.onload = resolve; setTimeout(() => reject(new Error(`${testCase.name} load timeout`)), 5000); });
+    const doc = frame.contentDocument;
+    const win = frame.contentWindow;
+    const selectors = ['html','body','.top','.progressWrap','.stage','.card'];
+    const boxes = Object.fromEntries(selectors.map(selector => {
+      const node = doc.querySelector(selector);
+      const rect = node?.getBoundingClientRect();
+      return [selector, rect ? { width: Math.round(rect.width), left: Math.round(rect.left), right: Math.round(rect.right) } : null];
+    }));
+    const overflowing = [...doc.querySelectorAll('body *')].filter(node => {
+      const rect = node.getBoundingClientRect();
+      return rect.width > 0 && (rect.right > win.innerWidth + 1 || rect.left < -1);
+    }).slice(0, 10).map(node => node.className || node.tagName);
+    const smallControls = [...doc.querySelectorAll('button:not([hidden])')].filter(node => {
+      const rect = node.getBoundingClientRect();
+      return rect.width > 0 && (rect.width < 44 || rect.height < 44);
+    }).map(node => node.textContent.trim()).slice(0, 10);
+    const languagePickerHeight = Math.round(doc.querySelector('.languagePicker')?.getBoundingClientRect().height || 0);
+    const hasUndefined = /undefined/i.test(doc.body.innerText);
+    const report = { ...testCase, viewport:win.innerWidth, clientWidth:doc.documentElement.clientWidth, scrollWidth:doc.documentElement.scrollWidth, boxes, overflowing, smallControls, languagePickerHeight, hasUndefined };
+    reports.push(report);
+    if (report.scrollWidth > report.clientWidth) failures.push(`${testCase.name}: horizontal overflow ${report.scrollWidth}/${report.clientWidth}`);
+    if (overflowing.length) failures.push(`${testCase.name}: overflowing ${overflowing.join(', ')}`);
+    if (smallControls.length) failures.push(`${testCase.name}: controls below 44px ${smallControls.join(', ')}`);
+    if (languagePickerHeight < 44) failures.push(`${testCase.name}: language picker below 44px (${languagePickerHeight})`);
+    if (hasUndefined) failures.push(`${testCase.name}: rendered undefined text`);
+  }
+
+  (async () => {
+    try {
+      for (const testCase of cases) await run(testCase);
+    } catch (error) {
+      failures.push(error.message);
+    }
+    result.className = failures.length ? 'fail' : 'pass';
+    result.textContent = `${failures.length ? 'FAIL' : 'PASS'}\n${JSON.stringify({ failures, reports }, null, 2)}`;
+    document.documentElement.dataset.testStatus = failures.length ? 'fail' : 'pass';
+  })();
+</script>
+</html>

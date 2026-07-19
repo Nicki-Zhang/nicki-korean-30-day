@@ -75,10 +75,11 @@ for (const [index, item] of (catalog || []).entries()) {
     continue;
   }
 
-  if (stableId === 'k0-consonant-contrast') {
+  if (stableId === 'k0-consonant-contrast' || stableId === 'lesson-05') {
     const html = fs.readFileSync(file, 'utf8');
-    if (!html.includes('lesson-consonant-contrast.js')) errors.push(`${file} does not load its course engine.`);
-    if (!html.includes('lesson-consonant-contrast.css')) errors.push(`${file} does not load its course styles.`);
+    const customBase = stableId === 'lesson-05' ? 'lesson-05' : 'lesson-consonant-contrast';
+    if (!html.includes(`${customBase}.js`)) errors.push(`${file} does not load its course engine.`);
+    if (!html.includes(`${customBase}.css`)) errors.push(`${file} does not load its course styles.`);
     if (!html.includes('course-catalog.js')) errors.push(`${file} does not load course-catalog.js.`);
     if (!html.includes('lesson-player.css')) errors.push(`${file} does not use the shared visual system.`);
     continue;
