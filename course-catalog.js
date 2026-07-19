@@ -1,98 +1,99 @@
 (function () {
-  const lessons = [
-    {
-      id: 'lesson-01',
-      order: 1,
-      path: 'K0',
-      template: 'hangul-foundation',
-      duration: 12,
-      xp: 50,
-      icon: '🌱',
-      prerequisites: [],
-      title: {
-        zh: '韩文字母：第一步',
-        en: 'Hangul: Your First Step',
-        vi: 'Hangul: Bước đầu tiên',
-        ja: 'ハングル：最初の一歩'
-      },
-      parts: {
-        zh: '基础元音 · 辅音 · 拼音节 · 跟读 · 挑战',
-        en: 'Vowels · Consonants · Build · Shadow · Challenge',
-        vi: 'Nguyên âm · Phụ âm · Ghép âm · Đọc theo · Thử thách',
-        ja: '母音 · 子音 · 音節作り · 音読 · チャレンジ'
-      }
-    },
-    {
-      id: 'lesson-02',
-      order: 2,
-      path: 'K0',
-      template: 'hangul-to-words',
-      duration: 13,
-      xp: 50,
-      icon: '🔤',
-      prerequisites: ['lesson-01'],
-      title: {
-        zh: '从音节读到第一个词',
-        en: 'From Syllables to Your First Words',
-        vi: 'Từ âm tiết đến những từ đầu tiên',
-        ja: '音節から最初の単語へ'
-      },
-      parts: {
-        zh: '新元音 · 新辅音 · 真实词汇 · 跟读 · 挑战',
-        en: 'New vowels · New consonants · Words · Shadow · Challenge',
-        vi: 'Nguyên âm mới · Phụ âm mới · Từ vựng · Đọc theo · Thử thách',
-        ja: '新しい母音 · 新しい子音 · 単語 · 音読 · チャレンジ'
-      }
-    },
-    {
-      id: 'lesson-03',
-      order: 3,
-      path: 'K0',
-      template: 'hangul-to-scenario',
-      duration: 14,
-      xp: 50,
-      icon: '👋',
-      prerequisites: ['lesson-02'],
-      title: {
-        zh: '第一次打招呼',
-        en: 'Your First Greeting',
-        vi: 'Lời chào đầu tiên',
-        ja: '最初のあいさつ'
-      },
-      parts: {
-        zh: '新字母 · 真实词汇 · 礼貌问候 · 跟读 · 挑战',
-        en: 'New letters · Real words · Polite greeting · Shadow · Challenge',
-        vi: 'Chữ mới · Từ thật · Lời chào lịch sự · Đọc theo · Thử thách',
-        ja: '新しい文字 · 単語 · 丁寧なあいさつ · 音読 · チャレンジ'
-      }
-    },
-    {
-      id: 'lesson-04',
-      order: 4,
-      path: 'K0',
-      template: 'hangul-batchim',
-      duration: 13,
-      xp: 50,
-      icon: '🧱',
-      prerequisites: ['lesson-03'],
-      title: {
-        zh: '收音：音节的最后一块',
-        en: 'Batchim: The Final Block',
-        vi: 'Batchim: Khối cuối của âm tiết',
-        ja: 'パッチム：音節の最後のブロック'
-      },
-      parts: {
-        zh: '收音 ㄴㅁㅇㄹ · 真实词汇 · 감사합니다 · 跟读 · 挑战',
-        en: 'Finals ㄴㅁㅇㄹ · Real words · 감사합니다 · Shadow · Challenge',
-        vi: 'Âm cuối ㄴㅁㅇㄹ · Từ thật · 감사합니다 · Đọc theo · Thử thách',
-        ja: 'パッチム ㄴㅁㅇㄹ · 実際の単語 · 감사합니다 · 音読 · チャレンジ'
-      }
-    }
-  ];
+  'use strict';
 
-  window.NIKIGO_COURSES = Object.freeze(lessons);
+  const available = ({ stableId, displayOrder, displayNumber, file, duration, xp, icon, template, title, parts, prerequisites = [] }) => ({
+    id: stableId,
+    stableId,
+    displayOrder,
+    displayNumber,
+    order: displayOrder,
+    status: 'available',
+    file,
+    path: 'K0',
+    template,
+    duration,
+    xp,
+    icon,
+    prerequisites,
+    title,
+    parts
+  });
+
+  const comingSoon = ({ stableId, displayOrder, displayNumber, icon, title, parts }) => ({
+    id: stableId,
+    stableId,
+    displayOrder,
+    displayNumber,
+    order: displayOrder,
+    status: 'comingSoon',
+    file: null,
+    path: 'K0',
+    template: 'roadmap-only',
+    duration: null,
+    xp: 0,
+    icon,
+    prerequisites: [],
+    title,
+    parts
+  });
+
+  const lessons = [
+    available({
+      stableId: 'lesson-00', displayOrder: 0, displayNumber: 0, file: 'lesson-00.html', duration: 3, xp: 0, icon: '🗺️', template: 'hangul-map',
+      title: { zh: '先认识韩文字母地图', en: 'Meet the Hangul Map First', vi: 'Làm quen bản đồ Hangul', ja: 'まずハングルの全体図を知ろう' },
+      parts: { zh: '40个基本字母 · 音节块 · 选择起点', en: '40 basic letters · Syllable blocks · Choose a starting point', vi: '40 chữ cái cơ bản · Khối âm tiết · Chọn điểm bắt đầu', ja: '40の基本文字 · 音節ブロック · 開始地点を選ぶ' }
+    }),
+    available({
+      stableId: 'lesson-01', displayOrder: 1, displayNumber: 1, file: 'lesson-01.html', duration: 12, xp: 50, icon: '🌱', template: 'hangul-foundation',
+      title: { zh: '核心元音 ㅏㅓㅗㅜㅡㅣ', en: 'Core Vowels ㅏㅓㅗㅜㅡㅣ', vi: 'Nguyên âm cốt lõi ㅏㅓㅗㅜㅡㅣ', ja: '基本母音 ㅏㅓㅗㅜㅡㅣ' },
+      parts: { zh: '当前版本先学习 ㅏㅓㅗㅜ · 完整音节示例', en: 'Current build starts with ㅏㅓㅗㅜ · Full-syllable examples', vi: 'Bản hiện tại bắt đầu với ㅏㅓㅗㅜ · Ví dụ âm tiết đầy đủ', ja: '現行版はㅏㅓㅗㅜから開始 · 完全な音節例' }
+    }),
+    available({
+      stableId: 'lesson-02', displayOrder: 2, displayNumber: 2, file: 'lesson-02.html', duration: 13, xp: 50, icon: '🔤', template: 'hangul-to-words', prerequisites: ['lesson-01'],
+      title: { zh: '其余基础元音和易混元音', en: 'More Basic and Easily Confused Vowels', vi: 'Nguyên âm cơ bản còn lại và dễ nhầm', ja: '残りの基本母音と似た母音' },
+      parts: { zh: 'ㅡㅣㅐㅔ · 音节 · 真实词汇', en: 'ㅡㅣㅐㅔ · Syllables · Real words', vi: 'ㅡㅣㅐㅔ · Âm tiết · Từ thật', ja: 'ㅡㅣㅐㅔ · 音節 · 実際の単語' }
+    }),
+    available({
+      stableId: 'lesson-03', displayOrder: 3, displayNumber: 3, file: 'lesson-03.html', duration: 14, xp: 50, icon: '🧩', template: 'hangul-to-scenario', prerequisites: ['lesson-02'],
+      title: { zh: '高频基础辅音：通过完整音节学习', en: 'High-frequency Consonants in Full Syllables', vi: 'Phụ âm thường gặp trong âm tiết đầy đủ', ja: '完全な音節で学ぶ基本子音' },
+      parts: { zh: 'ㅂㅅㅇ · 完整音节 · 问候预览', en: 'ㅂㅅㅇ · Full syllables · Greeting preview', vi: 'ㅂㅅㅇ · Âm tiết đầy đủ · Xem trước lời chào', ja: 'ㅂㅅㅇ · 完全な音節 · あいさつの予習' }
+    }),
+    comingSoon({
+      stableId: 'k0-lesson-04-plan', displayOrder: 4, displayNumber: 4, icon: '💨',
+      title: { zh: '送气音和紧音对比', en: 'Aspirated and Tense Consonants', vi: 'So sánh phụ âm bật hơi và căng', ja: '激音と濃音の比較' },
+      parts: { zh: 'ㅋㅌㅍㅊ · ㄲㄸㅃㅆㅉ · 完整音节对比', en: 'ㅋㅌㅍㅊ · ㄲㄸㅃㅆㅉ · Full-syllable contrasts', vi: 'ㅋㅌㅍㅊ · ㄲㄸㅃㅆㅉ · Đối chiếu âm tiết', ja: 'ㅋㅌㅍㅊ · ㄲㄸㅃㅆㅉ · 音節で比較' }
+    }),
+    comingSoon({
+      stableId: 'k0-lesson-05-plan', displayOrder: 5, displayNumber: 5, icon: '🧱',
+      title: { zh: '辅音与元音组成音节块', en: 'Build Syllable Blocks', vi: 'Ghép phụ âm và nguyên âm thành khối', ja: '子音と母音で音節ブロックを作る' },
+      parts: { zh: '横向结构 · 纵向结构 · 拼读规律', en: 'Horizontal · Vertical · Decoding patterns', vi: 'Cấu trúc ngang · Dọc · Quy tắc ghép đọc', ja: '横型 · 縦型 · 読み方の規則' }
+    }),
+    comingSoon({
+      stableId: 'k0-lesson-06-plan', displayOrder: 6, displayNumber: 6, icon: '🌈',
+      title: { zh: '复合元音', en: 'Compound Vowels', vi: 'Nguyên âm ghép', ja: '複合母音' },
+      parts: { zh: 'ㅘㅙㅚㅝㅞㅟㅢ · 真实音节', en: 'ㅘㅙㅚㅝㅞㅟㅢ · Real syllables', vi: 'ㅘㅙㅚㅝㅞㅟㅢ · Âm tiết thật', ja: 'ㅘㅙㅚㅝㅞㅟㅢ · 実際の音節' }
+    }),
+    available({
+      stableId: 'lesson-04', displayOrder: 7, displayNumber: 7, file: 'lesson-04.html', duration: 13, xp: 50, icon: '🏁', template: 'hangul-batchim', prerequisites: ['lesson-03'],
+      title: { zh: '四个基础收音 ㄴㅁㅇㄹ', en: 'Four Basic Finals ㄴㅁㅇㄹ', vi: 'Bốn âm cuối cơ bản ㄴㅁㅇㄹ', ja: '4つの基本パッチム ㄴㅁㅇㄹ' },
+      parts: { zh: '산 · 몸 · 공 · 물 · 完整单词发音', en: '산 · 몸 · 공 · 물 · Full-word pronunciation', vi: '산 · 몸 · 공 · 물 · Phát âm từ đầy đủ', ja: '산 · 몸 · 공 · 물 · 単語全体の発音' }
+    }),
+    comingSoon({
+      stableId: 'k0-lesson-08-plan', displayOrder: 8, displayNumber: 8, icon: '🎧',
+      title: { zh: '七种代表收音和常见音变', en: 'Seven Representative Finals and Sound Changes', vi: 'Bảy âm cuối đại diện và biến âm', ja: '7つの代表パッチムと音変化' },
+      parts: { zh: '代表音 · 连音 · 鼻音化 · 常见规则', en: 'Representative sounds · Linking · Nasalization', vi: 'Âm đại diện · Nối âm · Mũi hóa', ja: '代表音 · 連音 · 鼻音化' }
+    }),
+    comingSoon({
+      stableId: 'k0-lesson-09-plan', displayOrder: 9, displayNumber: 9, icon: '👋',
+      title: { zh: '场景韩语：问候与介绍', en: 'Scenario Korean: Greetings and Introductions', vi: 'Tiếng Hàn tình huống: Chào hỏi và giới thiệu', ja: '場面韓国語：あいさつと自己紹介' },
+      parts: { zh: '从第9课起进入问候、介绍等真实场景', en: 'Real greetings and introductions begin from Lesson 9', vi: 'Bắt đầu chào hỏi và giới thiệu thực tế từ Bài 9', ja: '第9課から実際のあいさつ・紹介へ' }
+    })
+  ].sort((a, b) => a.displayOrder - b.displayOrder);
+
+  window.NIKIGO_COURSES = Object.freeze(lessons.map(lesson => Object.freeze(lesson)));
   window.NIKIGO_NEXT_LESSON = function (completedLessons) {
     const completed = new Set(completedLessons || []);
-    return lessons.find(lesson => !completed.has(lesson.id)) || lessons[lessons.length - 1];
+    const availableLessons = lessons.filter(lesson => lesson.status === 'available');
+    return availableLessons.find(lesson => !completed.has(lesson.stableId)) || availableLessons[availableLessons.length - 1];
   };
 })();

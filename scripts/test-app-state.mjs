@@ -29,13 +29,35 @@ const migration = createRuntime({
   xp: 25,
   reviewItems: ['lesson01:vowels', 'lesson01:vowels', 'lesson02:words']
 });
-assert.equal(migration.api.version, 3);
+assert.equal(migration.api.version, 4);
 assert.equal(migration.api.get().name, '민지');
 assert.equal(migration.api.get().avatar, '🌱');
 assert.equal(migration.api.get().path, 'K0');
 assert.equal(migration.api.get().reviewItems.length, 2);
 assert.equal(migration.api.get().reviewItems[0].lessonId, 'lesson-01');
-assert.equal(JSON.parse(migration.storage.get('nikigoProfile')).schemaVersion, 3);
+assert.equal(JSON.parse(migration.storage.get('nikigoProfile')).schemaVersion, 4);
+assert.equal(migration.api.get().hangulLevel, '');
+assert.equal(migration.api.get().hangulRecommendation, '');
+
+const preserved = createRuntime({
+  schemaVersion: 3,
+  name: 'Nicki',
+  guest: true,
+  xp: 180,
+  completedLessons: ['lesson-01', 'lesson-04'],
+  lessonProgress: { 'lesson-01': 100, 'lesson-04': 42 },
+  audioRate: 0.85,
+  autoplayAudio: false,
+  interfaceLanguage: 'vi'
+});
+const preservedProfile = preserved.api.get();
+assert.equal(preservedProfile.xp, 180);
+assert.equal(preservedProfile.guest, true);
+assert.deepEqual([...preservedProfile.completedLessons], ['lesson-01', 'lesson-04']);
+assert.equal(preservedProfile.lessonProgress['lesson-04'], 42);
+assert.equal(preservedProfile.audioRate, 0.85);
+assert.equal(preservedProfile.autoplayAudio, false);
+assert.equal(preservedProfile.interfaceLanguage, 'vi');
 
 const profileDefaults = createRuntime({ name: '   ', avatar: 'unsupported' });
 assert.equal(profileDefaults.api.get().name, 'Nicki');

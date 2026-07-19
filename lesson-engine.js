@@ -48,15 +48,16 @@
     let currentUtterance = null;
     let audioUnlocked = false;
     let playbackGeneration = 0;
+    let activeAudioValue = '';
 
     const element = selector => document.querySelector(selector);
     const copy = key => config.copy[language]?.[key] || config.copy.en?.[key] || key;
     const completionCopy = key => COMPLETION_ACTIONS[language]?.[key] || COMPLETION_ACTIONS.en[key];
 
     function nextCourse() {
-      const lessons = global.NIKIGO_COURSES || [];
-      const currentIndex = lessons.findIndex(lesson => lesson.id === config.id);
-      return currentIndex >= 0 ? (lessons[currentIndex + 1] || null) : null;
+      const lessons = [...(global.NIKIGO_COURSES || [])].sort((a, b) => a.displayOrder - b.displayOrder);
+      const currentIndex = lessons.findIndex(lesson => (lesson.stableId || lesson.id) === config.id);
+      return currentIndex >= 0 ? (lessons.slice(currentIndex + 1).find(lesson => lesson.status === 'available' && lesson.file) || null) : null;
     }
 
     function normalizeLanguage(value) {
@@ -154,9 +155,18 @@
 
     function playOne(value, onEnd) {
       unlockAudio();
+      activeAudioValue = value;
+      if (screens[index]?.type === 'vowels' && config.batchimExamples) render();
+      const complete = () => {
+        if (activeAudioValue === value) {
+          activeAudioValue = '';
+          if (screens[index]?.type === 'vowels' && config.batchimExamples) render();
+        }
+        if (onEnd) onEnd();
+      };
       const file = config.audioFiles?.[value];
       if (!file) {
-        systemSpeech(value, onEnd);
+        systemSpeech(value, complete);
         return;
       }
       if (currentAudio) currentAudio.pause();
@@ -166,8 +176,8 @@
       currentAudio.preservesPitch = true;
       currentAudio.mozPreservesPitch = true;
       currentAudio.webkitPreservesPitch = true;
-      currentAudio.onended = () => { if (onEnd) onEnd(); };
-      currentAudio.play().catch(() => systemSpeech(value, onEnd));
+      currentAudio.onended = complete;
+      currentAudio.play().catch(() => systemSpeech(value, complete));
     }
 
     function speak(value) {
@@ -200,6 +210,9 @@
 
     function renderSoundSet(type, items, titleKey, leadKey, promptKey) {
       const seen = heard[type];
+      if (type === 'vowels' && config.batchimExamples) {
+        return shell(`<span class="eyebrow">${copy('vowelTag')}</span><h1>${copy(titleKey)}</h1><p class="lead">${copy(leadKey)}</p><div class="batchimGrid">${config.batchimExamples.map((example, itemIndex) => `<button class="batchimWordCard ${seen.has(itemIndex) ? 'done' : ''} ${activeAudioValue === example.audio ? 'playing' : ''}" data-action="hear" data-kind="vowels" data-index="${itemIndex}" aria-label="${copy('playWordAria').replace('{word}', example.word)}"><span class="batchimWordLine"><strong>${example.word}</strong><span class="listenWord">▶ ${copy('listenWord')}</span></span><span class="batchimTag">${copy('finalLabel')} · ${example.final} ${example.ending}</span><span class="batchimBuild">${example.word} → ${example.stem} + ${example.final}</span><span class="batchimMeaning">${copy(example.meaningKey)}</span></button>`).join('')}</div>${seen.size < items.length ? `<div class="note">🎧 ${copy(promptKey)} · ${seen.size}/${items.length}</div>` : ''}`);
+      }
       return shell(`<span class="eyebrow">${copy(type === 'vowels' ? 'vowelTag' : 'conTag')}</span><h1>${copy(titleKey)}</h1><p class="lead">${copy(leadKey)}</p><div class="learnGrid ${type === 'consonants' ? 'consonants' : ''}" style="--sound-count:${items.length}">${items.map((item, itemIndex) => `<button class="soundCard ${seen.has(itemIndex) ? 'done' : ''}" data-action="hear" data-kind="${type}" data-index="${itemIndex}"><span class="play">▶</span><span class="jamo">${item[0]}</span><span class="roman">${item[1]} · ${item[2]}</span><p>${copy(item[3])}</p></button>`).join('')}</div>${seen.size < items.length ? `<div class="note">🎧 ${copy(promptKey)} · ${seen.size}/${items.length}</div>` : ''}`);
     }
 
@@ -358,7 +371,7 @@
         return;
       }
       saveProfile();
-      global.location.href = `${next.id}.html?lang=${language}`;
+      global.location.href = `${next.file}?lang=${language}`;
     }
 
     function restart() {

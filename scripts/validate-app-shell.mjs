@@ -25,7 +25,8 @@ for (const requiredId of [
   'settingLanguage',
   'settingDaily',
   'settingAudioRate',
-  'autoplaySwitch'
+  'autoplaySwitch',
+  'courseNotice'
 ]) {
   assert.match(app, new RegExp(`id=["']${requiredId}["']`), `Missing #${requiredId}`);
 }
@@ -34,12 +35,16 @@ assert.match(app, /onclick="goHome\(\)"/);
 assert.doesNotMatch(app, /class="logo"[^>]+onclick="go\('welcome'\)"/);
 assert.match(app, /function saveProfileName\(\)/);
 assert.match(app, /function updateAvatar\(value\)/);
-assert.match(app, /Every lesson is open/);
+assert.match(app, /Coming soon/);
+assert.match(app, /lesson\.status==='available'/);
+assert.match(app, /!lesson\|\|lesson\.status!==/);
 assert.doesNotMatch(app, /lesson\.prerequisites\.every/);
 assert.doesNotMatch(app, />\ud83d\udd12<\/button>/);
 assert.match(lessonEngine, /data-action="next-lesson"/);
 assert.match(lessonEngine, /global\.NIKIGO_COURSES/);
 assert.match(lessonEngine, /function goNextLesson\(\)/);
+assert.match(worker, /\.\/lesson-00\.html/);
+assert.match(worker, /\.\/lesson-00\.js/);
 
 const ids = [...app.matchAll(/\sid=["']([^"']+)["']/g)].map(match => match[1]);
 const duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);

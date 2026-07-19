@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#6d4aff">
+  <title>Nikigo · Hangul Map</title>
+  <link rel="stylesheet" href="lesson-player.css">
+  <style>
+    .mapStage{max-width:1030px}.mapCard{padding:40px}.mapIntro{max-width:790px}.mapIntro h1{font-size:clamp(36px,6vw,58px)}.mapGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:28px 0}.letterGroup{border:1px solid var(--line);border-radius:22px;padding:20px;background:linear-gradient(145deg,#fff,#faf8ff)}.letterGroup.wide{grid-column:1/-1}.letterGroup header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}.letterGroup h2{font-size:15px;margin:0}.letterGroup small{color:var(--muted)}.letters{display:flex;flex-wrap:wrap;gap:8px}.letters span{min-width:43px;min-height:43px;border-radius:13px;background:var(--lav);display:grid;place-items:center;font-size:24px;font-weight:900;color:var(--d)}.syllableDemo{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin:28px 0;padding:25px;border-radius:23px;background:linear-gradient(135deg,var(--d),var(--p));color:#fff}.syllableDemo span{width:70px;height:70px;border-radius:20px;background:#ffffff18;display:grid;place-items:center;font-size:40px;font-weight:950}.syllableDemo b{font-size:25px;color:#dff6aa}.startTitle{text-align:center;margin:34px 0 7px}.startLead{text-align:center;color:var(--muted);margin:0 0 18px}.startGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.startChoice{border:1px solid var(--line);border-radius:20px;background:#fff;padding:20px;text-align:left;color:var(--ink);cursor:pointer;transition:.2s;min-height:155px}.startChoice:hover,.startChoice.selected{border-color:var(--p);background:var(--lav);transform:translateY(-2px)}.startChoice strong{display:block;font-size:17px;margin:10px 0 7px}.startChoice span{color:var(--muted);font-size:12px;line-height:1.55}.startChoice i{font-style:normal;font-size:27px}.selectionStatus{min-height:23px;text-align:center;margin-top:16px;color:var(--p);font-weight:850}.mapFoot{display:flex;justify-content:flex-start;margin-top:24px}.mapFoot button{border:0;background:transparent;color:var(--muted);font-weight:800;cursor:pointer}@media(max-width:760px){.mapCard{padding:27px 18px}.mapGrid,.startGrid{grid-template-columns:1fr}.letterGroup.wide{grid-column:auto}.letters span{min-width:39px;min-height:39px;font-size:21px}.syllableDemo span{width:58px;height:58px;font-size:33px}.startChoice{min-height:128px}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <button class="logo" id="homeLogo" type="button"><b>✦</b> Nikigo</button>
+    <span class="lessonName" id="lessonName"></span>
+    <div class="topActions"><div class="languagePicker"><span>🌐</span><select id="language" aria-label="Interface language"><option value="zh">简体中文</option><option value="en">English</option><option value="vi">Tiếng Việt</option><option value="ja">日本語</option></select></div><button class="homeButton" id="homeButton" type="button" aria-label="Return home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.1 3 10v10a1 1 0 0 0 1 1h5.5v-6h5v6H20a1 1 0 0 0 1-1V10l-9-6.9Z"/></svg></button></div>
+  </header>
+  <main class="stage mapStage"><article class="card mapCard">
+    <section class="mapIntro"><span class="eyebrow" id="eyebrow"></span><h1 id="title"></h1><p class="lead" id="description"></p></section>
+    <div class="mapGrid">
+      <section class="letterGroup"><header><h2 id="basicConsonantsTitle"></h2><small>10</small></header><div class="letters"><span>ㄱ</span><span>ㄴ</span><span>ㄷ</span><span>ㄹ</span><span>ㅁ</span><span>ㅂ</span><span>ㅅ</span><span>ㅇ</span><span>ㅈ</span><span>ㅎ</span></div></section>
+      <section class="letterGroup"><header><h2 id="aspiratedTitle"></h2><small>4</small></header><div class="letters"><span>ㅋ</span><span>ㅌ</span><span>ㅍ</span><span>ㅊ</span></div></section>
+      <section class="letterGroup"><header><h2 id="tenseTitle"></h2><small>5</small></header><div class="letters"><span>ㄲ</span><span>ㄸ</span><span>ㅃ</span><span>ㅆ</span><span>ㅉ</span></div></section>
+      <section class="letterGroup"><header><h2 id="basicVowelsTitle"></h2><small>10</small></header><div class="letters"><span>ㅏ</span><span>ㅑ</span><span>ㅓ</span><span>ㅕ</span><span>ㅗ</span><span>ㅛ</span><span>ㅜ</span><span>ㅠ</span><span>ㅡ</span><span>ㅣ</span></div></section>
+      <section class="letterGroup wide"><header><h2 id="compoundVowelsTitle"></h2><small>11</small></header><div class="letters"><span>ㅐ</span><span>ㅒ</span><span>ㅔ</span><span>ㅖ</span><span>ㅘ</span><span>ㅙ</span><span>ㅚ</span><span>ㅝ</span><span>ㅞ</span><span>ㅟ</span><span>ㅢ</span></div></section>
+    </div>
+    <div class="syllableDemo" aria-label="ㄱ plus ㅏ equals 가"><span>ㄱ</span><b>+</b><span>ㅏ</span><b>=</b><span>가</span></div>
+    <div class="note" id="soundRule"></div>
+    <h2 class="startTitle" id="startTitle"></h2><p class="startLead" id="startLead"></p>
+    <div class="startGrid">
+      <button class="startChoice" type="button" data-level="beginner" aria-pressed="false"><i>🌱</i><strong id="beginnerTitle"></strong><span id="beginnerDescription"></span></button>
+      <button class="startChoice" type="button" data-level="partial" aria-pressed="false"><i>🔤</i><strong id="partialTitle"></strong><span id="partialDescription"></span></button>
+      <button class="startChoice" type="button" data-level="reader" aria-pressed="false"><i>📖</i><strong id="readerTitle"></strong><span id="readerDescription"></span></button>
+    </div>
+    <p class="selectionStatus" id="selectionStatus" role="status" aria-live="polite"></p>
+    <div class="mapFoot"><button type="button" id="backButton"></button></div>
+  </article></main>
+  <script src="app-state.js"></script>
+  <script src="lesson-00.js"></script>
+</body>
+</html>

@@ -2,7 +2,7 @@
   'use strict';
 
   const STORAGE_KEY = 'nikigoProfile';
-  const SCHEMA_VERSION = 3;
+  const SCHEMA_VERSION = 4;
   const SUPPORTED_LANGUAGES = ['zh', 'en', 'vi', 'ja'];
   const AVATAR_CHOICES = ['initial', '🌱', '📚', '✨', '🐰'];
   const DEFAULTS = Object.freeze({
@@ -15,6 +15,8 @@
     time: '10',
     audioRate: 1,
     autoplayAudio: false,
+    hangulLevel: '',
+    hangulRecommendation: '',
     memberTier: 'free',
     completedLessons: [],
     reviewItems: [],
@@ -89,6 +91,8 @@
       time: ['5', '10', '15', '20'].includes(String(source.time)) ? String(source.time) : DEFAULTS.time,
       audioRate: finiteNumber(source.audioRate, DEFAULTS.audioRate, 0.8, 1.2),
       autoplayAudio: source.autoplayAudio === true,
+      hangulLevel: ['beginner', 'partial', 'reader'].includes(source.hangulLevel) ? source.hangulLevel : '',
+      hangulRecommendation: ['lesson-01', 'alphabet-check', 'scenario-coming-soon'].includes(source.hangulRecommendation) ? source.hangulRecommendation : '',
       memberTier: source.memberTier === 'plus' ? 'plus' : 'free',
       completedLessons: uniqueStrings(source.completedLessons),
       reviewItems: normalizeReviewItems(source.reviewItems, currentTime),
