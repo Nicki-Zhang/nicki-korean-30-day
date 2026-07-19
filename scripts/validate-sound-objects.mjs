@@ -9,22 +9,40 @@ const dataWindow = {};
 dataWindow.window = dataWindow;
 vm.runInNewContext(fs.readFileSync('hangul-sound-data.js', 'utf8'), dataWindow, { filename:'hangul-sound-data.js' });
 const soundData = dataWindow.NikigoHangulSoundData;
+const allowedAudioTypes = new Set(['letter-name','vowel-sound','onset-example','final-example','word','sentence']);
 assert.equal(soundData.items.length, 40);
 assert.equal(soundData.vowels.length, 21);
 assert.equal(soundData.consonants.length, 19);
 assert.equal(new Set(soundData.items.map(item => item.symbol)).size, 40);
 
+const requiredFields = ['symbol','letterName','letterNameAudio','vowelCarrierSyllable','vowelAudio','demoSyllable','demoAudio','finalExample','finalExampleAudio','audioType'];
+const expectedConsonants = new Map([
+  ['ㄱ',['기역','가']], ['ㄴ',['니은','나']], ['ㄷ',['디귿','다']], ['ㄹ',['리을','라']], ['ㅁ',['미음','마']],
+  ['ㅂ',['비읍','바']], ['ㅅ',['시옷','사']], ['ㅇ',['이응','아']], ['ㅈ',['지읒','자']], ['ㅎ',['히읗','하']],
+  ['ㅋ',['키읔','카']], ['ㅌ',['티읕','타']], ['ㅍ',['피읖','파']], ['ㅊ',['치읓','차']],
+  ['ㄲ',['쌍기역','까']], ['ㄸ',['쌍디귿','따']], ['ㅃ',['쌍비읍','빠']], ['ㅆ',['쌍시옷','싸']], ['ㅉ',['쌍지읒','짜']]
+]);
+
 for (const item of soundData.items) {
+  for (const field of requiredFields) assert.ok(Object.hasOwn(item, field), `${item.symbol} missing explicit field ${field}`);
   assert.equal(item.reviewStatus, 'pending', `${item.symbol} must remain pending`);
+  assert.ok(allowedAudioTypes.has(item.audioType), `${item.symbol} has invalid audioType ${item.audioType}`);
+  for (const soundObject of item.soundObjects) {
+    assert.ok(allowedAudioTypes.has(soundObject.audioType), `${item.symbol} sound object has invalid audioType`);
+    assert.ok(!/^[ㄱ-ㅎ]$/u.test(soundObject.speechText), `${item.symbol} uses an isolated consonant as speechText`);
+  }
   assert.ok(item.soundHint.startsWith('[') && item.soundHint.endsWith(']'), `${item.symbol} needs an approximate hint`);
   if (item.type === 'vowel') {
-    assert.ok(item.spokenExample, `${item.symbol} missing spokenExample`);
+    assert.ok(item.vowelCarrierSyllable, `${item.symbol} missing vowelCarrierSyllable`);
     assert.ok(item.mouthHintKey, `${item.symbol} missing mouthHintKey`);
-    if (item.audio) assert.ok(fs.existsSync(item.audio), `${item.symbol} missing ${item.audio}`);
+    assert.equal(item.audioType, 'vowel-sound');
+    if (item.vowelAudio) assert.ok(fs.existsSync(item.vowelAudio), `${item.symbol} missing ${item.vowelAudio}`);
   } else {
+    assert.deepEqual([item.letterName, item.demoSyllable], expectedConsonants.get(item.symbol), `${item.symbol} letter-name/demo mapping mismatch`);
     assert.ok(item.letterName, `${item.symbol} missing letterName`);
     assert.equal(item.letterNameAudio, null, `${item.symbol} letter-name audio must stay pending`);
     assert.ok(item.demoSyllable, `${item.symbol} missing demoSyllable`);
+    assert.equal(item.audioType, 'onset-example');
     assert.equal(Object.hasOwn(item, 'audio'), false, `${item.symbol} must not use ambiguous audio`);
     if (item.demoAudio) assert.ok(fs.existsSync(item.demoAudio), `${item.symbol} missing ${item.demoAudio}`);
   }
@@ -53,8 +71,8 @@ for (const [lessonId, symbols] of Object.entries(expected)) {
   assert.deepEqual([...config.consonants.map(item => item.symbol)], symbols.consonants);
   for (const item of config.vowels) {
     assert.equal(item.type, 'vowel');
-    assert.equal(config.audioFiles[item.spokenExample], item.audio, `${lessonId} ${item.symbol} mapping mismatch`);
-    buttonMappings.push({ lessonId, label:`听元音${item.symbol}`, speechText:item.spokenExample, file:item.audio });
+    assert.equal(config.audioFiles[item.vowelCarrierSyllable], item.vowelAudio, `${lessonId} ${item.symbol} mapping mismatch`);
+    buttonMappings.push({ lessonId, label:`听元音${item.symbol}`, speechText:item.vowelCarrierSyllable, file:item.vowelAudio });
   }
   for (const item of config.consonants) {
     assert.equal(item.type, 'consonant');
@@ -71,6 +89,8 @@ assert.match(lesson00Source, /data-symbol/);
 assert.match(lesson00Source, /letterNamePending/);
 assert.match(lesson00Source, /if \(!file\) return/);
 assert.match(lesson00Source, /preservesPitch = true/);
+assert.match(lesson00Source, /vowelCarrierRule/);
+assert.match(lesson00Source, /silentIeung/);
 
 const documentStub = { addEventListener() {} };
 const mapWindow = { document:documentStub, location:{ search:'', href:'' }, navigator:{ language:'en' } };
@@ -96,6 +116,10 @@ assert.match(engineSource, /listenVowelAria/);
 assert.match(engineSource, /letterNameAudio \? '' : 'disabled'/);
 assert.match(engineSource, /demoAudio \? '' : 'disabled'/);
 assert.match(engineSource, /listenFullWord/);
+assert.match(engineSource, /听字母名称/);
+assert.match(engineSource, /听示例音节/);
+assert.match(engineSource, /vowelCarrierRule/);
+assert.match(engineSource, /silentIeung/);
 
 const lesson04 = fs.readFileSync('lesson-04.html', 'utf8');
 for (const word of ['산','몸','공','물']) {
@@ -104,7 +128,7 @@ for (const word of ['산','몸','공','물']) {
 }
 assert.match(engineSource, /soundUi\('listenFullWord',\{word:example\.word\}\)/);
 
-const hostedMapPreviews = soundData.vowels.filter(item => item.audio).length + soundData.consonants.filter(item => item.demoAudio).length;
+const hostedMapPreviews = soundData.vowels.filter(item => item.vowelAudio).length + soundData.consonants.filter(item => item.demoAudio).length;
 assert.equal(hostedMapPreviews, 18);
 assert.equal(soundData.consonants.filter(item => item.letterNameAudio).length, 0);
 console.log(`Validated 40 interactive Hangul objects, ${hostedMapPreviews} reusable Lesson 0 previews, ${buttonMappings.length} explicit Lesson 1–3 sound mappings, and four UI languages.`);

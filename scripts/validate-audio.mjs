@@ -39,7 +39,7 @@ function loadLessonConfig(file) {
 
 function playableValues(config) {
   const values = new Set();
-  for (const item of config.vowels || []) values.add(Array.isArray(item) ? item[2] : item.spokenExample);
+  for (const item of config.vowels || []) values.add(Array.isArray(item) ? item[2] : item.vowelCarrierSyllable);
   for (const item of config.consonants || []) {
     if (Array.isArray(item)) values.add(item[2]);
     else {
@@ -147,7 +147,7 @@ try {
 if (fs.readFileSync('nikigo-app.html', 'utf8').includes('audio-audit.html')) error('Development audio audit page appears in the formal app shell.');
 
 const worker = fs.readFileSync('sw.js', 'utf8');
-if (!/CACHE='nikigo-v(?:6-audio-audit-1|7-k0-roadmap-1|8-sound-objects-1)'/.test(worker)) error('Service worker cache was not versioned for the audio repair.');
+if (!/CACHE\s*=\s*'nikigo-v(?:6-audio-audit-1|7-k0-roadmap-1|8-sound-objects-1|9-letter-audio-types-1)'/.test(worker)) error('Service worker cache was not versioned for the audio repair.');
 if (!worker.includes("'./audio-catalog.js'")) error('Service worker does not cache the canonical audio catalog.');
 
 if (errors.length) {

@@ -2,12 +2,20 @@
   'use strict';
 
   const pending = { reviewStatus: 'pending' };
-  const vowel = (symbol, spokenExample, soundHint, mouthHintKey, audio = null, category = 'basic-vowel') => Object.freeze({
+  const vowel = (symbol, vowelCarrierSyllable, soundHint, mouthHintKey, vowelAudio = null, category = 'basic-vowel') => Object.freeze({
     symbol,
     type: 'vowel',
     category,
-    spokenExample,
-    audio,
+    letterName: null,
+    letterNameAudio: null,
+    vowelCarrierSyllable,
+    vowelAudio,
+    demoSyllable: null,
+    demoAudio: null,
+    finalExample: null,
+    finalExampleAudio: null,
+    audioType: 'vowel-sound',
+    soundObjects: Object.freeze([{ audioType:'vowel-sound', speechText:vowelCarrierSyllable, file:vowelAudio }]),
     soundHint,
     mouthHintKey,
     ...pending
@@ -18,8 +26,17 @@
     category,
     letterName,
     letterNameAudio: null,
+    vowelCarrierSyllable: null,
+    vowelAudio: null,
     demoSyllable,
     demoAudio,
+    finalExample: null,
+    finalExampleAudio: null,
+    audioType: 'onset-example',
+    soundObjects: Object.freeze([
+      { audioType:'letter-name', speechText:letterName, file:null },
+      { audioType:'onset-example', speechText:demoSyllable, file:demoAudio }
+    ]),
     soundHint,
     contrastGroup,
     ...pending
