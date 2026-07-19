@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Nikigo mobile layout regression</title>
+  <style>
+    body{margin:0;padding:20px;background:#171526;color:#f8f7ff;font:14px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}
+    h1{font:800 22px/1.2 system-ui,sans-serif}
+    iframe{display:block;border:2px solid #8d77ff;background:#fff;margin:16px 0;max-width:none}
+    pre{white-space:pre-wrap;overflow-wrap:anywhere;padding:16px;border-radius:12px;background:#242039}
+    [data-status="pass"]{border:2px solid #55c98b}[data-status="fail"]{border:2px solid #f07282}
+  </style>
+</head>
+<body>
+  <h1>Lesson 4 real-DOM responsive regression</h1>
+  <p>Runs the actual lesson page in same-origin iframes at 390, 768 and 1440 CSS px.</p>
+  <div id="frames"></div>
+  <pre id="result" data-status="running">Running…</pre>
+  <script>
+    (() => {
+      const sizes=[{width:390,height:844},{width:768,height:900},{width:1440,height:1000}];
+      const selectors=['html','body','.top','.progressWrap','.stage','.contrastCard','.questionAudioPlayer','.quizOptions'];
+      const key='nikigoLessonSession:k0-consonant-contrast';
+      const previous=localStorage.getItem(key);
+      const session={version:1,step:3,answers:{},mistakes:[],optionOrders:{qg:['카','가','까'],qd:['다','타','따'],qb:['plain','aspirated','tense'],qj:['자','차','짜'],qs:['plain','aspirated','tense'],qall:['plain','aspirated','tense']},completed:false};
+      localStorage.setItem(key,JSON.stringify(session));
+      const frames=document.getElementById('frames');
+      const result=document.getElementById('result');
+
+      const inspect=frame=>{
+        const win=frame.contentWindow,doc=frame.contentDocument;
+        const elements=selectors.map(selector=>{
+          const el=doc.querySelector(selector);
+          if(!el)return{selector,missing:true};
+          const cs=win.getComputedStyle(el),rect=el.getBoundingClientRect();
+          return{selector,computedWidth:cs.width,rect:{x:rect.x,right:rect.right,width:rect.width,height:rect.height},minWidth:cs.minWidth,maxWidth:cs.maxWidth,writingMode:cs.writingMode};
+        });
+        const overflow=[...doc.querySelectorAll('*')].map(el=>{
+          const rect=el.getBoundingClientRect();
+          return{element:`${el.tagName.toLowerCase()}${el.id?'#'+el.id:''}${el.className?'.'+String(el.className).trim().replace(/\s+/g,'.'):''}`,x:rect.x,right:rect.right,width:rect.width,scrollWidth:el.scrollWidth,clientWidth:el.clientWidth};
+        }).filter(item=>item.x<-.5||item.right>win.innerWidth+.5||item.scrollWidth>item.clientWidth+1).slice(0,30);
+        const buttons=[...doc.querySelectorAll('button')].map(button=>({text:button.textContent.trim(),rect:button.getBoundingClientRect()}));
+        const heading=doc.querySelector('.contrastCard h1,.contrastCard h2')?.getBoundingClientRect();
+        return{viewport:{width:win.innerWidth,height:win.innerHeight},document:{clientWidth:doc.documentElement.clientWidth,scrollWidth:doc.documentElement.scrollWidth},elements,overflow,heading:heading&&{width:heading.width,height:heading.height},shortTouchTargets:buttons.filter(item=>item.rect.height<44||item.rect.width<44).map(item=>({text:item.text,width:item.rect.width,height:item.rect.height}))};
+      };
+
+      Promise.all(sizes.map(size=>new Promise(resolve=>{
+        const frame=document.createElement('iframe');
+        frame.width=String(size.width);frame.height=String(size.height);frame.title=`${size.width}px lesson preview`;
+        frame.addEventListener('load',()=>resolve(inspect(frame)),{once:true});
+        frame.src='../lesson-consonant-contrast.html?lang=zh';frames.appendChild(frame);
+      }))).then(reports=>{
+        const failures=reports.flatMap(report=>[
+          ...(report.document.scrollWidth>report.viewport.width?[`scrollWidth ${report.document.scrollWidth} > ${report.viewport.width}`]:[]),
+          ...(report.overflow.length?[`${report.viewport.width}px overflow: ${report.overflow.map(item=>item.element).join(', ')}`]:[]),
+          ...(report.heading&&report.heading.width<Math.min(250,report.viewport.width-40)?[`${report.viewport.width}px heading too narrow: ${report.heading.width}`]:[]),
+          ...(report.shortTouchTargets.length?[`${report.viewport.width}px short touch targets: ${report.shortTouchTargets.map(item=>item.text).join(', ')}`]:[])
+        ]);
+        result.dataset.status=failures.length?'fail':'pass';
+        result.textContent=JSON.stringify({status:failures.length?'FAIL':'PASS',failures,reports},null,2);
+        if(previous===null)localStorage.removeItem(key);else localStorage.setItem(key,previous);
+      }).catch(error=>{
+        result.dataset.status='fail';result.textContent=`FAIL\n${error.stack||error}`;
+        if(previous===null)localStorage.removeItem(key);else localStorage.setItem(key,previous);
+      });
+    })();
+  </script>
+</body>
+</html>

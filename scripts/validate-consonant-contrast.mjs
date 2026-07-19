@@ -60,7 +60,8 @@ assert.equal(api.SCREENS.length,15);
 assert.equal(api.GROUPS.length,5);
 assert.equal(Object.keys(api.QUESTIONS).length,6);
 assert.equal(Object.keys(api.HOSTED_AUDIO).length,0,'Missing hosted files must not be requested by the page.');
-assert.deepEqual(JSON.parse(JSON.stringify(api.GROUPS.flatMap(group=>group.items.map(item=>[item[0],item[2],item[3]])))),expected.map(item=>item.slice(0,3)));
+assert.deepEqual(JSON.parse(JSON.stringify(api.GROUPS.flatMap(group=>group.items.map(item=>[item.symbol,item.category,item.syllable])))),expected.map(item=>item.slice(0,3)));
+for(const item of api.GROUPS.flatMap(group=>group.items))assert.doesNotMatch(item.approximation,/[^\x20-\x7E]/,`${item.syllable} approximation must use cross-device plain text`);
 const englishKeys=Object.keys(api.UI.en);
 for(const language of languages)for(const key of englishKeys)assert.notEqual(api.UI[language]?.[key],undefined,`${language}.${key} is undefined`);
 

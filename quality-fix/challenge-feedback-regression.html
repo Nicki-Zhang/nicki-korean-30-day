@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Nikigo challenge feedback regression</title>
+  <style>body{margin:0;padding:20px;background:#171526;color:#f8f7ff;font:14px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}iframe{position:absolute;left:-10000px;width:390px;height:844px;border:0}pre{white-space:pre-wrap;overflow-wrap:anywhere;padding:16px;border-radius:12px;background:#242039}[data-status="pass"]{border:2px solid #55c98b}[data-status="fail"]{border:2px solid #f07282}</style>
+</head>
+<body>
+  <h1>Lessons 1–3 challenge feedback regression</h1>
+  <pre id="result" data-status="running">Running…</pre>
+  <script>
+    (()=>{
+      const languages=['zh','en','vi','ja'];
+      const cases=[
+        {id:'lesson-01',file:'lesson-01.html',index:9,quizAnswers:{0:{choice:1}},transcript:'오'},
+        {id:'lesson-02',file:'lesson-02.html',index:10,quizAnswers:{0:{choice:2}},transcript:'이'},
+        {id:'lesson-03',file:'lesson-03.html',index:14,quizAnswers:{3:{choice:1}},transcript:'안녕하세요',translations:{zh:'您好／你好',en:'Hello',vi:'Xin chào',ja:'こんにちは'}}
+      ];
+      const backups=Object.fromEntries(cases.map(item=>{const key=`nikigoLessonSession:${item.id}`;return[key,localStorage.getItem(key)];}));
+      const report=[];
+      const failures=[];
+      const restore=()=>Object.entries(backups).forEach(([key,value])=>value===null?localStorage.removeItem(key):localStorage.setItem(key,value));
+      const run=(item,language)=>new Promise(resolve=>{
+        const key=`nikigoLessonSession:${item.id}`;
+        localStorage.setItem(key,JSON.stringify({version:1,index:item.index,heard:{vowels:[],consonants:[],words:[]},built:[],practiceAnswers:{},quizAnswers:item.quizAnswers,phraseHeard:false,selfCheck:null,builderConsonant:null,builderVowel:null,builderFinal:null}));
+        const frame=document.createElement('iframe');
+        frame.addEventListener('load',()=>{
+          const doc=frame.contentDocument;
+          const player=doc.querySelector('.questionAudioPlayer')?.textContent.trim()||'';
+          const feedback=doc.querySelector('.feedback')?.textContent.trim()||'';
+          const reveal=doc.querySelector('.answerReveal')?.textContent.trim()||'';
+          const teaching=doc.querySelector('.feedback small')?.textContent.trim()||'';
+          const correct=doc.querySelector('.feedback span')?.textContent.trim()||'';
+          const row={lesson:item.id,language,player,feedback,reveal,teaching,correct};report.push(row);
+          if(player.includes(item.transcript))failures.push(`${item.id}/${language}: player leaks transcript`);
+          if(!reveal.includes(item.transcript))failures.push(`${item.id}/${language}: transcript missing after answer`);
+          if(!teaching)failures.push(`${item.id}/${language}: teaching explanation missing`);
+          if(!correct)failures.push(`${item.id}/${language}: correct answer missing`);
+          if(item.translations&&!reveal.includes(item.translations[language]))failures.push(`${item.id}/${language}: localized translation missing`);
+          if(`${player}${feedback}${reveal}`.includes('undefined'))failures.push(`${item.id}/${language}: undefined text`);
+          frame.remove();resolve();
+        },{once:true});
+        frame.src=`../${item.file}?lang=${language}`;document.body.appendChild(frame);
+      });
+      (async()=>{
+        try{for(const item of cases)for(const language of languages)await run(item,language);}
+        catch(error){failures.push(error.stack||String(error));}
+        finally{restore();const result=document.getElementById('result');result.dataset.status=failures.length?'fail':'pass';result.textContent=JSON.stringify({status:failures.length?'FAIL':'PASS',failures,report},null,2);}
+      })();
+    })();
+  </script>
+</body>
+</html>

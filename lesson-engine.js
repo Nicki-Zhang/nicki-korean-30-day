@@ -19,6 +19,61 @@
   Object.assign(SOUND_UI.en,{pronunciationExample:'Vowel sound',carrierSyllable:'Carrier syllable',vowelCarrierRule:'When a vowel is written as an independent syllable, it takes ㅇ. Here ㅇ is silent, so what you hear is the vowel itself.',silentIeung:'In 아, ㅇ is silent in the onset position.'});
   Object.assign(SOUND_UI.vi,{pronunciationExample:'Âm nguyên âm',carrierSyllable:'Âm tiết mang',vowelCarrierRule:'Khi viết nguyên âm thành âm tiết độc lập cần thêm ㅇ. Ở đây ㅇ câm, nên âm bạn nghe chính là nguyên âm.',silentIeung:'Trong 아, ㅇ ở vị trí đầu âm tiết không phát âm.'});
   Object.assign(SOUND_UI.ja,{pronunciationExample:'母音の音',carrierSyllable:'母音を載せる音節',vowelCarrierRule:'母音を独立した音節として書くときはㅇを加えます。ここでㅇは無音なので、実際に聞こえるのは母音そのものです。',silentIeung:'아では、音節頭のㅇは発音しません。'});
+  Object.assign(SOUND_UI.zh,{playerPlay:'播放听力题音频',playerPlaying:'正在播放',playerReplay:'再次播放',playerLoading:'音频加载中',playerError:'音频暂时无法播放，请重试',playerAriaPlay:'播放本题韩语音频',playerAriaReplay:'再次播放本题韩语音频',testAudio:'当前为测试音频，正式发布前将完成韩语发音审核。',transcriptLabel:'音频原文',translationLabel:'含义',correctAnswerLabel:'正确答案',teachingPointLabel:'学习提示',vowelFeedback:'比较承载音节中的元音音色，注意不要只依赖罗马音。',syllableFeedback:'听完整音节，分清开头辅音和元音的组合。',wordFeedback:'听完整单词的音节顺序，再与选项逐一比较。',phraseFeedback:'听完整表达和礼貌语尾，不要只抓住开头几个音节。'});
+  Object.assign(SOUND_UI.en,{playerPlay:'Play listening audio',playerPlaying:'Playing',playerReplay:'Play again',playerLoading:'Loading audio',playerError:'Audio is temporarily unavailable. Try again.',playerAriaPlay:'Play this Korean audio question',playerAriaReplay:'Play this Korean audio question again',testAudio:'Test audio. Korean pronunciation will be reviewed before release.',transcriptLabel:'Audio transcript',translationLabel:'Meaning',correctAnswerLabel:'Correct answer',teachingPointLabel:'Learning tip',vowelFeedback:'Compare the vowel quality inside the carrier syllable; do not rely on romanization alone.',syllableFeedback:'Listen to the full syllable and separate the onset from the vowel.',wordFeedback:'Listen for the full word’s syllable order, then compare each option.',phraseFeedback:'Listen to the whole expression and its polite ending, not only the opening syllables.'});
+  Object.assign(SOUND_UI.vi,{playerPlay:'Phát âm thanh bài nghe',playerPlaying:'Đang phát',playerReplay:'Phát lại',playerLoading:'Đang tải âm thanh',playerError:'Tạm thời không thể phát âm thanh. Hãy thử lại.',playerAriaPlay:'Phát âm thanh tiếng Hàn của câu này',playerAriaReplay:'Phát lại âm thanh tiếng Hàn của câu này',testAudio:'Âm thanh thử nghiệm. Phát âm tiếng Hàn sẽ được duyệt trước khi phát hành.',transcriptLabel:'Nội dung âm thanh',translationLabel:'Nghĩa',correctAnswerLabel:'Đáp án đúng',teachingPointLabel:'Gợi ý học tập',vowelFeedback:'So sánh chất âm nguyên âm trong âm tiết mang; đừng chỉ dựa vào phiên âm Latin.',syllableFeedback:'Nghe trọn âm tiết và phân biệt phụ âm đầu với nguyên âm.',wordFeedback:'Nghe thứ tự các âm tiết của cả từ rồi so sánh từng lựa chọn.',phraseFeedback:'Nghe toàn bộ biểu đạt và đuôi lịch sự, không chỉ các âm tiết đầu.'});
+  Object.assign(SOUND_UI.ja,{playerPlay:'聞き取り問題の音声を再生',playerPlaying:'再生中',playerReplay:'もう一度再生',playerLoading:'音声を読み込み中',playerError:'音声を一時的に再生できません。もう一度お試しください。',playerAriaPlay:'この問題の韓国語音声を再生',playerAriaReplay:'この問題の韓国語音声をもう一度再生',testAudio:'テスト音声です。公開前に韓国語発音の確認を完了します。',transcriptLabel:'音声の原文',translationLabel:'意味',correctAnswerLabel:'正解',teachingPointLabel:'学習ポイント',vowelFeedback:'母音を載せた音節の音色を比べ、ローマ字だけに頼らないでください。',syllableFeedback:'音節全体を聞き、語頭子音と母音の組み合わせを分けて捉えます。',wordFeedback:'単語全体の音節順を聞き、選択肢を一つずつ比べます。',phraseFeedback:'冒頭だけでなく、表現全体と丁寧な語尾を聞き取ります。'});
+
+  function neutralPlayerCopy(language, state) {
+    const copy = SOUND_UI[language] || SOUND_UI.en;
+    if (state === 'loading') return { label:copy.playerLoading, aria:copy.playerAriaPlay };
+    if (state === 'playing' || state === 'autoplay' || state === 'fallback') return { label:copy.playerPlaying, aria:copy.playerAriaReplay };
+    if (state === 'error') return { label:copy.playerError, aria:copy.playerAriaReplay };
+    if (state === 'played' || state === 'replay') return { label:copy.playerReplay, aria:copy.playerAriaReplay };
+    return { label:copy.playerPlay, aria:copy.playerAriaPlay };
+  }
+
+  function questionPlayerModel(question, language, state, answered, translation = '') {
+    const player = neutralPlayerCopy(language, state);
+    return Object.freeze({
+      label: player.label,
+      aria: player.aria,
+      transcript: answered ? (Array.isArray(question?.audio) ? question.audio.join(' · ') : question?.audio || '') : '',
+      translation: answered ? translation : '',
+      correctAnswer: answered ? question?.options?.[question.answer] || '' : ''
+    });
+  }
+
+  function normalizeLessonSession(raw, config, screenCount) {
+    if (!raw || raw.version !== 1 || !config || !Number.isInteger(screenCount) || screenCount < 1) return null;
+    const indexes = (value, length) => [...new Set((Array.isArray(value) ? value : [])
+      .filter(index => Number.isInteger(index) && index >= 0 && index < length))];
+    const answers = (value, questions) => Object.fromEntries(Object.entries(value || {}).flatMap(([key, answer]) => {
+      const questionIndex = Number(key);
+      const question = questions[questionIndex];
+      const choice = Number(answer?.choice);
+      if (!Number.isInteger(questionIndex) || !question || !Number.isInteger(choice) || choice < 0 || choice >= question.options.length) return [];
+      return [[questionIndex, { choice, correct:choice === question.answer }]];
+    }));
+    const syllables = new Set(Object.values(config.syllables || {}));
+    return Object.freeze({
+      version: 1,
+      index: Math.min(screenCount - 1, Math.max(0, Number.isInteger(raw.index) ? raw.index : 0)),
+      heard: {
+        vowels: indexes(raw.heard?.vowels, config.vowels?.length || 0),
+        consonants: indexes(raw.heard?.consonants, config.consonants?.length || 0),
+        words: indexes(raw.heard?.words, config.words?.length || 0)
+      },
+      built: [...new Set((Array.isArray(raw.built) ? raw.built : []).filter(value => syllables.has(value)))],
+      practiceAnswers: answers(raw.practiceAnswers, config.practice || []),
+      quizAnswers: answers(raw.quizAnswers, config.quiz || []),
+      phraseHeard: raw.phraseHeard === true,
+      selfCheck: ['practice', 'good'].includes(raw.selfCheck) ? raw.selfCheck : null,
+      builderConsonant: config.builder?.consonants?.includes(raw.builderConsonant) ? raw.builderConsonant : null,
+      builderVowel: config.builder?.vowels?.includes(raw.builderVowel) ? raw.builderVowel : null,
+      builderFinal: config.builder?.finals?.includes(raw.builderFinal) ? raw.builderFinal : null
+    });
+  }
 
   function mount(config) {
     if (!config || !config.id || !config.copy) throw new Error('Nikigo lesson config is incomplete.');
@@ -44,6 +99,7 @@
     const practiceAnswers = {};
     const quizAnswers = {};
     const autoplayedScreens = new Set();
+    const questionPlayerStates = new Map();
     let phraseHeard = false;
     let language = initialLanguage();
     let index = 0;
@@ -53,6 +109,7 @@
     let builderConsonant = config.builder.initialConsonant || config.builder.consonants[0];
     let builderVowel = config.builder.initialVowel || config.builder.vowels[0];
     let builderFinal = config.builder.finals ? (config.builder.initialFinal ?? config.builder.finals[0]) : '';
+    const sessionKey = `nikigoLessonSession:${config.id}`;
     let koreanVoices = [];
     let currentAudio = null;
     let currentUtterance = null;
@@ -66,6 +123,43 @@
     const soundUi = (key, values = {}) => Object.entries(values).reduce((value, [name, replacement]) => value.replaceAll(`{${name}}`, replacement), SOUND_UI[language]?.[key] || SOUND_UI.en[key] || key);
     const hasStructuredItems = items => Boolean(items?.length && !Array.isArray(items[0]));
     const shouldRenderPlayingState = () => ['vowels', 'consonants'].includes(screens[index]?.type) && (config.batchimExamples || hasStructuredItems(config[screens[index].type]));
+
+    function saveSession() {
+      global.localStorage.setItem(sessionKey, JSON.stringify({
+        version: 1,
+        index,
+        heard: Object.fromEntries(Object.entries(heard).map(([key, values]) => [key, [...values]])),
+        built: [...built],
+        practiceAnswers,
+        quizAnswers,
+        phraseHeard,
+        selfCheck,
+        builderConsonant,
+        builderVowel,
+        builderFinal
+      }));
+    }
+
+    function restoreSession() {
+      try {
+        const restored = normalizeLessonSession(JSON.parse(global.localStorage.getItem(sessionKey) || 'null'), config, screens.length);
+        if (!restored) return;
+        index = restored.index;
+        Object.entries(restored.heard).forEach(([key, values]) => values.forEach(value => heard[key].add(value)));
+        restored.built.forEach(value => built.add(value));
+        Object.assign(practiceAnswers, restored.practiceAnswers);
+        Object.assign(quizAnswers, restored.quizAnswers);
+        phraseHeard = restored.phraseHeard;
+        selfCheck = restored.selfCheck;
+        if (restored.builderConsonant !== null) builderConsonant = restored.builderConsonant;
+        if (restored.builderVowel !== null) builderVowel = restored.builderVowel;
+        if (restored.builderFinal !== null) builderFinal = restored.builderFinal;
+      } catch {
+        // Invalid or legacy session data is ignored without touching the learning profile.
+      }
+    }
+
+    restoreSession();
 
     function nextCourse() {
       const lessons = [...(global.NIKIGO_COURSES || [])].sort((a, b) => a.displayOrder - b.displayOrder);
@@ -146,7 +240,7 @@
     function systemSpeech(value, onEnd) {
       if (!('speechSynthesis' in global) || typeof global.SpeechSynthesisUtterance === 'undefined') {
         toast(copy('audioUnavailable'));
-        if (onEnd) onEnd();
+        if (onEnd) onEnd('error');
         return;
       }
       const synth = global.speechSynthesis;
@@ -158,10 +252,10 @@
       currentUtterance.pitch = 1;
       const voice = preferredKoreanVoice();
       if (voice) currentUtterance.voice = voice;
-      currentUtterance.onend = () => { if (onEnd) onEnd(); };
+      currentUtterance.onend = () => { if (onEnd) onEnd('played'); };
       currentUtterance.onerror = event => {
         if (!['canceled', 'interrupted'].includes(event.error)) toast(copy('audioError'));
-        if (onEnd) onEnd();
+        if (onEnd) onEnd('error');
       };
       synth.speak(currentUtterance);
     }
@@ -170,12 +264,12 @@
       unlockAudio();
       activeAudioValue = value;
       if (shouldRenderPlayingState()) render();
-      const complete = () => {
+      const complete = (result = 'played') => {
         if (activeAudioValue === value) {
           activeAudioValue = '';
           if (shouldRenderPlayingState()) render();
         }
-        if (onEnd) onEnd();
+        if (onEnd) onEnd(result);
       };
       const file = config.audioFiles?.[value];
       if (!file) {
@@ -193,18 +287,52 @@
       currentAudio.play().catch(() => systemSpeech(value, complete));
     }
 
-    function speak(value) {
+    function speak(value, onEnd) {
       const sequence = (Array.isArray(value) ? value : [value]).filter(Boolean);
       const generation = ++playbackGeneration;
       let sequenceIndex = 0;
       const playNext = () => {
-        if (generation !== playbackGeneration || sequenceIndex >= sequence.length) return;
-        playOne(sequence[sequenceIndex], () => {
+        if (generation !== playbackGeneration) return;
+        if (sequenceIndex >= sequence.length) { if (onEnd) onEnd('played'); return; }
+        playOne(sequence[sequenceIndex], result => {
+          if (result === 'error') { if (onEnd) onEnd('error'); return; }
           sequenceIndex += 1;
           playNext();
         });
       };
       playNext();
+    }
+
+    function questionKey(isQuiz, questionIndex) {
+      return `${isQuiz ? 'quiz' : 'practice'}:${questionIndex}`;
+    }
+
+    function questionTranslation(question) {
+      if (!question?.audio || Array.isArray(question.audio)) return '';
+      const word = config.words?.find(item => item[0] === question.audio);
+      if (word) return copy(word[3]);
+      if (config.phrase?.korean === question.audio) return copy(config.phrase.translationKey);
+      return '';
+    }
+
+    function questionTeachingPoint(question) {
+      if (config.phrase?.audio === question?.audio) return soundUi('phraseFeedback');
+      if (config.words?.some(item => item[0] === question?.audio)) return soundUi('wordFeedback');
+      const answer = question?.options?.[question.answer] || '';
+      if (/^[ㅏ-ㅣ]$/u.test(answer)) return soundUi('vowelFeedback');
+      return soundUi('syllableFeedback');
+    }
+
+    function playQuestionAudio(question, isQuiz, questionIndex, autoplay = false) {
+      const key = questionKey(isQuiz, questionIndex);
+      questionPlayerStates.set(key, autoplay ? 'autoplay' : 'loading');
+      render();
+      questionPlayerStates.set(key, autoplay ? 'autoplay' : 'playing');
+      render();
+      speak(question.audio, result => {
+        questionPlayerStates.set(key, result === 'error' ? 'error' : 'played');
+        render();
+      });
     }
 
     function progress() {
@@ -248,15 +376,21 @@
     function renderBuilder() {
       const result = config.syllables[builderConsonant + builderVowel + builderFinal] || '';
       const finalsGroup = config.builder.finals ? `<b class="operator">+</b><div class="pickGroup"><label>${copy('final')}</label><div class="picks">${config.builder.finals.map(value => `<button class="pick ${builderFinal === value ? 'on' : ''}" data-action="builder-pick" data-kind="final" data-value="${value}">${value || '–'}</button>`).join('')}</div></div>` : '';
-      return shell(`<span class="eyebrow">${copy('builderTag')}</span><h1>${copy('builderTitle')}</h1><p class="lead">${copy('builderLead')}</p><div class="builder ${config.builder.finals ? 'withFinal' : ''}"><div class="pickGroup"><label>${copy('consonant')}</label><div class="picks">${config.builder.consonants.map(value => `<button class="pick ${builderConsonant === value ? 'on' : ''}" data-action="builder-pick" data-kind="consonant" data-value="${value}">${value}</button>`).join('')}</div></div><b class="operator">+</b><div class="pickGroup"><label>${copy('vowel')}</label><div class="picks">${config.builder.vowels.map(value => `<button class="pick ${builderVowel === value ? 'on' : ''}" data-action="builder-pick" data-kind="vowel" data-value="${value}">${value}</button>`).join('')}</div></div>${finalsGroup}<b class="operator">=</b><button class="buildResult" data-action="build" ${result ? '' : 'disabled'}><span><small>${copy('yourSyllable')} · ▶</small><strong>${result || '—'}</strong></span></button></div><div class="builtList"><b>${copy('built')}:</b>${[...built].map(value => `<span>${value}</span>`).join('')}</div>${config.builder.required.every(value => built.has(value)) ? '' : `<div class="note">🧩 ${copy('buildMore')}</div>`}`);
+      return shell(`<span class="eyebrow">${copy('builderTag')}</span><h1>${copy('builderTitle')}</h1><p class="lead">${copy('builderLead')}</p><div class="builder ${config.builder.finals ? 'withFinal' : ''}"><div class="pickGroup"><label>${copy('consonant')}</label><div class="picks">${config.builder.consonants.map(value => `<button class="pick ${builderConsonant === value ? 'on' : ''}" data-action="builder-pick" data-kind="consonant" data-value="${value}">${value}</button>`).join('')}</div></div><b class="operator">+</b><div class="pickGroup"><label>${copy('vowel')}</label><div class="picks">${config.builder.vowels.map(value => `<button class="pick ${builderVowel === value ? 'on' : ''}" data-action="builder-pick" data-kind="vowel" data-value="${value}">${value}</button>`).join('')}</div></div>${finalsGroup}<b class="operator">=</b><button class="buildResult" data-action="build" aria-label="${result ? soundUi('listenDemo',{syllable:result}) : copy('yourSyllable')}" ${result ? '' : 'disabled'}><span><small>${copy('yourSyllable')}</small><strong>${result || '—'}</strong>${result ? `<em>▶ ${soundUi('listenDemo',{syllable:result})}</em>` : ''}</span></button></div><div class="builtList"><b>${copy('built')}:</b>${[...built].map(value => `<span>${value}</span>`).join('')}</div>${config.builder.required.every(value => built.has(value)) ? '' : `<div class="note">🧩 ${copy('buildMore')}</div>`}`);
     }
 
     function renderQuestion(question, isQuiz, questionIndex) {
       const answers = isQuiz ? quizAnswers : practiceAnswers;
       const answer = answers[questionIndex];
       const total = isQuiz ? config.quiz.length : config.practice.length;
-      const feedback = answer ? `<div class="feedback ${answer.correct ? 'good' : 'try'}">${answer.correct ? copy('correct') : copy('incorrect').replace('{answer}', question.options[question.answer])}</div>` : '';
-      return shell(`<span class="eyebrow">${isQuiz ? copy('question') : copy('practiceTag')} · ${questionIndex + 1} / ${total}</span><h2 class="question">${copy(question.prompt)}</h2>${question.audio ? `<button class="audioBtn" data-action="speak" data-value="${question.audio}" aria-label="${soundUi('playExample',{example:question.audio})}"><i>▶</i><span><b>${soundUi('playExample',{example:question.audio})}</b><small>0:02 · ${copy('aiVoice')}</small></span></button>` : ''}<div class="options">${question.options.map((option, optionIndex) => { let state = ''; if (answer) { if (optionIndex === question.answer) state = 'correct'; else if (optionIndex === answer.choice) state = 'wrong'; } return `<button class="option ${state}" data-action="answer" data-quiz="${isQuiz}" data-question="${questionIndex}" data-choice="${optionIndex}" ${answer ? 'disabled' : ''}><span>${String.fromCharCode(65 + optionIndex)}</span>${option}</button>`; }).join('')}</div>${feedback}`);
+      const correctAnswer = question.options[question.answer];
+      const feedback = answer ? `<div class="feedback ${answer.correct ? 'good' : 'try'}" role="status"><strong>${answer.correct ? copy('correct') : copy('incorrect').replace('{answer}', correctAnswer)}</strong><span>${soundUi('correctAnswerLabel')}：${correctAnswer}</span><small>${soundUi('teachingPointLabel')}：${questionTeachingPoint(question)}</small></div>` : '';
+      const playerState = questionPlayerStates.get(questionKey(isQuiz, questionIndex)) || 'initial';
+      const translation = questionTranslation(question);
+      const playerModel = questionPlayerModel(question, language, playerState, Boolean(answer), translation);
+      const reveal = answer && question.audio ? `<div class="answerReveal"><b>${soundUi('transcriptLabel')}：${playerModel.transcript}</b>${playerModel.translation ? `<span>${soundUi('translationLabel')}：${playerModel.translation}</span>` : ''}</div>` : '';
+      const player = question.audio ? `<div class="questionAudioPlayer" data-player-state="${playerState}"><button class="audioBtn" data-action="question-audio" data-quiz="${isQuiz}" data-question="${questionIndex}" aria-label="${playerModel.aria}"><i>▶</i><span><b>${playerModel.label}</b><small>0:02</small></span></button>${playerState === 'error' ? `<p class="playerError" role="status">${soundUi('playerError')}</p>` : ''}</div><p class="testAudioDisclosure">ⓘ ${soundUi('testAudio')}</p>` : '';
+      return shell(`<span class="eyebrow">${isQuiz ? copy('question') : copy('practiceTag')} · ${questionIndex + 1} / ${total}</span><h2 class="question">${copy(question.prompt)}</h2>${player}<div class="options">${question.options.map((option, optionIndex) => { let state = ''; if (answer) { if (optionIndex === question.answer) state = 'correct'; else if (optionIndex === answer.choice) state = 'wrong'; } return `<button class="option ${state}" data-action="answer" data-quiz="${isQuiz}" data-question="${questionIndex}" data-choice="${optionIndex}" ${answer ? 'disabled' : ''}><span>${String.fromCharCode(65 + optionIndex)}</span>${option}</button>`; }).join('')}</div>${feedback}${reveal}`);
     }
 
     function renderRepeat() {
@@ -295,6 +429,7 @@
       saveProfile();
       baseReviewIds.forEach(review => addReview(review, false));
       missedReviewIds.forEach(review => addReview(review, true));
+      saveSession();
     }
 
     function renderComplete() {
@@ -323,13 +458,14 @@
     function maybeAutoplay(screen) {
       if (profile.autoplayAudio !== true || autoplayedScreens.has(index)) return;
       let value = null;
-      if (screen.type === 'practice') value = config.practice[screen.question].audio;
-      if (screen.type === 'quiz') value = config.quiz[screen.question].audio;
+      let question = null;
+      if (screen.type === 'practice') { question = config.practice[screen.question]; value = question.audio; }
+      if (screen.type === 'quiz') { question = config.quiz[screen.question]; value = question.audio; }
       if (screen.type === 'repeat') value = config.repeat.audio;
       if (screen.type === 'phrase') value = config.phrase.audio;
       if (!value) return;
       autoplayedScreens.add(index);
-      global.setTimeout(() => speak(value), 250);
+      global.setTimeout(() => question ? playQuestionAudio(question, screen.type === 'quiz', screen.question, true) : speak(value), 250);
     }
 
     function render() {
@@ -370,6 +506,7 @@
         [config.id]: Math.max(Number(profile.lessonProgress?.[config.id]) || 0, progress())
       };
       saveProfile();
+      saveSession();
     }
 
     function toast(message) {
@@ -404,8 +541,10 @@
       Object.values(heard).forEach(set => set.clear());
       built.clear();
       autoplayedScreens.clear();
+      questionPlayerStates.clear();
       Object.keys(practiceAnswers).forEach(key => delete practiceAnswers[key]);
       Object.keys(quizAnswers).forEach(key => delete quizAnswers[key]);
+      saveSession();
       render();
       global.scrollTo(0, 0);
     }
@@ -415,13 +554,18 @@
       if (!button) return;
       const action = button.dataset.action;
       if (action === 'next' && index < screens.length - 1) { index += 1; recordProgress(); render(); global.scrollTo(0, 0); }
-      if (action === 'previous') { if (index === 0) exitLesson(); else { index -= 1; render(); global.scrollTo(0, 0); } }
+      if (action === 'previous') { if (index === 0) exitLesson(); else { index -= 1; saveSession(); render(); global.scrollTo(0, 0); } }
       if (action === 'exit') exitLesson();
       if (action === 'next-lesson') goNextLesson();
       if (action === 'restart') restart();
-      if (action === 'speak') speak(button.dataset.value);
+      if (action === 'question-audio') {
+        const isQuiz = button.dataset.quiz === 'true';
+        const questionIndex = Number(button.dataset.question);
+        const question = (isQuiz ? config.quiz : config.practice)[questionIndex];
+        if (question?.audio) playQuestionAudio(question, isQuiz, questionIndex);
+      }
       if (action === 'repeat-audio') speak(config.repeat.audio);
-      if (action === 'phrase') { phraseHeard = true; speak(config.phrase.audio); render(); }
+      if (action === 'phrase') { phraseHeard = true; saveSession(); speak(config.phrase.audio); render(); }
       if (action === 'structured-audio') {
         const kind = button.dataset.kind;
         const itemIndex = Number(button.dataset.index);
@@ -431,12 +575,14 @@
         const file = role === 'vowel' ? item.vowelAudio : role === 'letter-name' ? item.letterNameAudio : item.demoAudio;
         if (!file || !value) return;
         heard[kind].add(itemIndex);
+        saveSession();
         speak(value);
         render();
       }
       if (action === 'hear') {
         const items = button.dataset.kind === 'words' ? config.words : config[button.dataset.kind];
         heard[button.dataset.kind].add(Number(button.dataset.index));
+        saveSession();
         speak(items[Number(button.dataset.index)][2]);
         render();
       }
@@ -444,12 +590,14 @@
         if (button.dataset.kind === 'consonant') builderConsonant = button.dataset.value;
         else if (button.dataset.kind === 'final') builderFinal = button.dataset.value;
         else builderVowel = button.dataset.value;
+        saveSession();
         render();
       }
       if (action === 'build') {
         const result = config.syllables[builderConsonant + builderVowel + builderFinal];
         if (!result) return;
         built.add(result);
+        saveSession();
         speak(result);
         render();
       }
@@ -460,11 +608,13 @@
         const bank = isQuiz ? config.quiz : config.practice;
         const answers = isQuiz ? quizAnswers : practiceAnswers;
         if (!answers[questionIndex]) answers[questionIndex] = { choice, correct: choice === bank[questionIndex].answer };
+        saveSession();
         render();
       }
       if (action === 'self-check') {
         selfCheck = button.dataset.value;
         if (selfCheck === 'practice' && config.repeat.reviewId) addReview(config.repeat.reviewId, true);
+        saveSession();
         render();
       }
     });
@@ -472,6 +622,7 @@
     global.changeLanguage = value => {
       language = SUPPORTED.includes(value) ? value : 'en';
       saveProfile();
+      saveSession();
       render();
     };
     global.exitLesson = exitLesson;
@@ -487,5 +638,5 @@
     render();
   }
 
-  global.NikigoLesson = Object.freeze({ mount, uiCopy:SOUND_UI });
+  global.NikigoLesson = Object.freeze({ mount, uiCopy:SOUND_UI, neutralPlayerCopy, questionPlayerModel, normalizeLessonSession });
 })(window);
