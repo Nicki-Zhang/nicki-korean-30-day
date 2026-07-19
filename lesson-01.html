@@ -22,6 +22,7 @@
   <script src="app-state.js"></script>
   <script src="course-catalog.js"></script>
   <script src="audio-catalog.js"></script>
+  <script src="hangul-sound-data.js"></script>
   <script src="lesson-engine.js"></script>
   <script>
     const COPY={
@@ -34,8 +35,12 @@
     Object.assign(COPY.en,{practice1:'Listen and choose the matching vowel.',q1:'Listen and choose the correct vowel.',q4:'Which syllable does ㄴ + ㅏ make?',aiVoice:'Lesson voice is AI-generated',audioError:'Korean audio could not play. Check that your phone is not muted and try again.',audioUnavailable:'No Korean voice is available in this browser.',tapConsonants:'Listen to both examples'});
     Object.assign(COPY.vi,{practice1:'Nghe và chọn nguyên âm tương ứng.',q1:'Nghe và chọn nguyên âm đúng.',q4:'ㄴ + ㅏ tạo thành âm tiết nào?',aiVoice:'Giọng đọc bài học do AI tạo',audioError:'Không thể phát âm tiếng Hàn. Hãy kiểm tra chế độ im lặng của điện thoại và thử lại.',audioUnavailable:'Trình duyệt này không có giọng tiếng Hàn.',tapConsonants:'Hãy nghe đủ hai ví dụ'});
     Object.assign(COPY.ja,{practice1:'音を聞いて、対応する母音を選んでください。',q1:'音を聞いて正しい母音を選んでください。',q4:'ㄴ + ㅏはどの音節になりますか。',aiVoice:'レッスン音声はAIによる生成音声です',audioError:'韓国語の音声を再生できません。端末の消音設定を確認して、もう一度お試しください。',audioUnavailable:'このブラウザでは韓国語音声を利用できません。',tapConsonants:'2つの例を聞いてください'});
-    const vowels=[['ㅏ','a','아','vA'],['ㅓ','eo','어','vEo'],['ㅗ','o','오','vO'],['ㅜ','u','우','vU']];
-    const consonants=[['ㄱ','g/k','가','gDesc'],['ㄴ','n','나','nDesc']];
+    Object.assign(COPY.zh,{gDesc:'舌后部短暂接近软腭，在完整音节 가 中体会起始音。',nDesc:'舌尖靠近上齿龈，在完整音节 나 中体会起始音。'});
+    Object.assign(COPY.en,{gDesc:'Bring the back of the tongue briefly toward the soft palate; hear the onset inside 가.',nDesc:'Bring the tongue tip toward the ridge behind the teeth; hear the onset inside 나.'});
+    Object.assign(COPY.vi,{gDesc:'Đưa phần sau lưỡi đến gần ngạc mềm và nghe âm đầu trong âm tiết đầy đủ 가.',nDesc:'Đưa đầu lưỡi gần lợi trên và nghe âm đầu trong âm tiết đầy đủ 나.'});
+    Object.assign(COPY.ja,{gDesc:'舌の奥を軟口蓋に一度近づけ、完全な音節가の語頭で確認します。',nDesc:'舌先を上の歯茎に近づけ、完全な音節나の語頭で確認します。'});
+    const vowels=window.NikigoHangulSoundData.select(['ㅏ','ㅓ','ㅗ','ㅜ']).map((item,index)=>({...item,descriptionKey:['vA','vEo','vO','vU'][index]}));
+    const consonants=window.NikigoHangulSoundData.select(['ㄱ','ㄴ']).map((item,index)=>({...item,descriptionKey:['gDesc','nDesc'][index]}));
     const syllables={'ㄱㅏ':'가','ㄱㅓ':'거','ㄱㅗ':'고','ㄱㅜ':'구','ㄴㅏ':'나','ㄴㅓ':'너','ㄴㅗ':'노','ㄴㅜ':'누'};
     const practice=[{prompt:'practice1',audio:'아',options:['ㅓ','ㅏ','ㅗ','ㅜ'],answer:1},{prompt:'practice2',audio:'어',options:['ㅏ','ㅜ','ㅓ','ㅗ'],answer:2},{prompt:'practice3',options:['가','너','나','고'],answer:2}];
     const quiz=[{prompt:'q1',audio:'오',options:['ㅏ','ㅗ','ㅓ','ㅜ'],answer:1},{prompt:'q2',audio:'우',options:['ㅗ','ㅓ','ㅜ','ㅏ'],answer:2},{prompt:'q3',options:['거','나','가','고'],answer:2},{prompt:'q4',options:['너','가','고','나'],answer:3},{prompt:'q5',audio:'가',options:['나','거','가','노'],answer:2}];

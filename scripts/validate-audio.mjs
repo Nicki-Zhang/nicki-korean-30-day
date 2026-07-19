@@ -25,8 +25,11 @@ function loadLessonConfig(file) {
     .map(match => match[1])
     .filter(Boolean);
   let config;
+  const soundContext = {};
+  soundContext.window = soundContext;
+  vm.runInNewContext(fs.readFileSync('hangul-sound-data.js', 'utf8'), soundContext, { filename:'hangul-sound-data.js' });
   const context = {
-    window: { NikigoAudio: globalThis.NikigoAudio },
+    window: { NikigoAudio: globalThis.NikigoAudio, NikigoHangulSoundData:soundContext.NikigoHangulSoundData },
     NikigoLesson: { mount: value => { config = value; } }
   };
   vm.runInNewContext(scripts.at(-1), context, { filename: file });
@@ -36,8 +39,14 @@ function loadLessonConfig(file) {
 
 function playableValues(config) {
   const values = new Set();
-  for (const item of config.vowels || []) values.add(item[2]);
-  for (const item of config.consonants || []) values.add(item[2]);
+  for (const item of config.vowels || []) values.add(Array.isArray(item) ? item[2] : item.spokenExample);
+  for (const item of config.consonants || []) {
+    if (Array.isArray(item)) values.add(item[2]);
+    else {
+      if (item.letterNameAudio) values.add(item.letterName);
+      if (item.demoAudio) values.add(item.demoSyllable);
+    }
+  }
   for (const item of config.words || []) values.add(item[2]);
   for (const value of Object.values(config.syllables || {})) values.add(value);
   for (const question of [...(config.practice || []), ...(config.quiz || [])]) if (question.audio) values.add(question.audio);
@@ -138,7 +147,7 @@ try {
 if (fs.readFileSync('nikigo-app.html', 'utf8').includes('audio-audit.html')) error('Development audio audit page appears in the formal app shell.');
 
 const worker = fs.readFileSync('sw.js', 'utf8');
-if (!/CACHE='nikigo-v(?:6-audio-audit-1|7-k0-roadmap-1)'/.test(worker)) error('Service worker cache was not versioned for the audio repair.');
+if (!/CACHE='nikigo-v(?:6-audio-audit-1|7-k0-roadmap-1|8-sound-objects-1)'/.test(worker)) error('Service worker cache was not versioned for the audio repair.');
 if (!worker.includes("'./audio-catalog.js'")) error('Service worker does not cache the canonical audio catalog.');
 
 if (errors.length) {

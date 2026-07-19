@@ -9,6 +9,12 @@
     vi: { next: 'Bài tiếp theo', home: 'Về trang học tập' },
     ja: { next: '次のレッスン', home: '学習ホームへ戻る' }
   });
+  const SOUND_UI = Object.freeze({
+    zh:{vowel:'元音',consonant:'辅音',pronunciationExample:'发音示例',letterName:'字母名称',demoSyllable:'示例音节',listenVowel:'听元音{symbol}',listenVowelAria:'播放韩语元音{symbol}，示例音节{example}',listenLetterName:'听字母名 {name}',listenDemo:'听示例音节 {syllable}',letterNamePending:'字母名音频待补充',demoPending:'示例音节音频待补充',approximateHint:'近似提示：{hint}',romanNote:'罗马音仅帮助初步理解，实际发音请以韩语音频和口型说明为准。',consonantRule:'辅音需要与元音组合后才能自然发音。',listenFullWord:'听完整单词“{word}”',listenExpression:'听完整表达“{text}”',playExample:'听示例 {example}'},
+    en:{vowel:'Vowel',consonant:'Consonant',pronunciationExample:'Pronunciation example',letterName:'Letter name',demoSyllable:'Example syllable',listenVowel:'Listen to vowel {symbol}',listenVowelAria:'Play Korean vowel {symbol}, example syllable {example}',listenLetterName:'Listen to letter name {name}',listenDemo:'Listen to example syllable {syllable}',letterNamePending:'Letter-name audio pending',demoPending:'Example-syllable audio pending',approximateHint:'Approximate hint: {hint}',romanNote:'Romanization is only an initial aid. Follow the Korean audio and mouth guidance for the actual pronunciation.',consonantRule:'A consonant needs to combine with a vowel to be pronounced naturally.',listenFullWord:'Listen to the complete word “{word}”',listenExpression:'Listen to the complete expression “{text}”',playExample:'Listen to example {example}'},
+    vi:{vowel:'Nguyên âm',consonant:'Phụ âm',pronunciationExample:'Ví dụ phát âm',letterName:'Tên chữ cái',demoSyllable:'Âm tiết ví dụ',listenVowel:'Nghe nguyên âm {symbol}',listenVowelAria:'Phát nguyên âm tiếng Hàn {symbol}, âm tiết ví dụ {example}',listenLetterName:'Nghe tên chữ {name}',listenDemo:'Nghe âm tiết ví dụ {syllable}',letterNamePending:'Âm thanh tên chữ đang chờ bổ sung',demoPending:'Âm thanh âm tiết đang chờ bổ sung',approximateHint:'Gợi ý gần đúng: {hint}',romanNote:'Phiên âm Latin chỉ giúp hiểu ban đầu. Hãy theo âm thanh tiếng Hàn và hướng dẫn khẩu hình để phát âm thực tế.',consonantRule:'Phụ âm cần kết hợp với nguyên âm để có thể phát âm tự nhiên.',listenFullWord:'Nghe toàn bộ từ “{word}”',listenExpression:'Nghe toàn bộ biểu đạt “{text}”',playExample:'Nghe ví dụ {example}'},
+    ja:{vowel:'母音',consonant:'子音',pronunciationExample:'発音例',letterName:'文字名',demoSyllable:'例の音節',listenVowel:'母音{symbol}を聞く',listenVowelAria:'韓国語の母音{symbol}、例の音節{example}を再生',listenLetterName:'文字名{name}を聞く',listenDemo:'例の音節{syllable}を聞く',letterNamePending:'文字名音声は追加予定',demoPending:'例の音節音声は追加予定',approximateHint:'近似ヒント：{hint}',romanNote:'ローマ字は最初の理解を助ける目安です。実際の発音は韓国語音声と口の形の説明を基準にしてください。',consonantRule:'子音は母音と組み合わせて初めて自然に発音できます。',listenFullWord:'単語「{word}」全体を聞く',listenExpression:'表現「{text}」全体を聞く',playExample:'例の{example}を聞く'}
+  });
 
   function mount(config) {
     if (!config || !config.id || !config.copy) throw new Error('Nikigo lesson config is incomplete.');
@@ -53,6 +59,9 @@
     const element = selector => document.querySelector(selector);
     const copy = key => config.copy[language]?.[key] || config.copy.en?.[key] || key;
     const completionCopy = key => COMPLETION_ACTIONS[language]?.[key] || COMPLETION_ACTIONS.en[key];
+    const soundUi = (key, values = {}) => Object.entries(values).reduce((value, [name, replacement]) => value.replaceAll(`{${name}}`, replacement), SOUND_UI[language]?.[key] || SOUND_UI.en[key] || key);
+    const hasStructuredItems = items => Boolean(items?.length && !Array.isArray(items[0]));
+    const shouldRenderPlayingState = () => ['vowels', 'consonants'].includes(screens[index]?.type) && (config.batchimExamples || hasStructuredItems(config[screens[index].type]));
 
     function nextCourse() {
       const lessons = [...(global.NIKIGO_COURSES || [])].sort((a, b) => a.displayOrder - b.displayOrder);
@@ -156,11 +165,11 @@
     function playOne(value, onEnd) {
       unlockAudio();
       activeAudioValue = value;
-      if (screens[index]?.type === 'vowels' && config.batchimExamples) render();
+      if (shouldRenderPlayingState()) render();
       const complete = () => {
         if (activeAudioValue === value) {
           activeAudioValue = '';
-          if (screens[index]?.type === 'vowels' && config.batchimExamples) render();
+          if (shouldRenderPlayingState()) render();
         }
         if (onEnd) onEnd();
       };
@@ -211,17 +220,25 @@
     function renderSoundSet(type, items, titleKey, leadKey, promptKey) {
       const seen = heard[type];
       if (type === 'vowels' && config.batchimExamples) {
-        return shell(`<span class="eyebrow">${copy('vowelTag')}</span><h1>${copy(titleKey)}</h1><p class="lead">${copy(leadKey)}</p><div class="batchimGrid">${config.batchimExamples.map((example, itemIndex) => `<button class="batchimWordCard ${seen.has(itemIndex) ? 'done' : ''} ${activeAudioValue === example.audio ? 'playing' : ''}" data-action="hear" data-kind="vowels" data-index="${itemIndex}" aria-label="${copy('playWordAria').replace('{word}', example.word)}"><span class="batchimWordLine"><strong>${example.word}</strong><span class="listenWord">▶ ${copy('listenWord')}</span></span><span class="batchimTag">${copy('finalLabel')} · ${example.final} ${example.ending}</span><span class="batchimBuild">${example.word} → ${example.stem} + ${example.final}</span><span class="batchimMeaning">${copy(example.meaningKey)}</span></button>`).join('')}</div>${seen.size < items.length ? `<div class="note">🎧 ${copy(promptKey)} · ${seen.size}/${items.length}</div>` : ''}`);
+        return shell(`<span class="eyebrow">${copy('vowelTag')}</span><h1>${copy(titleKey)}</h1><p class="lead">${copy(leadKey)}</p><div class="batchimGrid">${config.batchimExamples.map((example, itemIndex) => `<button class="batchimWordCard ${seen.has(itemIndex) ? 'done' : ''} ${activeAudioValue === example.audio ? 'playing' : ''}" data-action="hear" data-kind="vowels" data-index="${itemIndex}" aria-label="${copy('playWordAria').replace('{word}', example.word)}"><span class="batchimWordLine"><strong>${example.word}</strong><span class="listenWord">▶ ${soundUi('listenFullWord',{word:example.word})}</span></span><span class="batchimTag">${copy('finalLabel')} · ${example.final} ${example.ending}</span><span class="batchimBuild">${example.word} → ${example.stem} + ${example.final}</span><span class="batchimMeaning">${copy(example.meaningKey)}</span></button>`).join('')}</div>${seen.size < items.length ? `<div class="note">🎧 ${copy(promptKey)} · ${seen.size}/${items.length}</div>` : ''}`);
       }
-      return shell(`<span class="eyebrow">${copy(type === 'vowels' ? 'vowelTag' : 'conTag')}</span><h1>${copy(titleKey)}</h1><p class="lead">${copy(leadKey)}</p><div class="learnGrid ${type === 'consonants' ? 'consonants' : ''}" style="--sound-count:${items.length}">${items.map((item, itemIndex) => `<button class="soundCard ${seen.has(itemIndex) ? 'done' : ''}" data-action="hear" data-kind="${type}" data-index="${itemIndex}"><span class="play">▶</span><span class="jamo">${item[0]}</span><span class="roman">${item[1]} · ${item[2]}</span><p>${copy(item[3])}</p></button>`).join('')}</div>${seen.size < items.length ? `<div class="note">🎧 ${copy(promptKey)} · ${seen.size}/${items.length}</div>` : ''}`);
+      if (hasStructuredItems(items)) {
+        const cards = items.map((item, itemIndex) => {
+          const playingValue = item.type === 'vowel' ? item.spokenExample : item.demoSyllable;
+          if (item.type === 'vowel') return `<article class="soundObjectCard ${seen.has(itemIndex) ? 'done' : ''} ${activeAudioValue === playingValue ? 'playing' : ''}"><span class="objectType">${soundUi('vowel')}</span><strong class="objectSymbol">${item.symbol}</strong><span class="objectExample">${soundUi('pronunciationExample')}：<b>${item.spokenExample}</b></span><span class="soundHint">${soundUi('approximateHint',{hint:item.soundHint})}</span><p>${copy(item.descriptionKey)}</p><button class="objectAudioButton" data-action="structured-audio" data-kind="${type}" data-index="${itemIndex}" data-role="vowel" aria-label="${soundUi('listenVowelAria',{symbol:item.symbol,example:item.spokenExample})}" ${item.audio ? '' : 'disabled'}>▶ ${item.audio ? soundUi('listenVowel',{symbol:item.symbol}) : soundUi('demoPending')}</button></article>`;
+          return `<article class="soundObjectCard consonantObject ${seen.has(itemIndex) ? 'done' : ''} ${activeAudioValue === playingValue ? 'playing' : ''}"><span class="objectType">${soundUi('consonant')}</span><strong class="objectSymbol">${item.symbol}</strong><div class="objectFacts"><span>${soundUi('letterName')}：<b>${item.letterName}</b></span><span>${soundUi('demoSyllable')}：<b>${item.demoSyllable}</b></span></div><span class="soundHint">${soundUi('approximateHint',{hint:item.soundHint})}</span><p>${copy(item.descriptionKey)}</p><p class="consonantRule">${soundUi('consonantRule')}</p><div class="objectActions"><button class="objectAudioButton secondaryAudio" data-action="structured-audio" data-kind="${type}" data-index="${itemIndex}" data-role="letter-name" ${item.letterNameAudio ? '' : 'disabled'}>${item.letterNameAudio ? `▶ ${soundUi('listenLetterName',{name:item.letterName})}` : soundUi('letterNamePending')}</button><button class="objectAudioButton" data-action="structured-audio" data-kind="${type}" data-index="${itemIndex}" data-role="demo" ${item.demoAudio ? '' : 'disabled'}>▶ ${item.demoAudio ? soundUi('listenDemo',{syllable:item.demoSyllable}) : soundUi('demoPending')}</button></div></article>`;
+        }).join('');
+        return shell(`<span class="eyebrow">${copy(type === 'vowels' ? 'vowelTag' : 'conTag')}</span><h1>${copy(titleKey)}</h1><p class="lead">${copy(leadKey)}</p><div class="soundObjectGrid" style="--sound-count:${items.length}">${cards}</div><div class="romanizationNote">ⓘ ${soundUi('romanNote')}</div>${seen.size < items.length ? `<div class="note">🎧 ${copy(promptKey)} · ${seen.size}/${items.length}</div>` : ''}`);
+      }
+      return shell(`<span class="eyebrow">${copy(type === 'vowels' ? 'vowelTag' : 'conTag')}</span><h1>${copy(titleKey)}</h1><p class="lead">${copy(leadKey)}</p><div class="learnGrid ${type === 'consonants' ? 'consonants' : ''}" style="--sound-count:${items.length}">${items.map((item, itemIndex) => `<button class="soundCard ${seen.has(itemIndex) ? 'done' : ''}" data-action="hear" data-kind="${type}" data-index="${itemIndex}" aria-label="${soundUi('playExample',{example:item[2]})}"><span class="play">▶ ${soundUi('playExample',{example:item[2]})}</span><span class="jamo">${item[0]}</span><span class="roman">${soundUi('approximateHint',{hint:`[${item[1]}]`})}</span><p>${copy(item[3])}</p></button>`).join('')}</div><div class="romanizationNote">ⓘ ${soundUi('romanNote')}</div>${seen.size < items.length ? `<div class="note">🎧 ${copy(promptKey)} · ${seen.size}/${items.length}</div>` : ''}`);
     }
 
     function renderWords() {
-      return shell(`<span class="eyebrow">${copy('wordsTag')}</span><h1>${copy('wordsTitle')}</h1><p class="lead">${copy('wordsLead')}</p><div class="wordGrid" style="--word-count:${config.words.length}">${config.words.map((word, wordIndex) => `<button class="wordCard ${heard.words.has(wordIndex) ? 'done' : ''}" data-action="hear" data-kind="words" data-index="${wordIndex}"><span class="wordIcon">${word[4]} · ▶</span><strong>${word[0]}</strong><span>${word[1]}</span><p>${copy(word[3])}</p></button>`).join('')}</div>${heard.words.size < config.words.length ? `<div class="note">🎧 ${copy('tapWords')} · ${heard.words.size}/${config.words.length}</div>` : ''}`);
+      return shell(`<span class="eyebrow">${copy('wordsTag')}</span><h1>${copy('wordsTitle')}</h1><p class="lead">${copy('wordsLead')}</p><div class="wordGrid" style="--word-count:${config.words.length}">${config.words.map((word, wordIndex) => `<button class="wordCard ${heard.words.has(wordIndex) ? 'done' : ''}" data-action="hear" data-kind="words" data-index="${wordIndex}" aria-label="${soundUi('listenFullWord',{word:word[0]})}"><span class="wordIcon">${word[4]}</span><strong>${word[0]}</strong><span class="wordListen">▶ ${soundUi('listenFullWord',{word:word[0]})}</span><span class="wordRoman">${soundUi('approximateHint',{hint:`[${word[1]}]`})}</span><p>${copy(word[3])}</p></button>`).join('')}</div><div class="romanizationNote">ⓘ ${soundUi('romanNote')}</div>${heard.words.size < config.words.length ? `<div class="note">🎧 ${copy('tapWords')} · ${heard.words.size}/${config.words.length}</div>` : ''}`);
     }
 
     function renderPhrase() {
-      return shell(`<span class="eyebrow">${copy('phraseTag')}</span><h1>${copy('phraseTitle')}</h1><p class="lead">${copy('phraseLead')}</p><button class="phraseBox ${phraseHeard ? 'done' : ''}" data-action="phrase"><span class="phrasePlay">▶</span><strong>${config.phrase.korean}</strong><span>${config.phrase.romanization}</span><p>${copy(config.phrase.translationKey)}</p></button><div class="note">💬 ${copy('phraseNote')}</div>`);
+      return shell(`<span class="eyebrow">${copy('phraseTag')}</span><h1>${copy('phraseTitle')}</h1><p class="lead">${copy('phraseLead')}</p><button class="phraseBox ${phraseHeard ? 'done' : ''}" data-action="phrase" aria-label="${soundUi('listenExpression',{text:config.phrase.korean})}"><span class="phrasePlay">▶</span><strong>${config.phrase.korean}</strong><span class="phraseListen">${soundUi('listenExpression',{text:config.phrase.korean})}</span><span class="phraseRoman">${soundUi('approximateHint',{hint:`[${config.phrase.romanization}]`})}</span><p>${copy(config.phrase.translationKey)}</p></button><div class="romanizationNote">ⓘ ${soundUi('romanNote')}</div><div class="note">💬 ${copy('phraseNote')}</div>`);
     }
 
     function renderBuilder() {
@@ -235,11 +252,11 @@
       const answer = answers[questionIndex];
       const total = isQuiz ? config.quiz.length : config.practice.length;
       const feedback = answer ? `<div class="feedback ${answer.correct ? 'good' : 'try'}">${answer.correct ? copy('correct') : copy('incorrect').replace('{answer}', question.options[question.answer])}</div>` : '';
-      return shell(`<span class="eyebrow">${isQuiz ? copy('question') : copy('practiceTag')} · ${questionIndex + 1} / ${total}</span><h2 class="question">${copy(question.prompt)}</h2>${question.audio ? `<button class="audioBtn" data-action="speak" data-value="${question.audio}"><i>▶</i><span><b>${copy('listen')}</b><small>0:02 · ${copy('aiVoice')}</small></span></button>` : ''}<div class="options">${question.options.map((option, optionIndex) => { let state = ''; if (answer) { if (optionIndex === question.answer) state = 'correct'; else if (optionIndex === answer.choice) state = 'wrong'; } return `<button class="option ${state}" data-action="answer" data-quiz="${isQuiz}" data-question="${questionIndex}" data-choice="${optionIndex}" ${answer ? 'disabled' : ''}><span>${String.fromCharCode(65 + optionIndex)}</span>${option}</button>`; }).join('')}</div>${feedback}`);
+      return shell(`<span class="eyebrow">${isQuiz ? copy('question') : copy('practiceTag')} · ${questionIndex + 1} / ${total}</span><h2 class="question">${copy(question.prompt)}</h2>${question.audio ? `<button class="audioBtn" data-action="speak" data-value="${question.audio}" aria-label="${soundUi('playExample',{example:question.audio})}"><i>▶</i><span><b>${soundUi('playExample',{example:question.audio})}</b><small>0:02 · ${copy('aiVoice')}</small></span></button>` : ''}<div class="options">${question.options.map((option, optionIndex) => { let state = ''; if (answer) { if (optionIndex === question.answer) state = 'correct'; else if (optionIndex === answer.choice) state = 'wrong'; } return `<button class="option ${state}" data-action="answer" data-quiz="${isQuiz}" data-question="${questionIndex}" data-choice="${optionIndex}" ${answer ? 'disabled' : ''}><span>${String.fromCharCode(65 + optionIndex)}</span>${option}</button>`; }).join('')}</div>${feedback}`);
     }
 
     function renderRepeat() {
-      return shell(`<span class="eyebrow">${copy('repeatTag')}</span><h1>${copy('repeatTitle')}</h1><p class="lead">${copy('repeatLead')}</p><div class="repeatBox"><small>${copy('listenPhrase')}</small><div class="repeatText">${config.repeat.display}</div><div class="repeatActions"><button class="primary" data-action="repeat-audio">▶ ${copy('again')}</button></div><div class="selfCheck"><button class="${selfCheck === 'practice' ? 'on' : ''}" data-action="self-check" data-value="practice">↻ ${copy('needPractice')}</button><button class="${selfCheck === 'good' ? 'on' : ''}" data-action="self-check" data-value="good">✓ ${copy('soundsGood')}</button></div></div>${selfCheck ? '' : `<div class="note">${copy('chooseCheck')}</div>`}`);
+      return shell(`<span class="eyebrow">${copy('repeatTag')}</span><h1>${copy('repeatTitle')}</h1><p class="lead">${copy('repeatLead')}</p><div class="repeatBox"><small>${copy('listenPhrase')}</small><div class="repeatText">${config.repeat.display}</div><div class="repeatActions"><button class="primary" data-action="repeat-audio" aria-label="${soundUi('listenExpression',{text:config.repeat.display})}">▶ ${soundUi('listenExpression',{text:config.repeat.display})}</button></div><div class="selfCheck"><button class="${selfCheck === 'practice' ? 'on' : ''}" data-action="self-check" data-value="practice">↻ ${copy('needPractice')}</button><button class="${selfCheck === 'good' ? 'on' : ''}" data-action="self-check" data-value="good">✓ ${copy('soundsGood')}</button></div></div>${selfCheck ? '' : `<div class="note">${copy('chooseCheck')}</div>`}`);
     }
 
     function renderChallenge() {
@@ -401,6 +418,18 @@
       if (action === 'speak') speak(button.dataset.value);
       if (action === 'repeat-audio') speak(config.repeat.audio);
       if (action === 'phrase') { phraseHeard = true; speak(config.phrase.audio); render(); }
+      if (action === 'structured-audio') {
+        const kind = button.dataset.kind;
+        const itemIndex = Number(button.dataset.index);
+        const item = config[kind][itemIndex];
+        const role = button.dataset.role;
+        const value = role === 'vowel' ? item.spokenExample : role === 'letter-name' ? item.letterName : item.demoSyllable;
+        const file = role === 'vowel' ? item.audio : role === 'letter-name' ? item.letterNameAudio : item.demoAudio;
+        if (!file || !value) return;
+        heard[kind].add(itemIndex);
+        speak(value);
+        render();
+      }
       if (action === 'hear') {
         const items = button.dataset.kind === 'words' ? config.words : config[button.dataset.kind];
         heard[button.dataset.kind].add(Number(button.dataset.index));
@@ -454,5 +483,5 @@
     render();
   }
 
-  global.NikigoLesson = Object.freeze({ mount });
+  global.NikigoLesson = Object.freeze({ mount, uiCopy:SOUND_UI });
 })(window);

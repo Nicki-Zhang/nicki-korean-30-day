@@ -16,8 +16,12 @@ function loadInlineConfig(file) {
     .map(match => match[1])
     .filter(Boolean);
   let config;
+  const soundContext = {};
+  soundContext.window = soundContext;
+  vm.runInNewContext(fs.readFileSync('hangul-sound-data.js', 'utf8'), soundContext, { filename: 'hangul-sound-data.js' });
+  const lessonWindow = { NikigoAudio: globalThis.NikigoAudio, NikigoHangulSoundData:soundContext.NikigoHangulSoundData };
   vm.runInNewContext(scripts.at(-1), {
-    window: { NikigoAudio: globalThis.NikigoAudio },
+    window: lessonWindow,
     NikigoLesson: { mount: value => { config = value; } }
   }, { filename: file });
   if (!config) throw new Error(`${file} did not mount a lesson config.`);

@@ -45,6 +45,7 @@ assert.match(lessonEngine, /global\.NIKIGO_COURSES/);
 assert.match(lessonEngine, /function goNextLesson\(\)/);
 assert.match(worker, /\.\/lesson-00\.html/);
 assert.match(worker, /\.\/lesson-00\.js/);
+assert.match(worker, /\.\/hangul-sound-data\.js/);
 
 const ids = [...app.matchAll(/\sid=["']([^"']+)["']/g)].map(match => match[1]);
 const duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);
