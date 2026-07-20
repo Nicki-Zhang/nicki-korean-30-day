@@ -33,6 +33,8 @@
     ...(options.mimeType ? { mimeType:options.mimeType } : {}),
     ...(options.sourceRunId ? { sourceRunId:options.sourceRunId } : {}),
     ...(options.sourceArtifact ? { sourceArtifact:options.sourceArtifact } : {}),
+    ...(options.sourceSha256 ? { sourceSha256:options.sourceSha256 } : {}),
+    ...(options.postProcessingReport ? { postProcessingReport:options.postProcessingReport } : {}),
     ...(options.technicalValidation ? { technicalValidation:options.technicalValidation } : {}),
     ...(options.reviewMethod ? { reviewMethod:options.reviewMethod } : {}),
     ...(options.reviewedAt ? { reviewedAt:options.reviewedAt } : {}),
@@ -149,12 +151,33 @@
     ['ja','ㅈ','plain','자'],['cha','ㅊ','aspirated','차'],['jja','ㅉ','tense','짜'],
     ['sa','ㅅ','plain','사'],['ssa','ㅆ','tense','싸']
   ];
+  const contrastReleases = Object.freeze({
+    ga:Object.freeze({
+      reviewStatus:'approved', assetStatus:'available', sha256:'705fc26ec549f1882f06eaeb997ba59f0ceef95e8c9603e5a7a82b35451205a9', fileSize:11949, mimeType:'audio/mpeg',
+      voice:'marin', generationDate:'2026-07-20T06:00:11.789Z', sourceRunId:'29720437383', sourceArtifact:'nikigo-audio-batch-02a-gaka-r1-run-29720437383-a23a08b', sourceSha256:'db8fe0dece7cf0290c11ec5eebde750e3c8051169b17c11e83775f7438453860',
+      postProcessingReport:'audio/k0-consonant-contrast/postprocessing-report.json', technicalValidation:'passed', reviewMethod:'product-owner-listening', reviewedAt:'2026-07-20', nativeReviewStatus:'deferred', nativeReviewer:null, needsNativeReview:false,
+      commercialUseBasis:'OpenAI API generated audio; legal review pending', rightsReviewStatus:'pending', reviewNotes:'Product owner listening passed on 2026-07-20; deterministic silence trim and linear gain alignment applied; optional native-speaker review deferred.'
+    }),
+    ka:Object.freeze({
+      reviewStatus:'approved', assetStatus:'available', sha256:'7a4754d8c2583d1941a8f2d18bfd41239e4e753726af880fc3c0ea7dd2c697ed', fileSize:11949, mimeType:'audio/mpeg',
+      voice:'marin', generationDate:'2026-07-20T06:00:11.789Z', sourceRunId:'29720437383', sourceArtifact:'nikigo-audio-batch-02a-gaka-r1-run-29720437383-a23a08b', sourceSha256:'460d6f23a6c17d1f3a6522289d0fe99d63253d598c5141695b45f12a29b7be71',
+      postProcessingReport:'audio/k0-consonant-contrast/postprocessing-report.json', technicalValidation:'passed', reviewMethod:'product-owner-listening', reviewedAt:'2026-07-20', nativeReviewStatus:'deferred', nativeReviewer:null, needsNativeReview:false,
+      commercialUseBasis:'OpenAI API generated audio; legal review pending', rightsReviewStatus:'pending', reviewNotes:'Product owner listening passed on 2026-07-20; deterministic silence trim and linear gain alignment applied; optional native-speaker review deferred.'
+    }),
+    kka:Object.freeze({
+      reviewStatus:'approved', assetStatus:'available', sha256:'c63080ad2e208b9f9319b806d2470143b7a2140cba4768c0cc61947cccf9e545', fileSize:10029, mimeType:'audio/mpeg',
+      voice:'marin', generationDate:'2026-07-20T04:40:35.153Z', sourceRunId:'29717434767', sourceArtifact:'nikigo-audio-batch-02a-run-29717434767-0213e68', sourceSha256:'20a33fd85584d2efc288513368a90c0ef94022f21a074bf0646a641b46ccdf27',
+      postProcessingReport:'audio/k0-consonant-contrast/postprocessing-report.json', technicalValidation:'passed', reviewMethod:'product-owner-listening', reviewedAt:'2026-07-20', nativeReviewStatus:'deferred', nativeReviewer:null, needsNativeReview:false,
+      commercialUseBasis:'OpenAI API generated audio; legal review pending', rightsReviewStatus:'pending', reviewNotes:'Product owner listening passed on 2026-07-20; original generated file retained as the source and only deterministic silence trim and linear gain alignment applied; optional native-speaker review deferred.'
+    })
+  });
   lessons['k0-consonant-contrast'] = Object.freeze({
     title:'听懂普通音、送气音和紧音',
     items:Object.freeze(contrastSpecs.map(([id, targetSymbol, category, syllable]) => item(id, syllable, syllable, `${id}.mp3`, {
       lessonId:'k0-consonant-contrast', targetSymbol, audioType:'initial-example', pronunciationType:'full-syllable',
       pronunciationRule:`${category} onset in a complete syllable`, screen:'对比卡片、听辨练习', teachingGoal:'通过完整音节比较普通音、送气音和紧音',
-      voiceSource:'openai-gpt-4o-mini-tts', assetStatus:'missing', reviewNotes:'Not generated; Korean native-speaker review required.'
+      voiceSource:'openai-gpt-4o-mini-tts', assetStatus:'missing', reviewNotes:'Not generated; Korean native-speaker review required.',
+      ...(contrastReleases[id] || {})
     })))
   });
 
@@ -189,7 +212,10 @@
 
   const APPROVED_ASSET_HASHES = Object.freeze({
     'lesson-00:yo':'d2570041a865d0d686e6debf1a06584fa10b1177ebb590e4654a30506f5538b0',
-    'lesson-00:yu':'3eb015cd5a7a9c7955976e1d0acd6669126e7c5c74a1c928f7d7b9d925d98430'
+    'lesson-00:yu':'3eb015cd5a7a9c7955976e1d0acd6669126e7c5c74a1c928f7d7b9d925d98430',
+    'k0-consonant-contrast:ga':'705fc26ec549f1882f06eaeb997ba59f0ceef95e8c9603e5a7a82b35451205a9',
+    'k0-consonant-contrast:ka':'7a4754d8c2583d1941a8f2d18bfd41239e4e753726af880fc3c0ea7dd2c697ed',
+    'k0-consonant-contrast:kka':'c63080ad2e208b9f9319b806d2470143b7a2140cba4768c0cc61947cccf9e545'
   });
   const REQUIRED_RELEASE_FIELDS = ['voiceSource','model','voice','generationDate','commercialUseBasis','rightsReviewStatus','reviewMethod','reviewedAt','nativeReviewStatus','technicalValidation','sha256','sourceRunId','sourceArtifact','reviewNotes'];
   function canPlayAudio(requestedSpeechText, entry, expectedAudioType) {

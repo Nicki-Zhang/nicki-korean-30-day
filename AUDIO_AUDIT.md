@@ -1,6 +1,16 @@
 # Nikigo 全课程韩语发音审计
 
-> 审计状态：代码链路已修复；Batch 1 的 요、유 已完成技术验证和产品负责人试听并接入。其余音频仍为 `pending`；母语者审核为可选发布前抽检。
+> 审计状态：代码链路已修复；Batch 1 的 요、유及 Batch 2A 的 가、카、까已完成技术验证、产品负责人试听和正式接入。其余 72 条音频仍为 `pending`；母语者审核为可选发布前抽检。
+
+## 已批准并接入的 Batch 2A
+
+| lesson | 页面 | 显示内容 | 播放内容 | 正式文件 | 类型 | 审核 | 权利复核 |
+|---|---|---|---|---|---|---|---|
+| k0-consonant-contrast | 第0课示例、第4课对比与听辨 | ㄱ / 가 / 普通音 | 가 | `audio/k0-consonant-contrast/ga.mp3` | `initial-example` | 产品负责人试听通过；技术验证通过 | pending |
+| k0-consonant-contrast | 第0课示例、第4课对比与听辨 | ㅋ / 카 / 送气音 | 카 | `audio/k0-consonant-contrast/ka.mp3` | `initial-example` | 产品负责人试听通过；技术验证通过 | pending |
+| k0-consonant-contrast | 第0课示例、第4课对比与听辨 | ㄲ / 까 / 紧音 | 까 | `audio/k0-consonant-contrast/kka.mp3` | `initial-example` | 产品负责人试听通过；技术验证通过 | pending |
+
+三条音频采用相同的确定性静音裁剪和线性增益对齐；输入/输出 SHA、裁剪量、增益和前后声学参数见 `audio/k0-consonant-contrast/postprocessing-report.json`。未使用降噪、压缩、变速、变调、设备 TTS 或文字 fallback。
 
 ## 根因摘要
 

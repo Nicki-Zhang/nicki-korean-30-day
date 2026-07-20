@@ -87,13 +87,16 @@ assert.ok(formal1.items.every(x=>x.reviewStatus==='approved'&&x.assetStatus==='a
 assert.deepEqual(formal1.items.map(x=>x.id),['yo','yu']);
 const formal2=JSON.parse(fs.readFileSync(path.join(root,'audio/k0-consonant-contrast/manifest.json'),'utf8'));
 const formal2a=formal2.items.filter(x=>['ga','ka','kka'].includes(x.id));
-assert.deepEqual(formal2a.map(x=>x.id),['ga','ka','kka']);assert.ok(formal2a.every(x=>x.reviewStatus==='pending'&&x.assetStatus==='missing'));
+assert.deepEqual(formal2a.map(x=>x.id),['ga','ka','kka']);assert.ok(formal2a.every(x=>x.reviewStatus==='approved'&&x.assetStatus==='available'));
 assert.doesNotMatch(fs.readFileSync(path.join(root,'audio-catalog.js'),'utf8'),/staging\//);
 assert.doesNotMatch(fs.readFileSync(path.join(root,'sw.js'),'utf8'),/staging\//);
 
 const published=fs.mkdtempSync(path.join(os.tmpdir(),'nikigo-audio-published-block-'));
 result=spawnSync(process.execPath,[path.join(root,'scripts/preflight-audio-batch.mjs'),'--batch-id','audio-batch-01','--mode','generate','--expected-count','2','--confirmation','GENERATE audio-batch-01 2','--staging-dir',published],{cwd:root,encoding:'utf8',env:{...process.env,[secretVariableName]:unusedSecretMarker}});
 assert.notEqual(result.status,0,'Published Batch 1 must not be generated again.');assert.match(result.stderr,/pending\/missing before review/);
+const published2a=fs.mkdtempSync(path.join(os.tmpdir(),'nikigo-audio-2a-published-block-'));
+result=spawnSync(process.execPath,[path.join(root,'scripts/preflight-audio-batch.mjs'),'--batch-id','audio-batch-02a-gaka-r1','--mode','generate','--expected-count','2','--confirmation','GENERATE audio-batch-02a-gaka-r1 2','--staging-dir',published2a],{cwd:root,encoding:'utf8',env:{...process.env,[secretVariableName]:unusedSecretMarker}});
+assert.notEqual(result.status,0,'Published Batch 2A revision must not be generated again.');assert.match(result.stderr,/pending\/missing before review/);
 
 for(const [name,args,pattern] of [
   ['unknown Batch 2B',['--batch-id','audio-batch-02b','--mode','dry-run','--expected-count','13','--confirmation','DRY-RUN'],/Unknown batchId/],
@@ -111,4 +114,4 @@ fs.cpSync(temp,broken,{recursive:true});fs.unlinkSync(path.join(broken,'files/ka
 result=spawnSync(process.execPath,[path.join(root,'scripts/validate-audio-staging.mjs'),'--batch-id','audio-batch-02a-gaka-r1','--mode','dry-run','--expected-count','2','--staging-dir',broken],{cwd:root,encoding:'utf8'});
 assert.notEqual(result.status,0,'Missing staged file must fail technical validation.');assert.ok(fs.existsSync(path.join(broken,'artifact-manifest.json')),'Failure must still preserve an artifact manifest.');
 
-console.log('Validated frozen Batch 1 settings, exact two-item 가/카 revision dry-run, preserved 까 exclusion, planning-only Batch 2B isolation, zero API/network access, failure-preserved reports, and workflow safeguards.');
+console.log('Validated frozen Batch 1 settings, published two-item 가/카 revision dry-run isolation, paid regeneration blocking, preserved 까 exclusion, planning-only Batch 2B isolation, zero API/network access, failure-preserved reports, and workflow safeguards.');

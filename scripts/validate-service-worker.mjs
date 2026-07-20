@@ -6,10 +6,10 @@ const worker = fs.readFileSync('sw.js', 'utf8');
 const cacheName = worker.match(/const CACHE = '([^']+)'/)?.[1];
 assert.ok(cacheName, 'Service Worker cache version is missing.');
 assert.notEqual(cacheName, 'nikigo-v13-lesson-05', 'Lesson 6 must not reuse the Lesson 5 cache.');
-assert.match(cacheName, /batch-01-approved/, 'Cache version must identify the approved Batch 1 asset update.');
+assert.match(cacheName, /batch-02a-approved/, 'Cache version must identify the approved Batch 2A asset update.');
 
 const cachedAssets = new Set([...worker.matchAll(/['"]\.\/([^'"]+)['"]/g)].map(match => match[1]));
-for (const asset of ['nikigo-app.html', 'app-state.js', 'course-catalog.js', 'audio-catalog.js', 'lesson-06.html', 'lesson-06.js', 'lesson-06.css', 'audio/lesson-00/yo.mp3', 'audio/lesson-00/yu.mp3']) {
+for (const asset of ['nikigo-app.html', 'app-state.js', 'course-catalog.js', 'audio-catalog.js', 'lesson-06.html', 'lesson-06.js', 'lesson-06.css', 'audio/lesson-00/yo.mp3', 'audio/lesson-00/yu.mp3', 'audio/k0-consonant-contrast/ga.mp3', 'audio/k0-consonant-contrast/ka.mp3', 'audio/k0-consonant-contrast/kka.mp3']) {
   assert.ok(cachedAssets.has(asset), `Service Worker is missing ${asset}.`);
 }
 

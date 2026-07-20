@@ -30,8 +30,8 @@ for (const [index,item] of manifest.items.entries()) {
   assert.deepEqual([item.targetSymbol,item.speechText,item.file],[symbol,spokenSyllable,audioFile]);
   for (const field of ['targetSymbol','speechText','file','expectedPronunciation','reviewStatus','assetStatus']) assert.ok(String(item[field]||'').trim(),`${item.id} missing ${field}`);
   assert.equal(item.audioType,'initial-example');
-  assert.equal(item.reviewStatus,'pending');
-  assert.equal(item.assetStatus,'missing');
+  if(index<3){assert.equal(item.reviewStatus,'approved');assert.equal(item.assetStatus,'available');}
+  else{assert.equal(item.reviewStatus,'pending');assert.equal(item.assetStatus,'missing');}
   assert.doesNotMatch(item.speechText,/^[ㄱ-ㅎ]$/u);
   assert.doesNotMatch(item.speechText,/^[A-Za-z]+$/);
 }

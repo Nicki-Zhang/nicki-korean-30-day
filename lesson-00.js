@@ -61,7 +61,8 @@
     const audioResolution = (item, action) => {
       const speechText = action === 'vowel' ? item.vowelCarrierSyllable : action === 'letter-name' ? item.letterName : item.demoSyllable;
       const audioType = action === 'vowel' ? 'vowel' : action === 'letter-name' ? 'letter-name' : 'initial-example';
-      return global.NikigoAudio.resolve(speechText, audioType);
+      const lessonId = action === 'demo' ? 'k0-consonant-contrast' : undefined;
+      return global.NikigoAudio.resolve(speechText, audioType, lessonId);
     };
 
     function renderLetters() {
@@ -137,7 +138,13 @@
       currentAudio.play().catch(() => { finish(false); byId('selectionStatus').textContent = text('audioError'); });
     }
 
-    function goHome() { global.location.href = `nikigo-app.html?lang=${language}#courses`; }
+    function stopAudio() {
+      playbackToken += 1;
+      if (currentAudio) currentAudio.pause();
+      currentAudio = null;
+      playingAudioKey = '';
+    }
+    function goHome() { stopAudio(); global.location.href = `nikigo-app.html?lang=${language}#courses`; }
     function choose(level) {
       if (!['beginner','partial','reader'].includes(level)) return;
       global.NikigoState.save(choicePatch(global.NikigoState.get(), level), 'lesson-00:starting-point');
@@ -149,6 +156,7 @@
     global.document.querySelector('.mapGrid').addEventListener('click', event => {
       const button = event.target.closest('[data-symbol]');
       if (!button) return;
+      stopAudio();
       selectedSymbol = button.dataset.symbol;
       render();
       byId('letterDetail').scrollIntoView({ behavior:'smooth', block:'nearest' });
@@ -159,6 +167,7 @@
       play(global.NikigoHangulSoundData.bySymbol[selectedSymbol], button.dataset.audioAction);
     });
     byId('language').addEventListener('change', event => {
+      stopAudio();
       language = SUPPORTED.includes(event.target.value) ? event.target.value : 'en';
       global.NikigoState.update({ interfaceLanguage:language, learningLanguage:language }, 'lesson-00:language');
       const nextUrl = new URL(global.location.href); nextUrl.searchParams.set('lang', language); global.history.replaceState(null, '', nextUrl);

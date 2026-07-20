@@ -13,7 +13,7 @@ const all=Object.entries(audio.lessons).flatMap(([lessonId,lesson])=>lesson.item
 const batch=audio.lessons['lesson-00'].items;
 assert.equal(all.length,77);
 assert.deepEqual(batch.map(entry=>entry.id),['yo','yu']);
-assert.deepEqual(Object.keys(audio.approvedAssetHashes).sort(),['lesson-00:yo','lesson-00:yu']);
+assert.deepEqual(Object.keys(audio.approvedAssetHashes).sort(),['k0-consonant-contrast:ga','k0-consonant-contrast:ka','k0-consonant-contrast:kka','lesson-00:yo','lesson-00:yu']);
 
 for(const entry of batch){
   const target=expected.get(entry.id);assert.ok(target);
@@ -35,8 +35,8 @@ for(const entry of batch){
 
 const others=all.filter(entry=>entry.lessonId!=='lesson-00');
 assert.equal(others.length,75,'Current catalog contains 75 other records, not 73.');
-assert.ok(others.every(entry=>entry.reviewStatus==='pending'));
-assert.ok(others.every(entry=>!audio.canPlayAudio(entry.speechText,entry,entry.audioType)));
+assert.equal(others.filter(entry=>entry.reviewStatus==='approved').length,3,'Only Batch 2A may join Batch 1 as approved audio.');
+assert.equal(others.filter(entry=>entry.reviewStatus==='pending').length,72);
 
 const manifest=JSON.parse(fs.readFileSync('audio/lesson-00/manifest.json','utf8'));
 assert.deepEqual(manifest.items,batch);
@@ -58,4 +58,4 @@ assert.doesNotMatch(source,/speechSynthesis|SpeechSynthesisUtterance|getVoices|t
 const worker=fs.readFileSync('sw.js','utf8');
 for(const file of ['./audio/lesson-00/yo.mp3','./audio/lesson-00/yu.mp3']) assert.ok(worker.includes(file));
 assert.doesNotMatch(worker,/staging\/|nikigo-audio-batch-01-validation-run/);
-console.log('Validated Batch 1 publication: exact two approved assets, immutable SHA map, 75 unchanged pending records, four-language UI, fail-closed playback, and isolated Service Worker cache.');
+console.log('Validated Batch 1 publication remains immutable after Batch 2A: exact yo/yu SHA values, four-language UI, fail-closed playback, and isolated Service Worker cache.');

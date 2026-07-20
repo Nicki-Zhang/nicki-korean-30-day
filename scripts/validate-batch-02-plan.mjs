@@ -28,12 +28,13 @@ assert.deepEqual(batch2b.items,originalExpected.slice(3));
 
 const contrast=audio.lessons['k0-consonant-contrast'].items;
 assert.deepEqual(contrast.map(x=>[x.id,x.speechText,x.audioType,x.file]),originalExpected.slice(0,14));
-assert.ok(contrast.every(x=>x.reviewStatus==='pending'&&x.assetStatus==='missing'));
+assert.ok(contrast.slice(0,3).every(x=>x.reviewStatus==='approved'&&x.assetStatus==='available'));
+assert.ok(contrast.slice(3).every(x=>x.reviewStatus==='pending'&&x.assetStatus==='missing'));
 assert.ok(batch2a.items.every(allowed=>contrast.some(item=>item.id===allowed.id&&item.speechText===allowed.speechText&&item.audioType===allowed.audioType&&item.file===allowed.outputFile)));
 
 const all=Object.values(audio.lessons).flatMap(lesson=>lesson.items);
-assert.equal(all.length,77);assert.equal(all.filter(x=>x.reviewStatus==='approved'&&x.assetStatus==='available').length,2);
-assert.ok(all.filter(x=>!['yo','yu'].includes(x.id)||x.lessonId!=='lesson-00').every(x=>x.reviewStatus==='pending'));
+assert.equal(all.length,77);assert.equal(all.filter(x=>x.reviewStatus==='approved'&&x.assetStatus==='available').length,5);
+assert.equal(all.filter(x=>x.reviewStatus==='pending').length,72);
 assert.equal(all.some(x=>x.speechText==='하'&&x.audioType==='initial-example'),false,'하 remains a documented formal-catalog gap.');
 assert.equal(all.some(x=>x.speechText==='그'&&x.audioType==='syllable'),false,'그 remains a documented formal-catalog gap.');
 assert.match(fs.readFileSync('hangul-sound-data.js','utf8'),/consonant\('ㅎ',[^\n]*'하'/u);
@@ -41,4 +42,4 @@ assert.match(fs.readFileSync('lesson-05.js','utf8'),/\['ㄱ','ㅡ','그'\]/u);
 const audit=fs.readFileSync('K0_AUDIO_PLAYER_AUDIT.csv','utf8');
 assert.match(audit,/lesson05-top-examples-2[^\n]*听示例音节 그[^\n]*missing-catalog-entry/u);
 assert.match(fs.readFileSync('K0_AUDIO_GENERATION_BATCH_PLAN.md','utf8'),/历史基线 `5fe8fb1`[\s\S]*까[\s\S]*初步通过[\s\S]*audio-batch-02a-gaka-r1[\s\S]*하[\s\S]*그/u);
-console.log('Validated the historical 16-item scope, preserved 까 review SHA, exact 2-item 가/카 revision allowlist, blocked Batch 2B, formal pending/missing state, and explicit 하/그 catalog gaps.');
+console.log('Validated the historical 16-item scope, preserved 까 source SHA, published 가/카/까, exact 2-item revision allowlist, blocked Batch 2B, remaining pending state, and explicit 하/그 catalog gaps.');
