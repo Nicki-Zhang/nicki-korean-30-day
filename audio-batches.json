@@ -12,13 +12,29 @@
           "id": "yo",
           "speechText": "요",
           "audioType": "vowel",
-          "outputFile": "yo.mp3"
+          "outputFile": "yo.mp3",
+          "expectedTechnical": {
+            "sampleRate": 24000,
+            "channels": 1,
+            "duration": 0.912,
+            "durationTolerance": 0.03,
+            "minDuration": 0.5,
+            "maxDuration": 3
+          }
         },
         {
           "id": "yu",
           "speechText": "유",
           "audioType": "vowel",
-          "outputFile": "yu.mp3"
+          "outputFile": "yu.mp3",
+          "expectedTechnical": {
+            "sampleRate": 24000,
+            "channels": 1,
+            "duration": 1.608,
+            "durationTolerance": 0.03,
+            "minDuration": 0.5,
+            "maxDuration": 3
+          }
         }
       ]
     }

@@ -11,6 +11,7 @@ on:
         options:
           - dry-run
           - generate
+          - validation-only
       batchId:
         description: Reviewed audio batch allowlist
         required: true
@@ -28,6 +29,21 @@ on:
         required: false
         default: DRY-RUN
         type: string
+      sourceRunId:
+        description: Existing workflow run containing a generated audio Artifact (validation-only)
+        required: false
+        default: ""
+        type: string
+      sourceArtifactName:
+        description: Exact existing Artifact name (validation-only)
+        required: false
+        default: ""
+        type: string
+      expectedSha256:
+        description: Exact comma-separated filename=sha256 allowlist (validation-only)
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: read
@@ -38,10 +54,14 @@ concurrency:
 
 jobs:
   stage-audio:
+    if: inputs.mode != 'validation-only'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
       contents: read
+    env:
+      NIKIGO_FFMPEG: ${{ runner.temp }}/nikigo-ffmpeg-6.1/ffmpeg
+      NIKIGO_FFPROBE: ${{ runner.temp }}/nikigo-ffmpeg-6.1/ffprobe
     steps:
       - name: Checkout authorized commit
         uses: actions/checkout@v5
@@ -78,6 +98,24 @@ jobs:
         env:
           NIKIGO_BASE_REF: origin/main
         run: npm test
+
+      - name: Install fixed FFmpeg 6.1 toolchain
+        run: >-
+          node scripts/install-media-toolchain.mjs
+          --destination "${{ runner.temp }}/nikigo-ffmpeg-6.1"
+          --report "staging/${{ inputs.batchId }}/toolchain-install-report.json"
+
+      - name: Verify ffmpeg, ffprobe and repository fixture before any generation
+        shell: bash
+        run: |
+          command -v "$NIKIGO_FFMPEG"
+          command -v "$NIKIGO_FFPROBE"
+          "$NIKIGO_FFMPEG" -version
+          "$NIKIGO_FFPROBE" -version
+          node scripts/validate-media-toolchain.mjs \
+            --ffmpeg "$NIKIGO_FFMPEG" \
+            --ffprobe "$NIKIGO_FFPROBE" \
+            --report "staging/${{ inputs.batchId }}/toolchain-preflight-report.json"
 
       - name: Validate exact batch allowlist before API access
         run: >-
@@ -120,6 +158,8 @@ jobs:
           --mode "${{ inputs.mode }}"
           --expected-count "${{ inputs.expectedCount }}"
           --staging-dir "staging/${{ inputs.batchId }}"
+          --ffmpeg "$NIKIGO_FFMPEG"
+          --ffprobe "$NIKIGO_FFPROBE"
 
       - name: Upload staged audio and reports
         if: always()
@@ -139,4 +179,115 @@ jobs:
           echo "- Batch: ${{ inputs.batchId }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Mode: ${{ inputs.mode }}" >> "$GITHUB_STEP_SUMMARY"
           echo "- Expected count: ${{ inputs.expectedCount }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Formal App manifests were not modified." >> "$GITHUB_STEP_SUMMARY"
+
+  validate-existing-audio:
+    if: inputs.mode == 'validation-only'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      actions: read
+      contents: read
+    env:
+      NIKIGO_FFMPEG: ${{ runner.temp }}/nikigo-ffmpeg-6.1/ffmpeg
+      NIKIGO_FFPROBE: ${{ runner.temp }}/nikigo-ffmpeg-6.1/ffprobe
+      VALIDATION_DIR: staging/${{ inputs.batchId }}-validation
+      SOURCE_DIR: ${{ runner.temp }}/nikigo-source-audio
+    steps:
+      - name: Checkout authorized validation commit
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          package-manager-cache: false
+
+      - name: Capture non-sensitive validation metadata
+        id: metadata
+        shell: bash
+        run: echo "short_sha=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch and verify remote main baseline
+        shell: bash
+        run: |
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          node scripts/validate-repository-safety.mjs --base-ref origin/main --baseline-only
+
+      - name: Preflight validation-only request
+        run: >-
+          node scripts/preflight-audio-validation.mjs
+          --source-run-id "${{ inputs.sourceRunId }}"
+          --source-artifact-name "${{ inputs.sourceArtifactName }}"
+          --batch-id "${{ inputs.batchId }}"
+          --expected-count "${{ inputs.expectedCount }}"
+          --expected-sha256 "${{ inputs.expectedSha256 }}"
+          --report "$VALIDATION_DIR/validation-request.json"
+
+      - name: Run complete tests without audio generation
+        env:
+          NIKIGO_BASE_REF: origin/main
+        run: npm test
+
+      - name: Install fixed FFmpeg 6.1 toolchain
+        run: >-
+          node scripts/install-media-toolchain.mjs
+          --destination "${{ runner.temp }}/nikigo-ffmpeg-6.1"
+          --report "$VALIDATION_DIR/toolchain-install-report.json"
+
+      - name: Verify ffmpeg, ffprobe and repository fixture
+        shell: bash
+        run: |
+          command -v "$NIKIGO_FFMPEG"
+          command -v "$NIKIGO_FFPROBE"
+          "$NIKIGO_FFMPEG" -version
+          "$NIKIGO_FFPROBE" -version
+          node scripts/validate-media-toolchain.mjs \
+            --ffmpeg "$NIKIGO_FFMPEG" \
+            --ffprobe "$NIKIGO_FFPROBE" \
+            --report "$VALIDATION_DIR/toolchain-preflight-report.json"
+
+      - name: Download exact existing audio Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.sourceArtifactName }}
+          path: ${{ env.SOURCE_DIR }}
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ inputs.sourceRunId }}
+
+      - name: Validate existing audio without TTS access
+        run: >-
+          node scripts/validate-existing-audio.mjs
+          --source-run-id "${{ inputs.sourceRunId }}"
+          --source-artifact-name "${{ inputs.sourceArtifactName }}"
+          --batch-id "${{ inputs.batchId }}"
+          --expected-count "${{ inputs.expectedCount }}"
+          --expected-sha256 "${{ inputs.expectedSha256 }}"
+          --source-dir "$SOURCE_DIR"
+          --output-dir "$VALIDATION_DIR"
+          --ffmpeg "$NIKIGO_FFMPEG"
+          --ffprobe "$NIKIGO_FFPROBE"
+
+      - name: Upload validation report and unchanged source audio
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nikigo-${{ inputs.batchId }}-validation-run-${{ github.run_id }}-${{ steps.metadata.outputs.short_sha }}
+          path: ${{ env.VALIDATION_DIR }}/
+          retention-days: 7
+          if-no-files-found: error
+
+      - name: Write non-blocking validation summary
+        if: always()
+        continue-on-error: true
+        shell: bash
+        run: |
+          echo "### Nikigo existing audio validation" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Source run: ${{ inputs.sourceRunId }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Source Artifact: ${{ inputs.sourceArtifactName }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Expected count: ${{ inputs.expectedCount }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- API requests: 0" >> "$GITHUB_STEP_SUMMARY"
           echo "- Formal App manifests were not modified." >> "$GITHUB_STEP_SUMMARY"

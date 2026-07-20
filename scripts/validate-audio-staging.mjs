@@ -1,9 +1,10 @@
+import fs from 'node:fs';
 import { readFile, stat } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import { spawnSync } from 'node:child_process';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadBatch, parseArgs, validateBatchShape, writeJson } from './audio-batch-lib.mjs';
+import { validateMediaFile } from './media-validation-lib.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = parseArgs(process.argv.slice(2));
@@ -11,6 +12,8 @@ const batchId = String(args['batch-id'] || '');
 const mode = String(args.mode || '');
 const expectedCount = Number(args['expected-count']);
 const stagingDir = resolve(root, String(args['staging-dir'] || `staging/${batchId}`));
+const ffmpegPath = String(args.ffmpeg || 'ffmpeg');
+const ffprobePath = String(args.ffprobe || 'ffprobe');
 const batch = await loadBatch(root, batchId);
 validateBatchShape(batchId, batch, expectedCount);
 
@@ -28,6 +31,12 @@ const artifact = {
   technicalValidation:{ status:'pending', errors }, items:[]
 };
 
+const expectedStagedFiles=(generation.items||[]).map(item=>String(item.stagedFile||'').replace(/^files\//u,''));
+try {
+  const actualFiles=fs.readdirSync(resolve(stagingDir,'files'),{withFileTypes:true}).filter(entry=>entry.isFile()).map(entry=>entry.name).sort();
+  if(JSON.stringify(actualFiles)!==JSON.stringify([...expectedStagedFiles].sort())) errors.push(`Staging files differ from generation report: expected ${expectedStagedFiles.join(', ')||'none'}, found ${actualFiles.join(', ')||'none'}.`);
+} catch(error) { errors.push(`Staging files directory cannot be read: ${error.message}`); }
+
 for (const item of generation.items || []) {
   const path = resolve(stagingDir, item.stagedFile || 'missing');
   try {
@@ -35,17 +44,17 @@ for (const item of generation.items || []) {
     const info = await stat(path);
     if (!info.size) throw new Error('file is empty');
     let codec='fixture',duration=null,sampleRate=null,channels=null,status='fixture-only';
+    let mediaValidation=null;
     if (mode === 'generate') {
-      const probe = spawnSync('ffprobe',['-v','error','-show_entries','stream=codec_name,sample_rate,channels:format=duration','-of','json',path],{encoding:'utf8'});
-      if (probe.status !== 0) throw new Error('ffprobe could not decode the file');
-      const parsed=JSON.parse(probe.stdout),stream=parsed.streams?.[0];
-      codec=stream?.codec_name;duration=Number(parsed.format?.duration);sampleRate=Number(stream?.sample_rate);channels=Number(stream?.channels);status='passed';
-      if (codec!=='mp3'||!Number.isFinite(duration)||duration<=0||!sampleRate||!channels) throw new Error('invalid MP3 technical metadata');
+      mediaValidation=await validateMediaFile(path,{ffmpegPath,ffprobePath});
+      codec=mediaValidation.technical.codec;duration=mediaValidation.technical.duration;sampleRate=mediaValidation.technical.sampleRate;channels=mediaValidation.technical.channels;status=mediaValidation.status;
+      if(mediaValidation.status!=='passed') errors.push(...mediaValidation.errors.map(error=>`${item.id}: ${error}`));
     }
     artifact.items.push({
       id:item.id,speechText:item.speechText,audioType:item.audioType,outputFile:item.stagedFile,
       fileSize:info.size,sha256:createHash('sha256').update(data).digest('hex'),codec,duration,sampleRate,channels,
-      generationStatus:item.generationStatus,reviewStatus:'underReview',technicalValidation:status
+      generationStatus:item.generationStatus,reviewStatus:'underReview',technicalValidation:status,
+      mediaCommands:mediaValidation?.commands||null,mediaErrors:mediaValidation?.errors||[]
     });
   } catch (error) {
     errors.push(`${item.id || 'unknown'}: ${error.message}`);

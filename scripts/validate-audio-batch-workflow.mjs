@@ -13,7 +13,7 @@ assert.equal(Object.keys(config.batches).length,1,'Only Batch 1 may be configure
 assert.equal(batch.expectedCount,2);assert.deepEqual(batch.items.map(x=>[x.speechText,x.outputFile]),[['요','yo.mp3'],['유','yu.mp3']]);
 assert.doesNotMatch(workflow,/^\s{2}(push|pull_request|schedule):/m);
 assert.match(workflow,/^\s{2}workflow_dispatch:/m);
-assert.match(workflow,/mode:[\s\S]*dry-run[\s\S]*generate/);
+assert.match(workflow,/mode:[\s\S]*dry-run[\s\S]*generate[\s\S]*validation-only/);
 assert.match(workflow,/batchId:[\s\S]*audio-batch-01/);
 assert.match(workflow,/concurrency:[\s\S]*group:.*inputs\.batchId/);
 assert.doesNotMatch(workflow,/git push|contents:\s*write/);
@@ -21,6 +21,12 @@ assert.match(workflow,/fetch-depth:\s*0/);
 assert.match(workflow,/git fetch --no-tags origin main:refs\/remotes\/origin\/main/);
 assert.match(workflow,/validate-repository-safety\.mjs --base-ref origin\/main --baseline-only/);
 assert.match(workflow,/NIKIGO_BASE_REF:\s*origin\/main/);
+assert.match(workflow,/sourceRunId:[\s\S]*sourceArtifactName:[\s\S]*expectedSha256:/);
+assert.match(workflow,/stage-audio:[\s\S]*if: inputs\.mode != 'validation-only'/);
+assert.match(workflow,/validate-existing-audio:[\s\S]*if: inputs\.mode == 'validation-only'/);
+assert.match(workflow,/Install fixed FFmpeg 6\.1 toolchain/);
+assert.match(workflow,/command -v "\$NIKIGO_FFMPEG"[\s\S]*command -v "\$NIKIGO_FFPROBE"/);
+assert.match(workflow,/actions\/download-artifact@v4[\s\S]*run-id: \$\{\{ inputs\.sourceRunId \}\}/);
 assert.match(workflow,/Upload staged audio and reports[\s\S]*if:\s*always\(\)/);
 assert.match(workflow,/retention-days:\s*7/);
 assert.ok(workflow.indexOf('Run complete tests before any generation')<workflow.indexOf('Generate paid audio into staging'));
@@ -28,6 +34,9 @@ const dryStep=workflow.match(/- name: Create no-cost dry-run staging fixtures[\s
 assert.doesNotMatch(dryStep,/OPENAI_API_KEY|generate paid|api\.openai/i);
 const paidStep=workflow.match(/- name: Generate paid audio into staging[\s\S]*?(?=\n\s+- name:)/)?.[0]||'';
 assert.match(paidStep,/OPENAI_API_KEY/);assert.match(paidStep,/inputs\.mode == 'generate'/);
+const validationJob=workflow.split('\n  validate-existing-audio:')[1]||'';
+assert.doesNotMatch(validationJob,/OPENAI_API_KEY|generate-lesson-audio\.mjs|api\.openai\.com/);
+assert.match(validationJob,/apiRequestCount|API requests: 0/);
 assert.doesNotMatch(workflow,/retry|max-attempts/);
 
 const temp=fs.mkdtempSync(path.join(os.tmpdir(),'nikigo-audio-dry-run-'));
