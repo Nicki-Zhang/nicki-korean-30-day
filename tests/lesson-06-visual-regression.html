@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><title>Nikigo visual evidence regression</title><style>body{font:14px system-ui;padding:20px;color:#211b3b}#status{font-weight:900}.pass{color:#18764b}.fail{color:#b52c42}iframe{position:fixed;left:-10000px;top:0;border:0}pre{white-space:pre-wrap;font:12px ui-monospace,monospace}</style></head>
+<body><h1>Nikigo visual evidence regression</h1><p id="status">RUNNING</p><pre id="result"></pre>
+<script>
+const cases=[
+  {name:'390 catalog',width:390,height:844,url:'lesson-06-catalog-preview.html?state=mixed',key:'课程',selector:'#courses h1',main:'#courses .courseRow'},
+  {name:'390 home',width:390,height:844,url:'lesson-06-preview.html?step=0&lang=zh',key:'看懂并拼出复合元音',selector:'#lessonStage h1',main:'#lessonStage'},
+  {name:'390 builder',width:390,height:844,url:'lesson-06-preview.html?step=8&lang=zh',key:'把初声和复合元音放进一个音节块',selector:'#lessonStage h1',main:'#lessonStage'},
+  {name:'390 challenge wrong',width:390,height:844,url:'lesson-06-preview.html?step=14&lang=zh&challenge=1',key:'再看一次',selector:'#lessonStage .feedback.try',main:'#lessonStage',action(doc){doc.querySelector('button[data-question="c1"][data-value="ㅝ"]')?.click()}},
+  {name:'390 first complete',width:390,height:844,url:'lesson-06-preview.html?step=17&lang=zh',key:'本次获得 +50 XP',selector:'#lessonStage .complete',main:'#lessonStage'},
+  {name:'390 repeat complete',width:390,height:844,url:'lesson-06-preview.html?step=17&lang=zh&completed=1',key:'本次不重复发放XP',selector:'#lessonStage .complete',main:'#lessonStage'},
+  {name:'768 builder',width:768,height:1024,url:'lesson-06-preview.html?step=8&lang=zh',key:'把初声和复合元音放进一个音节块',selector:'#lessonStage h1',main:'#lessonStage'},
+  {name:'768 complete',width:768,height:1024,url:'lesson-06-preview.html?step=17&lang=zh',key:'第6课完成',selector:'#lessonStage .complete',main:'#lessonStage'},
+  {name:'1440 catalog',width:1440,height:900,url:'lesson-06-catalog-preview.html?state=mixed',key:'6. 复合元音',selector:'#courses',main:'#courses .courseRow'},
+  {name:'1440 formulas',width:1440,height:900,url:'lesson-06-preview.html?step=12&lang=zh',key:'ㅑ + ㅣ = ㅒ',extraKey:'ㅕ + ㅣ = ㅖ',selector:'#lessonStage .vowelGrid',main:'#lessonStage'},
+  {name:'1440 words',width:1440,height:900,url:'lesson-06-preview.html?step=13&lang=zh',key:'读出不带收音的真实词',selector:'#lessonStage h1',main:'#lessonStage'},
+  {name:'1440 complete',width:1440,height:900,url:'lesson-06-preview.html?step=17&lang=zh',key:'第6课完成',selector:'#lessonStage .complete',main:'#lessonStage'}
+];
+const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+async function runCase(test){
+  const frame=document.createElement('iframe');frame.style.width=`${test.width}px`;frame.style.height=`${test.height}px`;frame.src=test.url;document.body.append(frame);
+  const deadline=Date.now()+10000;let actionRun=false,previous='';
+  while(Date.now()<deadline){
+    try{
+      const doc=frame.contentDocument,win=frame.contentWindow;if(!doc?.body){await wait(40);continue;}if(doc.readyState==='loading')await new Promise(resolve=>doc.addEventListener('DOMContentLoaded',resolve,{once:true}));
+      if(doc.fonts?.ready)await doc.fonts.ready;
+      if(test.action&&!actionRun&&doc.querySelector('#lessonStage .practicePrompt')){test.action(doc);actionRun=true;}
+      const target=doc.querySelector(test.selector),main=doc.querySelector(test.main),text=target?.textContent||'';
+      if(target&&text.includes(test.key)&&(!test.extraKey||text.includes(test.extraKey))){
+        const visible=[...doc.querySelectorAll('body *')].filter(node=>{const rect=node.getBoundingClientRect(),style=win.getComputedStyle(node);return rect.width>0&&rect.height>0&&style.display!=='none'&&style.visibility!=='hidden'}).length;
+        const htmlWidth=doc.documentElement.scrollWidth,bodyWidth=doc.body.scrollWidth,mainWidth=main?.getBoundingClientRect().width||0,current=`${target.getBoundingClientRect().width}:${target.getBoundingClientRect().height}`;
+        if(previous!==current){previous=current;await wait(100);continue;}
+        const bodyText=doc.body.innerText||'';
+        if(win.innerWidth!==test.width)throw new Error(`${test.name}: CSS viewport ${win.innerWidth}, expected ${test.width}`);
+        if(visible<20)throw new Error(`${test.name}: only ${visible} visible elements`);
+        if(Math.max(htmlWidth,bodyWidth)>win.innerWidth+2)throw new Error(`${test.name}: horizontal overflow ${Math.max(htmlWidth,bodyWidth)}-${win.innerWidth}`);
+        if(mainWidth<Math.min(300,test.width-40))throw new Error(`${test.name}: main card only ${mainWidth}px wide`);
+        if(bodyText.includes('undefined'))throw new Error(`${test.name}: rendered undefined`);
+        const result={name:test.name,url:win.location.href,title:doc.title,innerWidth:win.innerWidth,innerHeight:win.innerHeight,devicePixelRatio:win.devicePixelRatio,htmlScrollWidth:htmlWidth,bodyScrollWidth:bodyWidth,bodyScrollHeight:doc.body.scrollHeight,keySelector:test.selector,keyText:test.key,keyRect:target.getBoundingClientRect().toJSON(),fontsStatus:doc.fonts?.status||'unsupported',visibleElements:visible,mainCardWidth:mainWidth,horizontalOverflow:false};frame.remove();return result;
+      }
+    }catch(error){frame.remove();throw error;}
+    await wait(50);
+  }
+  frame.remove();throw new Error(`${test.name}: key text not rendered before timeout`);
+}
+async function inspectImage(item){
+  const image=new Image();image.src=`../quality-fix/lesson-06-unlocked/screenshots/${item.file}?seal=20260719`;
+  await new Promise((resolve,reject)=>{image.onload=resolve;image.onerror=()=>reject(new Error(`${item.file}: screenshot missing`));});
+  const canvas=document.createElement('canvas'),max=260,scale=Math.min(1,max/image.naturalWidth);canvas.width=Math.max(1,Math.round(image.naturalWidth*scale));canvas.height=Math.max(1,Math.round(image.naturalHeight*scale));
+  const context=canvas.getContext('2d',{willReadFrequently:true});context.drawImage(image,0,0,canvas.width,canvas.height);
+  const pixels=context.getImageData(0,0,canvas.width,canvas.height).data;let nonWhite=0,maxBucket=0;const buckets=new Map;
+  for(let index=0;index<pixels.length;index+=4){const r=pixels[index],g=pixels[index+1],b=pixels[index+2],a=pixels[index+3];if(a>8&&(r<246||g<246||b<246))nonWhite++;const key=`${r>>4},${g>>4},${b>>4},${a>>4}`,count=(buckets.get(key)||0)+1;buckets.set(key,count);if(count>maxBucket)maxBucket=count;}
+  const total=pixels.length/4,nonWhiteRatio=nonWhite/total,dominantColorRatio=maxBucket/total;
+  if(image.naturalWidth!==Math.round(item.innerWidth*item.devicePixelRatio))throw new Error(`${item.file}: screenshot width does not match CSS viewport × DPR`);
+  if(image.naturalHeight<300)throw new Error(`${item.file}: unreasonable height ${image.naturalHeight}`);
+  if(nonWhiteRatio<0.02)throw new Error(`${item.file}: near-blank ratio ${nonWhiteRatio.toFixed(4)}`);
+  if(buckets.size<16||dominantColorRatio>.985)throw new Error(`${item.file}: near-monochrome screenshot`);
+  return{file:item.file,imageWidth:image.naturalWidth,imageHeight:image.naturalHeight,nonWhiteRatio:Number(nonWhiteRatio.toFixed(4)),quantizedColors:buckets.size,dominantColorRatio:Number(dominantColorRatio.toFixed(4)),blankImage:false};
+}
+(async()=>{const results=[];try{const manifest=await fetch('../quality-fix/lesson-06-unlocked/SCREENSHOT_MANIFEST.json',{cache:'no-store'}).then(response=>response.json());for(const test of cases)results.push(await runCase(test));for(const item of manifest.screenshots)results.push(await inspectImage(item));document.getElementById('status').textContent='PASS';document.getElementById('status').className='pass';document.getElementById('result').textContent=JSON.stringify(results,null,2);window.__NIKIGO_VISUAL_RESULTS__=results;}catch(error){document.getElementById('status').textContent='FAIL';document.getElementById('status').className='fail';document.getElementById('result').textContent=error.stack||String(error);window.__NIKIGO_VISUAL_ERROR__=String(error);throw error;}})();
+</script></body></html>

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nikigo catalog QA launcher</title></head>
+<body>
+  <p id="status">正在准备真实课程目录验收状态…</p>
+  <script>
+    const params=new URLSearchParams(location.search);
+    const state=params.get('state')||'mixed';
+    const completedLessons=state==='completed'
+      ? ['lesson-01','k0-consonant-contrast','lesson-06']
+      : ['lesson-01','k0-consonant-contrast'];
+    const lessonProgress=state==='completed'
+      ? {'lesson-01':100,'lesson-02':45,'k0-consonant-contrast':100,'lesson-06':100}
+      : {'lesson-01':100,'lesson-02':45,'k0-consonant-contrast':100,'lesson-06':20};
+    const profile={schemaVersion:2,path:'K0',guest:true,name:'QA',xp:state==='completed'?150:100,interfaceLanguage:'zh',learningLanguage:'zh',completedLessons,lessonProgress,audioRate:1,autoplayAudio:false,weeklyProgress:0};
+    localStorage.setItem('nikigoProfile',JSON.stringify(profile));
+    location.replace(`../nikigo-app.html?lang=zh&qaCatalog=${state}#courses`);
+  </script>
+</body>
+</html>

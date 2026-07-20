@@ -2,7 +2,7 @@
 
 Nikigo 是一款面向全球用户的场景化韩语学习 App。学习目标语言固定为韩语，V1 支持简体中文、English、Tiếng Việt 和日本語四种辅助语言。
 
-当前仓库是 Web/PWA 产品基线，包含新用户引导、K0–K4 学习路径、能力诊断原型、课程进度、设置，以及三节 K0 课程。学习数据暂存在浏览器 `localStorage`，账户、会员和跨设备同步仍是原型能力。
+当前仓库是 Web/PWA 产品基线，包含新用户引导、K0–K4 学习路径、能力诊断原型、课程进度、设置，以及第0～6课和既有收音课程。学习数据暂存在浏览器 `localStorage`，账户、会员和跨设备同步仍是原型能力。
 
 ## 本地运行
 
@@ -14,14 +14,14 @@ python3 -m http.server 4173 --bind 127.0.0.1
 
 ## 课程架构
 
-- `lesson-engine.js`：统一的课程渲染、音频、门槛、进度、XP 和复习逻辑。
+- `lesson-engine.js`：现有通用课程的渲染、音频、进度、XP 和复习逻辑。
 - `lesson-player.css`：课程播放器的共享响应式样式。
-- `lesson-01.html`、`lesson-02.html`、`lesson-03.html`：课程内容配置与四语文案。
-- `course-catalog.js`：课程顺序、前置条件和首页元数据。
+- `lesson-00.html`～`lesson-06.html` 及专用课程文件：课程内容、互动与四语文案；不同课程形态可使用不同模板。
+- `course-catalog.js`：稳定ID、显示顺序、访问/发布/音频状态、推荐前置关系和首页元数据。
 - `app-state.js`：Schema Version 2 本机状态、旧数据迁移和间隔复习调度。
 - `review.html`、`review-catalog.js`：到期复习、答题反馈、XP 与重新排期。
 
-新增课程时应复用 `NikigoLesson.mount()`，不要复制播放器逻辑或整页 CSS。课程韩语音频优先使用经过母语审核的托管文件；设备韩语语音只能作为回退。
+开始修改前必须读取 `NIKIGO_DEVELOPMENT_RULES.md`。课程按教学目标选择合适模板；`NikigoLesson.mount()` 是现有通用课程引擎之一，不应强制套用到情景对话等不同课程形态。课程韩语音频只允许使用已通过技术验证并由产品负责人课程内试听通过的精确托管文件；母语者审核为可选发布前抽检。禁止设备 TTS 或文字答案 fallback。
 
 ## 校验
 

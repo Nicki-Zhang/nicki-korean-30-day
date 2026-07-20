@@ -16,6 +16,12 @@ for (const [index, item] of catalog.entries()) {
   assert.equal(item.displayOrder, index);
   assert.equal(item.displayNumber, index);
   assert.ok(['available', 'comingSoon'].includes(item.status));
+  assert.ok(['development', 'preview', 'released', 'comingSoon'].includes(item.releaseStatus));
+  assert.ok(['available', 'unavailable'].includes(item.accessStatus));
+  assert.ok(['pending', 'generated', 'underReview', 'approved', 'rejected'].includes(item.audioStatus));
+  assert.ok(Array.isArray(item.recommendedPrerequisites));
+  assert.deepEqual([...item.prerequisites], [], `${item.stableId} must not retain hard prerequisites`);
+  assert.equal(item.requiresCompletion, false);
   assert.ok(!stableIds.has(item.stableId), `duplicate stableId ${item.stableId}`);
   stableIds.add(item.stableId);
   for (const language of languages) {
@@ -29,14 +35,26 @@ for (const [index, item] of catalog.entries()) {
     assert.equal(item.file, null, `${item.stableId} must not link to an unfinished page`);
   }
 }
-assert.deepEqual([...catalog.filter(item => item.status === 'available').map(item => item.stableId)], ['lesson-00', 'lesson-01', 'lesson-02', 'lesson-03', 'k0-consonant-contrast', 'lesson-05', 'lesson-04']);
+assert.deepEqual([...catalog.filter(item => item.status === 'available').map(item => item.stableId)], ['lesson-00', 'lesson-01', 'lesson-02', 'lesson-03', 'k0-consonant-contrast', 'lesson-05', 'lesson-06', 'lesson-04']);
 const contrastLesson = catalog.find(item => item.stableId === 'k0-consonant-contrast');
 assert.equal(contrastLesson.displayNumber, 4);
 assert.equal(contrastLesson.file, 'lesson-consonant-contrast.html');
 const lesson05 = catalog.find(item => item.stableId === 'lesson-05');
-assert.equal(lesson05.prerequisites[0], 'k0-consonant-contrast');
+assert.deepEqual([...lesson05.recommendedPrerequisites], ['k0-consonant-contrast']);
 assert.equal(lesson05.file, 'lesson-05.html');
-assert.equal(lesson05.requiresCompletion, true);
+assert.equal(lesson05.requiresCompletion, false);
+const lesson06 = catalog.find(item => item.stableId === 'lesson-06');
+assert.deepEqual([...lesson06.recommendedPrerequisites], ['lesson-05']);
+assert.equal(lesson06.file, 'lesson-06.html');
+assert.equal(lesson06.requiresCompletion, false);
+assert.equal(lesson06.releaseStatus, 'preview');
+assert.equal(lesson06.audioStatus, 'pending');
+for (const lesson of catalog.filter(item => item.status === 'available')) {
+  assert.equal(catalogContext.window.NIKIGO_COURSE_UNLOCKED(lesson, []), true, `${lesson.stableId} must open without prior completion`);
+}
+assert.deepEqual(JSON.parse(JSON.stringify(catalog.map(item => item.recommendedPrerequisites))), [[], ['lesson-00'], ['lesson-01'], ['lesson-02'], ['lesson-03'], ['k0-consonant-contrast'], ['lesson-05'], ['lesson-06'], ['lesson-04'], ['k0-lesson-08-plan']]);
+assert.equal(catalogContext.window.NIKIGO_COURSE_UNLOCKED(catalog.find(item => item.status === 'comingSoon'), []), false);
+assert.equal(catalog.some(item => item.stableId === 'k0-lesson-06-plan'), false);
 assert.equal(catalog.find(item => item.stableId === 'lesson-04').displayNumber, 7);
 
 const lesson00Html = fs.readFileSync('lesson-00.html', 'utf8');

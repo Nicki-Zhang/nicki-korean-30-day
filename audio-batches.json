@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "batches": {
+    "audio-batch-01": {
+      "lessonId": "lesson-00",
+      "expectedCount": 2,
+      "model": "gpt-4o-mini-tts",
+      "voice": "marin",
+      "format": "mp3",
+      "instructionProfile": "batch-1-exact",
+      "speed": null,
+      "instructions": "Speak only the supplied Korean speechText exactly once in natural standard Seoul Korean. Do not spell, translate, explain, or add sounds.",
+      "expectedSampleRate": 24000,
+      "expectedChannels": 1,
+      "items": [
+        {
+          "id": "yo",
+          "speechText": "요",
+          "audioType": "vowel",
+          "outputFile": "yo.mp3",
+          "expectedTechnical": {
+            "sampleRate": 24000,
+            "channels": 1,
+            "duration": 0.912,
+            "durationTolerance": 0.03,
+            "minDuration": 0.5,
+            "maxDuration": 3
+          }
+        },
+        {
+          "id": "yu",
+          "speechText": "유",
+          "audioType": "vowel",
+          "outputFile": "yu.mp3",
+          "expectedTechnical": {
+            "sampleRate": 24000,
+            "channels": 1,
+            "duration": 1.608,
+            "durationTolerance": 0.03,
+            "minDuration": 0.5,
+            "maxDuration": 3
+          }
+        }
+      ]
+    },
+    "audio-batch-02a-gaka-r1": {
+      "lessonId": "k0-consonant-contrast",
+      "expectedCount": 2,
+      "model": "gpt-4o-mini-tts",
+      "voice": "marin",
+      "format": "mp3",
+      "instructionProfile": "controlled-onset-contrast-r1",
+      "speed": null,
+      "instructions": "Speak only the supplied Korean syllable exactly once in natural standard Seoul Korean for a controlled pronunciation comparison. Keep recording level, perceived loudness, vowel duration, speaking effort, microphone distance, and pacing closely matched across items. For 가, use a natural lenis ㄱ onset with weak airflow and no exaggerated pre-aspiration. For 카, use a clearly aspirated ㅋ onset with audible airflow, without increasing loudness or lengthening the vowel. Do not add leading noise, trailing sounds, spelling, translation, explanation, or emphasis.",
+      "expectedSampleRate": 24000,
+      "expectedChannels": 1,
+      "items": [
+        {
+          "id": "ga",
+          "speechText": "가",
+          "audioType": "initial-example",
+          "outputFile": "ga.mp3"
+        },
+        {
+          "id": "ka",
+          "speechText": "카",
+          "audioType": "initial-example",
+          "outputFile": "ka.mp3"
+        }
+      ]
+    }
+  },
+  "planningOnly": {
+    "audio-batch-02a-run-29717434767": {
+      "status": "partially-passed-revision-required",
+      "sourceArtifact": "nikigo-audio-batch-02a-run-29717434767-0213e68",
+      "productOwnerReview": {
+        "ga": {
+          "speechText": "가",
+          "file": "ga.mp3",
+          "sha256": "c641e0de40733773396f6c4a83074bb37db9f0d07e7f7b3699210eb8b25766f6",
+          "status": "rejected-for-revision",
+          "reason": "Longer noisy onset and insufficiently controlled loudness/duration for a clear lenis-versus-aspirated teaching contrast."
+        },
+        "ka": {
+          "speechText": "카",
+          "file": "ka.mp3",
+          "sha256": "538b4789fb02f80adc864eb9f0f93c04ee7f4a06d6006c9b4e460ddf330bcb97",
+          "status": "rejected-for-revision",
+          "reason": "Loudness and effective pronunciation length were not sufficiently matched to 가 for a controlled airflow comparison."
+        },
+        "kka": {
+          "speechText": "까",
+          "file": "kka.mp3",
+          "sha256": "20a33fd85584d2efc288513368a90c0ef94022f21a074bf0646a641b46ccdf27",
+          "status": "initially-passed-preserve",
+          "regenerationAllowed": false
+        }
+      }
+    },
+    "audio-batch-02-original": {
+      "expectedCount": 16,
+      "items": [
+        ["ga", "가", "initial-example", "ga.mp3"],
+        ["ka", "카", "initial-example", "ka.mp3"],
+        ["kka", "까", "initial-example", "kka.mp3"],
+        ["da", "다", "initial-example", "da.mp3"],
+        ["ta", "타", "initial-example", "ta.mp3"],
+        ["tta", "따", "initial-example", "tta.mp3"],
+        ["ba", "바", "initial-example", "ba.mp3"],
+        ["pa", "파", "initial-example", "pa.mp3"],
+        ["ppa", "빠", "initial-example", "ppa.mp3"],
+        ["ja", "자", "initial-example", "ja.mp3"],
+        ["cha", "차", "initial-example", "cha.mp3"],
+        ["jja", "짜", "initial-example", "jja.mp3"],
+        ["sa", "사", "initial-example", "sa.mp3"],
+        ["ssa", "싸", "initial-example", "ssa.mp3"],
+        ["ha", "하", "initial-example", "ha.mp3"],
+        ["geu", "그", "syllable", "geu.mp3"]
+      ]
+    },
+    "audio-batch-02b": {
+      "status": "planning-only",
+      "requiresProductOwnerApprovalOf": "audio-batch-02a",
+      "expectedCount": 13,
+      "items": [
+        ["da", "다", "initial-example", "da.mp3"],
+        ["ta", "타", "initial-example", "ta.mp3"],
+        ["tta", "따", "initial-example", "tta.mp3"],
+        ["ba", "바", "initial-example", "ba.mp3"],
+        ["pa", "파", "initial-example", "pa.mp3"],
+        ["ppa", "빠", "initial-example", "ppa.mp3"],
+        ["ja", "자", "initial-example", "ja.mp3"],
+        ["cha", "차", "initial-example", "cha.mp3"],
+        ["jja", "짜", "initial-example", "jja.mp3"],
+        ["sa", "사", "initial-example", "sa.mp3"],
+        ["ssa", "싸", "initial-example", "ssa.mp3"],
+        ["ha", "하", "initial-example", "ha.mp3"],
+        ["geu", "그", "syllable", "geu.mp3"]
+      ]
+    }
+  }
+}

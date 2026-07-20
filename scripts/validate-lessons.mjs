@@ -47,7 +47,12 @@ for (const [index, item] of (catalog || []).entries()) {
   if (item.displayOrder !== index) errors.push(`${stableId} has unexpected display order ${item.displayOrder}.`);
   if (item.displayNumber !== index) errors.push(`${stableId} has unexpected display number ${item.displayNumber}.`);
   if (!['available', 'comingSoon'].includes(item.status)) errors.push(`${stableId} has invalid status ${item.status}.`);
-  for (const prerequisite of item.prerequisites || []) {
+  if (!['development', 'preview', 'released', 'comingSoon'].includes(item.releaseStatus)) errors.push(`${stableId} has invalid releaseStatus ${item.releaseStatus}.`);
+  if (!['available', 'unavailable'].includes(item.accessStatus)) errors.push(`${stableId} has invalid accessStatus ${item.accessStatus}.`);
+  if (!['pending', 'generated', 'underReview', 'approved', 'rejected'].includes(item.audioStatus)) errors.push(`${stableId} has invalid audioStatus ${item.audioStatus}.`);
+  if ((item.prerequisites || []).length) errors.push(`${stableId} retains a hard prerequisite.`);
+  if (item.requiresCompletion !== false) errors.push(`${stableId} must not require prior completion.`);
+  for (const prerequisite of item.recommendedPrerequisites || []) {
     if (!ids.has(prerequisite)) errors.push(`${stableId} references a missing or later prerequisite: ${prerequisite}`);
   }
   for (const language of languages) {
@@ -75,9 +80,9 @@ for (const [index, item] of (catalog || []).entries()) {
     continue;
   }
 
-  if (stableId === 'k0-consonant-contrast' || stableId === 'lesson-05') {
+  if (stableId === 'k0-consonant-contrast' || stableId === 'lesson-05' || stableId === 'lesson-06') {
     const html = fs.readFileSync(file, 'utf8');
-    const customBase = stableId === 'lesson-05' ? 'lesson-05' : 'lesson-consonant-contrast';
+    const customBase = stableId === 'lesson-06' ? 'lesson-06' : stableId === 'lesson-05' ? 'lesson-05' : 'lesson-consonant-contrast';
     if (!html.includes(`${customBase}.js`)) errors.push(`${file} does not load its course engine.`);
     if (!html.includes(`${customBase}.css`)) errors.push(`${file} does not load its course styles.`);
     if (!html.includes('course-catalog.js')) errors.push(`${file} does not load course-catalog.js.`);
@@ -107,7 +112,7 @@ for (const [index, item] of (catalog || []).entries()) {
     const manifestFile = `audio/${stableId}/manifest.json`;
     if (fs.existsSync(manifestFile)) {
       const manifest = JSON.parse(fs.readFileSync(manifestFile, 'utf8'));
-      const manifestPaths = new Set((manifest.items || []).map(audio => `audio/${stableId}/${audio.file}`));
+      const manifestPaths = new Set((manifest.items || []).filter(audio => globalThis.NikigoAudio.canPlayAudio(audio.speechText,audio,audio.audioType)).map(audio => `audio/${stableId}/${audio.file}`));
       const mappedPaths = new Set(Object.values(config.audioFiles || {}));
       for (const path of mappedPaths) {
         if (!manifestPaths.has(path)) errors.push(`${file}: audio mapping is missing from ${manifestFile}: ${path}`);

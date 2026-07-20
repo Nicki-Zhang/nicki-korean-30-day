@@ -9,22 +9,69 @@
 
   const item = (id, displayText, speechText, file, options) => Object.freeze({
     id,
+    lessonId: options.lessonId,
+    targetSymbol: options.targetSymbol ?? null,
     displayText,
     speechText,
     expectedPronunciation: options.expectedPronunciation || speechText,
     pronunciationRule: options.pronunciationRule || '',
-    type: options.type,
+    audioType: options.audioType || options.type,
+    type: options.audioType || options.type,
     pronunciationType: options.pronunciationType,
     screen: options.screen,
     teachingGoal: options.teachingGoal,
     file,
-    voiceSource: options.voiceSource || 'openai-gpt-4o-mini-tts',
-    reviewStatus: 'pending',
-    needsNativeReview: true,
+    voiceSource: String(options.voiceSource || '').startsWith('apple-') ? 'legacy-system-export' : (options.voiceSource || 'openai-gpt-4o-mini-tts'),
+    model: options.model ?? (String(options.voiceSource || '').startsWith('apple-') ? null : 'gpt-4o-mini-tts'),
+    ...(options.voice ? { voice:options.voice } : {}),
+    generationDate: options.generationDate ?? null,
+    commercialUseBasis: options.commercialUseBasis ?? 'pending-documentation',
+    reviewStatus: options.reviewStatus || 'pending',
+    assetStatus: options.assetStatus || 'available',
+    ...(options.sha256 ? { sha256:options.sha256 } : {}),
+    ...(options.fileSize ? { fileSize:options.fileSize } : {}),
+    ...(options.mimeType ? { mimeType:options.mimeType } : {}),
+    ...(options.sourceRunId ? { sourceRunId:options.sourceRunId } : {}),
+    ...(options.sourceArtifact ? { sourceArtifact:options.sourceArtifact } : {}),
+    ...(options.sourceSha256 ? { sourceSha256:options.sourceSha256 } : {}),
+    ...(options.postProcessingReport ? { postProcessingReport:options.postProcessingReport } : {}),
+    ...(options.technicalValidation ? { technicalValidation:options.technicalValidation } : {}),
+    ...(options.reviewMethod ? { reviewMethod:options.reviewMethod } : {}),
+    ...(options.reviewedAt ? { reviewedAt:options.reviewedAt } : {}),
+    ...(options.nativeReviewStatus ? { nativeReviewStatus:options.nativeReviewStatus } : {}),
+    ...(options.rightsReviewStatus ? { rightsReviewStatus:options.rightsReviewStatus } : {}),
+    nativeReviewer: options.nativeReviewer ?? null,
+    reviewNotes: options.reviewNotes || 'legacy-unreviewed',
+    needsNativeReview: options.needsNativeReview ?? true,
     rights: RIGHTS_TEMPLATE
   });
 
-  const lessons = Object.freeze({
+  const lessons = {
+    'lesson-00': Object.freeze({
+      title: '韩文字母地图',
+      items: Object.freeze([
+        item('yo', 'ㅛ（发音载体：요）', '요', 'yo.mp3', {
+          targetSymbol:'ㅛ', type:'vowel', pronunciationType:'full-syllable',
+          screen:'第0课字母地图元音详情', teachingGoal:'用无声初声 ㅇ 承载元音 ㅛ',
+          reviewStatus:'approved', assetStatus:'available', sha256:'d2570041a865d0d686e6debf1a06584fa10b1177ebb590e4654a30506f5538b0', fileSize:14592, mimeType:'audio/mpeg',
+          voiceSource:'openai-gpt-4o-mini-tts', model:'gpt-4o-mini-tts', voice:'marin', generationDate:'2026-07-20T02:07:40.367Z',
+          sourceRunId:'29713532746', sourceArtifact:'nikigo-audio-batch-01-validation-run-29713532746-78e5510', technicalValidation:'passed',
+          reviewMethod:'product-owner-listening', reviewedAt:'2026-07-20', nativeReviewStatus:'deferred', nativeReviewer:null, needsNativeReview:false,
+          commercialUseBasis:'OpenAI API generated audio; legal review pending', rightsReviewStatus:'pending',
+          reviewNotes:'Product owner listening passed on 2026-07-20; optional native-speaker review deferred.'
+        }),
+        item('yu', 'ㅠ（发音载体：유）', '유', 'yu.mp3', {
+          targetSymbol:'ㅠ', type:'vowel', pronunciationType:'full-syllable',
+          screen:'第0课字母地图元音详情', teachingGoal:'用无声初声 ㅇ 承载元音 ㅠ',
+          reviewStatus:'approved', assetStatus:'available', sha256:'3eb015cd5a7a9c7955976e1d0acd6669126e7c5c74a1c928f7d7b9d925d98430', fileSize:25728, mimeType:'audio/mpeg',
+          voiceSource:'openai-gpt-4o-mini-tts', model:'gpt-4o-mini-tts', voice:'marin', generationDate:'2026-07-20T02:07:40.367Z',
+          sourceRunId:'29713532746', sourceArtifact:'nikigo-audio-batch-01-validation-run-29713532746-78e5510', technicalValidation:'passed',
+          reviewMethod:'product-owner-listening', reviewedAt:'2026-07-20', nativeReviewStatus:'deferred', nativeReviewer:null, needsNativeReview:false,
+          commercialUseBasis:'OpenAI API generated audio; legal review pending', rightsReviewStatus:'pending',
+          reviewNotes:'Product owner listening passed on 2026-07-20; optional native-speaker review deferred.'
+        })
+      ])
+    }),
     'lesson-01': Object.freeze({
       title: '韩文字母：第一步',
       items: Object.freeze([
@@ -91,14 +138,105 @@
         item('gamsahamnida', '감사합니다', '감사합니다', 'gamsahamnida-v2.wav', { type: 'sound-change', pronunciationType: '音变、完整句子或对话', screen: '场景短语、跟读、挑战 4', teachingGoal: '自然说出正式感谢', expectedPronunciation: '감사함니다', pronunciationRule: '鼻音化：합니다 → [함니다]', voiceSource: 'apple-system-ko-KR-yuna' })
       ])
     })
+  };
+
+  Object.entries(lessons).forEach(([lessonId, lesson]) => {
+    lessons[lessonId] = Object.freeze({ ...lesson, items:Object.freeze(lesson.items.map(entry => Object.freeze({ ...entry, lessonId }))) });
   });
+
+  const contrastSpecs = [
+    ['ga','ㄱ','plain','가'],['ka','ㅋ','aspirated','카'],['kka','ㄲ','tense','까'],
+    ['da','ㄷ','plain','다'],['ta','ㅌ','aspirated','타'],['tta','ㄸ','tense','따'],
+    ['ba','ㅂ','plain','바'],['pa','ㅍ','aspirated','파'],['ppa','ㅃ','tense','빠'],
+    ['ja','ㅈ','plain','자'],['cha','ㅊ','aspirated','차'],['jja','ㅉ','tense','짜'],
+    ['sa','ㅅ','plain','사'],['ssa','ㅆ','tense','싸']
+  ];
+  const contrastReleases = Object.freeze({
+    ga:Object.freeze({
+      reviewStatus:'approved', assetStatus:'available', sha256:'705fc26ec549f1882f06eaeb997ba59f0ceef95e8c9603e5a7a82b35451205a9', fileSize:11949, mimeType:'audio/mpeg',
+      voice:'marin', generationDate:'2026-07-20T06:00:11.789Z', sourceRunId:'29720437383', sourceArtifact:'nikigo-audio-batch-02a-gaka-r1-run-29720437383-a23a08b', sourceSha256:'db8fe0dece7cf0290c11ec5eebde750e3c8051169b17c11e83775f7438453860',
+      postProcessingReport:'audio/k0-consonant-contrast/postprocessing-report.json', technicalValidation:'passed', reviewMethod:'product-owner-listening', reviewedAt:'2026-07-20', nativeReviewStatus:'deferred', nativeReviewer:null, needsNativeReview:false,
+      commercialUseBasis:'OpenAI API generated audio; legal review pending', rightsReviewStatus:'pending', reviewNotes:'Product owner listening passed on 2026-07-20; deterministic silence trim and linear gain alignment applied; optional native-speaker review deferred.'
+    }),
+    ka:Object.freeze({
+      reviewStatus:'approved', assetStatus:'available', sha256:'7a4754d8c2583d1941a8f2d18bfd41239e4e753726af880fc3c0ea7dd2c697ed', fileSize:11949, mimeType:'audio/mpeg',
+      voice:'marin', generationDate:'2026-07-20T06:00:11.789Z', sourceRunId:'29720437383', sourceArtifact:'nikigo-audio-batch-02a-gaka-r1-run-29720437383-a23a08b', sourceSha256:'460d6f23a6c17d1f3a6522289d0fe99d63253d598c5141695b45f12a29b7be71',
+      postProcessingReport:'audio/k0-consonant-contrast/postprocessing-report.json', technicalValidation:'passed', reviewMethod:'product-owner-listening', reviewedAt:'2026-07-20', nativeReviewStatus:'deferred', nativeReviewer:null, needsNativeReview:false,
+      commercialUseBasis:'OpenAI API generated audio; legal review pending', rightsReviewStatus:'pending', reviewNotes:'Product owner listening passed on 2026-07-20; deterministic silence trim and linear gain alignment applied; optional native-speaker review deferred.'
+    }),
+    kka:Object.freeze({
+      reviewStatus:'approved', assetStatus:'available', sha256:'c63080ad2e208b9f9319b806d2470143b7a2140cba4768c0cc61947cccf9e545', fileSize:10029, mimeType:'audio/mpeg',
+      voice:'marin', generationDate:'2026-07-20T04:40:35.153Z', sourceRunId:'29717434767', sourceArtifact:'nikigo-audio-batch-02a-run-29717434767-0213e68', sourceSha256:'20a33fd85584d2efc288513368a90c0ef94022f21a074bf0646a641b46ccdf27',
+      postProcessingReport:'audio/k0-consonant-contrast/postprocessing-report.json', technicalValidation:'passed', reviewMethod:'product-owner-listening', reviewedAt:'2026-07-20', nativeReviewStatus:'deferred', nativeReviewer:null, needsNativeReview:false,
+      commercialUseBasis:'OpenAI API generated audio; legal review pending', rightsReviewStatus:'pending', reviewNotes:'Product owner listening passed on 2026-07-20; original generated file retained as the source and only deterministic silence trim and linear gain alignment applied; optional native-speaker review deferred.'
+    })
+  });
+  lessons['k0-consonant-contrast'] = Object.freeze({
+    title:'听懂普通音、送气音和紧音',
+    items:Object.freeze(contrastSpecs.map(([id, targetSymbol, category, syllable]) => item(id, syllable, syllable, `${id}.mp3`, {
+      lessonId:'k0-consonant-contrast', targetSymbol, audioType:'initial-example', pronunciationType:'full-syllable',
+      pronunciationRule:`${category} onset in a complete syllable`, screen:'对比卡片、听辨练习', teachingGoal:'通过完整音节比较普通音、送气音和紧音',
+      voiceSource:'openai-gpt-4o-mini-tts', assetStatus:'missing', reviewNotes:'Not generated; Korean native-speaker review required.',
+      ...(contrastReleases[id] || {})
+    })))
+  });
+
+  const lesson6Specs = [
+    ['wa-syllable','ㅘ','ㅘ（承载音节：와）','와','syllable','wa.mp3'],
+    ['wae-syllable','ㅙ','ㅙ（承载音节：왜）','왜','syllable','wae-syllable.mp3'],
+    ['oe-syllable','ㅚ','ㅚ（承载音节：외）','외','syllable','oe.mp3'],
+    ['wo-syllable','ㅝ','ㅝ（承载音节：워）','워','syllable','wo.mp3'],
+    ['we-syllable','ㅞ','ㅞ（承载音节：웨）','웨','syllable','we.mp3'],
+    ['wi-syllable','ㅟ','ㅟ（承载音节：위）','위','syllable','wi.mp3'],
+    ['ui-syllable','ㅢ','ㅢ（承载音节：의）','의','syllable','ui.mp3'],
+    ['yae-syllable','ㅒ','ㅒ（承载音节：얘）','얘','syllable','yae.mp3'],
+    ['ye-syllable','ㅖ','ㅖ（承载音节：예）','예','syllable','ye-syllable.mp3'],
+    ['mwo-word',null,'뭐','뭐','word','mwo.mp3'],
+    ['gwaja-word',null,'과자','과자','word','gwaja.mp3'],
+    ['yeou-word',null,'여우','여우','word','yeou.mp3'],
+    ['uija-word',null,'의자','의자','word','uija.mp3'],
+    ['wae-word',null,'왜','왜','word','wae-word.mp3'],
+    ['ye-word',null,'예','예','word','ye-word.mp3']
+  ];
+  lessons['lesson-06'] = Object.freeze({
+    title:'复合元音',
+    items:Object.freeze(lesson6Specs.map(([id,targetSymbol,displayText,speechText,audioType,file]) => item(id, displayText, speechText, file, {
+      lessonId:'lesson-06', targetSymbol, audioType, pronunciationType:audioType === 'word' ? 'full-word' : 'full-syllable',
+      pronunciationRule:audioType === 'word' ? 'complete word without final consonant' : `compound-vowel carrier ${targetSymbol}`,
+      screen:audioType === 'word' ? '无收音真实词汇' : '复合元音承载音节', teachingGoal:audioType === 'word' ? `完整单词“${speechText}”` : `用完整音节教学复合元音 ${targetSymbol}`,
+      assetStatus:'missing', reviewNotes:'Not generated; Korean native-speaker review required.'
+    })))
+  });
+
+  Object.freeze(lessons);
+
+  const APPROVED_ASSET_HASHES = Object.freeze({
+    'lesson-00:yo':'d2570041a865d0d686e6debf1a06584fa10b1177ebb590e4654a30506f5538b0',
+    'lesson-00:yu':'3eb015cd5a7a9c7955976e1d0acd6669126e7c5c74a1c928f7d7b9d925d98430',
+    'k0-consonant-contrast:ga':'705fc26ec549f1882f06eaeb997ba59f0ceef95e8c9603e5a7a82b35451205a9',
+    'k0-consonant-contrast:ka':'7a4754d8c2583d1941a8f2d18bfd41239e4e753726af880fc3c0ea7dd2c697ed',
+    'k0-consonant-contrast:kka':'c63080ad2e208b9f9319b806d2470143b7a2140cba4768c0cc61947cccf9e545'
+  });
+  const REQUIRED_RELEASE_FIELDS = ['voiceSource','model','voice','generationDate','commercialUseBasis','rightsReviewStatus','reviewMethod','reviewedAt','nativeReviewStatus','technicalValidation','sha256','sourceRunId','sourceArtifact','reviewNotes'];
+  function canPlayAudio(requestedSpeechText, entry, expectedAudioType) {
+    if (!entry || entry.reviewStatus !== 'approved' || entry.assetStatus !== 'available') return false;
+    if (!entry.file || entry.speechText !== requestedSpeechText) return false;
+    if (expectedAudioType && entry.audioType !== expectedAudioType) return false;
+    if (entry.type === 'deprecated' || entry.assetStatus === 'deprecated') return false;
+    if (!REQUIRED_RELEASE_FIELDS.every(field => entry[field] !== null && String(entry[field]).trim() !== '')) return false;
+    if (entry.technicalValidation !== 'passed' || !/^[a-f0-9]{64}$/u.test(entry.sha256)) return false;
+    if (APPROVED_ASSET_HASHES[`${entry.lessonId}:${entry.id}`] !== entry.sha256) return false;
+    if (entry.nativeReviewStatus === 'deferred' && entry.nativeReviewer !== null) return false;
+    if (entry.nativeReviewStatus !== 'deferred' && !String(entry.nativeReviewer || '').trim()) return false;
+    return true;
+  }
 
   function forLesson(lessonId) {
     const lesson = lessons[lessonId];
     if (!lesson) return { items: [], audioFiles: {}, pronunciationText: {} };
     const audioFiles = {};
     const pronunciationText = {};
-    lesson.items.forEach(entry => {
+    lesson.items.filter(entry => canPlayAudio(entry.speechText, entry)).forEach(entry => {
       audioFiles[entry.speechText] = `audio/${lessonId}/${entry.file}`;
       pronunciationText[entry.speechText] = entry.speechText;
     });
@@ -109,10 +247,11 @@
     };
   }
 
-  function findSpeech(speechText) {
+  function findSpeech(speechText, expectedAudioType, requestedLessonId) {
     for (const [lessonId, lesson] of Object.entries(lessons)) {
-      const entry = lesson.items.find(candidate => candidate.speechText === speechText);
-      if (entry) return Object.freeze({ ...entry, lessonId, path: `audio/${lessonId}/${entry.file}` });
+      if (requestedLessonId && requestedLessonId !== lessonId) continue;
+      const typed = lesson.items.find(candidate => candidate.speechText === speechText && (!expectedAudioType || candidate.audioType === expectedAudioType));
+      if (typed) return Object.freeze({ ...typed, lessonId, path: `audio/${lessonId}/${typed.file}` });
     }
     return null;
   }
@@ -135,5 +274,10 @@
     };
   }
 
-  global.NikigoAudio = Object.freeze({ lessons, forLesson, findSpeech, forSpeechTexts });
+  function resolve(requestedSpeechText, expectedAudioType, lessonId) {
+    const entry = findSpeech(requestedSpeechText, expectedAudioType, lessonId);
+    return Object.freeze({ entry, playable:canPlayAudio(requestedSpeechText, entry, expectedAudioType), path:entry?.path || null });
+  }
+
+  global.NikigoAudio = Object.freeze({ lessons, approvedAssetHashes:APPROVED_ASSET_HASHES, forLesson, findSpeech, forSpeechTexts, canPlayAudio, resolve });
 })(typeof window === 'undefined' ? globalThis : window);

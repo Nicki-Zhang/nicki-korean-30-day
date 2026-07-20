@@ -83,7 +83,8 @@ for(const {file,question} of genericQuestions){
 const soundSource=fs.readFileSync('hangul-sound-data.js','utf8');
 assert.doesNotMatch(soundSource,/[\u0300-\u036F]/u);
 const contrastSource=fs.readFileSync('lesson-consonant-contrast.js','utf8');
-assert.match(contrastSource,/embedded\?'':`<p class="testAudioDisclosure">/,'Embedded challenge must not duplicate the page audio disclosure.');
+assert.match(contrastSource,/embedded\|\|audioReady\?'':`<p class="testAudioDisclosure">/,'Embedded or released challenge audio must not duplicate the pending-audio disclosure.');
+assert.match(contrastSource,/sequenceReady\?'':`<p class="audioDisclosure">/,'Released contrast groups must hide the pending-audio disclosure while unreleased groups retain it.');
 assert.doesNotMatch(contrastSource,/再次播放\s+\$\{|Play again\s+\$\{|再次播放\s*\{content\}/);
 
 for(const cssFile of ['lesson-player.css','lesson-consonant-contrast.css','player-privacy.css','nikigo-app.html']){

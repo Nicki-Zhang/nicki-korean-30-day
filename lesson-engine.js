@@ -2,7 +2,6 @@
   'use strict';
 
   const SUPPORTED = ['zh', 'en', 'vi', 'ja'];
-  const FEMALE_KOREAN_VOICE = /Yuna|SunHi|Heami|Sora|Jimin|Seoyeon|Kyuri|Female|여성|한국.*여/i;
   const COMPLETION_ACTIONS = Object.freeze({
     zh: { next: '下一课', home: '返回学习主页' },
     en: { next: 'Next lesson', home: 'Return to learning home' },
@@ -23,6 +22,10 @@
   Object.assign(SOUND_UI.en,{playerPlay:'Play listening audio',playerPlaying:'Playing',playerReplay:'Play again',playerLoading:'Loading audio',playerError:'Audio is temporarily unavailable. Try again.',playerAriaPlay:'Play this Korean audio question',playerAriaReplay:'Play this Korean audio question again',testAudio:'Test audio. Korean pronunciation will be reviewed before release.',transcriptLabel:'Audio transcript',translationLabel:'Meaning',correctAnswerLabel:'Correct answer',teachingPointLabel:'Learning tip',vowelFeedback:'Compare the vowel quality inside the carrier syllable; do not rely on romanization alone.',syllableFeedback:'Listen to the full syllable and separate the onset from the vowel.',wordFeedback:'Listen for the full word’s syllable order, then compare each option.',phraseFeedback:'Listen to the whole expression and its polite ending, not only the opening syllables.'});
   Object.assign(SOUND_UI.vi,{playerPlay:'Phát âm thanh bài nghe',playerPlaying:'Đang phát',playerReplay:'Phát lại',playerLoading:'Đang tải âm thanh',playerError:'Tạm thời không thể phát âm thanh. Hãy thử lại.',playerAriaPlay:'Phát âm thanh tiếng Hàn của câu này',playerAriaReplay:'Phát lại âm thanh tiếng Hàn của câu này',testAudio:'Âm thanh thử nghiệm. Phát âm tiếng Hàn sẽ được duyệt trước khi phát hành.',transcriptLabel:'Nội dung âm thanh',translationLabel:'Nghĩa',correctAnswerLabel:'Đáp án đúng',teachingPointLabel:'Gợi ý học tập',vowelFeedback:'So sánh chất âm nguyên âm trong âm tiết mang; đừng chỉ dựa vào phiên âm Latin.',syllableFeedback:'Nghe trọn âm tiết và phân biệt phụ âm đầu với nguyên âm.',wordFeedback:'Nghe thứ tự các âm tiết của cả từ rồi so sánh từng lựa chọn.',phraseFeedback:'Nghe toàn bộ biểu đạt và đuôi lịch sự, không chỉ các âm tiết đầu.'});
   Object.assign(SOUND_UI.ja,{playerPlay:'聞き取り問題の音声を再生',playerPlaying:'再生中',playerReplay:'もう一度再生',playerLoading:'音声を読み込み中',playerError:'音声を一時的に再生できません。もう一度お試しください。',playerAriaPlay:'この問題の韓国語音声を再生',playerAriaReplay:'この問題の韓国語音声をもう一度再生',testAudio:'テスト音声です。公開前に韓国語発音の確認を完了します。',transcriptLabel:'音声の原文',translationLabel:'意味',correctAnswerLabel:'正解',teachingPointLabel:'学習ポイント',vowelFeedback:'母音を載せた音節の音色を比べ、ローマ字だけに頼らないでください。',syllableFeedback:'音節全体を聞き、語頭子音と母音の組み合わせを分けて捉えます。',wordFeedback:'単語全体の音節順を聞き、選択肢を一つずつ比べます。',phraseFeedback:'冒頭だけでなく、表現全体と丁寧な語尾を聞き取ります。'});
+  Object.assign(SOUND_UI.zh,{audioNotReleased:'音频尚未发布',skipAudioPreview:'跳过试听并继续结构预览',previewOnly:'结构预览不会记录试听、答案、完成状态或XP。'});
+  Object.assign(SOUND_UI.en,{audioNotReleased:'Audio not released yet',skipAudioPreview:'Skip audio and continue structure preview',previewOnly:'Structure preview does not record listening, answers, completion, or XP.'});
+  Object.assign(SOUND_UI.vi,{audioNotReleased:'Âm thanh chưa được phát hành',skipAudioPreview:'Bỏ qua âm thanh và tiếp tục xem trước cấu trúc',previewOnly:'Bản xem trước cấu trúc không ghi nhận lượt nghe, đáp án, hoàn thành hay XP.'});
+  Object.assign(SOUND_UI.ja,{audioNotReleased:'音声はまだ公開されていません',skipAudioPreview:'試聴をスキップして構造プレビューを続ける',previewOnly:'構造プレビューでは試聴・回答・完了・XPを記録しません。'});
 
   function neutralPlayerCopy(language, state) {
     const copy = SOUND_UI[language] || SOUND_UI.en;
@@ -71,7 +74,8 @@
       selfCheck: ['practice', 'good'].includes(raw.selfCheck) ? raw.selfCheck : null,
       builderConsonant: config.builder?.consonants?.includes(raw.builderConsonant) ? raw.builderConsonant : null,
       builderVowel: config.builder?.vowels?.includes(raw.builderVowel) ? raw.builderVowel : null,
-      builderFinal: config.builder?.finals?.includes(raw.builderFinal) ? raw.builderFinal : null
+      builderFinal: config.builder?.finals?.includes(raw.builderFinal) ? raw.builderFinal : null,
+      audioPreviewSkipped: raw.audioPreviewSkipped === true
     });
   }
 
@@ -110,12 +114,11 @@
     let builderVowel = config.builder.initialVowel || config.builder.vowels[0];
     let builderFinal = config.builder.finals ? (config.builder.initialFinal ?? config.builder.finals[0]) : '';
     const sessionKey = `nikigoLessonSession:${config.id}`;
-    let koreanVoices = [];
     let currentAudio = null;
-    let currentUtterance = null;
-    let audioUnlocked = false;
     let playbackGeneration = 0;
     let activeAudioValue = '';
+    const audioPreviewSkips = new Set();
+    let audioPreviewSkipped = false;
 
     const element = selector => document.querySelector(selector);
     const copy = key => config.copy[language]?.[key] || config.copy.en?.[key] || key;
@@ -136,7 +139,8 @@
         selfCheck,
         builderConsonant,
         builderVowel,
-        builderFinal
+        builderFinal,
+        audioPreviewSkipped
       }));
     }
 
@@ -154,6 +158,7 @@
         if (restored.builderConsonant !== null) builderConsonant = restored.builderConsonant;
         if (restored.builderVowel !== null) builderVowel = restored.builderVowel;
         if (restored.builderFinal !== null) builderFinal = restored.builderFinal;
+        audioPreviewSkipped = restored.audioPreviewSkipped;
       } catch {
         // Invalid or legacy session data is ignored without touching the learning profile.
       }
@@ -204,64 +209,7 @@
       return Math.min(1.2, Math.max(0.8, Number(profile.audioRate) || 1));
     }
 
-    function refreshVoices() {
-      if (!('speechSynthesis' in global)) return;
-      koreanVoices = global.speechSynthesis.getVoices().filter(voice => /^ko(?:-|_|$)/i.test(voice.lang || ''));
-    }
-
-    function preferredKoreanVoice() {
-      return koreanVoices.find(voice => FEMALE_KOREAN_VOICE.test(voice.name || ''))
-        || koreanVoices.find(voice => voice.localService)
-        || koreanVoices[0]
-        || null;
-    }
-
-    function unlockAudio() {
-      if (audioUnlocked) return;
-      audioUnlocked = true;
-      if ('speechSynthesis' in global) {
-        refreshVoices();
-        global.speechSynthesis.resume();
-      }
-      const AudioContextClass = global.AudioContext || global.webkitAudioContext;
-      if (!AudioContextClass) return;
-      try {
-        const context = new AudioContextClass();
-        if (context.state === 'suspended') context.resume();
-        const source = context.createBufferSource();
-        source.buffer = context.createBuffer(1, 1, 22050);
-        source.connect(context.destination);
-        source.start(0);
-      } catch (error) {
-        // Static audio and SpeechSynthesis can still work without AudioContext.
-      }
-    }
-
-    function systemSpeech(value, onEnd) {
-      if (!('speechSynthesis' in global) || typeof global.SpeechSynthesisUtterance === 'undefined') {
-        toast(copy('audioUnavailable'));
-        if (onEnd) onEnd('error');
-        return;
-      }
-      const synth = global.speechSynthesis;
-      if (synth.paused) synth.resume();
-      if (synth.speaking || synth.pending) synth.cancel();
-      currentUtterance = new global.SpeechSynthesisUtterance(config.pronunciationText?.[value] || value);
-      currentUtterance.lang = 'ko-KR';
-      currentUtterance.rate = Math.min(1.1, Math.max(0.62, 0.78 * configuredAudioRate()));
-      currentUtterance.pitch = 1;
-      const voice = preferredKoreanVoice();
-      if (voice) currentUtterance.voice = voice;
-      currentUtterance.onend = () => { if (onEnd) onEnd('played'); };
-      currentUtterance.onerror = event => {
-        if (!['canceled', 'interrupted'].includes(event.error)) toast(copy('audioError'));
-        if (onEnd) onEnd('error');
-      };
-      synth.speak(currentUtterance);
-    }
-
     function playOne(value, onEnd) {
-      unlockAudio();
       activeAudioValue = value;
       if (shouldRenderPlayingState()) render();
       const complete = (result = 'played') => {
@@ -273,7 +221,8 @@
       };
       const file = config.audioFiles?.[value];
       if (!file) {
-        systemSpeech(value, complete);
+        toast(soundUi('audioNotReleased'));
+        complete('error');
         return;
       }
       if (currentAudio) currentAudio.pause();
@@ -284,7 +233,7 @@
       currentAudio.mozPreservesPitch = true;
       currentAudio.webkitPreservesPitch = true;
       currentAudio.onended = complete;
-      currentAudio.play().catch(() => systemSpeech(value, complete));
+      currentAudio.play().catch(() => { toast(soundUi('playerError')); complete('error'); });
     }
 
     function speak(value, onEnd) {
@@ -341,7 +290,8 @@
 
     function shell(body) {
       const previousLabel = index === 0 ? copy('returnHome') : copy('back');
-      return `${body}<p class="aiDisclosure">ⓘ ${copy('aiVoice')}</p><div class="foot"><button class="ghost" data-action="previous">← ${previousLabel}</button><button class="primary" id="nextButton" data-action="next">${copy(index === screens.length - 2 ? 'finish' : 'continue')} →</button></div>`;
+      const preview = audioPreviewSkips.has(index) ? `<p class="note">${soundUi('previewOnly')}</p>` : '';
+      return `${body}${preview}<p class="aiDisclosure">ⓘ ${soundUi('audioNotReleased')}</p><div class="foot"><button class="ghost" data-action="previous">← ${previousLabel}</button><button class="secondary" data-action="skip-audio">${soundUi('skipAudioPreview')}</button><button class="primary" id="nextButton" data-action="next">${copy(index === screens.length - 2 ? 'finish' : 'continue')} →</button></div>`;
     }
 
     function renderIntro() {
@@ -433,7 +383,7 @@
     }
 
     function renderComplete() {
-      finishLesson();
+      if (!audioPreviewSkipped) finishLesson();
       const score = Object.values(quizAnswers).filter(answer => answer.correct).length;
       const perfect = score === config.quiz.length;
       const next = nextCourse();
@@ -444,6 +394,7 @@
     }
 
     function currentScreenAllowed(screen) {
+      if (audioPreviewSkips.has(index)) return true;
       if (screen.type === 'vowels') return heard.vowels.size === config.vowels.length;
       if (screen.type === 'consonants') return heard.consonants.size === config.consonants.length;
       if (screen.type === 'words') return heard.words.size === config.words.length;
@@ -463,9 +414,43 @@
       if (screen.type === 'quiz') { question = config.quiz[screen.question]; value = question.audio; }
       if (screen.type === 'repeat') value = config.repeat.audio;
       if (screen.type === 'phrase') value = config.phrase.audio;
-      if (!value) return;
+      if (!value || !(Array.isArray(value) ? value.every(item => config.audioFiles?.[item]) : config.audioFiles?.[value])) return;
       autoplayedScreens.add(index);
       global.setTimeout(() => question ? playQuestionAudio(question, screen.type === 'quiz', screen.question, true) : speak(value), 250);
+    }
+
+    function valueIsPlayable(value) {
+      const values = Array.isArray(value) ? value : [value];
+      return values.filter(Boolean).length > 0 && values.every(item => Boolean(config.audioFiles?.[item]));
+    }
+
+    function applyAudioGate(screen) {
+      element('#content').querySelectorAll('[data-action="question-audio"]').forEach(button => {
+        const isQuiz = button.dataset.quiz === 'true';
+        const question = (isQuiz ? config.quiz : config.practice)[Number(button.dataset.question)];
+        if (valueIsPlayable(question?.audio)) return;
+        button.disabled = true; button.setAttribute('aria-disabled','true'); button.setAttribute('aria-label',soundUi('audioNotReleased'));
+        const label = button.querySelector('b'); if (label) label.textContent = soundUi('audioNotReleased');
+        element('#content').querySelectorAll(`.option[data-quiz="${isQuiz}"][data-question="${button.dataset.question}"]`).forEach(option => { option.disabled = true; option.setAttribute('aria-disabled','true'); });
+      });
+      element('#content').querySelectorAll('[data-action="structured-audio"]').forEach(button => {
+        const item = config[button.dataset.kind][Number(button.dataset.index)];
+        const role = button.dataset.role;
+        const value = role === 'vowel' ? item.vowelCarrierSyllable : role === 'letter-name' ? item.letterName : item.demoSyllable;
+        if (valueIsPlayable(value)) return;
+        button.disabled = true; button.setAttribute('aria-disabled','true'); button.textContent = soundUi('audioNotReleased');
+      });
+      element('#content').querySelectorAll('[data-action="hear"]').forEach(button => {
+        const items = button.dataset.kind === 'words' ? config.words : config[button.dataset.kind];
+        const value = config.batchimExamples && button.dataset.kind === 'vowels' ? config.batchimExamples[Number(button.dataset.index)].audio : items[Number(button.dataset.index)][2];
+        if (valueIsPlayable(value)) return;
+        button.disabled = true; button.setAttribute('aria-disabled','true');
+        const label = button.querySelector('.play,.wordListen,.listenWord'); if (label) label.textContent = soundUi('audioNotReleased');
+      });
+      for (const [selector,value] of [['[data-action="phrase"]',config.phrase?.audio],['[data-action="repeat-audio"]',config.repeat?.audio]]) {
+        const button = element('#content').querySelector(selector); if (!button || valueIsPlayable(value)) continue;
+        button.disabled = true; button.setAttribute('aria-disabled','true'); button.setAttribute('aria-label',soundUi('audioNotReleased'));
+      }
     }
 
     function render() {
@@ -494,6 +479,7 @@
       if (screen.type === 'quiz') html = renderQuestion(config.quiz[screen.question], true, screen.question);
       if (screen.type === 'complete') html = renderComplete();
       element('#content').innerHTML = html;
+      applyAudioGate(screen);
       const nextButton = element('#nextButton');
       if (nextButton) nextButton.disabled = !currentScreenAllowed(screen);
       maybeAutoplay(screen);
@@ -538,6 +524,7 @@
       phraseHeard = false;
       finished = false;
       earnedXp = false;
+      audioPreviewSkipped = false;
       Object.values(heard).forEach(set => set.clear());
       built.clear();
       autoplayedScreens.clear();
@@ -554,6 +541,7 @@
       if (!button) return;
       const action = button.dataset.action;
       if (action === 'next' && index < screens.length - 1) { index += 1; recordProgress(); render(); global.scrollTo(0, 0); }
+      if (action === 'skip-audio' && index < screens.length - 1) { audioPreviewSkips.add(index); audioPreviewSkipped = true; index += 1; saveSession(); render(); global.scrollTo(0, 0); }
       if (action === 'previous') { if (index === 0) exitLesson(); else { index -= 1; saveSession(); render(); global.scrollTo(0, 0); } }
       if (action === 'exit') exitLesson();
       if (action === 'next-lesson') goNextLesson();
@@ -627,13 +615,6 @@
     };
     global.exitLesson = exitLesson;
 
-    if ('speechSynthesis' in global) {
-      refreshVoices();
-      if (typeof global.speechSynthesis.addEventListener === 'function') global.speechSynthesis.addEventListener('voiceschanged', refreshVoices);
-      else global.speechSynthesis.onvoiceschanged = refreshVoices;
-    }
-    document.addEventListener('touchstart', unlockAudio, { once: true, passive: true });
-    document.addEventListener('pointerdown', unlockAudio, { once: true });
     saveProfile();
     render();
   }

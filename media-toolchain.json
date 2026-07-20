@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "ffmpegVersion": "6.1",
+  "platform": "linux-x64-static",
+  "sourceRepository": "FedericoCarboni/setup-ffmpeg",
+  "releaseTag": "ffmpeg-6.1-20231201",
+  "assetName": "ffmpeg-linux-x64.tar.gz",
+  "downloadUrl": "https://github.com/FedericoCarboni/setup-ffmpeg/releases/download/ffmpeg-6.1-20231201/ffmpeg-linux-x64.tar.gz",
+  "archiveSha256": "36a92ef8b5c89723c7e7f9fbc601e5e6875fb7362c20961954270b4ec4f3bd33",
+  "fixture": {
+    "file": "audio/lesson-02/mi.mp3",
+    "sha256": "77e2a63c39057784b4855d5e79b1558d488bfec533cab4464d6f0f60d6bb692e"
+  },
+  "upgradePolicy": "Change the release tag, URL and SHA-256 together in a reviewed commit, then rerun fixture, dry-run and validation-only acceptance before any paid generation."
+}
