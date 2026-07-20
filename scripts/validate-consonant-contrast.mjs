@@ -101,6 +101,7 @@ assert.match(source,/min\(SCREENS\.length-1/);
 assert.match(source,/HOSTED_AUDIO\[item\.syllable\]\?text\('listenSound'/);
 assert.doesNotMatch(source,/speechSynthesis|SpeechSynthesisUtterance|getVoices/);
 const workflow=fs.readFileSync('.github/workflows/generate-lesson-audio.yml','utf8');
-assert.doesNotMatch(workflow,/k0-consonant-contrast|audio\/k0-\*\/manifest\.json/,'Batch 1 workflow must not invoke the contrast-audio batch.');
 assert.match(workflow,/audio-batch-01/);
+assert.match(workflow,/audio-batch-02a/);
+assert.doesNotMatch(workflow,/audio-batch-02b/,'Planning-only Batch 2B must not be dispatchable.');
 console.log('Validated 15-step K0 consonant contrast lesson, 14 safe full-syllable mappings, four languages, retry flow, resume state, completion compatibility, and direct course access.');

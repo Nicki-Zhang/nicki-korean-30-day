@@ -22,6 +22,12 @@ try {
   validateBatchShape(batchId, batch, expectedCount);
   await validateFormalManifest(root, batch, { allowPublished:mode === 'dry-run' });
   report.status = 'passed';
+  report.generationSettings = {
+    model:batch.model, voice:batch.voice, responseFormat:batch.format,
+    speed:batch.speed, instructions:batch.instructions,
+    expectedSampleRate:batch.expectedSampleRate, expectedChannels:batch.expectedChannels,
+    maxApiRequests:expectedCount, automaticRetry:false, outputScope:'staging-only'
+  };
   report.allowedItems = batch.items.map(({ id, speechText, audioType, outputFile }) => ({ id, speechText, audioType, outputFile }));
 } catch (error) {
   report.errors.push(error.message);

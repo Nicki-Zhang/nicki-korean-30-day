@@ -21,7 +21,9 @@ await validateFormalManifest(root, batch, { allowPublished:mode === 'dry-run' })
 const report = {
   workflowRunId, commit, batchId, generationMode:mode, expectedCount,
   generatedCount:0, apiRequestCount:0, generatedAt:new Date().toISOString(),
-  model:batch.model, voice:batch.voice, status:'running', items:[], errors:[]
+  model:batch.model, voice:batch.voice, responseFormat:batch.format, speed:batch.speed,
+  instructions:batch.instructions, expectedSampleRate:batch.expectedSampleRate, expectedChannels:batch.expectedChannels,
+  automaticRetry:false, status:'running', items:[], errors:[]
 };
 
 try {
@@ -41,14 +43,16 @@ try {
       if (remainingAllowed < 1) throw new Error('No allowlisted API requests remain.');
       report.apiRequestCount += 1;
       console.log(`API request ${report.apiRequestCount}/${expectedCount}: ${item.id}`);
+      const requestBody = {
+        model:batch.model, voice:batch.voice, input:item.speechText,
+        instructions:batch.instructions,
+        response_format:batch.format
+      };
+      if (typeof batch.speed === 'number') requestBody.speed = batch.speed;
       const response = await fetch('https://api.openai.com/v1/audio/speech', {
         method:'POST',
         headers:{ Authorization:`Bearer ${apiKey}`, 'Content-Type':'application/json' },
-        body:JSON.stringify({
-          model:batch.model, voice:batch.voice, input:item.speechText,
-          instructions:'Speak only the supplied Korean speechText exactly once in natural standard Seoul Korean. Do not spell, translate, explain, or add sounds.',
-          response_format:batch.format
-        })
+        body:JSON.stringify(requestBody)
       });
       if (!response.ok) throw new Error(`Audio API request failed for ${item.id}: HTTP ${response.status}`);
       await writeFile(resolve(filesDir, item.outputFile), Buffer.from(await response.arrayBuffer()));

@@ -7,6 +7,10 @@
       "model": "gpt-4o-mini-tts",
       "voice": "marin",
       "format": "mp3",
+      "speed": null,
+      "instructions": "Speak only the supplied Korean speechText exactly once in natural standard Seoul Korean. Do not spell, translate, explain, or add sounds.",
+      "expectedSampleRate": 24000,
+      "expectedChannels": 1,
       "items": [
         {
           "id": "yo",
@@ -36,6 +40,80 @@
             "maxDuration": 3
           }
         }
+      ]
+    },
+    "audio-batch-02a": {
+      "lessonId": "k0-consonant-contrast",
+      "expectedCount": 3,
+      "model": "gpt-4o-mini-tts",
+      "voice": "marin",
+      "format": "mp3",
+      "speed": null,
+      "instructions": "Speak only the supplied Korean speechText exactly once in natural standard Seoul Korean. Do not spell, translate, explain, or add sounds.",
+      "expectedSampleRate": 24000,
+      "expectedChannels": 1,
+      "items": [
+        {
+          "id": "ga",
+          "speechText": "가",
+          "audioType": "initial-example",
+          "outputFile": "ga.mp3"
+        },
+        {
+          "id": "ka",
+          "speechText": "카",
+          "audioType": "initial-example",
+          "outputFile": "ka.mp3"
+        },
+        {
+          "id": "kka",
+          "speechText": "까",
+          "audioType": "initial-example",
+          "outputFile": "kka.mp3"
+        }
+      ]
+    }
+  },
+  "planningOnly": {
+    "audio-batch-02-original": {
+      "expectedCount": 16,
+      "items": [
+        ["ga", "가", "initial-example", "ga.mp3"],
+        ["ka", "카", "initial-example", "ka.mp3"],
+        ["kka", "까", "initial-example", "kka.mp3"],
+        ["da", "다", "initial-example", "da.mp3"],
+        ["ta", "타", "initial-example", "ta.mp3"],
+        ["tta", "따", "initial-example", "tta.mp3"],
+        ["ba", "바", "initial-example", "ba.mp3"],
+        ["pa", "파", "initial-example", "pa.mp3"],
+        ["ppa", "빠", "initial-example", "ppa.mp3"],
+        ["ja", "자", "initial-example", "ja.mp3"],
+        ["cha", "차", "initial-example", "cha.mp3"],
+        ["jja", "짜", "initial-example", "jja.mp3"],
+        ["sa", "사", "initial-example", "sa.mp3"],
+        ["ssa", "싸", "initial-example", "ssa.mp3"],
+        ["ha", "하", "initial-example", "ha.mp3"],
+        ["geu", "그", "syllable", "geu.mp3"]
+      ]
+    },
+    "audio-batch-02b": {
+      "status": "planning-only",
+      "requiresProductOwnerApprovalOf": "audio-batch-02a",
+      "expectedCount": 13,
+      "items": [
+        ["da", "다", "initial-example", "da.mp3"],
+        ["ta", "타", "initial-example", "ta.mp3"],
+        ["tta", "따", "initial-example", "tta.mp3"],
+        ["ba", "바", "initial-example", "ba.mp3"],
+        ["pa", "파", "initial-example", "pa.mp3"],
+        ["ppa", "빠", "initial-example", "ppa.mp3"],
+        ["ja", "자", "initial-example", "ja.mp3"],
+        ["cha", "차", "initial-example", "cha.mp3"],
+        ["jja", "짜", "initial-example", "jja.mp3"],
+        ["sa", "사", "initial-example", "sa.mp3"],
+        ["ssa", "싸", "initial-example", "ssa.mp3"],
+        ["ha", "하", "initial-example", "ha.mp3"],
+        ["geu", "그", "syllable", "geu.mp3"]
       ]
     }
   }

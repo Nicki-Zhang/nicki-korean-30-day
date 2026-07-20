@@ -19,13 +19,14 @@ on:
         type: choice
         options:
           - audio-batch-01
+          - audio-batch-02a
       expectedCount:
         description: Must exactly match the reviewed batch allowlist
         required: true
         default: 2
         type: number
       confirmation:
-        description: Generate mode requires exactly "GENERATE audio-batch-01 2"
+        description: Generate mode requires exactly "GENERATE <batchId> <expectedCount>"
         required: false
         default: DRY-RUN
         type: string

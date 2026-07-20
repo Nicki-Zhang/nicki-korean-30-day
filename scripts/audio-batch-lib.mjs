@@ -23,6 +23,16 @@ export async function loadBatch(root, batchId) {
 
 export function validateBatchShape(batchId, batch, expectedCount) {
   if (!Number.isInteger(expectedCount) || expectedCount < 1) throw new Error('expectedCount must be a positive integer.');
+  if (batch.model !== 'gpt-4o-mini-tts' || batch.voice !== 'marin' || batch.format !== 'mp3') {
+    throw new Error(`${batchId} must use the product-owner-approved Batch 1 model, voice and MP3 format.`);
+  }
+  if (batch.speed !== null) throw new Error(`${batchId} speed must remain omitted (provider default), matching Batch 1.`);
+  if (batch.instructions !== 'Speak only the supplied Korean speechText exactly once in natural standard Seoul Korean. Do not spell, translate, explain, or add sounds.') {
+    throw new Error(`${batchId} instructions do not match the frozen Batch 1 request.`);
+  }
+  if (batch.expectedSampleRate !== 24000 || batch.expectedChannels !== 1) {
+    throw new Error(`${batchId} expected output must remain 24000 Hz mono.`);
+  }
   if (batch.expectedCount !== expectedCount || batch.items?.length !== expectedCount) {
     throw new Error(`${batchId} allowlist count must equal expectedCount (${expectedCount}).`);
   }

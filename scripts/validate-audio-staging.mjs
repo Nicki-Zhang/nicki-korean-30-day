@@ -27,7 +27,9 @@ const artifact = {
   generationMode:mode, expectedCount, generatedCount:generation.generatedCount || 0,
   apiRequestCount:generation.apiRequestCount || 0, generatedAt:generation.generatedAt,
   generationStatus:generation.status || 'missing',
-  model:batch.model, voice:batch.voice, reviewStatus:'underReview',
+  model:batch.model, voice:batch.voice, responseFormat:batch.format, speed:batch.speed,
+  instructions:batch.instructions, expectedSampleRate:batch.expectedSampleRate, expectedChannels:batch.expectedChannels,
+  automaticRetry:false, reviewStatus:'underReview',
   technicalValidation:{ status:'pending', errors }, items:[]
 };
 
