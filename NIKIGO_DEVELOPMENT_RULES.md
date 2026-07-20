@@ -41,14 +41,16 @@ Nikigo 支持至少六类模板：
 
 允许的音频类型：`letter-name`、`vowel-carrier`、`initial-example`、`syllable`、`word`、`sentence`、`dialogue-line`、`listening-question`。
 
-每个音频对象至少保存：`id`、`lessonId`、`targetSymbol`（适用时）、`displayText`、`speechText`、`audioType`、`pronunciationType`、`file`、`voiceSource`、`model`、`generationDate`、`commercialUseBasis`、`reviewStatus`、`nativeReviewer`、`reviewNotes`。
+每个音频对象至少保存：`id`、`lessonId`、`targetSymbol`（适用时）、`displayText`、`speechText`、`audioType`、`pronunciationType`、`file`、`voiceSource`、`model`、`generationDate`、`commercialUseBasis`、`reviewStatus`、`reviewMethod`、`nativeReviewStatus`、`nativeReviewer`、`technicalValidation`、`reviewedAt`、`reviewNotes`。旧记录可在正式接入任务中幂等迁移，不得为了补字段伪造审核事实。
 
 - 页面、按钮、映射、manifest 与实际音频内容必须一致；按钮要说明实际播放对象。
 - 完整音节不得描述为“单个字母发音”，辅音不得生成或伪装成裸音。
 - `pending`、`generated`、`underReview` 或缺失的音频不得作为正式音频播放。
 - 禁止设备 TTS fallback、相似文字替代和用答案文字替代音频。
 - 听力挑战作答前不得在可见文本、状态、title、aria-label 或屏幕阅读器文本中泄露原文、翻译或答案；作答后才能显示原文、翻译与解释。
-- AI 音频正式发布前必须完成韩语母语者试听。发布记录必须填写声音来源、模型、生成日期、商业使用依据和审核记录。
+- 音频接入流程为“技术验证 → 产品负责人课程内试听 → 明确通过后接入”。母语者审核改为可选的发布前抽检，不是当前课程开发或音频接入的强制步骤。
+- 产品负责人未明确反馈“试听通过”前，音频保持 `underReview` 或 `pending/missing`，不得标记 `approved` 或启用播放器。通过后记录 `reviewMethod: product-owner-listening`、`nativeReviewStatus: deferred`、`nativeReviewer: null`、`technicalValidation: passed` 和实际 `reviewedAt`。
+- 不得伪造 `nativeReviewer` 或母语审核记录；单个文件有问题时只将该文件标记 `rejected`，同批其他文件独立处理。
 
 付费生成只允许人工触发的隔离工作流；普通 push 只验证，不读取密钥、不生成、不提交音频。
 

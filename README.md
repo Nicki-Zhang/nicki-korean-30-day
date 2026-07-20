@@ -21,7 +21,7 @@ python3 -m http.server 4173 --bind 127.0.0.1
 - `app-state.js`：Schema Version 2 本机状态、旧数据迁移和间隔复习调度。
 - `review.html`、`review-catalog.js`：到期复习、答题反馈、XP 与重新排期。
 
-开始修改前必须读取 `NIKIGO_DEVELOPMENT_RULES.md`。课程按教学目标选择合适模板；`NikigoLesson.mount()` 是现有通用课程引擎之一，不应强制套用到情景对话等不同课程形态。课程韩语音频只允许使用已完成韩语母语审核的精确托管文件；禁止设备 TTS 或文字答案 fallback。
+开始修改前必须读取 `NIKIGO_DEVELOPMENT_RULES.md`。课程按教学目标选择合适模板；`NikigoLesson.mount()` 是现有通用课程引擎之一，不应强制套用到情景对话等不同课程形态。课程韩语音频只允许使用已通过技术验证并由产品负责人课程内试听通过的精确托管文件；母语者审核为可选发布前抽检。禁止设备 TTS 或文字答案 fallback。
 
 ## 校验
 
