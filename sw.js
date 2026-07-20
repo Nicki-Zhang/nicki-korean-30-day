@@ -1,4 +1,4 @@
-const CACHE = 'nikigo-v17-batch-02a-approved';
+const CACHE = 'nikigo-v20-course-navigation-network-refresh';
 const ASSETS = [
   './', './index.html', './nikigo-app.html', './app-state.js', './course-catalog.js',
   './hangul-sound-data.js', './audio-catalog.js', './review.html', './review.css',
@@ -13,8 +13,19 @@ const ASSETS = [
   './manifest.webmanifest'
 ];
 
+const NAVIGATION_ASSETS = new Set(ASSETS
+  .filter(asset => asset.endsWith('.html') || asset === './')
+  .map(asset => asset === './' ? 'index.html' : asset.slice(2)));
+
+function navigationAssetFor(url) {
+  const file = url.pathname.endsWith('/') ? 'index.html' : url.pathname.split('/').pop();
+  return NAVIGATION_ASSETS.has(file) ? `./${file}` : './nikigo-app.html';
+}
+
 self.addEventListener('install', event => event.waitUntil(
-  caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting())
+  caches.open(CACHE)
+    .then(cache => cache.addAll(ASSETS.map(asset => new Request(asset,{ cache:'reload' }))))
+    .then(() => self.skipWaiting())
 ));
 
 self.addEventListener('activate', event => event.waitUntil(
@@ -30,13 +41,23 @@ self.addEventListener('fetch', event => {
     event.respondWith(Promise.resolve(Response.error()));
     return;
   }
+  if (event.request.mode === 'navigate') {
+    const cachedNavigationAsset = navigationAssetFor(url);
+    event.respondWith(
+      fetch(event.request,{ cache:'no-store' }).then(response => {
+        if (!response.ok) throw new Error(`Navigation request failed: ${response.status}`);
+        const copy = response.clone();
+        caches.open(CACHE).then(cache => cache.put(cachedNavigationAsset, copy));
+        return response;
+      }).catch(() => caches.match(cachedNavigationAsset).then(hit => hit || Response.error()))
+    );
+    return;
+  }
   event.respondWith(
-    fetch(event.request).then(response => {
+    fetch(event.request,{ cache:'no-store' }).then(response => {
       const copy = response.clone();
       caches.open(CACHE).then(cache => cache.put(event.request, copy));
       return response;
-    }).catch(() => caches.match(event.request).then(hit => hit || (
-      event.request.mode === 'navigate' ? caches.match('./nikigo-app.html') : Response.error()
-    )))
+    }).catch(() => caches.match(event.request).then(hit => hit || Response.error()))
   );
 });

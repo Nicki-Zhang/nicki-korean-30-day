@@ -1,0 +1,27 @@
+{
+  "browser": "Google Chrome",
+  "testedAt": "2026-07-20",
+  "totalCases": 21,
+  "states": ["start", "continue", "review"],
+  "languages": ["zh", "en", "vi", "ja"],
+  "widths": [390, 768, 1440],
+  "offlineNavigation": false,
+  "offlineFallbackPassed": true,
+  "guestPassed": true,
+  "refreshPassed": true,
+  "backPassed": true,
+  "progressPreserved": true,
+  "xpPreserved": true,
+  "undefinedCount": 0,
+  "notFoundCount": 0,
+  "homeRedirectCount": 0,
+  "lessons": [
+    {"lesson":"lesson-00","file":"lesson-00.html","href":"lesson-00.html?lang=zh","finalUrl":"http://127.0.0.1:4174/lesson-00.html?lang=zh","title":"Nikigo · Hangul Map","passed":true},
+    {"lesson":"lesson-01","file":"lesson-01.html","href":"lesson-01.html?lang=en","finalUrl":"http://127.0.0.1:4174/lesson-01.html?lang=en","title":"Nikigo · Hangul First Step","passed":true},
+    {"lesson":"lesson-02","file":"lesson-02.html","href":"lesson-02.html?lang=vi","finalUrl":"http://127.0.0.1:4174/lesson-02.html?lang=vi","title":"Nikigo · From Syllables to Words","passed":true},
+    {"lesson":"lesson-03","file":"lesson-03.html","href":"lesson-03.html?lang=ja","finalUrl":"http://127.0.0.1:4174/lesson-03.html?lang=ja","title":"Nikigo · Your First Greeting","passed":true},
+    {"lesson":"k0-consonant-contrast","file":"lesson-consonant-contrast.html","href":"lesson-consonant-contrast.html?lang=zh","finalUrl":"http://127.0.0.1:4174/lesson-consonant-contrast.html?lang=zh","title":"Nikigo · K0 Consonant Contrast","passed":true},
+    {"lesson":"lesson-05","file":"lesson-05.html","href":"lesson-05.html?lang=en","finalUrl":"http://127.0.0.1:4174/lesson-05.html?lang=en","title":"Nikigo · Syllable Blocks","passed":true},
+    {"lesson":"lesson-06","file":"lesson-06.html","href":"lesson-06.html?lang=vi","finalUrl":"http://127.0.0.1:4174/lesson-06.html?lang=vi","title":"Nikigo · Compound Vowels","passed":true}
+  ]
+}

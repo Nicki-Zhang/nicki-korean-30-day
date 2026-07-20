@@ -75,5 +75,5 @@ assert.equal(audio.canPlayAudio(complete.speechText,{...complete,sha256:'0'.repe
 assert.equal(audio.canPlayAudio(complete.speechText,{...complete,assetStatus:'deprecated'},complete.audioType),false,'deprecated asset became playable');
 assert.doesNotMatch(fs.readFileSync('review-catalog.js','utf8'),/audio:\s*['"][^'"]*[,，][^'"]*['"]/, 'review sequence is comma-batched');
 assert.match(fs.readFileSync('review.html','utf8'),/currentAudio\.onended=next/,'review sequence is not file-by-file');
-const worker=fs.readFileSync('sw.js','utf8'); assert.match(worker,/nikigo-v17-batch-02a-approved/); assert.match(worker,/audio\/deprecated/);
+const worker=fs.readFileSync('sw.js','utf8'); assert.match(worker,/nikigo-v(?:17-batch-02a-approved|20-course-navigation-network-refresh)/); assert.match(worker,/audio\/deprecated/);
 console.log('Validated 77 strict catalog records, exactly 5 approved/playable Batch 1 + 2A assets, 72 pending records, physical SHA integrity, and zero device-TTS calls in production JS/HTML.');

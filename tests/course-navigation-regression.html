@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Nikigo real course navigation regression</title>
+  <style>body{font:14px system-ui;padding:20px}iframe{position:fixed;left:-10000px;top:0;border:0}pre{white-space:pre-wrap}.pass{color:#176f48}.fail{color:#b52c42}</style>
+</head>
+<body>
+  <h1>Nikigo real course navigation regression</h1>
+  <p id="status">RUNNING</p>
+  <pre id="result"></pre>
+<script>
+const lessons = [
+  ['lesson-00','lesson-00.html','Nikigo · Hangul Map'],
+  ['lesson-01','lesson-01.html','Nikigo · Hangul First Step'],
+  ['lesson-02','lesson-02.html','Nikigo · From Syllables to Words'],
+  ['lesson-03','lesson-03.html','Nikigo · Your First Greeting'],
+  ['k0-consonant-contrast','lesson-consonant-contrast.html','Nikigo · K0 Consonant Contrast'],
+  ['lesson-05','lesson-05.html','Nikigo · Syllable Blocks'],
+  ['lesson-06','lesson-06.html','Nikigo · Compound Vowels']
+];
+const languages = ['zh','en','vi','ja'];
+const widths = [390,768,1440];
+const states = ['start','continue','review'];
+const wait = milliseconds => new Promise(resolve => setTimeout(resolve,milliseconds));
+const frameLoad = frame => new Promise((resolve,reject) => {
+  const timeout=setTimeout(()=>reject(new Error('iframe load timeout')),8000);
+  frame.addEventListener('load',()=>{clearTimeout(timeout);resolve();},{once:true});
+});
+
+function seedProfile(lessonId,state,language) {
+  for (const key of Object.keys(localStorage)) if (key.startsWith('nikigoLessonSession:')) localStorage.removeItem(key);
+  const completed = state === 'review' ? [lessonId] : [];
+  const lessonProgress = state === 'continue' ? { legacyLesson:37,[lessonId]:42 } : { legacyLesson:37 };
+  localStorage.setItem('nikigoProfile',JSON.stringify({
+    schemaVersion:4,name:'Navigation Fixture',guest:true,path:'K0',interfaceLanguage:language,learningLanguage:language,
+    completedLessons:completed,lessonProgress,xp:321,streak:4,weeklyProgress:2,legacySentinel:'preserve-me'
+  }));
+}
+
+async function installWorker() {
+  const registration = await navigator.serviceWorker.register('../sw.js',{scope:'../',updateViaCache:'none'});
+  await registration.update();
+  await navigator.serviceWorker.ready;
+  if (!navigator.serviceWorker.controller) {
+    await new Promise(resolve => navigator.serviceWorker.addEventListener('controllerchange',resolve,{once:true}));
+  }
+  return registration.active?.scriptURL || '';
+}
+
+async function runCase(test,index) {
+  seedProfile(test.lessonId,test.state,test.language);
+  const frame=document.createElement('iframe');
+  frame.style.width=`${test.width}px`;frame.style.height='844px';
+  document.body.append(frame);
+  const catalogLoaded=frameLoad(frame);
+  frame.src=`../nikigo-app.html?lang=${test.language}#courses`;
+  await catalogLoaded;
+  const catalogDoc=frame.contentDocument,catalogWin=frame.contentWindow;
+  const action=catalogDoc.querySelector(`a[data-course-id="${test.lessonId}"]`);
+  if(!action)throw new Error(`${test.lessonId}/${test.state}/${test.language}: course action missing`);
+  const expectedHref=`${test.file}?lang=${test.language}`;
+  if(!action.getAttribute('href')?.endsWith(expectedHref))throw new Error(`${test.lessonId}: href mismatch ${action.getAttribute('href')}`);
+  const beforeUrl=catalogWin.location.href,buttonText=action.textContent.trim(),href=action.getAttribute('href');
+  const lessonLoaded=frameLoad(frame);action.click();await lessonLoaded;await wait(1100);
+  const lessonDoc=frame.contentDocument,lessonWin=frame.contentWindow;
+  const expectedPath=`/${test.file}`;
+  if(!lessonWin.location.pathname.endsWith(expectedPath))throw new Error(`${test.lessonId}: landed on ${lessonWin.location.href}`);
+  if(lessonWin.location.search!==`?lang=${test.language}`)throw new Error(`${test.lessonId}: language query lost`);
+  if(lessonDoc.title!==test.title)throw new Error(`${test.lessonId}: wrong document ${lessonDoc.title}`);
+  if(!lessonDoc.querySelector('h1')?.textContent.trim())throw new Error(`${test.lessonId}: first teaching heading missing`);
+  if((lessonDoc.body.innerText||'').includes('undefined'))throw new Error(`${test.lessonId}: rendered undefined`);
+  if(Math.max(lessonDoc.documentElement.scrollWidth,lessonDoc.body.scrollWidth)>lessonWin.innerWidth+2)throw new Error(`${test.lessonId}: horizontal overflow at ${test.width}`);
+  if(lessonWin.innerWidth!==test.width)throw new Error(`${test.lessonId}: iframe viewport ${lessonWin.innerWidth}, expected ${test.width}`);
+  const stableUrl=lessonWin.location.href;
+  await wait(100);
+  if(lessonWin.location.href!==stableUrl)throw new Error(`${test.lessonId}: redirected after the stability window`);
+  const profileAfter=JSON.parse(localStorage.getItem('nikigoProfile')||'{}');
+  if(profileAfter.xp!==321||profileAfter.legacySentinel!=='preserve-me'||profileAfter.lessonProgress?.legacyLesson!==37)throw new Error(`${test.lessonId}: existing user state changed during entry`);
+  const refreshLoaded=frameLoad(frame);lessonWin.location.reload();await refreshLoaded;await wait(120);
+  if(!frame.contentWindow.location.pathname.endsWith(expectedPath)||frame.contentDocument.title!==test.title)throw new Error(`${test.lessonId}: refresh did not stay in lesson`);
+  const backLoaded=frameLoad(frame);frame.contentWindow.history.back();await backLoaded;await wait(120);
+  if(frame.contentWindow.location.hash!=='#courses'||!frame.contentDocument.querySelector('#courses.active'))throw new Error(`${test.lessonId}: browser back did not return to catalog`);
+  const result={index,lesson:test.lessonId,state:test.state,language:test.language,width:test.width,beforeUrl,href,buttonText,finalUrl:stableUrl,title:test.title,refreshPassed:true,backPassed:true,guest:true,progressPreserved:true,horizontalOverflow:false};
+  frame.remove();return result;
+}
+
+(async()=>{
+  try{
+    const worker=await installWorker();
+    const cases=[];
+    lessons.forEach((lesson,lessonIndex)=>states.forEach((state,stateIndex)=>cases.push({lessonId:lesson[0],file:lesson[1],title:lesson[2],state,language:languages[(lessonIndex+stateIndex)%languages.length],width:widths[(lessonIndex+stateIndex)%widths.length]})));
+    const results=[];
+    for(let index=0;index<cases.length;index+=1)results.push(await runCase(cases[index],index));
+    document.body.dataset.result='pass';document.body.dataset.caseCount=String(results.length);document.getElementById('status').textContent='PASS';document.getElementById('status').className='pass';
+    document.getElementById('result').textContent=JSON.stringify({browser:'Google Chrome',serviceWorker:worker,offlineNavigation:false,cases:results},null,2);
+  }catch(error){document.body.dataset.result='fail';document.getElementById('status').textContent='FAIL';document.getElementById('status').className='fail';document.getElementById('result').textContent=error.stack||String(error);}
+})();
+</script>
+</body>
+</html>
