@@ -19,7 +19,7 @@ on:
         type: choice
         options:
           - audio-batch-01
-          - audio-batch-02a
+          - audio-batch-02a-gaka-r1
       expectedCount:
         description: Must exactly match the reviewed batch allowlist
         required: true

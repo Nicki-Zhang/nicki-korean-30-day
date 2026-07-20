@@ -27,8 +27,12 @@ export function validateBatchShape(batchId, batch, expectedCount) {
     throw new Error(`${batchId} must use the product-owner-approved Batch 1 model, voice and MP3 format.`);
   }
   if (batch.speed !== null) throw new Error(`${batchId} speed must remain omitted (provider default), matching Batch 1.`);
-  if (batch.instructions !== 'Speak only the supplied Korean speechText exactly once in natural standard Seoul Korean. Do not spell, translate, explain, or add sounds.') {
-    throw new Error(`${batchId} instructions do not match the frozen Batch 1 request.`);
+  const instructionProfiles = {
+    'batch-1-exact':'Speak only the supplied Korean speechText exactly once in natural standard Seoul Korean. Do not spell, translate, explain, or add sounds.',
+    'controlled-onset-contrast-r1':'Speak only the supplied Korean syllable exactly once in natural standard Seoul Korean for a controlled pronunciation comparison. Keep recording level, perceived loudness, vowel duration, speaking effort, microphone distance, and pacing closely matched across items. For 가, use a natural lenis ㄱ onset with weak airflow and no exaggerated pre-aspiration. For 카, use a clearly aspirated ㅋ onset with audible airflow, without increasing loudness or lengthening the vowel. Do not add leading noise, trailing sounds, spelling, translation, explanation, or emphasis.'
+  };
+  if (!instructionProfiles[batch.instructionProfile] || batch.instructions !== instructionProfiles[batch.instructionProfile]) {
+    throw new Error(`${batchId} instructions do not match an approved frozen profile.`);
   }
   if (batch.expectedSampleRate !== 24000 || batch.expectedChannels !== 1) {
     throw new Error(`${batchId} expected output must remain 24000 Hz mono.`);

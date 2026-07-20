@@ -102,6 +102,7 @@ assert.match(source,/HOSTED_AUDIO\[item\.syllable\]\?text\('listenSound'/);
 assert.doesNotMatch(source,/speechSynthesis|SpeechSynthesisUtterance|getVoices/);
 const workflow=fs.readFileSync('.github/workflows/generate-lesson-audio.yml','utf8');
 assert.match(workflow,/audio-batch-01/);
-assert.match(workflow,/audio-batch-02a/);
+assert.match(workflow,/audio-batch-02a-gaka-r1/);
+assert.doesNotMatch(workflow,/^\s{10}- audio-batch-02a\s*$/m,'Original three-item Batch 2A must not remain dispatchable.');
 assert.doesNotMatch(workflow,/audio-batch-02b/,'Planning-only Batch 2B must not be dispatchable.');
 console.log('Validated 15-step K0 consonant contrast lesson, 14 safe full-syllable mappings, four languages, retry flow, resume state, completion compatibility, and direct course access.');
