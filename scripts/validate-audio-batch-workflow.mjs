@@ -54,9 +54,15 @@ assert.equal(artifact.generatedCount,2);assert.equal(artifact.apiRequestCount,0)
 assert.deepEqual(artifact.items.map(x=>x.codec),['fixture','fixture']);
 assert.doesNotMatch(JSON.stringify(artifact),/MUST_NOT_BE_USED|OPENAI_API_KEY|Authorization/i);
 const formal=JSON.parse(fs.readFileSync(path.join(root,'audio/lesson-00/manifest.json'),'utf8'));
-assert.ok(formal.items.every(x=>x.reviewStatus==='pending'&&x.assetStatus==='missing'));
+assert.ok(formal.items.every(x=>x.reviewStatus==='approved'&&x.assetStatus==='available'));
+assert.deepEqual(formal.items.map(x=>x.id),['yo','yu']);
 assert.doesNotMatch(fs.readFileSync(path.join(root,'audio-catalog.js'),'utf8'),/staging\//);
 assert.doesNotMatch(fs.readFileSync(path.join(root,'sw.js'),'utf8'),/staging\//);
+
+const blocked=fs.mkdtempSync(path.join(os.tmpdir(),'nikigo-audio-published-block-'));
+result=spawnSync(process.execPath,[path.join(root,'scripts/preflight-audio-batch.mjs'),'--batch-id','audio-batch-01','--mode','generate','--expected-count','2','--confirmation','GENERATE audio-batch-01 2','--staging-dir',blocked],{cwd:root,encoding:'utf8',env:{...process.env,[secretVariableName]:unusedSecretMarker}});
+assert.notEqual(result.status,0,'Published Batch 1 must not be generated again.');
+assert.match(result.stderr,/pending\/missing before review/);
 
 const broken=fs.mkdtempSync(path.join(os.tmpdir(),'nikigo-audio-broken-'));
 fs.cpSync(temp,broken,{recursive:true});fs.unlinkSync(path.join(broken,'files/yu.mp3.fixture'));

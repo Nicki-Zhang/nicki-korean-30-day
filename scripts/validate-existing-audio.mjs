@@ -26,7 +26,7 @@ try {
   if(!new RegExp(`^nikigo-${batchId}-run-${sourceRunId}-[a-f0-9]{7,40}$`,'u').test(sourceArtifactName)) throw new Error('sourceArtifactName does not match sourceRunId and batchId.');
   const batch=await loadBatch(root,batchId);
   validateBatchShape(batchId,batch,expectedCount);
-  await validateFormalManifest(root,batch);
+  await validateFormalManifest(root,batch,{allowPublished:true});
   const sourceGeneration=JSON.parse(await readFile(resolve(sourceDir,'generation-report.json'),'utf8'));
   if(String(sourceGeneration.workflowRunId)!==sourceRunId||sourceGeneration.batchId!==batchId) throw new Error('Downloaded Artifact generation report does not match the requested source run and batch.');
   if(sourceGeneration.generatedCount!==expectedCount||sourceGeneration.items?.length!==expectedCount) throw new Error('Downloaded Artifact generated count does not match expectedCount.');

@@ -103,9 +103,9 @@ try {
   result=run('preflight-audio-validation.mjs',['--source-run-id','1234567','--source-artifact-name','nikigo-audio-batch-01-run-1234567-deadbee','--batch-id','audio-batch-01','--expected-count','1','--expected-sha256',`yo.mp3=${'0'.repeat(64)}`,'--report',path.join(temp,'wrong-count.json')]);assert.notEqual(result.status,0);assert.match(fs.readFileSync(path.join(temp,'wrong-count.json'),'utf8'),/allowlist count/);
 
   const formal=JSON.parse(fs.readFileSync(path.join(root,'audio/lesson-00/manifest.json'),'utf8'));
-  assert.ok(formal.items.filter(item=>['yo','yu'].includes(item.id)).every(item=>item.reviewStatus==='pending'&&item.assetStatus==='missing'));
+  assert.ok(formal.items.filter(item=>['yo','yu'].includes(item.id)).every(item=>item.reviewStatus==='approved'&&item.assetStatus==='available'&&item.technicalValidation==='passed'));
   assert.doesNotMatch(fs.readFileSync(path.join(root,'audio-catalog.js'),'utf8'),/staging\//);
-  console.log('Validated fixed media toolchain contracts, detailed ffprobe/ffmpeg evidence, validation-only isolation, SHA/count/artifact guards, corruption failures, and pending formal state.');
+  console.log('Validated fixed media toolchain contracts, detailed ffprobe/ffmpeg evidence, validation-only isolation, SHA/count/artifact guards, corruption failures, and approved Batch 1 formal state.');
 } finally {
   fs.rmSync(temp,{recursive:true,force:true});
 }

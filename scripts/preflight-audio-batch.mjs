@@ -20,7 +20,7 @@ try {
   }
   const batch = await loadBatch(root, batchId);
   validateBatchShape(batchId, batch, expectedCount);
-  await validateFormalManifest(root, batch);
+  await validateFormalManifest(root, batch, { allowPublished:mode === 'dry-run' });
   report.status = 'passed';
   report.allowedItems = batch.items.map(({ id, speechText, audioType, outputFile }) => ({ id, speechText, audioType, outputFile }));
 } catch (error) {

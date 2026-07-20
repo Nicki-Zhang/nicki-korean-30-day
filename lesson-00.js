@@ -11,10 +11,10 @@
   Object.assign(COPY.en,{pronunciationExample:'Vowel sound',carrierSyllable:'Carrier syllable',listenVowel:'Listen to vowel {symbol}',listenLetterName:'Listen to letter name {name}',vowelPending:'Vowel audio pending',letterNamePending:'Letter-name audio pending',vowelCarrierRule:'When a vowel is written as an independent syllable, it takes ㅇ. Here ㅇ is silent, so what you hear is the vowel itself.',silentIeung:'In 아, ㅇ is silent in the onset position.',consonantRule:'A consonant cannot be pronounced naturally on its own; learn its actual sound by combining it with a vowel.'});
   Object.assign(COPY.vi,{pronunciationExample:'Âm nguyên âm',carrierSyllable:'Âm tiết mang',listenVowel:'Nghe nguyên âm {symbol}',listenLetterName:'Nghe tên chữ cái {name}',vowelPending:'Âm thanh nguyên âm đang chờ bổ sung',letterNamePending:'Âm thanh tên chữ cái đang chờ bổ sung',vowelCarrierRule:'Khi viết nguyên âm thành âm tiết độc lập cần thêm ㅇ. Ở đây ㅇ câm, nên âm bạn nghe chính là nguyên âm.',silentIeung:'Trong 아, ㅇ ở vị trí đầu âm tiết không phát âm.',consonantRule:'Phụ âm không thể phát âm tự nhiên khi đứng một mình; hãy học âm thực tế bằng cách ghép với nguyên âm.'});
   Object.assign(COPY.ja,{pronunciationExample:'母音の音',carrierSyllable:'母音を載せる音節',listenVowel:'母音{symbol}を聞く',listenLetterName:'文字の名前{name}を聞く',vowelPending:'母音音声は追加予定',letterNamePending:'文字名音声は追加予定',vowelCarrierRule:'母音を独立した音節として書くときはㅇを加えます。ここでㅇは無音なので、実際に聞こえるのは母音そのものです。',silentIeung:'아では、音節頭のㅇは発音しません。',consonantRule:'子音は単独では自然に発音できません。母音と組み合わせて実際の音を学びます。'});
-  Object.assign(COPY.zh,{audioNotReleased:'音频尚未发布',audioError:'音频暂时无法播放，请重试'});
-  Object.assign(COPY.en,{audioNotReleased:'Audio not released yet',audioError:'Audio is temporarily unavailable. Try again.'});
-  Object.assign(COPY.vi,{audioNotReleased:'Âm thanh chưa được phát hành',audioError:'Tạm thời không thể phát âm thanh. Hãy thử lại.'});
-  Object.assign(COPY.ja,{audioNotReleased:'音声はまだ公開されていません',audioError:'音声を一時的に再生できません。もう一度お試しください。'});
+  Object.assign(COPY.zh,{audioNotReleased:'音频尚未发布',audioError:'音频暂时无法播放，请重试',audioPlaying:'正在播放',audioReplay:'再次播放'});
+  Object.assign(COPY.en,{audioNotReleased:'Audio not released yet',audioError:'Audio is temporarily unavailable. Try again.',audioPlaying:'Playing',audioReplay:'Play again'});
+  Object.assign(COPY.vi,{audioNotReleased:'Âm thanh chưa được phát hành',audioError:'Tạm thời không thể phát âm thanh. Hãy thử lại.',audioPlaying:'Đang phát',audioReplay:'Phát lại'});
+  Object.assign(COPY.ja,{audioNotReleased:'音声はまだ公開されていません',audioError:'音声を一時的に再生できません。もう一度お試しください。',audioPlaying:'再生中',audioReplay:'もう一度再生'});
 
   const MOUTH_HINTS = Object.freeze({
     zh:{a:'嘴巴自然张开，舌头放松。',ya:'先带轻微 y 滑音，再进入ㅏ的张口位置。',eo:'嘴唇不圆，舌头放松，声音比ㅗ更开放。',yeo:'先带轻微 y 滑音，再进入ㅓ。',o:'嘴唇收圆并稍微向前。',yo:'先带轻微 y 滑音，保持ㅗ的圆唇。',u:'嘴唇收圆，舌位比ㅗ更高、更靠后。',yu:'先带轻微 y 滑音，保持ㅜ的圆唇。',eu:'嘴唇自然展开，舌头后部抬起。',i:'嘴角稍向两侧，舌位高且靠前。',ae:'嘴巴略张，现代首尔音常接近ㅔ。',yae:'先带 y 滑音，再进入ㅐ。',e:'嘴角稍展开，舌位靠前。',ye:'先带 y 滑音，再进入ㅔ。',wa:'先圆唇发ㅗ，迅速滑向ㅏ。',wae:'先圆唇，再滑向ㅐ。',oe:'圆唇起始，现代发音常接近“we”。',wo:'先发ㅜ的圆唇，再滑向ㅓ。',we:'先发ㅜ的圆唇，再滑向ㅔ。',wi:'圆唇起始，再滑向ㅣ。',ui:'先保持ㅡ的平唇舌位，再滑向ㅣ。'},
@@ -52,7 +52,9 @@
     let language = SUPPORTED.includes(query) ? query : (SUPPORTED.includes(profile.interfaceLanguage) ? profile.interfaceLanguage : normalizeLanguage(global.navigator?.language));
     let selectedSymbol = '';
     let currentAudio = null;
-    let playingSymbol = '';
+    let playingAudioKey = '';
+    let playbackToken = 0;
+    const playedAudioKeys = new Set();
     const byId = id => global.document.getElementById(id);
     const keys = ['lessonName','eyebrow','title','description','previewInstruction','basicConsonantsTitle','aspiratedTitle','tenseTitle','basicVowelsTitle','compoundVowelsTitle','soundRule','startTitle','startLead','beginnerTitle','beginnerDescription','partialTitle','partialDescription','readerTitle','readerDescription','back'];
     const text = (key, values = {}) => Object.entries(values).reduce((value, [name, replacement]) => value.replaceAll(`{${name}}`, replacement), COPY[language][key] || COPY.en[key] || key);
@@ -70,8 +72,16 @@
     }
 
     function audioButton({ available, action, label, pending }) {
-      const buttonText = available ? `▶ ${label}` : pending;
-      return `<button type="button" class="detailAudio ${playingSymbol === action ? 'playing' : ''}" data-audio-action="${action}" aria-label="${buttonText}" ${available ? '' : 'disabled aria-disabled="true"'}>${buttonText}</button>`;
+      const audioKey = `${selectedSymbol}:${action}`;
+      const isPlaying = playingAudioKey === audioKey;
+      const buttonText = !available
+        ? pending
+        : isPlaying
+          ? text('audioPlaying')
+          : playedAudioKeys.has(audioKey)
+            ? `↻ ${text('audioReplay')}`
+            : `▶ ${label}`;
+      return `<button type="button" class="detailAudio ${isPlaying ? 'playing' : ''}" data-audio-action="${action}" aria-label="${buttonText}" ${available ? '' : 'disabled aria-disabled="true"'}>${buttonText}</button>`;
     }
 
     function renderDetail() {
@@ -107,16 +117,24 @@
       const resolved = audioResolution(item, action);
       if (!resolved.playable) return;
       if (currentAudio) currentAudio.pause();
-      playingSymbol = action;
+      const audioKey = `${item.symbol}:${action}`;
+      const token = ++playbackToken;
+      playingAudioKey = audioKey;
       renderDetail();
       currentAudio = new Audio(resolved.path);
       currentAudio.playbackRate = Math.min(1.2, Math.max(0.8, Number(global.NikigoState.get().audioRate) || 1));
       currentAudio.preservesPitch = true;
       currentAudio.mozPreservesPitch = true;
       currentAudio.webkitPreservesPitch = true;
-      const finish = () => { playingSymbol = ''; renderDetail(); };
-      currentAudio.onended = finish;
-      currentAudio.play().catch(() => { finish(); byId('selectionStatus').textContent = text('audioError'); });
+      const finish = (completed = false) => {
+        if (token !== playbackToken) return;
+        if (completed) playedAudioKeys.add(audioKey);
+        playingAudioKey = '';
+        currentAudio = null;
+        renderDetail();
+      };
+      currentAudio.onended = () => finish(true);
+      currentAudio.play().catch(() => { finish(false); byId('selectionStatus').textContent = text('audioError'); });
     }
 
     function goHome() { global.location.href = `nikigo-app.html?lang=${language}#courses`; }

@@ -26,5 +26,4 @@
 
 ## Batch 1 当前状态
 
-`yo.mp3`（요）和 `yu.mp3`（유）已完成技术验证，但尚未收到产品负责人“试听通过”结论，因此继续保持 `underReview`。正式 App manifest 继续保持 `reviewStatus: pending`、`assetStatus: missing`，不得正式接入播放器。
-
+`yo.mp3`（요）和 `yu.mp3`（유）已完成技术验证，并于 2026-07-20 收到产品负责人逐条“试听通过”结论。两条记录按固定 SHA 接入，使用 `reviewMethod: product-owner-listening`、`nativeReviewStatus: deferred`、`nativeReviewer: null`；发布法律复核以独立 `rightsReviewStatus: pending` 如实保留。任何后续文件仍须逐条走同一流程。

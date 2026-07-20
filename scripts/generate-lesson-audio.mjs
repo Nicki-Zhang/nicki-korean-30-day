@@ -16,7 +16,7 @@ await mkdir(filesDir, { recursive: true });
 
 const batch = await loadBatch(root, batchId);
 validateBatchShape(batchId, batch, expectedCount);
-await validateFormalManifest(root, batch);
+await validateFormalManifest(root, batch, { allowPublished:mode === 'dry-run' });
 
 const report = {
   workflowRunId, commit, batchId, generationMode:mode, expectedCount,

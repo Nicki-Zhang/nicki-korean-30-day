@@ -39,14 +39,16 @@ export function validateBatchShape(batchId, batch, expectedCount) {
   }
 }
 
-export async function validateFormalManifest(root, batch) {
+export async function validateFormalManifest(root, batch, options = {}) {
   const manifest = JSON.parse(await readFile(resolve(root, 'audio', batch.lessonId, 'manifest.json'), 'utf8'));
   for (const allowed of batch.items) {
     const item = manifest.items?.find(candidate => candidate.id === allowed.id);
     if (!item || item.speechText !== allowed.speechText || item.audioType !== allowed.audioType || item.file !== allowed.outputFile) {
       throw new Error(`Formal manifest does not exactly match allowlisted item ${allowed.id}.`);
     }
-    if (item.reviewStatus !== 'pending' || item.assetStatus !== 'missing') {
+    const readyForGeneration = item.reviewStatus === 'pending' && item.assetStatus === 'missing';
+    const alreadyPublished = item.reviewStatus === 'approved' && item.assetStatus === 'available';
+    if (!readyForGeneration && !(options.allowPublished && alreadyPublished)) {
       throw new Error(`Formal manifest ${allowed.id} must remain pending/missing before review.`);
     }
   }

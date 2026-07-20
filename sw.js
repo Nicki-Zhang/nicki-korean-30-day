@@ -1,4 +1,4 @@
-const CACHE = 'nikigo-v15-reviewed-audio-gate';
+const CACHE = 'nikigo-v16-batch-01-approved';
 const ASSETS = [
   './', './index.html', './nikigo-app.html', './app-state.js', './course-catalog.js',
   './hangul-sound-data.js', './audio-catalog.js', './review.html', './review.css',
@@ -7,6 +7,7 @@ const ASSETS = [
   './lesson-player.css', './player-privacy.css', './lesson-consonant-contrast.html', './lesson-consonant-contrast.js',
   './lesson-consonant-contrast.css', './lesson-05.html', './lesson-05.js',
   './lesson-05.css', './lesson-06.html', './lesson-06.js', './lesson-06.css',
+  './audio/lesson-00/yo.mp3', './audio/lesson-00/yu.mp3',
   './manifest.webmanifest'
 ];
 

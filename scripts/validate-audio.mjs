@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import { createHash } from 'node:crypto';
 
 await import(new URL('../audio-catalog.js', import.meta.url));
 const audio = globalThis.NikigoAudio;
@@ -35,7 +36,12 @@ for (const [lessonId, lesson] of Object.entries(audio.lessons)) {
     assert.equal(entry.assetStatus,exists?'available':'missing',`${lessonId}/${entry.id} assetStatus mismatch`);
     if(entry.reviewStatus==='approved') {
       assert.ok(exists,`approved asset missing ${path}`);
-      for(const field of ['voiceSource','model','generationDate','commercialUseBasis','nativeReviewer','reviewNotes']) assert.ok(entry[field]&&entry[field]!=='pending-documentation',`approved ${lessonId}/${entry.id} lacks ${field}`);
+      for(const field of ['voiceSource','model','voice','generationDate','commercialUseBasis','rightsReviewStatus','reviewMethod','reviewedAt','nativeReviewStatus','technicalValidation','sha256','sourceRunId','sourceArtifact','reviewNotes']) assert.ok(String(entry[field]??'').trim(),`approved ${lessonId}/${entry.id} lacks ${field}`);
+      assert.equal(entry.reviewMethod,'product-owner-listening');
+      assert.equal(entry.nativeReviewStatus,'deferred');
+      assert.equal(entry.nativeReviewer,null,'deferred native review must not invent a reviewer');
+      assert.equal(entry.technicalValidation,'passed');
+      assert.equal(createHash('sha256').update(fs.readFileSync(path)).digest('hex'),entry.sha256,`${lessonId}/${entry.id} SHA mismatch`);
       assert.equal(audio.canPlayAudio(entry.speechText,entry,entry.audioType),true);
     } else assert.equal(audio.canPlayAudio(entry.speechText,entry,entry.audioType),false,`${lessonId}/${entry.id} pending/rejected became playable`);
     assert.equal(audio.canPlayAudio(`${entry.speechText} `,entry,entry.audioType),false,'fuzzy speechText accepted');
@@ -45,7 +51,12 @@ for (const [lessonId, lesson] of Object.entries(audio.lessons)) {
 
 assert.equal(count,77);
 assert.deepEqual(audio.lessons['lesson-00'].items.map(entry=>entry.id),['yo','yu'],'Batch 1 must contain only yo and yu.');
-assert.ok(audio.lessons['lesson-00'].items.every(entry=>entry.reviewStatus==='pending'),'Generated Batch 1 audio must remain pending.');
+assert.ok(audio.lessons['lesson-00'].items.every(entry=>entry.reviewStatus==='approved'&&entry.assetStatus==='available'),'Product-owner approved Batch 1 must be available.');
+assert.equal(Object.values(audio.lessons).flatMap(lesson=>lesson.items).filter(entry=>audio.canPlayAudio(entry.speechText,entry,entry.audioType)).length,2,'Only Batch 1 yo/yu may be playable.');
+const otherEntries=Object.entries(audio.lessons).flatMap(([lessonId,lesson])=>lesson.items.map(entry=>({lessonId,...entry}))).filter(entry=>entry.lessonId!=='lesson-00');
+assert.equal(otherEntries.length,75,'Current catalog has 75 non-Batch-1 records.');
+assert.ok(otherEntries.every(entry=>entry.reviewStatus==='pending'),'A non-Batch-1 review status changed.');
+assert.ok(otherEntries.every(entry=>!audio.canPlayAudio(entry.speechText,entry,entry.audioType)),'A non-Batch-1 record became playable.');
 assert.equal(audio.lessons['k0-consonant-contrast'].items.length,14);
 assert.equal(audio.lessons['lesson-06'].items.length,15);
 for(const text of ['왜','예']) assert.deepEqual(audio.lessons['lesson-06'].items.filter(x=>x.speechText===text).map(x=>x.audioType).sort(),['syllable','word']);
@@ -55,11 +66,13 @@ const production=[
   ...fs.readdirSync('assets').filter(file=>/\.js$/.test(file)).map(file=>`assets/${file}`)
 ];
 for(const file of production) assert.doesNotMatch(fs.readFileSync(file,'utf8'),/speechSynthesis|SpeechSynthesisUtterance|getVoices/,`${file} contains device TTS`);
-const complete={...audio.lessons['lesson-01'].items[0],reviewStatus:'approved',assetStatus:'available',generationDate:'2026-01-01',commercialUseBasis:'documented',nativeReviewer:'reviewer',reviewNotes:'approved'};
+const complete={...audio.lessons['lesson-00'].items[0]};
 assert.equal(audio.canPlayAudio(complete.speechText,{...complete,assetStatus:'missing'},complete.audioType),false,'approved missing asset became playable');
-assert.equal(audio.canPlayAudio(complete.speechText,{...complete,nativeReviewer:null},complete.audioType),false,'approved incomplete review became playable');
+assert.equal(audio.canPlayAudio(complete.speechText,{...complete,nativeReviewer:'invented'},complete.audioType),false,'deferred native review accepted an invented reviewer');
+assert.equal(audio.canPlayAudio(complete.speechText,{...complete,technicalValidation:'failed'},complete.audioType),false,'failed technical validation became playable');
+assert.equal(audio.canPlayAudio(complete.speechText,{...complete,sha256:'0'.repeat(64)},complete.audioType),false,'wrong SHA became playable');
 assert.equal(audio.canPlayAudio(complete.speechText,{...complete,assetStatus:'deprecated'},complete.audioType),false,'deprecated asset became playable');
 assert.doesNotMatch(fs.readFileSync('review-catalog.js','utf8'),/audio:\s*['"][^'"]*[,，][^'"]*['"]/, 'review sequence is comma-batched');
 assert.match(fs.readFileSync('review.html','utf8'),/currentAudio\.onended=next/,'review sequence is not file-by-file');
-const worker=fs.readFileSync('sw.js','utf8'); assert.match(worker,/nikigo-v15-reviewed-audio-gate/); assert.match(worker,/audio\/deprecated/);
-console.log('Validated 77 strict catalog records, the exact 2-item Batch 1 scope, zero playable pending records, typed Lesson 6 records, and zero device-TTS calls in production JS/HTML.');
+const worker=fs.readFileSync('sw.js','utf8'); assert.match(worker,/nikigo-v16-batch-01-approved/); assert.match(worker,/audio\/deprecated/);
+console.log('Validated 77 strict catalog records, exactly 2 approved/playable Batch 1 assets, 75 unchanged pending records, physical SHA integrity, and zero device-TTS calls in production JS/HTML.');

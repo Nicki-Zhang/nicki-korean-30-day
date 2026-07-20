@@ -23,13 +23,24 @@
     file,
     voiceSource: String(options.voiceSource || '').startsWith('apple-') ? 'legacy-system-export' : (options.voiceSource || 'openai-gpt-4o-mini-tts'),
     model: options.model ?? (String(options.voiceSource || '').startsWith('apple-') ? null : 'gpt-4o-mini-tts'),
+    ...(options.voice ? { voice:options.voice } : {}),
     generationDate: options.generationDate ?? null,
     commercialUseBasis: options.commercialUseBasis ?? 'pending-documentation',
-    reviewStatus: 'pending',
+    reviewStatus: options.reviewStatus || 'pending',
     assetStatus: options.assetStatus || 'available',
-    nativeReviewer: null,
+    ...(options.sha256 ? { sha256:options.sha256 } : {}),
+    ...(options.fileSize ? { fileSize:options.fileSize } : {}),
+    ...(options.mimeType ? { mimeType:options.mimeType } : {}),
+    ...(options.sourceRunId ? { sourceRunId:options.sourceRunId } : {}),
+    ...(options.sourceArtifact ? { sourceArtifact:options.sourceArtifact } : {}),
+    ...(options.technicalValidation ? { technicalValidation:options.technicalValidation } : {}),
+    ...(options.reviewMethod ? { reviewMethod:options.reviewMethod } : {}),
+    ...(options.reviewedAt ? { reviewedAt:options.reviewedAt } : {}),
+    ...(options.nativeReviewStatus ? { nativeReviewStatus:options.nativeReviewStatus } : {}),
+    ...(options.rightsReviewStatus ? { rightsReviewStatus:options.rightsReviewStatus } : {}),
+    nativeReviewer: options.nativeReviewer ?? null,
     reviewNotes: options.reviewNotes || 'legacy-unreviewed',
-    needsNativeReview: true,
+    needsNativeReview: options.needsNativeReview ?? true,
     rights: RIGHTS_TEMPLATE
   });
 
@@ -40,12 +51,22 @@
         item('yo', 'ㅛ（发音载体：요）', '요', 'yo.mp3', {
           targetSymbol:'ㅛ', type:'vowel', pronunciationType:'full-syllable',
           screen:'第0课字母地图元音详情', teachingGoal:'用无声初声 ㅇ 承载元音 ㅛ',
-          assetStatus:'missing', reviewNotes:'Batch 1 item; Korean native-speaker review required.'
+          reviewStatus:'approved', assetStatus:'available', sha256:'d2570041a865d0d686e6debf1a06584fa10b1177ebb590e4654a30506f5538b0', fileSize:14592, mimeType:'audio/mpeg',
+          voiceSource:'openai-gpt-4o-mini-tts', model:'gpt-4o-mini-tts', voice:'marin', generationDate:'2026-07-20T02:07:40.367Z',
+          sourceRunId:'29713532746', sourceArtifact:'nikigo-audio-batch-01-validation-run-29713532746-78e5510', technicalValidation:'passed',
+          reviewMethod:'product-owner-listening', reviewedAt:'2026-07-20', nativeReviewStatus:'deferred', nativeReviewer:null, needsNativeReview:false,
+          commercialUseBasis:'OpenAI API generated audio; legal review pending', rightsReviewStatus:'pending',
+          reviewNotes:'Product owner listening passed on 2026-07-20; optional native-speaker review deferred.'
         }),
         item('yu', 'ㅠ（发音载体：유）', '유', 'yu.mp3', {
           targetSymbol:'ㅠ', type:'vowel', pronunciationType:'full-syllable',
           screen:'第0课字母地图元音详情', teachingGoal:'用无声初声 ㅇ 承载元音 ㅠ',
-          assetStatus:'missing', reviewNotes:'Batch 1 item; Korean native-speaker review required.'
+          reviewStatus:'approved', assetStatus:'available', sha256:'3eb015cd5a7a9c7955976e1d0acd6669126e7c5c74a1c928f7d7b9d925d98430', fileSize:25728, mimeType:'audio/mpeg',
+          voiceSource:'openai-gpt-4o-mini-tts', model:'gpt-4o-mini-tts', voice:'marin', generationDate:'2026-07-20T02:07:40.367Z',
+          sourceRunId:'29713532746', sourceArtifact:'nikigo-audio-batch-01-validation-run-29713532746-78e5510', technicalValidation:'passed',
+          reviewMethod:'product-owner-listening', reviewedAt:'2026-07-20', nativeReviewStatus:'deferred', nativeReviewer:null, needsNativeReview:false,
+          commercialUseBasis:'OpenAI API generated audio; legal review pending', rightsReviewStatus:'pending',
+          reviewNotes:'Product owner listening passed on 2026-07-20; optional native-speaker review deferred.'
         })
       ])
     }),
@@ -166,13 +187,22 @@
 
   Object.freeze(lessons);
 
-  const REQUIRED_RELEASE_FIELDS = ['voiceSource','model','generationDate','commercialUseBasis','nativeReviewer','reviewNotes'];
+  const APPROVED_ASSET_HASHES = Object.freeze({
+    'lesson-00:yo':'d2570041a865d0d686e6debf1a06584fa10b1177ebb590e4654a30506f5538b0',
+    'lesson-00:yu':'3eb015cd5a7a9c7955976e1d0acd6669126e7c5c74a1c928f7d7b9d925d98430'
+  });
+  const REQUIRED_RELEASE_FIELDS = ['voiceSource','model','voice','generationDate','commercialUseBasis','rightsReviewStatus','reviewMethod','reviewedAt','nativeReviewStatus','technicalValidation','sha256','sourceRunId','sourceArtifact','reviewNotes'];
   function canPlayAudio(requestedSpeechText, entry, expectedAudioType) {
     if (!entry || entry.reviewStatus !== 'approved' || entry.assetStatus !== 'available') return false;
     if (!entry.file || entry.speechText !== requestedSpeechText) return false;
     if (expectedAudioType && entry.audioType !== expectedAudioType) return false;
     if (entry.type === 'deprecated' || entry.assetStatus === 'deprecated') return false;
-    return REQUIRED_RELEASE_FIELDS.every(field => entry[field] !== null && String(entry[field]).trim() !== '' && entry[field] !== 'pending-documentation');
+    if (!REQUIRED_RELEASE_FIELDS.every(field => entry[field] !== null && String(entry[field]).trim() !== '')) return false;
+    if (entry.technicalValidation !== 'passed' || !/^[a-f0-9]{64}$/u.test(entry.sha256)) return false;
+    if (APPROVED_ASSET_HASHES[`${entry.lessonId}:${entry.id}`] !== entry.sha256) return false;
+    if (entry.nativeReviewStatus === 'deferred' && entry.nativeReviewer !== null) return false;
+    if (entry.nativeReviewStatus !== 'deferred' && !String(entry.nativeReviewer || '').trim()) return false;
+    return true;
   }
 
   function forLesson(lessonId) {
@@ -223,5 +253,5 @@
     return Object.freeze({ entry, playable:canPlayAudio(requestedSpeechText, entry, expectedAudioType), path:entry?.path || null });
   }
 
-  global.NikigoAudio = Object.freeze({ lessons, forLesson, findSpeech, forSpeechTexts, canPlayAudio, resolve });
+  global.NikigoAudio = Object.freeze({ lessons, approvedAssetHashes:APPROVED_ASSET_HASHES, forLesson, findSpeech, forSpeechTexts, canPlayAudio, resolve });
 })(typeof window === 'undefined' ? globalThis : window);
