@@ -60,8 +60,9 @@ jobs:
     permissions:
       contents: read
     env:
-      NIKIGO_FFMPEG: ${{ runner.temp }}/nikigo-ffmpeg-6.1/ffmpeg
-      NIKIGO_FFPROBE: ${{ runner.temp }}/nikigo-ffmpeg-6.1/ffprobe
+      NIKIGO_TOOLCHAIN_DIR: /tmp/nikigo-ffmpeg-6.1
+      NIKIGO_FFMPEG: /tmp/nikigo-ffmpeg-6.1/ffmpeg
+      NIKIGO_FFPROBE: /tmp/nikigo-ffmpeg-6.1/ffprobe
     steps:
       - name: Checkout authorized commit
         uses: actions/checkout@v5
@@ -102,7 +103,7 @@ jobs:
       - name: Install fixed FFmpeg 6.1 toolchain
         run: >-
           node scripts/install-media-toolchain.mjs
-          --destination "${{ runner.temp }}/nikigo-ffmpeg-6.1"
+          --destination "$NIKIGO_TOOLCHAIN_DIR"
           --report "staging/${{ inputs.batchId }}/toolchain-install-report.json"
 
       - name: Verify ffmpeg, ffprobe and repository fixture before any generation
@@ -189,10 +190,11 @@ jobs:
       actions: read
       contents: read
     env:
-      NIKIGO_FFMPEG: ${{ runner.temp }}/nikigo-ffmpeg-6.1/ffmpeg
-      NIKIGO_FFPROBE: ${{ runner.temp }}/nikigo-ffmpeg-6.1/ffprobe
+      NIKIGO_TOOLCHAIN_DIR: /tmp/nikigo-ffmpeg-6.1
+      NIKIGO_FFMPEG: /tmp/nikigo-ffmpeg-6.1/ffmpeg
+      NIKIGO_FFPROBE: /tmp/nikigo-ffmpeg-6.1/ffprobe
       VALIDATION_DIR: staging/${{ inputs.batchId }}-validation
-      SOURCE_DIR: ${{ runner.temp }}/nikigo-source-audio
+      SOURCE_DIR: /tmp/nikigo-source-audio
     steps:
       - name: Checkout authorized validation commit
         uses: actions/checkout@v5
@@ -234,7 +236,7 @@ jobs:
       - name: Install fixed FFmpeg 6.1 toolchain
         run: >-
           node scripts/install-media-toolchain.mjs
-          --destination "${{ runner.temp }}/nikigo-ffmpeg-6.1"
+          --destination "$NIKIGO_TOOLCHAIN_DIR"
           --report "$VALIDATION_DIR/toolchain-install-report.json"
 
       - name: Verify ffmpeg, ffprobe and repository fixture

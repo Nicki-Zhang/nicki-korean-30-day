@@ -56,6 +56,7 @@ try {
   assert.doesNotMatch(workflow,/retry|max-attempts/);
   assert.match(workflow,/Install fixed FFmpeg 6\.1 toolchain[\s\S]*Verify ffmpeg, ffprobe and repository fixture before any generation[\s\S]*Generate paid audio into staging/);
   assert.match(workflow,/command -v "\$NIKIGO_FFMPEG"/);assert.match(workflow,/command -v "\$NIKIGO_FFPROBE"/);
+  assert.doesNotMatch(workflow,/env:[\s\S]{0,500}\$\{\{ runner\.temp \}\}/,'job-level env must not use unavailable runner context');
 
   const toolchain=JSON.parse(fs.readFileSync(path.join(root,'media-toolchain.json'),'utf8'));
   assert.equal(toolchain.ffmpegVersion,'6.1');assert.match(toolchain.downloadUrl,/^https:\/\/github\.com\//);assert.match(toolchain.archiveSha256,/^[a-f0-9]{64}$/);
