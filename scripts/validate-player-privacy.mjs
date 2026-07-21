@@ -88,13 +88,17 @@ function loadLessonConfig(file) {
 }
 
 let genericAudioQuestions = 0;
-for (const file of ['lesson-01.html','lesson-02.html','lesson-03.html','lesson-04.html']) {
+for (const file of ['lesson-01.html','lesson-02.html','lesson-03.html']) {
   const config = loadLessonConfig(file);
   const questions = [...(config.practice || []), ...(config.quiz || [])].filter(question => question.audio);
   genericAudioQuestions += questions.length;
   assert.ok(fs.readFileSync(file,'utf8').includes('player-privacy.css'), `${file} does not load privacy styles`);
 }
-assert.equal(genericAudioQuestions, 16);
+assert.equal(genericAudioQuestions, 12);
+const lesson07Source=fs.readFileSync('lesson-07.js','utf8');
+assert.doesNotMatch(lesson07Source,/speechSynthesis|SpeechSynthesisUtterance|new Audio\s*\(/);
+assert.match(lesson07Source,/audioUnavailable/);
+assert.match(lesson07Source,/disabled aria-disabled="true"/);
 assert.equal(Object.keys(contrast.QUESTIONS).length, 6);
 
 const reviewSource = fs.readFileSync('review.html', 'utf8');
@@ -138,7 +142,7 @@ const privacyCss = fs.readFileSync('player-privacy.css','utf8');
 assert.match(privacyCss, /overflow-wrap:\s*anywhere/);
 assert.match(privacyCss, /@media\s*\(max-width:\s*600px\)/);
 const worker = fs.readFileSync('sw.js','utf8');
-assert.match(worker, /nikigo-v(?:11-player-privacy-1|12-quality-layout-1|13-lesson-05|14-lesson-06-structure|15-reviewed-audio-gate|16-batch-01-approved|17-batch-02a-approved|20-course-navigation-network-refresh)/);
+assert.match(worker, /nikigo-v(?:11-player-privacy-1|12-quality-layout-1|13-lesson-05|14-lesson-06-structure|15-reviewed-audio-gate|16-batch-01-approved|17-batch-02a-approved|20-course-navigation-network-refresh|21-lesson-07-preview)/);
 assert.match(worker, /\.\/player-privacy\.css/);
 
 console.log(`Validated answer privacy for ${genericAudioQuestions + 6} course audio questions and ${reviewListenCount} review listening items across ${states.length} states and ${languages.length} languages; checked ${soundItems.length + contrastItems.length} approximation hints.`);

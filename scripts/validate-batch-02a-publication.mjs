@@ -34,7 +34,7 @@ assert.ok(contrast.filter(entry=>entry.reviewStatus==='pending').every(entry=>!a
 
 const all=Object.values(audio.lessons).flatMap(lesson=>lesson.items);
 assert.equal(all.filter(entry=>audio.canPlayAudio(entry.speechText,entry,entry.audioType)).length,5);
-const batch1=audio.lessons['lesson-00'].items;
+const batch1=audio.lessons['lesson-00'].items.filter(entry=>['yo','yu'].includes(entry.id));
 assert.deepEqual(batch1.map(entry=>[entry.id,entry.sha256]),[
   ['yo','d2570041a865d0d686e6debf1a06584fa10b1177ebb590e4654a30506f5538b0'],
   ['yu','3eb015cd5a7a9c7955976e1d0acd6669126e7c5c74a1c928f7d7b9d925d98430']
@@ -78,4 +78,4 @@ const worker=fs.readFileSync('sw.js','utf8');
 for(const file of ['./audio/k0-consonant-contrast/ga.mp3','./audio/k0-consonant-contrast/ka.mp3','./audio/k0-consonant-contrast/kka.mp3'])assert.ok(worker.includes(file));
 assert.doesNotMatch(worker,/staging\/|actions\/runs\/|sourceArtifact/);
 
-console.log('Validated Batch 2A publication: exact source/output SHA chain, deterministic processing report, three approved playable syllables, Batch 1 immutability, 72 pending records, four-language labels, sequence playback mapping, fail-closed audio, and isolated Service Worker cache.');
+console.log('Validated Batch 2A publication: exact source/output SHA chain, deterministic processing report, three approved playable syllables, Batch 1 immutability, pending-audio gating, four-language labels, sequence playback mapping, fail-closed audio, and isolated Service Worker cache.');

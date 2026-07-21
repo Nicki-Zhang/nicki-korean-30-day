@@ -126,14 +126,13 @@ assert.equal(refreshedProfile.lessonProgress['lesson-04'], 38);
 assert.equal(refreshedProfile.lessonProgress['lesson-00'], 100);
 
 const lesson04 = fs.readFileSync('lesson-04.html', 'utf8');
-const engine = fs.readFileSync('lesson-engine.js', 'utf8');
+const lesson07 = fs.readFileSync('lesson-07.js', 'utf8');
 for (const word of ['산', '몸', '공', '물']) {
-  assert.match(lesson04, new RegExp(`word:'${word}'`));
-  assert.match(lesson04, new RegExp(`audio:'${word}'`));
+  assert.match(lesson07, new RegExp(`word:'${word}'`));
 }
-assert.match(lesson04, /batchimExamples/);
-assert.match(engine, /playWordAria/);
-assert.match(engine, /aria-label=/);
-assert.match(engine, /activeAudioValue === example\.audio/);
+assert.match(lesson04, /lesson-07\.html/);
+assert.match(lesson04, /target\.search = window\.location\.search/);
+assert.match(lesson07, /listenWord/);
+assert.match(lesson07, /audioUnavailable/);
 
-console.log('Validated K0 roadmap, four-language Lesson 0 choices, persistence, safe routing, and Lesson 7 batchim UI mappings.');
+console.log('Validated K0 roadmap, four-language Lesson 0 choices, persistence, safe routing, stable Lesson 7 compatibility, and batchim UI mappings.');

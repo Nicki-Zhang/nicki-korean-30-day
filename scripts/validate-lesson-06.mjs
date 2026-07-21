@@ -121,6 +121,6 @@ assert.equal(catalogContext.window.NIKIGO_COURSE_UNLOCKED(course,[]),true,'Audio
 assert.match(source,/releaseNotice/);
 assert.match(source,/lesson06ReleaseNotice/);
 const lesson7=catalogContext.window.NIKIGO_COURSES.find(item=>item.stableId==='lesson-04');
-assert.equal(lesson7.displayNumber,7);assert.equal(lesson7.file,'lesson-04.html');
+assert.equal(lesson7.displayNumber,7);assert.equal(lesson7.file,'lesson-07.html');
 
 console.log('Validated Lesson 6: 18 steps, four languages, direct structural-preview access, compound-vowel spelling, no fake listening, resume state, exact-audio policy, migration safety, and completion/XP blocked until audio approval.');

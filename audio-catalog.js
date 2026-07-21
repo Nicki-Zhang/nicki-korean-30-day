@@ -69,6 +69,15 @@
           reviewMethod:'product-owner-listening', reviewedAt:'2026-07-20', nativeReviewStatus:'deferred', nativeReviewer:null, needsNativeReview:false,
           commercialUseBasis:'OpenAI API generated audio; legal review pending', rightsReviewStatus:'pending',
           reviewNotes:'Product owner listening passed on 2026-07-20; optional native-speaker review deferred.'
+        }),
+        item('ha', 'ㅎ（示例音节：하）', '하', 'ha.mp3', {
+          targetSymbol:'ㅎ', type:'initial-example', pronunciationType:'full-syllable',
+          screen:'第0课字母地图辅音详情', teachingGoal:'在完整音节 하 中听 ㅎ 的初声', pronunciationRule:'초성 ㅎ',
+          reviewStatus:'pending', assetStatus:'missing', technicalValidation:'pending',
+          voiceSource:'openai-gpt-4o-mini-tts', model:'gpt-4o-mini-tts', voice:'marin', generationDate:null,
+          nativeReviewStatus:'deferred', nativeReviewer:null, needsNativeReview:false,
+          commercialUseBasis:'pending-documentation', rightsReviewStatus:'pending',
+          reviewNotes:'Batch 2B allowlist; not generated or reviewed.'
         })
       ])
     }),
@@ -136,6 +145,29 @@
         item('bang', '방', '방', 'bang-v2.wav', { type: 'batchim-example', pronunciationType: '收音', screen: '收音对比、拼音节、练习 1', teachingGoal: '对比 바 + ㅇ', pronunciationRule: '받침 ㅇ', voiceSource: 'apple-system-ko-KR-yuna' }),
         item('bal', '발', '발', 'bal-v2.wav', { type: 'batchim-example', pronunciationType: '收音', screen: '收音对比、拼音节', teachingGoal: '对比 바 + ㄹ', pronunciationRule: '받침 ㄹ', voiceSource: 'apple-system-ko-KR-yuna' }),
         item('gamsahamnida', '감사합니다', '감사합니다', 'gamsahamnida-v2.wav', { type: 'sound-change', pronunciationType: '音变、完整句子或对话', screen: '场景短语、跟读、挑战 4', teachingGoal: '自然说出正式感谢', expectedPronunciation: '감사함니다', pronunciationRule: '鼻音化：합니다 → [함니다]', voiceSource: 'apple-system-ko-KR-yuna' })
+      ])
+    }),
+    'lesson-05': Object.freeze({
+      title: '看懂韩语音节块',
+      items: Object.freeze([
+        item('geu', '그', '그', 'geu.mp3', {
+          targetSymbol:'ㅡ', type:'syllable', pronunciationType:'full-syllable',
+          screen:'第5课上下结构示例', teachingGoal:'用完整音节展示 ㄱ + ㅡ = 그', pronunciationRule:'ㄱ + ㅡ',
+          reviewStatus:'pending', assetStatus:'missing', technicalValidation:'pending',
+          voiceSource:'openai-gpt-4o-mini-tts', model:'gpt-4o-mini-tts', voice:'marin', generationDate:null,
+          nativeReviewStatus:'deferred', nativeReviewer:null, needsNativeReview:false,
+          commercialUseBasis:'pending-documentation', rightsReviewStatus:'pending',
+          reviewNotes:'Batch 2B allowlist; not generated or reviewed.'
+        })
+      ])
+    }),
+    'lesson-07': Object.freeze({
+      title: '基础收音 ㄴㅁㅇㄹ',
+      items: Object.freeze([
+        item('san','산','산','san.mp3',{ targetSymbol:'ㄴ', type:'word', pronunciationType:'full-word', screen:'第7课ㄴ示例', teachingGoal:'在完整单词 산 中听结尾[n]', pronunciationRule:'받침 ㄴ', reviewStatus:'pending', assetStatus:'missing', technicalValidation:'pending', voice:'marin', nativeReviewStatus:'deferred', rightsReviewStatus:'pending', nativeReviewer:null, needsNativeReview:false, reviewNotes:'Audio not generated or reviewed.' }),
+        item('mom','몸','몸','mom.mp3',{ targetSymbol:'ㅁ', type:'word', pronunciationType:'full-word', screen:'第7课ㅁ示例', teachingGoal:'在完整单词 몸 中听结尾[m]', pronunciationRule:'받침 ㅁ', reviewStatus:'pending', assetStatus:'missing', technicalValidation:'pending', voice:'marin', nativeReviewStatus:'deferred', rightsReviewStatus:'pending', nativeReviewer:null, needsNativeReview:false, reviewNotes:'Audio not generated or reviewed.' }),
+        item('gong','공','공','gong.mp3',{ targetSymbol:'ㅇ', type:'word', pronunciationType:'full-word', screen:'第7课ㅇ示例', teachingGoal:'在完整单词 공 中听结尾[ng]', pronunciationRule:'받침 ㅇ', reviewStatus:'pending', assetStatus:'missing', technicalValidation:'pending', voice:'marin', nativeReviewStatus:'deferred', rightsReviewStatus:'pending', nativeReviewer:null, needsNativeReview:false, reviewNotes:'Audio not generated or reviewed.' }),
+        item('mul','물','물','mul.mp3',{ targetSymbol:'ㄹ', type:'word', pronunciationType:'full-word', screen:'第7课ㄹ示例', teachingGoal:'在完整单词 물 中听结尾[l]', pronunciationRule:'받침 ㄹ', reviewStatus:'pending', assetStatus:'missing', technicalValidation:'pending', voice:'marin', nativeReviewStatus:'deferred', rightsReviewStatus:'pending', nativeReviewer:null, needsNativeReview:false, reviewNotes:'Audio not generated or reviewed.' })
       ])
     })
   };

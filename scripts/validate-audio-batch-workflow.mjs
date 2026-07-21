@@ -11,13 +11,13 @@ const config=JSON.parse(fs.readFileSync(path.join(root,'audio-batches.json'),'ut
 const batch1=config.batches['audio-batch-01'];
 const batch2a=config.batches['audio-batch-02a-gaka-r1'];
 const original2=config.planningOnly['audio-batch-02-original'];
-const batch2b=config.planningOnly['audio-batch-02b'];
+const batch2b=config.batches['audio-batch-02b'];
 const frozenInstructions='Speak only the supplied Korean speechText exactly once in natural standard Seoul Korean. Do not spell, translate, explain, or add sounds.';
 const controlledInstructions='Speak only the supplied Korean syllable exactly once in natural standard Seoul Korean for a controlled pronunciation comparison. Keep recording level, perceived loudness, vowel duration, speaking effort, microphone distance, and pacing closely matched across items. For 가, use a natural lenis ㄱ onset with weak airflow and no exaggerated pre-aspiration. For 카, use a clearly aspirated ㅋ onset with audible airflow, without increasing loudness or lengthening the vowel. Do not add leading noise, trailing sounds, spelling, translation, explanation, or emphasis.';
 
-assert.deepEqual(Object.keys(config.batches),['audio-batch-01','audio-batch-02a-gaka-r1'],'Only Batch 1 and the reviewed 가/카 revision may be executable.');
+assert.deepEqual(Object.keys(config.batches),['audio-batch-01','audio-batch-02a-gaka-r1','audio-batch-02b'],'Only reviewed/prepared strict allowlists may be executable.');
 assert.equal(original2.expectedCount,16);assert.equal(original2.items.length,16);
-assert.equal(batch2b.expectedCount,13);assert.equal(batch2b.items.length,13);assert.equal(batch2b.status,'planning-only');
+assert.equal(batch2b.expectedCount,13);assert.equal(batch2b.items.length,13);assert.equal(batch2b.maxApiRequests,13);assert.equal(batch2b.automaticRetry,false);
 assert.equal(batch1.expectedCount,2);assert.deepEqual(batch1.items.map(x=>[x.speechText,x.outputFile]),[['요','yo.mp3'],['유','yu.mp3']]);
 assert.equal(batch2a.expectedCount,2);assert.deepEqual(batch2a.items.map(x=>[x.id,x.speechText,x.audioType,x.outputFile]),[
   ['ga','가','initial-example','ga.mp3'],['ka','카','initial-example','ka.mp3']
@@ -34,7 +34,7 @@ assert.doesNotMatch(workflow,/^\s{2}(push|pull_request|schedule):/m);
 assert.match(workflow,/^\s{2}workflow_dispatch:/m);
 assert.match(workflow,/mode:[\s\S]*dry-run[\s\S]*generate[\s\S]*validation-only/);
 assert.match(workflow,/batchId:[\s\S]*audio-batch-01[\s\S]*audio-batch-02a-gaka-r1/);
-assert.doesNotMatch(workflow,/audio-batch-02b/);
+assert.match(workflow,/audio-batch-02b/);
 assert.doesNotMatch(workflow,/^\s{10}- audio-batch-02a\s*$/m);
 assert.match(workflow,/concurrency:[\s\S]*group:.*inputs\.batchId/);
 assert.doesNotMatch(workflow,/git push|contents:\s*write/);
@@ -83,8 +83,9 @@ assert.deepEqual(preflight.allowedItems.map(x=>x.speechText),['가','카']);
 assert.doesNotMatch(JSON.stringify({preflight,generation,artifact}),/MUST_NOT_BE_USED|OPENAI_API_KEY|Authorization/i);
 
 const formal1=JSON.parse(fs.readFileSync(path.join(root,'audio/lesson-00/manifest.json'),'utf8'));
-assert.ok(formal1.items.every(x=>x.reviewStatus==='approved'&&x.assetStatus==='available'));
-assert.deepEqual(formal1.items.map(x=>x.id),['yo','yu']);
+assert.ok(formal1.items.filter(x=>['yo','yu'].includes(x.id)).every(x=>x.reviewStatus==='approved'&&x.assetStatus==='available'));
+assert.deepEqual(formal1.items.map(x=>x.id),['yo','yu','ha']);
+assert.equal(formal1.items.find(x=>x.id==='ha').reviewStatus,'pending');assert.equal(formal1.items.find(x=>x.id==='ha').assetStatus,'missing');
 const formal2=JSON.parse(fs.readFileSync(path.join(root,'audio/k0-consonant-contrast/manifest.json'),'utf8'));
 const formal2a=formal2.items.filter(x=>['ga','ka','kka'].includes(x.id));
 assert.deepEqual(formal2a.map(x=>x.id),['ga','ka','kka']);assert.ok(formal2a.every(x=>x.reviewStatus==='approved'&&x.assetStatus==='available'));
@@ -99,7 +100,7 @@ result=spawnSync(process.execPath,[path.join(root,'scripts/preflight-audio-batch
 assert.notEqual(result.status,0,'Published Batch 2A revision must not be generated again.');assert.match(result.stderr,/pending\/missing before review/);
 
 for(const [name,args,pattern] of [
-  ['unknown Batch 2B',['--batch-id','audio-batch-02b','--mode','dry-run','--expected-count','13','--confirmation','DRY-RUN'],/Unknown batchId/],
+  ['wrong Batch 2B count',['--batch-id','audio-batch-02b','--mode','dry-run','--expected-count','12','--confirmation','DRY-RUN'],/allowlist count/],
   ['retired original Batch 2A',['--batch-id','audio-batch-02a','--mode','dry-run','--expected-count','3','--confirmation','DRY-RUN'],/Unknown batchId/],
   ['wrong count',['--batch-id','audio-batch-02a-gaka-r1','--mode','dry-run','--expected-count','3','--confirmation','DRY-RUN'],/allowlist count/],
   ['wrong confirmation',['--batch-id','audio-batch-02a-gaka-r1','--mode','generate','--expected-count','2','--confirmation','DRY-RUN'],/Generate confirmation must exactly match/]
@@ -114,4 +115,4 @@ fs.cpSync(temp,broken,{recursive:true});fs.unlinkSync(path.join(broken,'files/ka
 result=spawnSync(process.execPath,[path.join(root,'scripts/validate-audio-staging.mjs'),'--batch-id','audio-batch-02a-gaka-r1','--mode','dry-run','--expected-count','2','--staging-dir',broken],{cwd:root,encoding:'utf8'});
 assert.notEqual(result.status,0,'Missing staged file must fail technical validation.');assert.ok(fs.existsSync(path.join(broken,'artifact-manifest.json')),'Failure must still preserve an artifact manifest.');
 
-console.log('Validated frozen Batch 1 settings, published two-item 가/카 revision dry-run isolation, paid regeneration blocking, preserved 까 exclusion, planning-only Batch 2B isolation, zero API/network access, failure-preserved reports, and workflow safeguards.');
+console.log('Validated frozen Batch 1 settings, published two-item 가/카 revision isolation, preserved 까 exclusion, strict prepared Batch 2B allowlist, zero-cost dry-run behavior, failure-preserved reports, and workflow safeguards.');

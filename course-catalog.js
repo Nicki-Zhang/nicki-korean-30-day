@@ -84,7 +84,7 @@
       parts: { zh: 'ㅒㅖㅘㅙㅚㅝㅞㅟㅢ · 拼写结构 · 无收音词汇', en: 'ㅒㅖㅘㅙㅚㅝㅞㅟㅢ · Spelling structure · Words without finals', vi: 'ㅒㅖㅘㅙㅚㅝㅞㅟㅢ · Cấu trúc chữ · Từ không âm cuối', ja: 'ㅒㅖㅘㅙㅚㅝㅞㅟㅢ · 綴り構造 · 終声のない語' }
     }),
     available({
-      stableId: 'lesson-04', displayOrder: 7, displayNumber: 7, file: 'lesson-04.html', duration: 13, xp: 50, icon: '🏁', template: 'hangul-batchim', recommendedPrerequisites: ['lesson-06'],
+      stableId: 'lesson-04', displayOrder: 7, displayNumber: 7, file: 'lesson-07.html', duration: 13, xp: 50, icon: '🏁', template: 'hangul-batchim', recommendedPrerequisites: ['lesson-06'], releaseStatus: 'preview', audioStatus: 'pending',
       title: { zh: '四个基础收音 ㄴㅁㅇㄹ', en: 'Four Basic Finals ㄴㅁㅇㄹ', vi: 'Bốn âm cuối cơ bản ㄴㅁㅇㄹ', ja: '4つの基本パッチム ㄴㅁㅇㄹ' },
       parts: { zh: '산 · 몸 · 공 · 물 · 完整单词发音', en: '산 · 몸 · 공 · 물 · Full-word pronunciation', vi: '산 · 몸 · 공 · 물 · Phát âm từ đầy đủ', ja: '산 · 몸 · 공 · 물 · 単語全体の発音' }
     }),

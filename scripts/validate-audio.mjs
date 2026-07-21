@@ -49,14 +49,15 @@ for (const [lessonId, lesson] of Object.entries(audio.lessons)) {
   }
 }
 
-assert.equal(count,77);
-assert.deepEqual(audio.lessons['lesson-00'].items.map(entry=>entry.id),['yo','yu'],'Batch 1 must contain only yo and yu.');
-assert.ok(audio.lessons['lesson-00'].items.every(entry=>entry.reviewStatus==='approved'&&entry.assetStatus==='available'),'Product-owner approved Batch 1 must be available.');
+assert.equal(count,83);
+assert.deepEqual(audio.lessons['lesson-00'].items.map(entry=>entry.id),['yo','yu','ha'],'Lesson 0 must retain approved Batch 1 plus pending Batch 2B 하.');
+assert.ok(audio.lessons['lesson-00'].items.slice(0,2).every(entry=>entry.reviewStatus==='approved'&&entry.assetStatus==='available'),'Product-owner approved Batch 1 must be available.');
+assert.equal(audio.lessons['lesson-00'].items[2].reviewStatus,'pending');assert.equal(audio.lessons['lesson-00'].items[2].assetStatus,'missing');
 const allEntries=Object.entries(audio.lessons).flatMap(([lessonId,lesson])=>lesson.items.map(entry=>({lessonId,...entry})));
 const playable=allEntries.filter(entry=>audio.canPlayAudio(entry.speechText,entry,entry.audioType));
 assert.deepEqual(playable.map(entry=>`${entry.lessonId}:${entry.id}`).sort(),['k0-consonant-contrast:ga','k0-consonant-contrast:ka','k0-consonant-contrast:kka','lesson-00:yo','lesson-00:yu']);
 const pendingEntries=allEntries.filter(entry=>entry.reviewStatus==='pending');
-assert.equal(pendingEntries.length,72,'Exactly 72 records must remain pending after Batch 2A publication.');
+assert.equal(pendingEntries.length,78,'Exactly 78 records must remain pending after adding Batch 2B gaps and Lesson 7 preview records.');
 assert.ok(pendingEntries.every(entry=>!audio.canPlayAudio(entry.speechText,entry,entry.audioType)),'A pending record became playable.');
 assert.equal(audio.lessons['k0-consonant-contrast'].items.length,14);
 assert.equal(audio.lessons['lesson-06'].items.length,15);
@@ -75,5 +76,5 @@ assert.equal(audio.canPlayAudio(complete.speechText,{...complete,sha256:'0'.repe
 assert.equal(audio.canPlayAudio(complete.speechText,{...complete,assetStatus:'deprecated'},complete.audioType),false,'deprecated asset became playable');
 assert.doesNotMatch(fs.readFileSync('review-catalog.js','utf8'),/audio:\s*['"][^'"]*[,，][^'"]*['"]/, 'review sequence is comma-batched');
 assert.match(fs.readFileSync('review.html','utf8'),/currentAudio\.onended=next/,'review sequence is not file-by-file');
-const worker=fs.readFileSync('sw.js','utf8'); assert.match(worker,/nikigo-v(?:17-batch-02a-approved|20-course-navigation-network-refresh)/); assert.match(worker,/audio\/deprecated/);
-console.log('Validated 77 strict catalog records, exactly 5 approved/playable Batch 1 + 2A assets, 72 pending records, physical SHA integrity, and zero device-TTS calls in production JS/HTML.');
+const worker=fs.readFileSync('sw.js','utf8'); assert.match(worker,/nikigo-v(?:17-batch-02a-approved|20-course-navigation-network-refresh|21-lesson-07-preview)/); assert.match(worker,/audio\/deprecated/);
+console.log('Validated 83 strict catalog records, exactly 5 approved/playable Batch 1 + 2A assets, 78 pending records, physical SHA integrity, and zero device-TTS calls in production JS/HTML.');

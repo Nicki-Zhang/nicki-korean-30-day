@@ -122,11 +122,12 @@ assert.match(engineSource, /vowelCarrierRule/);
 assert.match(engineSource, /silentIeung/);
 
 const lesson04 = fs.readFileSync('lesson-04.html', 'utf8');
+const lesson07 = fs.readFileSync('lesson-07.js', 'utf8');
 for (const word of ['산','몸','공','물']) {
-  assert.match(lesson04, new RegExp(`word:'${word}'`));
-  assert.match(lesson04, new RegExp(`audio:'${word}'`));
+  assert.match(lesson07, new RegExp(`word:'${word}'`));
 }
-assert.match(engineSource, /soundUi\('listenFullWord',\{word:example\.word\}\)/);
+assert.match(lesson04,/lesson-07\.html/);
+assert.match(lesson07,/listenWord:'听完整单词 \{word\}'/);
 
 const hostedMapPreviews = soundData.vowels.filter(item => item.vowelAudio).length + soundData.consonants.filter(item => item.demoAudio).length;
 assert.equal(hostedMapPreviews, 18);

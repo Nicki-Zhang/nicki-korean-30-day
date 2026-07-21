@@ -1,0 +1,73 @@
+.lesson07Stage,.lesson07Card,.batchimGrid,.practiceGrid,.challengeOptions,.builderPanel{width:100%;min-width:0;max-width:100%}
+.lesson07Stage{max-width:1040px}
+.lesson07Card{min-height:600px}
+.lesson07Card h1,.lesson07Card h2{overflow-wrap:break-word;word-break:normal}
+.lesson07Notice{margin:0 0 22px;padding:13px 16px;border:1px solid #ead98c;border-radius:16px;background:#fff8dd;color:#735711;font-size:13px;font-weight:800;line-height:1.55}
+.lesson07Notice strong{display:block;margin-bottom:3px}
+.positionDiagram{display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,.7fr);gap:22px;align-items:center;margin:26px 0}
+.blockDiagram{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr .72fr;aspect-ratio:1/1;max-width:280px;margin:auto;border:4px solid #6d4aff;border-radius:28px;overflow:hidden;background:#fff}
+.blockDiagram span{display:grid;place-items:center;border:1px solid #ddd3ff;font-size:56px;font-weight:950;color:#211a37}
+.blockDiagram .final{grid-column:1/-1;background:#f1edff;color:#6d4aff}
+.diagramNotes{display:grid;gap:11px}
+.diagramNotes div{padding:14px 16px;border-radius:16px;background:#f7f4ff;font-weight:800;line-height:1.5}
+.batchimGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:24px 0}
+.batchimCard{min-width:0;border:1px solid var(--line);border-radius:22px;background:#fff;padding:18px;text-align:center}
+.batchimWord{display:block;color:var(--d);font-size:58px;line-height:1.1;font-weight:950}
+.batchimMeaning{display:block;margin-top:5px;color:var(--muted);font-weight:750}
+.finalBadge{display:inline-flex;align-items:center;min-height:30px;margin:12px 0 8px;padding:4px 10px;border-radius:999px;background:#f1edff;color:#5b42bf;font-size:13px;font-weight:900}
+.syllableBreakdown{font-size:19px;font-weight:850;color:#4b4260}
+.endingHint{display:block;margin-top:7px;color:#766d86;font-size:13px}
+.audioUnavailable{width:100%;min-height:46px;margin-top:14px;padding:9px 12px;border:0;border-radius:14px;background:#eeeaf4;color:#817893;font-weight:850;cursor:not-allowed;overflow-wrap:anywhere}
+.focusWord{display:grid;grid-template-columns:minmax(180px,.65fr) minmax(0,1fr);gap:24px;align-items:center;margin:26px 0}
+.focusWord .batchimCard{padding:28px}
+.focusWord .batchimWord{font-size:78px}
+.tipList{display:grid;gap:12px}
+.tipList div{padding:15px 17px;border-radius:17px;background:#f7f4ff;line-height:1.55;font-weight:750}
+.tipList strong{color:#5e44cf}
+.contrastTable{display:grid;gap:10px;margin:24px 0}
+.contrastRow{display:grid;grid-template-columns:95px minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:17px;background:#fff}
+.contrastRow b{font-size:29px;text-align:center;color:#5e44cf}
+.contrastRow span{line-height:1.45}
+.practiceGrid{display:grid;gap:13px;margin:24px 0}
+.practiceCard{display:grid;grid-template-columns:minmax(110px,.35fr) minmax(0,1fr);gap:14px;align-items:center;padding:17px;border:1px solid var(--line);border-radius:19px}
+.practicePrompt{font-size:26px;font-weight:950;text-align:center}
+.practiceOptions,.challengeOptions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.practiceOptions button,.challengeOption{min-width:0;min-height:48px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);padding:11px;font-weight:850;cursor:pointer;overflow-wrap:anywhere}
+.practiceOptions button.correct,.challengeOption.correct{border-color:#25865b;background:#eaf8f1}
+.practiceOptions button.wrong,.challengeOption.wrong{border-color:#c85669;background:#fff0f2}
+.feedback{grid-column:1/-1;display:grid;gap:5px;padding:12px 14px;border-radius:14px;background:#f7f4ff;line-height:1.45}
+.feedback.good{background:#eaf8f1}.feedback.try{background:#fff0f2}
+.builderPanel{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(150px,.72fr);gap:12px;align-items:end;margin:25px 0}
+.builderGroup{display:grid;gap:8px}.builderGroup label{color:var(--muted);font-size:12px;font-weight:900}
+.builderChoices{display:grid;grid-template-columns:repeat(2,minmax(48px,1fr));gap:8px}
+.builderChoice{min-height:48px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);font-size:24px;font-weight:950;cursor:pointer}
+.builderChoice.on{border-color:var(--p);background:var(--lav);color:var(--p)}
+.builderOperator{align-self:center;color:#948aa9;font-size:27px}
+.builderResult{min-height:120px;border:0;border-radius:22px;background:linear-gradient(145deg,var(--d),var(--p));color:#fff;padding:12px;cursor:pointer}
+.builderResult strong{display:block;font-size:56px;line-height:1.1}.builderResult small{font-weight:800}
+.builtWords{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.builtWords span{padding:7px 11px;border-radius:999px;background:#f1edff;color:#5b42bf;font-weight:850}
+.challengeHeader{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.questionDots{display:flex;gap:6px}.questionDots i{width:9px;height:9px;border-radius:50%;background:#ddd7e8}.questionDots i.on{background:var(--p)}
+.challengePrompt{font-size:clamp(26px,4vw,39px);line-height:1.35;margin:24px 0}
+.retryBadge{margin:14px 0;padding:13px 15px;border-radius:15px;background:#fff8dd;color:#735711;font-weight:850}
+.completeMark{width:100px;height:100px;margin:8px auto 20px;border-radius:30px;background:linear-gradient(135deg,var(--d),var(--p));color:var(--lime);display:grid;place-items:center;font-size:48px}
+.centered{text-align:center;margin-left:auto;margin-right:auto}
+.foot .primary,.foot .secondary,.foot .ghost,.lesson07Card button{min-height:44px}
+@media(max-width:760px){
+  html,body{width:100%;max-width:100%;overflow-x:hidden}
+  .top,.progressWrap,.stage{width:100%;min-width:0;max-width:100%;margin-left:auto;margin-right:auto}
+  .lesson07Card{min-height:0}
+  .positionDiagram,.focusWord,.practiceCard,.builderPanel{grid-template-columns:1fr}
+  .batchimGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .contrastRow{grid-template-columns:68px minmax(0,1fr)}
+  .contrastRow span:last-child{grid-column:1/-1}
+  .builderOperator{display:none}
+  .builderResult{min-height:102px}
+  .practiceOptions,.challengeOptions{grid-template-columns:1fr}
+  .foot{flex-wrap:wrap}.foot .ghost{order:2;width:100%}
+}
+@media(max-width:430px){
+  .batchimGrid{grid-template-columns:1fr}
+  .batchimWord{font-size:52px}
+  .focusWord .batchimWord{font-size:68px}
+}

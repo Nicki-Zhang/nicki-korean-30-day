@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 2,
+  "lesson": "lesson-07",
+  "reviewPolicy": "Technical validation, then product-owner course-context listening, then explicit approval.",
+  "generationDefaults": {
+    "provider": "openai",
+    "model": "gpt-4o-mini-tts",
+    "voice": "marin",
+    "format": "mp3"
+  },
+  "items": [
+    { "id": "san", "lessonId": "lesson-07", "targetSymbol": "ㄴ", "displayText": "산", "speechText": "산", "expectedPronunciation": "산", "pronunciationRule": "받침 ㄴ", "audioType": "word", "type": "word", "pronunciationType": "full-word", "screen": "第7课ㄴ示例", "teachingGoal": "在完整单词 산 中听结尾[n]", "file": "san.mp3", "voiceSource": "openai-gpt-4o-mini-tts", "model": "gpt-4o-mini-tts", "voice": "marin", "generationDate": null, "commercialUseBasis": "pending-documentation", "reviewStatus": "pending", "assetStatus": "missing", "technicalValidation": "pending", "nativeReviewStatus": "deferred", "rightsReviewStatus": "pending", "nativeReviewer": null, "reviewNotes": "Audio not generated or reviewed.", "needsNativeReview": false, "rights": { "voiceTalent": null, "consentRecord": null, "commercialUseRecord": null } },
+    { "id": "mom", "lessonId": "lesson-07", "targetSymbol": "ㅁ", "displayText": "몸", "speechText": "몸", "expectedPronunciation": "몸", "pronunciationRule": "받침 ㅁ", "audioType": "word", "type": "word", "pronunciationType": "full-word", "screen": "第7课ㅁ示例", "teachingGoal": "在完整单词 몸 中听结尾[m]", "file": "mom.mp3", "voiceSource": "openai-gpt-4o-mini-tts", "model": "gpt-4o-mini-tts", "voice": "marin", "generationDate": null, "commercialUseBasis": "pending-documentation", "reviewStatus": "pending", "assetStatus": "missing", "technicalValidation": "pending", "nativeReviewStatus": "deferred", "rightsReviewStatus": "pending", "nativeReviewer": null, "reviewNotes": "Audio not generated or reviewed.", "needsNativeReview": false, "rights": { "voiceTalent": null, "consentRecord": null, "commercialUseRecord": null } },
+    { "id": "gong", "lessonId": "lesson-07", "targetSymbol": "ㅇ", "displayText": "공", "speechText": "공", "expectedPronunciation": "공", "pronunciationRule": "받침 ㅇ", "audioType": "word", "type": "word", "pronunciationType": "full-word", "screen": "第7课ㅇ示例", "teachingGoal": "在完整单词 공 中听结尾[ng]", "file": "gong.mp3", "voiceSource": "openai-gpt-4o-mini-tts", "model": "gpt-4o-mini-tts", "voice": "marin", "generationDate": null, "commercialUseBasis": "pending-documentation", "reviewStatus": "pending", "assetStatus": "missing", "technicalValidation": "pending", "nativeReviewStatus": "deferred", "rightsReviewStatus": "pending", "nativeReviewer": null, "reviewNotes": "Audio not generated or reviewed.", "needsNativeReview": false, "rights": { "voiceTalent": null, "consentRecord": null, "commercialUseRecord": null } },
+    { "id": "mul", "lessonId": "lesson-07", "targetSymbol": "ㄹ", "displayText": "물", "speechText": "물", "expectedPronunciation": "물", "pronunciationRule": "받침 ㄹ", "audioType": "word", "type": "word", "pronunciationType": "full-word", "screen": "第7课ㄹ示例", "teachingGoal": "在完整单词 물 中听结尾[l]", "file": "mul.mp3", "voiceSource": "openai-gpt-4o-mini-tts", "model": "gpt-4o-mini-tts", "voice": "marin", "generationDate": null, "commercialUseBasis": "pending-documentation", "reviewStatus": "pending", "assetStatus": "missing", "technicalValidation": "pending", "nativeReviewStatus": "deferred", "rightsReviewStatus": "pending", "nativeReviewer": null, "reviewNotes": "Audio not generated or reviewed.", "needsNativeReview": false, "rights": { "voiceTalent": null, "consentRecord": null, "commercialUseRecord": null } }
+  ]
+}

@@ -29,7 +29,8 @@ export function validateBatchShape(batchId, batch, expectedCount) {
   if (batch.speed !== null) throw new Error(`${batchId} speed must remain omitted (provider default), matching Batch 1.`);
   const instructionProfiles = {
     'batch-1-exact':'Speak only the supplied Korean speechText exactly once in natural standard Seoul Korean. Do not spell, translate, explain, or add sounds.',
-    'controlled-onset-contrast-r1':'Speak only the supplied Korean syllable exactly once in natural standard Seoul Korean for a controlled pronunciation comparison. Keep recording level, perceived loudness, vowel duration, speaking effort, microphone distance, and pacing closely matched across items. For 가, use a natural lenis ㄱ onset with weak airflow and no exaggerated pre-aspiration. For 카, use a clearly aspirated ㅋ onset with audible airflow, without increasing loudness or lengthening the vowel. Do not add leading noise, trailing sounds, spelling, translation, explanation, or emphasis.'
+    'controlled-onset-contrast-r1':'Speak only the supplied Korean syllable exactly once in natural standard Seoul Korean for a controlled pronunciation comparison. Keep recording level, perceived loudness, vowel duration, speaking effort, microphone distance, and pacing closely matched across items. For 가, use a natural lenis ㄱ onset with weak airflow and no exaggerated pre-aspiration. For 카, use a clearly aspirated ㅋ onset with audible airflow, without increasing loudness or lengthening the vowel. Do not add leading noise, trailing sounds, spelling, translation, explanation, or emphasis.',
+    'controlled-onset-batch-2b':'Speak only the supplied Korean syllable exactly once in natural standard Seoul Korean for a controlled pronunciation set. Keep recording level, perceived loudness, rhythm, vowel duration, speaking effort, microphone distance, and pacing closely matched across items. Preserve natural category differences: lenis onsets use naturally weak airflow, aspirated onsets use clearly audible airflow, and tense onsets use a tight onset with little airflow. Do not create category differences by increasing loudness or lengthening the vowel. For 하 and 그, use their natural standard pronunciation with the same matched level and pacing. Do not add leading noise, trailing sounds, spelling, translation, explanation, or emphasis.'
   };
   if (!instructionProfiles[batch.instructionProfile] || batch.instructions !== instructionProfiles[batch.instructionProfile]) {
     throw new Error(`${batchId} instructions do not match an approved frozen profile.`);
@@ -39,6 +40,15 @@ export function validateBatchShape(batchId, batch, expectedCount) {
   }
   if (batch.expectedCount !== expectedCount || batch.items?.length !== expectedCount) {
     throw new Error(`${batchId} allowlist count must equal expectedCount (${expectedCount}).`);
+  }
+  if (batch.maxApiRequests !== undefined && batch.maxApiRequests !== expectedCount) {
+    throw new Error(`${batchId} maxApiRequests must equal expectedCount (${expectedCount}).`);
+  }
+  if (batch.automaticRetry !== undefined && batch.automaticRetry !== false) {
+    throw new Error(`${batchId} must disable automatic retry.`);
+  }
+  if (batch.outputPolicy !== undefined && batch.outputPolicy !== 'staging-artifact-only') {
+    throw new Error(`${batchId} output must remain staging/Artifact only.`);
   }
   const ids = new Set();
   const files = new Set();
@@ -54,8 +64,14 @@ export function validateBatchShape(batchId, batch, expectedCount) {
 }
 
 export async function validateFormalManifest(root, batch, options = {}) {
-  const manifest = JSON.parse(await readFile(resolve(root, 'audio', batch.lessonId, 'manifest.json'), 'utf8'));
+  const manifests = new Map();
   for (const allowed of batch.items) {
+    const lessonId = allowed.lessonId || batch.lessonId;
+    if (!lessonId) throw new Error(`Formal manifest lessonId is missing for ${allowed.id}.`);
+    if (!manifests.has(lessonId)) {
+      manifests.set(lessonId, JSON.parse(await readFile(resolve(root, 'audio', lessonId, 'manifest.json'), 'utf8')));
+    }
+    const manifest = manifests.get(lessonId);
     const item = manifest.items?.find(candidate => candidate.id === allowed.id);
     if (!item || item.speechText !== allowed.speechText || item.audioType !== allowed.audioType || item.file !== allowed.outputFile) {
       throw new Error(`Formal manifest does not exactly match allowlisted item ${allowed.id}.`);
@@ -66,7 +82,7 @@ export async function validateFormalManifest(root, batch, options = {}) {
       throw new Error(`Formal manifest ${allowed.id} must remain pending/missing before review.`);
     }
   }
-  return manifest;
+  return manifests;
 }
 
 export async function writeJson(path, value) {

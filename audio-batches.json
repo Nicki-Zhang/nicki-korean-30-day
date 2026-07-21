@@ -68,6 +68,35 @@
           "outputFile": "ka.mp3"
         }
       ]
+    },
+    "audio-batch-02b": {
+      "expectedCount": 13,
+      "model": "gpt-4o-mini-tts",
+      "voice": "marin",
+      "format": "mp3",
+      "instructionProfile": "controlled-onset-batch-2b",
+      "speed": null,
+      "instructions": "Speak only the supplied Korean syllable exactly once in natural standard Seoul Korean for a controlled pronunciation set. Keep recording level, perceived loudness, rhythm, vowel duration, speaking effort, microphone distance, and pacing closely matched across items. Preserve natural category differences: lenis onsets use naturally weak airflow, aspirated onsets use clearly audible airflow, and tense onsets use a tight onset with little airflow. Do not create category differences by increasing loudness or lengthening the vowel. For 하 and 그, use their natural standard pronunciation with the same matched level and pacing. Do not add leading noise, trailing sounds, spelling, translation, explanation, or emphasis.",
+      "expectedSampleRate": 24000,
+      "expectedChannels": 1,
+      "automaticRetry": false,
+      "maxApiRequests": 13,
+      "outputPolicy": "staging-artifact-only",
+      "items": [
+        { "lessonId": "k0-consonant-contrast", "id": "da", "speechText": "다", "audioType": "initial-example", "outputFile": "da.mp3" },
+        { "lessonId": "k0-consonant-contrast", "id": "ta", "speechText": "타", "audioType": "initial-example", "outputFile": "ta.mp3" },
+        { "lessonId": "k0-consonant-contrast", "id": "tta", "speechText": "따", "audioType": "initial-example", "outputFile": "tta.mp3" },
+        { "lessonId": "k0-consonant-contrast", "id": "ba", "speechText": "바", "audioType": "initial-example", "outputFile": "ba.mp3" },
+        { "lessonId": "k0-consonant-contrast", "id": "pa", "speechText": "파", "audioType": "initial-example", "outputFile": "pa.mp3" },
+        { "lessonId": "k0-consonant-contrast", "id": "ppa", "speechText": "빠", "audioType": "initial-example", "outputFile": "ppa.mp3" },
+        { "lessonId": "k0-consonant-contrast", "id": "ja", "speechText": "자", "audioType": "initial-example", "outputFile": "ja.mp3" },
+        { "lessonId": "k0-consonant-contrast", "id": "cha", "speechText": "차", "audioType": "initial-example", "outputFile": "cha.mp3" },
+        { "lessonId": "k0-consonant-contrast", "id": "jja", "speechText": "짜", "audioType": "initial-example", "outputFile": "jja.mp3" },
+        { "lessonId": "k0-consonant-contrast", "id": "sa", "speechText": "사", "audioType": "initial-example", "outputFile": "sa.mp3" },
+        { "lessonId": "k0-consonant-contrast", "id": "ssa", "speechText": "싸", "audioType": "initial-example", "outputFile": "ssa.mp3" },
+        { "lessonId": "lesson-00", "id": "ha", "speechText": "하", "audioType": "initial-example", "outputFile": "ha.mp3" },
+        { "lessonId": "lesson-05", "id": "geu", "speechText": "그", "audioType": "syllable", "outputFile": "geu.mp3" }
+      ]
     }
   },
   "planningOnly": {
@@ -104,26 +133,6 @@
         ["ga", "가", "initial-example", "ga.mp3"],
         ["ka", "카", "initial-example", "ka.mp3"],
         ["kka", "까", "initial-example", "kka.mp3"],
-        ["da", "다", "initial-example", "da.mp3"],
-        ["ta", "타", "initial-example", "ta.mp3"],
-        ["tta", "따", "initial-example", "tta.mp3"],
-        ["ba", "바", "initial-example", "ba.mp3"],
-        ["pa", "파", "initial-example", "pa.mp3"],
-        ["ppa", "빠", "initial-example", "ppa.mp3"],
-        ["ja", "자", "initial-example", "ja.mp3"],
-        ["cha", "차", "initial-example", "cha.mp3"],
-        ["jja", "짜", "initial-example", "jja.mp3"],
-        ["sa", "사", "initial-example", "sa.mp3"],
-        ["ssa", "싸", "initial-example", "ssa.mp3"],
-        ["ha", "하", "initial-example", "ha.mp3"],
-        ["geu", "그", "syllable", "geu.mp3"]
-      ]
-    },
-    "audio-batch-02b": {
-      "status": "planning-only",
-      "requiresProductOwnerApprovalOf": "audio-batch-02a",
-      "expectedCount": 13,
-      "items": [
         ["da", "다", "initial-example", "da.mp3"],
         ["ta", "타", "initial-example", "ta.mp3"],
         ["tta", "따", "initial-example", "tta.mp3"],

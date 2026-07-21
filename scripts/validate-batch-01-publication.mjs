@@ -10,9 +10,9 @@ const expected=new Map([
   ['yu',{speechText:'유',file:'yu.mp3',sha256:'3eb015cd5a7a9c7955976e1d0acd6669126e7c5c74a1c928f7d7b9d925d98430'}]
 ]);
 const all=Object.entries(audio.lessons).flatMap(([lessonId,lesson])=>lesson.items.map(entry=>({lessonId,...entry})));
-const batch=audio.lessons['lesson-00'].items;
-assert.equal(all.length,77);
-assert.deepEqual(batch.map(entry=>entry.id),['yo','yu']);
+const batch=audio.lessons['lesson-00'].items.filter(entry=>expected.has(entry.id));
+assert.equal(all.length,83);
+assert.deepEqual(audio.lessons['lesson-00'].items.map(entry=>entry.id),['yo','yu','ha']);
 assert.deepEqual(Object.keys(audio.approvedAssetHashes).sort(),['k0-consonant-contrast:ga','k0-consonant-contrast:ka','k0-consonant-contrast:kka','lesson-00:yo','lesson-00:yu']);
 
 for(const entry of batch){
@@ -33,13 +33,13 @@ for(const entry of batch){
   ]) assert.equal(audio.canPlayAudio(target.speechText,{...entry,...mutation},'vowel'),false,`${entry.id} unsafe mutation became playable`);
 }
 
-const others=all.filter(entry=>entry.lessonId!=='lesson-00');
-assert.equal(others.length,75,'Current catalog contains 75 other records, not 73.');
+const others=all.filter(entry=>!expected.has(entry.id)||entry.lessonId!=='lesson-00');
+assert.equal(others.length,81,'Current catalog contains 81 records outside approved Batch 1.');
 assert.equal(others.filter(entry=>entry.reviewStatus==='approved').length,3,'Only Batch 2A may join Batch 1 as approved audio.');
-assert.equal(others.filter(entry=>entry.reviewStatus==='pending').length,72);
+assert.equal(others.filter(entry=>entry.reviewStatus==='pending').length,78);
 
 const manifest=JSON.parse(fs.readFileSync('audio/lesson-00/manifest.json','utf8'));
-assert.deepEqual(manifest.items,batch);
+assert.deepEqual(manifest.items,audio.lessons['lesson-00'].items);
 const source=fs.readFileSync('lesson-00.js','utf8');
 const documentStub={addEventListener(){}};
 const context={window:{document:documentStub,location:{search:'',href:''},navigator:{language:'en'}},document:documentStub,URLSearchParams,setTimeout(){}};

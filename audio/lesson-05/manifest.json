@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 2,
+  "lesson": "lesson-05",
+  "reviewPolicy": "Technical validation, then product-owner course-context listening, then explicit approval.",
+  "generationDefaults": {
+    "provider": "openai",
+    "model": "gpt-4o-mini-tts",
+    "voice": "marin",
+    "format": "mp3"
+  },
+  "items": [
+    {
+      "id": "geu",
+      "lessonId": "lesson-05",
+      "targetSymbol": "ㅡ",
+      "displayText": "그",
+      "speechText": "그",
+      "expectedPronunciation": "그",
+      "pronunciationRule": "ㄱ + ㅡ",
+      "audioType": "syllable",
+      "type": "syllable",
+      "pronunciationType": "full-syllable",
+      "screen": "第5课上下结构示例",
+      "teachingGoal": "用完整音节展示 ㄱ + ㅡ = 그",
+      "file": "geu.mp3",
+      "voiceSource": "openai-gpt-4o-mini-tts",
+      "model": "gpt-4o-mini-tts",
+      "voice": "marin",
+      "generationDate": null,
+      "commercialUseBasis": "pending-documentation",
+      "reviewStatus": "pending",
+      "assetStatus": "missing",
+      "technicalValidation": "pending",
+      "nativeReviewStatus": "deferred",
+      "rightsReviewStatus": "pending",
+      "nativeReviewer": null,
+      "reviewNotes": "Batch 2B allowlist; not generated or reviewed.",
+      "needsNativeReview": false,
+      "rights": {
+        "voiceTalent": null,
+        "consentRecord": null,
+        "commercialUseRecord": null
+      }
+    }
+  ]
+}

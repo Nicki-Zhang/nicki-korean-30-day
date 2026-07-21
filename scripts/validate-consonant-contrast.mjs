@@ -104,5 +104,5 @@ const workflow=fs.readFileSync('.github/workflows/generate-lesson-audio.yml','ut
 assert.match(workflow,/audio-batch-01/);
 assert.match(workflow,/audio-batch-02a-gaka-r1/);
 assert.doesNotMatch(workflow,/^\s{10}- audio-batch-02a\s*$/m,'Original three-item Batch 2A must not remain dispatchable.');
-assert.doesNotMatch(workflow,/audio-batch-02b/,'Planning-only Batch 2B must not be dispatchable.');
+assert.match(workflow,/audio-batch-02b/,'Prepared Batch 2B must be explicitly dispatchable only by workflow_dispatch.');
 console.log('Validated 15-step K0 consonant contrast lesson, 14 safe full-syllable mappings, four languages, retry flow, resume state, completion compatibility, and direct course access.');
