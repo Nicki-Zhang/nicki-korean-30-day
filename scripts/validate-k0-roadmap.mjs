@@ -8,8 +8,8 @@ catalogContext.window.window = catalogContext.window;
 vm.runInNewContext(fs.readFileSync('course-catalog.js', 'utf8'), catalogContext, { filename: 'course-catalog.js' });
 const catalog = catalogContext.window.NIKIGO_COURSES;
 
-assert.equal(catalog.length, 10);
-assert.deepEqual([...catalog.map(item => item.displayNumber)], [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+assert.equal(catalog.length, 11);
+assert.deepEqual([...catalog.map(item => item.displayNumber)], [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 const stableIds = new Set();
 for (const [index, item] of catalog.entries()) {
   assert.equal(item.id, item.stableId);
@@ -35,7 +35,7 @@ for (const [index, item] of catalog.entries()) {
     assert.equal(item.file, null, `${item.stableId} must not link to an unfinished page`);
   }
 }
-assert.deepEqual([...catalog.filter(item => item.status === 'available').map(item => item.stableId)], ['lesson-00', 'lesson-01', 'lesson-02', 'lesson-03', 'k0-consonant-contrast', 'lesson-05', 'lesson-06', 'lesson-04']);
+assert.deepEqual([...catalog.filter(item => item.status === 'available').map(item => item.stableId)], ['lesson-00', 'lesson-01', 'lesson-02', 'lesson-03', 'k0-consonant-contrast', 'lesson-05', 'lesson-06', 'lesson-04', 'lesson-08', 'lesson-09', 'lesson-10']);
 const contrastLesson = catalog.find(item => item.stableId === 'k0-consonant-contrast');
 assert.equal(contrastLesson.displayNumber, 4);
 assert.equal(contrastLesson.file, 'lesson-consonant-contrast.html');
@@ -52,8 +52,8 @@ assert.equal(lesson06.audioStatus, 'pending');
 for (const lesson of catalog.filter(item => item.status === 'available')) {
   assert.equal(catalogContext.window.NIKIGO_COURSE_UNLOCKED(lesson, []), true, `${lesson.stableId} must open without prior completion`);
 }
-assert.deepEqual(JSON.parse(JSON.stringify(catalog.map(item => item.recommendedPrerequisites))), [[], ['lesson-00'], ['lesson-01'], ['lesson-02'], ['lesson-03'], ['k0-consonant-contrast'], ['lesson-05'], ['lesson-06'], ['lesson-04'], ['k0-lesson-08-plan']]);
-assert.equal(catalogContext.window.NIKIGO_COURSE_UNLOCKED(catalog.find(item => item.status === 'comingSoon'), []), false);
+assert.deepEqual(JSON.parse(JSON.stringify(catalog.map(item => item.recommendedPrerequisites))), [[], ['lesson-00'], ['lesson-01'], ['lesson-02'], ['lesson-03'], ['k0-consonant-contrast'], ['lesson-05'], ['lesson-06'], ['lesson-04'], ['lesson-08'], ['lesson-09']]);
+assert.equal(catalog.filter(item => item.status === 'comingSoon').length, 0);
 assert.equal(catalog.some(item => item.stableId === 'k0-lesson-06-plan'), false);
 assert.equal(catalog.find(item => item.stableId === 'lesson-04').displayNumber, 7);
 

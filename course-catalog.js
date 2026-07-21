@@ -88,15 +88,20 @@
       title: { zh: '四个基础收音 ㄴㅁㅇㄹ', en: 'Four Basic Finals ㄴㅁㅇㄹ', vi: 'Bốn âm cuối cơ bản ㄴㅁㅇㄹ', ja: '4つの基本パッチム ㄴㅁㅇㄹ' },
       parts: { zh: '산 · 몸 · 공 · 물 · 完整单词发音', en: '산 · 몸 · 공 · 물 · Full-word pronunciation', vi: '산 · 몸 · 공 · 물 · Phát âm từ đầy đủ', ja: '산 · 몸 · 공 · 물 · 単語全体の発音' }
     }),
-    comingSoon({
-      stableId: 'k0-lesson-08-plan', displayOrder: 8, displayNumber: 8, icon: '🎧', recommendedPrerequisites: ['lesson-04'],
+    available({
+      stableId: 'lesson-08', displayOrder: 8, displayNumber: 8, file: 'lesson-08.html', duration: 15, xp: 50, icon: '🎧', template: 'pronunciation', recommendedPrerequisites: ['lesson-04'], releaseStatus: 'preview', audioStatus: 'pending',
       title: { zh: '七种代表收音和常见音变', en: 'Seven Representative Finals and Sound Changes', vi: 'Bảy âm cuối đại diện và biến âm', ja: '7つの代表パッチムと音変化' },
       parts: { zh: '代表音 · 连音 · 鼻音化 · 常见规则', en: 'Representative sounds · Linking · Nasalization', vi: 'Âm đại diện · Nối âm · Mũi hóa', ja: '代表音 · 連音 · 鼻音化' }
     }),
-    comingSoon({
-      stableId: 'k0-lesson-09-plan', displayOrder: 9, displayNumber: 9, icon: '👋', recommendedPrerequisites: ['k0-lesson-08-plan'],
+    available({
+      stableId: 'lesson-09', displayOrder: 9, displayNumber: 9, file: 'lesson-09.html', duration: 15, xp: 50, icon: '👋', template: 'scenario-dialogue', recommendedPrerequisites: ['lesson-08'], releaseStatus: 'preview', audioStatus: 'pending',
       title: { zh: '场景韩语：问候与介绍', en: 'Scenario Korean: Greetings and Introductions', vi: 'Tiếng Hàn tình huống: Chào hỏi và giới thiệu', ja: '場面韓国語：あいさつと自己紹介' },
       parts: { zh: '从第9课起进入问候、介绍等真实场景', en: 'Real greetings and introductions begin from Lesson 9', vi: 'Bắt đầu chào hỏi và giới thiệu thực tế từ Bài 9', ja: '第9課から実際のあいさつ・紹介へ' }
+    }),
+    available({
+      stableId: 'lesson-10', displayOrder: 10, displayNumber: 10, file: 'lesson-10.html', duration: 15, xp: 50, icon: '🏆', template: 'review-challenge', recommendedPrerequisites: ['lesson-09'], releaseStatus: 'preview', audioStatus: 'pending',
+      title: { zh: 'K0阶段复习挑战', en: 'K0 Review Challenge', vi: 'Thử thách ôn tập K0', ja: 'K0復習チャレンジ' },
+      parts: { zh: '第0～9课综合复习 · 错题重练 · 阶段检查点', en: 'Lessons 0–9 review · Retry missed items · Learning checkpoint', vi: 'Ôn Bài 0–9 · Luyện lại câu sai · Điểm kiểm tra', ja: '第0～9課の総合復習 · 間違いの再練習 · 学習チェックポイント' }
     })
   ].sort((a, b) => a.displayOrder - b.displayOrder);
 

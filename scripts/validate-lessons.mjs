@@ -90,6 +90,15 @@ for (const [index, item] of (catalog || []).entries()) {
     continue;
   }
 
+  if (['lesson-08','lesson-09','lesson-10'].includes(stableId)) {
+    const html = fs.readFileSync(file, 'utf8');
+    if (!html.includes(`${stableId}.js`)) errors.push(`${file} does not load its lesson configuration.`);
+    if (!html.includes('lesson-sprint-engine.js')) errors.push(`${file} does not load the sprint lesson engine.`);
+    if (!html.includes('lesson-sprint.css')) errors.push(`${file} does not load the sprint lesson styles.`);
+    if (!html.includes('audio-catalog.js')) errors.push(`${file} does not load the strict audio catalog.`);
+    continue;
+  }
+
   try {
     const { config, html } = loadInlineConfig(file);
     if (config.id !== stableId) errors.push(`${file} mounts ${config.id} instead of ${stableId}.`);

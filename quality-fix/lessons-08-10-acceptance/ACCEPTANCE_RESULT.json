@@ -1,0 +1,40 @@
+{
+  "date": "2026-07-21",
+  "browser": "Google Chrome",
+  "baseSha": "b193726f6d1444ffbf2c3a3385eb6a4ab7b1cd60",
+  "lessons": ["lesson-08", "lesson-09", "lesson-10"],
+  "viewports": [
+    { "width": 390, "height": 844 },
+    { "width": 768, "height": 1024 },
+    { "width": 1440, "height": 900 }
+  ],
+  "layoutCases": 9,
+  "horizontalOverflowCases": 0,
+  "smallControlCases": 0,
+  "undefinedTextCases": 0,
+  "consoleWarnings": 0,
+  "consoleErrors": 0,
+  "favicon": {
+    "path": "assets/nikigo-mark.svg",
+    "localChromeHttpStatus": 200,
+    "rootFallbackRequestObserved": true,
+    "rootFallbackHttpStatus": 200
+  },
+  "interaction": {
+    "lesson08Completed": true,
+    "lesson09Completed": true,
+    "lesson10Completed": true,
+    "retryGatePassed": true,
+    "refreshRestorePassed": true,
+    "repeatXpGuardPassed": true,
+    "directAccessPassed": true,
+    "fourLanguagesPassed": true,
+    "listeningPrivacyPassed": true,
+    "pendingAudioDisabled": true,
+    "deviceTtsFallbackCalls": 0
+  },
+  "approvedAudioReuse": [
+    { "lessonId": "lesson-03", "text": "안녕하세요", "audioType": "sentence", "httpStatus": 200 },
+    { "lessonId": "lesson-04", "text": "바", "audioType": "syllable", "httpStatus": 200, "sha256": "dc8345a1cad1ee3044c7f5ff633efbe13fd18c5d31f506107122b5464fe69e5e" }
+  ]
+}

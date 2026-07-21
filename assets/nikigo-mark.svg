@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Nikigo">
+  <rect width="64" height="64" rx="16" fill="#6d4aff"/>
+  <path d="M18 18h10v10H18zm18 0h10v10H36zM18 36h10v10H18z" fill="#fff"/>
+  <path d="M38 35h8v11H35v-8h3z" fill="#c9ff4a"/>
+</svg>
