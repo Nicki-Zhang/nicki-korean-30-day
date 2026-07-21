@@ -28,17 +28,16 @@ assert.deepEqual(batch2b.items.map(({id,speechText,audioType,outputFile})=>[id,s
 
 const contrast=audio.lessons['k0-consonant-contrast'].items;
 assert.deepEqual(contrast.map(x=>[x.id,x.speechText,x.audioType,x.file]),originalExpected.slice(0,14));
-assert.ok(contrast.slice(0,3).every(x=>x.reviewStatus==='approved'&&x.assetStatus==='available'));
-assert.ok(contrast.slice(3).every(x=>x.reviewStatus==='pending'&&x.assetStatus==='missing'));
+assert.ok(contrast.every(x=>x.reviewStatus==='approved'&&x.assetStatus==='available'));
 assert.ok(batch2a.items.every(allowed=>contrast.some(item=>item.id===allowed.id&&item.speechText===allowed.speechText&&item.audioType===allowed.audioType&&item.file===allowed.outputFile)));
 
 const all=Object.values(audio.lessons).flatMap(lesson=>lesson.items);
-assert.equal(all.filter(x=>x.reviewStatus==='approved'&&x.assetStatus==='available').length,5);
-assert.ok(all.some(x=>x.lessonId==='lesson-00'&&x.speechText==='하'&&x.audioType==='initial-example'&&x.reviewStatus==='pending'&&x.assetStatus==='missing'));
-assert.ok(all.some(x=>x.lessonId==='lesson-05'&&x.speechText==='그'&&x.audioType==='syllable'&&x.reviewStatus==='pending'&&x.assetStatus==='missing'));
+assert.equal(all.filter(x=>x.reviewStatus==='approved'&&x.assetStatus==='available').length,18);
+assert.ok(all.some(x=>x.lessonId==='lesson-00'&&x.speechText==='하'&&x.audioType==='initial-example'&&x.reviewStatus==='approved'&&x.assetStatus==='available'));
+assert.ok(all.some(x=>x.lessonId==='lesson-05'&&x.speechText==='그'&&x.audioType==='syllable'&&x.reviewStatus==='approved'&&x.assetStatus==='available'));
 assert.match(fs.readFileSync('hangul-sound-data.js','utf8'),/consonant\('ㅎ',[^\n]*'하'/u);
 assert.match(fs.readFileSync('lesson-05.js','utf8'),/\['ㄱ','ㅡ','그'\]/u);
 const audit=fs.readFileSync('K0_AUDIO_PLAYER_AUDIT.csv','utf8');
-assert.match(audit,/lesson05-top-examples-2[^\n]*听示例音节 그[^\n]*missing-catalog-entry/u);
+assert.match(audit,/lesson05-top-examples-2[^\n]*lesson-05:geu[^\n]*released/u);
 assert.match(fs.readFileSync('K0_AUDIO_GENERATION_BATCH_PLAN.md','utf8'),/历史基线 `5fe8fb1`[\s\S]*까[\s\S]*初步通过[\s\S]*audio-batch-02a-gaka-r1[\s\S]*하[\s\S]*그/u);
-console.log('Validated the historical 16-item scope, preserved Batch 2A, and prepared the exact 13-item Batch 2B allowlist with pending 하/그 records.');
+console.log('Validated the historical 16-item scope, preserved Batch 2A, and published the exact 13-item Batch 2B allowlist including strict 하/그 records.');

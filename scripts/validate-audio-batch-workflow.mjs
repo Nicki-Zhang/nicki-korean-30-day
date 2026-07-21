@@ -85,7 +85,7 @@ assert.doesNotMatch(JSON.stringify({preflight,generation,artifact}),/MUST_NOT_BE
 const formal1=JSON.parse(fs.readFileSync(path.join(root,'audio/lesson-00/manifest.json'),'utf8'));
 assert.ok(formal1.items.filter(x=>['yo','yu'].includes(x.id)).every(x=>x.reviewStatus==='approved'&&x.assetStatus==='available'));
 assert.deepEqual(formal1.items.map(x=>x.id),['yo','yu','ha']);
-assert.equal(formal1.items.find(x=>x.id==='ha').reviewStatus,'pending');assert.equal(formal1.items.find(x=>x.id==='ha').assetStatus,'missing');
+assert.equal(formal1.items.find(x=>x.id==='ha').reviewStatus,'approved');assert.equal(formal1.items.find(x=>x.id==='ha').assetStatus,'available');
 const formal2=JSON.parse(fs.readFileSync(path.join(root,'audio/k0-consonant-contrast/manifest.json'),'utf8'));
 const formal2a=formal2.items.filter(x=>['ga','ka','kka'].includes(x.id));
 assert.deepEqual(formal2a.map(x=>x.id),['ga','ka','kka']);assert.ok(formal2a.every(x=>x.reviewStatus==='approved'&&x.assetStatus==='available'));
@@ -98,6 +98,9 @@ assert.notEqual(result.status,0,'Published Batch 1 must not be generated again.'
 const published2a=fs.mkdtempSync(path.join(os.tmpdir(),'nikigo-audio-2a-published-block-'));
 result=spawnSync(process.execPath,[path.join(root,'scripts/preflight-audio-batch.mjs'),'--batch-id','audio-batch-02a-gaka-r1','--mode','generate','--expected-count','2','--confirmation','GENERATE audio-batch-02a-gaka-r1 2','--staging-dir',published2a],{cwd:root,encoding:'utf8',env:{...process.env,[secretVariableName]:unusedSecretMarker}});
 assert.notEqual(result.status,0,'Published Batch 2A revision must not be generated again.');assert.match(result.stderr,/pending\/missing before review/);
+const published2b=fs.mkdtempSync(path.join(os.tmpdir(),'nikigo-audio-2b-published-block-'));
+result=spawnSync(process.execPath,[path.join(root,'scripts/preflight-audio-batch.mjs'),'--batch-id','audio-batch-02b','--mode','generate','--expected-count','13','--confirmation','GENERATE audio-batch-02b 13','--staging-dir',published2b],{cwd:root,encoding:'utf8',env:{...process.env,[secretVariableName]:unusedSecretMarker}});
+assert.notEqual(result.status,0,'Published Batch 2B must not be generated again.');assert.match(result.stderr,/pending\/missing before review/);
 
 for(const [name,args,pattern] of [
   ['wrong Batch 2B count',['--batch-id','audio-batch-02b','--mode','dry-run','--expected-count','12','--confirmation','DRY-RUN'],/allowlist count/],

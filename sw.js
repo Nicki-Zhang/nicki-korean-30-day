@@ -1,16 +1,22 @@
-const CACHE = 'nikigo-v21-lesson-07-preview';
+const CACHE = 'nikigo-v22-audio-batch-02b-approved';
 const ASSETS = [
   './', './index.html', './nikigo-app.html', './app-state.js', './course-catalog.js',
   './hangul-sound-data.js', './audio-catalog.js', './review.html', './review.css',
-  './review-catalog.js', './lesson-00.html', './lesson-00.js', './lesson-01.html',
+  './review-catalog.js', './lesson-00.html', './lesson-00.js?v=22-audio-batch-02b', './lesson-01.html',
   './lesson-02.html', './lesson-03.html', './lesson-04.html', './lesson-engine.js',
   './lesson-player.css', './player-privacy.css', './lesson-consonant-contrast.html', './lesson-consonant-contrast.js',
   './lesson-consonant-contrast.css', './lesson-05.html', './lesson-05.js',
   './lesson-05.css', './lesson-06.html', './lesson-06.js', './lesson-06.css',
   './lesson-07.html', './lesson-07.js', './lesson-07.css',
   './audio/lesson-00/yo.mp3', './audio/lesson-00/yu.mp3',
+  './audio/lesson-00/ha.mp3', './audio/lesson-05/geu.mp3',
   './audio/k0-consonant-contrast/ga.mp3', './audio/k0-consonant-contrast/ka.mp3',
-  './audio/k0-consonant-contrast/kka.mp3',
+  './audio/k0-consonant-contrast/kka.mp3', './audio/k0-consonant-contrast/da.mp3',
+  './audio/k0-consonant-contrast/ta.mp3', './audio/k0-consonant-contrast/tta.mp3',
+  './audio/k0-consonant-contrast/ba.mp3', './audio/k0-consonant-contrast/pa.mp3',
+  './audio/k0-consonant-contrast/ppa.mp3', './audio/k0-consonant-contrast/ja.mp3',
+  './audio/k0-consonant-contrast/cha.mp3', './audio/k0-consonant-contrast/jja.mp3',
+  './audio/k0-consonant-contrast/sa.mp3', './audio/k0-consonant-contrast/ssa.mp3',
   './manifest.webmanifest'
 ];
 

@@ -30,8 +30,7 @@ for (const [index,item] of manifest.items.entries()) {
   assert.deepEqual([item.targetSymbol,item.speechText,item.file],[symbol,spokenSyllable,audioFile]);
   for (const field of ['targetSymbol','speechText','file','expectedPronunciation','reviewStatus','assetStatus']) assert.ok(String(item[field]||'').trim(),`${item.id} missing ${field}`);
   assert.equal(item.audioType,'initial-example');
-  if(index<3){assert.equal(item.reviewStatus,'approved');assert.equal(item.assetStatus,'available');}
-  else{assert.equal(item.reviewStatus,'pending');assert.equal(item.assetStatus,'missing');}
+  assert.equal(item.reviewStatus,'approved');assert.equal(item.assetStatus,'available');
   assert.doesNotMatch(item.speechText,/^[ㄱ-ㅎ]$/u);
   assert.doesNotMatch(item.speechText,/^[A-Za-z]+$/);
 }
@@ -59,7 +58,7 @@ assert.equal(api.LESSON_ID,'k0-consonant-contrast');
 assert.equal(api.SCREENS.length,15);
 assert.equal(api.GROUPS.length,5);
 assert.equal(Object.keys(api.QUESTIONS).length,6);
-assert.equal(Object.keys(api.HOSTED_AUDIO).length,0,'Missing hosted files must not be requested by the page.');
+assert.equal(Object.keys(api.HOSTED_AUDIO).length,0,'The empty-catalog UI fixture must not invent hosted files.');
 assert.deepEqual(JSON.parse(JSON.stringify(api.GROUPS.flatMap(group=>group.items.map(item=>[item.symbol,item.category,item.syllable])))),expected.map(item=>item.slice(0,3)));
 for(const item of api.GROUPS.flatMap(group=>group.items))assert.doesNotMatch(item.approximation,/[^\x20-\x7E]/,`${item.syllable} approximation must use cross-device plain text`);
 const englishKeys=Object.keys(api.UI.en);

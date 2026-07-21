@@ -26,21 +26,28 @@
       "voiceSource": "openai-gpt-4o-mini-tts",
       "model": "gpt-4o-mini-tts",
       "voice": "marin",
-      "generationDate": null,
-      "commercialUseBasis": "pending-documentation",
-      "reviewStatus": "pending",
-      "assetStatus": "missing",
-      "technicalValidation": "pending",
+      "generationDate": "2026-07-21T03:28:43.393Z",
+      "commercialUseBasis": "OpenAI API generated audio; legal review pending",
+      "reviewStatus": "approved",
+      "assetStatus": "available",
+      "technicalValidation": "passed",
       "nativeReviewStatus": "deferred",
       "rightsReviewStatus": "pending",
       "nativeReviewer": null,
-      "reviewNotes": "Batch 2B allowlist; not generated or reviewed.",
+      "reviewNotes": "Product owner listening passed on 2026-07-21; optional native-speaker review deferred.",
       "needsNativeReview": false,
       "rights": {
         "voiceTalent": null,
         "consentRecord": null,
         "commercialUseRecord": null
-      }
+      },
+      "sha256": "c7dee859df0d3dc4ac9b8fd0c5d37ac7588e07313004a93a802849a4989d0d58",
+      "fileSize": 11520,
+      "mimeType": "audio/mpeg",
+      "sourceRunId": "29798619662",
+      "sourceArtifact": "nikigo-audio-batch-02b-run-29798619662-09fad4f",
+      "reviewMethod": "product-owner-listening",
+      "reviewedAt": "2026-07-21"
     }
   ]
 }

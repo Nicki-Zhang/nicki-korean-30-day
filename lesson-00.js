@@ -61,7 +61,7 @@
     const audioResolution = (item, action) => {
       const speechText = action === 'vowel' ? item.vowelCarrierSyllable : action === 'letter-name' ? item.letterName : item.demoSyllable;
       const audioType = action === 'vowel' ? 'vowel' : action === 'letter-name' ? 'letter-name' : 'initial-example';
-      const lessonId = action === 'demo' ? 'k0-consonant-contrast' : undefined;
+      const lessonId = action === 'demo' ? (item.symbol === 'ㅎ' ? 'lesson-00' : 'k0-consonant-contrast') : undefined;
       return global.NikigoAudio.resolve(speechText, audioType, lessonId);
     };
 

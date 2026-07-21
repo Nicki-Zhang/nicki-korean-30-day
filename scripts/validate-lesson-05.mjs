@@ -121,10 +121,10 @@ assert.equal(api.completionPatch(completed).xp, 250, 'Repeat completion must not
 const expectedHosted = {
   가: 'audio/lesson-01/ga.mp3', 너: 'audio/lesson-01/neo-v2.wav', 미: 'audio/lesson-02/mi.mp3',
   고: 'audio/lesson-01/go-v2.wav', 누: 'audio/lesson-01/nu-v2.wav', 아: 'audio/lesson-01/a.mp3',
-  어: 'audio/lesson-01/eo.mp3', 오: 'audio/lesson-01/o.mp3', 나: 'audio/lesson-01/na.mp3'
+  어: 'audio/lesson-01/eo.mp3', 오: 'audio/lesson-01/o.mp3', 나: 'audio/lesson-01/na.mp3',
+  그: 'audio/lesson-05/geu.mp3'
 };
 assert.deepEqual(JSON.parse(JSON.stringify(api.AUDIO_FILES)), expectedHosted);
-assert.equal(api.AUDIO_FILES['그'], undefined);
 for (const path of Object.values(expectedHosted)) assert.ok(fs.existsSync(path), `Missing exact reused audio: ${path}`);
 
 const catalogContext = { window: {} };

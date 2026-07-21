@@ -7,6 +7,28 @@
     commercialUseRecord: null
   });
 
+  const BATCH_02B_SOURCE = Object.freeze({
+    da:['37cabe6d05782f45ae49ebc5d2c76278cd3a3ac088ff433e50dd32d4b5619046',15360],
+    ta:['158b84180fc317e304ec0e15d50c2a2df6d9dbe6ca6abb690d2471e846f90be8',23424],
+    tta:['a027bee927746526b9f69b9b19ce552486fbc6ed2e3b8d9b6669a18f3413d7f0',18432],
+    ba:['128841a96d40fc42589b97a89d31ef637ed70108b588a025f8b9095b5449b95c',13824],
+    pa:['78b31bba7f20ebb379b9c5f92d9fb9da36debfd9bc17236af168c065392185ed',21120],
+    ppa:['53cd03ff44b7ee2f39432a62db06d48467ffca76cf843c77c2a1d58b54f07285',16128],
+    ja:['b65419728ffc7272ea4a93eee8566757688822081ebd031d1f8bd3fbfb2407d8',17664],
+    cha:['0b9f14ede1bb854d28493883e54bfc6b3aa39dceb6fafe2328cdb95696ab517d',21888],
+    jja:['9514e93678a8dfbae79af74bafa67c4f04314517c225a902da605f3ca8d824d2',16896],
+    sa:['dc102fb4fa65f0592055ca4751e47498c38ac8d33b344996bd99c8328b6d5f3b',14592],
+    ssa:['3c3b83fc317f12b936006c5fea2d5cd5966f7c5a1127883a4f0b86e6096ec381',19200],
+    ha:['5a3e5a6e172bb265c02149b84b725a46de61156c5bf2fe2c39c8b263e65969b5',13824],
+    geu:['c7dee859df0d3dc4ac9b8fd0c5d37ac7588e07313004a93a802849a4989d0d58',11520]
+  });
+  const batch02bRelease = id => ({
+    reviewStatus:'approved', assetStatus:'available', sha256:BATCH_02B_SOURCE[id][0], fileSize:BATCH_02B_SOURCE[id][1], mimeType:'audio/mpeg',
+    voice:'marin', generationDate:'2026-07-21T03:28:43.393Z', sourceRunId:'29798619662', sourceArtifact:'nikigo-audio-batch-02b-run-29798619662-09fad4f',
+    technicalValidation:'passed', reviewMethod:'product-owner-listening', reviewedAt:'2026-07-21', nativeReviewStatus:'deferred', nativeReviewer:null, needsNativeReview:false,
+    commercialUseBasis:'OpenAI API generated audio; legal review pending', rightsReviewStatus:'pending', reviewNotes:'Product owner listening passed on 2026-07-21; optional native-speaker review deferred.'
+  });
+
   const item = (id, displayText, speechText, file, options) => Object.freeze({
     id,
     lessonId: options.lessonId,
@@ -73,11 +95,8 @@
         item('ha', 'ㅎ（示例音节：하）', '하', 'ha.mp3', {
           targetSymbol:'ㅎ', type:'initial-example', pronunciationType:'full-syllable',
           screen:'第0课字母地图辅音详情', teachingGoal:'在完整音节 하 中听 ㅎ 的初声', pronunciationRule:'초성 ㅎ',
-          reviewStatus:'pending', assetStatus:'missing', technicalValidation:'pending',
-          voiceSource:'openai-gpt-4o-mini-tts', model:'gpt-4o-mini-tts', voice:'marin', generationDate:null,
-          nativeReviewStatus:'deferred', nativeReviewer:null, needsNativeReview:false,
-          commercialUseBasis:'pending-documentation', rightsReviewStatus:'pending',
-          reviewNotes:'Batch 2B allowlist; not generated or reviewed.'
+          voiceSource:'openai-gpt-4o-mini-tts', model:'gpt-4o-mini-tts',
+          ...batch02bRelease('ha')
         })
       ])
     }),
@@ -153,11 +172,8 @@
         item('geu', '그', '그', 'geu.mp3', {
           targetSymbol:'ㅡ', type:'syllable', pronunciationType:'full-syllable',
           screen:'第5课上下结构示例', teachingGoal:'用完整音节展示 ㄱ + ㅡ = 그', pronunciationRule:'ㄱ + ㅡ',
-          reviewStatus:'pending', assetStatus:'missing', technicalValidation:'pending',
-          voiceSource:'openai-gpt-4o-mini-tts', model:'gpt-4o-mini-tts', voice:'marin', generationDate:null,
-          nativeReviewStatus:'deferred', nativeReviewer:null, needsNativeReview:false,
-          commercialUseBasis:'pending-documentation', rightsReviewStatus:'pending',
-          reviewNotes:'Batch 2B allowlist; not generated or reviewed.'
+          voiceSource:'openai-gpt-4o-mini-tts', model:'gpt-4o-mini-tts',
+          ...batch02bRelease('geu')
         })
       ])
     }),
@@ -201,7 +217,18 @@
       voice:'marin', generationDate:'2026-07-20T04:40:35.153Z', sourceRunId:'29717434767', sourceArtifact:'nikigo-audio-batch-02a-run-29717434767-0213e68', sourceSha256:'20a33fd85584d2efc288513368a90c0ef94022f21a074bf0646a641b46ccdf27',
       postProcessingReport:'audio/k0-consonant-contrast/postprocessing-report.json', technicalValidation:'passed', reviewMethod:'product-owner-listening', reviewedAt:'2026-07-20', nativeReviewStatus:'deferred', nativeReviewer:null, needsNativeReview:false,
       commercialUseBasis:'OpenAI API generated audio; legal review pending', rightsReviewStatus:'pending', reviewNotes:'Product owner listening passed on 2026-07-20; original generated file retained as the source and only deterministic silence trim and linear gain alignment applied; optional native-speaker review deferred.'
-    })
+    }),
+    da:Object.freeze(batch02bRelease('da')),
+    ta:Object.freeze(batch02bRelease('ta')),
+    tta:Object.freeze(batch02bRelease('tta')),
+    ba:Object.freeze(batch02bRelease('ba')),
+    pa:Object.freeze(batch02bRelease('pa')),
+    ppa:Object.freeze(batch02bRelease('ppa')),
+    ja:Object.freeze(batch02bRelease('ja')),
+    cha:Object.freeze(batch02bRelease('cha')),
+    jja:Object.freeze(batch02bRelease('jja')),
+    sa:Object.freeze(batch02bRelease('sa')),
+    ssa:Object.freeze(batch02bRelease('ssa'))
   });
   lessons['k0-consonant-contrast'] = Object.freeze({
     title:'听懂普通音、送气音和紧音',
@@ -247,7 +274,20 @@
     'lesson-00:yu':'3eb015cd5a7a9c7955976e1d0acd6669126e7c5c74a1c928f7d7b9d925d98430',
     'k0-consonant-contrast:ga':'705fc26ec549f1882f06eaeb997ba59f0ceef95e8c9603e5a7a82b35451205a9',
     'k0-consonant-contrast:ka':'7a4754d8c2583d1941a8f2d18bfd41239e4e753726af880fc3c0ea7dd2c697ed',
-    'k0-consonant-contrast:kka':'c63080ad2e208b9f9319b806d2470143b7a2140cba4768c0cc61947cccf9e545'
+    'k0-consonant-contrast:kka':'c63080ad2e208b9f9319b806d2470143b7a2140cba4768c0cc61947cccf9e545',
+    'k0-consonant-contrast:da':BATCH_02B_SOURCE.da[0],
+    'k0-consonant-contrast:ta':BATCH_02B_SOURCE.ta[0],
+    'k0-consonant-contrast:tta':BATCH_02B_SOURCE.tta[0],
+    'k0-consonant-contrast:ba':BATCH_02B_SOURCE.ba[0],
+    'k0-consonant-contrast:pa':BATCH_02B_SOURCE.pa[0],
+    'k0-consonant-contrast:ppa':BATCH_02B_SOURCE.ppa[0],
+    'k0-consonant-contrast:ja':BATCH_02B_SOURCE.ja[0],
+    'k0-consonant-contrast:cha':BATCH_02B_SOURCE.cha[0],
+    'k0-consonant-contrast:jja':BATCH_02B_SOURCE.jja[0],
+    'k0-consonant-contrast:sa':BATCH_02B_SOURCE.sa[0],
+    'k0-consonant-contrast:ssa':BATCH_02B_SOURCE.ssa[0],
+    'lesson-00:ha':BATCH_02B_SOURCE.ha[0],
+    'lesson-05:geu':BATCH_02B_SOURCE.geu[0]
   });
   const REQUIRED_RELEASE_FIELDS = ['voiceSource','model','voice','generationDate','commercialUseBasis','rightsReviewStatus','reviewMethod','reviewedAt','nativeReviewStatus','technicalValidation','sha256','sourceRunId','sourceArtifact','reviewNotes'];
   function canPlayAudio(requestedSpeechText, entry, expectedAudioType) {

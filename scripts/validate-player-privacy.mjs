@@ -142,7 +142,7 @@ const privacyCss = fs.readFileSync('player-privacy.css','utf8');
 assert.match(privacyCss, /overflow-wrap:\s*anywhere/);
 assert.match(privacyCss, /@media\s*\(max-width:\s*600px\)/);
 const worker = fs.readFileSync('sw.js','utf8');
-assert.match(worker, /nikigo-v(?:11-player-privacy-1|12-quality-layout-1|13-lesson-05|14-lesson-06-structure|15-reviewed-audio-gate|16-batch-01-approved|17-batch-02a-approved|20-course-navigation-network-refresh|21-lesson-07-preview)/);
+assert.match(worker, /nikigo-v22-audio-batch-02b-approved/);
 assert.match(worker, /\.\/player-privacy\.css/);
 
 console.log(`Validated answer privacy for ${genericAudioQuestions + 6} course audio questions and ${reviewListenCount} review listening items across ${states.length} states and ${languages.length} languages; checked ${soundItems.length + contrastItems.length} approximation hints.`);

@@ -1,6 +1,6 @@
 # Nikigo 全课程韩语发音审计
 
-> 审计状态：代码链路已修复；Batch 1 的 요、유及 Batch 2A 的 가、카、까已完成技术验证、产品负责人试听和正式接入。其余 72 条音频仍为 `pending`；母语者审核为可选发布前抽检。
+> 审计状态：代码链路已修复；Batch 1 的 요、유、Batch 2A 的 가、카、까，以及 Batch 2B 的13条音频均已完成技术验证、产品负责人试听和正式接入。其余 65 条音频仍为 `pending`；母语者审核为可选发布前抽检。
 
 ## 已批准并接入的 Batch 2A
 
@@ -11,6 +11,10 @@
 | k0-consonant-contrast | 第0课示例、第4课对比与听辨 | ㄲ / 까 / 紧音 | 까 | `audio/k0-consonant-contrast/kka.mp3` | `initial-example` | 产品负责人试听通过；技术验证通过 | pending |
 
 三条音频采用相同的确定性静音裁剪和线性增益对齐；输入/输出 SHA、裁剪量、增益和前后声学参数见 `audio/k0-consonant-contrast/postprocessing-report.json`。未使用降噪、压缩、变速、变调、设备 TTS 或文字 fallback。
+
+## 已批准并接入的 Batch 2B
+
+固定来源为 Actions Run `29798619662` 的 Artifact `nikigo-audio-batch-02b-run-29798619662-09fad4f`。`다、타、따、바、파、빠、자、차、짜、사、싸` 以 `initial-example` 接入 `audio/k0-consonant-contrast/`；`하` 以 `initial-example` 接入 `audio/lesson-00/`；`그` 以 `syllable` 接入 `audio/lesson-05/`。13条均保持 Artifact 原始文件与完整 SHA，产品负责人于 2026-07-21 试听通过；本次接入 API 请求数为0，未重新生成或后处理。权利复核字段均保持 `pending`，未伪造法律结论。
 
 ## 根因摘要
 

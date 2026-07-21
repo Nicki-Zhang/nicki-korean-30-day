@@ -29,11 +29,10 @@ for(const entry of published){
     assert.equal(audio.canPlayAudio(target.speechText,{...entry,...mutation},'initial-example'),false,`${entry.id} unsafe mutation became playable`);
   }
 }
-assert.equal(contrast.filter(entry=>entry.reviewStatus==='pending').length,11);
-assert.ok(contrast.filter(entry=>entry.reviewStatus==='pending').every(entry=>!audio.canPlayAudio(entry.speechText,entry,entry.audioType)));
+assert.equal(contrast.filter(entry=>entry.reviewStatus==='approved').length,14);
 
 const all=Object.values(audio.lessons).flatMap(lesson=>lesson.items);
-assert.equal(all.filter(entry=>audio.canPlayAudio(entry.speechText,entry,entry.audioType)).length,5);
+assert.equal(all.filter(entry=>audio.canPlayAudio(entry.speechText,entry,entry.audioType)).length,18);
 const batch1=audio.lessons['lesson-00'].items.filter(entry=>['yo','yu'].includes(entry.id));
 assert.deepEqual(batch1.map(entry=>[entry.id,entry.sha256]),[
   ['yo','d2570041a865d0d686e6debf1a06584fa10b1177ebb590e4654a30506f5538b0'],
@@ -65,7 +64,9 @@ const documentStub={getElementById:id=>elements.get(id)||element(),addEventListe
 const context={window:{location:{search:'?lang=en',href:''},navigator:{language:'en'},document:documentStub,localStorage:{getItem(){return null;},setItem(){}},NikigoState:{get(){return{};},update(value){return value;}},NikigoAudio:audio,setTimeout(){},scrollTo(){}},document:documentStub,URLSearchParams,Audio:class{}};
 context.window.window=context.window;
 vm.runInNewContext(source,context,{filename:'lesson-consonant-contrast.js'});
-assert.deepEqual(JSON.parse(JSON.stringify(context.window.NikigoContrastLesson.HOSTED_AUDIO)),{
+const hosted=JSON.parse(JSON.stringify(context.window.NikigoContrastLesson.HOSTED_AUDIO));
+assert.equal(Object.keys(hosted).length,14);
+assert.deepEqual(Object.fromEntries(['가','카','까'].map(speech=>[speech,hosted[speech]])),{
   '가':'audio/k0-consonant-contrast/ga.mp3','카':'audio/k0-consonant-contrast/ka.mp3','까':'audio/k0-consonant-contrast/kka.mp3'
 });
 for(const language of ['zh','en','vi','ja']){
@@ -73,9 +74,9 @@ for(const language of ['zh','en','vi','ja']){
   for(const key of ['listenSound','listenSequence','playerPlay','playerReplay','playerError'])assert.ok(ui[key]&&!ui[key].includes('undefined'));
 }
 assert.match(source,/global\.setTimeout\(next,260\)/);assert.doesNotMatch(source,/speechSynthesis|SpeechSynthesisUtterance|getVoices/);
-assert.match(fs.readFileSync('lesson-00.js','utf8'),/action === 'demo' \? 'k0-consonant-contrast'/);
+assert.match(fs.readFileSync('lesson-00.js','utf8'),/action === 'demo' \? \(item\.symbol === 'ㅎ' \? 'lesson-00' : 'k0-consonant-contrast'\)/);
 const worker=fs.readFileSync('sw.js','utf8');
 for(const file of ['./audio/k0-consonant-contrast/ga.mp3','./audio/k0-consonant-contrast/ka.mp3','./audio/k0-consonant-contrast/kka.mp3'])assert.ok(worker.includes(file));
 assert.doesNotMatch(worker,/staging\/|actions\/runs\/|sourceArtifact/);
 
-console.log('Validated Batch 2A publication: exact source/output SHA chain, deterministic processing report, three approved playable syllables, Batch 1 immutability, pending-audio gating, four-language labels, sequence playback mapping, fail-closed audio, and isolated Service Worker cache.');
+console.log('Validated Batch 2A publication remains immutable after Batch 2B: exact source/output SHA chain, deterministic processing report, Batch 1 immutability, four-language labels, sequence playback mapping, fail-closed audio, and isolated Service Worker cache.');
