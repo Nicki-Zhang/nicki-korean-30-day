@@ -1,0 +1,29 @@
+{
+  "direction": "Seoul Night Journey + Focused Learning",
+  "sourceNavigation": "journey-home-visible-link",
+  "viewports": [390],
+  "flowLesson": "lesson-11",
+  "flowStates": 3,
+  "interaction": {
+    "homeToOpening": true,
+    "openingToDialogue": true,
+    "lineAdvance": true,
+    "speakerSwitch": true,
+    "backToOpening": true,
+    "pendingAudioDisabled": true
+  },
+  "consoleIssues": [],
+  "networkFailures": [],
+  "fourLanguageUndefined": [],
+  "audioApiRequests": 0,
+  "audioCost": 0,
+  "screenshots": [
+    "visual-v2-390/01-home.png",
+    "visual-v2-390/02-lesson-11-opening.png",
+    "visual-v2-390/03-dialogue.png"
+  ],
+  "comparisons": [
+    "visual-v2-390/previous-vs-seoul-night.png",
+    "visual-v2-390/reference-vs-implementation.png"
+  ]
+}

@@ -4,13 +4,13 @@
   "continuousSession": true,
   "lesson": "lesson-11",
   "states": [
-    "flow-390/01-home.png",
-    "flow-390/02-lesson-11-opening.png",
-    "flow-390/03-dialogue-interaction.png",
-    "flow-390/04-core-expression.png",
-    "flow-390/05-correct-feedback.png",
-    "flow-390/06-wrong-feedback.png",
-    "flow-390/07-phrase-build.png",
-    "flow-390/08-complete-relearn.png"
-  ]
+    "visual-v2-390/01-home.png",
+    "visual-v2-390/02-lesson-11-opening.png",
+    "visual-v2-390/03-dialogue.png"
+  ],
+  "comparisons": [
+    "visual-v2-390/previous-vs-seoul-night.png",
+    "visual-v2-390/reference-vs-implementation.png"
+  ],
+  "scope": "first-round-only"
 }

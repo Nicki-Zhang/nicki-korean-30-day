@@ -278,6 +278,112 @@
 .courseExperiencePilot .pilotLineControls p{margin:0;color:var(--pilot-muted);font-size:12px;line-height:1.45}
 .courseExperiencePilot .pilotLineNext{min-height:48px;border:1px solid var(--pilot-line);border-radius:14px;background:var(--pilot-surface);color:var(--pilot-brand-deep);padding:0 18px;font-weight:900}
 .courseExperiencePilot.pilotDialoguePending .pilotLineNext{border-color:var(--pilot-brand);background:var(--pilot-brand);color:#fff}
+
+/* Seoul Night Journey: first-round Lesson 11 opening */
+.courseExperiencePilot.pilotSceneOpening{
+  --pilot-brand:#744cff;
+  --pilot-brand-deep:#0d1238;
+  --pilot-canvas:#0d1238;
+  --pilot-surface:#151a48;
+  --pilot-ink:#fff;
+  --pilot-muted:#d7d9e8;
+  --pilot-line:#ffffff26;
+  --pilot-shadow:0 20px 54px rgba(5,8,31,.34);
+  background:var(--pilot-canvas);
+}
+.courseExperiencePilot.pilotSceneOpening .top{background:#0d1238;color:#fff}
+.courseExperiencePilot.pilotSceneOpening .logo{color:#fff}
+.courseExperiencePilot.pilotSceneOpening .languagePicker select,
+.courseExperiencePilot.pilotSceneOpening .homeButton{border-color:#ffffff32;background:#ffffff12;color:#fff}
+.courseExperiencePilot.pilotSceneOpening .progressWrap{margin-bottom:12px}
+.courseExperiencePilot.pilotSceneOpening .progressMeta{color:#d7d9e8}
+.courseExperiencePilot.pilotSceneOpening .track{background:#ffffff20}
+.courseExperiencePilot.pilotSceneOpening .track i{background:linear-gradient(90deg,#9e86ff,#744cff)}
+.courseExperiencePilot.pilotSceneOpening .stage{width:100%;margin-bottom:0}
+.courseExperiencePilot.pilotSceneOpening .sprintCard{
+  min-height:calc(100dvh - 110px);
+  padding:0;
+  border:0;
+  border-radius:28px 28px 0 0;
+  background:#151a48;
+  box-shadow:none;
+}
+.courseExperiencePilot.pilotSceneOpening .sprintCard::before{display:none}
+.courseExperiencePilot .pilotSceneVisual{position:relative;min-height:264px;overflow:hidden;background:#0d1238}
+.courseExperiencePilot .pilotSceneVisual>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:63% center}
+.courseExperiencePilot .pilotSceneVisual::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,18,56,.08),rgba(13,18,56,.24) 52%,#151a48 100%)}
+.courseExperiencePilot .pilotSceneCaption{position:absolute;z-index:1;left:18px;right:18px;bottom:18px;display:flex;gap:8px;align-items:center}
+.courseExperiencePilot .pilotSceneCaption span{display:flex;align-items:center;gap:7px;min-height:36px;padding:0 11px;border:1px solid #ffffff38;border-radius:12px;background:#0d1238a8;color:#fff;font-size:11px;font-weight:900;backdrop-filter:blur(10px)}
+.courseExperiencePilot .pilotSceneCaption img{width:16px;height:16px;filter:invert(1)}
+.courseExperiencePilot .pilotSceneBody{display:flex;flex:1;flex-direction:column;padding:4px 18px max(22px,env(safe-area-inset-bottom))}
+.courseExperiencePilot.pilotSceneOpening .modulePill{background:#744cff;color:#fff}
+.courseExperiencePilot.pilotSceneOpening .tag{margin-top:12px;color:#beb1ff}
+.courseExperiencePilot.pilotSceneOpening h1{margin-top:10px;font-size:34px;line-height:1.08;color:#fff}
+.courseExperiencePilot.pilotSceneOpening .lead{font-size:16px;line-height:1.55;color:#d7d9e8}
+.courseExperiencePilot.pilotSceneOpening .learningGrid{margin:20px 0 14px}
+.courseExperiencePilot.pilotSceneOpening .learningItem{min-height:86px;padding:12px 10px;border-color:#ffffff20;border-radius:16px;background:#ffffff0a}
+.courseExperiencePilot.pilotSceneOpening .learningItem strong{color:#fff;font-size:13px}
+.courseExperiencePilot.pilotSceneOpening .learningItem p,
+.courseExperiencePilot.pilotSceneOpening .learningItem span{color:#d7d9e8;font-size:11px;line-height:1.35}
+.courseExperiencePilot .pilotRoutePreview{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;padding:11px 0;border-top:1px solid #ffffff20;color:#d7d9e8;font-size:11px}
+.courseExperiencePilot .pilotRoutePreview span{color:#9e86ff;font-weight:900}
+.courseExperiencePilot .pilotRoutePreview strong{font-size:12px;text-align:right}
+.courseExperiencePilot.pilotSceneOpening .foot{padding-top:12px;border-top:0}
+.courseExperiencePilot.pilotSceneOpening .foot .primary{min-height:54px;border-radius:16px;background:#744cff;font-size:16px;box-shadow:0 12px 28px rgba(8,7,36,.35)}
+.courseExperiencePilot.pilotSceneOpening .foot .secondary,
+.courseExperiencePilot.pilotSceneOpening .foot .ghost{color:#d7d9e8}
+
+/* Focused Learning Mode: first-round Lesson 11 dialogue */
+.courseExperiencePilot.pilotFocusedDialogue{
+  --pilot-brand:#2f6df6;
+  --pilot-brand-deep:#12204d;
+  --pilot-brand-soft:#eaf1ff;
+  --pilot-canvas:#f5f7ff;
+  --pilot-surface:#fff;
+  --pilot-ink:#171a2f;
+  --pilot-muted:#646b80;
+  --pilot-line:#dfe4f1;
+  background:#f5f7ff;
+}
+.courseExperiencePilot.pilotFocusedDialogue .stage{width:calc(100% - 32px);margin-bottom:20px}
+.courseExperiencePilot.pilotFocusedDialogue .sprintCard{min-height:calc(100dvh - 136px);padding:22px 0 max(20px,env(safe-area-inset-bottom));border:0;background:transparent;box-shadow:none}
+.courseExperiencePilot.pilotFocusedDialogue .sprintCard::before{width:36px;margin:0 0 18px;background:#2f6df6}
+.courseExperiencePilot.pilotFocusedDialogue .modulePill{background:#eaf1ff;color:#1f54c5}
+.courseExperiencePilot.pilotFocusedDialogue .tag{color:#2f6df6}
+.courseExperiencePilot.pilotFocusedDialogue h1{margin:10px 0 8px;font-size:27px;line-height:1.12;color:#171a2f}
+.courseExperiencePilot.pilotFocusedDialogue .lead{font-size:16px;line-height:1.55;color:#646b80}
+.courseExperiencePilot .pilotDialogueCast{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0 10px}
+.courseExperiencePilot .pilotDialogueCast>div{display:flex;align-items:center;gap:9px;min-height:56px;padding:9px 10px;border:1px solid #dfe4f1;border-radius:16px;background:#fff;color:#646b80;font-size:11px;font-weight:850;transition:border-color 180ms ease,background 180ms ease,transform 180ms ease}
+.courseExperiencePilot .pilotDialogueCast>div.active{border:2px solid #2f6df6;background:#eaf1ff;color:#12204d;transform:translateY(-2px)}
+.courseExperiencePilot .pilotDialogueCast img{width:28px;height:28px;filter:invert(29%) sepia(84%) saturate(2584%) hue-rotate(214deg)}
+.courseExperiencePilot .pilotDialogueMeta{margin:12px 0 8px;color:#646b80;font-size:11px}
+.courseExperiencePilot .pilotDialogueMeta span:first-child{color:#2f6df6}
+.courseExperiencePilot.pilotFocusedDialogue .dialogue{margin:0}
+.courseExperiencePilot.pilotFocusedDialogue .dialogue.pilotLineMode .bubble.pilotCurrentLine{width:100%;max-width:100%;min-height:176px;padding:18px;border:1px solid #cbd8fb;border-radius:22px 22px 22px 8px;background:#fff;box-shadow:0 14px 34px rgba(31,54,112,.10);animation:pilotLineIn 180ms ease-out}
+.courseExperiencePilot.pilotFocusedDialogue .dialogue.pilotLineMode .bubble.b.pilotCurrentLine{margin-left:0;border-color:#d9ccff;border-radius:22px 22px 8px 22px;background:#f5f0ff}
+.courseExperiencePilot.pilotFocusedDialogue .bubble>b{display:none}
+.courseExperiencePilot .pilotSpeaker{display:flex;align-items:center;gap:10px;margin-bottom:17px}
+.courseExperiencePilot .pilotAvatar{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:#eaf1ff}
+.courseExperiencePilot .bubble.b .pilotAvatar{background:#ebe5ff}
+.courseExperiencePilot .pilotAvatar img{width:25px;height:25px;filter:invert(29%) sepia(84%) saturate(2584%) hue-rotate(214deg)}
+.courseExperiencePilot .pilotSpeaker span:last-child{display:grid;gap:2px}
+.courseExperiencePilot .pilotSpeaker b{margin:0;color:#12204d;font-size:13px}
+.courseExperiencePilot .pilotSpeaker small{color:#2f6df6;font-size:10px;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
+.courseExperiencePilot.pilotFocusedDialogue .bubble .korean{font-size:38px;line-height:1.14;color:#12204d;letter-spacing:-.03em}
+.courseExperiencePilot.pilotFocusedDialogue .bubble p{font-size:16px;line-height:1.5;color:#646b80}
+.courseExperiencePilot .pilotLineControls{grid-template-columns:1fr;margin-top:12px}
+.courseExperiencePilot .pilotLineControls p{font-size:11px}
+.courseExperiencePilot .pilotLineNext{width:100%;min-height:54px;border:0;border-radius:16px;background:#2f6df6;color:#fff;font-size:15px;box-shadow:0 10px 24px rgba(47,109,246,.22);transition:transform 180ms ease,background 180ms ease}
+.courseExperiencePilot .pilotLineNext:active{transform:scale(.985)}
+.courseExperiencePilot.pilotFocusedDialogue .foot{padding-top:16px;border-top:0}
+.courseExperiencePilot.pilotFocusedDialogue .foot .primary{min-height:54px;background:#2f6df6}
+@keyframes pilotLineIn{from{opacity:.45;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+@media(prefers-reduced-motion:reduce){
+  .courseExperiencePilot *,
+  .courseExperiencePilot *::before,
+  .courseExperiencePilot *::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
 .courseExperiencePilot.pilotDialoguePending .foot .primary:disabled,
 .courseExperiencePilot.pilotIsPractice .foot .primary:disabled{display:none}
 .courseExperiencePilot .pilotMasterySummary{margin:24px 0;border:1px solid var(--pilot-line);border-radius:20px;background:#f5f1e9;padding:18px;text-align:left}
@@ -345,3 +451,11 @@
 .courseExperiencePilot .foot .secondary,
 .courseExperiencePilot .foot .ghost,
 .courseExperiencePilot .repeatActions .secondary{justify-self:center;order:2}
+
+/* Keep the approved first-round mobile compositions after legacy pilot media rules. */
+.courseExperiencePilot.pilotSceneOpening .stage{width:100%;margin-bottom:0}
+.courseExperiencePilot.pilotSceneOpening .sprintCard{min-height:calc(100dvh - 110px);padding:0;border-radius:28px 28px 0 0}
+.courseExperiencePilot.pilotSceneOpening .learningGrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.courseExperiencePilot.pilotFocusedDialogue .stage{width:calc(100% - 32px)}
+.courseExperiencePilot.pilotFocusedDialogue .sprintCard{min-height:calc(100dvh - 136px);padding:22px 0 max(20px,env(safe-area-inset-bottom));border-radius:0}
+.courseExperiencePilot.pilotFocusedDialogue .bubble{max-width:100%}
