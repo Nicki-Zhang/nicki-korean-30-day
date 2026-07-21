@@ -1,0 +1,330 @@
+:root {
+  --clear-canvas:#f6f7f4;
+  --clear-surface:#ffffff;
+  --clear-ink:#171918;
+  --clear-secondary:#626964;
+  --clear-divider:#d9ded9;
+  --clear-object:#8a928c;
+  --clear-action:#171918;
+  --clear-accent:#287f60;
+  --clear-accent-strong:#1d674c;
+  --clear-accent-soft:#e7f6ef;
+  --clear-error:#a94338;
+  --clear-error-soft:#fbedeb;
+}
+
+.clear-shell {
+  --p:var(--clear-accent);
+  --p2:var(--clear-accent);
+  --d:var(--clear-ink);
+  --ink:var(--clear-ink);
+  --muted:var(--clear-secondary);
+  --line:var(--clear-divider);
+  --lav:var(--clear-accent-soft);
+  --lime:var(--clear-accent-soft);
+  --green:var(--clear-accent);
+  --bg:var(--clear-canvas);
+  background:var(--clear-canvas);
+  color:var(--clear-ink);
+  font-family:Inter,Pretendard,"Noto Sans KR","Apple SD Gothic Neo","Segoe UI",sans-serif;
+  font-weight:450;
+}
+
+.clear-shell .top {
+  min-height:72px;
+  height:auto;
+  border-bottom:1px solid var(--clear-divider);
+}
+
+.clear-shell .logo {
+  min-height:44px;
+  color:var(--clear-ink);
+  font-size:20px;
+  font-weight:700;
+  letter-spacing:-.03em;
+}
+
+.clear-shell .logo b,
+.clear-shell .logo small,
+.clear-shell .languagePicker > span,
+.clear-shell .appNav button > span,
+.clear-shell .courseIcon,
+.clear-shell .missionIcon {
+  display:none;
+}
+
+.clear-shell .languagePicker {
+  border:0;
+  border-radius:0;
+  background:transparent;
+  padding:0;
+}
+
+.clear-shell .top select {
+  min-height:44px;
+  border:1px solid var(--clear-object);
+  border-radius:12px;
+  background:var(--clear-surface);
+  color:var(--clear-ink);
+  font-weight:500;
+}
+
+.clear-shell .avatar {
+  background:var(--clear-action);
+  color:#fff;
+  border-radius:12px;
+  font-weight:650;
+}
+
+.clear-shell .primary,
+.clear-shell .secondary,
+.clear-shell .ghost,
+.clear-shell .courseAction {
+  min-height:52px;
+  border-radius:14px;
+  box-shadow:none;
+  font-weight:650;
+}
+
+.clear-shell .primary {
+  background:var(--clear-action);
+  color:#fff;
+}
+
+.clear-shell .secondary,
+.clear-shell .courseAction.secondary {
+  border:1px solid var(--clear-object);
+  background:var(--clear-surface);
+  color:var(--clear-ink);
+}
+
+.clear-shell button:focus-visible,
+.clear-shell a:focus-visible,
+.clear-shell select:focus-visible {
+  outline:3px solid var(--clear-accent-strong)!important;
+  outline-offset:3px!important;
+}
+
+.clear-shell .dashboard,
+.clear-shell .mainPage {
+  width:min(100%,1080px);
+  margin-inline:auto;
+  padding:34px 24px 120px;
+}
+
+.clear-shell .dashHero {
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:28px;
+  padding:0 0 26px;
+  border-bottom:1px solid var(--clear-divider);
+  border-radius:0;
+  background:transparent;
+  color:var(--clear-ink);
+}
+
+.clear-shell .dashHero small,
+.clear-shell .dashHero p {
+  color:var(--clear-secondary);
+  opacity:1;
+  font-size:14px;
+  font-weight:500;
+}
+
+.clear-shell .dashHero h1 {
+  margin:7px 0;
+  font-size:clamp(34px,4vw,46px);
+  line-height:1.12;
+  letter-spacing:-.04em;
+  font-weight:700;
+}
+
+.clear-shell .pathBadge {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:0;
+  border-radius:0;
+  background:transparent;
+  color:var(--clear-secondary);
+}
+
+.clear-shell .pathBadge strong {
+  color:var(--clear-accent-strong);
+  font-size:24px;
+  font-weight:700;
+}
+
+.clear-shell .pathBadge span {
+  color:var(--clear-secondary);
+  opacity:1;
+  font-size:13px;
+}
+
+.clear-shell .pathBadge b { color:var(--clear-ink); font-weight:600; }
+
+.clear-shell .metrics {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:0;
+  margin:0 0 26px;
+  border-bottom:1px solid var(--clear-divider);
+}
+
+.clear-shell .metric {
+  padding:16px 16px 16px 0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+}
+
+.clear-shell .metric + .metric { padding-left:16px; border-left:1px solid var(--clear-divider); }
+.clear-shell .metric span { color:var(--clear-secondary); font-size:14px; }
+.clear-shell .metric b { margin-top:5px; font-size:18px; font-weight:650; }
+
+.clear-shell .dashGrid {
+  grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);
+  gap:28px;
+}
+
+.clear-shell .panel {
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+}
+
+.clear-shell .panelHead {
+  min-height:44px;
+  margin-bottom:12px;
+}
+
+.clear-shell .panelHead h2 {
+  font-size:20px;
+  line-height:1.3;
+  font-weight:650;
+}
+
+.clear-shell .panelHead button {
+  min-height:44px;
+  color:var(--clear-secondary);
+  font-size:14px;
+  font-weight:550;
+  text-decoration:underline;
+  text-underline-offset:4px;
+}
+
+.clear-shell .mission {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:22px;
+  align-items:end;
+  padding:22px 0 26px;
+  border:0;
+  border-top:1px solid var(--clear-divider);
+  border-bottom:1px solid var(--clear-divider);
+  border-radius:0;
+}
+
+.clear-shell .mission > div { min-width:0; }
+.clear-shell .mission small { color:var(--clear-accent-strong)!important; font-size:14px; font-weight:650!important; }
+.clear-shell .missionKorean { margin:8px 0 2px!important; color:var(--clear-ink)!important; font-size:clamp(36px,5vw,44px)!important; line-height:1.16!important; letter-spacing:-.04em; font-weight:700!important; }
+.clear-shell .mission h3 { margin:6px 0!important; font-size:18px; font-weight:600; }
+.clear-shell .mission p { color:var(--clear-secondary); font-size:16px; line-height:1.45; }
+.clear-shell .mission .primary { min-width:150px; }
+
+.clear-shell .clearReview {
+  margin-top:26px!important;
+  padding-top:16px;
+  border-top:1px solid var(--clear-divider);
+}
+
+.clear-shell .clearReview > p { margin:0; color:var(--clear-secondary)!important; font-size:16px; line-height:1.5; }
+
+.clear-shell .clearPath .panel { border-top:1px solid var(--clear-divider); }
+.clear-shell .abilities { gap:0; }
+.clear-shell .ability { min-height:50px; grid-template-columns:74px 1fr 32px; border-bottom:1px solid var(--clear-divider); }
+.clear-shell .ability span { font-weight:600; }
+.clear-shell .ability i { background:var(--clear-divider); }
+.clear-shell .ability i b { background:var(--clear-accent); }
+
+.clear-shell .pageIntro {
+  padding-bottom:20px;
+  border-bottom:1px solid var(--clear-divider);
+}
+
+.clear-shell .pageIntro h1 { font-size:30px; font-weight:700; color:var(--clear-ink); }
+.clear-shell .pageIntro p { font-size:16px; }
+.clear-shell .courseList { gap:0; }
+.clear-shell .courseRow {
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:20px;
+  padding:22px 0;
+  border:0;
+  border-bottom:1px solid var(--clear-divider);
+  border-radius:0;
+  background:transparent;
+}
+
+.clear-shell .courseRow h2 { font-size:20px; font-weight:650; }
+.clear-shell .courseRow p { font-size:15px; line-height:1.45; }
+.clear-shell .courseMeta span { padding:4px 0; background:transparent; font-size:12px; font-weight:500; }
+.clear-shell .courseMeta span + span::before { content:"·"; margin-right:9px; color:var(--clear-object); }
+.clear-shell .courseAction { min-width:112px; }
+.clear-shell .miniTrack { background:var(--clear-divider); }
+.clear-shell .miniTrack i { background:var(--clear-accent); }
+
+.clear-shell .appNav {
+  width:min(520px,calc(100% - 24px));
+  border:1px solid var(--clear-divider);
+  border-radius:16px;
+  box-shadow:none;
+  background:var(--clear-surface);
+}
+
+.clear-shell .appNav button {
+  min-height:48px;
+  border-radius:10px;
+  color:var(--clear-secondary);
+  font-size:13px;
+  font-weight:550;
+}
+
+.clear-shell .appNav button.active {
+  background:var(--clear-accent-soft);
+  color:var(--clear-accent-strong);
+  font-weight:650;
+}
+
+.clear-shell .toast { background:var(--clear-action); box-shadow:none; }
+
+@media (max-width:780px) {
+  .clear-shell .top { min-height:62px; padding:0 16px; }
+  .clear-shell .dashboard,
+  .clear-shell .mainPage { width:100%; padding:22px 18px 104px; }
+  .clear-shell .dashHero { align-items:flex-start; flex-direction:column; gap:12px; }
+  .clear-shell .dashHero h1 { font-size:34px; }
+  .clear-shell .pathBadge { width:100%; justify-content:flex-start; }
+  .clear-shell .metrics { grid-template-columns:1fr 1fr; }
+  .clear-shell .metric:nth-child(3) { display:none; }
+  .clear-shell .dashGrid { grid-template-columns:1fr; gap:28px; }
+  .clear-shell .mission { grid-template-columns:1fr; align-items:stretch; }
+  .clear-shell .mission .primary { width:100%; }
+  .clear-shell .clearPath { border-top:1px solid var(--clear-divider); padding-top:20px; }
+  .clear-shell .courseRow { grid-template-columns:1fr; }
+  .clear-shell .courseAction { width:100%; }
+}
+
+@media (max-width:430px) {
+  .clear-shell .topRight { gap:6px; }
+  .clear-shell .top select { max-width:112px; padding-inline:8px; }
+  .clear-shell .avatar { width:44px; }
+  .clear-shell .missionKorean { font-size:38px!important; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .clear-shell *,
+  .clear-shell *::before,
+  .clear-shell *::after { transition-duration:.01ms!important; animation-duration:.01ms!important; }
+}

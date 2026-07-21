@@ -1,0 +1,123 @@
+{
+  "browser": "Google Chrome",
+  "chromeMode": "isolated-headful-user-data-dir",
+  "baseUrl": "http://127.0.0.1:8769",
+  "viewports": [
+    {
+      "label": "390-home",
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "htmlScrollWidth": 390,
+      "bodyScrollWidth": 390,
+      "bodyScrollHeight": 1349,
+      "overflow": false,
+      "undefinedText": false,
+      "tooSmall": []
+    },
+    {
+      "label": "768-complete",
+      "innerWidth": 768,
+      "innerHeight": 900,
+      "htmlScrollWidth": 768,
+      "bodyScrollWidth": 768,
+      "bodyScrollHeight": 941,
+      "overflow": false,
+      "undefinedText": false,
+      "tooSmall": []
+    },
+    {
+      "label": "1440-complete",
+      "innerWidth": 1440,
+      "innerHeight": 900,
+      "htmlScrollWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "bodyScrollHeight": 948,
+      "overflow": false,
+      "undefinedText": false,
+      "tooSmall": []
+    }
+  ],
+  "languages": {
+    "zh": {
+      "label": "390-zh",
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "htmlScrollWidth": 390,
+      "bodyScrollWidth": 390,
+      "bodyScrollHeight": 848,
+      "overflow": false,
+      "undefinedText": false,
+      "tooSmall": []
+    },
+    "en": {
+      "label": "390-en",
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "htmlScrollWidth": 390,
+      "bodyScrollWidth": 390,
+      "bodyScrollHeight": 848,
+      "overflow": false,
+      "undefinedText": false,
+      "tooSmall": []
+    },
+    "vi": {
+      "label": "390-vi",
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "htmlScrollWidth": 390,
+      "bodyScrollWidth": 390,
+      "bodyScrollHeight": 848,
+      "overflow": false,
+      "undefinedText": false,
+      "tooSmall": []
+    },
+    "ja": {
+      "label": "390-ja",
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "htmlScrollWidth": 390,
+      "bodyScrollWidth": 390,
+      "bodyScrollHeight": 848,
+      "overflow": false,
+      "undefinedText": false,
+      "tooSmall": []
+    }
+  },
+  "interaction": {
+    "enteredFromCourseHome": true,
+    "keyboardChunkFocus": "name",
+    "keyboardActivation": true,
+    "refreshRestore": true,
+    "browserBack": true,
+    "undoReorder": true,
+    "firstAwardedXp": 50,
+    "totalXpAfterFirst": 50,
+    "relearn": true,
+    "repeatAwardedXp": 0,
+    "totalXpAfterRepeat": 50,
+    "correctWrongRetry": true,
+    "touchTargets": true,
+    "returnAndRefresh": true
+  },
+  "screenshots": [
+    "01-home-390.png",
+    "02-opening-390.png",
+    "03-dialogue-390.png",
+    "04-choice-error-390.png",
+    "05-core-teaching-390.png",
+    "06-build-error-390.png",
+    "07-build-correct-390.png",
+    "08-summary-dialogue-390.png",
+    "09-final-challenge-390.png",
+    "10-complete-first-390.png",
+    "11-relearn-390.png",
+    "12-complete-repeat-390.png"
+  ],
+  "consoleWarnings": 0,
+  "consoleErrors": 0,
+  "networkErrors": [],
+  "runtimeExceptions": [],
+  "pendingAudioDisabled": true,
+  "audioApiRequests": 0,
+  "audioCost": 0
+}

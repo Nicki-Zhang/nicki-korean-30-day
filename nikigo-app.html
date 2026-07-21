@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#6d4aff">
+  <meta name="theme-color" content="#F6F7F4">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Nikigo">
@@ -21,8 +21,9 @@
     .profileSummary{grid-template-columns:repeat(auto-fit,minmax(105px,1fr))}.nameEditor{display:flex;align-items:center;gap:8px}.nameEditor input{width:min(240px,42vw);min-height:44px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;color:var(--ink);outline:none}.nameEditor input:focus{border-color:var(--p);box-shadow:0 0 0 3px #6d4aff12}.avatarChoices{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.avatarChoice{width:44px;height:44px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);font-weight:900;cursor:pointer}.avatarChoice.on{border-color:var(--p);background:var(--lav);color:var(--p);box-shadow:0 0 0 3px #6d4aff10}.logo:focus-visible,.avatar:focus-visible,.avatarChoice:focus-visible{outline:3px solid #b7a7ff;outline-offset:2px}@media(max-width:780px){.profileSummary{grid-template-columns:1fr 1fr}.profileSummary div:last-child{grid-column:auto}.settingsGroup .settingControl{flex-direction:column;align-items:stretch}.settingsGroup .settingControl select{width:100%;max-width:none}.nameEditor,.nameEditor input{width:100%}.nameEditor .settingAction{flex:none}.avatarChoices{justify-content:flex-start}}
     .courseRow.locked{background:#fbfaff;opacity:.78}.courseRow.locked button{border:1px solid var(--line);background:#f2eef8;color:var(--muted);box-shadow:none;cursor:default}.courseAction{display:inline-flex;align-items:center;justify-content:center;min-height:44px;text-decoration:none}
   </style>
+  <link rel="stylesheet" href="assets/nikigo-clear-shell.css">
 </head>
-<body>
+<body class="clear-shell">
 <div class="app">
   <header class="top"><button class="logo" id="homeLogo" onclick="goHome()" aria-label="返回学习首页"><b>✦</b> Nikigo <small>2.0</small></button><div class="topRight"><label class="languagePicker" id="languagePicker"><span aria-hidden="true">🌐</span><select id="language" aria-label="Choose interface language" onchange="changeLanguage(this.value)"><option value="zh">简体中文</option><option value="en">English</option><option value="vi">Tiếng Việt</option><option value="ja">日本語</option></select></label><button id="avatar" class="avatar" onclick="go('profile')" aria-label="打开个人中心" title="打开个人中心">N</button></div></header>
 
@@ -32,7 +33,20 @@
 
   <section id="flow" class="screen flowWrap"><div class="flowCard"><div class="flowTop"><button class="back" onclick="flowBack()">←</button><div class="flowProgress"><div><span data-i18n="onboarding">新用户引导</span><b id="flowCount">1 / 4</b></div><div class="track"><i id="flowBar" style="width:25%"></i></div></div></div><div id="flowContent"></div><div class="flowFoot"><button class="ghost" onclick="skipFlow()" data-i18n="later">稍后设置</button><button id="flowNext" class="primary" onclick="flowNext()">继续 →</button></div></div></section>
 
-  <section id="dashboard" class="screen dashboard"><div class="dashHero"><div><small id="dashGreeting">下午好，Nicki</small><h1>오늘도 한 걸음 더.</h1><p data-i18n="dashLead">今天也向真实交流更进一步。</p></div><div class="pathBadge"><strong id="dashPath">K0</strong><span><span data-i18n="currentPath">当前路径</span><br><b id="dashPathName">韩文基础</b></span></div></div><div class="metrics"><div class="metric"><span data-i18n="streak">连续学习</span><b data-i18n="oneDay">1 天 🔥</b></div><div class="metric"><span data-i18n="todayGoal">今日目标</span><b id="dailyMetric">10 min</b></div><div class="metric"><span data-i18n="weekProgress">本周进度</span><b>1 / 5</b></div><div class="metric"><span data-i18n="membershipStatus">会员状态</span><b>Free</b></div></div><div class="dashGrid"><div><article class="panel"><div class="panelHead"><h2 data-i18n="todayTraining">今天的训练</h2><button onclick="notifyKey('courseSoon')" data-i18n="viewPath">查看路径</button></div><div class="mission"><div class="missionIcon" id="missionIcon">🌱</div><div><small id="missionNumber" style="color:var(--p);font-weight:900">MISSION 01</small><h3 id="missionTitle">韩文字母：第一步</h3><p id="missionParts">基础元音 · 辅音 · 拼音节 · 跟读 · 挑战</p></div><button class="primary" onclick="goLesson()"><span data-i18n="start">开始</span> 12 min</button></div></article><article class="panel" style="margin-top:16px"><div class="panelHead"><h2 data-i18n="reviewCenter">复习中心</h2><button id="reviewAction" onclick="goReview()" data-i18n="all">全部</button></div><p id="reviewSummary" style="color:var(--muted)" data-i18n="reviewEmpty">完成第一节课后，错题、收藏和到期复习会出现在这里。</p></article></div><aside><article class="panel"><div class="panelHead"><h2 data-i18n="abilityProfile">能力画像</h2><button onclick="goDiagnostic()" data-i18n="rediagnose">重新诊断</button></div><div id="abilityList" class="abilities"></div></article><article class="membership"><span>NIKIGO PLUS</span><h3 data-i18n="unlockPath">解锁完整学习路径</h3><p data-i18n="plusDesc">完整课程、能力趋势、无限复习和增强发音反馈。</p><button onclick="notifyKey('plusPrototype')" data-i18n="viewBenefits">查看会员权益</button></article></aside></div></section>
+  <section id="dashboard" class="screen dashboard clearDashboard">
+    <div class="dashHero">
+      <div><small id="dashGreeting">下午好，Nicki</small><h1>오늘도 한 걸음 더.</h1><p data-i18n="dashLead">今天也向真实交流更进一步。</p></div>
+      <div class="pathBadge"><strong id="dashPath">K0</strong><span><span data-i18n="currentPath">当前路径</span><br><b id="dashPathName">韩文基础</b></span></div>
+    </div>
+    <div class="metrics clearStats"><div class="metric"><span data-i18n="streak">连续学习</span><b data-i18n="oneDay">1 天</b></div><div class="metric"><span data-i18n="todayGoal">今日目标</span><b id="dailyMetric">10 min</b></div><div class="metric"><span data-i18n="weekProgress">本周进度</span><b>1 / 5</b></div></div>
+    <div class="dashGrid clearDashGrid">
+      <div>
+        <article class="panel clearContinue"><div class="panelHead"><h2 data-i18n="todayTraining">今天的训练</h2><button onclick="go('courses')" data-i18n="navCourses">课程</button></div><div class="mission"><span class="missionIcon" id="missionIcon" aria-hidden="true"></span><div><small id="missionNumber">MISSION 01</small><p class="missionKorean" id="missionKorean">이름과 신분</p><h3 id="missionTitle">姓名与身份</h3><p id="missionParts">询问姓名 · 礼貌介绍 · 基础身份</p></div><button class="primary" onclick="goLesson()"><span data-i18n="start">开始</span></button></div></article>
+        <article class="panel clearReview"><div class="panelHead"><h2 data-i18n="reviewCenter">复习中心</h2><button id="reviewAction" onclick="goReview()" data-i18n="all">全部</button></div><p id="reviewSummary" data-i18n="reviewEmpty">完成第一节课后，错题、收藏和到期复习会出现在这里。</p></article>
+      </div>
+      <aside class="clearPath"><article class="panel"><div class="panelHead"><h2 data-i18n="currentPath">当前路径</h2><button onclick="go('courses')" data-i18n="viewPath">查看路径</button></div><div id="abilityList" class="abilities"></div></article></aside>
+    </div>
+  </section>
 
   <section id="courses" class="screen mainPage"><div class="pageIntro"><div><h1 data-i18n="coursesTitle">课程</h1><p data-i18n="coursesLead">沿着学习路径继续，每节课都建立在前面的能力上。</p></div></div><div id="courseNotice" class="courseNotice" role="status"></div><div id="courseList" class="courseList"></div></section>
 
@@ -179,4 +193,5 @@
   const h=location.hash.slice(1);if(h&&document.getElementById(h))go(h);else if(data.path)go('dashboard');
   if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{}));
 </script>
+<script src="assets/nikigo-clear-shell.js"></script>
 </body></html>

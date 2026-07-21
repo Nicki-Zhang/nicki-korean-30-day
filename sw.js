@@ -1,4 +1,4 @@
-const CACHE = 'nikigo-v27-self-review-gate';
+const CACHE = 'nikigo-v27-self-review-gate-clear-interactive-01';
 const ASSETS = [
   './', './index.html', './nikigo-app.html', './app-state.js', './course-catalog.js',
   './hangul-sound-data.js', './audio-catalog.js', './review.html', './review.css',
@@ -12,6 +12,8 @@ const ASSETS = [
   './lesson-10.html', './lesson-10.js', './lesson-11.html', './lesson-11.js',
   './lesson-12.html', './lesson-12.js', './lesson-13.html', './lesson-13.js',
   './lesson-sprint-engine.js', './lesson-sprint.css',
+  './lesson-clear-interactive.js', './lesson-clear-interactive.css',
+  './assets/nikigo-clear-shell.js', './assets/nikigo-clear-shell.css',
   './assets/nikigo-mark.svg', './favicon.ico',
   './audio/lesson-00/yo.mp3', './audio/lesson-00/yu.mp3',
   './audio/lesson-00/ha.mp3', './audio/lesson-05/geu.mp3',

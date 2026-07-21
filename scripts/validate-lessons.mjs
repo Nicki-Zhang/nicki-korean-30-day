@@ -92,9 +92,12 @@ for (const [index, item] of (catalog || []).entries()) {
 
   if (['lesson-08','lesson-09','lesson-10','lesson-11','lesson-12','lesson-13'].includes(stableId)) {
     const html = fs.readFileSync(file, 'utf8');
+    const isClearInteractivePilot = stableId === 'lesson-11';
+    const expectedEngine = isClearInteractivePilot ? 'lesson-clear-interactive.js' : 'lesson-sprint-engine.js';
+    const expectedStyles = isClearInteractivePilot ? 'lesson-clear-interactive.css' : 'lesson-sprint.css';
     if (!html.includes(`${stableId}.js`)) errors.push(`${file} does not load its lesson configuration.`);
-    if (!html.includes('lesson-sprint-engine.js')) errors.push(`${file} does not load the sprint lesson engine.`);
-    if (!html.includes('lesson-sprint.css')) errors.push(`${file} does not load the sprint lesson styles.`);
+    if (!html.includes(expectedEngine)) errors.push(`${file} does not load its expected lesson engine.`);
+    if (!html.includes(expectedStyles)) errors.push(`${file} does not load its expected lesson styles.`);
     if (!html.includes('audio-catalog.js')) errors.push(`${file} does not load the strict audio catalog.`);
     continue;
   }
