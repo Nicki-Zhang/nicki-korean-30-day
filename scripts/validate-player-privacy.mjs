@@ -97,7 +97,7 @@ for (const file of ['lesson-01.html','lesson-02.html','lesson-03.html']) {
 assert.equal(genericAudioQuestions, 12);
 const lesson07Source=fs.readFileSync('lesson-07.js','utf8');
 assert.doesNotMatch(lesson07Source,/speechSynthesis|SpeechSynthesisUtterance/);
-assert.match(lesson07Source,/resolve\?\.\('바','syllable',LESSON_ID\)/);
+assert.match(lesson07Source,/resolve\?\.\('바','syllable',AUDIO_LESSON_ID\)/);
 assert.match(lesson07Source,/BASE_SYLLABLE_AUDIO\?\.playable/);
 assert.match(lesson07Source,/audioUnavailable/);
 assert.match(lesson07Source,/disabled aria-disabled="true"/);
@@ -144,7 +144,7 @@ const privacyCss = fs.readFileSync('player-privacy.css','utf8');
 assert.match(privacyCss, /overflow-wrap:\s*anywhere/);
 assert.match(privacyCss, /@media\s*\(max-width:\s*600px\)/);
 const worker = fs.readFileSync('sw.js','utf8');
-assert.match(worker, /nikigo-v25-lessons-11-13-sprint/);
+assert.match(worker, /nikigo-v26-course-identity-content-audit/);
 assert.match(worker, /\.\/player-privacy\.css/);
 
 console.log(`Validated answer privacy for ${genericAudioQuestions + 6} course audio questions and ${reviewListenCount} review listening items across ${states.length} states and ${languages.length} languages; checked ${soundItems.length + contrastItems.length} approximation hints.`);

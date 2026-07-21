@@ -1,4 +1,4 @@
-const CACHE = 'nikigo-v25-lessons-11-13-sprint';
+const CACHE = 'nikigo-v26-course-identity-content-audit';
 const ASSETS = [
   './', './index.html', './nikigo-app.html', './app-state.js', './course-catalog.js',
   './hangul-sound-data.js', './audio-catalog.js', './review.html', './review.css',

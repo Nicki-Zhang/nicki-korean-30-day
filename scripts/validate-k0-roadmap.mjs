@@ -35,12 +35,12 @@ for (const [index, item] of catalog.entries()) {
     assert.equal(item.file, null, `${item.stableId} must not link to an unfinished page`);
   }
 }
-assert.deepEqual([...catalog.filter(item => item.status === 'available').map(item => item.stableId)], ['lesson-00', 'lesson-01', 'lesson-02', 'lesson-03', 'k0-consonant-contrast', 'lesson-05', 'lesson-06', 'lesson-04', 'lesson-08', 'lesson-09', 'lesson-10', 'lesson-11', 'lesson-12', 'lesson-13']);
-const contrastLesson = catalog.find(item => item.stableId === 'k0-consonant-contrast');
+assert.deepEqual([...catalog.filter(item => item.status === 'available').map(item => item.stableId)], ['lesson-00', 'lesson-01', 'lesson-02', 'lesson-03', 'lesson-04', 'lesson-05', 'lesson-06', 'lesson-07', 'lesson-08', 'lesson-09', 'lesson-10', 'lesson-11', 'lesson-12', 'lesson-13']);
+const contrastLesson = catalog.find(item => item.stableId === 'lesson-04');
 assert.equal(contrastLesson.displayNumber, 4);
-assert.equal(contrastLesson.file, 'lesson-consonant-contrast.html');
+assert.equal(contrastLesson.file, 'lesson-04.html');
 const lesson05 = catalog.find(item => item.stableId === 'lesson-05');
-assert.deepEqual([...lesson05.recommendedPrerequisites], ['k0-consonant-contrast']);
+assert.deepEqual([...lesson05.recommendedPrerequisites], ['lesson-04']);
 assert.equal(lesson05.file, 'lesson-05.html');
 assert.equal(lesson05.requiresCompletion, false);
 const lesson06 = catalog.find(item => item.stableId === 'lesson-06');
@@ -52,12 +52,12 @@ assert.equal(lesson06.audioStatus, 'pending');
 for (const lesson of catalog.filter(item => item.status === 'available')) {
   assert.equal(catalogContext.window.NIKIGO_COURSE_UNLOCKED(lesson, []), true, `${lesson.stableId} must open without prior completion`);
 }
-assert.deepEqual(JSON.parse(JSON.stringify(catalog.map(item => item.recommendedPrerequisites))), [[], ['lesson-00'], ['lesson-01'], ['lesson-02'], ['lesson-03'], ['k0-consonant-contrast'], ['lesson-05'], ['lesson-06'], ['lesson-04'], ['lesson-08'], ['lesson-09'], ['lesson-10'], ['lesson-11'], ['lesson-12']]);
+assert.deepEqual(JSON.parse(JSON.stringify(catalog.map(item => item.recommendedPrerequisites))), [[], ['lesson-00'], ['lesson-01'], ['lesson-02'], ['lesson-03'], ['lesson-04'], ['lesson-05'], ['lesson-06'], ['lesson-07'], ['lesson-08'], ['lesson-09'], ['lesson-10'], ['lesson-11'], ['lesson-12']]);
 assert.ok(catalog.filter(item => item.displayNumber <= 10).every(item => item.path === 'K0'));
 assert.ok(catalog.filter(item => item.displayNumber >= 11).every(item => item.path === 'K1'));
 assert.equal(catalog.filter(item => item.status === 'comingSoon').length, 0);
 assert.equal(catalog.some(item => item.stableId === 'k0-lesson-06-plan'), false);
-assert.equal(catalog.find(item => item.stableId === 'lesson-04').displayNumber, 7);
+assert.equal(catalog.find(item => item.stableId === 'lesson-07').displayNumber, 7);
 
 const lesson00Html = fs.readFileSync('lesson-00.html', 'utf8');
 for (const marker of ['class="mapGrid"', 'class="syllableDemo"', 'data-level="beginner"', 'data-level="partial"', 'data-level="reader"']) assert.match(lesson00Html, new RegExp(marker));
@@ -124,16 +124,18 @@ const refreshedProfile = JSON.parse(persistedStorage.get('nikigoProfile'));
 assert.equal(refreshedProfile.hangulLevel, 'partial');
 assert.equal(refreshedProfile.hangulRecommendation, 'alphabet-check');
 assert.equal(refreshedProfile.xp, 90);
-assert.equal(refreshedProfile.lessonProgress['lesson-04'], 38);
+assert.equal(refreshedProfile.lessonProgress['lesson-07'], 38);
 assert.equal(refreshedProfile.lessonProgress['lesson-00'], 100);
 
 const lesson04 = fs.readFileSync('lesson-04.html', 'utf8');
+assert.match(lesson04,/lesson-consonant-contrast\.js/);
 const lesson07 = fs.readFileSync('lesson-07.js', 'utf8');
 for (const word of ['산', '몸', '공', '물']) {
   assert.match(lesson07, new RegExp(`word:'${word}'`));
 }
-assert.match(lesson04, /lesson-07\.html/);
-assert.match(lesson04, /target\.search = window\.location\.search/);
+const legacyContrast = fs.readFileSync('lesson-consonant-contrast.html', 'utf8');
+assert.match(legacyContrast, /lesson-04\.html/);
+assert.match(legacyContrast, /target\.search = window\.location\.search/);
 assert.match(lesson07, /listenWord/);
 assert.match(lesson07, /audioUnavailable/);
 

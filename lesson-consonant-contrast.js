@@ -1,12 +1,14 @@
 (function (global) {
   'use strict';
 
-  const LESSON_ID = 'k0-consonant-contrast';
+  const LESSON_ID = 'lesson-04';
+  const AUDIO_LESSON_ID = 'k0-consonant-contrast';
+  global.NikigoCurrentLesson = Object.freeze({lessonId:LESSON_ID});
   const SESSION_KEY = `nikigoLessonSession:${LESSON_ID}`;
   const LANGUAGES = ['zh', 'en', 'vi', 'ja'];
-  const HOSTED_AUDIO = Object.freeze(Object.fromEntries((global.NikigoAudio?.lessons?.[LESSON_ID]?.items || [])
+  const HOSTED_AUDIO = Object.freeze(Object.fromEntries((global.NikigoAudio?.lessons?.[AUDIO_LESSON_ID]?.items || [])
     .filter(entry => global.NikigoAudio.canPlayAudio(entry.speechText, entry, 'initial-example'))
-    .map(entry => [entry.speechText, `audio/${LESSON_ID}/${entry.file}`])));
+    .map(entry => [entry.speechText, `audio/${AUDIO_LESSON_ID}/${entry.file}`])));
   const CATEGORY_KEYS = ['plain', 'aspirated', 'tense'];
 
   const UI = {
@@ -22,8 +24,8 @@
       correct:'正确。{detail}', incorrect:'再听一次。{detail}', detailPlain:'普通音的气流自然，不刻意送气或收紧。', detailAspirated:'送气音在爆破后有明显气流。', detailTense:'紧音先收紧，爆破短，气流较少。', answerWas:'正确答案是 {answer}。',
       retryTitle:'易错音重播', retryLead:'刚才答错的音会在这里再次出现。听对以后再进入总结。', retryEmpty:'本轮没有需要重练的音；你仍可以返回任意对比组复听。', retryAgain:'重播并再试', retryRemaining:'还需重练 {count} 项',
       summaryTitle:'今天先建立听辨起点', summaryLead:'继续在真实语速里反复比较，辨音会逐渐稳定。', summary1:'普通音：自然气流', summary2:'送气音：明显气流', summary3:'紧音：先收紧、气流较少', summary4:'所有声音都通过完整音节学习',
-      completeTitle:'第4课完成', completeLead:'你已经完成第一轮普通音、送气音和紧音对比。下一课“音节块”仍在开发中。', xp:'+50 XP', earned:'已保存学习进度', returnCourses:'返回课程主页',
-      audioDisclosure:'音频尚未发布，托管文件需完成韩语母语者审核。', resumed:'已恢复上次学习位置。', aiVoice:'音频尚未发布', noVoice:'音频尚未发布。', pendingNext:'下一课即将开放'
+      completeTitle:'第4课完成', completeLead:'你已经完成第一轮普通音、送气音和紧音对比，可以随时重新学习本课内容。', xp:'+50 XP', earned:'已保存学习进度', returnCourses:'返回课程主页', reviewLesson:'重新学习本课',
+      audioDisclosure:'只播放精确匹配且已审核的托管音频。', resumed:'已恢复上次学习位置。', aiVoice:'精确审核音频不可用', noVoice:'此处没有可用的精确审核音频。', pendingNext:'课程主页还有更多内容可继续学习'
     },
     en: {
       lessonName:'Lesson 4 · Plain, Aspirated, and Tense Sounds', progress:'Course progress', home:'Return to learning home', back:'Back', next:'Continue', finish:'Complete lesson',
@@ -34,7 +36,7 @@
       quizTag:'Listening practice', replay:'Play again', replaySequence:'Play the sequence again', chooseSyllable:'Play one full syllable and choose what you hear.', chooseAspirated:'Play three separate syllables and choose the aspirated one.', chooseCategory:'Play one full syllable and decide whether it is plain, aspirated, or tense.', correct:'Correct. {detail}', incorrect:'Listen again. {detail}', detailPlain:'Plain sounds use natural airflow without extra aspiration or tension.', detailAspirated:'Aspirated sounds release a clear puff after the consonant.', detailTense:'Tense sounds begin tight, release briefly, and use less air.', answerWas:'The correct answer is {answer}.',
       retryTitle:'Replay tricky sounds', retryLead:'Sounds missed earlier return here. Identify each one correctly before the summary.', retryEmpty:'No sounds need another round. You can still go back to replay any contrast.', retryAgain:'Replay and try again', retryRemaining:'{count} item(s) left',
       summaryTitle:'Build a listening starting point today', summaryLead:'Keep comparing these sounds in natural speech; your distinctions will become steadier.', summary1:'Plain: natural airflow', summary2:'Aspirated: noticeable airflow', summary3:'Tense: tighten first, less airflow', summary4:'Every sound is learned in a complete syllable',
-      completeTitle:'Lesson 4 complete', completeLead:'You completed a first round of plain, aspirated, and tense contrasts. The next syllable-block lesson is still in development.', xp:'+50 XP', earned:'Progress saved', returnCourses:'Return to Courses', audioDisclosure:'Audio not released yet. Hosted files require Korean native-speaker review.', resumed:'Your previous position was restored.', aiVoice:'Audio not released yet', noVoice:'Audio not released yet.', pendingNext:'Next lesson coming soon'
+      completeTitle:'Lesson 4 complete', completeLead:'You completed a first round of plain, aspirated, and tense contrasts. You can review the lesson at any time.', xp:'+50 XP', earned:'Progress saved', returnCourses:'Return to Courses', reviewLesson:'Review this lesson', audioDisclosure:'Only exact approved hosted audio is played.', resumed:'Your previous position was restored.', aiVoice:'Exact approved audio unavailable', noVoice:'No exact approved audio is available here.', pendingNext:'More lessons are available'
     },
     vi: {
       lessonName:'Bài 4 · Âm thường, bật hơi và căng', progress:'Tiến độ bài học', home:'Về trang học tập', back:'Quay lại', next:'Tiếp tục', finish:'Hoàn thành bài',
@@ -45,7 +47,7 @@
       quizTag:'Luyện nghe phân biệt', replay:'Phát lại', replaySequence:'Phát lại chuỗi âm', chooseSyllable:'Phát một âm tiết đầy đủ rồi chọn âm bạn nghe thấy.', chooseAspirated:'Phát liên tiếp ba âm tiết riêng biệt rồi chọn âm bật hơi.', chooseCategory:'Phát một âm tiết đầy đủ rồi xác định âm thường, bật hơi hay căng.', correct:'Đúng. {detail}', incorrect:'Hãy nghe lại. {detail}', detailPlain:'Âm thường dùng luồng hơi tự nhiên, không thêm bật hơi hay siết.', detailAspirated:'Âm bật hơi có luồng hơi rõ sau khi bật âm.', detailTense:'Âm căng siết trước, bật ngắn và dùng ít hơi hơn.', answerWas:'Đáp án đúng là {answer}.',
       retryTitle:'Nghe lại âm dễ nhầm', retryLead:'Các âm trả lời sai sẽ xuất hiện lại ở đây. Hãy nghe đúng trước khi sang phần tổng kết.', retryEmpty:'Không có âm nào cần luyện lại. Bạn vẫn có thể quay lại nghe bất kỳ nhóm nào.', retryAgain:'Phát lại và thử lại', retryRemaining:'Còn {count} mục',
       summaryTitle:'Hôm nay xây nền tảng nghe phân biệt', summaryLead:'Tiếp tục so sánh trong tốc độ nói tự nhiên để khả năng phân biệt ổn định dần.', summary1:'Âm thường: luồng hơi tự nhiên', summary2:'Âm bật hơi: luồng hơi rõ', summary3:'Âm căng: siết trước, ít hơi hơn', summary4:'Mọi âm đều được học qua âm tiết đầy đủ',
-      completeTitle:'Đã hoàn thành Bài 4', completeLead:'Bạn đã hoàn thành vòng đầu so sánh âm thường, bật hơi và căng. Bài tiếp theo về khối âm tiết vẫn đang phát triển.', xp:'+50 XP', earned:'Đã lưu tiến độ', returnCourses:'Trở về Bài học', audioDisclosure:'Âm thanh chưa được phát hành; tệp lưu trữ cần người bản ngữ Hàn duyệt.', resumed:'Đã khôi phục vị trí học trước đó.', aiVoice:'Âm thanh chưa được phát hành', noVoice:'Âm thanh chưa được phát hành.', pendingNext:'Bài tiếp theo sắp ra mắt'
+      completeTitle:'Đã hoàn thành Bài 4', completeLead:'Bạn đã hoàn thành vòng đầu so sánh âm thường, bật hơi và căng. Bạn có thể ôn lại bài bất cứ lúc nào.', xp:'+50 XP', earned:'Đã lưu tiến độ', returnCourses:'Trở về Bài học', reviewLesson:'Ôn lại bài này', audioDisclosure:'Chỉ phát tệp âm thanh lưu trữ đã duyệt và khớp chính xác.', resumed:'Đã khôi phục vị trí học trước đó.', aiVoice:'Không có âm thanh chính xác đã duyệt', noVoice:'Tại đây chưa có âm thanh chính xác đã duyệt.', pendingNext:'Có thêm bài học để tiếp tục'
     },
     ja: {
       lessonName:'第4課 · 平音・激音・濃音', progress:'レッスン進捗', home:'学習ホームへ戻る', back:'戻る', next:'続ける', finish:'レッスン完了',
@@ -56,18 +58,18 @@
       quizTag:'聞き分け練習', replay:'もう一度再生', replaySequence:'もう一度連続再生', chooseSyllable:'完全な音節を一つ再生し、聞こえた音節を選びます。', chooseAspirated:'3つの独立した音節を連続再生し、その中の激音を選びます。', chooseCategory:'完全な音節を一つ再生し、平音・激音・濃音を判断します。', correct:'正解です。{detail}', incorrect:'もう一度聞きましょう。{detail}', detailPlain:'平音は余分な送気や緊張を加えず、自然な気流を使います。', detailAspirated:'激音は破裂後に明確な気流があります。', detailTense:'濃音は先に締め、短く破裂し、気流が少なめです。', answerWas:'正解は {answer} です。',
       retryTitle:'間違えやすい音を再生', retryLead:'先ほど間違えた音をここでもう一度練習します。正しく聞き分けてからまとめへ進みます。', retryEmpty:'再練習が必要な音はありません。戻ってどの比較でも聞き直せます。', retryAgain:'再生してもう一度', retryRemaining:'残り {count} 項目',
       summaryTitle:'今日は聞き分けの出発点を作る', summaryLead:'自然な速さでも繰り返し比べると、聞き分けが徐々に安定します。', summary1:'平音：自然な気流', summary2:'激音：明確な気流', summary3:'濃音：先に締め、気流は少なめ', summary4:'すべて完全な音節で学習',
-      completeTitle:'第4課 完了', completeLead:'平音・激音・濃音の最初の比較を完了しました。次の音節ブロックの課は開発中です。', xp:'+50 XP', earned:'学習進捗を保存しました', returnCourses:'コースへ戻る', audioDisclosure:'音声は未公開です。ホスト音声は韓国語母語話者の確認が必要です。', resumed:'前回の学習位置を復元しました。', aiVoice:'音声はまだ公開されていません', noVoice:'音声はまだ公開されていません。', pendingNext:'次のレッスンは近日公開'
+      completeTitle:'第4課 完了', completeLead:'平音・激音・濃音の最初の比較を完了しました。いつでも本課を復習できます。', xp:'+50 XP', earned:'学習進捗を保存しました', returnCourses:'コースへ戻る', reviewLesson:'この課を復習', audioDisclosure:'完全一致する審査済みのホスト音声だけを再生します。', resumed:'前回の学習位置を復元しました。', aiVoice:'完全一致する審査済み音声は利用できません', noVoice:'ここでは完全一致する審査済み音声を利用できません。', pendingNext:'続けて学べる課があります'
     }
   };
-  Object.assign(UI.zh,{playerPlay:'播放听力题音频',playerPlaying:'正在播放',playerReplay:'再次播放',playerLoading:'音频加载中',playerError:'音频暂时无法播放，请重试',playerAriaPlay:'播放本题韩语音频',playerAriaReplay:'再次播放本题韩语音频',testAudio:'当前为测试音频，正式发布前将完成韩语发音审核。',transcriptLabel:'音频原文',categoryResult:'发音类别',correctAnswerLabel:'正确答案',teachingPointLabel:'学习提示',approximationLabel:'近似提示'});
-  Object.assign(UI.en,{playerPlay:'Play listening audio',playerPlaying:'Playing',playerReplay:'Play again',playerLoading:'Loading audio',playerError:'Audio is temporarily unavailable. Try again.',playerAriaPlay:'Play this Korean audio question',playerAriaReplay:'Play this Korean audio question again',testAudio:'Test audio. Korean pronunciation will be reviewed before release.',transcriptLabel:'Audio transcript',categoryResult:'Pronunciation category',correctAnswerLabel:'Correct answer',teachingPointLabel:'Learning tip',approximationLabel:'Approximate hint'});
-  Object.assign(UI.vi,{playerPlay:'Phát âm thanh bài nghe',playerPlaying:'Đang phát',playerReplay:'Phát lại',playerLoading:'Đang tải âm thanh',playerError:'Tạm thời không thể phát âm thanh. Hãy thử lại.',playerAriaPlay:'Phát âm thanh tiếng Hàn của câu này',playerAriaReplay:'Phát lại âm thanh tiếng Hàn của câu này',testAudio:'Âm thanh thử nghiệm. Phát âm tiếng Hàn sẽ được duyệt trước khi phát hành.',transcriptLabel:'Nội dung âm thanh',categoryResult:'Loại phát âm',correctAnswerLabel:'Đáp án đúng',teachingPointLabel:'Gợi ý học tập',approximationLabel:'Gợi ý gần đúng'});
-  Object.assign(UI.ja,{playerPlay:'聞き取り問題の音声を再生',playerPlaying:'再生中',playerReplay:'もう一度再生',playerLoading:'音声を読み込み中',playerError:'音声を一時的に再生できません。もう一度お試しください。',playerAriaPlay:'この問題の韓国語音声を再生',playerAriaReplay:'この問題の韓国語音声をもう一度再生',testAudio:'テスト音声です。公開前に韓国語発音の確認を完了します。',transcriptLabel:'音声の原文',categoryResult:'発音カテゴリー',correctAnswerLabel:'正解',teachingPointLabel:'学習ポイント',approximationLabel:'近似ヒント'});
+  Object.assign(UI.zh,{playerPlay:'播放听力题音频',playerPlaying:'正在播放',playerReplay:'再次播放',playerLoading:'音频加载中',playerError:'音频暂时无法播放，请重试',playerAriaPlay:'播放本题韩语音频',playerAriaReplay:'再次播放本题韩语音频',testAudio:'当前播放精确匹配且已审核的托管音频。',transcriptLabel:'音频原文',categoryResult:'发音类别',correctAnswerLabel:'正确答案',teachingPointLabel:'学习提示',approximationLabel:'近似提示'});
+  Object.assign(UI.en,{playerPlay:'Play listening audio',playerPlaying:'Playing',playerReplay:'Play again',playerLoading:'Loading audio',playerError:'Audio is temporarily unavailable. Try again.',playerAriaPlay:'Play this Korean audio question',playerAriaReplay:'Play this Korean audio question again',testAudio:'This uses exact approved hosted audio.',transcriptLabel:'Audio transcript',categoryResult:'Pronunciation category',correctAnswerLabel:'Correct answer',teachingPointLabel:'Learning tip',approximationLabel:'Approximate hint'});
+  Object.assign(UI.vi,{playerPlay:'Phát âm thanh bài nghe',playerPlaying:'Đang phát',playerReplay:'Phát lại',playerLoading:'Đang tải âm thanh',playerError:'Tạm thời không thể phát âm thanh. Hãy thử lại.',playerAriaPlay:'Phát âm thanh tiếng Hàn của câu này',playerAriaReplay:'Phát lại âm thanh tiếng Hàn của câu này',testAudio:'Đang dùng âm thanh lưu trữ đã duyệt và khớp chính xác.',transcriptLabel:'Nội dung âm thanh',categoryResult:'Loại phát âm',correctAnswerLabel:'Đáp án đúng',teachingPointLabel:'Gợi ý học tập',approximationLabel:'Gợi ý gần đúng'});
+  Object.assign(UI.ja,{playerPlay:'聞き取り問題の音声を再生',playerPlaying:'再生中',playerReplay:'もう一度再生',playerLoading:'音声を読み込み中',playerError:'音声を一時的に再生できません。もう一度お試しください。',playerAriaPlay:'この問題の韓国語音声を再生',playerAriaReplay:'この問題の韓国語音声をもう一度再生',testAudio:'完全一致する審査済みのホスト音声を使用しています。',transcriptLabel:'音声の原文',categoryResult:'発音カテゴリー',correctAnswerLabel:'正解',teachingPointLabel:'学習ポイント',approximationLabel:'近似ヒント'});
 
-  Object.assign(UI.zh,{audioNotReleased:'音频尚未发布',previewSkip:'跳过听辨并继续结构预览',previewOnly:'结构预览不会记录答案、完成状态或XP。'});
-  Object.assign(UI.en,{audioNotReleased:'Audio not released yet',previewSkip:'Skip listening and continue structure preview',previewOnly:'Structure preview does not record answers, completion, or XP.'});
-  Object.assign(UI.vi,{audioNotReleased:'Âm thanh chưa được phát hành',previewSkip:'Bỏ qua phần nghe và tiếp tục xem trước cấu trúc',previewOnly:'Bản xem trước không ghi nhận đáp án, hoàn thành hay XP.'});
-  Object.assign(UI.ja,{audioNotReleased:'音声はまだ公開されていません',previewSkip:'聞き取りをスキップして構造プレビューを続ける',previewOnly:'構造プレビューでは回答・完了・XPを記録しません。'});
+  Object.assign(UI.zh,{audioNotReleased:'精确审核音频不可用',previewSkip:'跳过听辨并继续结构预览',previewOnly:'结构预览不会记录答案、完成状态或XP。'});
+  Object.assign(UI.en,{audioNotReleased:'Exact approved audio unavailable',previewSkip:'Skip listening and continue structure preview',previewOnly:'Structure preview does not record answers, completion, or XP.'});
+  Object.assign(UI.vi,{audioNotReleased:'Không có âm thanh chính xác đã duyệt',previewSkip:'Bỏ qua phần nghe và tiếp tục xem trước cấu trúc',previewOnly:'Bản xem trước không ghi nhận đáp án, hoàn thành hay XP.'});
+  Object.assign(UI.ja,{audioNotReleased:'完全一致する審査済み音声は利用できません',previewSkip:'聞き取りをスキップして構造プレビューを続ける',previewOnly:'構造プレビューでは回答・完了・XPを記録しません。'});
 
   const GROUPS = Object.freeze([
     { id:'g', sequence:['가','카','까'], items:[{symbol:'ㄱ',letterName:'기역',category:'plain',syllable:'가',approximation:'k/g'},{symbol:'ㅋ',letterName:'키읔',category:'aspirated',syllable:'카',approximation:''},{symbol:'ㄲ',letterName:'쌍기역',category:'tense',syllable:'까',approximation:'kk'}] },
@@ -236,7 +238,7 @@
   }
   function renderComplete() {
     if(Object.keys(HOSTED_AUDIO).length<14){previewSkipped=true;session.previewSkipped=true;saveSession()} completeLesson();
-    return `<div class="complete"><div class="completeMark">✓</div><span class="eyebrow">K0 · COMPLETE</span><h1>${text('completeTitle')}</h1><p class="lead centered">${text('completeLead')}</p><div class="rewards"><span class="reward">✦ ${text('xp')}</span><span class="reward">✓ ${text('earned')}</span><span class="reward">⏳ ${text('pendingNext')}</span></div><div class="repeatActions"><button class="primary" data-action="home">${text('returnCourses')} →</button></div></div>`;
+    return `<div class="complete"><div class="completeMark">✓</div><span class="eyebrow">K0 · COMPLETE</span><h1>${text('completeTitle')}</h1><p class="lead centered">${text('completeLead')}</p><div class="rewards"><span class="reward">✦ ${text('xp')}</span><span class="reward">✓ ${text('earned')}</span><span class="reward">✓ ${text('pendingNext')}</span></div><div class="repeatActions"><button class="secondary" data-action="review">↻ ${text('reviewLesson')}</button><button class="primary" data-action="home">${text('returnCourses')} →</button></div></div>`;
   }
   function render() {
     const [type,id]=SCREENS[session.step]; const stage=document.getElementById('lessonStage');
@@ -261,6 +263,7 @@
     if(action==='answer'){answerQuestion(button.dataset.question,button.dataset.value,false);return;}
     if(action==='retry-answer'){answerQuestion(button.dataset.question,button.dataset.value,true);return;}
     if(action==='retry-again'){retryFeedback=null;stopAudio();const question=QUESTIONS[button.dataset.question];render();if(question)playQuestionAudio(question);return;}
+    if(action==='review'){stopAudio();session=blankSession();retryFeedback=null;saveSession();render();global.scrollTo(0,0);return;}
     if(action==='back'){stopAudio();session.step=Math.max(0,session.step-1);retryFeedback=null;saveSession();render();global.scrollTo(0,0);return;}
     if(action==='next'){stopAudio();if(Object.keys(HOSTED_AUDIO).length<14)session.previewSkipped=true;session.step=Math.min(SCREENS.length-1,session.step+1);retryFeedback=null;saveSession();render();global.scrollTo(0,0);}
   });

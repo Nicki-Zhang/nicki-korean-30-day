@@ -1,11 +1,13 @@
 (function (global) {
   'use strict';
 
-  // The public file/display number is Lesson 7. The stable ID remains lesson-04
-  // so users of the historical batchim lesson keep progress and one-time XP.
-  const LESSON_ID = 'lesson-04';
+  // The course identity is Lesson 7. The legacy audio namespace remains lesson-04
+  // because the sealed approved 바 asset must not be moved or changed.
+  const LESSON_ID = 'lesson-07';
+  const AUDIO_LESSON_ID = 'lesson-04';
+  global.NikigoCurrentLesson = Object.freeze({lessonId:LESSON_ID});
   const SESSION_KEY = `nikigoLessonSession:${LESSON_ID}`;
-  const BASE_SYLLABLE_AUDIO = global.NikigoAudio?.resolve?.('바','syllable',LESSON_ID);
+  const BASE_SYLLABLE_AUDIO = global.NikigoAudio?.resolve?.('바','syllable',AUDIO_LESSON_ID);
   const LANGUAGES = ['zh', 'en', 'vi', 'ja'];
   const SCREENS = ['intro','structure','san','mom','gong','mul','compare','split','build','recognize','challenge','retry','complete'];
   const EXAMPLES = Object.freeze([
@@ -59,7 +61,7 @@
       bottom:'底部', left:'左边', outside:'音节块外面', closeOnly:'在目标位置收住，不添加元音', extraVowel:'在结尾再加一个元音', letterName:'只读字母名称',
       e1:'收音位于音节块底部。', e2:'산由사和底部收音ㄴ组成。', e3:'공的底部是ㅇ，结尾为[ng]。', e4:'收音只收住结尾，不形成额外音节。', e5:'물表示水，底部收音是ㄹ。',
       retryTag:'错题重练', retryTitle:'把错题改正后再完成', retryLead:'每道错题都需要重新答对。', retryEmpty:'没有需要重练的题。', remaining:'还需重练 {count} 题', tryAgain:'再试一次', continueRetry:'继续重练',
-      completeTag:'K0 · 第7课完成', completeTitle:'第7课完成！', completeLead:'你已经理解基础收音的位置，并能拼合、拆分和识别산、몸、공、물。', xpEarned:'本次获得 +50 XP', xpClaimed:'首次完成奖励已领取，本次不重复发放XP', progressSaved:'学习进度已保存', returnCourses:'返回课程主页'
+      completeTag:'K0 · 第7课完成', completeTitle:'第7课完成！', completeLead:'你已经理解基础收音的位置，并能拼合、拆分和识别산、몸、공、물。', xpEarned:'本次获得 +50 XP', xpClaimed:'首次完成奖励已领取，本次不重复发放XP', progressSaved:'学习进度已保存', reviewLesson:'重新学习本课', returnCourses:'返回课程主页'
     },
     en: {
       lessonName:'Lesson 7 · Basic Batchim', progress:'Lesson progress', home:'Return to Courses', back:'Back', next:'Continue', finish:'Complete lesson',
@@ -83,7 +85,7 @@
       bottom:'At the bottom', left:'On the left', outside:'Outside the block', closeOnly:'Close at the target position, with no added vowel', extraVowel:'Add another vowel after it', letterName:'Say only the letter name',
       e1:'A final consonant sits at the bottom of the block.', e2:'산 contains 사 plus bottom final ㄴ.', e3:'공 has final ㅇ and ends in [ng].', e4:'A final closes the ending without creating another syllable.', e5:'물 means water and has final ㄹ.',
       retryTag:'RETRY MISSED QUESTIONS', retryTitle:'Correct missed questions before finishing', retryLead:'Each missed question must be answered correctly.', retryEmpty:'No questions need another round.', remaining:'{count} question(s) left', tryAgain:'Try again', continueRetry:'Continue retry',
-      completeTag:'K0 · LESSON 7 COMPLETE', completeTitle:'Lesson 7 complete!', completeLead:'You understand where basic finals sit and can build, split and recognize 산, 몸, 공 and 물.', xpEarned:'You earned +50 XP this time', xpClaimed:'The first-completion reward was already claimed; no extra XP this time', progressSaved:'Learning progress saved', returnCourses:'Return to Courses'
+      completeTag:'K0 · LESSON 7 COMPLETE', completeTitle:'Lesson 7 complete!', completeLead:'You understand where basic finals sit and can build, split and recognize 산, 몸, 공 and 물.', xpEarned:'You earned +50 XP this time', xpClaimed:'The first-completion reward was already claimed; no extra XP this time', progressSaved:'Learning progress saved', reviewLesson:'Review this lesson', returnCourses:'Return to Courses'
     },
     vi: {
       lessonName:'Bài 7 · Batchim cơ bản', progress:'Tiến độ bài học', home:'Về trang khóa học', back:'Quay lại', next:'Tiếp tục', finish:'Hoàn thành bài',
@@ -107,7 +109,7 @@
       bottom:'Ở đáy', left:'Bên trái', outside:'Ngoài khối', closeOnly:'Khép đúng vị trí, không thêm nguyên âm', extraVowel:'Thêm nguyên âm sau đó', letterName:'Chỉ đọc tên chữ',
       e1:'Âm cuối nằm ở đáy khối.', e2:'산 gồm 사 và âm cuối ㄴ.', e3:'공 có âm cuối ㅇ và kết bằng [ng].', e4:'Âm cuối khép tiếng mà không tạo thêm âm tiết.', e5:'물 nghĩa là nước và có âm cuối ㄹ.',
       retryTag:'LUYỆN LẠI CÂU SAI', retryTitle:'Sửa câu sai trước khi hoàn thành', retryLead:'Mỗi câu sai phải được trả lời đúng.', retryEmpty:'Không có câu cần luyện lại.', remaining:'Còn {count} câu', tryAgain:'Thử lại', continueRetry:'Tiếp tục luyện',
-      completeTag:'K0 · HOÀN THÀNH BÀI 7', completeTitle:'Đã hoàn thành Bài 7!', completeLead:'Bạn hiểu vị trí âm cuối và có thể ghép, tách, nhận biết 산, 몸, 공, 물.', xpEarned:'Lần này bạn nhận +50 XP', xpClaimed:'Đã nhận thưởng lần hoàn thành đầu; lần này không cộng thêm XP', progressSaved:'Đã lưu tiến độ', returnCourses:'Về trang khóa học'
+      completeTag:'K0 · HOÀN THÀNH BÀI 7', completeTitle:'Đã hoàn thành Bài 7!', completeLead:'Bạn hiểu vị trí âm cuối và có thể ghép, tách, nhận biết 산, 몸, 공, 물.', xpEarned:'Lần này bạn nhận +50 XP', xpClaimed:'Đã nhận thưởng lần hoàn thành đầu; lần này không cộng thêm XP', progressSaved:'Đã lưu tiến độ', reviewLesson:'Ôn lại bài này', returnCourses:'Về trang khóa học'
     },
     ja: {
       lessonName:'第7課 · 基本パッチム', progress:'レッスン進捗', home:'コース一覧へ', back:'戻る', next:'続ける', finish:'レッスン完了',
@@ -131,7 +133,7 @@
       bottom:'下部', left:'左側', outside:'ブロックの外', closeOnly:'目標位置で閉じ、母音を足さない', extraVowel:'後に母音を足す', letterName:'字母名だけを読む',
       e1:'パッチムはブロック下部にあります。', e2:'산は사と下部のㄴから成ります。', e3:'공の終声はㅇで、[ng]で終わります。', e4:'終声は新しい音節を作らず語尾を閉じます。', e5:'물は「水」で、終声はㄹです。',
       retryTag:'間違いを再練習', retryTitle:'間違いを直してから完了', retryLead:'間違えた問題は正解する必要があります。', retryEmpty:'再練習する問題はありません。', remaining:'残り{count}問', tryAgain:'もう一度', continueRetry:'次の再練習へ',
-      completeTag:'K0 · 第7課完了', completeTitle:'第7課、完了！', completeLead:'基本パッチムの位置を理解し、산・몸・공・물を組み立て・分解・識別できました。', xpEarned:'今回 +50 XP を獲得', xpClaimed:'初回完了報酬は受取済みです。今回はXPを追加しません', progressSaved:'進捗を保存しました', returnCourses:'コース一覧へ'
+      completeTag:'K0 · 第7課完了', completeTitle:'第7課、完了！', completeLead:'基本パッチムの位置を理解し、산・몸・공・물を組み立て・分解・識別できました。', xpEarned:'今回 +50 XP を獲得', xpClaimed:'初回完了報酬は受取済みです。今回はXPを追加しません', progressSaved:'進捗を保存しました', reviewLesson:'この課を復習', returnCourses:'コース一覧へ'
     }
   };
 
@@ -227,7 +229,7 @@
     profile=global.NikigoState?.update?.(completionPatch,'lesson-07:complete')||completionPatch(profile);
     global.localStorage.setItem(SESSION_KEY,JSON.stringify(session)); completionAwardedThisView=first; return first;
   }
-  function renderComplete() { completeLesson(); return `<div class="complete"><div class="completeMark">✓</div><span class="eyebrow">${text('completeTag')}</span><h1>${text('completeTitle')}</h1><p class="lead centered">${text('completeLead')}</p><div class="rewards"><span class="reward">✦ ${text(completionAwardedThisView?'xpEarned':'xpClaimed')}</span><span class="reward">✓ ${text('progressSaved')}</span></div><button class="primary" data-action="home">${text('returnCourses')} →</button></div>`; }
+  function renderComplete() { completeLesson(); return `<div class="complete"><div class="completeMark">✓</div><span class="eyebrow">${text('completeTag')}</span><h1>${text('completeTitle')}</h1><p class="lead centered">${text('completeLead')}</p><div class="rewards"><span class="reward">✦ ${text(completionAwardedThisView?'xpEarned':'xpClaimed')}</span><span class="reward">✓ ${text('progressSaved')}</span></div><div class="repeatActions"><button class="ghost" data-action="review">↻ ${text('reviewLesson')}</button><button class="primary" data-action="home">${text('returnCourses')} →</button></div></div>`; }
   function allowed(screen) { if(screen==='split')return allCorrect(SPLIT_QUESTIONS,'splitAnswers'); if(screen==='build')return session.built.length===4; if(screen==='recognize')return allCorrect(RECOGNIZE_QUESTIONS,'recognizeAnswers'); if(screen==='retry')return session.mistakes.length===0; return true; }
   function answerQuestion(key,questions,id,choice) { const q=questions.find(item=>item.id===id); if(!q||session[key][id]?.correct)return; session[key][id]={choice,correct:choice===q.correct}; }
   function render() {
@@ -243,6 +245,7 @@
     const button=event.target.closest('button'); if(!button)return; const action=button.dataset.action;
     if(button.id==='homeButton'||button.id==='homeLogo'||action==='home'){goHome();return;}
     if(action==='base-audio'){playBaseSyllableAudio();return;}
+    if(action==='review'){session=blankSession();saveSession();render();global.scrollTo(0,0);return;}
     if(action==='back')session.step=Math.max(0,session.step-1);
     else if(action==='next'){const screen=SCREENS[session.step];if(!allowed(screen))return;session.step=Math.min(SCREENS.length-1,session.step+1);}
     else if(action==='split-answer')answerQuestion('splitAnswers',SPLIT_QUESTIONS,button.dataset.question,button.dataset.value);

@@ -1,0 +1,297 @@
+{
+  "browser": "Google Chrome",
+  "scenarios": [
+    {
+      "scenario": "fresh",
+      "lesson4": {
+        "url": "http://127.0.0.1:4188/lesson-04.html?lang=zh&audit=fresh",
+        "lessonId": "lesson-04",
+        "progress": "1 / 15",
+        "text": "K0 · 10分钟\n听懂普通音、送气音和紧音\n\n通过完整韩语音节，初步听出气流和紧张度的差别。完成一次练习只是建立起点，不代表已经完全掌握。\n\n👂 听完整音节\n不播放孤立辅音裸音。\n💨 比较气流\n送气音有更明显的气流。\n⚡ 感受紧张度\n紧音先收紧，气流较少。\n继续 →",
+        "reviewButton": null,
+        "profile": {
+          "schemaVersion": 4,
+          "name": "Nicki",
+          "avatar": "initial",
+          "path": "K0",
+          "interfaceLanguage": "zh",
+          "learningLanguage": "zh",
+          "time": "10",
+          "audioRate": 1,
+          "autoplayAudio": false,
+          "hangulLevel": "",
+          "hangulRecommendation": "",
+          "memberTier": "free",
+          "completedLessons": [],
+          "reviewItems": [],
+          "lessonProgress": {},
+          "weeklyProgress": 0,
+          "xp": 100,
+          "streak": 0
+        },
+        "keys": [
+          "nikigoCourseIdentityMigration:v1"
+        ]
+      },
+      "lesson7": {
+        "url": "http://127.0.0.1:4188/lesson-07.html?lang=zh&audit=fresh",
+        "lessonId": "lesson-07",
+        "progress": "1 / 13",
+        "text": "开发预览 · 音频尚未发布\n课程正文和练习可以完成；待审核音频保持禁用，不使用设备语音或文字替代。\nK0 · 第7课\n听懂并读出基础收音\n\n认识音节块底部的ㄴ、ㅁ、ㅇ、ㄹ，通过完整音节和真实词理解四种基础收尾。\n\n看懂位置\n收音写在音节块底部。\n读完整词\n用산、몸、공、물学习，不读孤立收音。\n收住结尾\n不在n、m、ng、l后添加额外元音。\n辅音收音不能脱离音节自然发音，因此试听对象始终是完整音节或真实单词。\n← 返回\n继续 →",
+        "reviewButton": null,
+        "profile": {
+          "schemaVersion": 4,
+          "name": "Nicki",
+          "avatar": "initial",
+          "path": "K0",
+          "interfaceLanguage": "zh",
+          "learningLanguage": "zh",
+          "time": "10",
+          "audioRate": 1,
+          "autoplayAudio": false,
+          "hangulLevel": "",
+          "hangulRecommendation": "",
+          "memberTier": "free",
+          "completedLessons": [],
+          "reviewItems": [],
+          "lessonProgress": {},
+          "weeklyProgress": 0,
+          "xp": 100,
+          "streak": 0
+        },
+        "keys": [
+          "nikigoCourseIdentityMigration:v1"
+        ]
+      }
+    },
+    {
+      "scenario": "both-completed",
+      "lesson4": {
+        "url": "http://127.0.0.1:4188/lesson-04.html?lang=zh&audit=both-completed",
+        "lessonId": "lesson-04",
+        "progress": "15 / 15",
+        "text": "✓\nK0 · COMPLETE\n第4课完成\n\n你已经完成第一轮普通音、送气音和紧音对比，可以随时重新学习本课内容。\n\n✦ +50 XP\n✓ 已保存学习进度\n✓ 课程主页还有更多内容可继续学习\n↻ 重新学习本课\n返回课程主页 →",
+        "reviewButton": "↻ 重新学习本课",
+        "profile": {
+          "schemaVersion": 4,
+          "name": "Nicki",
+          "avatar": "initial",
+          "path": "K0",
+          "interfaceLanguage": "zh",
+          "learningLanguage": "zh",
+          "time": "10",
+          "audioRate": 1,
+          "autoplayAudio": false,
+          "hangulLevel": "",
+          "hangulRecommendation": "",
+          "memberTier": "free",
+          "completedLessons": [
+            "lesson-04",
+            "lesson-07"
+          ],
+          "reviewItems": [],
+          "lessonProgress": {
+            "lesson-04": 100,
+            "lesson-07": 100
+          },
+          "weeklyProgress": 0,
+          "xp": 100,
+          "streak": 0
+        },
+        "keys": [
+          "nikigoCourseIdentityMigration:v1",
+          "nikigoLessonSession:k0-consonant-contrast",
+          "nikigoLessonSession:lesson-04",
+          "nikigoLessonSession:lesson-07"
+        ]
+      },
+      "lesson7": {
+        "url": "http://127.0.0.1:4188/lesson-07.html?lang=zh&audit=both-completed",
+        "lessonId": "lesson-07",
+        "progress": "13 / 13",
+        "text": "开发预览 · 音频尚未发布\n课程正文和练习可以完成；待审核音频保持禁用，不使用设备语音或文字替代。\n✓\nK0 · 第7课完成\n第7课完成！\n\n你已经理解基础收音的位置，并能拼合、拆分和识别산、몸、공、물。\n\n✦ 首次完成奖励已领取，本次不重复发放XP\n✓ 学习进度已保存\n↻ 重新学习本课\n返回课程主页 →",
+        "reviewButton": "↻ 重新学习本课",
+        "profile": {
+          "schemaVersion": 4,
+          "name": "Nicki",
+          "avatar": "initial",
+          "path": "K0",
+          "interfaceLanguage": "zh",
+          "learningLanguage": "zh",
+          "time": "10",
+          "audioRate": 1,
+          "autoplayAudio": false,
+          "hangulLevel": "",
+          "hangulRecommendation": "",
+          "memberTier": "free",
+          "completedLessons": [
+            "lesson-04",
+            "lesson-07"
+          ],
+          "reviewItems": [],
+          "lessonProgress": {
+            "lesson-04": 100,
+            "lesson-07": 100
+          },
+          "weeklyProgress": 0,
+          "xp": 100,
+          "streak": 0
+        },
+        "keys": [
+          "nikigoCourseIdentityMigration:v1",
+          "nikigoLessonSession:k0-consonant-contrast",
+          "nikigoLessonSession:lesson-04",
+          "nikigoLessonSession:lesson-07"
+        ]
+      }
+    },
+    {
+      "scenario": "lesson07-only",
+      "lesson4": {
+        "url": "http://127.0.0.1:4188/lesson-04.html?lang=zh&audit=lesson07-only",
+        "lessonId": "lesson-04",
+        "progress": "1 / 15",
+        "text": "K0 · 10分钟\n听懂普通音、送气音和紧音\n\n通过完整韩语音节，初步听出气流和紧张度的差别。完成一次练习只是建立起点，不代表已经完全掌握。\n\n👂 听完整音节\n不播放孤立辅音裸音。\n💨 比较气流\n送气音有更明显的气流。\n⚡ 感受紧张度\n紧音先收紧，气流较少。\n继续 →",
+        "reviewButton": null,
+        "profile": {
+          "schemaVersion": 4,
+          "name": "Nicki",
+          "avatar": "initial",
+          "path": "K0",
+          "interfaceLanguage": "zh",
+          "learningLanguage": "zh",
+          "time": "10",
+          "audioRate": 1,
+          "autoplayAudio": false,
+          "hangulLevel": "",
+          "hangulRecommendation": "",
+          "memberTier": "free",
+          "completedLessons": [
+            "lesson-07"
+          ],
+          "reviewItems": [],
+          "lessonProgress": {
+            "lesson-07": 100
+          },
+          "weeklyProgress": 0,
+          "xp": 100,
+          "streak": 0
+        },
+        "keys": [
+          "nikigoCourseIdentityMigration:v1",
+          "nikigoLessonSession:lesson-07"
+        ]
+      },
+      "lesson7": {
+        "url": "http://127.0.0.1:4188/lesson-07.html?lang=zh&audit=lesson07-only",
+        "lessonId": "lesson-07",
+        "progress": "13 / 13",
+        "text": "开发预览 · 音频尚未发布\n课程正文和练习可以完成；待审核音频保持禁用，不使用设备语音或文字替代。\n✓\nK0 · 第7课完成\n第7课完成！\n\n你已经理解基础收音的位置，并能拼合、拆分和识别산、몸、공、물。\n\n✦ 首次完成奖励已领取，本次不重复发放XP\n✓ 学习进度已保存\n↻ 重新学习本课\n返回课程主页 →",
+        "reviewButton": "↻ 重新学习本课",
+        "profile": {
+          "schemaVersion": 4,
+          "name": "Nicki",
+          "avatar": "initial",
+          "path": "K0",
+          "interfaceLanguage": "zh",
+          "learningLanguage": "zh",
+          "time": "10",
+          "audioRate": 1,
+          "autoplayAudio": false,
+          "hangulLevel": "",
+          "hangulRecommendation": "",
+          "memberTier": "free",
+          "completedLessons": [
+            "lesson-07"
+          ],
+          "reviewItems": [],
+          "lessonProgress": {
+            "lesson-07": 100
+          },
+          "weeklyProgress": 0,
+          "xp": 100,
+          "streak": 0
+        },
+        "keys": [
+          "nikigoCourseIdentityMigration:v1",
+          "nikigoLessonSession:lesson-07"
+        ]
+      }
+    },
+    {
+      "scenario": "lesson04-only",
+      "lesson4": {
+        "url": "http://127.0.0.1:4188/lesson-04.html?lang=zh&audit=lesson04-only",
+        "lessonId": "lesson-04",
+        "progress": "15 / 15",
+        "text": "✓\nK0 · COMPLETE\n第4课完成\n\n你已经完成第一轮普通音、送气音和紧音对比，可以随时重新学习本课内容。\n\n✦ +50 XP\n✓ 已保存学习进度\n✓ 课程主页还有更多内容可继续学习\n↻ 重新学习本课\n返回课程主页 →",
+        "reviewButton": "↻ 重新学习本课",
+        "profile": {
+          "schemaVersion": 4,
+          "name": "Nicki",
+          "avatar": "initial",
+          "path": "K0",
+          "interfaceLanguage": "zh",
+          "learningLanguage": "zh",
+          "time": "10",
+          "audioRate": 1,
+          "autoplayAudio": false,
+          "hangulLevel": "",
+          "hangulRecommendation": "",
+          "memberTier": "free",
+          "completedLessons": [
+            "lesson-04"
+          ],
+          "reviewItems": [],
+          "lessonProgress": {
+            "lesson-04": 100
+          },
+          "weeklyProgress": 0,
+          "xp": 100,
+          "streak": 0
+        },
+        "keys": [
+          "nikigoCourseIdentityMigration:v1",
+          "nikigoLessonSession:k0-consonant-contrast",
+          "nikigoLessonSession:lesson-04"
+        ]
+      },
+      "lesson7": {
+        "url": "http://127.0.0.1:4188/lesson-07.html?lang=zh&audit=lesson04-only",
+        "lessonId": "lesson-07",
+        "progress": "1 / 13",
+        "text": "开发预览 · 音频尚未发布\n课程正文和练习可以完成；待审核音频保持禁用，不使用设备语音或文字替代。\nK0 · 第7课\n听懂并读出基础收音\n\n认识音节块底部的ㄴ、ㅁ、ㅇ、ㄹ，通过完整音节和真实词理解四种基础收尾。\n\n看懂位置\n收音写在音节块底部。\n读完整词\n用산、몸、공、물学习，不读孤立收音。\n收住结尾\n不在n、m、ng、l后添加额外元音。\n辅音收音不能脱离音节自然发音，因此试听对象始终是完整音节或真实单词。\n← 返回\n继续 →",
+        "reviewButton": null,
+        "profile": {
+          "schemaVersion": 4,
+          "name": "Nicki",
+          "avatar": "initial",
+          "path": "K0",
+          "interfaceLanguage": "zh",
+          "learningLanguage": "zh",
+          "time": "10",
+          "audioRate": 1,
+          "autoplayAudio": false,
+          "hangulLevel": "",
+          "hangulRecommendation": "",
+          "memberTier": "free",
+          "completedLessons": [
+            "lesson-04"
+          ],
+          "reviewItems": [],
+          "lessonProgress": {
+            "lesson-04": 100
+          },
+          "weeklyProgress": 0,
+          "xp": 100,
+          "streak": 0
+        },
+        "keys": [
+          "nikigoCourseIdentityMigration:v1",
+          "nikigoLessonSession:k0-consonant-contrast",
+          "nikigoLessonSession:lesson-04"
+        ]
+      }
+    }
+  ]
+}

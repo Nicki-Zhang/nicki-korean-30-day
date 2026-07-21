@@ -88,7 +88,7 @@ assert.match(engine, /valueIsPlayable\(question\.audio\) \? '' : `<p class="test
 assert.match(engine, /querySelector\('\[data-action="build"\]'\)/u);
 assert.match(engine, /result && !valueIsPlayable\(result\)/u);
 const lesson07 = fs.readFileSync('lesson-07.js', 'utf8');
-assert.match(lesson07, /resolve\?\.\('바','syllable',LESSON_ID\)/u);
+assert.match(lesson07, /resolve\?\.\('바','syllable',AUDIO_LESSON_ID\)/u);
 assert.match(lesson07, /data-action="base-audio"/u);
 
 const worker = fs.readFileSync('sw.js', 'utf8');

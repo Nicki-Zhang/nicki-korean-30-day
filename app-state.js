@@ -2,6 +2,7 @@
   'use strict';
 
   const STORAGE_KEY = 'nikigoProfile';
+  const COURSE_IDENTITY_MIGRATION_KEY = 'nikigoCourseIdentityMigration:v1';
   const SCHEMA_VERSION = 4;
   const SUPPORTED_LANGUAGES = ['zh', 'en', 'vi', 'ja'];
   const AVATAR_CHOICES = ['initial', '🌱', '📚', '✨', '🐰'];
@@ -112,6 +113,44 @@
     return normalized;
   }
 
+  function migrateCourseIdentityStorage() {
+    try {
+      if (global.localStorage.getItem(COURSE_IDENTITY_MIGRATION_KEY) === 'done') return;
+      const rawProfile = safeObject(JSON.parse(global.localStorage.getItem(STORAGE_KEY) || '{}'), {});
+      const legacyCompleted = uniqueStrings(rawProfile.completedLessons);
+      const legacyProgress = { ...safeObject(rawProfile.lessonProgress, {}) };
+      const lesson4Completed = legacyCompleted.includes('k0-consonant-contrast');
+      const lesson7Completed = legacyCompleted.includes('lesson-04');
+      const completedLessons = legacyCompleted.filter(id => id !== 'k0-consonant-contrast' && id !== 'lesson-04');
+      if (lesson4Completed) completedLessons.push('lesson-04');
+      if (lesson7Completed) completedLessons.push('lesson-07');
+      const lessonProgress = Object.fromEntries(Object.entries(legacyProgress)
+        .filter(([id]) => id !== 'k0-consonant-contrast' && id !== 'lesson-04'));
+      if (Object.hasOwn(legacyProgress, 'k0-consonant-contrast')) lessonProgress['lesson-04'] = legacyProgress['k0-consonant-contrast'];
+      if (Object.hasOwn(legacyProgress, 'lesson-04')) lessonProgress['lesson-07'] = legacyProgress['lesson-04'];
+      global.localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        ...rawProfile,
+        completedLessons: [...new Set(completedLessons)],
+        lessonProgress,
+        reviewItems: (Array.isArray(rawProfile.reviewItems) ? rawProfile.reviewItems : []).map(item => {
+          if (typeof item === 'string') return item.replace(/^lesson04:/, 'lesson07:');
+          const review = safeObject(item, {});
+          const id = String(review.id || '').replace(/^lesson04:/, 'lesson07:');
+          return { ...review, id, lessonId: review.lessonId === 'lesson-04' ? 'lesson-07' : review.lessonId };
+        })
+      }));
+
+      const legacyLesson4Session = global.localStorage.getItem('nikigoLessonSession:k0-consonant-contrast');
+      const legacyLesson7Session = global.localStorage.getItem('nikigoLessonSession:lesson-04');
+      if (legacyLesson7Session !== null) global.localStorage.setItem('nikigoLessonSession:lesson-07', legacyLesson7Session);
+      if (legacyLesson4Session !== null) global.localStorage.setItem('nikigoLessonSession:lesson-04', legacyLesson4Session);
+      else global.localStorage.removeItem('nikigoLessonSession:lesson-04');
+      global.localStorage.setItem(COURSE_IDENTITY_MIGRATION_KEY, 'done');
+    } catch (error) {
+      // Leave the legacy state untouched if an atomic migration cannot complete.
+    }
+  }
+
   function readStorage() {
     try {
       return normalize(JSON.parse(global.localStorage.getItem(STORAGE_KEY) || '{}'));
@@ -120,6 +159,7 @@
     }
   }
 
+  migrateCourseIdentityStorage();
   const state = readStorage();
   try {
     global.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));

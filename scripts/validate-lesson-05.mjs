@@ -133,10 +133,10 @@ vm.runInNewContext(fs.readFileSync('course-catalog.js', 'utf8'), catalogContext,
 const course = catalogContext.window.NIKIGO_COURSES.find(item => item.stableId === 'lesson-05');
 assert.equal(course.displayNumber, 5);
 assert.equal(course.file, 'lesson-05.html');
-assert.deepEqual([...course.recommendedPrerequisites], ['k0-consonant-contrast']);
-assert.equal(catalogContext.window.NIKIGO_COURSE_UNLOCKED(course, ['k0-consonant-contrast']), true);
+assert.deepEqual([...course.recommendedPrerequisites], ['lesson-04']);
+assert.equal(catalogContext.window.NIKIGO_COURSE_UNLOCKED(course, ['lesson-04']), true);
 assert.equal(catalogContext.window.NIKIGO_COURSE_UNLOCKED(course, []), true);
-assert.equal(catalogContext.window.NIKIGO_NEXT_LESSON(['lesson-00', 'lesson-01', 'lesson-02', 'lesson-03']).stableId, 'k0-consonant-contrast');
-assert.equal(catalogContext.window.NIKIGO_NEXT_LESSON(['lesson-00', 'lesson-01', 'lesson-02', 'lesson-03', 'k0-consonant-contrast']).stableId, 'lesson-05');
+assert.equal(catalogContext.window.NIKIGO_NEXT_LESSON(['lesson-00', 'lesson-01', 'lesson-02', 'lesson-03']).stableId, 'lesson-04');
+assert.equal(catalogContext.window.NIKIGO_NEXT_LESSON(['lesson-00', 'lesson-01', 'lesson-02', 'lesson-03', 'lesson-04']).stableId, 'lesson-05');
 
 console.log('Validated Lesson 5: 16 steps, four languages, direct access, CV composition/splitting, silent onset ㅇ, persisted state, exact hosted audio reuse, migration safety, and one-time +50 XP.');

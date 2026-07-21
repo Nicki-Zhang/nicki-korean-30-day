@@ -60,7 +60,7 @@ assert.match(engineSource,/class="buildResult"[^>]+aria-label="\$\{result \? sou
 const catalogWindow={};catalogWindow.window=catalogWindow;
 vm.runInNewContext(fs.readFileSync('course-catalog.js','utf8'),catalogWindow,{filename:'course-catalog.js'});
 const catalog=catalogWindow.NIKIGO_COURSES;
-assert.deepEqual([...catalog.slice(0,5).map(course=>course.stableId)],['lesson-00','lesson-01','lesson-02','lesson-03','k0-consonant-contrast']);
+assert.deepEqual([...catalog.slice(0,5).map(course=>course.stableId)],['lesson-00','lesson-01','lesson-02','lesson-03','lesson-04']);
 assert.deepEqual([...catalog.slice(0,5).map(course=>course.displayNumber)],[0,1,2,3,4]);
 for(const course of catalog.filter(course=>course.status==='comingSoon'))assert.equal(course.file,null,`${course.stableId} must not have a link`);
 

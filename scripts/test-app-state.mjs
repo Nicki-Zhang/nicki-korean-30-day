@@ -53,11 +53,24 @@ const preserved = createRuntime({
 const preservedProfile = preserved.api.get();
 assert.equal(preservedProfile.xp, 180);
 assert.equal(preservedProfile.guest, true);
-assert.deepEqual([...preservedProfile.completedLessons], ['lesson-01', 'lesson-04']);
-assert.equal(preservedProfile.lessonProgress['lesson-04'], 42);
+assert.deepEqual([...preservedProfile.completedLessons], ['lesson-01', 'lesson-07']);
+assert.equal(preservedProfile.lessonProgress['lesson-07'], 42);
+assert.equal(preservedProfile.lessonProgress['lesson-04'], undefined);
 assert.equal(preservedProfile.audioRate, 0.85);
 assert.equal(preservedProfile.autoplayAudio, false);
 assert.equal(preservedProfile.interfaceLanguage, 'vi');
+
+const identityMigration = createRuntime({
+  completedLessons: ['k0-consonant-contrast', 'lesson-04'],
+  lessonProgress: { 'k0-consonant-contrast': 65, 'lesson-04': 100 },
+  reviewItems: [{ id:'lesson04:batchim', lessonId:'lesson-04' }]
+});
+assert.deepEqual([...identityMigration.api.get().completedLessons], ['lesson-04', 'lesson-07']);
+assert.equal(identityMigration.api.get().lessonProgress['lesson-04'], 65);
+assert.equal(identityMigration.api.get().lessonProgress['lesson-07'], 100);
+assert.equal(identityMigration.api.get().reviewItems[0].id, 'lesson07:batchim');
+assert.equal(identityMigration.api.get().reviewItems[0].lessonId, 'lesson-07');
+assert.equal(identityMigration.storage.get('nikigoCourseIdentityMigration:v1'), 'done');
 
 const profileDefaults = createRuntime({ name: '   ', avatar: 'unsupported' });
 assert.equal(profileDefaults.api.get().name, 'Nicki');

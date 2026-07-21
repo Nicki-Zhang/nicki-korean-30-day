@@ -1,0 +1,59 @@
+{
+  "browser": "Google Chrome",
+  "generatedAt": "2026-07-21",
+  "results": [
+    {
+      "course": "lesson-08",
+      "language": "zh",
+      "runtimeId": "lesson-08",
+      "progress": "15 / 15",
+      "completed": true,
+      "completedLessons": [
+        "lesson-08"
+      ],
+      "xp": 50,
+      "reviewButton": "↻ 重新学习本课",
+      "finalText": "✓\n\nK0 · 第8课完成\n\n第8课完成！\n\n你已经能用七种代表音、连音和鼻音化的基础线索识别常见读法。\n\n本次获得 +50 XP学习进度已保存\n↻ 重新学习本课\n返回课程主页"
+    },
+    {
+      "course": "lesson-09",
+      "language": "en",
+      "runtimeId": "lesson-09",
+      "progress": "15 / 15",
+      "completed": true,
+      "completedLessons": [
+        "lesson-09"
+      ],
+      "xp": 50,
+      "reviewButton": "↻ Review this lesson",
+      "finalText": "✓\n\nK0 · LESSON 9 COMPLETE\n\nLesson 9 complete!\n\nYou can understand greetings, name introductions, questions, and responses in a first meeting.\n\nYou earned +50 XP this timeLearning progress saved\n↻ Review this lesson\nReturn to Courses"
+    },
+    {
+      "course": "lesson-11",
+      "language": "vi",
+      "runtimeId": "lesson-11",
+      "progress": "13 / 13",
+      "completed": true,
+      "completedLessons": [
+        "lesson-11"
+      ],
+      "xp": 50,
+      "reviewButton": "↻ Ôn lại bài này",
+      "finalText": "✓\n\nK1 · HOÀN THÀNH BÀI 11\n\nĐã hoàn thành Bài 11!\n\nBạn đã có thể hỏi tên và dùng mẫu lịch sự cố định để giới thiệu tên, thân phận cơ bản.\n\nLần này bạn nhận +50 XPĐã lưu tiến độ\n↻ Ôn lại bài này\nVề trang khóa học"
+    },
+    {
+      "course": "lesson-13",
+      "language": "ja",
+      "runtimeId": "lesson-13",
+      "progress": "13 / 13",
+      "completed": true,
+      "completedLessons": [
+        "lesson-13"
+      ],
+      "xp": 50,
+      "reviewButton": "↻ この課を復習",
+      "finalText": "✓\n\nK1 · 第13課完了\n\n第13課完了！\n\n固有数詞1～10を識別し、개を使った基本的な数量問答ができます。\n\n今回は +50 XP を獲得しました学習進捗を保存しました\n↻ この課を復習\nコース一覧へ"
+    }
+  ],
+  "consoleIssueCount": 0
+}

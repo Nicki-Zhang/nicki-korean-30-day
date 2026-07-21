@@ -81,6 +81,7 @@
 
   function mount(config) {
     if (!config || !config.id || !config.copy) throw new Error('Nikigo lesson config is incomplete.');
+    global.NikigoCurrentLesson = Object.freeze({lessonId:config.id});
 
     const profile = global.NikigoState
       ? global.NikigoState.get()

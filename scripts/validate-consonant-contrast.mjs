@@ -11,7 +11,7 @@ const expected = [
   ['ㅅ','plain','사','sa.mp3'],['ㅆ','tense','싸','ssa.mp3']
 ];
 
-const html = fs.readFileSync('lesson-consonant-contrast.html','utf8');
+const html = fs.readFileSync('lesson-04.html','utf8');
 const source = fs.readFileSync('lesson-consonant-contrast.js','utf8');
 const css = fs.readFileSync('lesson-consonant-contrast.css','utf8');
 const manifest = JSON.parse(fs.readFileSync('audio/k0-consonant-contrast/manifest.json','utf8'));
@@ -54,7 +54,7 @@ lessonWindow.window=lessonWindow;
 vm.runInNewContext(source,{window:lessonWindow,document:documentStub,URLSearchParams,Audio:class{}},{filename:'lesson-consonant-contrast.js'});
 const api=lessonWindow.NikigoContrastLesson;
 assert.ok(api);
-assert.equal(api.LESSON_ID,'k0-consonant-contrast');
+assert.equal(api.LESSON_ID,'lesson-04');
 assert.equal(api.SCREENS.length,15);
 assert.equal(api.GROUPS.length,5);
 assert.equal(Object.keys(api.QUESTIONS).length,6);
@@ -74,25 +74,24 @@ assert.notDeepEqual(practice.optionOrders.qg,undefined);
 const completed=api.completionPatch(oldProfile);
 assert.equal(completed.xp,170);
 assert.equal(completed.lessonProgress['lesson-03'],66);
-assert.equal(completed.lessonProgress['k0-consonant-contrast'],100);
-assert.deepEqual([...completed.completedLessons],['lesson-02','k0-consonant-contrast']);
+assert.equal(completed.lessonProgress['lesson-04'],100);
+assert.deepEqual([...completed.completedLessons],['lesson-02','lesson-04']);
 assert.equal(completed.audioRate,0.9);
 assert.equal(completed.guest,true);
 assert.equal(api.completionPatch(completed).xp,170,'Repeat completion must not award XP twice.');
 
-storage.set('nikigoLessonSession:k0-consonant-contrast',JSON.stringify({...api.blankSession(),step:8,mistakes:['qb']}));
-const resumed = JSON.parse(storage.get('nikigoLessonSession:k0-consonant-contrast'));
+storage.set('nikigoLessonSession:lesson-04',JSON.stringify({...api.blankSession(),step:8,mistakes:['qb']}));
+const resumed = JSON.parse(storage.get('nikigoLessonSession:lesson-04'));
 assert.equal(resumed.step,8);
 assert.deepEqual(resumed.mistakes,['qb']);
 
 const catalogContext={window:{}};catalogContext.window.window=catalogContext.window;
 vm.runInNewContext(fs.readFileSync('course-catalog.js','utf8'),catalogContext,{filename:'course-catalog.js'});
 const catalog=catalogContext.window.NIKIGO_COURSES;
-const course=catalog.find(item=>item.stableId==='k0-consonant-contrast');
+const course=catalog.find(item=>item.stableId==='lesson-04');
 assert.equal(course.displayNumber,4);
-assert.equal(course.file,'lesson-consonant-contrast.html');
-assert.notEqual(course.stableId,'lesson-04');
-assert.deepEqual([...catalog.find(item=>item.stableId==='lesson-05').recommendedPrerequisites],['k0-consonant-contrast']);
+assert.equal(course.file,'lesson-04.html');
+assert.deepEqual([...catalog.find(item=>item.stableId==='lesson-05').recommendedPrerequisites],['lesson-04']);
 
 assert.doesNotMatch(source,/playSequence\(\s*\[['"][ㄱ-ㅎ]['"]\]\s*\)/u);
 assert.match(source,/global\.setTimeout\(next,260\)/);

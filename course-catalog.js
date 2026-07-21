@@ -69,12 +69,12 @@
       parts: { zh: 'ㅂㅅㅇ · 完整音节 · 问候预览', en: 'ㅂㅅㅇ · Full syllables · Greeting preview', vi: 'ㅂㅅㅇ · Âm tiết đầy đủ · Xem trước lời chào', ja: 'ㅂㅅㅇ · 完全な音節 · あいさつの予習' }
     }),
     available({
-      stableId: 'k0-consonant-contrast', displayOrder: 4, displayNumber: 4, file: 'lesson-consonant-contrast.html', duration: 10, xp: 50, icon: '💨', template: 'consonant-contrast', recommendedPrerequisites: ['lesson-03'],
+      stableId: 'lesson-04', displayOrder: 4, displayNumber: 4, file: 'lesson-04.html', duration: 10, xp: 50, icon: '💨', template: 'consonant-contrast', recommendedPrerequisites: ['lesson-03'],
       title: { zh: '听懂普通音、送气音和紧音', en: 'Hear Plain, Aspirated, and Tense Sounds', vi: 'Nghe âm thường, bật hơi và căng', ja: '平音・激音・濃音を聞き分ける' },
       parts: { zh: '完整音节 · 气流对比 · 初步听辨', en: 'Full syllables · Airflow contrasts · First listening distinctions', vi: 'Âm tiết đầy đủ · So sánh luồng hơi · Nghe phân biệt bước đầu', ja: '完全な音節 · 気流の比較 · はじめての聞き分け' }
     }),
     available({
-      stableId: 'lesson-05', displayOrder: 5, displayNumber: 5, file: 'lesson-05.html', duration: 10, xp: 50, icon: '🧱', template: 'syllable-blocks', recommendedPrerequisites: ['k0-consonant-contrast'],
+      stableId: 'lesson-05', displayOrder: 5, displayNumber: 5, file: 'lesson-05.html', duration: 10, xp: 50, icon: '🧱', template: 'syllable-blocks', recommendedPrerequisites: ['lesson-04'],
       title: { zh: '看懂韩语音节块', en: 'Understand Korean Syllable Blocks', vi: 'Hiểu khối âm tiết tiếng Hàn', ja: '韓国語の音節ブロックを理解する' },
       parts: { zh: '左右结构 · 上下结构 · 拼合与拆分', en: 'Left–right · Top–bottom · Build and split', vi: 'Trái–phải · Trên–dưới · Ghép và tách', ja: '左右構造 · 上下構造 · 組み立てと分解' }
     }),
@@ -84,12 +84,12 @@
       parts: { zh: 'ㅒㅖㅘㅙㅚㅝㅞㅟㅢ · 拼写结构 · 无收音词汇', en: 'ㅒㅖㅘㅙㅚㅝㅞㅟㅢ · Spelling structure · Words without finals', vi: 'ㅒㅖㅘㅙㅚㅝㅞㅟㅢ · Cấu trúc chữ · Từ không âm cuối', ja: 'ㅒㅖㅘㅙㅚㅝㅞㅟㅢ · 綴り構造 · 終声のない語' }
     }),
     available({
-      stableId: 'lesson-04', displayOrder: 7, displayNumber: 7, file: 'lesson-07.html', duration: 13, xp: 50, icon: '🏁', template: 'hangul-batchim', recommendedPrerequisites: ['lesson-06'], releaseStatus: 'preview', audioStatus: 'pending',
+      stableId: 'lesson-07', displayOrder: 7, displayNumber: 7, file: 'lesson-07.html', duration: 13, xp: 50, icon: '🏁', template: 'hangul-batchim', recommendedPrerequisites: ['lesson-06'], releaseStatus: 'preview', audioStatus: 'pending',
       title: { zh: '四个基础收音 ㄴㅁㅇㄹ', en: 'Four Basic Finals ㄴㅁㅇㄹ', vi: 'Bốn âm cuối cơ bản ㄴㅁㅇㄹ', ja: '4つの基本パッチム ㄴㅁㅇㄹ' },
       parts: { zh: '산 · 몸 · 공 · 물 · 完整单词发音', en: '산 · 몸 · 공 · 물 · Full-word pronunciation', vi: '산 · 몸 · 공 · 물 · Phát âm từ đầy đủ', ja: '산 · 몸 · 공 · 물 · 単語全体の発音' }
     }),
     available({
-      stableId: 'lesson-08', displayOrder: 8, displayNumber: 8, file: 'lesson-08.html', duration: 15, xp: 50, icon: '🎧', template: 'pronunciation', recommendedPrerequisites: ['lesson-04'], releaseStatus: 'preview', audioStatus: 'pending',
+      stableId: 'lesson-08', displayOrder: 8, displayNumber: 8, file: 'lesson-08.html', duration: 15, xp: 50, icon: '🎧', template: 'pronunciation', recommendedPrerequisites: ['lesson-07'], releaseStatus: 'preview', audioStatus: 'pending',
       title: { zh: '七种代表收音和常见音变', en: 'Seven Representative Finals and Sound Changes', vi: 'Bảy âm cuối đại diện và biến âm', ja: '7つの代表パッチムと音変化' },
       parts: { zh: '代表音 · 连音 · 鼻音化 · 常见规则', en: 'Representative sounds · Linking · Nasalization', vi: 'Âm đại diện · Nối âm · Mũi hóa', ja: '代表音 · 連音 · 鼻音化' }
     }),

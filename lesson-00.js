@@ -1,5 +1,6 @@
 (function (global) {
   'use strict';
+  global.NikigoCurrentLesson = Object.freeze({lessonId:'lesson-00'});
 
   const SUPPORTED = ['zh', 'en', 'vi', 'ja'];
   const COPY = Object.freeze({

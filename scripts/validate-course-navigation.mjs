@@ -6,15 +6,24 @@ const app=fs.readFileSync('nikigo-app.html','utf8');
 const worker=fs.readFileSync('sw.js','utf8');
 const harness=fs.readFileSync('tests/course-navigation-regression.html','utf8');
 const evidence=JSON.parse(fs.readFileSync('quality-fix/course-navigation/NAVIGATION_RESULT.json','utf8'));
+const contentEvidence=JSON.parse(fs.readFileSync('quality-fix/course-content-audit/CONTENT_INTEGRITY_MATRIX.json','utf8'));
 const context={window:{}};context.window.window=context.window;
 vm.runInNewContext(fs.readFileSync('course-catalog.js','utf8'),context,{filename:'course-catalog.js'});
-const developed=context.window.NIKIGO_COURSES.filter(lesson=>lesson.displayNumber>=0&&lesson.displayNumber<=6);
+const developed=context.window.NIKIGO_COURSES.filter(lesson=>lesson.displayNumber>=0&&lesson.displayNumber<=13);
 
-assert.equal(developed.length,7);
+assert.equal(developed.length,14);
 for(const lesson of developed){
   assert.equal(lesson.status,'available',`${lesson.stableId} must stay directly accessible.`);
   assert.ok(lesson.file&&fs.existsSync(lesson.file),`${lesson.stableId} target is missing.`);
-  assert.ok(evidence.lessons.some(item=>item.lesson===lesson.stableId&&item.file===lesson.file&&item.passed===true),`${lesson.stableId} lacks real-click evidence.`);
+  const audit=contentEvidence.matrix.find(item=>item.displayNumber===lesson.displayNumber);
+  assert.ok(audit,`${lesson.stableId} lacks current real-Chrome content evidence.`);
+  assert.equal(audit.expectedId,lesson.stableId,`${lesson.stableId} catalog identity differs from browser evidence.`);
+  assert.equal(audit.runtimeLessonId,lesson.stableId,`${lesson.stableId} runtime identity differs from its route.`);
+  assert.equal(new URL(audit.entryHref).pathname.split('/').at(-1),lesson.file,`${lesson.stableId} href differs from its canonical file.`);
+  assert.equal(audit.blank,false,`${lesson.stableId} rendered blank or title-only content.`);
+  assert.equal(audit.wrongCourse,false,`${lesson.stableId} rendered another course.`);
+  assert.equal(audit.undefinedText,false,`${lesson.stableId} rendered undefined text.`);
+  assert.equal(audit.horizontalOverflow,false,`${lesson.stableId} overflowed in the audited viewport.`);
 }
 
 assert.match(app,/data-course-id="\$\{stableId\}" href="\$\{url\}"/,'Course actions must expose real href targets.');
@@ -41,5 +50,8 @@ assert.equal(evidence.xpPreserved,true);
 assert.equal(evidence.undefinedCount,0);
 assert.equal(evidence.notFoundCount,0);
 assert.equal(evidence.homeRedirectCount,0);
+assert.equal(contentEvidence.browser,'Google Chrome');
+assert.equal(contentEvidence.matrix.length,14);
+assert.equal(contentEvidence.screenshots.length,22);
 
-console.log('Validated real Chrome evidence for 21 catalog clicks: Lessons 0–6 × start/continue/review, four languages, 390/768/1440px, exact offline fallback, refresh, browser back, and state preservation.');
+console.log('Validated historical 21-case navigation regression evidence plus current real-Chrome content and route identity evidence for Lessons 0–13.');

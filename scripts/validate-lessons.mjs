@@ -80,9 +80,9 @@ for (const [index, item] of (catalog || []).entries()) {
     continue;
   }
 
-  if (stableId === 'k0-consonant-contrast' || stableId === 'lesson-05' || stableId === 'lesson-06' || stableId === 'lesson-04') {
+  if (stableId === 'lesson-04' || stableId === 'lesson-05' || stableId === 'lesson-06' || stableId === 'lesson-07') {
     const html = fs.readFileSync(file, 'utf8');
-    const customBase = stableId === 'lesson-04' ? 'lesson-07' : stableId === 'lesson-06' ? 'lesson-06' : stableId === 'lesson-05' ? 'lesson-05' : 'lesson-consonant-contrast';
+    const customBase = stableId === 'lesson-04' ? 'lesson-consonant-contrast' : stableId === 'lesson-07' ? 'lesson-07' : stableId;
     if (!html.includes(`${customBase}.js`)) errors.push(`${file} does not load its course engine.`);
     if (!html.includes(`${customBase}.css`)) errors.push(`${file} does not load its course styles.`);
     if (!html.includes('course-catalog.js')) errors.push(`${file} does not load course-catalog.js.`);
