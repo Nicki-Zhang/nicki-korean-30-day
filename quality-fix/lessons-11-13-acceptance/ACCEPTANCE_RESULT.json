@@ -1,0 +1,38 @@
+{
+  "baseline": "da61c15a794b0e4d7b96f2d6ef2bcdf3cdc884ad",
+  "branch": "agent/lessons-11-13-sprint",
+  "browser": "Google Chrome",
+  "testedAt": "2026-07-21",
+  "lessons": [11, 12, 13],
+  "stepCountPerLesson": 13,
+  "languages": ["zh", "en", "vi", "ja"],
+  "interaction": {
+    "directAccess": true,
+    "correctAnswers": true,
+    "incorrectAnswers": true,
+    "mistakeRetryGate": true,
+    "back": true,
+    "refreshResume": true,
+    "completionResume": true,
+    "firstCompletionXp50": true,
+    "repeatCompletionXpBlocked": true,
+    "pendingAudioDisabled": true,
+    "courseCompletableWithoutAudio": true
+  },
+  "layoutCases": 9,
+  "viewports": ["390x844", "768x1024", "1440x900"],
+  "horizontalOverflowCases": 0,
+  "smallControlCases": 0,
+  "undefinedTextCases": 0,
+  "consoleWarnings": 0,
+  "consoleErrors": 0,
+  "sealedApprovedAudioCount": 54,
+  "audioFilesModified": 0,
+  "audioApiRequests": 0,
+  "audioCost": 0,
+  "screenshots": [
+    "lesson-11-390.png", "lesson-11-768.png", "lesson-11-1440.png",
+    "lesson-12-390.png", "lesson-12-768.png", "lesson-12-1440.png",
+    "lesson-13-390.png", "lesson-13-768.png", "lesson-13-1440.png"
+  ]
+}

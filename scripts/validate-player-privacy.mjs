@@ -144,7 +144,7 @@ const privacyCss = fs.readFileSync('player-privacy.css','utf8');
 assert.match(privacyCss, /overflow-wrap:\s*anywhere/);
 assert.match(privacyCss, /@media\s*\(max-width:\s*600px\)/);
 const worker = fs.readFileSync('sw.js','utf8');
-assert.match(worker, /nikigo-v24-lessons-08-10-sprint/);
+assert.match(worker, /nikigo-v25-lessons-11-13-sprint/);
 assert.match(worker, /\.\/player-privacy\.css/);
 
 console.log(`Validated answer privacy for ${genericAudioQuestions + 6} course audio questions and ${reviewListenCount} review listening items across ${states.length} states and ${languages.length} languages; checked ${soundItems.length + contrastItems.length} approximation hints.`);

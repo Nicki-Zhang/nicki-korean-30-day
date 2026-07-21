@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  const available = ({ stableId, displayOrder, displayNumber, file, duration, xp, icon, template, title, parts, recommendedPrerequisites = [], releaseStatus = 'preview', audioStatus = 'pending' }) => ({
+  const available = ({ stableId, displayOrder, displayNumber, file, duration, xp, icon, template, title, parts, path = 'K0', recommendedPrerequisites = [], releaseStatus = 'preview', audioStatus = 'pending' }) => ({
     id: stableId,
     stableId,
     displayOrder,
@@ -10,7 +10,7 @@
     status: 'available',
     accessStatus: 'available',
     file,
-    path: 'K0',
+    path,
     template,
     duration,
     xp,
@@ -102,6 +102,21 @@
       stableId: 'lesson-10', displayOrder: 10, displayNumber: 10, file: 'lesson-10.html', duration: 15, xp: 50, icon: '🏆', template: 'review-challenge', recommendedPrerequisites: ['lesson-09'], releaseStatus: 'preview', audioStatus: 'pending',
       title: { zh: 'K0阶段复习挑战', en: 'K0 Review Challenge', vi: 'Thử thách ôn tập K0', ja: 'K0復習チャレンジ' },
       parts: { zh: '第0～9课综合复习 · 错题重练 · 阶段检查点', en: 'Lessons 0–9 review · Retry missed items · Learning checkpoint', vi: 'Ôn Bài 0–9 · Luyện lại câu sai · Điểm kiểm tra', ja: '第0～9課の総合復習 · 間違いの再練習 · 学習チェックポイント' }
+    }),
+    available({
+      stableId: 'lesson-11', displayOrder: 11, displayNumber: 11, file: 'lesson-11.html', duration: 13, xp: 50, icon: '🪪', template: 'scenario-dialogue', path: 'K1', recommendedPrerequisites: ['lesson-10'], releaseStatus: 'preview', audioStatus: 'pending',
+      title: { zh: '姓名与身份', en: 'Name and Identity', vi: 'Tên và thân phận', ja: '名前と立場' },
+      parts: { zh: '询问姓名 · 礼貌介绍 · 基础身份', en: 'Ask a name · Polite introduction · Basic identity', vi: 'Hỏi tên · Giới thiệu lịch sự · Thân phận cơ bản', ja: '名前を尋ねる · 丁寧な紹介 · 基本的な立場' }
+    }),
+    available({
+      stableId: 'lesson-12', displayOrder: 12, displayNumber: 12, file: 'lesson-12.html', duration: 13, xp: 50, icon: '🌏', template: 'scenario-dialogue', path: 'K1', recommendedPrerequisites: ['lesson-11'], releaseStatus: 'preview', audioStatus: 'pending',
+      title: { zh: '国家与语言', en: 'Countries and Languages', vi: 'Quốc gia và ngôn ngữ', ja: '国と言語' },
+      parts: { zh: '来自哪里 · 国家背景 · 学习语言', en: 'Where from · Country background · Study language', vi: 'Đến từ đâu · Nền tảng quốc gia · Ngôn ngữ đang học', ja: '出身 · 国の背景 · 学ぶ言語' }
+    }),
+    available({
+      stableId: 'lesson-13', displayOrder: 13, displayNumber: 13, file: 'lesson-13.html', duration: 13, xp: 50, icon: '🔟', template: 'number-practice', path: 'K1', recommendedPrerequisites: ['lesson-12'], releaseStatus: 'preview', audioStatus: 'pending',
+      title: { zh: '固有数词1～10与基础数量', en: 'Native Korean Numbers 1–10 and Basic Quantities', vi: 'Số thuần Hàn 1–10 và số lượng cơ bản', ja: '固有数詞1～10と基本数量' },
+      parts: { zh: '하나～열 · 한/두/세/네 · 몇 개예요?', en: '하나–열 · 한/두/세/네 · 몇 개예요?', vi: '하나–열 · 한/두/세/네 · 몇 개예요?', ja: '하나～열 · 한/두/세/네 · 몇 개예요?' }
     })
   ].sort((a, b) => a.displayOrder - b.displayOrder);
 

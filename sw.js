@@ -1,4 +1,4 @@
-const CACHE = 'nikigo-v24-lessons-08-10-sprint';
+const CACHE = 'nikigo-v25-lessons-11-13-sprint';
 const ASSETS = [
   './', './index.html', './nikigo-app.html', './app-state.js', './course-catalog.js',
   './hangul-sound-data.js', './audio-catalog.js', './review.html', './review.css',
@@ -9,7 +9,9 @@ const ASSETS = [
   './lesson-05.css', './lesson-06.html', './lesson-06.js', './lesson-06.css',
   './lesson-07.html', './lesson-07.js', './lesson-07.css',
   './lesson-08.html', './lesson-08.js', './lesson-09.html', './lesson-09.js',
-  './lesson-10.html', './lesson-10.js', './lesson-sprint-engine.js', './lesson-sprint.css',
+  './lesson-10.html', './lesson-10.js', './lesson-11.html', './lesson-11.js',
+  './lesson-12.html', './lesson-12.js', './lesson-13.html', './lesson-13.js',
+  './lesson-sprint-engine.js', './lesson-sprint.css',
   './assets/nikigo-mark.svg', './favicon.ico',
   './audio/lesson-00/yo.mp3', './audio/lesson-00/yu.mp3',
   './audio/lesson-00/ha.mp3', './audio/lesson-05/geu.mp3',

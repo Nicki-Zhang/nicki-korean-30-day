@@ -90,7 +90,7 @@ for (const [index, item] of (catalog || []).entries()) {
     continue;
   }
 
-  if (['lesson-08','lesson-09','lesson-10'].includes(stableId)) {
+  if (['lesson-08','lesson-09','lesson-10','lesson-11','lesson-12','lesson-13'].includes(stableId)) {
     const html = fs.readFileSync(file, 'utf8');
     if (!html.includes(`${stableId}.js`)) errors.push(`${file} does not load its lesson configuration.`);
     if (!html.includes('lesson-sprint-engine.js')) errors.push(`${file} does not load the sprint lesson engine.`);
