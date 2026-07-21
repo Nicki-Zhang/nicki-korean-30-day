@@ -2,6 +2,7 @@
   "browser": "Google Chrome",
   "base": "614fd89c9918d1397e360f9e8a7a100430b5cc4d",
   "generatedAt": "2026-07-21",
+  "auditProtocol": "self-review-v1",
   "matrix": [
     {
       "displayNumber": 0,
@@ -10,18 +11,44 @@
       "expectedId": "lesson-00",
       "runtimeLessonId": "lesson-00",
       "stepCount": null,
+      "navigationSource": "course-home-click",
       "first": {
-        "url": "http://127.0.0.1:4188/lesson-00.html?lang=zh&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-00.html?lang=zh",
         "text": "K0 · 3分钟全局认识\n先认识韩文字母地图\n\n韩语由辅音、元音和音节块组成。你不需要现在记住所有字母，Nikigo会带你分阶段学习。\n\n点击任意字母可试听。这里用于认识韩文字母全貌，不需要现在记住所有字母，后续课程会分阶段练习。\n\n基础辅音\n10\nㄱ\nㄴ\nㄷ\nㄹ\nㅁ\nㅂ\nㅅ\nㅇ\nㅈ\nㅎ\n送气音\n4\nㅋ\nㅌ\nㅍ\nㅊ\n紧音\n5\nㄲ\nㄸ\nㅃ\nㅆ\nㅉ\n基础元音\n10\nㅏ\nㅑ\nㅓ\nㅕ\nㅗ\nㅛ\nㅜ\nㅠ\nㅡ\nㅣ\n复合元音\n11\nㅐ\nㅒ\nㅔ\nㅖ\nㅘ\nㅙ\nㅚ\nㅝ\nㅞ\nㅟ\nㅢ\nㄱ\n+\nㅏ\n=\n가\n💡 辅音通常不能脱离元音自然发音，因此后续课程会通过完整音节和真实单词学习。\n选择适合你的起点\n\n这不是考试，只用于安排下一步；不要求听完40个字母。\n\n🌱\n我从零开始\n从第1课的核心元音开始。\n🔤\n我认识一些字母\n进入现有诊断流程；字母专项检查仍在开发。\n📖\n我已经能拼读韩文\n返回课程主页；场景课程已经开放，更多内容将持续更新。\n\n← 返回课程主页"
       },
       "middle": {
-        "url": "http://127.0.0.1:4188/lesson-00.html?lang=zh&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-00.html?lang=zh",
         "text": "K0 · 3分钟全局认识\n先认识韩文字母地图\n\n韩语由辅音、元音和音节块组成。你不需要现在记住所有字母，Nikigo会带你分阶段学习。\n\n点击任意字母可试听。这里用于认识韩文字母全貌，不需要现在记住所有字母，后续课程会分阶段练习。\n\n基础辅音\n10\nㄱ\nㄴ\nㄷ\nㄹ\nㅁ\nㅂ\nㅅ\nㅇ\nㅈ\nㅎ\n送气音\n4\nㅋ\nㅌ\nㅍ\nㅊ\n紧音\n5\nㄲ\nㄸ\nㅃ\nㅆ\nㅉ\n基础元音\n10\nㅏ\nㅑ\nㅓ\nㅕ\nㅗ\nㅛ\nㅜ\nㅠ\nㅡ\nㅣ\n复合元音\n11\nㅐ\nㅒ\nㅔ\nㅖ\nㅘ\nㅙ\nㅚ\nㅝ\nㅞ\nㅟ\nㅢ\nㄱ\n+\nㅏ\n=\n가\n💡 辅音通常不能脱离元音自然发音，因此后续课程会通过完整音节和真实单词学习。\n选择适合你的起点\n\n这不是考试，只用于安排下一步；不要求听完40个字母。\n\n🌱\n我从零开始\n从第1课的核心元音开始。\n🔤\n我认识一些字母\n进入现有诊断流程；字母专项检查仍在开发。\n📖\n我已经能拼读韩文\n返回课程主页；场景课程已经开放，更多内容将持续更新。\n\n← 返回课程主页"
       },
       "precomplete": {
-        "url": "http://127.0.0.1:4188/lesson-00.html?lang=zh&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-00.html?lang=zh",
         "text": "K0 · 3分钟全局认识\n先认识韩文字母地图\n\n韩语由辅音、元音和音节块组成。你不需要现在记住所有字母，Nikigo会带你分阶段学习。\n\n点击任意字母可试听。这里用于认识韩文字母全貌，不需要现在记住所有字母，后续课程会分阶段练习。\n\n基础辅音\n10\nㄱ\nㄴ\nㄷ\nㄹ\nㅁ\nㅂ\nㅅ\nㅇ\nㅈ\nㅎ\n送气音\n4\nㅋ\nㅌ\nㅍ\nㅊ\n紧音\n5\nㄲ\nㄸ\nㅃ\nㅆ\nㅉ\n基础元音\n10\nㅏ\nㅑ\nㅓ\nㅕ\nㅗ\nㅛ\nㅜ\nㅠ\nㅡ\nㅣ\n复合元音\n11\nㅐ\nㅒ\nㅔ\nㅖ\nㅘ\nㅙ\nㅚ\nㅝ\nㅞ\nㅟ\nㅢ\nㄱ\n+\nㅏ\n=\n가\n💡 辅音通常不能脱离元音自然发音，因此后续课程会通过完整音节和真实单词学习。\n选择适合你的起点\n\n这不是考试，只用于安排下一步；不要求听完40个字母。\n\n🌱\n我从零开始\n从第1课的核心元音开始。\n🔤\n我认识一些字母\n进入现有诊断流程；字母专项检查仍在开发。\n📖\n我已经能拼读韩文\n返回课程主页；场景课程已经开放，更多内容将持续更新。\n\n← 返回课程主页"
       },
+      "screenshots": {
+        "first": "lesson-00-zh-first.png",
+        "middle": "lesson-00-zh-middle.png",
+        "precomplete": "lesson-00-zh-precomplete.png"
+      },
+      "viewportChecks": [
+        {
+          "width": 390,
+          "height": 844,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "horizontalOverflow": false,
+          "blank": false
+        }
+      ],
       "undefinedText": false,
       "horizontalOverflow": false,
       "wrongCourse": false,
@@ -34,18 +61,44 @@
       "expectedId": "lesson-01",
       "runtimeLessonId": "lesson-01",
       "stepCount": 15,
+      "navigationSource": "course-home-click",
       "first": {
-        "url": "http://127.0.0.1:4188/lesson-01.html?lang=en&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-01.html?lang=en",
         "text": "K0 · HANGUL FOUNDATION\nHangul: Your First Step\n\nIn about 10–12 minutes, learn four basic vowels and two consonants, then build your first Korean syllables.\n\n👂 Hear\nTell ㅏ, ㅓ, ㅗ and ㅜ apart\n🔤 Recognize\nMeet ㄱ and ㄴ\n🧩 Build\nCombine syllables such as 가 and 나\n💡 Korean syllables work like building blocks: a consonant and a vowel join inside one square. Understand the pattern today; you do not need to memorize everything at once.\n← Return to learning home\nContinue →"
       },
       "middle": {
-        "url": "http://127.0.0.1:4188/lesson-01.html?lang=en&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-01.html?lang=en",
         "text": "PRACTICE · 3 / 3\nWhich syllable is read “na”?\nA\n가\nB\n너\nC\n나\nD\n고\n← Back\nContinue →"
       },
       "precomplete": {
-        "url": "http://127.0.0.1:4188/lesson-01.html?lang=en&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-01.html?lang=en",
         "text": "CHALLENGE · 5 / 5\nListen and choose the correct syllable.\n▶\nPlay listening audio\n0:02\nA\n나\nB\n거\nC\n가\nD\n노\n← Back\nFinish lesson →"
       },
+      "screenshots": {
+        "first": "lesson-01-en-first.png",
+        "middle": "lesson-01-en-middle.png",
+        "precomplete": "lesson-01-en-precomplete.png"
+      },
+      "viewportChecks": [
+        {
+          "width": 390,
+          "height": 844,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "horizontalOverflow": false,
+          "blank": false
+        }
+      ],
       "undefinedText": false,
       "horizontalOverflow": false,
       "wrongCourse": false,
@@ -58,18 +111,44 @@
       "expectedId": "lesson-02",
       "runtimeLessonId": "lesson-02",
       "stepCount": 16,
+      "navigationSource": "course-home-click",
       "first": {
-        "url": "http://127.0.0.1:4188/lesson-02.html?lang=vi&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-02.html?lang=vi",
         "text": "K0 · HANGUL ĐẾN TỪ VỰNG\nTừ âm tiết đến những từ đầu tiên\n\nTrong khoảng 12–13 phút, học bốn nguyên âm, ba phụ âm và đọc 나무, 다리, 머리.\n\n👂 Nghe & nhận biết\nNhận biết ㅡ, ㅣ, ㅐ, ㅔ\n🧩 Ghép âm\nDùng ㄷ, ㄹ, ㅁ để tạo âm tiết\n📖 Đọc từ\nĐọc ba từ tiếng Hàn thật\n💡 Bài này chuyển từ âm tiết rời sang từ thật. Hãy tập giải mã chữ trước; chưa cần nhớ hết nghĩa ngay.\n← Về trang học tập\nTiếp tục →"
       },
       "middle": {
-        "url": "http://127.0.0.1:4188/lesson-02.html?lang=vi&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-02.html?lang=vi",
         "text": "LUYỆN TẬP · 3 / 3\nNghe và chọn từ tương ứng.\n▶\nPhát âm thanh bài nghe\n0:02\nA\n다리\nB\n머리\nC\n나무\nD\n나리\n← Quay lại\nTiếp tục →"
       },
       "precomplete": {
-        "url": "http://127.0.0.1:4188/lesson-02.html?lang=vi&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-02.html?lang=vi",
         "text": "THỬ THÁCH · 5 / 5\nNguyên âm nào được dùng trong 애?\nA\nㅔ\nB\nㅣ\nC\nㅐ\nD\nㅡ\n← Quay lại\nHoàn thành →"
       },
+      "screenshots": {
+        "first": "lesson-02-vi-first.png",
+        "middle": "lesson-02-vi-middle.png",
+        "precomplete": "lesson-02-vi-precomplete.png"
+      },
+      "viewportChecks": [
+        {
+          "width": 390,
+          "height": 844,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "horizontalOverflow": false,
+          "blank": false
+        }
+      ],
       "undefinedText": false,
       "horizontalOverflow": false,
       "wrongCourse": false,
@@ -82,18 +161,44 @@
       "expectedId": "lesson-03",
       "runtimeLessonId": "lesson-03",
       "stepCount": 17,
+      "navigationSource": "course-home-click",
       "first": {
-        "url": "http://127.0.0.1:4188/lesson-03.html?lang=ja&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-03.html?lang=ja",
         "text": "K0 · 最初のあいさつ\n単語を読み、あいさつしよう\n\n2つの母音と3つの子音を学び、바다と사람を読んで、初対面で안녕하세요を使います。\n\n🧩 読みを広げる\nㅑ・ㅕ・ㅂ・ㅅ・ㅇを学ぶ\n📖 実際の単語\n바다と사람を読む\n👋 ミッション\n新しい相手に丁寧にあいさつする\n💡 안녕하세요にはまだ詳しく学んでいない文字もあります。まずは便利な一つの表現として覚え、後のレッスンで分解します。\n← 学習ホームへ戻る\n続ける →"
       },
       "middle": {
-        "url": "http://127.0.0.1:4188/lesson-03.html?lang=ja&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-03.html?lang=ja",
         "text": "練習 · 2 / 3\nㅅ + ㅏはどの音節ですか。\nA\n바\nB\n사\nC\n셔\nD\n아\n← 戻る\n続ける →"
       },
       "precomplete": {
-        "url": "http://127.0.0.1:4188/lesson-03.html?lang=ja&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-03.html?lang=ja",
         "text": "チャレンジ · 5 / 5\nㅇは音節の最初で通常どう発音しますか。\nA\n∅ (silent)\nB\nm\nC\ns\nD\nb\n← 戻る\n完了 →"
       },
+      "screenshots": {
+        "first": "lesson-03-ja-first.png",
+        "middle": "lesson-03-ja-middle.png",
+        "precomplete": "lesson-03-ja-precomplete.png"
+      },
+      "viewportChecks": [
+        {
+          "width": 390,
+          "height": 844,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "horizontalOverflow": false,
+          "blank": false
+        }
+      ],
       "undefinedText": false,
       "horizontalOverflow": false,
       "wrongCourse": false,
@@ -106,18 +211,44 @@
       "expectedId": "lesson-04",
       "runtimeLessonId": "lesson-04",
       "stepCount": 15,
+      "navigationSource": "course-home-click",
       "first": {
-        "url": "http://127.0.0.1:4188/lesson-04.html?lang=zh&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-04.html?lang=zh",
         "text": "K0 · 10分钟\n听懂普通音、送气音和紧音\n\n通过完整韩语音节，初步听出气流和紧张度的差别。完成一次练习只是建立起点，不代表已经完全掌握。\n\n👂 听完整音节\n不播放孤立辅音裸音。\n💨 比较气流\n送气音有更明显的气流。\n⚡ 感受紧张度\n紧音先收紧，气流较少。\n继续 →"
       },
       "middle": {
-        "url": "http://127.0.0.1:4188/lesson-04.html?lang=zh&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-04.html?lang=zh",
         "text": "바 / 파 / 빠\n바—파—빠\n\n点击每个完整音节分别试听，再使用连续对比。\n\nㅂ\n普通音\n바\n字母名称：비읍\n示例音节：바\n\n保持自然气流，不要刻意加重。\n\n▶ 听普通音 바\nㅍ\n送气音\n파\n字母名称：피읖\n示例音节：파\n\n发音时有明显气流。\n\n▶ 听送气音 파\nㅃ\n紧音\n빠\n字母名称：쌍비읍\n示例音节：빠\n\n喉部和口腔先收紧，气流较少。\n\n▶ 听紧音 빠\n▶ 连续听 바—파—빠\n展开近似提示\n← 返回\n继续 →"
       },
       "precomplete": {
-        "url": "http://127.0.0.1:4188/lesson-04.html?lang=zh&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-04.html?lang=zh",
         "text": "14 · K0\n今天先建立听辨起点\n\n继续在真实语速里反复比较，辨音会逐渐稳定。\n\n① 普通音：自然气流\n② 送气音：明显气流\n③ 紧音：先收紧、气流较少\n④ 所有声音都通过完整音节学习\n← 返回\n完成课程 →"
       },
+      "screenshots": {
+        "first": "lesson-04-zh-first.png",
+        "middle": "lesson-04-zh-middle.png",
+        "precomplete": "lesson-04-zh-precomplete.png"
+      },
+      "viewportChecks": [
+        {
+          "width": 390,
+          "height": 844,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "horizontalOverflow": false,
+          "blank": false
+        }
+      ],
       "undefinedText": false,
       "horizontalOverflow": false,
       "wrongCourse": false,
@@ -130,18 +261,44 @@
       "expectedId": "lesson-05",
       "runtimeLessonId": "lesson-05",
       "stepCount": 16,
+      "navigationSource": "course-home-click",
       "first": {
-        "url": "http://127.0.0.1:4188/lesson-05.html?lang=en&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-05.html?lang=en",
         "text": "K0 · LESSON 5\nUnderstand Korean Syllable Blocks\n\nHangul letters do not stay in a line. They share one block, and each block represents one syllable.\n\n🧱 One block, one syllable\nTreat each Hangul block as one complete syllable.\n↔️ Recognize two layouts\nVertical vowels go to the right; horizontal vowels go below.\n🧩 Build and split blocks\nPractice basic CV syllables without introducing finals.\nⓘ This lesson uses only consonant + vowel (CV) blocks. No final consonants or CVC structures appear.\nContinue →"
       },
       "middle": {
-        "url": "http://127.0.0.1:4188/lesson-05.html?lang=en&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-05.html?lang=en",
         "text": "TOP–BOTTOM\nWhich block layout does 고 use?\n고\nLeft–right\nTop–bottom\n← Back\nContinue →"
       },
       "precomplete": {
-        "url": "http://127.0.0.1:4188/lesson-05.html?lang=en&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-05.html?lang=en",
         "text": "SUMMARY\nYou can now read basic syllable blocks\n\nCheck the vowel direction, then read the consonant and vowel as one syllable.\n\n1 · One Hangul block represents one syllable.\n2 · Vertical vowels usually make a left–right block.\n3 · Horizontal vowels usually make a top–bottom block.\n4 · Vowel-initial syllables use silent placeholder ㅇ.\n5 · This lesson uses CV only; finals come later.\n← Back\nComplete lesson →"
       },
+      "screenshots": {
+        "first": "lesson-05-en-first.png",
+        "middle": "lesson-05-en-middle.png",
+        "precomplete": "lesson-05-en-precomplete.png"
+      },
+      "viewportChecks": [
+        {
+          "width": 390,
+          "height": 844,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "horizontalOverflow": false,
+          "blank": false
+        }
+      ],
       "undefinedText": false,
       "horizontalOverflow": false,
       "wrongCourse": false,
@@ -154,18 +311,44 @@
       "expectedId": "lesson-06",
       "runtimeLessonId": "lesson-06",
       "stepCount": 18,
+      "navigationSource": "course-home-click",
       "first": {
-        "url": "http://127.0.0.1:4188/lesson-06.html?lang=vi&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-06.html?lang=vi",
         "text": "Âm thanh chờ duyệt · Bài này chỉ là bản xem trước cấu trúc và chưa phát hành chính thức.\nK0 · BÀI 6\nNhận biết và ghép nguyên âm ghép\n\nKết hợp các phần nguyên âm quen thuộc, đọc âm tiết đầy đủ và nhận biết chữ viết dễ nhầm.\n\nNhìn cấu trúc\nHiểu cách ㅗ, ㅜ, ㅡ kết hợp với nguyên âm khác.\nGhép âm tiết\nDùng ㅇ câm để mang nguyên âm ghép.\nĐọc từ thật\nChỉ đọc từ không có âm cuối; CVC để học sau.\nBài này chỉ có nguyên âm và âm tiết CV. Một số cách viết nghe rất gần nhau trong tiếng Hàn Seoul hiện đại nên không tạo bài nghe phân biệt giả.\n← Quay lại\nTiếp tục →"
       },
       "middle": {
-        "url": "http://127.0.0.1:4188/lesson-06.html?lang=vi&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-06.html?lang=vi",
         "text": "Âm thanh chờ duyệt · Bài này chỉ là bản xem trước cấu trúc và chưa phát hành chính thức.\nTƯƠNG TÁC · GHÉP KHỐI\nĐặt phụ âm đầu và nguyên âm ghép vào một khối\n\nGhép ít nhất 3 âm tiết khác nhau và có 뭐. Chỉ cho phép tổ hợp an toàn trong bài.\n\nPhụ âm đầu\nㅇ\nㅁ\n+\nNguyên âm ghép\nㅘ\nㅙ\nㅚ\nㅝ\nㅞ\nㅟ\nㅢ\n=\n와\nXác nhận âm tiết 와\nĐã ghép：\n—\nGhép 3 âm tiết khác nhau và có 뭐.\n← Quay lại\nTiếp tục →"
       },
       "precomplete": {
-        "url": "http://127.0.0.1:4188/lesson-06.html?lang=vi&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-06.html?lang=vi",
         "text": "Âm thanh chờ duyệt · Bài này chỉ là bản xem trước cấu trúc và chưa phát hành chính thức.\nTỔNG KẾT\nBạn đã nhận biết cấu trúc nguyên âm ghép\n\nĐọc cấu trúc chữ trước rồi đặt vào âm tiết và từ không âm cuối.\n\n1 · ㅗ, ㅜ, ㅡ có thể kết hợp với nguyên âm khác.\n2 · Âm tiết nguyên âm dùng ㅇ câm giữ chỗ.\n3 · ㅙ, ㅚ, ㅞ hiện nay có thể nghe rất gần nhau.\n4 · ㅒ, ㅖ tập trung chữ viết, không phóng đại khác biệt âm.\n5 · Bài này chỉ có nguyên âm và CV; âm cuối bắt đầu ở Bài 7.\n← Quay lại\nHoàn thành bài →"
       },
+      "screenshots": {
+        "first": "lesson-06-vi-first.png",
+        "middle": "lesson-06-vi-middle.png",
+        "precomplete": "lesson-06-vi-precomplete.png"
+      },
+      "viewportChecks": [
+        {
+          "width": 390,
+          "height": 844,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "horizontalOverflow": false,
+          "blank": false
+        }
+      ],
       "undefinedText": false,
       "horizontalOverflow": false,
       "wrongCourse": false,
@@ -178,18 +361,44 @@
       "expectedId": "lesson-07",
       "runtimeLessonId": "lesson-07",
       "stepCount": 13,
+      "navigationSource": "course-home-click",
       "first": {
-        "url": "http://127.0.0.1:4188/lesson-07.html?lang=ja&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-07.html?lang=ja",
         "text": "開発プレビュー · 音声未公開\n本文と練習は完了できます。未審査音声は無効のままで、端末音声や文字による代用は行いません。\nK0 · 第7課\n基本パッチムを理解して読む\n\n音節ブロック下部のㄴ・ㅁ・ㅇ・ㄹを、完全な音節と実際の単語で学びます。\n\n位置を見る\nパッチムはブロック下部にあります。\n単語全体を読む\n孤立音ではなく산・몸・공・물で学びます。\n語尾を閉じる\nn・m・ng・lの後に母音を足しません。\n終声子音は音節から離して自然に発音できないため、聞く対象は常に完全な音節か実際の単語です。\n← 戻る\n続ける →"
       },
       "middle": {
-        "url": "http://127.0.0.1:4188/lesson-07.html?lang=ja&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-07.html?lang=ja",
         "text": "開発プレビュー · 音声未公開\n本文と練習は完了できます。未審査音声は無効のままで、端末音声や文字による代用は行いません。\n完全な単語 · ㄹ\n물のㄹを閉じる\n\n무の後、舌先を上に軽く触れます。[l]に近く、余分な母音を足しません。\n\n물\n水\nパッチム ㄹ\n물 → 무 + ㄹ\n実際の語尾：ㄹ [l]\n完全な単語「물」を聞く · 音声未公開\n口の動き\n무の後、舌先を上に軽く触れます。[l]に近く、余分な母音を足しません。\nまず単語全体を読む\n물 → 무 + ㄹ\n語尾を閉じるだけで、音節を追加しません。\n← 戻る\n続ける →"
       },
       "precomplete": {
-        "url": "http://127.0.0.1:4188/lesson-07.html?lang=ja&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-07.html?lang=ja",
         "text": "開発プレビュー · 音声未公開\n本文と練習は完了できます。未審査音声は無効のままで、端末音声や文字による代用は行いません。\n間違いを再練習\n間違いを直してから完了\n\n間違えた問題は正解する必要があります。\n\n✓ 再練習する問題はありません。\n← 戻る\n続ける →"
       },
+      "screenshots": {
+        "first": "lesson-07-ja-first.png",
+        "middle": "lesson-07-ja-middle.png",
+        "precomplete": "lesson-07-ja-precomplete.png"
+      },
+      "viewportChecks": [
+        {
+          "width": 390,
+          "height": 844,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "horizontalOverflow": false,
+          "blank": false
+        }
+      ],
       "undefinedText": false,
       "horizontalOverflow": false,
       "wrongCourse": false,
@@ -202,18 +411,44 @@
       "expectedId": "lesson-08",
       "runtimeLessonId": "lesson-08",
       "stepCount": 15,
+      "navigationSource": "course-home-click",
       "first": {
-        "url": "http://127.0.0.1:4188/lesson-08.html?lang=zh&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-08.html?lang=zh",
         "text": "代表收音\n\nK0 · 第8课\n\n从写法走向实际收尾\n\n韩语收音写法很多，但词尾主要归为七种代表音。本课只做规则识别，不要求用未审核音频。\n\n目标一\n认出七种代表音\n目标二\n看懂连音\n目标三\n识别鼻音化\n返回\n继续"
       },
       "middle": {
-        "url": "http://127.0.0.1:4188/lesson-08.html?lang=zh&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-08.html?lang=zh",
         "text": "连音\n\n连音判断\n\n한국어中发生连音的是哪一处？\n\n找到收音后紧接ㅇ开头音节的位置。\n\n국 + 어\n한 + 국\n没有连音\n返回\n继续"
       },
       "precomplete": {
-        "url": "http://127.0.0.1:4188/lesson-08.html?lang=zh&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-08.html?lang=zh",
         "text": "鼻音化与识别\n\n最终检查\n\n哪项说法最准确？\n\n把本课的三个判断顺序合起来。\n\n先找代表音，再看后续音节判断连音或鼻音化\n所有收音都按字母名称完整读出\n音变会改变正式拼写\n返回\n完成课程"
       },
+      "screenshots": {
+        "first": "lesson-08-zh-first.png",
+        "middle": "lesson-08-zh-middle.png",
+        "precomplete": "lesson-08-zh-precomplete.png"
+      },
+      "viewportChecks": [
+        {
+          "width": 390,
+          "height": 844,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "horizontalOverflow": false,
+          "blank": false
+        }
+      ],
       "undefinedText": false,
       "horizontalOverflow": false,
       "wrongCourse": false,
@@ -226,18 +461,44 @@
       "expectedId": "lesson-09",
       "runtimeLessonId": "lesson-09",
       "stepCount": 15,
+      "navigationSource": "course-home-click",
       "first": {
-        "url": "http://127.0.0.1:4188/lesson-09.html?lang=en&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-09.html?lang=en",
         "text": "Greeting scene\n\nK0 · LESSON 9\n\nStart a first meeting with a natural greeting\n\nMove from Hangul knowledge into a real scene: greet, say your name, ask another person’s name, and respond politely.\n\nScene\nFirst meeting\nRole A\nGreet and introduce\nRole B\nRespond and ask\nBack\nContinue"
       },
       "middle": {
-        "url": "http://127.0.0.1:4188/lesson-09.html?lang=en&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-09.html?lang=en",
         "text": "Self-introduction\n\nBUILD\n\nBuild “I’m Minji”\n\nChoose the three parts in the introduction frame.\n\nTopic\n저는\n이름은\nName\n민지\n유나\nEnding\n예요\n안녕\n•••\nConfirm build\nBack\nContinue"
       },
       "precomplete": {
-        "url": "http://127.0.0.1:4188/lesson-09.html?lang=en&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-09.html?lang=en",
         "text": "Scenario understanding\n\nINTEGRATED CHALLENGE\n\nWhich exchange best fits a first meeting?\n\nCheck the polite greeting, introduction, and response together.\n\nA: 안녕하세요. 저는 민지예요. / B: 안녕하세요. 저는 유나예요.\nA: 민지. / B: 유나.\nA: 이름이 뭐예요? / B: 이름이 뭐예요?\nBack\nComplete lesson"
       },
+      "screenshots": {
+        "first": "lesson-09-en-first.png",
+        "middle": "lesson-09-en-middle.png",
+        "precomplete": "lesson-09-en-precomplete.png"
+      },
+      "viewportChecks": [
+        {
+          "width": 390,
+          "height": 844,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "horizontalOverflow": false,
+          "blank": false
+        }
+      ],
       "undefinedText": false,
       "horizontalOverflow": false,
       "wrongCourse": false,
@@ -250,18 +511,44 @@
       "expectedId": "lesson-10",
       "runtimeLessonId": "lesson-10",
       "stepCount": 15,
+      "navigationSource": "course-home-click",
       "first": {
-        "url": "http://127.0.0.1:4188/lesson-10.html?lang=vi&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-10.html?lang=vi",
         "text": "Chữ và âm tiết · 5 bước\n\nK0 · BÀI 10\n\nKết nối Bài 0–9\n\nĐây là điểm kiểm tra ôn tập K0, không phải chứng nhận tốt nghiệp thương mại. Chỉ ôn nội dung đã học và phải luyện lại câu sai.\n\nMô-đun 1\nChữ và âm tiết\nMô-đun 2\nÂm cuối và biến âm\nMô-đun 3\nHiểu tình huống\nQuay lại\nTiếp tục"
       },
       "middle": {
-        "url": "http://127.0.0.1:4188/lesson-10.html?lang=vi&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-10.html?lang=vi",
         "text": "Âm cuối và biến âm · 5 bước\n\nGHÉP CẶP\n\nGhép cách viết với âm đại diện\n\nChỉ dùng nhóm đã học ở Bài 8.\n\nChọn thẻ bên trái rồi chọn cặp bên phải.\n\nㅋ\nㅊ\nㅍ\nㅂ\nㄷ\nㄱ\nQuay lại\nTiếp tục"
       },
       "precomplete": {
-        "url": "http://127.0.0.1:4188/lesson-10.html?lang=vi&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-10.html?lang=vi",
         "text": "Chào hỏi, giới thiệu và thử thách tổng hợp · 5 bước\n\nTHỬ THÁCH TỔNG HỢP CUỐI\n\nLựa chọn nào phù hợp cả chữ, quy tắc âm và tình huống?\n\nĐây là câu cuối của điểm kiểm tra K0 và chỉ dùng nội dung đã học.\n\nChào bằng 안녕하세요; xem 바 là ㅂ+ㅏ; nhận biết mũi hóa trong 국물\nPhải học ngữ pháp mới mới trả lời\nDùng TTS thiết bị khi thiếu âm thanh\nQuay lại\nHoàn thành bài"
       },
+      "screenshots": {
+        "first": "lesson-10-vi-first.png",
+        "middle": "lesson-10-vi-middle.png",
+        "precomplete": "lesson-10-vi-precomplete.png"
+      },
+      "viewportChecks": [
+        {
+          "width": 390,
+          "height": 844,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "horizontalOverflow": false,
+          "blank": false
+        }
+      ],
       "undefinedText": false,
       "horizontalOverflow": false,
       "wrongCourse": false,
@@ -274,18 +561,44 @@
       "expectedId": "lesson-11",
       "runtimeLessonId": "lesson-11",
       "stepCount": 13,
+      "navigationSource": "course-home-click",
       "first": {
-        "url": "http://127.0.0.1:4188/lesson-11.html?lang=ja&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-11.html?lang=ja",
         "text": "初対面\n\nK1 · 第11課\n\n名前から基本会話を始める\n\n名前を尋ね、名前と中立的な立場を紹介し、丁寧な初対面の会話を完成します。\n\n名前を尋ねる\n固定質問を使う\n立場を言う\n名詞＋이에요/예요\n丁寧に応答\n만나서 반가워요\n戻る\n続ける"
       },
       "middle": {
-        "url": "http://127.0.0.1:4188/lesson-11.html?lang=ja&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-11.html?lang=ja",
         "text": "名前と立場の文型\n\n組み立て\n\n名前紹介を組み立てる\n\n架空の名前하늘で固定表現を作ります。\n\n主題\n저는\n이름이\n名前\n하늘\n민아\n語尾\n이에요\n예요\n•••\n組み立てを確認\n戻る\n続ける"
       },
       "precomplete": {
-        "url": "http://127.0.0.1:4188/lesson-11.html?lang=ja&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-11.html?lang=ja",
         "text": "場面練習\n\n総合チャレンジ\n\n本課の範囲に合う会話は？\n\n名前・立場・丁寧な初対面の応答だけで判断します。\n\nA: 이름이 뭐예요? / B: 저는 민아예요. 학생이에요. / A: 만나서 반가워요.\n過去形で昨日の仕事を話す\nタメ口で友達と話す\n戻る\nレッスン完了"
       },
+      "screenshots": {
+        "first": "lesson-11-ja-first.png",
+        "middle": "lesson-11-ja-middle.png",
+        "precomplete": "lesson-11-ja-precomplete.png"
+      },
+      "viewportChecks": [
+        {
+          "width": 390,
+          "height": 844,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "horizontalOverflow": false,
+          "blank": false
+        }
+      ],
       "undefinedText": false,
       "horizontalOverflow": false,
       "wrongCourse": false,
@@ -298,18 +611,44 @@
       "expectedId": "lesson-12",
       "runtimeLessonId": "lesson-12",
       "stepCount": 13,
+      "navigationSource": "course-home-click",
       "first": {
-        "url": "http://127.0.0.1:4188/lesson-12.html?lang=zh&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-12.html?lang=zh",
         "text": "来自哪里\n\nK1 · 第12课\n\n用固定句型交流国家与语言\n\n学习询问来自哪里、表达国家背景和正在学习的语言。所有人物与信息均为虚构练习。\n\n询问\n어느 나라에서 왔어요?\n来源\nN에서 왔어요\n语言\nN어를 공부해요\n返回\n继续"
       },
       "middle": {
-        "url": "http://127.0.0.1:4188/lesson-12.html?lang=zh&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-12.html?lang=zh",
         "text": "国家与语言句型\n\n拼合\n\n拼出“我来自越南”\n\n按固定来源框架选择三个部分。\n\n主题\n저는\n어느\n国家\n베트남\n한국어\n结尾\n에서 왔어요\n를 공부해요\n•••\n确认拼合\n返回\n继续"
       },
       "precomplete": {
-        "url": "http://127.0.0.1:4188/lesson-12.html?lang=zh&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-12.html?lang=zh",
         "text": "场景练习\n\n综合挑战\n\n哪段交流完整且不超出本课？\n\n综合判断来源、国家背景和学习语言。\n\nA: 어느 나라에서 왔어요? / B: 저는 베트남에서 왔어요. 저는 베트남 사람이에요. 저는 한국어를 공부해요.\n加入过去时和未来计划\n详细比较所有助词和动词变形\n返回\n完成课程"
       },
+      "screenshots": {
+        "first": "lesson-12-zh-first.png",
+        "middle": "lesson-12-zh-middle.png",
+        "precomplete": "lesson-12-zh-precomplete.png"
+      },
+      "viewportChecks": [
+        {
+          "width": 390,
+          "height": 844,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "horizontalOverflow": false,
+          "blank": false
+        }
+      ],
       "undefinedText": false,
       "horizontalOverflow": false,
       "wrongCourse": false,
@@ -322,18 +661,44 @@
       "expectedId": "lesson-13",
       "runtimeLessonId": "lesson-13",
       "stepCount": 13,
+      "navigationSource": "course-home-click",
       "first": {
-        "url": "http://127.0.0.1:4188/lesson-13.html?lang=en&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-13.html?lang=en",
         "text": "Native Korean numbers 1–10\n\nK1 · LESSON 13\n\nCount to ten with native Korean numbers\n\nLearn only native Korean numbers 1–10, the counter 개, and basic quantity questions and answers.\n\n1–5\n하나 · 둘 · 셋 · 넷 · 다섯\n6–10\n여섯 · 일곱 · 여덟 · 아홉 · 열\nBasic exchange\n몇 개예요? · 세 개예요.\nBack\nContinue"
       },
       "middle": {
-        "url": "http://127.0.0.1:4188/lesson-13.html?lang=en&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-13.html?lang=en",
         "text": "Native Korean numbers 1–10\n\nMATCH\n\nMatch six through ten to digits\n\nComplete the second number set.\n\nChoose a card on the left, then its match on the right.\n\n여섯\n일곱\n여덟\n아홉\n열\n10\n9\n8\n7\n6\nBack\nContinue"
       },
       "precomplete": {
-        "url": "http://127.0.0.1:4188/lesson-13.html?lang=en&audit=content-integrity",
+        "url": "http://127.0.0.1:4188/lesson-13.html?lang=en",
         "text": "Quantity challenge\n\nINTEGRATED CHALLENGE\n\nWhich exchange stays fully within this lesson?\n\nJudge only native Korean numbers 1–10, 개, and the polite quantity exchange.\n\nA: 몇 개예요? / B: 열 개예요.\nUse Sino-Korean numbers for prices\nUse other counters such as 명, 살, or 시\nBack\nComplete lesson"
       },
+      "screenshots": {
+        "first": "lesson-13-en-first.png",
+        "middle": "lesson-13-en-middle.png",
+        "precomplete": "lesson-13-en-precomplete.png"
+      },
+      "viewportChecks": [
+        {
+          "width": 390,
+          "height": 844,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "horizontalOverflow": false,
+          "blank": false
+        },
+        {
+          "width": 1440,
+          "height": 900,
+          "horizontalOverflow": false,
+          "blank": false
+        }
+      ],
       "undefinedText": false,
       "horizontalOverflow": false,
       "wrongCourse": false,
@@ -342,26 +707,54 @@
   ],
   "screenshots": [
     "lesson-00-zh-first.png",
+    "lesson-00-zh-middle.png",
+    "lesson-00-zh-precomplete.png",
     "lesson-01-en-first.png",
+    "lesson-01-en-middle.png",
+    "lesson-01-en-precomplete.png",
     "lesson-02-vi-first.png",
+    "lesson-02-vi-middle.png",
+    "lesson-02-vi-precomplete.png",
     "lesson-03-ja-first.png",
+    "lesson-03-ja-middle.png",
+    "lesson-03-ja-precomplete.png",
     "lesson-04-zh-first.png",
     "lesson-04-zh-middle.png",
     "lesson-04-zh-precomplete.png",
     "lesson-05-en-first.png",
+    "lesson-05-en-middle.png",
+    "lesson-05-en-precomplete.png",
     "lesson-06-vi-first.png",
+    "lesson-06-vi-middle.png",
+    "lesson-06-vi-precomplete.png",
     "lesson-07-ja-first.png",
     "lesson-07-ja-middle.png",
     "lesson-07-ja-precomplete.png",
     "lesson-08-zh-first.png",
+    "lesson-08-zh-middle.png",
+    "lesson-08-zh-precomplete.png",
     "lesson-09-en-first.png",
+    "lesson-09-en-middle.png",
+    "lesson-09-en-precomplete.png",
     "lesson-10-vi-first.png",
+    "lesson-10-vi-middle.png",
+    "lesson-10-vi-precomplete.png",
     "lesson-11-ja-first.png",
     "lesson-11-ja-middle.png",
     "lesson-11-ja-precomplete.png",
     "lesson-12-zh-first.png",
+    "lesson-12-zh-middle.png",
+    "lesson-12-zh-precomplete.png",
     "lesson-13-en-first.png",
     "lesson-13-en-middle.png",
     "lesson-13-en-precomplete.png"
-  ]
+  ],
+  "consoleIssueCount": 0,
+  "consoleIssueDetails": [],
+  "networkFailureCount": 0,
+  "networkFailures": [],
+  "serviceWorker": {
+    "controlled": true,
+    "cache": "nikigo-v27-self-review-gate"
+  }
 }

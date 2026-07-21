@@ -37,6 +37,10 @@
     Object.assign(COPY.en,{bDesc:'Close both lips, then release into the vowel inside 바.',sDesc:'Let air pass near the tongue tip and hear the onset inside 사.',ngDesc:'At the start of a syllable, ㅇ is silent and lets the vowel appear naturally inside 아.'});
     Object.assign(COPY.vi,{bDesc:'Khép hai môi rồi chuyển sang nguyên âm trong 바.',sDesc:'Để luồng hơi đi qua gần đầu lưỡi và nghe âm đầu trong 사.',ngDesc:'Ở đầu âm tiết, ㅇ câm và cho nguyên âm xuất hiện tự nhiên trong 아.'});
     Object.assign(COPY.ja,{bDesc:'両唇を閉じてから母音へ移り、完全な音節바の語頭で確認します。',sDesc:'舌先付近から息を通し、完全な音節사の語頭で確認します。',ngDesc:'音節頭のㅇは無音で、完全な音節아の中で母音を自然に表します。'});
+    Object.assign(COPY.zh,{aiVoice:'只播放精确匹配且已审核的托管音频',audioError:'音频暂时无法播放，请稍后重试。',audioUnavailable:'此处没有可用的精确审核音频。'});
+    Object.assign(COPY.en,{aiVoice:'Only exact approved hosted audio is played',audioError:'Audio is temporarily unavailable. Try again later.',audioUnavailable:'No exact approved audio is available here.'});
+    Object.assign(COPY.vi,{aiVoice:'Chỉ phát âm thanh lưu trữ đã duyệt và khớp chính xác',audioError:'Tạm thời không thể phát âm thanh. Hãy thử lại sau.',audioUnavailable:'Tại đây chưa có âm thanh chính xác đã duyệt.'});
+    Object.assign(COPY.ja,{aiVoice:'完全一致する審査済みのホスト音声だけを再生します',audioError:'音声を一時的に再生できません。しばらくしてからお試しください。',audioUnavailable:'ここでは完全一致する審査済み音声を利用できません。'});
     const vowels=window.NikigoHangulSoundData.select(['ㅑ','ㅕ']).map((item,index)=>({...item,descriptionKey:['vYa','vYeo'][index]}));
     const consonants=window.NikigoHangulSoundData.select(['ㅂ','ㅅ','ㅇ']).map((item,index)=>({...item,descriptionKey:['bDesc','sDesc','ngDesc'][index]}));
     const words=[['바다','bada','바다','sea','🌊'],['사람','saram','사람','person','🧑'],['안녕','annyeong','안녕','helloPreview','👋']];

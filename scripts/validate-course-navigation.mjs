@@ -52,6 +52,6 @@ assert.equal(evidence.notFoundCount,0);
 assert.equal(evidence.homeRedirectCount,0);
 assert.equal(contentEvidence.browser,'Google Chrome');
 assert.equal(contentEvidence.matrix.length,14);
-assert.equal(contentEvidence.screenshots.length,22);
+assert.equal(contentEvidence.screenshots.length,42);
 
 console.log('Validated historical 21-case navigation regression evidence plus current real-Chrome content and route identity evidence for Lessons 0–13.');

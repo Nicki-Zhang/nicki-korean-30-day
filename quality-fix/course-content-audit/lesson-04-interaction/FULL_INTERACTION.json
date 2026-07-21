@@ -1,0 +1,31 @@
+{
+  "browser": "Google Chrome",
+  "course": "lesson-04",
+  "language": "zh",
+  "navigationSource": "course-home-click",
+  "runtimeLessonId": "lesson-04",
+  "wrongAnswerTriggered": true,
+  "retryObserved": true,
+  "courseBackPassed": true,
+  "browserBackPassed": true,
+  "refreshPassed": true,
+  "firstCompletion": {
+    "progress": "15 / 15",
+    "xp": 50,
+    "completedLessons": [
+      "lesson-04"
+    ],
+    "review": true,
+    "text": "✓\nK0 · COMPLETE\n第4课完成\n\n你已经完成第一轮普通音、送气音和紧音对比，可以随时重新学习本课内容。\n\n✦ 本次获得 +50 XP\n✓ 已保存学习进度\n✓ 课程主页还有更多内容可继续学习\n↻ 重新学习本课\n返回课程主页 →"
+  },
+  "repeatCompletion": {
+    "progress": "15 / 15",
+    "xp": 50,
+    "completedLessons": [
+      "lesson-04"
+    ],
+    "review": true,
+    "text": "✓\nK0 · COMPLETE\n第4课完成\n\n你已经完成第一轮普通音、送气音和紧音对比，可以随时重新学习本课内容。\n\n✦ 首次完成奖励已领取，本次不重复发放XP\n✓ 已保存学习进度\n✓ 课程主页还有更多内容可继续学习\n↻ 重新学习本课\n返回课程主页 →"
+  },
+  "consoleIssueCount": 0
+}

@@ -37,6 +37,10 @@
     Object.assign(COPY.en,{dDesc:'Make a brief closure behind the upper teeth and hear the onset inside 다.',rDesc:'Tap the tongue tip quickly against the ridge and hear the onset inside 라.',mDesc:'Close both lips, then release into the vowel inside 마.'});
     Object.assign(COPY.vi,{dDesc:'Chặn ngắn bằng đầu lưỡi sau lợi trên và nghe âm đầu trong 다.',rDesc:'Bật nhanh đầu lưỡi vào lợi trên và nghe âm đầu trong 라.',mDesc:'Khép hai môi rồi chuyển sang nguyên âm trong 마.'});
     Object.assign(COPY.ja,{dDesc:'上の歯茎の後ろで短く閉鎖し、完全な音節다の語頭で確認します。',rDesc:'舌先を歯茎に素早く一度当て、完全な音節라の語頭で確認します。',mDesc:'両唇を閉じてから母音へ移り、完全な音節마の語頭で確認します。'});
+    Object.assign(COPY.zh,{aiVoice:'只播放精确匹配且已审核的托管音频',audioError:'音频暂时无法播放，请稍后重试。',audioUnavailable:'此处没有可用的精确审核音频。'});
+    Object.assign(COPY.en,{aiVoice:'Only exact approved hosted audio is played',audioError:'Audio is temporarily unavailable. Try again later.',audioUnavailable:'No exact approved audio is available here.'});
+    Object.assign(COPY.vi,{aiVoice:'Chỉ phát âm thanh lưu trữ đã duyệt và khớp chính xác',audioError:'Tạm thời không thể phát âm thanh. Hãy thử lại sau.',audioUnavailable:'Tại đây chưa có âm thanh chính xác đã duyệt.'});
+    Object.assign(COPY.ja,{aiVoice:'完全一致する審査済みのホスト音声だけを再生します',audioError:'音声を一時的に再生できません。しばらくしてからお試しください。',audioUnavailable:'ここでは完全一致する審査済み音声を利用できません。'});
     const vowels=window.NikigoHangulSoundData.select(['ㅡ','ㅣ','ㅐ','ㅔ']).map((item,index)=>({...item,descriptionKey:['vEu','vI','vAe','vE'][index]}));
     const consonants=window.NikigoHangulSoundData.select(['ㄷ','ㄹ','ㅁ']).map((item,index)=>({...item,descriptionKey:['dDesc','rDesc','mDesc'][index]}));
     const words=[['나무','namu','나무','tree','🌳'],['다리','dari','다리','legBridge','🦵'],['머리','meori','머리','head','🙂']];

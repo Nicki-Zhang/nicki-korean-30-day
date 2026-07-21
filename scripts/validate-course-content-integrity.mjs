@@ -92,6 +92,10 @@ for (const marker of ['nikigoCourseIdentityMigration:v1','nikigoLessonSession:k0
 const matrix = JSON.parse(fs.readFileSync('quality-fix/course-content-audit/CONTENT_INTEGRITY_MATRIX.json','utf8'));
 assert.equal(matrix.browser,'Google Chrome');
 assert.equal(matrix.matrix.length,14);
+assert.equal(matrix.screenshots.length,42);
+assert.equal(matrix.consoleIssueCount,0);
+assert.equal(matrix.networkFailureCount,0);
+assert.equal(matrix.serviceWorker.controlled,true);
 for (const lesson of lessons) {
   const evidence = matrix.matrix.find(item => item.displayNumber === lesson.displayNumber);
   assert.equal(evidence.expectedId,lesson.stableId);
@@ -106,9 +110,13 @@ for (const lesson of lessons) {
 const combinations = JSON.parse(fs.readFileSync('quality-fix/course-content-audit/progress-combinations/PROGRESS_COMBINATIONS.json','utf8'));
 assert.deepEqual(combinations.scenarios.map(item=>item.scenario),['fresh','both-completed','lesson07-only','lesson04-only']);
 for (const scenario of combinations.scenarios) {
+  assert.equal(scenario.navigationSource,'course-home-click');
   assert.equal(scenario.lesson4.lessonId,'lesson-04');
   assert.equal(scenario.lesson7.lessonId,'lesson-07');
 }
+assert.deepEqual(combinations.scenarios.map(item=>item.lesson7.profile.completedLessons),[
+  [],['lesson-04','lesson-07'],['lesson-07'],['lesson-04']
+]);
 assert.equal(combinations.scenarios[0].lesson4.progress,'1 / 15');
 assert.equal(combinations.scenarios[0].lesson7.progress,'1 / 13');
 assert.equal(combinations.scenarios[1].lesson4.reviewButton,'↻ 重新学习本课');
@@ -124,10 +132,30 @@ assert.equal(completions.consoleIssueCount,0);
 assert.deepEqual(completions.results.map(item=>item.language),languages);
 for (const result of completions.results) {
   assert.equal(result.runtimeId,result.course);
-  assert.equal(result.completed,true);
-  assert.deepEqual(result.completedLessons,[result.course]);
-  assert.equal(result.xp,50);
-  assert.ok(result.reviewButton);
+  assert.equal(result.navigationSource,'course-home-click');
+  assert.equal(result.firstCompletion.completed,true);
+  assert.equal(result.repeatCompletion.completed,true);
+  assert.deepEqual(result.firstCompletion.completedLessons,[result.course]);
+  assert.deepEqual(result.repeatCompletion.completedLessons,[result.course]);
+  assert.equal(result.firstCompletion.xp,50);
+  assert.equal(result.repeatCompletion.xp,50);
+  assert.ok(result.firstCompletion.reviewButton);
+  assert.equal(result.wrongAnswerTriggered,true);
+  assert.equal(result.retryObserved,true);
+  assert.equal(result.courseBackPassed,true);
+  assert.equal(result.browserBackPassed,true);
+  assert.equal(result.refreshPassed,true);
 }
+
+const lesson04Interaction=JSON.parse(fs.readFileSync('quality-fix/course-content-audit/lesson-04-interaction/FULL_INTERACTION.json','utf8'));
+assert.equal(lesson04Interaction.browser,'Google Chrome');
+assert.equal(lesson04Interaction.navigationSource,'course-home-click');
+assert.equal(lesson04Interaction.runtimeLessonId,'lesson-04');
+for(const key of ['wrongAnswerTriggered','retryObserved','courseBackPassed','browserBackPassed','refreshPassed'])assert.equal(lesson04Interaction[key],true);
+assert.equal(lesson04Interaction.firstCompletion.xp,50);
+assert.equal(lesson04Interaction.repeatCompletion.xp,50);
+assert.match(lesson04Interaction.firstCompletion.text,/\+50 XP/);
+assert.match(lesson04Interaction.repeatCompletion.text,/不重复发放XP/);
+assert.equal(lesson04Interaction.consoleIssueCount,0);
 
 console.log('Validated Lessons 0–13 visible-content checkpoints, unique current identities, canonical Lesson 4/7 routing, four migration combinations, four-language full-course completion, review re-entry, and legacy progress migration.');

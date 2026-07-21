@@ -24,7 +24,7 @@
       correct:'正确。{detail}', incorrect:'再听一次。{detail}', detailPlain:'普通音的气流自然，不刻意送气或收紧。', detailAspirated:'送气音在爆破后有明显气流。', detailTense:'紧音先收紧，爆破短，气流较少。', answerWas:'正确答案是 {answer}。',
       retryTitle:'易错音重播', retryLead:'刚才答错的音会在这里再次出现。听对以后再进入总结。', retryEmpty:'本轮没有需要重练的音；你仍可以返回任意对比组复听。', retryAgain:'重播并再试', retryRemaining:'还需重练 {count} 项',
       summaryTitle:'今天先建立听辨起点', summaryLead:'继续在真实语速里反复比较，辨音会逐渐稳定。', summary1:'普通音：自然气流', summary2:'送气音：明显气流', summary3:'紧音：先收紧、气流较少', summary4:'所有声音都通过完整音节学习',
-      completeTitle:'第4课完成', completeLead:'你已经完成第一轮普通音、送气音和紧音对比，可以随时重新学习本课内容。', xp:'+50 XP', earned:'已保存学习进度', returnCourses:'返回课程主页', reviewLesson:'重新学习本课',
+      completeTitle:'第4课完成', completeLead:'你已经完成第一轮普通音、送气音和紧音对比，可以随时重新学习本课内容。', xp:'本次获得 +50 XP', xpClaimed:'首次完成奖励已领取，本次不重复发放XP', earned:'已保存学习进度', returnCourses:'返回课程主页', reviewLesson:'重新学习本课',
       audioDisclosure:'只播放精确匹配且已审核的托管音频。', resumed:'已恢复上次学习位置。', aiVoice:'精确审核音频不可用', noVoice:'此处没有可用的精确审核音频。', pendingNext:'课程主页还有更多内容可继续学习'
     },
     en: {
@@ -36,7 +36,7 @@
       quizTag:'Listening practice', replay:'Play again', replaySequence:'Play the sequence again', chooseSyllable:'Play one full syllable and choose what you hear.', chooseAspirated:'Play three separate syllables and choose the aspirated one.', chooseCategory:'Play one full syllable and decide whether it is plain, aspirated, or tense.', correct:'Correct. {detail}', incorrect:'Listen again. {detail}', detailPlain:'Plain sounds use natural airflow without extra aspiration or tension.', detailAspirated:'Aspirated sounds release a clear puff after the consonant.', detailTense:'Tense sounds begin tight, release briefly, and use less air.', answerWas:'The correct answer is {answer}.',
       retryTitle:'Replay tricky sounds', retryLead:'Sounds missed earlier return here. Identify each one correctly before the summary.', retryEmpty:'No sounds need another round. You can still go back to replay any contrast.', retryAgain:'Replay and try again', retryRemaining:'{count} item(s) left',
       summaryTitle:'Build a listening starting point today', summaryLead:'Keep comparing these sounds in natural speech; your distinctions will become steadier.', summary1:'Plain: natural airflow', summary2:'Aspirated: noticeable airflow', summary3:'Tense: tighten first, less airflow', summary4:'Every sound is learned in a complete syllable',
-      completeTitle:'Lesson 4 complete', completeLead:'You completed a first round of plain, aspirated, and tense contrasts. You can review the lesson at any time.', xp:'+50 XP', earned:'Progress saved', returnCourses:'Return to Courses', reviewLesson:'Review this lesson', audioDisclosure:'Only exact approved hosted audio is played.', resumed:'Your previous position was restored.', aiVoice:'Exact approved audio unavailable', noVoice:'No exact approved audio is available here.', pendingNext:'More lessons are available'
+      completeTitle:'Lesson 4 complete', completeLead:'You completed a first round of plain, aspirated, and tense contrasts. You can review the lesson at any time.', xp:'You earned +50 XP this time', xpClaimed:'The first-completion reward was already claimed; no extra XP this time', earned:'Progress saved', returnCourses:'Return to Courses', reviewLesson:'Review this lesson', audioDisclosure:'Only exact approved hosted audio is played.', resumed:'Your previous position was restored.', aiVoice:'Exact approved audio unavailable', noVoice:'No exact approved audio is available here.', pendingNext:'More lessons are available'
     },
     vi: {
       lessonName:'Bài 4 · Âm thường, bật hơi và căng', progress:'Tiến độ bài học', home:'Về trang học tập', back:'Quay lại', next:'Tiếp tục', finish:'Hoàn thành bài',
@@ -47,7 +47,7 @@
       quizTag:'Luyện nghe phân biệt', replay:'Phát lại', replaySequence:'Phát lại chuỗi âm', chooseSyllable:'Phát một âm tiết đầy đủ rồi chọn âm bạn nghe thấy.', chooseAspirated:'Phát liên tiếp ba âm tiết riêng biệt rồi chọn âm bật hơi.', chooseCategory:'Phát một âm tiết đầy đủ rồi xác định âm thường, bật hơi hay căng.', correct:'Đúng. {detail}', incorrect:'Hãy nghe lại. {detail}', detailPlain:'Âm thường dùng luồng hơi tự nhiên, không thêm bật hơi hay siết.', detailAspirated:'Âm bật hơi có luồng hơi rõ sau khi bật âm.', detailTense:'Âm căng siết trước, bật ngắn và dùng ít hơi hơn.', answerWas:'Đáp án đúng là {answer}.',
       retryTitle:'Nghe lại âm dễ nhầm', retryLead:'Các âm trả lời sai sẽ xuất hiện lại ở đây. Hãy nghe đúng trước khi sang phần tổng kết.', retryEmpty:'Không có âm nào cần luyện lại. Bạn vẫn có thể quay lại nghe bất kỳ nhóm nào.', retryAgain:'Phát lại và thử lại', retryRemaining:'Còn {count} mục',
       summaryTitle:'Hôm nay xây nền tảng nghe phân biệt', summaryLead:'Tiếp tục so sánh trong tốc độ nói tự nhiên để khả năng phân biệt ổn định dần.', summary1:'Âm thường: luồng hơi tự nhiên', summary2:'Âm bật hơi: luồng hơi rõ', summary3:'Âm căng: siết trước, ít hơi hơn', summary4:'Mọi âm đều được học qua âm tiết đầy đủ',
-      completeTitle:'Đã hoàn thành Bài 4', completeLead:'Bạn đã hoàn thành vòng đầu so sánh âm thường, bật hơi và căng. Bạn có thể ôn lại bài bất cứ lúc nào.', xp:'+50 XP', earned:'Đã lưu tiến độ', returnCourses:'Trở về Bài học', reviewLesson:'Ôn lại bài này', audioDisclosure:'Chỉ phát tệp âm thanh lưu trữ đã duyệt và khớp chính xác.', resumed:'Đã khôi phục vị trí học trước đó.', aiVoice:'Không có âm thanh chính xác đã duyệt', noVoice:'Tại đây chưa có âm thanh chính xác đã duyệt.', pendingNext:'Có thêm bài học để tiếp tục'
+      completeTitle:'Đã hoàn thành Bài 4', completeLead:'Bạn đã hoàn thành vòng đầu so sánh âm thường, bật hơi và căng. Bạn có thể ôn lại bài bất cứ lúc nào.', xp:'Lần này bạn nhận +50 XP', xpClaimed:'Đã nhận thưởng lần đầu; lần này không cộng thêm XP', earned:'Đã lưu tiến độ', returnCourses:'Trở về Bài học', reviewLesson:'Ôn lại bài này', audioDisclosure:'Chỉ phát tệp âm thanh lưu trữ đã duyệt và khớp chính xác.', resumed:'Đã khôi phục vị trí học trước đó.', aiVoice:'Không có âm thanh chính xác đã duyệt', noVoice:'Tại đây chưa có âm thanh chính xác đã duyệt.', pendingNext:'Có thêm bài học để tiếp tục'
     },
     ja: {
       lessonName:'第4課 · 平音・激音・濃音', progress:'レッスン進捗', home:'学習ホームへ戻る', back:'戻る', next:'続ける', finish:'レッスン完了',
@@ -58,7 +58,7 @@
       quizTag:'聞き分け練習', replay:'もう一度再生', replaySequence:'もう一度連続再生', chooseSyllable:'完全な音節を一つ再生し、聞こえた音節を選びます。', chooseAspirated:'3つの独立した音節を連続再生し、その中の激音を選びます。', chooseCategory:'完全な音節を一つ再生し、平音・激音・濃音を判断します。', correct:'正解です。{detail}', incorrect:'もう一度聞きましょう。{detail}', detailPlain:'平音は余分な送気や緊張を加えず、自然な気流を使います。', detailAspirated:'激音は破裂後に明確な気流があります。', detailTense:'濃音は先に締め、短く破裂し、気流が少なめです。', answerWas:'正解は {answer} です。',
       retryTitle:'間違えやすい音を再生', retryLead:'先ほど間違えた音をここでもう一度練習します。正しく聞き分けてからまとめへ進みます。', retryEmpty:'再練習が必要な音はありません。戻ってどの比較でも聞き直せます。', retryAgain:'再生してもう一度', retryRemaining:'残り {count} 項目',
       summaryTitle:'今日は聞き分けの出発点を作る', summaryLead:'自然な速さでも繰り返し比べると、聞き分けが徐々に安定します。', summary1:'平音：自然な気流', summary2:'激音：明確な気流', summary3:'濃音：先に締め、気流は少なめ', summary4:'すべて完全な音節で学習',
-      completeTitle:'第4課 完了', completeLead:'平音・激音・濃音の最初の比較を完了しました。いつでも本課を復習できます。', xp:'+50 XP', earned:'学習進捗を保存しました', returnCourses:'コースへ戻る', reviewLesson:'この課を復習', audioDisclosure:'完全一致する審査済みのホスト音声だけを再生します。', resumed:'前回の学習位置を復元しました。', aiVoice:'完全一致する審査済み音声は利用できません', noVoice:'ここでは完全一致する審査済み音声を利用できません。', pendingNext:'続けて学べる課があります'
+      completeTitle:'第4課 完了', completeLead:'平音・激音・濃音の最初の比較を完了しました。いつでも本課を復習できます。', xp:'今回は +50 XP を獲得しました', xpClaimed:'初回完了報酬は受取済みです。今回はXPを追加しません', earned:'学習進捗を保存しました', returnCourses:'コースへ戻る', reviewLesson:'この課を復習', audioDisclosure:'完全一致する審査済みのホスト音声だけを再生します。', resumed:'前回の学習位置を復元しました。', aiVoice:'完全一致する審査済み音声は利用できません', noVoice:'ここでは完全一致する審査済み音声を利用できません。', pendingNext:'続けて学べる課があります'
     }
   };
   Object.assign(UI.zh,{playerPlay:'播放听力题音频',playerPlaying:'正在播放',playerReplay:'再次播放',playerLoading:'音频加载中',playerError:'音频暂时无法播放，请重试',playerAriaPlay:'播放本题韩语音频',playerAriaReplay:'再次播放本题韩语音频',testAudio:'当前播放精确匹配且已审核的托管音频。',transcriptLabel:'音频原文',categoryResult:'发音类别',correctAnswerLabel:'正确答案',teachingPointLabel:'学习提示',approximationLabel:'近似提示'});
@@ -100,6 +100,7 @@
   let playbackToken = 0;
   let previewSkipped = false;
   let retryFeedback = null;
+  let completionAwardedThisView = false;
   const autoplayed = new Set();
   const questionPlayerStates = new Map();
 
@@ -232,13 +233,16 @@
     return `<span class="eyebrow">14 · K0</span><h1>${text('summaryTitle')}</h1><p class="lead">${text('summaryLead')}</p><div class="summaryList"><div>① ${text('summary1')}</div><div>② ${text('summary2')}</div><div>③ ${text('summary3')}</div><div>④ ${text('summary4')}</div></div>${footer({nextLabel:text('finish')})}`;
   }
   function completeLesson() {
-    if(previewSkipped||session.previewSkipped||Object.keys(HOSTED_AUDIO).length<14)return; if(session.completed)return; session.completed=true; session.step=SCREENS.length-1;
+    if(previewSkipped||session.previewSkipped||Object.keys(HOSTED_AUDIO).length<14)return false; if(session.completed)return false;
+    const first = !(global.NikigoState?.get?.().completedLessons || []).includes(LESSON_ID);
+    session.completed=true; session.step=SCREENS.length-1; completionAwardedThisView=first;
     if(global.NikigoState)global.NikigoState.update(completionPatch,'contrast:complete');
     global.localStorage.setItem(SESSION_KEY,JSON.stringify(session));
+    return first;
   }
   function renderComplete() {
     if(Object.keys(HOSTED_AUDIO).length<14){previewSkipped=true;session.previewSkipped=true;saveSession()} completeLesson();
-    return `<div class="complete"><div class="completeMark">✓</div><span class="eyebrow">K0 · COMPLETE</span><h1>${text('completeTitle')}</h1><p class="lead centered">${text('completeLead')}</p><div class="rewards"><span class="reward">✦ ${text('xp')}</span><span class="reward">✓ ${text('earned')}</span><span class="reward">✓ ${text('pendingNext')}</span></div><div class="repeatActions"><button class="secondary" data-action="review">↻ ${text('reviewLesson')}</button><button class="primary" data-action="home">${text('returnCourses')} →</button></div></div>`;
+    return `<div class="complete"><div class="completeMark">✓</div><span class="eyebrow">K0 · COMPLETE</span><h1>${text('completeTitle')}</h1><p class="lead centered">${text('completeLead')}</p><div class="rewards"><span class="reward">✦ ${text(completionAwardedThisView?'xp':'xpClaimed')}</span><span class="reward">✓ ${text('earned')}</span><span class="reward">✓ ${text('pendingNext')}</span></div><div class="repeatActions"><button class="secondary" data-action="review">↻ ${text('reviewLesson')}</button><button class="primary" data-action="home">${text('returnCourses')} →</button></div></div>`;
   }
   function render() {
     const [type,id]=SCREENS[session.step]; const stage=document.getElementById('lessonStage');

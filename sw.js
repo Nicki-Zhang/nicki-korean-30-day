@@ -1,4 +1,4 @@
-const CACHE = 'nikigo-v26-course-identity-content-audit';
+const CACHE = 'nikigo-v27-self-review-gate';
 const ASSETS = [
   './', './index.html', './nikigo-app.html', './app-state.js', './course-catalog.js',
   './hangul-sound-data.js', './audio-catalog.js', './review.html', './review.css',

@@ -19,8 +19,9 @@ Browser: Google Chrome with a disposable user-data directory. No normal Chrome p
 - `lesson-consonant-contrast.html` is a one-way legacy redirect to canonical Lesson 4.
 - A one-time identity migration snapshots legacy values before writing, then maps old Lesson 4 progress to current `lesson-04` and old Lesson 7 progress to current `lesson-07` without sharing keys.
 - Completed Lessons 4–13 now expose a localized review action that resets only the lesson session; the completed profile record and one-time XP remain intact.
-- The Service Worker cache is bumped to `nikigo-v26-course-identity-content-audit`.
+- The Service Worker cache is bumped to `nikigo-v27-self-review-gate`.
 - Every current lesson exposes a runtime lesson identity, and a permanent visible-content gate checks real first, middle, and pre-completion content rather than step-array length alone.
+- `NIKIGO_DEVELOPMENT_RULES.md`, `NIKIGO_DEVELOPMENT_TODO.md`, and the executable test suite now require the permanent self-check, self-correction, and revalidation loop. A Sprint cannot pass on source existence or smoke checks alone.
 
 ## Content matrix
 
@@ -43,7 +44,13 @@ Browser: Google Chrome with a disposable user-data directory. No normal Chrome p
 
 All 14 routes rendered meaningful content with no blank page, title-only placeholder, wrong-course render, `undefined` text, or measured horizontal overflow. The exact DOM text and URLs are in `CONTENT_INTEGRITY_MATRIX.json`.
 
-Four complete courses were clicked through in four languages, including an incorrect answer and mandatory retry: Lesson 8 (zh), Lesson 9 (en), Lesson 11 (vi), and Lesson 13 (ja). All reached completion with exactly +50 XP and zero Chrome console issues.
+Four complete courses were clicked through in four languages, including an incorrect answer and mandatory retry: Lesson 10 (zh), Lesson 11 (en), Lesson 12 (vi), and Lesson 13 (ja). All reached completion with exactly +50 XP once; repeat completion kept XP at 50. Lesson 4 separately passed a full correct route, incorrect answer, retry, course back, browser back, refresh, first completion, repeat completion, and re-learning check.
+
+## Three-layer completion evidence
+
+- Source code exists: all 14 canonical files, identities, localized teaching copy, examples, exercises, reachable answers, summaries, and migration keys pass static executable checks.
+- Browser actually renders: all 14 courses were entered by clicking the visible course home in disposable Google Chrome; each has beginning, middle, and pre-completion DOM evidence and screenshots at the required checkpoints.
+- User can operate it: the four-language full-course runs and the dedicated Lesson 4 run exercised answers, retry, navigation, refresh, completion, repeated completion, and review re-entry. Console warnings/errors and failed network requests were zero after correction.
 
 ## Lesson 4 / Lesson 7 progress combinations
 
@@ -55,6 +62,14 @@ Four complete courses were clicked through in four languages, including an incor
 | Lesson 4 only | `lesson-04`, 15/15 + review | `lesson-07`, 1/13 | none |
 
 The eight real-Chrome screenshots and full localStorage/profile evidence are under `progress-combinations/`.
+
+## Self-correction log
+
+1. The initial audit exposed the Lesson 4/7 semantic identity inversion and completion-only re-entry. Both were treated as blockers and repaired before revalidation.
+2. The first permanent-gate Chrome run detected the deprecated mobile-capable meta warning. The standards-compatible meta declaration was added, the Service Worker cache was bumped, and the complete 14-course matrix was rerun to zero warnings/errors.
+3. The Lesson 4 repeat-completion screen visibly claimed `+50 XP` even though storage correctly prevented a second award. The visible copy now distinguishes first award from an already-claimed award, and the complete interaction was rerun.
+4. The first four-state progress rerun was contaminated by the audit harness clearing storage while an old lesson runtime remained active. Manual storage inspection showed the application preserved a truly blank profile. The harness was corrected to force a neutral course-home reload for every seed; rerun profiles are exactly `[]`, `[lesson-04, lesson-07]`, `[lesson-07]`, and `[lesson-04]`.
+5. Historical Lesson 1–4 copy suggested device-voice behavior that the privacy implementation forbids. Effective four-language copy was corrected to describe only exact approved hosted assets; static privacy checks and Chrome evidence were rerun.
 
 ## Audio and API invariants
 
