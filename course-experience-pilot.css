@@ -1,0 +1,283 @@
+:root{
+  --pilot-brand:#6846e8;
+  --pilot-brand-deep:#2f255c;
+  --pilot-brand-soft:#f0ecff;
+  --pilot-canvas:#f7f5fb;
+  --pilot-surface:#fff;
+  --pilot-ink:#211b35;
+  --pilot-muted:#6e687c;
+  --pilot-line:#e3dfea;
+  --pilot-success:#16724d;
+  --pilot-success-bg:#eaf7f1;
+  --pilot-error:#a8374c;
+  --pilot-error-bg:#fff0f2;
+  --pilot-focus:#9a86f0;
+  --pilot-shadow:0 20px 54px rgba(47,37,92,.10);
+  --pilot-radius:28px;
+}
+
+.courseExperiencePilot{
+  min-height:100dvh;
+  background:var(--pilot-canvas);
+  color:var(--pilot-ink);
+  padding-bottom:max(20px,env(safe-area-inset-bottom));
+}
+.courseExperiencePilot .top{
+  min-height:72px;
+  height:auto;
+  padding-top:max(8px,env(safe-area-inset-top));
+}
+.courseExperiencePilot .logo{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  color:var(--pilot-ink);
+  min-width:44px;
+  min-height:44px;
+}
+.courseExperiencePilot .logo img{width:30px;height:30px;border-radius:9px}
+.courseExperiencePilot .logo span{font-size:20px;font-weight:950;letter-spacing:-.03em}
+.courseExperiencePilot .homeButton svg{width:20px;height:20px;fill:currentColor}
+.courseExperiencePilot .languagePicker{background:transparent;padding:0;border:0}
+.courseExperiencePilot .languagePicker select{
+  min-height:44px;
+  border:1px solid var(--pilot-line);
+  border-radius:13px;
+  background:var(--pilot-surface);
+  padding:0 34px 0 12px;
+}
+.courseExperiencePilot .progressWrap{margin-top:4px;margin-bottom:18px}
+.courseExperiencePilot .progressMeta{font-size:12px;color:var(--pilot-muted);font-weight:850}
+.courseExperiencePilot .track{height:7px;background:#e6e2ed}
+.courseExperiencePilot .track i{background:var(--pilot-brand);transition:width .24s ease}
+.courseExperiencePilot .stage{width:min(860px,calc(100% - 32px));margin:0 auto 36px;padding:0}
+.courseExperiencePilot .sprintCard,
+.courseExperiencePilot .contrastCard{
+  min-height:min(650px,calc(100dvh - 150px));
+  border:1px solid var(--pilot-line);
+  border-radius:var(--pilot-radius);
+  background:var(--pilot-surface);
+  box-shadow:var(--pilot-shadow);
+  padding:clamp(24px,5vw,48px);
+  position:relative;
+  overflow:hidden;
+}
+.courseExperiencePilot .sprintCard::before,
+.courseExperiencePilot .contrastCard::before{
+  content:"";
+  display:block;
+  width:48px;
+  height:5px;
+  margin-bottom:26px;
+  border-radius:99px;
+  background:var(--pilot-brand);
+}
+.courseExperiencePilot .modulePill,
+.courseExperiencePilot .eyebrow{
+  color:var(--pilot-brand-deep);
+  background:var(--pilot-brand-soft);
+  border-radius:999px;
+  padding:7px 11px;
+  font-size:11px;
+  letter-spacing:.06em;
+  font-weight:900;
+}
+.courseExperiencePilot .eyebrow::before{display:none}
+.courseExperiencePilot .tag{margin-top:14px;color:var(--pilot-brand);font-size:11px}
+.courseExperiencePilot h1{
+  max-width:760px;
+  margin:14px 0 10px;
+  color:var(--pilot-ink);
+  font-size:clamp(31px,5vw,50px);
+  line-height:1.08;
+  letter-spacing:-.035em;
+}
+.courseExperiencePilot .lead{max-width:700px;margin:0;color:var(--pilot-muted);line-height:1.62}
+.courseExperiencePilot .korean,
+.courseExperiencePilot .soundSyllable,
+.courseExperiencePilot .buildResult strong{
+  color:var(--pilot-brand-deep);
+  font-family:"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  font-weight:950;
+}
+.courseExperiencePilot .learningGrid,
+.courseExperiencePilot .conceptGrid,
+.courseExperiencePilot .goals{gap:12px;margin:26px 0}
+.courseExperiencePilot .learningItem,
+.courseExperiencePilot .concept,
+.courseExperiencePilot .goal{
+  border:1px solid var(--pilot-line);
+  border-radius:18px;
+  background:#fbfaff;
+  padding:18px;
+}
+.courseExperiencePilot .learningItem strong,
+.courseExperiencePilot .goal b{font-size:15px;color:var(--pilot-brand-deep)}
+.courseExperiencePilot .learningItem p,
+.courseExperiencePilot .goal span{color:var(--pilot-muted);line-height:1.5}
+.courseExperiencePilot .dialogue{gap:14px;max-width:720px}
+.courseExperiencePilot .bubble{
+  border:1px solid var(--pilot-line);
+  border-radius:20px 20px 20px 6px;
+  background:#faf9fd;
+  padding:16px 18px;
+  box-shadow:0 7px 20px rgba(47,37,92,.05);
+}
+.courseExperiencePilot .bubble.b{
+  border-radius:20px 20px 6px 20px;
+  background:var(--pilot-brand-soft);
+}
+.courseExperiencePilot .bubble .korean{display:block;font-size:clamp(28px,5vw,43px);line-height:1.2}
+.courseExperiencePilot .bubble p{margin:7px 0 0;color:var(--pilot-muted)}
+.courseExperiencePilot .optionGrid,
+.courseExperiencePilot .quizOptions,
+.courseExperiencePilot .matchGrid,
+.courseExperiencePilot .partGroups{gap:11px;margin:24px 0}
+.courseExperiencePilot .option,
+.courseExperiencePilot .quizOption,
+.courseExperiencePilot .matchButton,
+.courseExperiencePilot .partButton{
+  min-height:56px;
+  border:1px solid var(--pilot-line);
+  border-radius:16px;
+  background:#fff;
+  color:var(--pilot-ink);
+  padding:13px 16px;
+  box-shadow:none;
+}
+.courseExperiencePilot .option:hover,
+.courseExperiencePilot .quizOption:hover,
+.courseExperiencePilot .matchButton:hover,
+.courseExperiencePilot .partButton:hover{border-color:var(--pilot-focus);background:#faf9ff}
+.courseExperiencePilot .option.correct,
+.courseExperiencePilot .quizOption.correct,
+.courseExperiencePilot .matchButton.done{
+  border:2px solid var(--pilot-success);
+  background:var(--pilot-success-bg);
+}
+.courseExperiencePilot .option.correct::after{content:" ✓";font-weight:950;color:var(--pilot-success)}
+.courseExperiencePilot .option.wrong,
+.courseExperiencePilot .quizOption.wrong{
+  border:2px solid var(--pilot-error);
+  background:var(--pilot-error-bg);
+  text-decoration:line-through;
+  text-decoration-thickness:2px;
+}
+.courseExperiencePilot .feedback{
+  display:grid;
+  gap:5px;
+  border:1px solid var(--pilot-line);
+  border-left-width:5px;
+  border-radius:16px;
+  padding:14px 16px;
+  line-height:1.5;
+}
+.courseExperiencePilot .feedback.good{border-left-color:var(--pilot-success);background:var(--pilot-success-bg);color:var(--pilot-success)}
+.courseExperiencePilot .feedback.try{border-left-color:var(--pilot-error);background:var(--pilot-error-bg);color:var(--pilot-error)}
+.courseExperiencePilot .feedback.good b::before{content:"✓ ";font-weight:950}
+.courseExperiencePilot .feedback.try b::before{content:"× ";font-weight:950}
+.courseExperiencePilot .buildResult,
+.courseExperiencePilot .quizAudio,
+.courseExperiencePilot .repeatBox{
+  border:1px solid #d9d1f4;
+  background:var(--pilot-brand-soft);
+  color:var(--pilot-brand-deep);
+  box-shadow:none;
+}
+.courseExperiencePilot .soundPlay,
+.courseExperiencePilot .sequenceButton,
+.courseExperiencePilot .replayButton,
+.courseExperiencePilot .audioButton,
+.courseExperiencePilot .primary{
+  min-height:48px;
+  border-radius:15px;
+  background:var(--pilot-brand);
+  color:#fff;
+  box-shadow:none;
+}
+.courseExperiencePilot button:disabled{cursor:not-allowed;opacity:.52}
+.courseExperiencePilot .foot{
+  margin-top:auto;
+  padding-top:28px;
+  border-top:1px solid var(--pilot-line);
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:12px;
+}
+.courseExperiencePilot .foot .secondary,
+.courseExperiencePilot .foot .ghost{
+  justify-self:start;
+  min-height:44px;
+  border:0;
+  background:transparent;
+  color:var(--pilot-muted);
+  box-shadow:none;
+  padding:8px 4px;
+}
+.courseExperiencePilot .foot .primary{justify-self:end;min-width:150px;padding:0 22px}
+.courseExperiencePilot .completeMark{
+  width:88px;
+  height:88px;
+  border-radius:26px;
+  background:var(--pilot-brand-deep);
+  color:#dff6aa;
+}
+.courseExperiencePilot .rewards{margin:24px 0}
+.courseExperiencePilot .reward{border:1px solid var(--pilot-line);background:#faf9fd;color:var(--pilot-brand-deep)}
+.courseExperiencePilot .repeatActions{display:grid;grid-template-columns:1fr auto;gap:12px;border-top:1px solid var(--pilot-line);padding-top:28px}
+.courseExperiencePilot .repeatActions .secondary{justify-self:start;border:0;background:transparent;color:var(--pilot-muted)}
+.courseExperiencePilot .repeatActions .primary{justify-self:end}
+.courseExperiencePilot :is(button,select):focus-visible{outline:3px solid var(--pilot-focus);outline-offset:3px}
+
+.courseExperiencePilot.pilotDialogue .pilotIsOpening .sprintCard,
+.courseExperiencePilot.pilotNumbers .pilotIsOpening .sprintCard{background:#fff}
+.courseExperiencePilot.pilotDialogue .dialogue{margin-left:auto;margin-right:auto}
+.courseExperiencePilot.pilotNumbers.pilotIsOpening .learningItem>span{
+  display:block;
+  margin-top:8px;
+  color:var(--pilot-brand-deep);
+  font-family:"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  font-size:clamp(20px,3vw,26px);
+  font-weight:900;
+  line-height:1.4;
+}
+.courseExperiencePilot.pilotNumbers .learningItem .korean{font-size:clamp(34px,6vw,56px)}
+.courseExperiencePilot.pilotPronunciation .contrastSound{border-color:var(--pilot-line);background:#fbfaff}
+.courseExperiencePilot.pilotPronunciation .soundCategory{background:var(--pilot-brand-soft);color:var(--pilot-brand-deep)}
+
+@media(max-width:760px){
+  .courseExperiencePilot .top,
+  .courseExperiencePilot .progressWrap,
+  .courseExperiencePilot .stage{width:calc(100% - 24px);padding-left:0;padding-right:0}
+  .courseExperiencePilot .top{width:100%;padding-left:12px;padding-right:12px}
+  .courseExperiencePilot .lessonName{display:none}
+  .courseExperiencePilot .sprintCard,
+  .courseExperiencePilot .contrastCard{min-height:calc(100dvh - 132px);padding:24px 18px;border-radius:22px}
+  .courseExperiencePilot .learningGrid,
+  .courseExperiencePilot .conceptGrid,
+  .courseExperiencePilot .goals,
+  .courseExperiencePilot .optionGrid,
+  .courseExperiencePilot .quizOptions,
+  .courseExperiencePilot .matchGrid,
+  .courseExperiencePilot .partGroups{grid-template-columns:1fr}
+  .courseExperiencePilot .bubble{max-width:94%}
+  .courseExperiencePilot .foot,
+  .courseExperiencePilot .repeatActions{grid-template-columns:1fr}
+  .courseExperiencePilot .foot .primary,
+  .courseExperiencePilot .repeatActions .primary{width:100%;justify-self:stretch;order:1}
+  .courseExperiencePilot .foot .secondary,
+  .courseExperiencePilot .foot .ghost,
+  .courseExperiencePilot .repeatActions .secondary{justify-self:center;order:2}
+}
+@media(max-width:430px){
+  .courseExperiencePilot .logo span{display:none}
+  .courseExperiencePilot .languagePicker select{max-width:142px}
+  .courseExperiencePilot h1{font-size:32px}
+  .courseExperiencePilot .korean{font-size:34px}
+}
+@media(prefers-reduced-motion:reduce){
+  .courseExperiencePilot *,
+  .courseExperiencePilot *::before,
+  .courseExperiencePilot *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}
+}

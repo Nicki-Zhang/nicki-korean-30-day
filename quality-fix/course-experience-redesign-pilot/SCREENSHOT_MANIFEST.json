@@ -1,0 +1,37 @@
+{
+  "browser": "Google Chrome",
+  "browserVersion": "Chrome/150.0.7871.129",
+  "navigationSource": "visible-course-home-click",
+  "viewports": [390, 768, 1440],
+  "lessons": {
+    "lesson-04": [
+      "screenshots/lesson-04-01-opening-390.png",
+      "screenshots/lesson-04-02-core-390.png",
+      "screenshots/lesson-04-03-practice-wrong-390.png",
+      "screenshots/lesson-04-03-practice-correct-390.png",
+      "screenshots/lesson-04-04-complete-390.png"
+    ],
+    "lesson-09": [
+      "screenshots/lesson-09-01-opening-390.png",
+      "screenshots/lesson-09-02-core-390.png",
+      "screenshots/lesson-09-03-practice-wrong-390.png",
+      "screenshots/lesson-09-03-practice-correct-390.png",
+      "screenshots/lesson-09-04-complete-390.png"
+    ],
+    "lesson-13": [
+      "screenshots/lesson-13-01-opening-390.png",
+      "screenshots/lesson-13-02-core-390.png",
+      "screenshots/lesson-13-03-practice-wrong-390.png",
+      "screenshots/lesson-13-03-practice-correct-390.png",
+      "screenshots/lesson-13-04-complete-390.png"
+    ]
+  },
+  "responsiveEvidence": [
+    "screenshots/lesson-04-responsive-768.png",
+    "screenshots/lesson-04-responsive-1440.png",
+    "screenshots/lesson-09-responsive-768.png",
+    "screenshots/lesson-09-responsive-1440.png",
+    "screenshots/lesson-13-responsive-768.png",
+    "screenshots/lesson-13-responsive-1440.png"
+  ]
+}

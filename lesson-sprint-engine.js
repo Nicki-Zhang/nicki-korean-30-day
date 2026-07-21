@@ -48,6 +48,7 @@
   const format = (value,data) => String(value).replace(/\{(\w+)\}/g,(_,key)=>data[key]??'');
   const escape = value => String(value).replace(/[&<>"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[char]));
   const current = () => config.steps[session.step];
+  const isExperiencePilot = ['lesson-09','lesson-13'].includes(config.id);
   const isInteractive = step => ['choice','scenario','listening','match','build'].includes(step.type);
   const stepDone = step => !isInteractive(step) || Boolean(session.answers[step.id]?.done);
   function save() {
@@ -74,7 +75,7 @@
     }
     if(['choice','scenario','listening'].includes(step.type)){
       const answer=session.answers[step.id];
-      return `${step.context?`<div class="dialogue">${step.context.map(line=>`<div class="bubble ${line.role==='B'?'b':''}"><b>${escape(line.role)}</b><span class="korean">${escape(line.korean)}</span>${line.translation?`<p>${escape(tr(line.translation))}</p>`:''}</div>`).join('')}</div>`:''}${step.type==='listening'?renderAudios(step,true):renderAudios(step)}<div class="optionGrid">${step.options.map(option=>{let cls='option';if(answer?.selected===option.id)cls+=answer.correct?' correct':' wrong';else if(answer&&!answer.correct&&option.id===step.correct)cls+=' correct';return `<button type="button" class="${cls}" data-action="answer" data-value="${escape(option.id)}" ${answer?'disabled':''}>${escape(option.korean||tr(option.label))}</button>`}).join('')}</div>${answer?`<div class="feedback ${answer.correct?'good':'try'}"><b>${escape(answer.correct?ui('correct'):ui('incorrect'))}</b><span>${escape(tr(step.explanation))}</span></div>`:''}`;
+      return `${step.context?`<div class="dialogue">${step.context.map(line=>`<div class="bubble ${line.role==='B'?'b':''}"><b>${escape(line.role)}</b><span class="korean">${escape(line.korean)}</span>${line.translation?`<p>${escape(tr(line.translation))}</p>`:''}</div>`).join('')}</div>`:''}${step.type==='listening'?renderAudios(step,true):renderAudios(step)}<div class="optionGrid">${step.options.map(option=>{let cls='option';if(answer?.selected===option.id)cls+=answer.correct?' correct':' wrong';else if(answer&&!answer.correct&&!isExperiencePilot&&option.id===step.correct)cls+=' correct';return `<button type="button" class="${cls}" data-action="answer" data-value="${escape(option.id)}" ${answer?'disabled':''}>${escape(option.korean||tr(option.label))}</button>`}).join('')}</div>${answer?`<div class="feedback ${answer.correct?'good':'try'}"><b>${escape(answer.correct?ui('correct'):ui('incorrect'))}</b>${answer.correct||!isExperiencePilot?`<span>${escape(tr(step.explanation))}</span>`:''}</div>`:''}`;
     }
     if(step.type==='match'){
       const state=session.match[step.id]||{left:null,done:[]};const done=new Set(state.done||[]);const answer=session.answers[step.id];
@@ -82,7 +83,7 @@
     }
     if(step.type==='build'){
       const state=session.build[step.id]||{};const answer=session.answers[step.id];const built=step.groups.map(group=>group.options.find(option=>option.id===state[group.id])?.korean||'•').join('');
-      return `<div class="partGroups">${step.groups.map(group=>`<div class="partGroup"><small>${escape(tr(group.label))}</small>${group.options.map(option=>`<button type="button" class="partButton ${state[group.id]===option.id?'selected':''}" data-action="part" data-group="${group.id}" data-value="${option.id}">${escape(option.korean)}</button>`).join('')}</div>`).join('')}</div><div class="buildResult"><strong>${escape(built)}</strong></div><button type="button" class="primary audioButton" data-action="confirm-build">${escape(ui('build'))}</button>${answer?`<div class="feedback ${answer.correct?'good':'try'}"><b>${escape(answer.correct?ui('correct'):ui('incorrect'))}</b><span>${escape(tr(step.explanation))}</span></div>`:''}`;
+      return `<div class="partGroups">${step.groups.map(group=>`<div class="partGroup"><small>${escape(tr(group.label))}</small>${group.options.map(option=>`<button type="button" class="partButton ${state[group.id]===option.id?'selected':''}" data-action="part" data-group="${group.id}" data-value="${option.id}">${escape(option.korean)}</button>`).join('')}</div>`).join('')}</div><div class="buildResult"><strong>${escape(built)}</strong></div><button type="button" class="primary audioButton" data-action="confirm-build">${escape(ui('build'))}</button>${answer?`<div class="feedback ${answer.correct?'good':'try'}"><b>${escape(answer.correct?ui('correct'):ui('incorrect'))}</b>${answer.correct||!isExperiencePilot?`<span>${escape(tr(step.explanation))}</span>`:''}</div>`:''}`;
     }
     return '';
   }
