@@ -5,6 +5,7 @@
   // so users of the historical batchim lesson keep progress and one-time XP.
   const LESSON_ID = 'lesson-04';
   const SESSION_KEY = `nikigoLessonSession:${LESSON_ID}`;
+  const BASE_SYLLABLE_AUDIO = global.NikigoAudio?.resolve?.('바','syllable',LESSON_ID);
   const LANGUAGES = ['zh', 'en', 'vi', 'ja'];
   const SCREENS = ['intro','structure','san','mom','gong','mul','compare','split','build','recognize','challenge','retry','complete'];
   const EXAMPLES = Object.freeze([
@@ -136,6 +137,7 @@
 
   let language = languageFromEnvironment();
   let profile = global.NikigoState?.get?.() || {};
+  let currentAudio = null;
   let session = readSession();
   let completionAwardedThisView = false;
 
@@ -183,6 +185,15 @@
   function footer({disabled=false,label=text('next'),action='next'}={}) { return `<div class="foot"><button class="ghost" data-action="back">← ${text('back')}</button><button class="primary" data-action="${action}" ${disabled?'disabled':''}>${label} →</button></div>`; }
   function releaseNotice() { return `<aside class="lesson07Notice" role="status"><strong>${text('previewTitle')}</strong>${text('previewLead')}</aside>`; }
   function audioButton(word) { return `<button class="audioUnavailable" type="button" disabled aria-disabled="true" aria-label="${text('listenWord',{word})} · ${text('audioUnavailable')}">${text('listenWord',{word})} · ${text('audioUnavailable')}</button>`; }
+  function baseSyllableAudioButton() { return BASE_SYLLABLE_AUDIO?.playable ? `<button class="secondary" type="button" data-action="base-audio" aria-label="${text('listenWord',{word:'바'})}">▶ ${text('listenWord',{word:'바'})}</button>` : audioButton('바'); }
+  function playBaseSyllableAudio() {
+    if (!BASE_SYLLABLE_AUDIO?.playable || !BASE_SYLLABLE_AUDIO.path) return;
+    currentAudio?.pause();
+    currentAudio = new Audio(BASE_SYLLABLE_AUDIO.path);
+    currentAudio.playbackRate = Math.min(1.2,Math.max(.8,Number(profile.audioRate)||1));
+    currentAudio.preservesPitch = true;
+    currentAudio.play().catch(()=>{});
+  }
   function exampleCard(item) { return `<article class="batchimCard"><strong class="batchimWord">${item.word}</strong><span class="batchimMeaning">${text(item.meaning)}</span><span class="finalBadge">${text('finalLabel')} ${item.final}</span><div class="syllableBreakdown">${item.word} → ${item.base} + ${item.final}</div><small class="endingHint">${text('endingSound')}：${item.final} ${item.ending}</small>${audioButton(item.word)}</article>`; }
   function renderIntro() { return `<span class="eyebrow">${text('introTag')}</span><h1>${text('introTitle')}</h1><p class="lead">${text('introLead')}</p><div class="goals">${[1,2,3].map(i=>`<div class="goal"><b>${text(`goal${i}`)}</b><span>${text(`goal${i}d`)}</span></div>`).join('')}</div><div class="note">${text('noBareFinal')}</div>${footer()}`; }
   function renderStructure() { return `<span class="eyebrow">${text('structureTag')}</span><h1>${text('structureTitle')}</h1><p class="lead">${text('structureLead')}</p><div class="positionDiagram"><div class="blockDiagram" aria-label="${text('onset')}, ${text('vowel')}, ${text('final')}"><span>ㅅ</span><span>ㅏ</span><span class="final">ㄴ</span></div><div class="diagramNotes"><div>1 · ${text('onset')}：ㅅ</div><div>2 · ${text('vowel')}：ㅏ</div><div>3 · ${text('final')}：ㄴ</div><div>${text('structureNote')}</div></div></div>${footer()}`; }
@@ -195,7 +206,7 @@
   function renderPractice(questions,key,action,promptKey) { return questions.map(q=>{ const answer=session[key][q.id]; return `<article class="practiceCard"><div class="practicePrompt">${promptKey?text(q.prompt):q.prompt}</div><div class="practiceOptions">${q.options.map(value=>`<button class="${answer?(value===q.correct?'correct':value===answer.choice?'wrong':''):''}" data-action="${action}" data-question="${q.id}" data-value="${value}" ${answer?.correct?'disabled':''}>${value}${answer&&value===q.correct?' ✓':answer&&value===answer.choice?' ✕':''}</button>`).join('')}</div>${answer?`<div class="feedback ${answer.correct?'good':'try'}"><strong>${answer.correct?text('correct'):text('incorrect',{answer:q.correct})}</strong></div>`:''}</article>`; }).join(''); }
   function renderSplit() { return `<span class="eyebrow">${text('splitTag')}</span><h1>${text('splitTitle')}</h1><p class="lead">${text('splitLead')}</p><div class="practiceGrid">${renderPractice(SPLIT_QUESTIONS,'splitAnswers','split-answer',false)}</div>${footer({disabled:!allCorrect(SPLIT_QUESTIONS,'splitAnswers')})}`; }
   function buildResult() { return BUILD_MAP[`${session.base}+${session.final}`]||''; }
-  function renderBuild() { const result=buildResult(),done=session.built.length===4; return `<span class="eyebrow">${text('buildTag')}</span><h1>${text('buildTitle')}</h1><p class="lead">${text('buildLead')}</p><div class="builderPanel"><div class="builderGroup"><label>${text('base')}</label><div class="builderChoices">${['사','모','고','무'].map(v=>`<button class="builderChoice ${session.base===v?'on':''}" data-action="builder-pick" data-kind="base" data-value="${v}" aria-pressed="${session.base===v}">${v}</button>`).join('')}</div></div><b class="builderOperator">+</b><div class="builderGroup"><label>${text('chooseFinal')}</label><div class="builderChoices">${['ㄴ','ㅁ','ㅇ','ㄹ'].map(v=>`<button class="builderChoice ${session.final===v?'on':''}" data-action="builder-pick" data-kind="final" data-value="${v}" aria-pressed="${session.final===v}">${v}</button>`).join('')}</div></div><b class="builderOperator">=</b><button class="builderResult" data-action="build" ${result?'':'disabled'} aria-label="${result?text('confirmBuild',{word:result}):text('invalidBuild')}"><strong>${result||'—'}</strong><small>${result?text('confirmBuild',{word:result}):text('invalidBuild')}</small></button></div><b>${text('built')}：</b><div class="builtWords">${session.built.map(word=>`<span>${word}</span>`).join('')||'—'}</div>${done?'':`<div class="note">${text('buildNeed')}</div>`}${footer({disabled:!done})}`; }
+  function renderBuild() { const result=buildResult(),done=session.built.length===4; return `<span class="eyebrow">${text('buildTag')}</span><h1>${text('buildTitle')}</h1><p class="lead">${text('buildLead')}</p><div class="builderPanel"><div class="builderGroup"><label>${text('base')}</label><div class="builderChoices">${['사','모','고','무'].map(v=>`<button class="builderChoice ${session.base===v?'on':''}" data-action="builder-pick" data-kind="base" data-value="${v}" aria-pressed="${session.base===v}">${v}</button>`).join('')}</div></div><b class="builderOperator">+</b><div class="builderGroup"><label>${text('chooseFinal')}</label><div class="builderChoices">${['ㄴ','ㅁ','ㅇ','ㄹ'].map(v=>`<button class="builderChoice ${session.final===v?'on':''}" data-action="builder-pick" data-kind="final" data-value="${v}" aria-pressed="${session.final===v}">${v}</button>`).join('')}</div></div><b class="builderOperator">=</b><button class="builderResult" data-action="build" ${result?'':'disabled'} aria-label="${result?text('confirmBuild',{word:result}):text('invalidBuild')}"><strong>${result||'—'}</strong><small>${result?text('confirmBuild',{word:result}):text('invalidBuild')}</small></button></div><div class="repeatActions">${baseSyllableAudioButton()}</div><b>${text('built')}：</b><div class="builtWords">${session.built.map(word=>`<span>${word}</span>`).join('')||'—'}</div>${done?'':`<div class="note">${text('buildNeed')}</div>`}${footer({disabled:!done})}`; }
   function renderRecognize() { return `<span class="eyebrow">${text('recognizeTag')}</span><h1>${text('recognizeTitle')}</h1><p class="lead">${text('recognizeLead')}</p><div class="practiceGrid">${renderPractice(RECOGNIZE_QUESTIONS,'recognizeAnswers','recognize-answer',true)}</div>${footer({disabled:!allCorrect(RECOGNIZE_QUESTIONS,'recognizeAnswers')})}`; }
   function labelOption(value) { return OPTION_KEYS[value]?text(OPTION_KEYS[value]):value; }
   function feedback(question,answer) { return answer?`<div class="feedback ${answer.correct?'good':'try'}"><strong>${answer.correct?text('correct'):text('incorrect',{answer:labelOption(question.correct)})}</strong><span>${text('correctAnswer')}：${labelOption(question.correct)}</span><span>${text(question.explain)}</span></div>`:''; }
@@ -231,6 +242,7 @@
   document.addEventListener('click',event=>{
     const button=event.target.closest('button'); if(!button)return; const action=button.dataset.action;
     if(button.id==='homeButton'||button.id==='homeLogo'||action==='home'){goHome();return;}
+    if(action==='base-audio'){playBaseSyllableAudio();return;}
     if(action==='back')session.step=Math.max(0,session.step-1);
     else if(action==='next'){const screen=SCREENS[session.step];if(!allowed(screen))return;session.step=Math.min(SCREENS.length-1,session.step+1);}
     else if(action==='split-answer')answerQuestion('splitAnswers',SPLIT_QUESTIONS,button.dataset.question,button.dataset.value);

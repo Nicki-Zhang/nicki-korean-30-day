@@ -32,7 +32,7 @@ assert.ok(contrast.every(x=>x.reviewStatus==='approved'&&x.assetStatus==='availa
 assert.ok(batch2a.items.every(allowed=>contrast.some(item=>item.id===allowed.id&&item.speechText===allowed.speechText&&item.audioType===allowed.audioType&&item.file===allowed.outputFile)));
 
 const all=Object.values(audio.lessons).flatMap(lesson=>lesson.items);
-assert.equal(all.filter(x=>x.reviewStatus==='approved'&&x.assetStatus==='available').length,18);
+assert.equal(all.filter(x=>x.reviewStatus==='approved'&&x.assetStatus==='available').length,54);
 assert.ok(all.some(x=>x.lessonId==='lesson-00'&&x.speechText==='하'&&x.audioType==='initial-example'&&x.reviewStatus==='approved'&&x.assetStatus==='available'));
 assert.ok(all.some(x=>x.lessonId==='lesson-05'&&x.speechText==='그'&&x.audioType==='syllable'&&x.reviewStatus==='approved'&&x.assetStatus==='available'));
 assert.match(fs.readFileSync('hangul-sound-data.js','utf8'),/consonant\('ㅎ',[^\n]*'하'/u);

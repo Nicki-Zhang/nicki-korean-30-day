@@ -9,7 +9,9 @@ const manifest=JSON.parse(fs.readFileSync('audio/lesson-07/manifest.json','utf8'
 assert.match(html,/lesson-07\.css/);
 assert.match(html,/lesson-07\.js/);
 assert.match(html,/audio-catalog\.js/);
-assert.doesNotMatch(source,/speechSynthesis|SpeechSynthesisUtterance|new Audio\s*\(/);
+assert.doesNotMatch(source,/speechSynthesis|SpeechSynthesisUtterance/);
+assert.match(source,/resolve\?\.\('바','syllable',LESSON_ID\)/);
+assert.match(source,/if \(!BASE_SYLLABLE_AUDIO\?\.playable \|\| !BASE_SYLLABLE_AUDIO\.path\) return;/);
 assert.doesNotMatch(source,/prerequisite|requiresCompletion|lockedTitle/);
 assert.match(css,/@media\s*\(max-width:\s*760px\)/);
 assert.match(css,/min-height:\s*44px/);

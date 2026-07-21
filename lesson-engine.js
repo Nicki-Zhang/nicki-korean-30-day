@@ -288,10 +288,31 @@
       return Math.round((index + 1) / screens.length * 100);
     }
 
+    function screenAudioValues(screen) {
+      if (!screen) return [];
+      if (screen.type === 'vowels' && config.batchimExamples) return config.batchimExamples.map(item => item.audio);
+      if (screen.type === 'vowels' || screen.type === 'consonants') return config[screen.type].map(item => hasStructuredItems(config[screen.type]) ? (item.type === 'vowel' ? item.vowelCarrierSyllable : item.demoSyllable) : item[2]);
+      if (screen.type === 'words') return config.words.map(item => item[0]);
+      if (screen.type === 'phrase') return [config.phrase?.audio];
+      if (screen.type === 'builder') return Object.values(config.syllables || {});
+      if (screen.type === 'practice') return [config.practice[screen.question]?.audio];
+      if (screen.type === 'repeat') return [config.repeat?.audio];
+      if (screen.type === 'quiz') return [config.quiz[screen.question]?.audio];
+      return [];
+    }
+
+    function screenHasUnavailableAudio(screen) {
+      const values = screenAudioValues(screen).flat().filter(Boolean);
+      return values.length > 0 && !values.every(value => Boolean(config.audioFiles?.[value]));
+    }
+
     function shell(body) {
       const previousLabel = index === 0 ? copy('returnHome') : copy('back');
       const preview = audioPreviewSkips.has(index) ? `<p class="note">${soundUi('previewOnly')}</p>` : '';
-      return `${body}${preview}<p class="aiDisclosure">ⓘ ${soundUi('audioNotReleased')}</p><div class="foot"><button class="ghost" data-action="previous">← ${previousLabel}</button><button class="secondary" data-action="skip-audio">${soundUi('skipAudioPreview')}</button><button class="primary" id="nextButton" data-action="next">${copy(index === screens.length - 2 ? 'finish' : 'continue')} →</button></div>`;
+      const unavailable = screenHasUnavailableAudio(screens[index]);
+      const disclosure = unavailable ? `<p class="aiDisclosure">ⓘ ${soundUi('audioNotReleased')}</p>` : '';
+      const skip = unavailable ? `<button class="secondary" data-action="skip-audio">${soundUi('skipAudioPreview')}</button>` : '';
+      return `${body}${preview}${disclosure}<div class="foot"><button class="ghost" data-action="previous">← ${previousLabel}</button>${skip}<button class="primary" id="nextButton" data-action="next">${copy(index === screens.length - 2 ? 'finish' : 'continue')} →</button></div>`;
     }
 
     function renderIntro() {
@@ -339,7 +360,7 @@
       const translation = questionTranslation(question);
       const playerModel = questionPlayerModel(question, language, playerState, Boolean(answer), translation);
       const reveal = answer && question.audio ? `<div class="answerReveal"><b>${soundUi('transcriptLabel')}：${playerModel.transcript}</b>${playerModel.translation ? `<span>${soundUi('translationLabel')}：${playerModel.translation}</span>` : ''}</div>` : '';
-      const player = question.audio ? `<div class="questionAudioPlayer" data-player-state="${playerState}"><button class="audioBtn" data-action="question-audio" data-quiz="${isQuiz}" data-question="${questionIndex}" aria-label="${playerModel.aria}"><i>▶</i><span><b>${playerModel.label}</b><small>0:02</small></span></button>${playerState === 'error' ? `<p class="playerError" role="status">${soundUi('playerError')}</p>` : ''}</div><p class="testAudioDisclosure">ⓘ ${soundUi('testAudio')}</p>` : '';
+      const player = question.audio ? `<div class="questionAudioPlayer" data-player-state="${playerState}"><button class="audioBtn" data-action="question-audio" data-quiz="${isQuiz}" data-question="${questionIndex}" aria-label="${playerModel.aria}"><i>▶</i><span><b>${playerModel.label}</b><small>0:02</small></span></button>${playerState === 'error' ? `<p class="playerError" role="status">${soundUi('playerError')}</p>` : ''}</div>${valueIsPlayable(question.audio) ? '' : `<p class="testAudioDisclosure">ⓘ ${soundUi('testAudio')}</p>`}` : '';
       return shell(`<span class="eyebrow">${isQuiz ? copy('question') : copy('practiceTag')} · ${questionIndex + 1} / ${total}</span><h2 class="question">${copy(question.prompt)}</h2>${player}<div class="options">${question.options.map((option, optionIndex) => { let state = ''; if (answer) { if (optionIndex === question.answer) state = 'correct'; else if (optionIndex === answer.choice) state = 'wrong'; } return `<button class="option ${state}" data-action="answer" data-quiz="${isQuiz}" data-question="${questionIndex}" data-choice="${optionIndex}" ${answer ? 'disabled' : ''}><span>${String.fromCharCode(65 + optionIndex)}</span>${option}</button>`; }).join('')}</div>${feedback}${reveal}`);
     }
 
@@ -447,6 +468,15 @@
         button.disabled = true; button.setAttribute('aria-disabled','true');
         const label = button.querySelector('.play,.wordListen,.listenWord'); if (label) label.textContent = soundUi('audioNotReleased');
       });
+      const buildButton = element('#content').querySelector('[data-action="build"]');
+      if (buildButton) {
+        const result = config.syllables[builderConsonant + builderVowel + builderFinal];
+        if (result && !valueIsPlayable(result)) {
+          buildButton.disabled = true;
+          buildButton.setAttribute('aria-disabled','true');
+          buildButton.setAttribute('aria-label',soundUi('audioNotReleased'));
+        }
+      }
       for (const [selector,value] of [['[data-action="phrase"]',config.phrase?.audio],['[data-action="repeat-audio"]',config.repeat?.audio]]) {
         const button = element('#content').querySelector(selector); if (!button || valueIsPlayable(value)) continue;
         button.disabled = true; button.setAttribute('aria-disabled','true'); button.setAttribute('aria-label',soundUi('audioNotReleased'));

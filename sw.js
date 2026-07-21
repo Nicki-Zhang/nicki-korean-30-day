@@ -1,4 +1,4 @@
-const CACHE = 'nikigo-v22-audio-batch-02b-approved';
+const CACHE = 'nikigo-v23-reviewed-existing-audio-approved';
 const ASSETS = [
   './', './index.html', './nikigo-app.html', './app-state.js', './course-catalog.js',
   './hangul-sound-data.js', './audio-catalog.js', './review.html', './review.css',
@@ -17,6 +17,24 @@ const ASSETS = [
   './audio/k0-consonant-contrast/ppa.mp3', './audio/k0-consonant-contrast/ja.mp3',
   './audio/k0-consonant-contrast/cha.mp3', './audio/k0-consonant-contrast/jja.mp3',
   './audio/k0-consonant-contrast/sa.mp3', './audio/k0-consonant-contrast/ssa.mp3',
+  './audio/lesson-01/a.mp3', './audio/lesson-01/eo.mp3',
+  './audio/lesson-01/o.mp3', './audio/lesson-01/u.mp3',
+  './audio/lesson-01/ga.mp3', './audio/lesson-01/na.mp3',
+  './audio/lesson-01/geo-v2.wav', './audio/lesson-01/go-v2.wav',
+  './audio/lesson-01/gu-v2.wav', './audio/lesson-01/neo-v2.wav',
+  './audio/lesson-01/no-v2.wav', './audio/lesson-01/nu-v2.wav',
+  './audio/lesson-02/eu.mp3', './audio/lesson-02/i.mp3',
+  './audio/lesson-02/ae.mp3', './audio/lesson-02/e.mp3',
+  './audio/lesson-02/da.mp3', './audio/lesson-02/di.mp3',
+  './audio/lesson-02/ra.mp3', './audio/lesson-02/ma.mp3',
+  './audio/lesson-02/mi.mp3', './audio/lesson-02/namu.mp3',
+  './audio/lesson-02/dari.mp3', './audio/lesson-02/meori.mp3',
+  './audio/lesson-03/ya.mp3', './audio/lesson-03/yeo.mp3',
+  './audio/lesson-03/ba.mp3', './audio/lesson-03/byeo.mp3',
+  './audio/lesson-03/sa.mp3', './audio/lesson-03/syeo.mp3',
+  './audio/lesson-03/a.mp3', './audio/lesson-03/bada.mp3',
+  './audio/lesson-03/saram.mp3', './audio/lesson-03/annyeong.mp3',
+  './audio/lesson-03/annyeonghaseyo.mp3', './audio/lesson-04/ba-v2.wav',
   './manifest.webmanifest'
 ];
 

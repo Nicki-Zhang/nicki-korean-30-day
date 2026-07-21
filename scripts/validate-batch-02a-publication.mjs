@@ -32,7 +32,7 @@ for(const entry of published){
 assert.equal(contrast.filter(entry=>entry.reviewStatus==='approved').length,14);
 
 const all=Object.values(audio.lessons).flatMap(lesson=>lesson.items);
-assert.equal(all.filter(entry=>audio.canPlayAudio(entry.speechText,entry,entry.audioType)).length,18);
+assert.equal(all.filter(entry=>audio.canPlayAudio(entry.speechText,entry,entry.audioType)).length,54);
 const batch1=audio.lessons['lesson-00'].items.filter(entry=>['yo','yu'].includes(entry.id));
 assert.deepEqual(batch1.map(entry=>[entry.id,entry.sha256]),[
   ['yo','d2570041a865d0d686e6debf1a06584fa10b1177ebb590e4654a30506f5538b0'],
@@ -74,7 +74,9 @@ for(const language of ['zh','en','vi','ja']){
   for(const key of ['listenSound','listenSequence','playerPlay','playerReplay','playerError'])assert.ok(ui[key]&&!ui[key].includes('undefined'));
 }
 assert.match(source,/global\.setTimeout\(next,260\)/);assert.doesNotMatch(source,/speechSynthesis|SpeechSynthesisUtterance|getVoices/);
-assert.match(fs.readFileSync('lesson-00.js','utf8'),/action === 'demo' \? \(item\.symbol === 'ㅎ' \? 'lesson-00' : 'k0-consonant-contrast'\)/);
+const lesson00Source=fs.readFileSync('lesson-00.js','utf8');
+assert.match(lesson00Source,/const mappedLessonId = item\.demoAudio\?\.match/);
+assert.match(lesson00Source,/mappedLessonId \|\| \(item\.symbol === 'ㅎ' \? 'lesson-00' : 'k0-consonant-contrast'\)/);
 const worker=fs.readFileSync('sw.js','utf8');
 for(const file of ['./audio/k0-consonant-contrast/ga.mp3','./audio/k0-consonant-contrast/ka.mp3','./audio/k0-consonant-contrast/kka.mp3'])assert.ok(worker.includes(file));
 assert.doesNotMatch(worker,/staging\/|actions\/runs\/|sourceArtifact/);

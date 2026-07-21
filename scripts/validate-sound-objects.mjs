@@ -71,13 +71,13 @@ for (const [lessonId, symbols] of Object.entries(expected)) {
   assert.deepEqual([...config.consonants.map(item => item.symbol)], symbols.consonants);
   for (const item of config.vowels) {
     assert.equal(item.type, 'vowel');
-    assert.equal(config.audioFiles[item.vowelCarrierSyllable], undefined, `${lessonId} ${item.symbol} pending audio must be gated`);
+    assert.equal(config.audioFiles[item.vowelCarrierSyllable], item.vowelAudio, `${lessonId} ${item.symbol} approved vowel mapping mismatch`);
     buttonMappings.push({ lessonId, label:`听元音${item.symbol}`, speechText:item.vowelCarrierSyllable, file:item.vowelAudio });
   }
   for (const item of config.consonants) {
     assert.equal(item.type, 'consonant');
     assert.equal(item.letterNameAudio, null);
-    assert.equal(config.audioFiles[item.demoSyllable], undefined, `${lessonId} ${item.symbol} pending demo must be gated`);
+    assert.equal(config.audioFiles[item.demoSyllable], item.demoAudio, `${lessonId} ${item.symbol} approved demo mapping mismatch`);
     buttonMappings.push({ lessonId, label:`听示例音节 ${item.demoSyllable}`, speechText:item.demoSyllable, file:item.demoAudio });
   }
 }

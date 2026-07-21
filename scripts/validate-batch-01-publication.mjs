@@ -13,7 +13,7 @@ const all=Object.entries(audio.lessons).flatMap(([lessonId,lesson])=>lesson.item
 const batch=audio.lessons['lesson-00'].items.filter(entry=>expected.has(entry.id));
 assert.equal(all.length,83);
 assert.deepEqual(audio.lessons['lesson-00'].items.map(entry=>entry.id),['yo','yu','ha']);
-assert.equal(Object.keys(audio.approvedAssetHashes).length,18);
+assert.equal(Object.keys(audio.approvedAssetHashes).length,54);
 for(const key of ['k0-consonant-contrast:ga','k0-consonant-contrast:ka','k0-consonant-contrast:kka','lesson-00:yo','lesson-00:yu']) assert.ok(audio.approvedAssetHashes[key]);
 
 for(const entry of batch){
@@ -36,8 +36,8 @@ for(const entry of batch){
 
 const others=all.filter(entry=>!expected.has(entry.id)||entry.lessonId!=='lesson-00');
 assert.equal(others.length,81,'Current catalog contains 81 records outside approved Batch 1.');
-assert.equal(others.filter(entry=>entry.reviewStatus==='approved').length,16,'Batch 2A and Batch 2B may join Batch 1 as approved audio.');
-assert.equal(others.filter(entry=>entry.reviewStatus==='pending').length,65);
+assert.equal(others.filter(entry=>entry.reviewStatus==='approved').length,52,'Later product-owner-approved audio may join Batch 1.');
+assert.equal(others.filter(entry=>entry.reviewStatus==='pending').length,29);
 
 const manifest=JSON.parse(fs.readFileSync('audio/lesson-00/manifest.json','utf8'));
 assert.deepEqual(manifest.items,audio.lessons['lesson-00'].items);

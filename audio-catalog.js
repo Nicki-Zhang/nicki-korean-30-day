@@ -29,6 +29,72 @@
     commercialUseBasis:'OpenAI API generated audio; legal review pending', rightsReviewStatus:'pending', reviewNotes:'Product owner listening passed on 2026-07-21; optional native-speaker review deferred.'
   });
 
+  const REVIEWED_EXISTING_ASSETS = Object.freeze({
+    'lesson-01:a':['8e893ff874c91380889ea124e3d15bce5da14e60ea89438a3ab0e8673b406b59',18432],
+    'lesson-01:eo':['85a6913c65739ea5f743e4f7d7af7850feffabacd13b82e62115f6ca826a873c',14592],
+    'lesson-01:o':['4e5b17115a29ccc8420716db1ceaa8edf88ad7e97b0fbb542336cb4aa7b90192',19200],
+    'lesson-01:u':['f64b071df66a3f4d5e4a55c41ab2ea287d00c02a4ff21fa854bb7e64bda52f45',12288],
+    'lesson-01:ga':['11ac6f071d18d46b72ce82a6dcd1b8cabb6b7aef50651bae5a63b1ee64c95303',11520],
+    'lesson-01:na':['5e1a7902cad24f24c7d1b4258bdcafe7c07fa92dd48f10d5d4d31657b43c6b6d',16896],
+    'lesson-01:geo':['12a3d6860c6b990225a419e369966402050c11c69dc7144878e54c16aeb81ae2',16512],
+    'lesson-01:go':['e8b36f73d54fdb6ae0c8666ac107ebb61e03f7c4042fe931f96ac8ade16e6f55',16468],
+    'lesson-01:gu':['4c58f4b4d06501f983be51597ff455575626ac4cb4d628c6bca6952114e41929',16726],
+    'lesson-01:neo':['972b578de602fba01c62e5941b2f1e7e822187881c2589fcfa20d9a1ca5948bb',16262],
+    'lesson-01:no':['8261f015f1a1d30c761de49615746d9128dfee87bd6490847967aa2ea1df4a31',15242],
+    'lesson-01:nu':['ed6954ec5373a34d9c438524ba5dba300b02427cab47ad23d83a6dcd75996536',15750],
+    'lesson-02:eu':['6d52937199d761d228a1bf1cc5dfb6ff64dc194c3c0f5037becb781c54d980f8',14592],
+    'lesson-02:i':['3390b44c22311440df2e5d0415a254c3f5b14dd4034f65accc1b160cb41ba23b',32256],
+    'lesson-02:ae':['07dc5c7b6fdc20d1eb5f803b20bb96cfe78efea8d260bc5c5365ac9fa86bf686',22656],
+    'lesson-02:e':['2bab201e942a77e17c6be19e6ac238e3ae26ddaac7616dbe5a7986fc9ffd0bbb',14592],
+    'lesson-02:da':['76d1646319f8191830288e0ea6a859e21c2304e1427743e1331905bbaa4714a4',16896],
+    'lesson-02:di':['0411f0bae1ff7a7ce1454b7bbc149304e147992355293300de5285c68bc5fd06',16128],
+    'lesson-02:ra':['2458f243268c25adc1c78fbebfeada75bc110c9299a2faab81feffbe74892bb4',12288],
+    'lesson-02:ma':['6e4cd90544e268c9249efb8e9e94817327670de13c9e4623c54c3688c1ce49dc',13824],
+    'lesson-02:mi':['77e2a63c39057784b4855d5e79b1558d488bfec533cab4464d6f0f60d6bb692e',13056],
+    'lesson-02:namu':['2cd38d1980e10fd3b3fb8f4771d37f170b6323011ff19ebf1e508af0ceb4dcd0',15360],
+    'lesson-02:dari':['89ac9f3c1e2fda0f7ce5bc32283ebfba31a296619c8d20408072fc1c6b3f01bc',15360],
+    'lesson-02:meori':['41250f21c9115f516ada5be9279505db8d6f1d9e0fea765ced99959602af68ec',12288],
+    'lesson-03:ya':['c0e901c4cbcb564925f1785478f70cc3783367880ba93f2089806349ac2f1589',21888],
+    'lesson-03:yeo':['0192fd777e29ebd44733a90d8b829463432a1c50c3aaaf7d14559bd22687e643',24960],
+    'lesson-03:ba':['6a0ff4579c7c010857e24a94b89b945a575de7eae446833389491fdff4ff7b07',16128],
+    'lesson-03:byeo':['c78bd8a777e1b9e27419d18ce4e4ea8a5b857109bfc0e115fcaafa5209ab662a',14592],
+    'lesson-03:sa':['39924ee692963d887b43482457b3f2f88e923f9a1deb9485d427580d6ea0af8e',21120],
+    'lesson-03:syeo':['41c860b8e120b304bd0566e16bb7a0d54f0e84b251bae317559828b214323fa4',15360],
+    'lesson-03:a':['4594f0ce881ed82fa1a4eb08e14f54d4dfd6d6370027b7500ebc7a9e20190696',18432],
+    'lesson-03:bada':['941d8c389aa267a8a2e88af9a3173535df0d69cef97c3bd6a6e9f411d96d69e6',16896],
+    'lesson-03:saram':['acfdee57490f47cb20cb1bf746c9b399c8044d833e18a0e668f527780ba79d16',16128],
+    'lesson-03:annyeong':['520c0bb4a21711e081ee330ad73030cee8d47ab1bcd65ca8529b903e0195bedf',21120],
+    'lesson-03:annyeonghaseyo':['4087cf765ef449080c112f9a55c16ae319abc366a33847dd7cc8fbaa4d96f105',18432],
+    'lesson-04:ba':['dc8345a1cad1ee3044c7f5ff633efbe13fd18c5d31f506107122b5464fe69e5e',16726]
+  });
+  const SYSTEM_EXPORT_RECORDS = new Set(['lesson-01:geo','lesson-01:go','lesson-01:gu','lesson-01:neo','lesson-01:no','lesson-01:nu','lesson-04:ba']);
+  const REVIEWED_SOURCE_COMMITS = Object.freeze({
+    'lesson-01':'9f012c1c67b8a3de2f260417dfbc12612d12247f',
+    'lesson-02':'d1b9c81a41d888f947f516aab7cd2b969744cb89',
+    'lesson-03':'737647fcd1f7d780974cde4d3a52e4b14d28520d',
+    system:'9b5b6f50b11bdb0900bd13d317ad6458a2676f69'
+  });
+  const REVIEWED_SOURCE_DATES = Object.freeze({
+    'lesson-01':'2026-07-18T11:29:20Z', 'lesson-02':'2026-07-18T11:51:26Z',
+    'lesson-03':'2026-07-18T13:51:53Z', system:'2026-07-19T09:43:37+07:00'
+  });
+  const reviewedExistingRelease = recordId => {
+    const source = REVIEWED_EXISTING_ASSETS[recordId];
+    if (!source) return null;
+    const systemExport = SYSTEM_EXPORT_RECORDS.has(recordId);
+    const lessonId = recordId.split(':')[0];
+    const sourceKey = systemExport ? 'system' : lessonId;
+    return {
+      reviewStatus:'approved', assetStatus:'available', sha256:source[0], fileSize:source[1], mimeType:systemExport ? 'audio/wav' : 'audio/mpeg',
+      model:systemExport ? 'macOS-system-voice' : 'gpt-4o-mini-tts', voice:systemExport ? 'Yuna' : 'marin', generationDate:REVIEWED_SOURCE_DATES[sourceKey],
+      sourceRunId:systemExport ? 'not-applicable-local-system-export' : 'legacy-github-actions-run-id-unavailable',
+      sourceArtifact:`repository-commit-${REVIEWED_SOURCE_COMMITS[sourceKey]}`,
+      technicalValidation:'passed', reviewMethod:'product-owner-listening', reviewedAt:'2026-07-21', nativeReviewStatus:'deferred', nativeReviewer:null, needsNativeReview:false,
+      commercialUseBasis:'pending-documentation', rightsReviewStatus:'pending',
+      reviewNotes:'Product owner listening passed on 2026-07-21; source provenance is retained from repository history; commercial rights review remains pending.'
+    };
+  };
+
   const item = (id, displayText, speechText, file, options) => Object.freeze({
     id,
     lessonId: options.lessonId,
@@ -189,7 +255,7 @@
   };
 
   Object.entries(lessons).forEach(([lessonId, lesson]) => {
-    lessons[lessonId] = Object.freeze({ ...lesson, items:Object.freeze(lesson.items.map(entry => Object.freeze({ ...entry, lessonId }))) });
+    lessons[lessonId] = Object.freeze({ ...lesson, items:Object.freeze(lesson.items.map(entry => Object.freeze({ ...entry, ...(reviewedExistingRelease(`${lessonId}:${entry.id}`) || {}), lessonId }))) });
   });
 
   const contrastSpecs = [
@@ -287,7 +353,8 @@
     'k0-consonant-contrast:sa':BATCH_02B_SOURCE.sa[0],
     'k0-consonant-contrast:ssa':BATCH_02B_SOURCE.ssa[0],
     'lesson-00:ha':BATCH_02B_SOURCE.ha[0],
-    'lesson-05:geu':BATCH_02B_SOURCE.geu[0]
+    'lesson-05:geu':BATCH_02B_SOURCE.geu[0],
+    ...Object.fromEntries(Object.entries(REVIEWED_EXISTING_ASSETS).map(([recordId,source]) => [recordId,source[0]]))
   });
   const REQUIRED_RELEASE_FIELDS = ['voiceSource','model','voice','generationDate','commercialUseBasis','rightsReviewStatus','reviewMethod','reviewedAt','nativeReviewStatus','technicalValidation','sha256','sourceRunId','sourceArtifact','reviewNotes'];
   function canPlayAudio(requestedSpeechText, entry, expectedAudioType) {
