@@ -48,7 +48,8 @@
   const format = (value,data) => String(value).replace(/\{(\w+)\}/g,(_,key)=>data[key]??'');
   const escape = value => String(value).replace(/[&<>"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[char]));
   const current = () => config.steps[session.step];
-  const isExperiencePilot = ['lesson-09','lesson-13'].includes(config.id);
+  const isExperiencePilot = ['lesson-11','lesson-13'].includes(config.id);
+  const homeUrl = () => `nikigo-app.html?lang=${language}${isExperiencePilot?'&experience=pilot':''}#courses`;
   const isInteractive = step => ['choice','scenario','listening','match','build'].includes(step.type);
   const stepDone = step => !isInteractive(step) || Boolean(session.answers[step.id]?.done);
   function save() {
@@ -107,7 +108,7 @@
     const button=event.target.closest('button');if(!button)return;const step=current();const action=button.dataset.action;
     if(action==='next')next();
     else if(action==='back'){session.step=Math.max(0,session.step-1);save();render()}
-    else if(action==='home'||action==='home-logo')global.location.href=`nikigo-app.html?lang=${language}#courses`;
+    else if(action==='home'||action==='home-logo')global.location.href=homeUrl();
     else if(action==='review'){session=blankSession();save();render();global.scrollTo(0,0)}
     else if(action==='answer')record(step,button.dataset.value===step.correct,button.dataset.value);
     else if(action==='part'){session.build[step.id]={...(session.build[step.id]||{}),[button.dataset.group]:button.dataset.value};save();render()}
@@ -117,7 +118,7 @@
     else if(action==='audio'){const audio=[...(step.audios||[]),...(step.audio?[step.audio]:[])][Number(button.dataset.audio)||0];const result=audioResult(audio);if(!result?.playable||!result.path)return;const media=new Audio(result.path);media.play().catch(()=>notify(ui('audioError')))}
   });
   languageSelect.addEventListener('change',event=>{language=LANGUAGES.includes(event.target.value)?event.target.value:'en';save();render()});
-  document.getElementById('homeButton').addEventListener('click',()=>{global.location.href=`nikigo-app.html?lang=${language}#courses`});
-  document.getElementById('homeLogo').addEventListener('click',()=>{global.location.href=`nikigo-app.html?lang=${language}#courses`});
+  document.getElementById('homeButton').addEventListener('click',()=>{global.location.href=homeUrl()});
+  document.getElementById('homeLogo').addEventListener('click',()=>{global.location.href=homeUrl()});
   render();
 })(window);

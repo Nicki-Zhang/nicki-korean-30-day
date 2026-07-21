@@ -2,8 +2,8 @@
   --pilot-brand:#6846e8;
   --pilot-brand-deep:#2f255c;
   --pilot-brand-soft:#f0ecff;
-  --pilot-canvas:#f7f5fb;
-  --pilot-surface:#fff;
+  --pilot-canvas:#f7f4ee;
+  --pilot-surface:#fffdf9;
   --pilot-ink:#211b35;
   --pilot-muted:#6e687c;
   --pilot-line:#e3dfea;
@@ -14,14 +14,43 @@
   --pilot-focus:#9a86f0;
   --pilot-shadow:0 20px 54px rgba(47,37,92,.10);
   --pilot-radius:28px;
+  --pilot-space-1:8px;
+  --pilot-space-2:16px;
+  --pilot-space-3:24px;
+  --pilot-space-4:32px;
+  --pilot-button-height:52px;
+  --pilot-motion:180ms;
+  --pilot-content-max:860px;
 }
 
 .courseExperiencePilot{
+  width:min(100%,390px);
   min-height:100dvh;
+  margin:0 auto;
   background:var(--pilot-canvas);
   color:var(--pilot-ink);
   padding-bottom:max(20px,env(safe-area-inset-bottom));
 }
+.courseExperiencePilot .top,
+.courseExperiencePilot .progressWrap,
+.courseExperiencePilot .stage{width:calc(100% - 24px);padding-left:0;padding-right:0}
+.courseExperiencePilot .top{width:100%;padding-left:12px;padding-right:12px}
+.courseExperiencePilot .lessonName{display:none}
+.courseExperiencePilot .sprintCard,
+.courseExperiencePilot .contrastCard{min-height:calc(100dvh - 132px);padding:24px 18px;border-radius:22px}
+.courseExperiencePilot :is(.learningGrid,.conceptGrid,.goals,.optionGrid,.quizOptions,.matchGrid,.partGroups){grid-template-columns:1fr}
+.courseExperiencePilot.pilotIsOpening .learningGrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.courseExperiencePilot.pilotIsOpening .learningItem{padding:13px 10px}
+.courseExperiencePilot.pilotIsOpening .learningItem strong{font-size:12px}
+.courseExperiencePilot.pilotIsOpening .learningItem span{font-size:11px;line-height:1.35}
+.courseExperiencePilot .bubble{max-width:94%}
+.courseExperiencePilot .foot,
+.courseExperiencePilot .repeatActions{grid-template-columns:1fr}
+.courseExperiencePilot .foot .primary,
+.courseExperiencePilot .repeatActions .primary{width:100%;justify-self:stretch;order:1}
+.courseExperiencePilot .foot .secondary,
+.courseExperiencePilot .foot .ghost,
+.courseExperiencePilot .repeatActions .secondary{justify-self:center;order:2}
 .courseExperiencePilot .top{
   min-height:72px;
   height:auto;
@@ -49,8 +78,8 @@
 .courseExperiencePilot .progressWrap{margin-top:4px;margin-bottom:18px}
 .courseExperiencePilot .progressMeta{font-size:12px;color:var(--pilot-muted);font-weight:850}
 .courseExperiencePilot .track{height:7px;background:#e6e2ed}
-.courseExperiencePilot .track i{background:var(--pilot-brand);transition:width .24s ease}
-.courseExperiencePilot .stage{width:min(860px,calc(100% - 32px));margin:0 auto 36px;padding:0}
+.courseExperiencePilot .track i{background:var(--pilot-brand);transition:width var(--pilot-motion) ease}
+.courseExperiencePilot .stage{width:min(var(--pilot-content-max),calc(100% - 32px));margin:0 auto 36px;padding:0}
 .courseExperiencePilot .sprintCard,
 .courseExperiencePilot .contrastCard{
   min-height:min(650px,calc(100dvh - 150px));
@@ -230,9 +259,31 @@
 .courseExperiencePilot .repeatActions .primary{justify-self:end}
 .courseExperiencePilot :is(button,select):focus-visible{outline:3px solid var(--pilot-focus);outline-offset:3px}
 
-.courseExperiencePilot.pilotDialogue .pilotIsOpening .sprintCard,
-.courseExperiencePilot.pilotNumbers .pilotIsOpening .sprintCard{background:#fff}
+.courseExperiencePilot.pilotDialogue.pilotIsOpening .sprintCard,
+.courseExperiencePilot.pilotNumbers.pilotIsOpening .sprintCard{background:var(--pilot-brand-deep);color:#fff}
+.courseExperiencePilot.pilotIsOpening .sprintCard::before{background:#dff6aa}
+.courseExperiencePilot.pilotIsOpening h1{color:#fff}
+.courseExperiencePilot.pilotIsOpening .lead{color:#ded8ef}
+.courseExperiencePilot.pilotIsOpening .modulePill{background:#ffffff18;color:#fff}
+.courseExperiencePilot.pilotIsOpening .tag{color:#d8cffc}
+.courseExperiencePilot.pilotIsOpening .learningItem{background:#ffffff0d;border-color:#ffffff22}
+.courseExperiencePilot.pilotIsOpening .learningItem strong{color:#dff6aa}
+.courseExperiencePilot.pilotIsOpening .learningItem span,
+.courseExperiencePilot.pilotIsOpening .learningItem p{color:#fff}
 .courseExperiencePilot.pilotDialogue .dialogue{margin-left:auto;margin-right:auto}
+.courseExperiencePilot .pilotDialogueMeta{display:flex;justify-content:space-between;align-items:center;margin:22px 0 10px;color:var(--pilot-muted);font-size:11px;font-weight:900}
+.courseExperiencePilot .dialogue.pilotLineMode .bubble{display:none}
+.courseExperiencePilot .dialogue.pilotLineMode .bubble.pilotCurrentLine{display:block;max-width:100%;min-height:150px;padding:22px}
+.courseExperiencePilot .pilotLineControls{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin-top:12px}
+.courseExperiencePilot .pilotLineControls p{margin:0;color:var(--pilot-muted);font-size:12px;line-height:1.45}
+.courseExperiencePilot .pilotLineNext{min-height:48px;border:1px solid var(--pilot-line);border-radius:14px;background:var(--pilot-surface);color:var(--pilot-brand-deep);padding:0 18px;font-weight:900}
+.courseExperiencePilot.pilotDialoguePending .pilotLineNext{border-color:var(--pilot-brand);background:var(--pilot-brand);color:#fff}
+.courseExperiencePilot.pilotDialoguePending .foot .primary:disabled,
+.courseExperiencePilot.pilotIsPractice .foot .primary:disabled{display:none}
+.courseExperiencePilot .pilotMasterySummary{margin:24px 0;border:1px solid var(--pilot-line);border-radius:20px;background:#f5f1e9;padding:18px;text-align:left}
+.courseExperiencePilot .pilotMasterySummary h2{margin:0 0 12px;font-size:16px;color:var(--pilot-ink)}
+.courseExperiencePilot .pilotMasterySummary ul{display:grid;gap:9px;margin:0;padding:0;list-style:none}
+.courseExperiencePilot .pilotMasterySummary li{font-family:"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:19px;font-weight:900;color:var(--pilot-brand-deep)}
 .courseExperiencePilot.pilotNumbers.pilotIsOpening .learningItem>span{
   display:block;
   margin-top:8px;
@@ -275,9 +326,22 @@
   .courseExperiencePilot .languagePicker select{max-width:142px}
   .courseExperiencePilot h1{font-size:32px}
   .courseExperiencePilot .korean{font-size:34px}
+  .courseExperiencePilot .sprintCard,
+  .courseExperiencePilot .contrastCard{padding:20px 16px}
+  .courseExperiencePilot .pilotLineControls{grid-template-columns:1fr}
+  .courseExperiencePilot .pilotLineNext{width:100%}
 }
 @media(prefers-reduced-motion:reduce){
   .courseExperiencePilot *,
   .courseExperiencePilot *::before,
   .courseExperiencePilot *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
+
+/* The first pilot is intentionally a single 390px flow; wider migration waits for product approval. */
+.courseExperiencePilot .foot,
+.courseExperiencePilot .repeatActions{grid-template-columns:1fr!important}
+.courseExperiencePilot .foot .primary,
+.courseExperiencePilot .repeatActions .primary{width:100%;justify-self:stretch;order:1}
+.courseExperiencePilot .foot .secondary,
+.courseExperiencePilot .foot .ghost,
+.courseExperiencePilot .repeatActions .secondary{justify-self:center;order:2}

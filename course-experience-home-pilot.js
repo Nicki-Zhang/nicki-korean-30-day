@@ -1,0 +1,24 @@
+(function () {
+  'use strict';
+  const params = new URLSearchParams(location.search);
+  if (params.get('experience') !== 'pilot') return;
+
+  const supported = ['zh','en','vi','ja'];
+  const profile = window.NikigoState?.get?.() || {};
+  const language = supported.includes(params.get('lang')) ? params.get('lang') : supported.includes(profile.interfaceLanguage) ? profile.interfaceLanguage : 'zh';
+  const copy = {
+    zh:{hello:'下午好，学习者',eyebrow:'你的韩国生活旅程',xp:'XP',streak:'连续',days:'天',continue:'继续学习',mission:'今日主任务',lesson:'第11课 · 姓名与身份',goal:'이름이 뭐예요?',goalCopy:'在第一次见面时询问姓名，并礼貌介绍自己。',resume:'开始 8 分钟任务',today:'今日任务',todayTitle:'完成一次场景交流',todayCopy:'开场 · 对话 · 表达 · 拼合',journey:'学习旅程',journeyMeta:'自由进入',k0:'K0 · 韩文基础',k0copy:'字母、发音与复习挑战',k1:'K1 · 生活交流',k1copy:'姓名、国家与基础数量',path:'推荐路径',pathLink:'查看第11课',review:'复习入口'},
+    en:{hello:'Good afternoon, learner',eyebrow:'Your Korean life journey',xp:'XP',streak:'Streak',days:'days',continue:'Continue learning',mission:"Today's main mission",lesson:'Lesson 11 · Name and identity',goal:'이름이 뭐예요?',goalCopy:'Ask a name and introduce yourself politely at a first meeting.',resume:'Start 8-minute mission',today:"Today's task",todayTitle:'Complete one first-meeting exchange',todayCopy:'Brief · dialogue · expression · build',journey:'Learning journey',journeyMeta:'Free access',k0:'K0 · Hangul foundation',k0copy:'Letters, pronunciation, review',k1:'K1 · Life communication',k1copy:'Names, countries, basic numbers',path:'Recommended path',pathLink:'Open Lesson 11',review:'Review'},
+    vi:{hello:'Chào buổi chiều, bạn học',eyebrow:'Hành trình sống cùng tiếng Hàn',xp:'XP',streak:'Chuỗi',days:'ngày',continue:'Học tiếp',mission:'Nhiệm vụ chính hôm nay',lesson:'Bài 11 · Tên và thân phận',goal:'이름이 뭐예요?',goalCopy:'Hỏi tên và tự giới thiệu lịch sự khi gặp lần đầu.',resume:'Bắt đầu nhiệm vụ 8 phút',today:'Nhiệm vụ hôm nay',todayTitle:'Hoàn thành một cuộc gặp đầu tiên',todayCopy:'Mở đầu · hội thoại · mẫu câu · ghép',journey:'Hành trình học',journeyMeta:'Tự do truy cập',k0:'K0 · Nền tảng Hangul',k0copy:'Chữ cái, phát âm và ôn tập',k1:'K1 · Giao tiếp đời sống',k1copy:'Tên, quốc gia và số cơ bản',path:'Lộ trình đề xuất',pathLink:'Mở Bài 11',review:'Ôn tập'},
+    ja:{hello:'こんにちは、学習者さん',eyebrow:'あなたの韓国生活ジャーニー',xp:'XP',streak:'連続',days:'日',continue:'学習を続ける',mission:'今日のメインミッション',lesson:'第11課 · 名前と立場',goal:'이름이 뭐예요?',goalCopy:'初対面で名前を尋ね、丁寧に自己紹介します。',resume:'8分のミッションを開始',today:'今日のタスク',todayTitle:'初対面の会話を1つ完成',todayCopy:'導入 · 会話 · 表現 · 組み立て',journey:'学習ジャーニー',journeyMeta:'自由に開始',k0:'K0 · ハングル基礎',k0copy:'文字・発音・復習チャレンジ',k1:'K1 · 生活コミュニケーション',k1copy:'名前・国・基本の数',path:'おすすめルート',pathLink:'第11課を開く',review:'復習入口'}
+  }[language];
+  const progress = Number(profile.lessonProgress?.['lesson-11']) || 0;
+  const completed = new Set(profile.completedLessons || []);
+  const lessonHref = `lesson-11.html?lang=${encodeURIComponent(language)}&experience=pilot`;
+  document.documentElement.lang = language === 'zh' ? 'zh-CN' : language;
+  document.body.classList.add('pilotJourneyHome');
+  const main = document.createElement('main');
+  main.className = 'journeyHome';
+  main.innerHTML = `<header class="journeyHomeHeader"><div class="journeyBrand"><img src="assets/nikigo-mark.svg" alt=""><span>Nikigo</span></div><div class="journeyMetrics"><div class="journeyMetric"><b>${Number(profile.xp)||0}</b><span>${copy.xp}</span></div><div class="journeyMetric"><b>${Number(profile.streakDays)||0}</b><span>${copy.streak} · ${copy.days}</span></div></div></header><section class="journeyGreeting"><small>${copy.eyebrow}</small><h1>${copy.hello}</h1></section><section class="journeyMission" aria-labelledby="journeyGoal"><div class="journeyMissionLabel"><span>${copy.continue}</span><span>${progress}%</span></div><p class="journeyMissionLabel">${copy.mission}</p><h2 id="journeyGoal">${copy.goal}</h2><p>${copy.lesson}<br>${copy.goalCopy}</p><div class="journeyMissionProgress"><i style="width:${Math.max(8,progress)}%"></i></div><a class="journeyPrimary" href="${lessonHref}">${completed.has('lesson-11')?copy.continue:copy.resume}</a></section><section class="journeySection"><div class="journeySectionHead"><h2>${copy.today}</h2><span>1 / 1</span></div><article class="journeyToday"><div><strong>${copy.todayTitle}</strong><span>${copy.todayCopy}</span></div><b>+50 XP</b></article></section><section class="journeySection"><div class="journeySectionHead"><h2>${copy.journey}</h2><span>${copy.journeyMeta}</span></div><div class="journeyPath"><article><small>K0</small><b>${copy.k0}</b><span>${copy.k0copy}</span></article><article class="current"><small>K1 · NOW</small><b>${copy.k1}</b><span>${copy.k1copy}</span></article></div><div class="journeyLinks"><a class="journeyLink" href="${lessonHref}">${copy.path}: ${copy.pathLink}</a><a class="journeyLink" href="review.html?lang=${encodeURIComponent(language)}">${copy.review}</a></div></section>`;
+  document.body.append(main);
+})();
