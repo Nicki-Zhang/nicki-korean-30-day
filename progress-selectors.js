@@ -98,6 +98,127 @@ function isStageComplete(profile, contents, stageId) {
     && stageContents.every(content => isContentCompleted(profile, content.stableId));
 }
 
+function getHistoricalChapterRecord(profile, chapterId) {
+  const record = profile?.taxonomyCompletions?.[chapterId];
+  if (!record || typeof record !== 'object') return null;
+  return record;
+}
+
+function buildStageChapterViewModel(options = {}) {
+  const profile = options.profile || {};
+  const contents = Array.isArray(options.contents) ? options.contents : [];
+  const taxonomy = options.taxonomy;
+  if (!taxonomy || !Array.isArray(taxonomy.stages) || !Array.isArray(taxonomy.chapters)) {
+    throw new TypeError('An explicit stage/chapter taxonomy is required.');
+  }
+  const byId = new Map(contents.map(content => [content.stableId, content]));
+  const complete = completedSet(profile);
+  const currentContentId = options.currentContentId || null;
+  const currentPlacement = taxonomy.lessonMap?.[currentContentId] || null;
+  const requestedStageId = options.currentStageId || profile.path || currentPlacement?.stageId || null;
+  const activeStageId = taxonomy.stages.some(item => item.stageId === requestedStageId)
+    ? requestedStageId
+    : (currentPlacement?.stageId || taxonomy.stages[0]?.stageId || null);
+
+  const stages = [...taxonomy.stages]
+    .sort((a, b) => a.displayOrder - b.displayOrder)
+    .map(stage => {
+      const chapters = taxonomy.chapters
+        .filter(chapter => chapter.stageId === stage.stageId)
+        .sort((a, b) => a.moduleDisplayOrder - b.moduleDisplayOrder)
+        .map(chapter => {
+          const chapterContents = chapter.contentIds
+            .map(stableId => byId.get(stableId))
+            .filter(Boolean)
+            .sort((a, b) => a.displayOrder - b.displayOrder);
+          const gatedContents = chapterContents.filter(content => content.formallyCompletable === false);
+          const completedCount = chapterContents.filter(content =>
+            content.formallyCompletable !== false && complete.has(content.stableId)
+          ).length;
+          const previewPendingCount = gatedContents.length;
+          const formallyCompletableContents = chapterContents.filter(content => content.formallyCompletable !== false);
+          const currentCompletableContentComplete = formallyCompletableContents.length > 0
+            && formallyCompletableContents.every(content => complete.has(content.stableId));
+          const formallyComplete = previewPendingCount === 0
+            && chapterContents.length > 0
+            && chapterContents.every(content => complete.has(content.stableId));
+          const status = formallyComplete
+            ? 'complete'
+            : (previewPendingCount > 0 && currentCompletableContentComplete
+              ? (chapter.completionPolicy?.auxiliaryStatus || 'available-content-complete')
+              : (completedCount > 0 ? 'in-progress' : 'not-started'));
+          const historical = getHistoricalChapterRecord(profile, chapter.chapterId);
+          const historicalContentIds = Array.isArray(historical?.contentIds) ? historical.contentIds : [];
+          const newContentAvailable = historical?.historicalCompletion === true
+            && chapter.contentIds.some(stableId => !historicalContentIds.includes(stableId));
+          const isCurrent = currentPlacement?.chapterId === chapter.chapterId
+            || (!currentPlacement && stage.stageId === activeStageId
+              && chapterContents.some(content => content.stableId === currentContentId));
+
+          return Object.freeze({
+            taxonomyVersion:taxonomy.taxonomyVersion,
+            stageId:stage.stageId,
+            chapterId:chapter.chapterId,
+            moduleDisplayOrder:chapter.moduleDisplayOrder,
+            name:chapter.name,
+            objective:chapter.objective,
+            contentIds:Object.freeze(chapterContents.map(content => content.stableId)),
+            contents:Object.freeze(chapterContents),
+            historicalCompletion:historical?.historicalCompletion === true,
+            historicalCompletedAt:typeof historical?.historicalCompletedAt === 'string'
+              ? historical.historicalCompletedAt
+              : null,
+            currentVersionProgress:Object.freeze({
+              completedCount,
+              totalCount:chapterContents.length,
+              percent:chapterContents.length ? Math.round((completedCount / chapterContents.length) * 100) : 0,
+              status,
+              formallyComplete,
+              currentCompletableContentComplete,
+              previewPendingCount
+            }),
+            newContentAvailable,
+            isCurrent,
+            expanded:isCurrent
+          });
+        });
+      const stageCompletedCount = chapters.reduce((sum, chapter) =>
+        sum + chapter.currentVersionProgress.completedCount, 0);
+      const stageTotalCount = chapters.reduce((sum, chapter) =>
+        sum + chapter.currentVersionProgress.totalCount, 0);
+      const isCurrent = stage.stageId === activeStageId;
+      let normalizedChapters = chapters;
+      if (isCurrent && !chapters.some(chapter => chapter.expanded)) {
+        const firstIncomplete = chapters.find(chapter => !chapter.currentVersionProgress.formallyComplete) || chapters[0];
+        normalizedChapters = chapters.map(chapter => Object.freeze({
+          ...chapter,
+          isCurrent:chapter.chapterId === firstIncomplete?.chapterId,
+          expanded:chapter.chapterId === firstIncomplete?.chapterId
+        }));
+      }
+      return Object.freeze({
+        taxonomyVersion:taxonomy.taxonomyVersion,
+        stageId:stage.stageId,
+        displayOrder:stage.displayOrder,
+        name:stage.name,
+        label:stage.label,
+        objective:stage.objective,
+        completedCount:stageCompletedCount,
+        totalCount:stageTotalCount,
+        isCurrent,
+        expanded:isCurrent,
+        chapters:Object.freeze(normalizedChapters)
+      });
+    });
+
+  return Object.freeze({
+    taxonomyVersion:taxonomy.taxonomyVersion,
+    currentStageId:activeStageId,
+    currentChapterId:stages.flatMap(stage => stage.chapters).find(chapter => chapter.isCurrent)?.chapterId || null,
+    stages:Object.freeze(stages)
+  });
+}
+
 export {
   getContentProgress,
   isContentCompleted,
@@ -107,5 +228,6 @@ export {
   getHistoricalUnfinishedContents,
   getDueReviewItems,
   getRecommendedNextContent,
-  isStageComplete
+  isStageComplete,
+  buildStageChapterViewModel
 };

@@ -1,6 +1,9 @@
-const CACHE = 'nikigo-v28-self-review-gate-purple-dashboard-01';
+const CACHE = 'nikigo-v29-self-review-gate-product-architecture-01';
 const ASSETS = [
   './', './index.html', './nikigo-app.html', './app-state.js', './course-catalog.js',
+  './content-registry.js', './content-type-map.js', './route-registry.js',
+  './recommendation-policy.js', './progress-selectors.js', './audio-readiness.js',
+  './stage-chapter-taxonomy.js',
   './hangul-sound-data.js', './audio-catalog.js', './review.html', './review.css',
   './review-catalog.js', './lesson-00.html', './lesson-00.js?v=22-audio-batch-02b', './lesson-01.html',
   './lesson-02.html', './lesson-03.html', './lesson-04.html', './lesson-engine.js',
@@ -13,7 +16,7 @@ const ASSETS = [
   './lesson-12.html', './lesson-12.js', './lesson-13.html', './lesson-13.js',
   './lesson-sprint-engine.js', './lesson-sprint.css',
   './lesson-clear-interactive.js', './lesson-clear-interactive.css', './lesson-purple-interactive.css',
-  './assets/nikigo-clear-shell.js', './assets/nikigo-purple-shell.css',
+  './assets/nikigo-clear-shell.js', './assets/nikigo-product-shell.js', './assets/nikigo-purple-shell.css',
   './assets/nikigo-mark.svg', './favicon.ico',
   './audio/lesson-00/yo.mp3', './audio/lesson-00/yu.mp3',
   './audio/lesson-00/ha.mp3', './audio/lesson-05/geu.mp3',

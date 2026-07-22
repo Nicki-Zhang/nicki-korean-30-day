@@ -9,7 +9,8 @@ const route = (id, path, options = {}) => Object.freeze({
 const APP_ROUTES = Object.freeze({
   home: route('home', 'nikigo-app.html#dashboard', { aliases:['dashboard', '#dashboard', '#home'] }),
   learn: route('learn', 'nikigo-app.html#courses', { aliases:['courses', '#courses', '#learn'] }),
-  practice: route('practice', 'review.html', { aliases:['review', 'review.html'] }),
+  practice: route('practice', 'nikigo-app.html#practice', { aliases:['practice', '#practice', '#review'] }),
+  review: route('review', 'review.html', { aliases:['review', 'review.html'] }),
   progress: route('progress', 'nikigo-app.html#progress', { aliases:['#progress'] }),
   me: route('me', 'nikigo-app.html#profile', { aliases:['profile', '#profile', '#me'] }),
   setup: route('setup', 'nikigo-app.html#flow', { aliases:['flow', '#flow', 'welcome', '#welcome'] }),
@@ -47,6 +48,7 @@ function validateRouteCompatibility() {
   const required = Object.freeze({
     '#dashboard': 'home',
     '#courses': 'learn',
+    '#practice': 'practice',
     '#progress': 'progress',
     '#profile': 'me'
   });

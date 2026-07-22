@@ -19,6 +19,7 @@ import {
   resolveContentRoute,
   validateRouteCompatibility
 } from '../route-registry.js';
+import { STAGE_CHAPTER_TAXONOMY } from '../stage-chapter-taxonomy.js';
 
 function loadCatalog() {
   const context = { window:{} };
@@ -39,6 +40,10 @@ const audio = loadAudio();
 const catalogBefore = JSON.stringify(courses);
 const audioIndex = buildAudioReadinessIndex(courses, audio);
 const registry = buildContentRegistry(courses, { audioReadinessByContent:audioIndex });
+const taxonomyRegistry = buildContentRegistry(courses, {
+  audioReadinessByContent:audioIndex,
+  taxonomy:STAGE_CHAPTER_TAXONOMY
+});
 
 assert.equal(registry.length, 14);
 assert.deepEqual(registry.map(content => content.stableId), Array.from(courses, course => course.stableId));
@@ -48,6 +53,7 @@ assert.deepEqual(registry.map(content => content.route), Array.from(courses, cou
 assert.equal(validateContentRegistryParity(courses, registry).valid, true);
 assert.equal(validateContentTypeMap(courses.map(course => course.stableId)).valid, true);
 assert.equal(JSON.stringify(courses), catalogBefore, 'Adapters must not mutate the existing catalog.');
+assert.equal(taxonomyRegistry.every(content => Boolean(content.chapterId)), true);
 
 for (const [index, content] of registry.entries()) {
   const course = courses[index];
@@ -82,6 +88,9 @@ assert.equal(getAppRoute('#courses').id, 'learn');
 assert.equal(getAppRoute('#dashboard').id, 'home');
 assert.equal(getAppRoute('#progress').id, 'progress');
 assert.equal(getAppRoute('#profile').id, 'me');
+assert.equal(getAppRoute('#practice').id, 'practice');
+assert.equal(resolveAppRoute('practice'), 'nikigo-app.html#practice');
+assert.equal(resolveAppRoute('review'), 'review.html');
 assert.equal(resolveAppRoute('#courses'), 'nikigo-app.html#courses');
 assert.equal(resolveAppRoute('learn', { language:'vi' }), 'nikigo-app.html?lang=vi#courses');
 assert.equal(resolveContentRoute(registry[11], { language:'ja' }), 'lesson-11.html?lang=ja');

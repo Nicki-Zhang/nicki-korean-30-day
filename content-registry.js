@@ -24,6 +24,10 @@ function createContentDescriptor(course, options = {}) {
 
   const typeDefinition = getContentTypeDefinition(stableId);
   if (!typeDefinition) throw new TypeError(`${stableId} has no approved content type mapping.`);
+  const taxonomyPlacement = options.taxonomy?.lessonMap?.[stableId] || null;
+  if (taxonomyPlacement?.stageId && course.path && taxonomyPlacement.stageId !== course.path) {
+    throw new TypeError(`${stableId} taxonomy stage does not match the existing catalog path.`);
+  }
 
   const audioReadiness = options.audioReadinessByContent?.[stableId] || Object.freeze({
     contentId: stableId,
@@ -47,8 +51,8 @@ function createContentDescriptor(course, options = {}) {
     stableId,
     contentType: typeDefinition.contentType,
     programId: 'korean',
-    stageId: course.path || null,
-    chapterId: null,
+    stageId: taxonomyPlacement?.stageId || course.path || null,
+    chapterId: taxonomyPlacement?.chapterId || null,
     displayOrder: course.displayOrder,
     displayNumber: course.displayNumber,
     route: course.file || null,

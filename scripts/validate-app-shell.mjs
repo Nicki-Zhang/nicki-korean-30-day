@@ -26,7 +26,12 @@ for (const requiredId of [
   'settingDaily',
   'settingAudioRate',
   'autoplaySwitch',
-  'courseNotice'
+  'courseNotice',
+  'practice',
+  'practiceDueCount',
+  'relearnList',
+  'primaryAction',
+  'dashModuleName'
 ]) {
   assert.match(app, new RegExp(`id=["']${requiredId}["']`), `Missing #${requiredId}`);
 }
@@ -41,6 +46,15 @@ assert.match(app, /lesson\.releaseStatus==='preview'&&lesson\.audioStatus==='pen
 assert.match(app, /<a class="courseAction \$\{done\?'secondary':'primary'\}" data-course-id="\$\{stableId\}" href="\$\{url\}">/);
 assert.match(app, /lesson\.file\?`\$\{lesson\.file\}\?lang=\$\{encodeURIComponent\(currentLanguage\)\}`/);
 assert.match(app, /closest\('a\[data-course-id\]'\)/);
+assert.equal((app.match(/data-target="(?:dashboard|courses|practice|progress|profile)"/g) || []).length, 5);
+assert.match(app, /function renderPractice\(\)/);
+assert.match(app, /class="courseList taxonomyList"/);
+assert.match(app, /taxonomyStage/);
+assert.match(app, /taxonomyChapter/);
+assert.match(app, /availableContentComplete:'当前可完成内容已学完'/);
+assert.match(app, /audioPreparing:'\{count\}课音频准备中'/);
+assert.match(app, /window\.addEventListener\('hashchange'/);
+assert.match(app, /<script type="module" src="assets\/nikigo-product-shell\.js"><\/script>/);
 assert.match(app, /serviceWorker\.register\('sw\.js',\{updateViaCache:'none'\}\)/);
 assert.match(app, /registration=>registration\.update\(\)/);
 assert.match(app, /recommendedPrerequisites/);

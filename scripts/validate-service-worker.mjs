@@ -15,6 +15,9 @@ for (const asset of ['nikigo-app.html', 'app-state.js', 'course-catalog.js', 'au
 for (const asset of ['lesson-11.html', 'lesson-11.js', 'lesson-12.html', 'lesson-12.js', 'lesson-13.html', 'lesson-13.js']) {
   assert.ok(cachedAssets.has(asset), `Service Worker is missing ${asset}.`);
 }
+for (const asset of ['content-registry.js', 'content-type-map.js', 'route-registry.js', 'recommendation-policy.js', 'progress-selectors.js', 'audio-readiness.js', 'stage-chapter-taxonomy.js', 'assets/nikigo-product-shell.js']) {
+  assert.ok(cachedAssets.has(asset), `Phase 3B.2 module ${asset} is missing from the offline cache.`);
+}
 
 const catalogContext = { window: {} };
 catalogContext.window.window = catalogContext.window;

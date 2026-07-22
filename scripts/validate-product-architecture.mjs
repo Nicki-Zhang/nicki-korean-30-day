@@ -8,6 +8,7 @@ import { buildAudioReadinessIndex } from '../audio-readiness.js';
 import { validateContentTypeMap } from '../content-type-map.js';
 import { validateRecommendationCopy } from '../recommendation-policy.js';
 import { validateRouteCompatibility } from '../route-registry.js';
+import { STAGE_CHAPTER_TAXONOMY, validateStageChapterTaxonomy } from '../stage-chapter-taxonomy.js';
 
 const protectedHashes = Object.freeze({
   'app-state.js': 'aa4ad0b06782ae58466a8f49bc3020ea0d6b25d1ec209ca25d26005c7bee6c1e',
@@ -41,6 +42,8 @@ assert.equal(validateRouteCompatibility().valid, true);
 assert.equal(Object.keys(audio.approvedAssetHashes).length, 54);
 assert.equal(registry.every(content => content.available), true);
 assert.equal(registry.find(content => content.stableId === 'lesson-06').formallyCompletable, false);
+assert.equal(validateStageChapterTaxonomy(courses.map(course => course.stableId)).valid, true);
+assert.equal(buildContentRegistry(courses, { taxonomy:STAGE_CHAPTER_TAXONOMY }).every(content => Boolean(content.chapterId)), true);
 
 const pureModules = [
   'content-registry.js',
@@ -48,7 +51,8 @@ const pureModules = [
   'route-registry.js',
   'recommendation-policy.js',
   'progress-selectors.js',
-  'audio-readiness.js'
+  'audio-readiness.js',
+  'stage-chapter-taxonomy.js'
 ];
 for (const file of pureModules) {
   const source = fs.readFileSync(file, 'utf8');
@@ -57,4 +61,4 @@ for (const file of pureModules) {
   }
 }
 
-console.log('Validated Stage 3B.1 architecture purity, protected file hashes, 14-course parity, 54 approved audio hashes, route compatibility, language keys, free access, and Lesson 6 gating.');
+console.log('Validated Stage 3B.2 architecture purity, protected file hashes, approved taxonomy, 14-course parity, 54 approved audio hashes, route compatibility, language keys, free access, and Lesson 6 gating.');

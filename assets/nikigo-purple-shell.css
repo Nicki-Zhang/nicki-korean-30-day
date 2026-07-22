@@ -121,7 +121,7 @@
   bottom:auto;
   width:auto;
   transform:translateX(-50%);
-  grid-template-columns:repeat(4,auto);
+  grid-template-columns:repeat(5,auto);
   gap:4px;
   padding:3px;
   border:1px solid var(--nikigo-border);
@@ -228,6 +228,7 @@
 .purple-shell .pathBadge strong { color:#eeecff; font-size:27px; line-height:1; }
 .purple-shell .pathBadge span { color:rgba(255,255,255,.7); font-size:12px; opacity:1; }
 .purple-shell .pathBadge b { color:#fff; font-size:13px; }
+.purple-shell .pathBadge #dashModuleName { display:block; margin-top:2px; color:rgba(255,255,255,.72); font-size:12px; line-height:1.35; }
 .purple-shell .pathBadge button {
   min-height:44px;
   border:0;
@@ -398,6 +399,112 @@
 .purple-shell .miniTrack { background:#eceaf3; }
 .purple-shell .miniTrack i { background:var(--nikigo-purple); }
 
+.purple-shell .taxonomyList { display:grid; gap:16px; }
+.purple-shell .taxonomyStage,
+.purple-shell .taxonomyChapter {
+  min-width:0;
+  overflow:hidden;
+  border:1px solid var(--nikigo-border);
+  border-radius:20px;
+  background:var(--nikigo-surface);
+}
+.purple-shell .taxonomyStage.current { border-color:#cec9f4; }
+.purple-shell .taxonomyStage > summary,
+.purple-shell .taxonomyChapter > summary {
+  min-height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:18px 20px;
+  color:var(--nikigo-ink);
+  cursor:pointer;
+  list-style:none;
+}
+.purple-shell .taxonomyStage > summary::-webkit-details-marker,
+.purple-shell .taxonomyChapter > summary::-webkit-details-marker { display:none; }
+.purple-shell .taxonomyStage > summary::after,
+.purple-shell .taxonomyChapter > summary::after {
+  content:"+";
+  flex:0 0 28px;
+  height:28px;
+  display:grid;
+  place-items:center;
+  border-radius:9px;
+  background:var(--nikigo-purple-soft);
+  color:var(--nikigo-purple-deep);
+  font-size:18px;
+  font-weight:700;
+}
+.purple-shell .taxonomyStage[open] > summary::after,
+.purple-shell .taxonomyChapter[open] > summary::after { content:"−"; }
+.purple-shell .taxonomyStage > summary > span:first-child,
+.purple-shell .taxonomyChapter > summary > span:first-child { min-width:0; flex:1; }
+.purple-shell .taxonomyStage > summary small {
+  display:block;
+  margin-bottom:3px;
+  color:var(--nikigo-purple-deep);
+  font-size:12px;
+  font-weight:750;
+}
+.purple-shell .taxonomyStage > summary strong,
+.purple-shell .taxonomyChapter > summary strong { display:block; font-size:19px; line-height:1.35; }
+.purple-shell .taxonomyStage > summary em,
+.purple-shell .taxonomyChapter > summary em {
+  display:block;
+  margin-top:5px;
+  color:var(--nikigo-muted);
+  font-size:13px;
+  font-style:normal;
+  font-weight:500;
+  line-height:1.5;
+}
+.purple-shell .taxonomyStage > summary > b {
+  flex:0 0 auto;
+  color:var(--nikigo-muted);
+  font-size:13px;
+  white-space:nowrap;
+}
+.purple-shell .taxonomyChapters { display:grid; gap:12px; padding:0 16px 16px; }
+.purple-shell .taxonomyChapter { border-radius:16px; background:#fcfbff; }
+.purple-shell .taxonomyChapter.current { border-color:#d3cef6; background:#faf9ff; }
+.purple-shell .taxonomyChapter > summary { padding:16px 18px; }
+.purple-shell .taxonomyChapter > summary strong { font-size:17px; }
+.purple-shell .moduleStatus {
+  min-width:150px;
+  display:flex;
+  align-items:flex-end;
+  flex-direction:column;
+  gap:3px;
+}
+.purple-shell .moduleStatus b { color:var(--nikigo-muted); font-size:12px; font-weight:650; text-align:right; }
+.purple-shell .moduleStatus b:nth-child(n+2) { color:var(--nikigo-purple-deep); }
+.purple-shell .moduleLessons { display:grid; gap:10px; padding:0 12px 12px; }
+.purple-shell .moduleLessons .courseRow { margin:0; }
+
+.purple-shell .practiceGrid { display:grid; grid-template-columns:minmax(280px,.72fr) minmax(0,1.28fr); gap:16px; align-items:start; }
+.purple-shell .practicePrimary { background:linear-gradient(145deg,var(--nikigo-purple-soft),#fff); }
+.purple-shell .practicePrimary h2 { margin:16px 0 6px; font-size:22px; }
+.purple-shell .practicePrimary p,
+.purple-shell .practiceLeadCopy { color:var(--nikigo-muted); font-size:14px; line-height:1.6; }
+.purple-shell .practicePrimary .secondary { width:100%; margin-top:12px; }
+.purple-shell .practiceCount { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.purple-shell .practiceCount span { color:var(--nikigo-purple-deep); font-size:13px; font-weight:750; }
+.purple-shell .practiceCount strong { color:var(--nikigo-purple-dark); font-size:32px; }
+.purple-shell .relearnList { display:grid; gap:0; }
+.purple-shell .relearnList a {
+  min-height:52px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  border-top:1px solid var(--nikigo-border);
+  color:var(--nikigo-ink);
+  text-decoration:none;
+}
+.purple-shell .relearnList a b { color:var(--nikigo-purple-deep); font-size:13px; }
+.purple-shell .emptyState { margin:12px 0 4px; color:var(--nikigo-muted); font-size:14px; }
+
 .purple-shell .progressGrid { grid-template-columns:1.05fr .95fr .95fr; gap:12px; }
 .purple-shell .progressTile { padding:20px; }
 .purple-shell .progressTile:first-child { border-color:#d6d1f7; background:var(--nikigo-purple-soft); }
@@ -464,7 +571,7 @@
     width:auto;
     transform:none;
     padding:5px;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(5,1fr);
     gap:2px;
     border-radius:18px;
     background:rgba(255,255,255,.96);
@@ -512,6 +619,16 @@
   .purple-shell .courseIcon { width:48px; height:48px; }
   .purple-shell .courseRow .courseAction,
   .purple-shell .courseRow > button { grid-column:1/-1; width:100%; }
+  .purple-shell .taxonomyStage > summary,
+  .purple-shell .taxonomyChapter > summary { align-items:flex-start; flex-wrap:wrap; gap:10px; padding:16px; }
+  .purple-shell .taxonomyStage > summary > b { order:2; }
+  .purple-shell .taxonomyStage > summary::after,
+  .purple-shell .taxonomyChapter > summary::after { order:3; }
+  .purple-shell .moduleStatus { min-width:0; flex:1 1 100%; align-items:flex-start; }
+  .purple-shell .moduleStatus b { text-align:left; }
+  .purple-shell .taxonomyChapters { padding:0 10px 10px; }
+  .purple-shell .moduleLessons { padding:0 8px 8px; }
+  .purple-shell .practiceGrid { grid-template-columns:1fr; }
   .purple-shell .progressGrid { grid-template-columns:1fr 1fr; }
   .purple-shell .progressTile:first-child { grid-column:1/-1; }
   .purple-shell .profileSummary { grid-template-columns:1fr 1fr; }
@@ -534,6 +651,7 @@
   .purple-shell .heroContinue .mission .primary { width:100%; }
   .purple-shell .metric { padding-inline:13px; }
   .purple-shell .courseMeta { gap:6px; }
+  .purple-shell .appNav button { font-size:10px; }
 }
 
 @media (prefers-reduced-motion:reduce) {
