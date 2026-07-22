@@ -55,7 +55,7 @@ The number **54** refers to approved, exact-playable catalog assets—not the to
 | First-level page | User question | Product responsibility | Current support | Required reorganization |
 | --- | --- | --- | --- | --- |
 | 首页 | 我现在应该学什么？ | Select and explain exactly one strongest next action | Partial | Replace first-uncompleted-only logic with a priority selector; keep progress summaries secondary |
-| 学习 | 我可以学什么？ | Recommended path, all released courses, future content collections | Mostly | Rename current “课程” responsibility to “学习”; separate path guidance from catalog browsing |
+| 学习 | 我可以学什么？ | Recommended path and all released courses grouped by Stage and Chapter/Module | Mostly | Rename current “课程” responsibility to “学习”; replace the flat long list with an explicitly approved Stage → Chapter/Module hierarchy |
 | 练习 | 我现在应该复习什么？ | Due review, mistakes, relearning and later practice/game runtimes | Partial, hidden | Promote `review.html` into the first-level IA; add sources/filters without inventing games or vocabulary entries |
 | 进度 | 我学会了什么，有什么证据？ | Course completion, history, accuracy, mastery and skill evidence | Partial | Keep current completion/XP data; add evidence and mastery only when backed by recorded events |
 | 我的 | Nikigo 怎样配合我的学习？ | Four-language preference, goal, audio, account and personal settings | Mostly | Keep settings; move placement/learning-plan actions to an appropriate learning setup section if needed |
@@ -65,7 +65,10 @@ The number **54** refers to approved, exact-playable catalog assets—not the to
 - Desktop: five first-level items in one product navigation.
 - Mobile: five destinations may use the existing compact bottom-navigation pattern, but labels and active state must remain perceivable; content must retain bottom safe-area padding.
 - `首页` is a decision surface, not a second course catalog.
-- `学习` owns browsing and free entry.
+- `首页` shows the current localized stage/module context, one continue action and one complete-path entry; it does not show the full course list.
+- `学习` owns browsing and free entry, grouped by Stage and Chapter/Module rather than one flat long list.
+- The current stage and current module are expanded by default; other modules may collapse.
+- Every module shows a localized name/objective and completed/total lesson counts; its lessons remain ordered by catalog `displayOrder`.
 - `练习` owns review workload and retry flows; it does not own primary course progression.
 - `进度` reports evidence; it does not recommend multiple competing actions.
 - `我的` owns preferences and account settings; it does not become a miscellaneous feature drawer.
@@ -175,6 +178,8 @@ Program
 - `ReviewItem`: preserve current IDs such as `lesson01:quiz:0`; link each item to `contentId`/legacy `lessonId` without renaming stored IDs.
 
 Display number and `displayOrder` remain presentation/recommendation metadata only. They must never become entitlement or progression gates.
+
+Phase 3B.1.5 produced the approved, explicit, versioned Stage/Chapter map in `NIKIGO_STAGE_CHAPTER_TAXONOMY_V1.md`. Phase 3B.2 may adapt it into runtime descriptors without changing `course-catalog.js`; title/template inference remains forbidden.
 
 ## 6. Four reusable content types
 
@@ -523,10 +528,23 @@ Keep as authoritative or compatibility-critical:
 - Do not change visible UI, course pages, lesson engines, state storage, ReviewItem publication, course content, audio data or the purple/white visual system.
 - Acceptance includes all 12 approved scenario groups: setup, explicit active session, due review, ambiguous historical unfinished courses, next available, stage complete, free choice, Lesson 6 gate, 14-course free access, catalog identity/route parity, legacy route aliases and four-language key completeness.
 
+### Phase 3B.1.5 — Stage and Chapter Taxonomy Approval
+
+- Review Lessons 0–13 against their real content, not title inference.
+- Approve explicit four-language stage names, chapter IDs/names/goals, lesson memberships, module display order, completion conditions, gate states and future expansion rules.
+- Keep `course-catalog.js`, runtime content descriptors, course content, state and visible UI unchanged.
+- Record the approved `nikigo-taxonomy-v1` map and product decisions in `NIKIGO_STAGE_CHAPTER_TAXONOMY_V1.md`.
+- No Stage/Chapter grouping is implemented in the Learn page during this phase.
+
 ### Phase 3B.2 — Five-page shell and responsibility split
 
 - Add Practice as a first-level destination using the current real review data.
 - Rename/reframe Courses as Learn while preserving `#courses` as a compatibility alias.
+- Implement the approved explicit Stage → Chapter/Module → Lesson grouping; do not retain one flat long list as course count grows.
+- Keep internal `K0`/`K1` IDs unchanged while showing localized “Stage 1 · Hangul Foundations” and “Stage 2 · Essential Korean” labels to users.
+- Default-expand the current stage/module and allow other modules to collapse; show localized module goals and completed/total lesson counts.
+- Model Lesson 6’s gated module as user-facing 3/4 plus audio-preparation status; never claim 4/4, formal completion or XP while its required-audio gate is closed, and never let that gate block later recommendations.
+- Expose `taxonomyVersion`, `historicalCompletion`, `historicalCompletedAt`, `currentVersionProgress` and `newContentAvailable` through pure view models before any separately approved persistence migration.
 - Connect Dashboard to exactly one recommendation view model.
 - Keep current purple/white visual components; make only structural/class changes needed for IA.
 - Acceptance: 390/768/1440 navigation, four languages, deep links, no overflow, keyboard focus, no console/network errors.
@@ -571,6 +589,8 @@ Names below are proposed for Stage 3B and may be adjusted to existing project co
 - `scripts/test-state-compatibility.mjs`
 - `scripts/validate-product-architecture.mjs`
 
+After Phase 3B.1.5 approval, Phase 3B.2 may add `stage-chapter-taxonomy.js` as the explicit runtime map. It must not infer chapter IDs or skill tags from course titles.
+
 ### Existing files likely to receive scoped Stage 3B changes
 
 - `nikigo-app.html` — five-page shell, page responsibility markup and compatibility hash routing.
@@ -610,6 +630,10 @@ Before any Stage 3B branch is considered ready:
 - The recommendation selector always returns exactly one `primaryAction`.
 - `#dashboard`, `#courses`, `#progress`, `#profile`, direct lesson routes, review and diagnostic routes retain compatibility mappings.
 - Every new user-facing key is complete in `zh`, `en`, `vi` and `ja`.
+- Stage and module UI uses approved four-language names and objectives rather than exposing only K0/K1.
+- Learn groups courses by explicit Stage/Chapter membership, expands the current stage/module by default and keeps other modules collapsible.
+- Module progress shows completed and total lesson counts plus any completion-gate/preview state without converting gates into completion.
+- Module ordering and course `displayOrder` affect display/recommendation only; all `available` course routes remain directly accessible.
 - Four languages work across all five first-level responsibilities.
 - Lessons 4, 7 and 11 retain interaction, retry, completion, relearning and restore behavior.
 - Representative tests cover every engine family, not only the three named lessons.
@@ -632,3 +656,4 @@ The product owner approved these decisions for implementation:
 3. Historical unfinished courses without a reliable recent-activity signal remain secondary and never displace due review through guessed ranking.
 4. Lesson 6 remains freely enterable as preview/audio-in-preparation, but cannot be a formally completable recommendation or award formal completion/XP while its required-audio gate is closed.
 5. Stage 3B starts with adapters, pure selectors and compatibility aliases. Phase 3B.1 does not rewrite `course-catalog.js`, `app-state.js`, lesson engines, `audio-catalog.js`, course content/answers, stable IDs, ReviewItem IDs or session keys.
+6. Phase 3B.1.5 approves an explicit Stage/Chapter taxonomy before Phase 3B.2. Runtime code must not derive `chapterId` or `skillTags` from course titles, and the Learn page must not remain a single flat course list as content grows.
