@@ -60,6 +60,16 @@ Ordinary users see the localized ordinal label before the internal code:
 | `K0` | 阶段1 · 韩文基础 | Stage 1 · Hangul Foundations | Giai đoạn 1 · Nền tảng Hangul | ステージ1 · ハングル基礎 |
 | `K1` | 阶段2 · 基础沟通 | Stage 2 · Essential Korean | Giai đoạn 2 · Giao tiếp tiếng Hàn cơ bản | ステージ2 · 韓国語の基本コミュニケーション |
 
+### Runtime naming approval audit
+
+The approved K1 name is consistent in this taxonomy, `stage-chapter-taxonomy.js` and the future-state blueprint. A runtime audit found the following legacy “Survival Korean” source strings. The four-language replacements below are now approved for a focused compatibility-safe cleanup; business decisions remain keyed only by `K1`.
+
+| Runtime source | Current legacy copy | Approved value | Current user impact | Resolution |
+| --- | --- | --- | --- | --- |
+| `nikigo-app.html` base `pathNames.K1` | zh `生存韩语`; en `Survival Korean`; vi `Tiếng Hàn sinh tồn`; ja `サバイバル韓国語` | zh `基础沟通`; en `Essential Korean`; vi `Giao tiếp tiếng Hàn cơ bản`; ja `韓国語の基本コミュニケーション` | Later assignments currently override all four values before the app renders, so the main app displays the approved name; the duplicate source remains inconsistent | Replace the stale base values and remove the redundant overrides in the V4 integration |
+| `nikigo-app.html` base onboarding option for learners who know Hangul | zh `从生存韩语开始`; en `Start with survival Korean`; vi `Bắt đầu với tiếng Hàn sinh tồn`; ja `サバイバル韓国語から始める` | zh `从基础沟通开始`; en `Start with Essential Korean`; vi `Bắt đầu với giao tiếp tiếng Hàn cơ bản`; ja `韓国語の基本コミュニケーションから始める` | Later assignments currently override all four values; no observed main-app mismatch | Replace the stale base values and remove the redundant overrides in the V4 integration |
+| `diagnostic.html` `PATH_NAMES.K1` | zh `生存韩语`; en `Survival Korean`; vi `Tiếng Hàn sinh tồn`; ja `サバイバル韓国語` | Approved four-language K1 names above | The diagnostic can still display legacy K1 naming | Apply the focused four-language correction and retain diagnostic behavior |
+
 ## 3. Chapter summary
 
 `moduleDisplayOrder` is scoped within its stage. Lessons inside a module always use their existing catalog `displayOrder`.
@@ -253,12 +263,15 @@ This section is the implementation contract for Stage 3B.2.
 
 ### Learn
 
-- Group by Stage → Chapter/Module → Lesson.
-- Default-expand the current stage and current module.
-- If there is no active module, expand the module containing the current primary recommendation; if the stage is complete, expand its summary/current-version module state.
-- Other modules are collapsible.
-- Each module shows localized name, localized objective, `completedCount / totalCount`, gate/preview status and lessons ordered by catalog `displayOrder`.
-- Grouping never disables an `available` course link.
+- Use the approved `Stage overview → Module path → Module detail → Lesson` flow.
+- Stage overview shows the localized Stage label, one objective, `completedCount / totalCount` and the approved original Stage illustration.
+- The Stage screen renders Modules as a low-density connected path. It does not expand Lesson lists in place.
+- Module detail shows the localized Module objective, progress, current/recommended Lesson and Lessons ordered by catalog `displayOrder`.
+- The selected Stage defaults to the active resumable course, then the formal recommendation, then the last browsed Stage, then `K0`. A valid Stage/Module URL state takes precedence because it represents deliberate navigation or refresh restoration.
+- Only K0 and K1 are visible while they are the only Stages with real runtime content. K2–K4 remain internal future containers and do not produce empty or locked entries.
+- Each Module shows localized name, localized objective, `completedCount / totalCount`, gate/preview status and a detail entry.
+- Grouping never disables an `available` course link. The path connector expresses recommended order only.
+- Lesson 6 remains freely enterable as preview, is excluded from formally completable recommendation, cannot award formal completion XP while gated and does not block Lesson 7 or later content.
 
 ### Explicit-data rule
 

@@ -55,7 +55,7 @@ The number **54** refers to approved, exact-playable catalog assets—not the to
 | First-level page | User question | Product responsibility | Current support | Required reorganization |
 | --- | --- | --- | --- | --- |
 | 首页 | 我现在应该学什么？ | Select and explain exactly one strongest next action | Partial | Replace first-uncompleted-only logic with a priority selector; keep progress summaries secondary |
-| 学习 | 我可以学什么？ | Recommended path and all released courses grouped by Stage and Chapter/Module | Mostly | Rename current “课程” responsibility to “学习”; replace the flat long list with an explicitly approved Stage → Chapter/Module hierarchy |
+| 学习 | 我可以从哪里继续，也可以浏览什么？ | Stage overview first; a low-density Module path second; Module detail owns the Lesson list | Mostly | Rename current “课程” responsibility to “学习”; replace the V3 mission-first runtime with the approved V4 Stage overview → Module path → Module detail → Lesson flow |
 | 练习 | 我现在应该复习什么？ | Due review, mistakes, relearning and later practice/game runtimes | Partial, hidden | Promote `review.html` into the first-level IA; add sources/filters without inventing games or vocabulary entries |
 | 进度 | 我学会了什么，有什么证据？ | Course completion, history, accuracy, mastery and skill evidence | Partial | Keep current completion/XP data; add evidence and mastery only when backed by recorded events |
 | 我的 | Nikigo 怎样配合我的学习？ | Four-language preference, goal, audio, account and personal settings | Mostly | Keep settings; move placement/learning-plan actions to an appropriate learning setup section if needed |
@@ -66,13 +66,27 @@ The number **54** refers to approved, exact-playable catalog assets—not the to
 - Mobile: five destinations may use the existing compact bottom-navigation pattern, but labels and active state must remain perceivable; content must retain bottom safe-area padding.
 - `首页` is a decision surface, not a second course catalog.
 - `首页` shows the current localized stage/module context, one continue action and one complete-path entry; it does not show the full course list.
-- `学习` owns browsing and free entry, grouped by Stage and Chapter/Module rather than one flat long list.
+- `学习` owns Stage browsing, the recommended Module path, Module detail, Lesson discovery and free entry. The Stage overview and current Module are primary; complete Lesson lists appear only in Module detail.
 - The current stage and current module are expanded by default; other modules may collapse.
 - Every module shows a localized name/objective and completed/total lesson counts; its lessons remain ordered by catalog `displayOrder`.
 - `练习` owns review workload and retry flows; it does not own primary course progression.
 - `进度` reports evidence; it does not recommend multiple competing actions.
 - `我的` owns preferences and account settings; it does not become a miscellaneous feature drawer.
 - No Vocabulary or Game navigation item is created until real approved content exists.
+
+### Approved Learn page V4 responsibility
+
+- The formal flow is `Stage overview → Module path → Module detail → Lesson`.
+- The Stage overview contains the localized Stage name, one learning objective, truthful completion progress and one original Nikigo illustration.
+- The primary Stage screen uses a low-density vertical Module path. It does not directly flatten every Lesson onto the main Learn page.
+- Module detail owns the Module objective, progress, current or recommended Lesson and the real Lesson list for that Module.
+- The current Module may contain the page's single strongest continue/start action. Other Modules use quieter detail entry actions.
+- `Stage → Module → Lesson` controls grouping, display and recommendation only. It never becomes an access gate; every `available` course remains freely enterable.
+- Only Stages with real released runtime content are visible. K0 and K1 are visible now; K2–K4 do not appear as empty cards, locked entries or “coming soon” placeholders before separate release approval.
+- User-facing labels are `阶段1 · 韩文基础` and `阶段2 · 基础沟通` with the approved four-language equivalents. Business decisions continue to use stable `stageId` values `K0` and `K1`.
+- V4 is the formal Learn-page design baseline. V3 remains historical design evidence and is not loaded by the formal runtime.
+- The Practice page owns due review, mistakes, relearning, future approved games and pronunciation training. The Progress page owns course progress and evidence-backed ability reporting.
+- Future vocabulary learning belongs to Learn, but no vocabulary route, card or empty entry enters runtime until its data and rules receive separate approval.
 
 ## 3. Current architecture
 
@@ -441,7 +455,7 @@ flowchart TD
 | Page | User goal | Most important information | Primary action | Secondary actions | State that must remain | Must not appear |
 | --- | --- | --- | --- | --- | --- | --- |
 | Dashboard | Know what to do now | One recommendation, reason, exact resume/lesson/review context | Resume / review / start next—exactly one | View K0 path, see compact streak/XP/goal/week summaries | Language, current path, progress, due count, XP, streak | Full settings, equal-weight course grid, multiple competing CTAs, unreleased future modules |
-| 学习 / 全部课程 | Browse and freely enter learning content | Recommended path plus truthful complete catalog and release/audio limitations | Enter selected available content | Filter by stage/type; view details | Completion %, availability, stable route, recommendation order | Review queue management, account/legal settings, fake vocabulary/game entries |
+| 学习 / 阶段与模块路径 | Understand the current Stage, follow the Module path, or freely choose another available Lesson | Localized Stage overview, truthful progress, current Module and low-density recommended sequence | Continue/start the current Module's selected Lesson—exactly one | Switch Stage; open Module detail; freely enter another available Lesson | Active/resumable lesson, selected Stage/Module URL state, completion %, availability, stable route, recommendation order, Lesson 6 gate | Review queue management, account/legal settings, fake vocabulary/game entries, empty K2–K4 entries, or a flat all-Lesson wall |
 | 练习 / 复习中心 | Clear the most useful practice workload | Due count, source lesson, review type, readiness/empty state | Start due review | Review mistakes, relearn a completed course, later choose approved practice type | ReviewItem mastery, due time, attempts, language, exact audio gate | Full course catalog, invented game levels, formal mastery claims without evidence |
 | 进度 / 能力报告 | Understand progress and evidence | Completion, learning history, accuracy and skill evidence with data coverage | Inspect a stage/skill record | Open a completed course or related review | XP, completed IDs, progress %, evidence provenance and dates | Primary learning recommendation, settings, unsupported skill scores presented as fact |
 | 我的 / 设置 | Adjust how Nikigo works | Language, learning goal, audio and account preferences | Save the changed setting | Placement setup, privacy/support/account actions | Four-language selection, time goal, audio rate/autoplay, identity | Course cards, review workload, XP celebration as main content |
@@ -540,7 +554,8 @@ Keep as authoritative or compatibility-critical:
 
 - Add Practice as a first-level destination using the current real review data.
 - Rename/reframe Courses as Learn while preserving `#courses` as a compatibility alias.
-- Implement the approved explicit Stage → Chapter/Module → Lesson grouping; do not retain one flat long list as course count grows.
+- Treat Learn as Stage/Module-path-first: one Stage overview, one connected low-density Module path, then a separate Module detail containing Lessons.
+- Implement the approved explicit Stage → Chapter/Module → Lesson grouping; do not retain one flat long list or render all Lessons on the Stage overview.
 - Keep internal `K0`/`K1` IDs unchanged while showing localized “Stage 1 · Hangul Foundations” and “Stage 2 · Essential Korean” labels to users.
 - Default-expand the current stage/module and allow other modules to collapse; show localized module goals and completed/total lesson counts.
 - Model Lesson 6’s gated module as user-facing 3/4 plus audio-preparation status; never claim 4/4, formal completion or XP while its required-audio gate is closed, and never let that gate block later recommendations.
