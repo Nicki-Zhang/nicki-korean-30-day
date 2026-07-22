@@ -4,32 +4,35 @@ import vm from 'node:vm';
 
 const html=fs.readFileSync('lesson-11.html','utf8');
 const lessonCss=fs.readFileSync('lesson-clear-interactive.css','utf8');
+const lessonTheme=fs.readFileSync('lesson-purple-interactive.css','utf8');
 const lessonEngine=fs.readFileSync('lesson-clear-interactive.js','utf8');
-const shellCss=fs.readFileSync('assets/nikigo-clear-shell.css','utf8');
+const shellCss=fs.readFileSync('assets/nikigo-purple-shell.css','utf8');
 const shellJs=fs.readFileSync('assets/nikigo-clear-shell.js','utf8');
 const app=fs.readFileSync('nikigo-app.html','utf8');
 const worker=fs.readFileSync('sw.js','utf8');
 
-for(const marker of ['lesson-clear-interactive.css','lesson-clear-interactive.js','audio-catalog.js','lesson-11.js'])assert.ok(html.includes(marker),`Lesson 11 pilot missing ${marker}`);
-assert.ok(app.includes('assets/nikigo-clear-shell.css'));
+for(const marker of ['lesson-clear-interactive.css','lesson-purple-interactive.css','lesson-clear-interactive.js','audio-catalog.js','lesson-11.js'])assert.ok(html.includes(marker),`Lesson 11 pilot missing ${marker}`);
+assert.ok(app.includes('assets/nikigo-purple-shell.css'));
 assert.ok(app.includes('assets/nikigo-clear-shell.js'));
 assert.match(shellJs,/target\.textContent !== nextTitle/,'Dashboard mutation sync must be idempotent.');
-for(const marker of ['--canvas:#f6f7f4','--ink:#171918','--action:#171918','--accent:#287f60','--error:#a94338','prefers-reduced-motion','min-height:44px'])assert.ok(lessonCss.includes(marker),`Ink & Jade token or accessibility rule missing: ${marker}`);
-for(const source of [lessonCss,shellCss]){
-  assert.doesNotMatch(source,/#6d4aff|#9b7cff|linear-gradient|radial-gradient|box-shadow:\s*0\s+\d+px\s+\d+px/, 'Pilot must not restore purple, gradients, or decorative shadows.');
-}
+for(const marker of ['--nikigo-purple:#6657d9','--nikigo-purple-deep:#4f46b8','--nikigo-purple-soft:#f2f0ff','--nikigo-canvas:#f7f7fb','min-height:44px','prefers-reduced-motion'])assert.ok(shellCss.includes(marker),`Purple dashboard token or accessibility rule missing: ${marker}`);
+for(const marker of ['--canvas:#f7f7fb','--action:#4f46b8','--accent:#6657d9','--success:#257653','--error:#a94338','min-height:44px','prefers-reduced-motion'])assert.ok(lessonTheme.includes(marker),`Purple lesson token or accessibility rule missing: ${marker}`);
+for(const source of [lessonTheme,shellCss])assert.doesNotMatch(source,/#287f60|#1d674c|#f6f7f4/i,'Loaded purple theme must not contain Ink & Jade palette tokens.');
+assert.match(shellCss,/linear-gradient\(128deg,#403a86/,'Dashboard hero must retain the restrained purple gradient.');
+assert.match(app,/id="streakMetric"/);assert.match(app,/id="xpMetric"/);assert.match(app,/id="weekMetric"/);
+assert.match(app,/<\/header>\s*<nav id="appNav"/,'Primary navigation must remain adjacent to the top shell for desktop and mobile placement.');
 assert.match(lessonCss,/\.conceptChunk\[aria-pressed="true"\][\s\S]*translateY\(-3px\)/);
 assert.match(lessonCss,/--motion:180ms/);
 assert.match(lessonEngine,/NikigoAudio\?\.resolve\?\.\(audio\.text,audio\.audioType,audio\.lessonId\)/);
 assert.match(lessonEngine,/if\(!result\?\.playable\|\|!result\.path\)return/);
 assert.doesNotMatch(lessonEngine,/speechSynthesis|SpeechSynthesisUtterance|webkitSpeech|text-to-speech/i);
 assert.doesNotMatch(lessonEngine,/option\.id===step\.correct|step\.correct\)[\s\S]{0,120}isCorrect/, 'Wrong feedback must not reveal the correct option.');
-for(const marker of ['wrongHint','history.pushState','popstate','completionPatch','beginRetry','move-left','move-right','prefers-reduced-motion'])assert.ok(`${lessonEngine}\n${lessonCss}`.includes(marker),`Pilot interaction missing ${marker}`);
+for(const marker of ['wrongHint','history.pushState','popstate','completionPatch','beginRetry','move-left','move-right','prefers-reduced-motion'])assert.ok(`${lessonEngine}\n${lessonCss}\n${lessonTheme}`.includes(marker),`Pilot interaction missing ${marker}`);
 for(const marker of ['저는 하늘이에요.','저는 하늘 이에요']){
   if(marker.includes(' 하늘 ')) assert.ok(!`${lessonEngine}\n${shellJs}\n${app}`.includes(marker),'Invalid Korean spacing entered the pilot.');
   else assert.ok(lessonEngine.includes(marker),'Canonical Korean sentence missing.');
 }
-for(const asset of ['./lesson-clear-interactive.js','./lesson-clear-interactive.css','./assets/nikigo-clear-shell.js','./assets/nikigo-clear-shell.css'])assert.ok(worker.includes(asset),`Service Worker missing ${asset}`);
+for(const asset of ['./lesson-clear-interactive.js','./lesson-clear-interactive.css','./lesson-purple-interactive.css','./assets/nikigo-clear-shell.js','./assets/nikigo-purple-shell.css'])assert.ok(worker.includes(asset),`Service Worker missing ${asset}`);
 
 const context={window:{}};context.window.window=context.window;
 vm.runInNewContext(fs.readFileSync('lesson-11.js','utf8'),context,{filename:'lesson-11.js'});
@@ -67,8 +70,9 @@ if(fs.existsSync(`${evidenceRoot}/ACCEPTANCE_RESULT.json`)){
   assert.equal(evidence.interaction.firstAwardedXp,50);assert.equal(evidence.interaction.repeatAwardedXp,0);assert.equal(evidence.interaction.totalXpAfterRepeat,evidence.interaction.totalXpAfterFirst);
   assert.deepEqual(Object.keys(evidence.languages),['zh','en','vi','ja']);
   for(const item of [...evidence.viewports,...Object.values(evidence.languages)]){assert.equal(item.overflow,false);assert.equal(item.undefinedText,false);assert.deepEqual(item.tooSmall,[]);}
+  assert.equal(evidence.dashboardScreenshots.length,4);for(const file of evidence.dashboardScreenshots)assert.ok(fs.statSync(`${evidenceRoot}/screenshots/${file}`).size>20000,`${file} is too small`);
   assert.equal(evidence.screenshots.length,12);for(const file of evidence.screenshots)assert.ok(fs.statSync(`${evidenceRoot}/screenshots/${file}`).size>20000,`${file} is too small`);
   assert.ok(fs.statSync(`${evidenceRoot}/nikigo-lesson-11-390-flow.mov`).size>1000000,'390px interaction recording is missing');
 }
 
-console.log('Validated the Lesson 11 Ink & Jade pilot: isolated renderer, 13-step compatibility, retry/relearn/XP gates, non-revealing feedback, keyboard-ready controls, exact-audio fail-closed behavior, and 54 sealed assets unchanged.');
+console.log('Validated the purple Nikigo dashboard and Lesson 11 theme: isolated renderer, 13-step compatibility, retry/relearn/XP gates, non-revealing feedback, keyboard-ready controls, exact-audio fail-closed behavior, and 54 sealed assets unchanged.');

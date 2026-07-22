@@ -1,7 +1,7 @@
 {
   "browser": "Google Chrome",
   "chromeMode": "isolated-headful-user-data-dir",
-  "baseUrl": "http://127.0.0.1:8769",
+  "baseUrl": "http://127.0.0.1:4190",
   "viewports": [
     {
       "label": "390-home",
@@ -9,7 +9,7 @@
       "innerHeight": 844,
       "htmlScrollWidth": 390,
       "bodyScrollWidth": 390,
-      "bodyScrollHeight": 1349,
+      "bodyScrollHeight": 1295,
       "overflow": false,
       "undefinedText": false,
       "tooSmall": []
@@ -20,7 +20,7 @@
       "innerHeight": 900,
       "htmlScrollWidth": 768,
       "bodyScrollWidth": 768,
-      "bodyScrollHeight": 941,
+      "bodyScrollHeight": 981,
       "overflow": false,
       "undefinedText": false,
       "tooSmall": []
@@ -31,7 +31,7 @@
       "innerHeight": 900,
       "htmlScrollWidth": 1440,
       "bodyScrollWidth": 1440,
-      "bodyScrollHeight": 948,
+      "bodyScrollHeight": 989,
       "overflow": false,
       "undefinedText": false,
       "tooSmall": []
@@ -44,7 +44,7 @@
       "innerHeight": 844,
       "htmlScrollWidth": 390,
       "bodyScrollWidth": 390,
-      "bodyScrollHeight": 848,
+      "bodyScrollHeight": 854,
       "overflow": false,
       "undefinedText": false,
       "tooSmall": []
@@ -55,7 +55,7 @@
       "innerHeight": 844,
       "htmlScrollWidth": 390,
       "bodyScrollWidth": 390,
-      "bodyScrollHeight": 848,
+      "bodyScrollHeight": 854,
       "overflow": false,
       "undefinedText": false,
       "tooSmall": []
@@ -66,7 +66,7 @@
       "innerHeight": 844,
       "htmlScrollWidth": 390,
       "bodyScrollWidth": 390,
-      "bodyScrollHeight": 848,
+      "bodyScrollHeight": 854,
       "overflow": false,
       "undefinedText": false,
       "tooSmall": []
@@ -77,7 +77,7 @@
       "innerHeight": 844,
       "htmlScrollWidth": 390,
       "bodyScrollWidth": 390,
-      "bodyScrollHeight": 848,
+      "bodyScrollHeight": 854,
       "overflow": false,
       "undefinedText": false,
       "tooSmall": []
@@ -99,6 +99,12 @@
     "touchTargets": true,
     "returnAndRefresh": true
   },
+  "dashboardScreenshots": [
+    "dashboard-390-first.png",
+    "dashboard-390-full.png",
+    "dashboard-768.png",
+    "dashboard-1440.png"
+  ],
   "screenshots": [
     "01-home-390.png",
     "02-opening-390.png",

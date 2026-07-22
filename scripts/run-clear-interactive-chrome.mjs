@@ -47,6 +47,7 @@ async function navigate(url){await cdp.send('Page.navigate',{url});await waitFor
 async function click(selector){const result=await evaluate(`(()=>{const nodes=[...document.querySelectorAll(${JSON.stringify(selector)})].filter(node=>!node.disabled&&node.getClientRects().length);if(nodes.length!==1)return {count:nodes.length};nodes[0].click();return {count:1};})()`);assert.equal(result.count,1,`Expected one visible control: ${selector}`);await delay(210);}
 async function clickCourse11(){const result=await evaluate(`(()=>{const nodes=[...document.querySelectorAll('.courseAction[data-course-id="lesson-11"]')];return {count:nodes.length,href:nodes[0]?.href||null};})()`);assert.equal(result.count,1,'Lesson 11 course row missing');assert.ok(result.href?.includes('lesson-11.html'),'Lesson 11 href is incorrect');await navigate(result.href);await waitFor(`location.pathname.endsWith('/lesson-11.html')`,'Lesson 11 navigation');await waitFor(`document.querySelector('#progressCount')?.textContent.trim()==='1 / 13'`,'Lesson 11 opening');}
 async function capture(name){const {data}=await cdp.send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false,fromSurface:true});await writeFile(path.join(shots,name),Buffer.from(data,'base64'));}
+async function captureFull(name){const {cssContentSize}=await cdp.send('Page.getLayoutMetrics');const {data}=await cdp.send('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,fromSurface:true,clip:{x:0,y:0,width:Math.ceil(cssContentSize.width),height:Math.ceil(cssContentSize.height),scale:1}});await writeFile(path.join(shots,name),Buffer.from(data,'base64'));}
 async function pageAudit(label){return evaluate(`(()=>{const controls=[...document.querySelectorAll('button,select,a')].filter(node=>node.getClientRects().length);const tooSmall=controls.filter(node=>{const r=node.getBoundingClientRect();return r.width<44||r.height<44;}).map(node=>node.textContent.trim().slice(0,40));return {label:${JSON.stringify(label)},innerWidth,innerHeight,htmlScrollWidth:document.documentElement.scrollWidth,bodyScrollWidth:document.body.scrollWidth,bodyScrollHeight:document.body.scrollHeight,overflow:document.documentElement.scrollWidth>innerWidth+2||document.body.scrollWidth>innerWidth+2,undefinedText:document.body.innerText.includes('undefined'),tooSmall};})()`);
 }
 async function setViewport(width,height){await cdp.send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:1,mobile:width<=430,screenWidth:width,screenHeight:height});await delay(160);}
@@ -56,7 +57,7 @@ async function matchAll(ids){for(const id of ids){await click(`[data-action="mat
 async function addTokens(keys){for(const key of keys)await click(`[data-action="add-token"][data-value="${key}"]`);await click('[data-action="confirm-build"]');}
 async function completeCorrectRoute(){await next();await showFullDialogue();await next();await click('[data-action="answer"][data-value="answer"]');await next();await matchAll(['ask','intro','nice']);await next();await next();await addTokens(['topic:jeoneun','name:haneul','ending:ieyo']);await next();await click('[data-action="answer"][data-value="right"]');await next();await matchAll(['student','teacher','worker']);await next();await showFullDialogue();await next();await addTokens(['topic:jeoneun','identity:student','ending:ieyo']);await next();await click('[data-action="answer"][data-value="nice"]');await next();await click('[data-action="answer"][data-value="right"]');await next();}
 
-const results={browser:'Google Chrome',chromeMode:recordScreen?'isolated-headful-user-data-dir':'isolated-headless-user-data-dir',baseUrl,viewports:[],languages:{},interaction:{},screenshots:[],consoleWarnings:0,consoleErrors:0,networkErrors:[],runtimeExceptions:[],pendingAudioDisabled:false,audioApiRequests:0,audioCost:0};
+const results={browser:'Google Chrome',chromeMode:recordScreen?'isolated-headful-user-data-dir':'isolated-headless-user-data-dir',baseUrl,viewports:[],languages:{},interaction:{},dashboardScreenshots:[],screenshots:[],consoleWarnings:0,consoleErrors:0,networkErrors:[],runtimeExceptions:[],pendingAudioDisabled:false,audioApiRequests:0,audioCost:0};
 try{
   await cdp.send('Page.enable');await cdp.send('Runtime.enable');await cdp.send('Network.enable');await cdp.send('Log.enable');
   await setViewport(390,844);
@@ -69,6 +70,14 @@ try{
   await waitFor(`location.hash==='#dashboard'`,'course dashboard');
   console.log('chrome: dashboard ready');
   results.viewports.push(await pageAudit('390-home'));
+  await evaluate(`scrollTo(0,0)`);await delay(160);
+  await capture('dashboard-390-first.png');results.dashboardScreenshots.push('dashboard-390-first.png');
+  await evaluate(`document.querySelector('#appNav').style.visibility='hidden'`);
+  await captureFull('dashboard-390-full.png');results.dashboardScreenshots.push('dashboard-390-full.png');
+  await evaluate(`document.querySelector('#appNav').style.removeProperty('visibility')`);
+  await setViewport(768,1024);await evaluate(`scrollTo(0,0)`);await capture('dashboard-768.png');results.dashboardScreenshots.push('dashboard-768.png');
+  await setViewport(1440,900);await evaluate(`scrollTo(0,0)`);await capture('dashboard-1440.png');results.dashboardScreenshots.push('dashboard-1440.png');
+  await setViewport(390,844);await evaluate(`scrollTo(0,0)`);
   await capture('01-home-390.png');results.screenshots.push('01-home-390.png');
   if(recordScreen){await rm(movie,{force:true});screenRecorder=spawn('/usr/sbin/screencapture',['-v','-R0,0,390,844',movie],{stdio:'ignore'});await delay(700);}
   saveFrames=true;await cdp.send('Page.startScreencast',{format:'jpeg',quality:72,maxWidth:390,maxHeight:844,everyNthFrame:1});
@@ -128,7 +137,7 @@ try{
   assert.ok(results.viewports.every(item=>!item.overflow&&!item.undefinedText&&item.tooSmall.length===0),JSON.stringify(results.viewports));
   assert.ok(Object.values(results.languages).every(item=>item.tooSmall.length===0),JSON.stringify(results.languages));
   await writeFile(path.join(root,'ACCEPTANCE_RESULT.json'),JSON.stringify(results,null,2)+'\n');
-  console.log(JSON.stringify({status:'PASS',screenshots:results.screenshots.length,frames:frameNumber,firstXp,viewports:results.viewports,languages:Object.keys(results.languages),pendingAudioDisabled:results.pendingAudioDisabled},null,2));
+  console.log(JSON.stringify({status:'PASS',dashboardScreenshots:results.dashboardScreenshots.length,screenshots:results.screenshots.length,frames:frameNumber,firstXp,viewports:results.viewports,languages:Object.keys(results.languages),pendingAudioDisabled:results.pendingAudioDisabled},null,2));
 } finally {
   if(screenRecorder){screenRecorder.kill('SIGINT');screenRecorder=null;}
   try{saveFrames=false;await cdp.send('Page.stopScreencast');}catch{}
