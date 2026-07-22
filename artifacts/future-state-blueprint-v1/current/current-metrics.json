@@ -1,0 +1,372 @@
+[
+  {
+    "viewport": 390,
+    "page": "01-home",
+    "url": "http://127.0.0.1:4175/nikigo-app.html?lang=zh#dashboard",
+    "clientWidth": 390,
+    "h1": [
+      "你的韩语，从这里开始",
+      "创建账户",
+      "오늘도 한 걸음 더.",
+      "学习",
+      "练习"
+    ],
+    "scrollWidth": 390,
+    "title": "Nikigo · 学习韩语",
+    "visibleMainActions": [
+      "创建学习档案 →",
+      "游客体验",
+      "注册",
+      "登录",
+      "✉ 邮箱",
+      "▣ 手机号",
+      "发送验证码",
+      "创建账户并继续",
+      "不注册，先体验",
+      "←",
+      "稍后设置",
+      "继续 →"
+    ]
+  },
+  {
+    "viewport": 390,
+    "page": "02-learn",
+    "url": "http://127.0.0.1:4175/nikigo-app.html?lang=zh#courses",
+    "clientWidth": 390,
+    "h1": [
+      "你的韩语，从这里开始",
+      "创建账户",
+      "오늘도 한 걸음 더.",
+      "学习",
+      "练习"
+    ],
+    "scrollWidth": 390,
+    "title": "Nikigo · 学习韩语",
+    "visibleMainActions": [
+      "创建学习档案 →",
+      "游客体验",
+      "注册",
+      "登录",
+      "✉ 邮箱",
+      "▣ 手机号",
+      "发送验证码",
+      "创建账户并继续",
+      "不注册，先体验",
+      "←",
+      "稍后设置",
+      "继续 →"
+    ]
+  },
+  {
+    "viewport": 390,
+    "page": "03-practice",
+    "url": "http://127.0.0.1:4175/nikigo-app.html?lang=zh#practice",
+    "clientWidth": 390,
+    "h1": [
+      "你的韩语，从这里开始",
+      "创建账户",
+      "오늘도 한 걸음 더.",
+      "学习",
+      "练习"
+    ],
+    "scrollWidth": 390,
+    "title": "Nikigo · 学习韩语",
+    "visibleMainActions": [
+      "创建学习档案 →",
+      "游客体验",
+      "注册",
+      "登录",
+      "✉ 邮箱",
+      "▣ 手机号",
+      "发送验证码",
+      "创建账户并继续",
+      "不注册，先体验",
+      "←",
+      "稍后设置",
+      "继续 →"
+    ]
+  },
+  {
+    "viewport": 390,
+    "page": "04-progress",
+    "url": "http://127.0.0.1:4175/nikigo-app.html?lang=zh#progress",
+    "clientWidth": 390,
+    "h1": [
+      "你的韩语，从这里开始",
+      "创建账户",
+      "오늘도 한 걸음 더.",
+      "学习",
+      "练习"
+    ],
+    "scrollWidth": 390,
+    "title": "Nikigo · 学习韩语",
+    "visibleMainActions": [
+      "创建学习档案 →",
+      "游客体验",
+      "注册",
+      "登录",
+      "✉ 邮箱",
+      "▣ 手机号",
+      "发送验证码",
+      "创建账户并继续",
+      "不注册，先体验",
+      "←",
+      "稍后设置",
+      "继续 →"
+    ]
+  },
+  {
+    "viewport": 390,
+    "page": "05-me",
+    "url": "http://127.0.0.1:4175/nikigo-app.html?lang=zh#profile",
+    "clientWidth": 390,
+    "h1": [
+      "你的韩语，从这里开始",
+      "创建账户",
+      "오늘도 한 걸음 더.",
+      "学习",
+      "练习"
+    ],
+    "scrollWidth": 390,
+    "title": "Nikigo · 学习韩语",
+    "visibleMainActions": [
+      "创建学习档案 →",
+      "游客体验",
+      "注册",
+      "登录",
+      "✉ 邮箱",
+      "▣ 手机号",
+      "发送验证码",
+      "创建账户并继续",
+      "不注册，先体验",
+      "←",
+      "稍后设置",
+      "继续 →"
+    ]
+  },
+  {
+    "viewport": 390,
+    "page": "06-diagnostic",
+    "url": "http://127.0.0.1:4175/diagnostic.html?lang=zh",
+    "clientWidth": 390,
+    "h1": [
+      "从真实能力开始学习",
+      ""
+    ],
+    "scrollWidth": 390,
+    "title": "Nikigo · Korean Placement Check",
+    "visibleMainActions": [
+      "✦ Nikigo 2.0",
+      "开始诊断 →",
+      "我是完全零基础",
+      "←",
+      "▶播放韩语0:04 · Korean",
+      "▶ 播放韩语",
+      "",
+      "暂时跳过",
+      "接受推荐",
+      "从更基础开始",
+      "挑战更高难度",
+      "↻ 重新体验"
+    ]
+  },
+  {
+    "viewport": 390,
+    "page": "07-lesson11",
+    "url": "http://127.0.0.1:4175/lesson-11.html?lang=zh",
+    "clientWidth": 390,
+    "h1": [
+      "이름이 뭐예요?"
+    ],
+    "scrollWidth": 390,
+    "title": "Nikigo · Lesson 11",
+    "visibleMainActions": [
+      "开始任务"
+    ]
+  },
+  {
+    "viewport": 1440,
+    "page": "01-home",
+    "url": "http://127.0.0.1:4175/nikigo-app.html?lang=zh#dashboard",
+    "clientWidth": 1440,
+    "h1": [
+      "你的韩语，从这里开始",
+      "创建账户",
+      "오늘도 한 걸음 더.",
+      "学习",
+      "练习"
+    ],
+    "scrollWidth": 1440,
+    "title": "Nikigo · 学习韩语",
+    "visibleMainActions": [
+      "创建学习档案 →",
+      "游客体验",
+      "注册",
+      "登录",
+      "✉ 邮箱",
+      "▣ 手机号",
+      "发送验证码",
+      "创建账户并继续",
+      "不注册，先体验",
+      "←",
+      "稍后设置",
+      "继续 →"
+    ]
+  },
+  {
+    "viewport": 1440,
+    "page": "02-learn",
+    "url": "http://127.0.0.1:4175/nikigo-app.html?lang=zh#courses",
+    "clientWidth": 1440,
+    "h1": [
+      "你的韩语，从这里开始",
+      "创建账户",
+      "오늘도 한 걸음 더.",
+      "学习",
+      "练习"
+    ],
+    "scrollWidth": 1440,
+    "title": "Nikigo · 学习韩语",
+    "visibleMainActions": [
+      "创建学习档案 →",
+      "游客体验",
+      "注册",
+      "登录",
+      "✉ 邮箱",
+      "▣ 手机号",
+      "发送验证码",
+      "创建账户并继续",
+      "不注册，先体验",
+      "←",
+      "稍后设置",
+      "继续 →"
+    ]
+  },
+  {
+    "viewport": 1440,
+    "page": "03-practice",
+    "url": "http://127.0.0.1:4175/nikigo-app.html?lang=zh#practice",
+    "clientWidth": 1440,
+    "h1": [
+      "你的韩语，从这里开始",
+      "创建账户",
+      "오늘도 한 걸음 더.",
+      "学习",
+      "练习"
+    ],
+    "scrollWidth": 1440,
+    "title": "Nikigo · 学习韩语",
+    "visibleMainActions": [
+      "创建学习档案 →",
+      "游客体验",
+      "注册",
+      "登录",
+      "✉ 邮箱",
+      "▣ 手机号",
+      "发送验证码",
+      "创建账户并继续",
+      "不注册，先体验",
+      "←",
+      "稍后设置",
+      "继续 →"
+    ]
+  },
+  {
+    "viewport": 1440,
+    "page": "04-progress",
+    "url": "http://127.0.0.1:4175/nikigo-app.html?lang=zh#progress",
+    "clientWidth": 1440,
+    "h1": [
+      "你的韩语，从这里开始",
+      "创建账户",
+      "오늘도 한 걸음 더.",
+      "学习",
+      "练习"
+    ],
+    "scrollWidth": 1440,
+    "title": "Nikigo · 学习韩语",
+    "visibleMainActions": [
+      "创建学习档案 →",
+      "游客体验",
+      "注册",
+      "登录",
+      "✉ 邮箱",
+      "▣ 手机号",
+      "发送验证码",
+      "创建账户并继续",
+      "不注册，先体验",
+      "←",
+      "稍后设置",
+      "继续 →"
+    ]
+  },
+  {
+    "viewport": 1440,
+    "page": "05-me",
+    "url": "http://127.0.0.1:4175/nikigo-app.html?lang=zh#profile",
+    "clientWidth": 1440,
+    "h1": [
+      "你的韩语，从这里开始",
+      "创建账户",
+      "오늘도 한 걸음 더.",
+      "学习",
+      "练习"
+    ],
+    "scrollWidth": 1440,
+    "title": "Nikigo · 学习韩语",
+    "visibleMainActions": [
+      "创建学习档案 →",
+      "游客体验",
+      "注册",
+      "登录",
+      "✉ 邮箱",
+      "▣ 手机号",
+      "发送验证码",
+      "创建账户并继续",
+      "不注册，先体验",
+      "←",
+      "稍后设置",
+      "继续 →"
+    ]
+  },
+  {
+    "viewport": 1440,
+    "page": "06-diagnostic",
+    "url": "http://127.0.0.1:4175/diagnostic.html?lang=zh",
+    "clientWidth": 1440,
+    "h1": [
+      "从真实能力开始学习",
+      ""
+    ],
+    "scrollWidth": 1440,
+    "title": "Nikigo · Korean Placement Check",
+    "visibleMainActions": [
+      "✦ Nikigo 2.0",
+      "开始诊断 →",
+      "我是完全零基础",
+      "←",
+      "▶播放韩语0:04 · Korean",
+      "▶ 播放韩语",
+      "",
+      "暂时跳过",
+      "接受推荐",
+      "从更基础开始",
+      "挑战更高难度",
+      "↻ 重新体验"
+    ]
+  },
+  {
+    "viewport": 1440,
+    "page": "07-lesson11",
+    "url": "http://127.0.0.1:4175/lesson-11.html?lang=zh",
+    "clientWidth": 1440,
+    "h1": [
+      "이름이 뭐예요?"
+    ],
+    "scrollWidth": 1440,
+    "title": "Nikigo · Lesson 11",
+    "visibleMainActions": [
+      "开始任务"
+    ]
+  }
+]

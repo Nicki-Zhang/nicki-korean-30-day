@@ -1,0 +1,54 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- strong: 内部产品蓝图
+- generic: 非正式 runtime，不代表功能已上线
+- banner:
+  - link "Nikigo":
+    - /url: "?screen=home"
+  - navigation "一级导航":
+    - link "首页":
+      - /url: "?screen=home"
+    - link "学习":
+      - /url: "?screen=learn"
+    - link "练习":
+      - /url: "?screen=practice"
+    - link "进度":
+      - /url: "?screen=progress"
+    - link "我的":
+      - /url: "?screen=me"
+  - generic: 界面语言
+  - combobox "界面语言":
+    - option "简体中文" [selected]
+    - option "English"
+    - option "Tiếng Việt"
+    - option "日本語"
+  - button "打开个人中心": "N"
+- main:
+  - heading "会员与权益预留" [level=1]
+  - paragraph: 本页只定义未来 entitlement 边界，不定价、不支付、不改变当前课程访问规则。
+  - generic: RESERVED
+  - heading "永久保护的基础权益" [level=2]
+  - strong: 现有 available 课程
+  - generic: 继续自由进入，不因会员上线而回收。
+  - generic: 保护
+  - strong: 本地进度
+  - generic: 访客也能保存与恢复。
+  - generic: 保护
+  - strong: 音频门禁
+  - generic: 会员不能绕过审核与 catalog。
+  - generic: 安全
+  - strong: 基础复习
+  - generic: 已产生的 ReviewItem 可继续处理。
+  - generic: 连续性
+  - complementary:
+    - heading "可能的未来权益" [level=2]
+    - strong: 跨设备云同步
+    - generic: 需要账户和隐私审批。
+    - generic: RESERVED
+    - strong: 扩展练习包
+    - generic: 需要真实内容与 XP 审批。
+    - generic: RESERVED
+    - strong: 高级发音反馈
+    - generic: 需要录音、模型、费用和隐私审批。
+    - generic: RESERVED
+    - button "不在本阶段开发" [disabled]

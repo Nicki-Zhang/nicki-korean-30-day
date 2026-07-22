@@ -1,0 +1,362 @@
+[
+  {
+    "viewport": 390,
+    "screen": "onboarding",
+    "clientWidth": 390,
+    "disabledButtons": 0,
+    "h1": "首次学习设置",
+    "primaryActions": 1,
+    "scrollWidth": 390,
+    "title": "首次学习设置 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 390,
+    "screen": "home",
+    "clientWidth": 390,
+    "disabledButtons": 0,
+    "h1": "今天从哪里开始",
+    "primaryActions": 1,
+    "scrollWidth": 390,
+    "title": "今天从哪里开始 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 390,
+    "screen": "learn",
+    "clientWidth": 390,
+    "disabledButtons": 1,
+    "h1": "学习",
+    "primaryActions": 1,
+    "scrollWidth": 390,
+    "title": "学习 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 390,
+    "screen": "stage",
+    "clientWidth": 390,
+    "disabledButtons": 0,
+    "h1": "阶段2 · 基础沟通",
+    "primaryActions": 0,
+    "scrollWidth": 390,
+    "title": "阶段2 · 基础沟通 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 390,
+    "screen": "module",
+    "clientWidth": 390,
+    "disabledButtons": 0,
+    "h1": "Module：数字与基础数量",
+    "primaryActions": 1,
+    "scrollWidth": 390,
+    "title": "Module：数字与基础数量 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 390,
+    "screen": "course-intro",
+    "clientWidth": 390,
+    "disabledButtons": 0,
+    "h1": "第11课 · 姓名与身份",
+    "primaryActions": 1,
+    "scrollWidth": 390,
+    "title": "第11课 · 姓名与身份 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 390,
+    "screen": "course-play",
+    "clientWidth": 390,
+    "disabledButtons": 0,
+    "h1": "课程进行",
+    "primaryActions": 1,
+    "scrollWidth": 390,
+    "title": "课程进行 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 390,
+    "screen": "course-complete",
+    "clientWidth": 390,
+    "disabledButtons": 0,
+    "h1": "课程完成",
+    "primaryActions": 1,
+    "scrollWidth": 390,
+    "title": "课程完成 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 390,
+    "screen": "vocabulary",
+    "clientWidth": 390,
+    "disabledButtons": 0,
+    "h1": "单词学习",
+    "primaryActions": 0,
+    "scrollWidth": 390,
+    "title": "单词学习 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 390,
+    "screen": "wordbook",
+    "clientWidth": 390,
+    "disabledButtons": 0,
+    "h1": "单词本",
+    "primaryActions": 0,
+    "scrollWidth": 390,
+    "title": "单词本 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 390,
+    "screen": "practice",
+    "clientWidth": 390,
+    "disabledButtons": 0,
+    "h1": "练习",
+    "primaryActions": 1,
+    "scrollWidth": 390,
+    "title": "练习 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 390,
+    "screen": "game",
+    "clientWidth": 390,
+    "disabledButtons": 3,
+    "h1": "游戏与闯关",
+    "primaryActions": 0,
+    "scrollWidth": 390,
+    "title": "游戏与闯关 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 390,
+    "screen": "checkpoint",
+    "clientWidth": 390,
+    "disabledButtons": 0,
+    "h1": "Stage Checkpoint",
+    "primaryActions": 1,
+    "scrollWidth": 390,
+    "title": "Stage Checkpoint | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 390,
+    "screen": "progress",
+    "clientWidth": 390,
+    "disabledButtons": 0,
+    "h1": "进度",
+    "primaryActions": 0,
+    "scrollWidth": 390,
+    "title": "进度 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 390,
+    "screen": "ability",
+    "clientWidth": 390,
+    "disabledButtons": 0,
+    "h1": "六维能力",
+    "primaryActions": 0,
+    "scrollWidth": 390,
+    "title": "六维能力 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 390,
+    "screen": "me",
+    "clientWidth": 390,
+    "disabledButtons": 0,
+    "h1": "我的",
+    "primaryActions": 0,
+    "scrollWidth": 390,
+    "title": "我的 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 390,
+    "screen": "login",
+    "clientWidth": 390,
+    "disabledButtons": 0,
+    "h1": "登录与云同步",
+    "primaryActions": 1,
+    "scrollWidth": 390,
+    "title": "登录与云同步 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 390,
+    "screen": "membership",
+    "clientWidth": 390,
+    "disabledButtons": 1,
+    "h1": "会员与权益预留",
+    "primaryActions": 0,
+    "scrollWidth": 390,
+    "title": "会员与权益预留 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 1440,
+    "screen": "onboarding",
+    "clientWidth": 1440,
+    "disabledButtons": 0,
+    "h1": "首次学习设置",
+    "primaryActions": 1,
+    "scrollWidth": 1440,
+    "title": "首次学习设置 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 1440,
+    "screen": "home",
+    "clientWidth": 1440,
+    "disabledButtons": 0,
+    "h1": "今天从哪里开始",
+    "primaryActions": 1,
+    "scrollWidth": 1440,
+    "title": "今天从哪里开始 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 1440,
+    "screen": "learn",
+    "clientWidth": 1440,
+    "disabledButtons": 1,
+    "h1": "学习",
+    "primaryActions": 1,
+    "scrollWidth": 1440,
+    "title": "学习 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 1440,
+    "screen": "stage",
+    "clientWidth": 1440,
+    "disabledButtons": 0,
+    "h1": "阶段2 · 基础沟通",
+    "primaryActions": 0,
+    "scrollWidth": 1440,
+    "title": "阶段2 · 基础沟通 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 1440,
+    "screen": "module",
+    "clientWidth": 1440,
+    "disabledButtons": 0,
+    "h1": "Module：数字与基础数量",
+    "primaryActions": 1,
+    "scrollWidth": 1440,
+    "title": "Module：数字与基础数量 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 1440,
+    "screen": "course-intro",
+    "clientWidth": 1440,
+    "disabledButtons": 0,
+    "h1": "第11课 · 姓名与身份",
+    "primaryActions": 1,
+    "scrollWidth": 1440,
+    "title": "第11课 · 姓名与身份 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 1440,
+    "screen": "course-play",
+    "clientWidth": 1440,
+    "disabledButtons": 0,
+    "h1": "课程进行",
+    "primaryActions": 1,
+    "scrollWidth": 1440,
+    "title": "课程进行 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 1440,
+    "screen": "course-complete",
+    "clientWidth": 1440,
+    "disabledButtons": 0,
+    "h1": "课程完成",
+    "primaryActions": 1,
+    "scrollWidth": 1440,
+    "title": "课程完成 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 1440,
+    "screen": "vocabulary",
+    "clientWidth": 1440,
+    "disabledButtons": 0,
+    "h1": "单词学习",
+    "primaryActions": 0,
+    "scrollWidth": 1440,
+    "title": "单词学习 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 1440,
+    "screen": "wordbook",
+    "clientWidth": 1440,
+    "disabledButtons": 0,
+    "h1": "单词本",
+    "primaryActions": 0,
+    "scrollWidth": 1440,
+    "title": "单词本 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 1440,
+    "screen": "practice",
+    "clientWidth": 1440,
+    "disabledButtons": 0,
+    "h1": "练习",
+    "primaryActions": 1,
+    "scrollWidth": 1440,
+    "title": "练习 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 1440,
+    "screen": "game",
+    "clientWidth": 1440,
+    "disabledButtons": 3,
+    "h1": "游戏与闯关",
+    "primaryActions": 0,
+    "scrollWidth": 1440,
+    "title": "游戏与闯关 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 1440,
+    "screen": "checkpoint",
+    "clientWidth": 1440,
+    "disabledButtons": 0,
+    "h1": "Stage Checkpoint",
+    "primaryActions": 1,
+    "scrollWidth": 1440,
+    "title": "Stage Checkpoint | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 1440,
+    "screen": "progress",
+    "clientWidth": 1440,
+    "disabledButtons": 0,
+    "h1": "进度",
+    "primaryActions": 0,
+    "scrollWidth": 1440,
+    "title": "进度 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 1440,
+    "screen": "ability",
+    "clientWidth": 1440,
+    "disabledButtons": 0,
+    "h1": "六维能力",
+    "primaryActions": 0,
+    "scrollWidth": 1440,
+    "title": "六维能力 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 1440,
+    "screen": "me",
+    "clientWidth": 1440,
+    "disabledButtons": 0,
+    "h1": "我的",
+    "primaryActions": 0,
+    "scrollWidth": 1440,
+    "title": "我的 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 1440,
+    "screen": "login",
+    "clientWidth": 1440,
+    "disabledButtons": 0,
+    "h1": "登录与云同步",
+    "primaryActions": 1,
+    "scrollWidth": 1440,
+    "title": "登录与云同步 | Nikigo Future-State Product Blueprint V1"
+  },
+  {
+    "viewport": 1440,
+    "screen": "membership",
+    "clientWidth": 1440,
+    "disabledButtons": 1,
+    "h1": "会员与权益预留",
+    "primaryActions": 0,
+    "scrollWidth": 1440,
+    "title": "会员与权益预留 | Nikigo Future-State Product Blueprint V1"
+  }
+]

@@ -1,0 +1,52 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- strong: 内部产品蓝图
+- generic: 非正式 runtime，不代表功能已上线
+- banner:
+  - link "Nikigo":
+    - /url: "?screen=home"
+  - navigation "一级导航":
+    - link "首页":
+      - /url: "?screen=home"
+    - link "学习":
+      - /url: "?screen=learn"
+    - link "练习":
+      - /url: "?screen=practice"
+    - link "进度":
+      - /url: "?screen=progress"
+    - link "我的":
+      - /url: "?screen=me"
+  - generic: 界面语言
+  - combobox "界面语言":
+    - option "简体中文" [selected]
+    - option "English"
+    - option "Tiếng Việt"
+    - option "日本語"
+  - button "打开个人中心": "N"
+- main:
+  - heading "Stage Checkpoint" [level=1]
+  - paragraph: 阶段检查用于确认已学能力和下一步推荐，不把课程顺序变成访问门禁。
+  - generic: NEXT
+  - generic: 阶段1 · 韩文基础
+  - heading "K0 综合检查" [level=2]
+  - paragraph: 覆盖拼读、听辨、音节结构、收音与简单场景理解。现有 lesson-10 保留原身份。
+  - generic: 组成
+  - strong: 真实题目
+  - generic: 预计
+  - strong: 15 min
+  - generic: 重试
+  - strong: 允许
+  - generic: 门禁
+  - strong: 无
+  - button "开始 Checkpoint"
+  - complementary:
+    - heading "结果用途" [level=2]
+    - strong: 能力证据
+    - generic: 只更新有真实作答的维度。
+    - generic: 证据
+    - strong: 复习
+    - generic: 错误项进入复习计划。
+    - generic: ReviewItem
+    - strong: 推荐
+    - generic: 可推荐下一 Stage，但不锁定自由进入。
+    - generic: 建议

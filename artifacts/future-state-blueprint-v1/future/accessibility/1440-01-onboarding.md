@@ -1,0 +1,65 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- strong: 内部产品蓝图
+- generic: 非正式 runtime，不代表功能已上线
+- banner:
+  - link "Nikigo":
+    - /url: "?screen=home"
+  - navigation "一级导航":
+    - link "首页":
+      - /url: "?screen=home"
+    - link "学习":
+      - /url: "?screen=learn"
+    - link "练习":
+      - /url: "?screen=practice"
+    - link "进度":
+      - /url: "?screen=progress"
+    - link "我的":
+      - /url: "?screen=me"
+  - generic: 界面语言
+  - combobox "界面语言":
+    - option "简体中文" [selected]
+    - option "English"
+    - option "Tiếng Việt"
+    - option "日本語"
+  - button "打开个人中心": "N"
+- main:
+  - heading "首次学习设置" [level=1]
+  - paragraph: 用最少问题建立界面语言、起点和学习节奏。诊断可跳过，不阻止自由选课。
+  - generic: NEXT
+  - generic: 设置进度 1 / 3
+  - heading "先确定你怎样使用 Nikigo" [level=2]
+  - generic: 界面与讲解语言
+  - combobox "界面与讲解语言":
+    - option "简体中文" [selected]
+    - option "English"
+    - option "Tiếng Việt"
+    - option "日本語"
+  - generic: 韩语起点
+  - combobox "韩语起点":
+    - option "完全零基础" [selected]
+    - option "认识一些韩文字母"
+    - option "有基础，想先诊断"
+  - generic: 每日目标
+  - combobox "每日目标":
+    - option "10 分钟" [selected]
+    - option "15 分钟"
+    - option "20 分钟"
+  - generic: 音频偏好
+  - combobox "音频偏好":
+    - option "标准播放" [selected]
+    - option "慢速优先"
+    - option "先看文字"
+  - button "保存并查看起点"
+  - button "稍后诊断"
+  - complementary:
+    - heading "设置只负责必要信息" [level=2]
+    - strong: 不会锁课
+    - generic: 所有 available 课程仍可从学习页自由进入。
+    - generic: 规则
+    - strong: 可随时修改
+    - generic: 语言、目标和音频偏好归入“我的”。
+    - generic: 设置
+    - strong: 诊断不是考试
+    - generic: 只用于推荐起点和今日训练。
+    - generic: 可跳过

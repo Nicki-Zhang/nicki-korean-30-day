@@ -1,0 +1,48 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- strong: 内部产品蓝图
+- generic: 非正式 runtime，不代表功能已上线
+- banner:
+  - link "Nikigo":
+    - /url: "?screen=home"
+  - generic: 界面语言
+  - combobox "界面语言":
+    - option "简体中文" [selected]
+    - option "English"
+    - option "Tiếng Việt"
+    - option "日本語"
+  - button "打开个人中心": "N"
+- main:
+  - heading "单词本" [level=1]
+  - paragraph: 按真实掌握证据组织词汇，不把所有词做成大卡片，也不显示未发布内容。
+  - generic: LATER
+  - generic: 学习状态
+  - combobox "学习状态":
+    - option "全部已学词" [selected]
+    - option "需要复习"
+    - option "正在掌握"
+  - generic: 搜索韩语或释义
+  - searchbox "搜索韩语或释义"
+  - strong: 이름
+  - generic: 名字 · 来自 lesson-11
+  - generic: 积累中
+  - strong: 나라
+  - generic: 国家 · 来自 lesson-12
+  - generic: 待复习
+  - strong: 하나
+  - generic: 一 · 来自 lesson-13
+  - generic: 积累中
+  - strong: 두
+  - generic: 二 · 来自 lesson-13
+  - generic: 积累中
+- navigation "移动端一级导航":
+  - link "首页":
+    - /url: "?screen=home"
+  - link "学习":
+    - /url: "?screen=learn"
+  - link "练习":
+    - /url: "?screen=practice"
+  - link "进度":
+    - /url: "?screen=progress"
+  - link "我的":
+    - /url: "?screen=me"

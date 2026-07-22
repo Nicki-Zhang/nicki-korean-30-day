@@ -1,0 +1,49 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- strong: 内部产品蓝图
+- generic: 非正式 runtime，不代表功能已上线
+- banner:
+  - link "Nikigo":
+    - /url: "?screen=home"
+  - navigation "一级导航":
+    - link "首页":
+      - /url: "?screen=home"
+    - link "学习":
+      - /url: "?screen=learn"
+    - link "练习":
+      - /url: "?screen=practice"
+    - link "进度":
+      - /url: "?screen=progress"
+    - link "我的":
+      - /url: "?screen=me"
+  - generic: 界面语言
+  - combobox "界面语言":
+    - option "简体中文" [selected]
+    - option "English"
+    - option "Tiếng Việt"
+    - option "日本語"
+  - button "打开个人中心": "N"
+- main:
+  - heading "登录与云同步" [level=1]
+  - paragraph: 先保护本地访客进度，再让用户选择是否绑定账户。同步冲突必须可解释和可恢复。
+  - generic: LATER
+  - heading "在设备之间继续学习" [level=2]
+  - paragraph: 登录后同步课程进度、复习计划、语言设置和可追溯能力证据。
+  - generic: 邮箱
+  - textbox "邮箱":
+    - /placeholder: name@example.com…
+  - generic: 密码
+  - textbox "密码":
+    - /placeholder: 输入密码…
+  - button "登录并检查本地数据"
+  - complementary:
+    - heading "迁移边界" [level=2]
+    - strong: 先预览
+    - generic: 显示本地与云端差异，不静默覆盖。
+    - generic: 必需
+    - strong: 冲突合并
+    - generic: 完成记录取并集，XP 不能重复发放。
+    - generic: 规则
+    - strong: 离线
+    - generic: 未登录时继续使用本地状态。
+    - generic: 兼容

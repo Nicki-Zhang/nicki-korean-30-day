@@ -1,0 +1,54 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- strong: 内部产品蓝图
+- generic: 非正式 runtime，不代表功能已上线
+- banner:
+  - link "Nikigo":
+    - /url: "?screen=home"
+  - navigation "一级导航":
+    - link "首页":
+      - /url: "?screen=home"
+    - link "学习":
+      - /url: "?screen=learn"
+    - link "练习":
+      - /url: "?screen=practice"
+    - link "进度":
+      - /url: "?screen=progress"
+    - link "我的":
+      - /url: "?screen=me"
+  - generic: 界面语言
+  - combobox "界面语言":
+    - option "简体中文" [selected]
+    - option "English"
+    - option "Tiếng Việt"
+    - option "日本語"
+  - button "打开个人中心": "N"
+- main:
+  - heading "课程进行" [level=1]
+  - paragraph: 通用课程模板保留步骤恢复、即时反馈、键盘操作和音频门禁。
+  - generic: CURRENT
+  - generic: 第11课
+  - strong: 姓名与身份
+  - generic: 步骤
+  - strong: 6 / 13
+  - generic: 状态
+  - strong: 可恢复
+  - generic: 音频
+  - strong: 待审核
+  - generic: 听懂并选择合适回答
+  - generic: 이름이 뭐예요?
+  - paragraph: 句子音频未通过 catalog 审核时，播放按钮保持禁用并说明原因。
+  - button "저는 민지예요."
+  - button "한국에서 왔어요."
+  - button "检查答案"
+  - complementary:
+    - heading "本步状态" [level=2]
+    - strong: 即时反馈
+    - generic: 正确与错误必须用文字、颜色和焦点共同表达。
+    - generic: 必需
+    - strong: 保存
+    - generic: 选择与步骤位置写回兼容会话。
+    - generic: 当前
+    - strong: 错题
+    - generic: 错误可产生 ReviewItem，但 ID 需稳定。
+    - generic: 契约

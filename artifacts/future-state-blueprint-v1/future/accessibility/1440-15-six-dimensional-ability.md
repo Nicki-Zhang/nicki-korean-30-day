@@ -1,0 +1,42 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- strong: 内部产品蓝图
+- generic: 非正式 runtime，不代表功能已上线
+- banner:
+  - link "Nikigo":
+    - /url: "?screen=home"
+  - navigation "一级导航":
+    - link "首页":
+      - /url: "?screen=home"
+    - link "学习":
+      - /url: "?screen=learn"
+    - link "练习":
+      - /url: "?screen=practice"
+    - link "进度":
+      - /url: "?screen=progress"
+    - link "我的":
+      - /url: "?screen=me"
+  - generic: 界面语言
+  - combobox "界面语言":
+    - option "简体中文" [selected]
+    - option "English"
+    - option "Tiếng Việt"
+    - option "日本語"
+  - button "打开个人中心": "N"
+- main:
+  - heading "六维能力" [level=1]
+  - paragraph: 每个结论都能回到课程、练习或诊断证据。证据不足时明确显示“积累中”。
+  - generic: NEXT
+  - strong: 韩文读写
+  - generic: 证据：foundation-lesson、拼装与 checkpoint
+  - strong: 听力
+  - generic: 证据：审核音频上的听辨作答
+  - strong: 词汇
+  - generic: 证据：词汇回忆、课程使用与复习
+  - strong: 语法与句型
+  - generic: 证据：句型选择与情境任务
+  - strong: 发音
+  - generic: 当前只显示已有听辨证据；跟读评分需独立审批
+  - strong: 沟通
+  - generic: 证据：Scenario Mission 与 Stage Checkpoint
+  - generic: 禁止：用课程标题推断 skillTags，用假分数填满图表，或把未审核发音能力显示为已掌握。

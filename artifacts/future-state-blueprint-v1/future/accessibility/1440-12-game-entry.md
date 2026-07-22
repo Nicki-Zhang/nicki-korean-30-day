@@ -1,0 +1,38 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- strong: 内部产品蓝图
+- generic: 非正式 runtime，不代表功能已上线
+- banner:
+  - link "Nikigo":
+    - /url: "?screen=home"
+  - navigation "一级导航":
+    - link "首页":
+      - /url: "?screen=home"
+    - link "学习":
+      - /url: "?screen=learn"
+    - link "练习":
+      - /url: "?screen=practice"
+    - link "进度":
+      - /url: "?screen=progress"
+    - link "我的":
+      - /url: "?screen=me"
+  - generic: 界面语言
+  - combobox "界面语言":
+    - option "简体中文" [selected]
+    - option "English"
+    - option "Tiếng Việt"
+    - option "日本語"
+  - button "打开个人中心": "N"
+- main:
+  - heading "游戏与闯关" [level=1]
+  - paragraph: Practice Game 只承接已学内容和明确训练目标，不以游戏包装替代教学证据。
+  - generic: LATER
+  - heading "听音选择" [level=2]
+  - paragraph: 输入：已审核音频与已学词句。输出：听力证据和错题。
+  - button "尚未开放" [disabled]
+  - heading "音节拼装" [level=2]
+  - paragraph: 输入：韩文字母和音节规则。输出：拼读证据和 ReviewItem。
+  - button "尚未开放" [disabled]
+  - heading "情境闯关" [level=2]
+  - paragraph: 输入：已学 Scenario Mission。输出：沟通选择证据。
+  - button "尚未开放" [disabled]

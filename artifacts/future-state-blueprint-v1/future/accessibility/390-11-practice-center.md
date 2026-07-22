@@ -1,0 +1,47 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- strong: 内部产品蓝图
+- generic: 非正式 runtime，不代表功能已上线
+- banner:
+  - link "Nikigo":
+    - /url: "?screen=home"
+  - generic: 界面语言
+  - combobox "界面语言":
+    - option "简体中文" [selected]
+    - option "English"
+    - option "Tiếng Việt"
+    - option "日本語"
+  - button "打开个人中心": "N"
+- main:
+  - heading "练习" [level=1]
+  - paragraph: 到期复习、错题、重新学习、未来游戏和发音都归入这里，但按状态逐步开放。
+  - generic: CURRENT
+  - generic: 今日优先
+  - heading "到期复习 6 项" [level=2]
+  - paragraph: 复习内容来自稳定 ReviewItem，不根据页面标题临时拼装。
+  - button "开始到期复习"
+  - complementary:
+    - heading "其他练习" [level=2]
+    - strong: 错题重练
+    - generic: 保持当前 retryMistakes 兼容。
+    - generic: CURRENT
+    - strong: 重新学习
+    - generic: 完成课程可再次进入，本次 +0 XP。
+    - generic: CURRENT
+    - strong: 游戏闯关
+    - generic: 需真实 practice-game 内容。
+    - generic: LATER
+    - strong: 发音跟读
+    - generic: 需音频、录音授权和隐私审批。
+    - generic: LATER
+- navigation "移动端一级导航":
+  - link "首页":
+    - /url: "?screen=home"
+  - link "学习":
+    - /url: "?screen=learn"
+  - link "练习":
+    - /url: "?screen=practice"
+  - link "进度":
+    - /url: "?screen=progress"
+  - link "我的":
+    - /url: "?screen=me"

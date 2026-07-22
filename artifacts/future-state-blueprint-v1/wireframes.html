@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Nikigo Future-State Product Blueprint V1</title>
+  <style>
+    :root {
+      --ink: #272633;
+      --muted: #686674;
+      --line: #d9d7e2;
+      --paper: #f7f7fa;
+      --surface: #ffffff;
+      --soft: #efedf9;
+      --accent: #5b50bd;
+      --accent-ink: #423a92;
+      --current: #2e6b4f;
+      --next: #385d9b;
+      --later: #775d20;
+      --reserved: #6c6572;
+      --radius: 12px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "Noto Sans KR", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+    }
+
+    * { box-sizing: border-box; }
+    html { background: var(--paper); }
+    body { margin: 0; min-width: 320px; background: var(--paper); }
+    a { color: inherit; }
+    button, input, select { font: inherit; }
+    button, a, select, input { touch-action: manipulation; }
+    button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible {
+      outline: 3px solid #948ae8;
+      outline-offset: 3px;
+    }
+    button:disabled { cursor: not-allowed; opacity: .58; }
+    .skip-link { position: fixed; top: 8px; left: 8px; z-index: 100; padding: 10px 14px; background: var(--ink); color: #fff; transform: translateY(-160%); }
+    .skip-link:focus { transform: translateY(0); }
+    .blueprint-bar { min-height: 36px; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 6px 20px; background: #2f2d38; color: #fff; font-size: 12px; letter-spacing: .01em; }
+    .blueprint-bar strong { font-weight: 700; }
+    .shell-header { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.98); }
+    .header-inner { max-width: 1240px; min-height: 64px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; }
+    .brand { color: var(--accent-ink); font-size: 24px; font-weight: 800; text-decoration: none; letter-spacing: -.03em; }
+    .primary-nav { display: flex; align-items: center; gap: 4px; }
+    .primary-nav a { min-height: 44px; min-width: 64px; display: inline-flex; align-items: center; justify-content: center; padding: 0 14px; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 650; color: var(--muted); }
+    .primary-nav a[aria-current="page"] { color: var(--accent-ink); background: var(--soft); }
+    .header-tools { justify-self: end; display: flex; gap: 8px; align-items: center; }
+    .header-tools select, .profile-button { min-height: 44px; border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 10px; padding: 0 12px; }
+    .profile-button { min-width: 44px; font-weight: 800; }
+    .page { max-width: 1240px; margin: 0 auto; padding: 32px 24px 56px; }
+    .page-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: end; margin-bottom: 24px; }
+    .page-head h1 { margin: 0 0 6px; font-size: clamp(28px, 3vw, 38px); line-height: 1.1; letter-spacing: -.03em; text-wrap: balance; }
+    .page-head p { max-width: 68ch; margin: 0; color: var(--muted); line-height: 1.55; }
+    .status { align-self: start; display: inline-flex; min-height: 32px; align-items: center; padding: 0 10px; border: 1px solid currentColor; border-radius: 6px; font-size: 12px; font-weight: 750; text-transform: uppercase; letter-spacing: .05em; }
+    .status-current { color: var(--current); background: #f3faf6; }
+    .status-next { color: var(--next); background: #f3f7fc; }
+    .status-later { color: var(--later); background: #fffaf0; }
+    .status-reserved { color: var(--reserved); background: #f6f4f7; }
+    .grid { display: grid; gap: 16px; }
+    .grid-2 { grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr); }
+    .grid-equal { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .panel { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 20px; min-width: 0; }
+    .panel-strong { border-color: #b9b4dd; background: #fbfaff; }
+    .panel h2, .panel h3 { margin: 0 0 8px; line-height: 1.25; text-wrap: balance; }
+    .panel h2 { font-size: 21px; }
+    .panel h3 { font-size: 16px; }
+    .panel p { margin: 0; color: var(--muted); line-height: 1.5; }
+    .kicker { margin-bottom: 8px; color: var(--accent-ink); font-size: 13px; font-weight: 760; }
+    .action-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .button, button.button { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--accent); border-radius: 9px; padding: 0 18px; background: var(--accent); color: #fff; font-weight: 760; text-decoration: none; cursor: pointer; }
+    .button-secondary { background: #fff; color: var(--accent-ink); border-color: var(--line); }
+    .button-quiet { background: transparent; color: var(--accent-ink); border-color: transparent; }
+    .info-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: var(--radius); background: #fff; overflow: hidden; }
+    .info-strip > div { min-width: 0; padding: 14px 16px; border-right: 1px solid var(--line); }
+    .info-strip > div:last-child { border-right: 0; }
+    .info-strip span { display: block; color: var(--muted); font-size: 12px; }
+    .info-strip strong { display: block; margin-top: 4px; font-size: 18px; font-variant-numeric: tabular-nums; }
+    .stack { display: grid; gap: 12px; }
+    .row { min-height: 54px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .row:last-child { border-bottom: 0; }
+    .row strong, .row small { display: block; }
+    .row small { margin-top: 4px; color: var(--muted); line-height: 1.4; }
+    .row-meta { text-align: right; color: var(--muted); font-size: 12px; white-space: nowrap; }
+    .stage-list { display: grid; gap: 10px; }
+    .stage-row { display: grid; grid-template-columns: 88px minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .stage-row:last-child { border-bottom: 0; }
+    .stage-code { font-size: 13px; font-weight: 800; color: var(--accent-ink); }
+    .stage-row p { font-size: 13px; }
+    .module-progress { font-variant-numeric: tabular-nums; font-weight: 800; }
+    .timeline { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 12px; }
+    .timeline-mark { width: 14px; height: 14px; margin: 3px auto 0; border: 2px solid var(--accent); border-radius: 50%; background: #fff; }
+    .timeline-line { width: 2px; min-height: 46px; margin: 2px auto; background: var(--line); }
+    .lesson-block { font-size: clamp(44px, 8vw, 82px); line-height: 1; font-weight: 800; letter-spacing: -.05em; color: var(--accent-ink); }
+    .answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 16px; }
+    .answer-grid button { min-height: 54px; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: var(--ink); font-weight: 650; }
+    .evidence-list { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px 20px; }
+    .evidence { padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .evidence strong, .evidence span { display: block; }
+    .evidence span { margin-top: 4px; color: var(--muted); font-size: 13px; }
+    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .field { display: grid; gap: 6px; }
+    .field label { font-size: 13px; font-weight: 700; }
+    .field input, .field select { min-height: 44px; width: 100%; border: 1px solid var(--line); border-radius: 8px; padding: 0 12px; background: #fff; color: var(--ink); }
+    .note { padding: 12px 14px; border-left: 4px solid var(--accent); background: var(--soft); color: #4a4561; font-size: 13px; line-height: 1.5; }
+    .status-key { display: flex; flex-wrap: wrap; gap: 8px; }
+    .mini-status { display: inline-flex; align-items: center; min-height: 28px; padding: 0 8px; border: 1px solid var(--line); border-radius: 5px; color: var(--muted); background: #fff; font-size: 11px; font-weight: 720; }
+    .section-gap { margin-top: 16px; }
+    .mobile-nav { display: none; }
+
+    @media (max-width: 767px) {
+      .blueprint-bar { justify-content: flex-start; padding-inline: 16px; white-space: nowrap; overflow: hidden; }
+      .shell-header { position: static; }
+      .header-inner { min-height: 58px; padding: 0 16px; grid-template-columns: 1fr auto; }
+      .brand { font-size: 22px; }
+      .primary-nav { display: none; }
+      .header-tools select { max-width: 118px; }
+      .page { padding: 22px 16px 96px; }
+      .page-head { grid-template-columns: minmax(0, 1fr) auto; gap: 12px; margin-bottom: 18px; }
+      .page-head h1 { font-size: 28px; }
+      .page-head p { font-size: 14px; }
+      .status { min-height: 28px; padding-inline: 7px; font-size: 10px; }
+      .grid-2, .grid-equal, .grid-3, .form-grid, .evidence-list { grid-template-columns: 1fr; }
+      .panel { padding: 16px; }
+      .info-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .info-strip > div:nth-child(2) { border-right: 0; }
+      .info-strip > div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .stage-row { grid-template-columns: 58px minmax(0, 1fr); gap: 10px; }
+      .stage-row > :last-child { grid-column: 2; justify-self: start; }
+      .answer-grid { grid-template-columns: 1fr; }
+      .action-row .button { flex: 1 1 100%; }
+      .mobile-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); padding: 6px max(8px, env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left)); border-top: 1px solid var(--line); background: rgba(255,255,255,.98); }
+      .mobile-nav a { min-height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 8px; text-decoration: none; color: var(--muted); font-size: 12px; font-weight: 700; }
+      .mobile-nav a[aria-current="page"] { color: var(--accent-ink); background: var(--soft); }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <div class="blueprint-bar"><strong>内部产品蓝图</strong><span>非正式 runtime，不代表功能已上线</span></div>
+  <header class="shell-header">
+    <div class="header-inner">
+      <a class="brand" href="?screen=home" translate="no">Nikigo</a>
+      <nav class="primary-nav" aria-label="一级导航">
+        <a data-nav="home" href="?screen=home">首页</a>
+        <a data-nav="learn" href="?screen=learn">学习</a>
+        <a data-nav="practice" href="?screen=practice">练习</a>
+        <a data-nav="progress" href="?screen=progress">进度</a>
+        <a data-nav="me" href="?screen=me">我的</a>
+      </nav>
+      <div class="header-tools">
+        <label for="language" class="skip-link">界面语言</label>
+        <select id="language" name="language" aria-label="界面语言">
+          <option selected>简体中文</option><option>English</option><option>Tiếng Việt</option><option>日本語</option>
+        </select>
+        <button class="profile-button" type="button" aria-label="打开个人中心">N</button>
+      </div>
+    </div>
+  </header>
+  <main id="main" class="page"></main>
+  <nav class="mobile-nav" aria-label="移动端一级导航">
+    <a data-nav="home" href="?screen=home">首页</a>
+    <a data-nav="learn" href="?screen=learn">学习</a>
+    <a data-nav="practice" href="?screen=practice">练习</a>
+    <a data-nav="progress" href="?screen=progress">进度</a>
+    <a data-nav="me" href="?screen=me">我的</a>
+  </nav>
+  <script>
+    const statusLabel = { current: 'CURRENT', next: 'NEXT', later: 'LATER', reserved: 'RESERVED' };
+    const head = (title, description, status) => `
+      <header class="page-head">
+        <div><h1>${title}</h1><p>${description}</p></div>
+        <span class="status status-${status}">${statusLabel[status]}</span>
+      </header>`;
+    const row = (title, description, meta = '') => `
+      <div class="row"><div><strong>${title}</strong><small>${description}</small></div><div class="row-meta">${meta}</div></div>`;
+    const screens = {
+      onboarding: {
+        nav: 'me', status: 'next', title: '首次学习设置', description: '用最少问题建立界面语言、起点和学习节奏。诊断可跳过，不阻止自由选课。',
+        body: `
+          <div class="grid grid-2">
+            <section class="panel panel-strong"><div class="kicker">设置进度 1 / 3</div><h2>先确定你怎样使用 Nikigo</h2><div class="form-grid section-gap">
+              <div class="field"><label for="ui-language">界面与讲解语言</label><select id="ui-language" name="ui-language"><option>简体中文</option><option>English</option><option>Tiếng Việt</option><option>日本語</option></select></div>
+              <div class="field"><label for="start-point">韩语起点</label><select id="start-point" name="start-point"><option>完全零基础</option><option>认识一些韩文字母</option><option>有基础，想先诊断</option></select></div>
+              <div class="field"><label for="daily-goal">每日目标</label><select id="daily-goal" name="daily-goal"><option>10 分钟</option><option>15 分钟</option><option>20 分钟</option></select></div>
+              <div class="field"><label for="audio-mode">音频偏好</label><select id="audio-mode" name="audio-mode"><option>标准播放</option><option>慢速优先</option><option>先看文字</option></select></div>
+            </div><div class="action-row"><button class="button" type="button">保存并查看起点</button><button class="button button-secondary" type="button">稍后诊断</button></div></section>
+            <aside class="panel"><h2>设置只负责必要信息</h2>${row('不会锁课','所有 available 课程仍可从学习页自由进入。','规则')}${row('可随时修改','语言、目标和音频偏好归入“我的”。','设置')}${row('诊断不是考试','只用于推荐起点和今日训练。','可跳过')}</aside>
+          </div>`
+      },
+      home: {
+        nav: 'home', status: 'current', title: '今天从哪里开始', description: '首页只给一个最强下一步，并说明它处于哪个 Stage 和 Module。',
+        body: `
+          <section class="panel panel-strong"><div class="grid grid-2"><div><div class="kicker">阶段1 · 韩文基础</div><h2>继续第4课：听懂普通音、送气音和紧音</h2><p>上次停在步骤 6。先完成当前明确可恢复的课程会话。</p><div class="action-row"><a class="button" href="?screen=course-play">继续当前课程</a><a class="button button-quiet" href="?screen=learn">查看完整路径</a></div></div><div class="note"><strong>当前模块</strong><br>辅音、音节块与复合元音<br><br>主操作来源：active unfinished course</div></div></section>
+          <div class="info-strip section-gap"><div><span>连续学习</span><strong>1 天</strong></div><div><span>累计 XP</span><strong>0 XP</strong></div><div><span>今日目标</span><strong>10 min</strong></div><div><span>本周进度</span><strong>0 / 5</strong></div></div>
+          <div class="grid grid-2 section-gap"><section class="panel"><h2>今日训练</h2>${row('到期复习','完成主课程后建议处理。','0 项')}${row('词汇巩固','Future-state 中由已学课程生成。','LATER')}${row('发音跟读','只在审核音频和权限就绪后提供。','LATER')}</section><aside class="panel"><h2>当前路径</h2><p>韩文基础，模块 2 / 4。Lesson 6 仍是音频准备中的预览，不阻止推荐第7课及以后内容。</p></aside></div>`
+      },
+      learn: {
+        nav: 'learn', status: 'current', title: '学习', description: '课程路径和未来单词学习都归入“学习”，但正式 runtime 只展示真实可用内容。',
+        body: `
+          <div class="grid grid-2"><section class="panel"><div class="kicker">课程路径</div><h2>Stage → Module → Lesson</h2><div class="stage-list section-gap">
+            <div class="stage-row"><span class="stage-code">阶段1</span><div><strong>韩文基础</strong><p>4 个模块，11 门现有课程</p></div><span class="module-progress">3 / 11</span></div>
+            <div class="stage-row"><span class="stage-code">阶段2</span><div><strong>基础沟通</strong><p>2 个已批准模块，3 门现有课程，另有规划课程位</p></div><span class="module-progress">0 / 3</span></div>
+            <div class="stage-row"><span class="stage-code">阶段3</span><div><strong>日常生活</strong><p>仅蓝图规划，不进入正式 runtime</p></div><span class="mini-status">LATER</span></div>
+            <div class="stage-row"><span class="stage-code">阶段4</span><div><strong>旅行与社交</strong><p>仅蓝图规划，不进入正式 runtime</p></div><span class="mini-status">LATER</span></div>
+            <div class="stage-row"><span class="stage-code">阶段5</span><div><strong>职场与自然表达</strong><p>仅蓝图规划，不进入正式 runtime</p></div><span class="mini-status">RESERVED</span></div>
+          </div><div class="action-row"><a class="button" href="?screen=stage">打开当前 Stage</a></div></section>
+          <aside class="panel"><div class="kicker">单词学习</div><h2>与课程证据相连</h2><p>未来词汇内容从明确的 vocabulary-session 与课程词汇表产生，不从标题推断，也不创建空入口。</p><div class="action-row"><button class="button button-secondary" type="button" disabled>规划中，不可进入</button></div></aside></div>`
+      },
+      stage: {
+        nav: 'learn', status: 'next', title: '阶段2 · 基础沟通', description: '内部 ID 仍为 K1。普通用户看到可理解名称、目标、Module 和 checkpoint。',
+        body: `
+          <div class="grid grid-2"><section class="panel panel-strong"><div class="kicker">Stage 目标</div><h2>完成身份、来源和基础数量的简短交流</h2><p>推荐顺序只影响展示与推荐。所有 available 课程继续自由进入。</p><div class="timeline section-gap"><div><div class="timeline-mark"></div><div class="timeline-line"></div></div><div>${row('姓名、身份与语言背景','lesson-11 至 lesson-12','0 / 2')}${row('数字与基础数量','lesson-13 加规划课程位','0 / 1 current')}${row('日常基本交换','未来 scenario-mission 课程位','LATER')}${row('阶段 Checkpoint','达到明确资格后推荐，不作为硬门禁','LATER')}</div></div></section>
+          <aside class="panel"><h2>推荐与进入</h2>${row('推荐顺序','Module 顺序与 displayOrder 决定下一课。','建议')}${row('自由进入','available 内容始终可直接进入。','规则')}${row('扩展','新增课程需显式 taxonomyVersion。','版本化')}</aside></div>`
+      },
+      module: {
+        nav: 'learn', status: 'current', title: 'Module：数字与基础数量', description: '现有 lesson-13 保留原 stableId、编号和内容。未来只显示规划课程位，不创建空文件。',
+        body: `
+          <div class="grid grid-2"><section class="panel"><div class="kicker">学习目标</div><h2>在真实数量问答中选择正确数词和量词</h2>${row('第13课 · 固有数词1-10与基础数量','stableId: lesson-13','CURRENT')}${row('规划课程位 A','汉字数词与价格，需要内容审批','NEXT')}${row('规划课程位 B','时间与日期，需要内容审批','LATER')}${row('规划课程位 C','年龄与计数单位，需要内容审批','LATER')}<div class="action-row"><a class="button" href="?screen=course-intro">查看第13课</a></div></section>
+          <aside class="panel"><h2>Module 完成</h2><p>历史完成按 taxonomyVersion 保存。新增课程不回收 XP，不改写历史完成日期，也不自动完成新内容。</p><div class="note section-gap">当前版本进度：0 / 1<br>未来版本课程位：3<br>newContentAvailable 仅在真实内容发布后成立</div></aside></div>`
+      },
+      'course-intro': {
+        nav: 'learn', status: 'current', title: '第11课 · 姓名与身份', description: '课程开始页解释目标、预计时间、音频状态和恢复状态，不塞入完整课程内容。',
+        body: `
+          <div class="grid grid-2"><section class="panel panel-strong"><div class="kicker">Scenario Mission</div><h2>이름이 뭐예요?</h2><p>学习礼貌询问姓名，并用简短句子介绍身份。</p><div class="info-strip section-gap"><div><span>预计时间</span><strong>13 min</strong></div><div><span>步骤</span><strong>13</strong></div><div><span>首次完成</span><strong>+50 XP</strong></div><div><span>重新学习</span><strong>+0 XP</strong></div></div><div class="action-row"><a class="button" href="?screen=course-play">开始课程</a><a class="button button-secondary" href="?screen=module">返回 Module</a></div></section>
+          <aside class="panel"><h2>开始前</h2>${row('恢复状态','如有可靠会话，主按钮改为“继续”。','兼容')}${row('音频状态','未审核句子音频保持禁用，不用 TTS 替代。','门禁')}${row('语言','讲解可切换 zh/en/vi/ja。','四语言')}</aside></div>`
+      },
+      'course-play': {
+        nav: 'learn', status: 'current', title: '课程进行', description: '通用课程模板保留步骤恢复、即时反馈、键盘操作和音频门禁。',
+        body: `
+          <div class="info-strip"><div><span>第11课</span><strong>姓名与身份</strong></div><div><span>步骤</span><strong>6 / 13</strong></div><div><span>状态</span><strong>可恢复</strong></div><div><span>音频</span><strong>待审核</strong></div></div>
+          <div class="grid grid-2 section-gap"><section class="panel panel-strong"><div class="kicker">听懂并选择合适回答</div><div class="lesson-block" lang="ko">이름이 뭐예요?</div><p class="section-gap">句子音频未通过 catalog 审核时，播放按钮保持禁用并说明原因。</p><div class="answer-grid"><button type="button">저는 민지예요.</button><button type="button">한국에서 왔어요.</button></div><div class="action-row"><button class="button" type="button">检查答案</button></div></section>
+          <aside class="panel"><h2>本步状态</h2>${row('即时反馈','正确与错误必须用文字、颜色和焦点共同表达。','必需')}${row('保存','选择与步骤位置写回兼容会话。','当前')}${row('错题','错误可产生 ReviewItem，但 ID 需稳定。','契约')}</aside></div>`
+      },
+      'course-complete': {
+        nav: 'learn', status: 'current', title: '课程完成', description: '完成页确认真实结果、首次 XP 和下一步，不制造多个竞争主操作。',
+        body: `
+          <div class="grid grid-2"><section class="panel panel-strong"><div class="kicker">本次结果</div><h2>第11课已完成</h2><p>你已经能礼貌询问姓名并完成基础身份表达。</p><div class="info-strip section-gap"><div><span>首次完成</span><strong>+50 XP</strong></div><div><span>正确率</span><strong>由真实作答计算</strong></div><div><span>错题</span><strong>进入复习</strong></div><div><span>能力证据</span><strong>已记录</strong></div></div><div class="action-row"><a class="button" href="?screen=course-intro">学习推荐下一课</a></div></section>
+          <aside class="panel"><h2>完成规则</h2>${row('重复完成','仍显示完成，但本次 +0 XP。','保护')}${row('下一步推荐','由唯一 primaryAction selector 生成。','一个')}${row('返回与刷新','完成状态可恢复，不重复发奖。','兼容')}</aside></div>`
+      },
+      vocabulary: {
+        nav: 'learn', status: 'later', title: '单词学习', description: 'Vocabulary Session 是独立内容类型，与课程、ReviewItem 和六维能力共享证据协议。',
+        body: `
+          <div class="grid grid-2"><section class="panel panel-strong"><div class="kicker">今日词汇 3 / 8</div><div class="lesson-block" lang="ko">이름</div><h2>名字</h2><p>来源：姓名、身份与语言背景。例句和音频必须来自已审核内容。</p><div class="answer-grid"><button type="button">记得</button><button type="button">需要再看</button></div></section>
+          <aside class="panel"><h2>数据输出</h2>${row('掌握度','基于多次回忆证据，不用单次点击定级。','mastery')}${row('复习计划','错误或低置信度生成 ReviewItem。','schedule')}${row('今日训练','到期词汇可进入练习页。','shared')}</aside></div>`
+      },
+      wordbook: {
+        nav: 'learn', status: 'later', title: '单词本', description: '按真实掌握证据组织词汇，不把所有词做成大卡片，也不显示未发布内容。',
+        body: `
+          <section class="panel"><div class="form-grid"><div class="field"><label for="word-filter">学习状态</label><select id="word-filter" name="word-filter"><option>全部已学词</option><option>需要复习</option><option>正在掌握</option></select></div><div class="field"><label for="word-search">搜索韩语或释义</label><input id="word-search" name="word-search" type="search" autocomplete="off" placeholder="例如 이름…"></div></div><div class="stack section-gap">${row('이름','名字 · 来自 lesson-11','积累中')}${row('나라','国家 · 来自 lesson-12','待复习')}${row('하나','一 · 来自 lesson-13','积累中')}${row('두','二 · 来自 lesson-13','积累中')}</div></section>`
+      },
+      practice: {
+        nav: 'practice', status: 'current', title: '练习', description: '到期复习、错题、重新学习、未来游戏和发音都归入这里，但按状态逐步开放。',
+        body: `
+          <div class="grid grid-2"><section class="panel panel-strong"><div class="kicker">今日优先</div><h2>到期复习 6 项</h2><p>复习内容来自稳定 ReviewItem，不根据页面标题临时拼装。</p><div class="action-row"><button class="button" type="button">开始到期复习</button></div></section>
+          <aside class="panel"><h2>其他练习</h2>${row('错题重练','保持当前 retryMistakes 兼容。','CURRENT')}${row('重新学习','完成课程可再次进入，本次 +0 XP。','CURRENT')}${row('游戏闯关','需真实 practice-game 内容。','LATER')}${row('发音跟读','需音频、录音授权和隐私审批。','LATER')}</aside></div>`
+      },
+      game: {
+        nav: 'practice', status: 'later', title: '游戏与闯关', description: 'Practice Game 只承接已学内容和明确训练目标，不以游戏包装替代教学证据。',
+        body: `
+          <div class="grid grid-3"><section class="panel"><h2>听音选择</h2><p>输入：已审核音频与已学词句。输出：听力证据和错题。</p><div class="action-row"><button class="button button-secondary" type="button" disabled>尚未开放</button></div></section><section class="panel"><h2>音节拼装</h2><p>输入：韩文字母和音节规则。输出：拼读证据和 ReviewItem。</p><div class="action-row"><button class="button button-secondary" type="button" disabled>尚未开放</button></div></section><section class="panel"><h2>情境闯关</h2><p>输入：已学 Scenario Mission。输出：沟通选择证据。</p><div class="action-row"><button class="button button-secondary" type="button" disabled>尚未开放</button></div></section></div>`
+      },
+      checkpoint: {
+        nav: 'practice', status: 'next', title: 'Stage Checkpoint', description: '阶段检查用于确认已学能力和下一步推荐，不把课程顺序变成访问门禁。',
+        body: `
+          <div class="grid grid-2"><section class="panel panel-strong"><div class="kicker">阶段1 · 韩文基础</div><h2>K0 综合检查</h2><p>覆盖拼读、听辨、音节结构、收音与简单场景理解。现有 lesson-10 保留原身份。</p><div class="info-strip section-gap"><div><span>组成</span><strong>真实题目</strong></div><div><span>预计</span><strong>15 min</strong></div><div><span>重试</span><strong>允许</strong></div><div><span>门禁</span><strong>无</strong></div></div><div class="action-row"><button class="button" type="button">开始 Checkpoint</button></div></section>
+          <aside class="panel"><h2>结果用途</h2>${row('能力证据','只更新有真实作答的维度。','证据')}${row('复习','错误项进入复习计划。','ReviewItem')}${row('推荐','可推荐下一 Stage，但不锁定自由进入。','建议')}</aside></div>`
+      },
+      progress: {
+        nav: 'progress', status: 'current', title: '进度', description: '课程、Module、Stage、词汇、复习和六维能力都基于真实证据，不用装饰性分数填空。',
+        body: `
+          <div class="grid grid-2"><section class="panel"><h2>课程与路径</h2>${row('阶段1 · 韩文基础','3 门完成，1 门学习中','3 / 11')}${row('当前 Module','辅音、音节块与复合元音','3 / 4 content')}${row('Lesson 6','当前可完成内容已学完，1 课音频准备中','不显示 4 / 4')}${row('阶段2 · 基础沟通','尚未开始','0 / 3 current')}</section>
+          <aside class="panel"><h2>证据概览</h2>${row('课程完成','来自 completedLessons 与版本化完成记录。','CURRENT')}${row('复习表现','来自 ReviewItem 尝试。','NEXT')}${row('词汇掌握','来自 vocabulary-session。','LATER')}${row('六维能力','来自可追溯学习事件。','NEXT')}<div class="action-row"><a class="button button-secondary" href="?screen=ability">查看六维能力</a></div></aside></div>`
+      },
+      ability: {
+        nav: 'progress', status: 'next', title: '六维能力', description: '每个结论都能回到课程、练习或诊断证据。证据不足时明确显示“积累中”。',
+        body: `
+          <section class="panel"><div class="evidence-list"><div class="evidence"><strong>韩文读写</strong><span>证据：foundation-lesson、拼装与 checkpoint</span></div><div class="evidence"><strong>听力</strong><span>证据：审核音频上的听辨作答</span></div><div class="evidence"><strong>词汇</strong><span>证据：词汇回忆、课程使用与复习</span></div><div class="evidence"><strong>语法与句型</strong><span>证据：句型选择与情境任务</span></div><div class="evidence"><strong>发音</strong><span>当前只显示已有听辨证据；跟读评分需独立审批</span></div><div class="evidence"><strong>沟通</strong><span>证据：Scenario Mission 与 Stage Checkpoint</span></div></div></section>
+          <div class="note section-gap">禁止：用课程标题推断 skillTags，用假分数填满图表，或把未审核发音能力显示为已掌握。</div>`
+      },
+      me: {
+        nav: 'me', status: 'current', title: '我的', description: '语言、目标、音频、账户、会员、数据与隐私统一归入设置，不增加一级导航。',
+        body: `
+          <div class="grid grid-2"><section class="panel"><h2>学习设置</h2>${row('界面与讲解语言','简体中文，可切换 en/vi/ja','CURRENT')}${row('每日学习目标','10 分钟','CURRENT')}${row('音频偏好','标准播放，严格 catalog 门禁','CURRENT')}${row('学习起点','可重新诊断，不回写虚假能力','NEXT')}</section>
+          <aside class="panel"><h2>账户与权益</h2>${row('登录与云同步','本地访客数据可在确认后迁移。','LATER')}${row('会员与权益','只预留 entitlement，不锁定现有 available 课程。','RESERVED')}${row('数据与隐私','导出、删除、录音授权和诊断说明。','LATER')}<div class="action-row"><a class="button button-secondary" href="?screen=login">查看同步蓝图</a></div></aside></div>`
+      },
+      login: {
+        nav: 'me', status: 'later', title: '登录与云同步', description: '先保护本地访客进度，再让用户选择是否绑定账户。同步冲突必须可解释和可恢复。',
+        body: `
+          <div class="grid grid-2"><section class="panel panel-strong"><h2>在设备之间继续学习</h2><p>登录后同步课程进度、复习计划、语言设置和可追溯能力证据。</p><div class="form-grid section-gap"><div class="field"><label for="email">邮箱</label><input id="email" name="email" type="email" autocomplete="email" spellcheck="false" placeholder="name@example.com…"></div><div class="field"><label for="password">密码</label><input id="password" name="password" type="password" autocomplete="current-password" placeholder="输入密码…"></div></div><div class="action-row"><button class="button" type="button">登录并检查本地数据</button></div></section>
+          <aside class="panel"><h2>迁移边界</h2>${row('先预览','显示本地与云端差异，不静默覆盖。','必需')}${row('冲突合并','完成记录取并集，XP 不能重复发放。','规则')}${row('离线','未登录时继续使用本地状态。','兼容')}</aside></div>`
+      },
+      membership: {
+        nav: 'me', status: 'reserved', title: '会员与权益预留', description: '本页只定义未来 entitlement 边界，不定价、不支付、不改变当前课程访问规则。',
+        body: `
+          <div class="grid grid-2"><section class="panel"><h2>永久保护的基础权益</h2>${row('现有 available 课程','继续自由进入，不因会员上线而回收。','保护')}${row('本地进度','访客也能保存与恢复。','保护')}${row('音频门禁','会员不能绕过审核与 catalog。','安全')}${row('基础复习','已产生的 ReviewItem 可继续处理。','连续性')}</section>
+          <aside class="panel panel-strong"><h2>可能的未来权益</h2>${row('跨设备云同步','需要账户和隐私审批。','RESERVED')}${row('扩展练习包','需要真实内容与 XP 审批。','RESERVED')}${row('高级发音反馈','需要录音、模型、费用和隐私审批。','RESERVED')}<div class="action-row"><button class="button" type="button" disabled>不在本阶段开发</button></div></aside></div>`
+      }
+    };
+
+    const requested = new URLSearchParams(location.search).get('screen') || 'home';
+    const screen = screens[requested] || screens.home;
+    document.title = `${screen.title} | Nikigo Future-State Product Blueprint V1`;
+    document.querySelector('#main').innerHTML = head(screen.title, screen.description, screen.status) + screen.body;
+    document.querySelectorAll('[data-nav]').forEach(link => {
+      if (link.dataset.nav === screen.nav) link.setAttribute('aria-current', 'page');
+    });
+  </script>
+</body>
+</html>

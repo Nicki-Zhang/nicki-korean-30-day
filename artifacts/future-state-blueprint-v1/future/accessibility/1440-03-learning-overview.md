@@ -1,0 +1,58 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- strong: 内部产品蓝图
+- generic: 非正式 runtime，不代表功能已上线
+- banner:
+  - link "Nikigo":
+    - /url: "?screen=home"
+  - navigation "一级导航":
+    - link "首页":
+      - /url: "?screen=home"
+    - link "学习":
+      - /url: "?screen=learn"
+    - link "练习":
+      - /url: "?screen=practice"
+    - link "进度":
+      - /url: "?screen=progress"
+    - link "我的":
+      - /url: "?screen=me"
+  - generic: 界面语言
+  - combobox "界面语言":
+    - option "简体中文" [selected]
+    - option "English"
+    - option "Tiếng Việt"
+    - option "日本語"
+  - button "打开个人中心": "N"
+- main:
+  - heading "学习" [level=1]
+  - paragraph: 课程路径和未来单词学习都归入“学习”，但正式 runtime 只展示真实可用内容。
+  - generic: CURRENT
+  - generic: 课程路径
+  - heading "Stage → Module → Lesson" [level=2]
+  - generic: 阶段1
+  - strong: 韩文基础
+  - paragraph: 4 个模块，11 门现有课程
+  - generic: 3 / 11
+  - generic: 阶段2
+  - strong: 基础沟通
+  - paragraph: 2 个已批准模块，3 门现有课程，另有规划课程位
+  - generic: 0 / 3
+  - generic: 阶段3
+  - strong: 日常生活
+  - paragraph: 仅蓝图规划，不进入正式 runtime
+  - generic: LATER
+  - generic: 阶段4
+  - strong: 旅行与社交
+  - paragraph: 仅蓝图规划，不进入正式 runtime
+  - generic: LATER
+  - generic: 阶段5
+  - strong: 职场与自然表达
+  - paragraph: 仅蓝图规划，不进入正式 runtime
+  - generic: RESERVED
+  - link "打开当前 Stage":
+    - /url: "?screen=stage"
+  - complementary:
+    - generic: 单词学习
+    - heading "与课程证据相连" [level=2]
+    - paragraph: 未来词汇内容从明确的 vocabulary-session 与课程词汇表产生，不从标题推断，也不创建空入口。
+    - button "规划中，不可进入" [disabled]

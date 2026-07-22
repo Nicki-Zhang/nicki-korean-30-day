@@ -1,0 +1,53 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- strong: 内部产品蓝图
+- generic: 非正式 runtime，不代表功能已上线
+- banner:
+  - link "Nikigo":
+    - /url: "?screen=home"
+  - navigation "一级导航":
+    - link "首页":
+      - /url: "?screen=home"
+    - link "学习":
+      - /url: "?screen=learn"
+    - link "练习":
+      - /url: "?screen=practice"
+    - link "进度":
+      - /url: "?screen=progress"
+    - link "我的":
+      - /url: "?screen=me"
+  - generic: 界面语言
+  - combobox "界面语言":
+    - option "简体中文" [selected]
+    - option "English"
+    - option "Tiếng Việt"
+    - option "日本語"
+  - button "打开个人中心": "N"
+- main:
+  - heading "课程完成" [level=1]
+  - paragraph: 完成页确认真实结果、首次 XP 和下一步，不制造多个竞争主操作。
+  - generic: CURRENT
+  - generic: 本次结果
+  - heading "第11课已完成" [level=2]
+  - paragraph: 你已经能礼貌询问姓名并完成基础身份表达。
+  - generic: 首次完成
+  - strong: +50 XP
+  - generic: 正确率
+  - strong: 由真实作答计算
+  - generic: 错题
+  - strong: 进入复习
+  - generic: 能力证据
+  - strong: 已记录
+  - link "学习推荐下一课":
+    - /url: "?screen=course-intro"
+  - complementary:
+    - heading "完成规则" [level=2]
+    - strong: 重复完成
+    - generic: 仍显示完成，但本次 +0 XP。
+    - generic: 保护
+    - strong: 下一步推荐
+    - generic: 由唯一 primaryAction selector 生成。
+    - generic: 一个
+    - strong: 返回与刷新
+    - generic: 完成状态可恢复，不重复发奖。
+    - generic: 兼容

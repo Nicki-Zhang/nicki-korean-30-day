@@ -1,0 +1,21 @@
+- main:
+  - button "✦ Nikigo 2.0"
+  - generic: 🌐
+  - combobox "Choose interface language":
+    - option "简体中文" [selected]
+    - option "English"
+    - option "Tiếng Việt"
+    - option "日本語"
+  - text: 韩语能力诊断
+  - heading "从真实能力开始学习" [level=1]
+  - paragraph: 用约 5–8 分钟了解你的韩语听力、词汇、语法与场景沟通能力。结果只用于推荐起点，不是考试。
+  - generic: ◷ 约 5–8 分钟
+  - generic: ◇ 首次诊断免费
+  - generic: ✓ 6 项能力
+  - button "开始诊断 →"
+  - button "我是完全零基础"
+  - generic: 나의 한국어
+  - generic: 预览
+  - strong: "6"
+  - text: 能力
+  - generic: 个性化路径，而不是固定等级。

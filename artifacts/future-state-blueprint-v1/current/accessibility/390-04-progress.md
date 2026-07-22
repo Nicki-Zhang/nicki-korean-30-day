@@ -1,0 +1,79 @@
+- banner:
+  - button "返回学习首页": Nikigo
+  - combobox "Choose interface language":
+    - option "简体中文" [selected]
+    - option "English"
+    - option "Tiếng Việt"
+    - option "日本語"
+  - button "打开个人中心": "N"
+- main:
+  - text: − − + + + + + +
+  - heading "学习进度" [level=1]
+  - paragraph: 查看已完成课程、经验值与当前学习节奏。
+  - article:
+    - text: 已完成课程
+    - strong: "0"
+    - paragraph: 共 14 节已开放课程
+  - article:
+    - text: 累计 XP
+    - strong: "0"
+    - paragraph: 完成课程和复习可以获得 XP。
+  - article:
+    - text: 本周目标
+    - strong: 0 / 5
+    - paragraph: 保持适合自己的节奏，不需要一次学太久。
+  - article:
+    - heading "课程进度" [level=2]
+    - heading "阶段1 · 韩文基础" [level=2]
+    - generic: 0/11课完成
+    - heading "韩文地图与基础元音" [level=3]
+    - heading "0. 先认识韩文字母地图" [level=4]
+    - paragraph: 尚未开始
+    - generic: 0%
+    - heading "1. 核心元音 ㅏㅓㅗㅜㅡㅣ" [level=4]
+    - paragraph: 尚未开始
+    - generic: 0%
+    - heading "2. 其余基础元音和易混元音" [level=4]
+    - paragraph: 尚未开始
+    - generic: 0%
+    - heading "辅音、音节块与复合元音" [level=3]
+    - heading "3. 高频基础辅音：通过完整音节学习" [level=4]
+    - paragraph: 尚未开始
+    - generic: 0%
+    - heading "4. 听懂普通音、送气音和紧音" [level=4]
+    - paragraph: 尚未开始
+    - generic: 0%
+    - heading "5. 看懂韩语音节块" [level=4]
+    - paragraph: 尚未开始
+    - generic: 0%
+    - heading "6. 复合元音" [level=4]
+    - paragraph: 尚未开始
+    - generic: 0%
+    - heading "收音与常见音变" [level=3]
+    - heading "7. 四个基础收音 ㄴㅁㅇㄹ" [level=4]
+    - paragraph: 尚未开始
+    - generic: 0%
+    - heading "8. 七种代表收音和常见音变" [level=4]
+    - paragraph: 尚未开始
+    - generic: 0%
+    - heading "综合应用与K0阶段挑战" [level=3]
+    - heading "9. 场景韩语：问候与介绍" [level=4]
+    - paragraph: 尚未开始
+    - generic: 0%
+    - heading "10. K0阶段复习挑战" [level=4]
+    - paragraph: 尚未开始
+    - generic: 0%
+    - heading "阶段2 · 基础沟通" [level=2]
+    - generic: 0/3课完成
+    - heading "姓名、身份与语言背景" [level=3]
+    - heading "11. 姓名与身份" [level=4]
+    - paragraph: 尚未开始
+    - generic: 0%
+    - heading "12. 国家与语言" [level=4]
+    - paragraph: 尚未开始
+    - generic: 0%
+    - heading "数字与基础数量" [level=3]
+    - heading "13. 固有数词1～10与基础数量" [level=4]
+    - paragraph: 尚未开始
+    - generic: 0%
+- status

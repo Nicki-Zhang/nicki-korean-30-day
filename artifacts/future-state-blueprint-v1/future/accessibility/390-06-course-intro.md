@@ -1,0 +1,55 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- strong: 内部产品蓝图
+- generic: 非正式 runtime，不代表功能已上线
+- banner:
+  - link "Nikigo":
+    - /url: "?screen=home"
+  - generic: 界面语言
+  - combobox "界面语言":
+    - option "简体中文" [selected]
+    - option "English"
+    - option "Tiếng Việt"
+    - option "日本語"
+  - button "打开个人中心": "N"
+- main:
+  - heading "第11课 · 姓名与身份" [level=1]
+  - paragraph: 课程开始页解释目标、预计时间、音频状态和恢复状态，不塞入完整课程内容。
+  - generic: CURRENT
+  - generic: Scenario Mission
+  - heading "이름이 뭐예요?" [level=2]
+  - paragraph: 学习礼貌询问姓名，并用简短句子介绍身份。
+  - generic: 预计时间
+  - strong: 13 min
+  - generic: 步骤
+  - strong: "13"
+  - generic: 首次完成
+  - strong: +50 XP
+  - generic: 重新学习
+  - strong: +0 XP
+  - link "开始课程":
+    - /url: "?screen=course-play"
+  - link "返回 Module":
+    - /url: "?screen=module"
+  - complementary:
+    - heading "开始前" [level=2]
+    - strong: 恢复状态
+    - generic: 如有可靠会话，主按钮改为“继续”。
+    - generic: 兼容
+    - strong: 音频状态
+    - generic: 未审核句子音频保持禁用，不用 TTS 替代。
+    - generic: 门禁
+    - strong: 语言
+    - generic: 讲解可切换 zh/en/vi/ja。
+    - generic: 四语言
+- navigation "移动端一级导航":
+  - link "首页":
+    - /url: "?screen=home"
+  - link "学习":
+    - /url: "?screen=learn"
+  - link "练习":
+    - /url: "?screen=practice"
+  - link "进度":
+    - /url: "?screen=progress"
+  - link "我的":
+    - /url: "?screen=me"

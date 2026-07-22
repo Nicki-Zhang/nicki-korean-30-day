@@ -1,0 +1,46 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- strong: 内部产品蓝图
+- generic: 非正式 runtime，不代表功能已上线
+- banner:
+  - link "Nikigo":
+    - /url: "?screen=home"
+  - generic: 界面语言
+  - combobox "界面语言":
+    - option "简体中文" [selected]
+    - option "English"
+    - option "Tiếng Việt"
+    - option "日本語"
+  - button "打开个人中心": "N"
+- main:
+  - heading "单词学习" [level=1]
+  - paragraph: Vocabulary Session 是独立内容类型，与课程、ReviewItem 和六维能力共享证据协议。
+  - generic: LATER
+  - generic: 今日词汇 3 / 8
+  - generic: 이름
+  - heading "名字" [level=2]
+  - paragraph: 来源：姓名、身份与语言背景。例句和音频必须来自已审核内容。
+  - button "记得"
+  - button "需要再看"
+  - complementary:
+    - heading "数据输出" [level=2]
+    - strong: 掌握度
+    - generic: 基于多次回忆证据，不用单次点击定级。
+    - generic: mastery
+    - strong: 复习计划
+    - generic: 错误或低置信度生成 ReviewItem。
+    - generic: schedule
+    - strong: 今日训练
+    - generic: 到期词汇可进入练习页。
+    - generic: shared
+- navigation "移动端一级导航":
+  - link "首页":
+    - /url: "?screen=home"
+  - link "学习":
+    - /url: "?screen=learn"
+  - link "练习":
+    - /url: "?screen=practice"
+  - link "进度":
+    - /url: "?screen=progress"
+  - link "我的":
+    - /url: "?screen=me"

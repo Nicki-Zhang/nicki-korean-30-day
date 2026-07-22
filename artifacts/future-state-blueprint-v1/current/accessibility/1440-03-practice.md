@@ -1,0 +1,23 @@
+- banner:
+  - button "返回学习首页": ✦ Nikigo
+  - combobox "Choose interface language":
+    - option "简体中文" [selected]
+    - option "English"
+    - option "Tiếng Việt"
+    - option "日本語"
+  - button "打开个人中心": "N"
+- main:
+  - text: − − + + + + + +
+  - heading "练习" [level=1]
+  - paragraph: 处理到期复习和错题，也可以重新学习已完成课程。
+  - article:
+    - generic: 到期复习
+    - strong: "0"
+    - heading "复习中心" [level=2]
+    - paragraph: 目前没有到期复习，仍可进入复习中心查看全部项目。
+    - button "打开复习中心"
+  - article:
+    - heading "重新学习" [level=2]
+    - paragraph: 从已完成课程中选择一课重新练习，重复完成不会再次获得课程 XP。
+    - paragraph: 完成课程后，可从这里重新学习。
+- status

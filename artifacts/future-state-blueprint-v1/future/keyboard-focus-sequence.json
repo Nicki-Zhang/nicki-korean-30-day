@@ -1,0 +1,98 @@
+[
+  {
+    "href": "#main",
+    "minHeight": "0px",
+    "name": "跳到主要内容",
+    "tag": "A"
+  },
+  {
+    "href": "?screen=home",
+    "minHeight": "auto",
+    "name": "Nikigo",
+    "tag": "A"
+  },
+  {
+    "href": "?screen=home",
+    "minHeight": "44px",
+    "name": "首页",
+    "tag": "A"
+  },
+  {
+    "href": "?screen=learn",
+    "minHeight": "44px",
+    "name": "学习",
+    "tag": "A"
+  },
+  {
+    "href": "?screen=practice",
+    "minHeight": "44px",
+    "name": "练习",
+    "tag": "A"
+  },
+  {
+    "href": "?screen=progress",
+    "minHeight": "44px",
+    "name": "进度",
+    "tag": "A"
+  },
+  {
+    "href": "?screen=me",
+    "minHeight": "44px",
+    "name": "我的",
+    "tag": "A"
+  },
+  {
+    "href": "",
+    "minHeight": "44px",
+    "name": "界面语言",
+    "tag": "SELECT"
+  },
+  {
+    "href": "",
+    "minHeight": "44px",
+    "name": "打开个人中心",
+    "tag": "BUTTON"
+  },
+  {
+    "href": "?screen=course-play",
+    "minHeight": "44px",
+    "name": "继续当前课程",
+    "tag": "A"
+  },
+  {
+    "href": "?screen=learn",
+    "minHeight": "44px",
+    "name": "查看完整路径",
+    "tag": "A"
+  },
+  {
+    "href": "?screen=home",
+    "minHeight": "48px",
+    "name": "首页",
+    "tag": "A"
+  },
+  {
+    "href": "?screen=learn",
+    "minHeight": "48px",
+    "name": "学习",
+    "tag": "A"
+  },
+  {
+    "href": "?screen=practice",
+    "minHeight": "48px",
+    "name": "练习",
+    "tag": "A"
+  },
+  {
+    "href": "?screen=progress",
+    "minHeight": "48px",
+    "name": "进度",
+    "tag": "A"
+  },
+  {
+    "href": "?screen=me",
+    "minHeight": "48px",
+    "name": "我的",
+    "tag": "A"
+  }
+]

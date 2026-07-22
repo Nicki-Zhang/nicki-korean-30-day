@@ -1,0 +1,58 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- strong: 内部产品蓝图
+- generic: 非正式 runtime，不代表功能已上线
+- banner:
+  - link "Nikigo":
+    - /url: "?screen=home"
+  - generic: 界面语言
+  - combobox "界面语言":
+    - option "简体中文" [selected]
+    - option "English"
+    - option "Tiếng Việt"
+    - option "日本語"
+  - button "打开个人中心": "N"
+- main:
+  - heading "进度" [level=1]
+  - paragraph: 课程、Module、Stage、词汇、复习和六维能力都基于真实证据，不用装饰性分数填空。
+  - generic: CURRENT
+  - heading "课程与路径" [level=2]
+  - strong: 阶段1 · 韩文基础
+  - generic: 3 门完成，1 门学习中
+  - generic: 3 / 11
+  - strong: 当前 Module
+  - generic: 辅音、音节块与复合元音
+  - generic: 3 / 4 content
+  - strong: Lesson 6
+  - generic: 当前可完成内容已学完，1 课音频准备中
+  - generic: 不显示 4 / 4
+  - strong: 阶段2 · 基础沟通
+  - generic: 尚未开始
+  - generic: 0 / 3 current
+  - complementary:
+    - heading "证据概览" [level=2]
+    - strong: 课程完成
+    - generic: 来自 completedLessons 与版本化完成记录。
+    - generic: CURRENT
+    - strong: 复习表现
+    - generic: 来自 ReviewItem 尝试。
+    - generic: NEXT
+    - strong: 词汇掌握
+    - generic: 来自 vocabulary-session。
+    - generic: LATER
+    - strong: 六维能力
+    - generic: 来自可追溯学习事件。
+    - generic: NEXT
+    - link "查看六维能力":
+      - /url: "?screen=ability"
+- navigation "移动端一级导航":
+  - link "首页":
+    - /url: "?screen=home"
+  - link "学习":
+    - /url: "?screen=learn"
+  - link "练习":
+    - /url: "?screen=practice"
+  - link "进度":
+    - /url: "?screen=progress"
+  - link "我的":
+    - /url: "?screen=me"
