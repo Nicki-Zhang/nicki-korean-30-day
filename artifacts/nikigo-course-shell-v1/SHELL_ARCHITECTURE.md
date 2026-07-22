@@ -169,4 +169,3 @@ Lesson 0 should use only the topbar, context, exit semantics, language control, 
 | Spacing | 4, 8, 12, 16, 20, 24, 28, 32, 44, 56, 72 px |
 | Type | system UI stack with Noto Sans KR and platform Korean fallbacks |
 | Motion | 140, 240, 400 ms with standard and enter easing |
-

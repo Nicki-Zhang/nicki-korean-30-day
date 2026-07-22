@@ -24,4 +24,3 @@
 3. Course-local retry is not the same as the global `app-state.js` ReviewItem schedule. The Shell must not merge those concepts.
 4. The seven-part teaching model can be represented as optional phase metadata. Current lessons contain 13, 15, or 18 real steps, while Lesson 0 has no linear steps.
 5. Audio state must remain a semantic input from the existing resolver or gate. The Shell may display `available`, `pending`, or `blocked`, but may not calculate those states itself.
-

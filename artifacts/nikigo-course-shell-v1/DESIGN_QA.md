@@ -43,4 +43,3 @@ The prototype avoids the patterns that made earlier pages feel like an AI-genera
 ## Prototype-only limitation
 
 The fixture demonstrates view states; it deliberately does not implement actual answer ownership, XP calculation, retry scheduling, audio resolution, completion gates, recommendation, session migration, or saved progress. Those responsibilities remain with existing engines and adapters.
-
