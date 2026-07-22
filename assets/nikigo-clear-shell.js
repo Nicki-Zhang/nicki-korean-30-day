@@ -10,7 +10,7 @@
   });
 
   function syncMissionKorean() {
-    const action = document.querySelector('.clearContinue .mission .primary');
+    const action = document.querySelector('.clearContinue .mission .primary') || document.getElementById('primaryAction');
     const target = document.getElementById('missionKorean');
     if (!action || !target) return;
     const nextTitle = koreanTitles[action.dataset.lesson] || '';

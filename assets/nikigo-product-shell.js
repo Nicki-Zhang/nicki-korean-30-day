@@ -1,6 +1,6 @@
 import { buildContentRegistry } from '../content-registry.js';
 import { selectHomeRecommendation, RECOMMENDATION_COPY } from '../recommendation-policy.js';
-import { getRecommendedNextContent, buildStageChapterViewModel } from '../progress-selectors.js';
+import { getLearningPrimaryContent, buildStageChapterViewModel } from '../progress-selectors.js';
 import { STAGE_CHAPTER_TAXONOMY } from '../stage-chapter-taxonomy.js';
 
 const courses = Array.isArray(window.NIKIGO_COURSES) ? window.NIKIGO_COURSES : [];
@@ -20,10 +20,17 @@ function reliableCurrentSession(profile) {
     const progress = Number(profile?.lessonProgress?.[content.stableId]) || 0;
     if (progress <= 0 || progress >= 100) return false;
     const session = parseSession(content.stableId);
-    return session && session.completed !== true && Number(session.step) > 0;
+    const position = Number(session?.step ?? session?.index);
+    return session && session.completed !== true && Number.isFinite(position) && position > 0;
   });
   if (inProgress.length !== 1) return null;
-  return Object.freeze({ contentId:inProgress[0].stableId, resumable:true, isCurrent:true });
+  const session = parseSession(inProgress[0].stableId);
+  return Object.freeze({
+    contentId:inProgress[0].stableId,
+    resumable:true,
+    isCurrent:true,
+    position:Number(session?.step ?? session?.index) || 0
+  });
 }
 
 function reliableReferrerContent(profile) {
@@ -47,20 +54,28 @@ function dueReviews(profile) {
 }
 
 function rebuild(profile = window.NikigoAppData || {}, language = profile.interfaceLanguage || 'en') {
+  const currentSession = reliableCurrentSession(profile);
   const recommendation = selectHomeRecommendation({
     profile,
     contents,
-    currentSession:reliableCurrentSession(profile),
+    currentSession,
     reliableRecentContentId:reliableReferrerContent(profile),
     dueReviews:dueReviews(profile)
   });
-  const nextPathContent = getRecommendedNextContent(profile, contents, profile.path);
-  const currentContentId = recommendation.primaryAction.contentId || nextPathContent?.stableId || null;
+  const learningPrimary = getLearningPrimaryContent({
+    profile,
+    contents,
+    stageId:profile.path,
+    activeContentId:recommendation.primaryAction.kind === 'resume-active'
+      ? recommendation.primaryAction.contentId
+      : null
+  });
+  const currentContentId = learningPrimary?.stableId || null;
   const taxonomyView = buildStageChapterViewModel({
     profile,
     contents,
     taxonomy:STAGE_CHAPTER_TAXONOMY,
-    currentStageId:profile.path,
+    currentStageId:learningPrimary?.stageId || profile.path,
     currentContentId
   });
   const safeLanguage = ['zh', 'en', 'vi', 'ja'].includes(language) ? language : 'en';
@@ -69,6 +84,8 @@ function rebuild(profile = window.NikigoAppData || {}, language = profile.interf
     recommendation,
     primaryAction:recommendation.primaryAction,
     primaryActionLabel:RECOMMENDATION_COPY[safeLanguage][recommendation.primaryAction.labelKey],
+    learningPrimary,
+    learningSession:currentSession,
     taxonomy:STAGE_CHAPTER_TAXONOMY,
     taxonomyView
   });

@@ -90,6 +90,29 @@ function getRecommendedNextContent(profile, contents, stageId) {
     .sort((a, b) => a.displayOrder - b.displayOrder)[0] || null;
 }
 
+function getLearningPrimaryContent(options = {}) {
+  const profile = options.profile || {};
+  const contents = Array.isArray(options.contents) ? options.contents : [];
+  const byId = new Map(contents.map(content => [content.stableId, content]));
+  const active = typeof options.activeContentId === 'string'
+    ? byId.get(options.activeContentId)
+    : null;
+
+  if (active?.available && !isContentCompleted(profile, active.stableId)) {
+    return active;
+  }
+
+  const stageId = options.stageId || profile.path;
+  const nextInStage = getRecommendedNextContent(profile, contents, stageId);
+  if (nextInStage) return nextInStage;
+
+  return contents
+    .filter(content => content.available
+      && content.formallyCompletable
+      && !isContentCompleted(profile, content.stableId))
+    .sort((a, b) => a.displayOrder - b.displayOrder)[0] || null;
+}
+
 function isStageComplete(profile, contents, stageId) {
   const stageContents = (contents || []).filter(content =>
     content.available && content.formallyCompletable && content.stageId === stageId
@@ -228,6 +251,7 @@ export {
   getHistoricalUnfinishedContents,
   getDueReviewItems,
   getRecommendedNextContent,
+  getLearningPrimaryContent,
   isStageComplete,
   buildStageChapterViewModel
 };
