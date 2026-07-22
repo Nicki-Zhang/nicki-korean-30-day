@@ -1,0 +1,60 @@
+- generic [active] [ref=f34e1]:
+  - link "跳到主要内容" [ref=f34e2] [cursor=pointer]:
+    - /url: "#app"
+  - generic [ref=f34e3]:
+    - banner [ref=f34e4]:
+      - generic [ref=f34e5]:
+        - link "Nikigo home" [ref=f34e6] [cursor=pointer]:
+          - /url: "?lang=zh&stage=K1"
+          - text: Nikigo
+        - combobox "辅助语言" [ref=f34e8] [cursor=pointer]:
+          - option "简体中文" [selected]
+          - option "English"
+          - option "Tiếng Việt"
+          - option "日本語"
+    - main [ref=f34e9]:
+      - generic [ref=f34e11]:
+        - button "返回Stage路径" [ref=f34e12] [cursor=pointer]
+        - generic [ref=f34e14]:
+          - paragraph [ref=f34e15]: 阶段1 · 韩文基础
+          - heading "辅音、音节块与复合元音" [level=1] [ref=f34e16]
+          - paragraph [ref=f34e17]: 区分常见辅音，理解音节块，并掌握复合元音拼写结构。
+          - generic [ref=f34e18]:
+            - generic [ref=f34e19]: Module进度
+            - generic [ref=f34e20]: 3 / 4课完成
+          - progressbar [ref=f34e21]
+          - paragraph [ref=f34e23]: 当前可完成内容已学完1课音频准备中
+        - generic [ref=f34e24]:
+          - heading "本Module课程" [level=2] [ref=f34e25]
+          - generic [ref=f34e26]:
+            - article [ref=f34e27]:
+              - generic [ref=f34e28]: "3"
+              - generic [ref=f34e29]:
+                - generic [ref=f34e30]: 第3课 · 14分钟 · 已完成
+                - generic [ref=f34e31]: 高频基础辅音：通过完整音节学习
+              - button "已完成" [ref=f34e32] [cursor=pointer]
+            - article [ref=f34e33]:
+              - generic [ref=f34e34]: "4"
+              - generic [ref=f34e35]:
+                - generic [ref=f34e36]: 第4课 · 10分钟 · 已完成
+                - generic [ref=f34e37]: 听懂普通音、送气音和紧音
+              - button "已完成" [ref=f34e38] [cursor=pointer]
+            - article [ref=f34e39]:
+              - generic [ref=f34e40]: "5"
+              - generic [ref=f34e41]:
+                - generic [ref=f34e42]: 第5课 · 10分钟 · 已完成
+                - generic [ref=f34e43]: 看懂韩语音节块
+              - button "已完成" [ref=f34e44] [cursor=pointer]
+            - article [ref=f34e45]:
+              - generic [ref=f34e46]: "6"
+              - generic [ref=f34e47]:
+                - generic [ref=f34e48]: 第6课 · 14分钟 · 音频准备中
+                - generic [ref=f34e49]: 复合元音
+              - button "进入预览" [ref=f34e50] [cursor=pointer]
+    - navigation "主导航" [ref=f34e51]:
+      - button "首页" [ref=f34e52] [cursor=pointer]
+      - button "学习" [ref=f34e53] [cursor=pointer]
+      - button "练习" [ref=f34e54] [cursor=pointer]
+      - button "进度" [ref=f34e55] [cursor=pointer]
+      - button "我的" [ref=f34e56] [cursor=pointer]
+    - status [ref=f34e57]

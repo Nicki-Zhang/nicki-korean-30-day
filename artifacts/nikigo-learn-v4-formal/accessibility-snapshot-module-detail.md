@@ -1,0 +1,45 @@
+- generic [ref=f6e23] [box=20,68,1160,849]:
+  - generic [ref=f6e24] [box=150,68,900,849]:
+    - button "返回Stage路径" [ref=f6e25] [cursor=pointer] [box=150,106,105,44]
+    - generic [ref=f6e27] [box=184,197,630,201]:
+      - paragraph [ref=f6e28] [box=184,197,630,20]: 阶段1 · 韩文基础
+      - heading "辅音、音节块与复合元音" [level=1] [ref=f6e29] [box=184,227,630,50]
+      - paragraph [ref=f6e30] [box=184,288,630,53]: 通过完整音节区分高频辅音和普通音、送气音、紧音，理解左右/上下音节块，并掌握复合元音的拼写结构。
+      - generic [ref=f6e31] [box=184,361,630,22]:
+        - generic [ref=f6e32] [box=184,361,79,22]: Module进度
+        - generic [ref=f6e33] [box=746,361,68,22]: 0 / 4课完成
+      - progressbar "辅音、音节块与复合元音" [ref=f6e34] [box=184,392,630,6]
+    - generic [ref=f6e35] [box=150,470,900,447]:
+      - generic [ref=f6e36] [box=150,470,900,64]:
+        - heading "本Module课程" [level=2] [ref=f6e37] [box=150,470,900,38]
+        - paragraph [ref=f6e38] [box=150,512,900,22]: 所有已开放课程都可自由进入。
+      - generic [ref=f6e39] [box=150,553,900,364]:
+        - article [ref=f6e40] [box=150,553,900,82]:
+          - generic [ref=f6e41] [box=167,575,38,38]: "3"
+          - generic [ref=f6e42] [box=225,572,698,44]:
+            - generic [ref=f6e43] [box=225,572,698,18]: 第3课 · 14分钟 · 正在学习
+            - generic [ref=f6e44] [box=225,594,698,22]: 高频基础辅音：通过完整音节学习
+          - link "开始学习" [ref=f6e45] [cursor=pointer] [box=939,572,94,44]:
+            - /url: lesson-03.html?lang=zh
+        - article [ref=f6e46] [box=150,647,900,82]:
+          - generic [ref=f6e47] [box=167,669,38,38]: "4"
+          - generic [ref=f6e48] [box=225,666,698,44]:
+            - generic [ref=f6e49] [box=225,666,698,18]: 第4课 · 10分钟 · 可学习
+            - generic [ref=f6e50] [box=225,688,698,22]: 听懂普通音、送气音和紧音
+          - link "开始学习" [ref=f6e51] [cursor=pointer] [box=939,666,94,44]:
+            - /url: lesson-04.html?lang=zh
+        - article [ref=f6e52] [box=150,741,900,82]:
+          - generic [ref=f6e53] [box=167,763,38,38]: "5"
+          - generic [ref=f6e54] [box=225,760,698,44]:
+            - generic [ref=f6e55] [box=225,760,698,18]: 第5课 · 10分钟 · 可学习
+            - generic [ref=f6e56] [box=225,782,698,22]: 看懂韩语音节块
+          - link "开始学习" [ref=f6e57] [cursor=pointer] [box=939,760,94,44]:
+            - /url: lesson-05.html?lang=zh
+        - article [ref=f6e58] [box=150,835,900,82]:
+          - generic [ref=f6e59] [box=167,857,38,38]: "6"
+          - generic [ref=f6e60] [box=225,854,698,44]:
+            - generic [ref=f6e61] [box=225,854,698,18]: 第6课 · 14分钟 · 预览 · 音频准备中
+            - generic [ref=f6e62] [box=225,876,698,22]: 复合元音
+          - link "进入预览" [ref=f6e63] [cursor=pointer] [box=939,854,94,44]:
+            - /url: lesson-06.html?lang=zh
+  - status [box=586,772,28,20]

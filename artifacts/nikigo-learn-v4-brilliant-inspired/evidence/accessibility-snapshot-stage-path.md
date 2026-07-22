@@ -1,0 +1,59 @@
+- generic [active] [ref=f35e1]:
+  - link "跳到主要内容" [ref=f35e2] [cursor=pointer]:
+    - /url: "#app"
+  - generic [ref=f35e3]:
+    - banner [ref=f35e4]:
+      - generic [ref=f35e5]:
+        - link "Nikigo home" [ref=f35e6] [cursor=pointer]:
+          - /url: "?lang=zh&stage=K1"
+          - text: Nikigo
+        - combobox "辅助语言" [ref=f35e8] [cursor=pointer]:
+          - option "简体中文" [selected]
+          - option "English"
+          - option "Tiếng Việt"
+          - option "日本語"
+    - main [ref=f35e9]:
+      - generic [ref=f35e10]:
+        - generic [ref=f35e11]:
+          - heading "学习" [level=1] [ref=f35e12]
+          - paragraph [ref=f35e13]: 选择阶段，沿着清楚的Module路径继续学习。
+        - tablist "学习" [ref=f35e14]:
+          - tab "阶段1 · 韩文基础" [ref=f35e15] [cursor=pointer]
+          - tab "阶段2 · 基础沟通 当前阶段" [selected] [ref=f35e16] [cursor=pointer]:
+            - text: 阶段2 · 基础沟通
+            - generic [ref=f35e17]: 当前阶段
+        - tabpanel [ref=f35e18]:
+          - generic [ref=f35e19]:
+            - heading "阶段2 · 基础沟通" [level=2] [ref=f35e20]
+            - paragraph [ref=f35e21]: 使用基础礼貌表达介绍姓名、身份、来源和学习语言，并进行简单数量问答。
+            - generic [ref=f35e22]:
+              - generic [ref=f35e23]: Stage进度
+              - generic [ref=f35e24]: 0 / 3课完成
+            - progressbar [ref=f35e25]
+        - generic [ref=f35e26]:
+          - generic [ref=f35e27]:
+            - heading "学习路径" [level=2] [ref=f35e28]
+            - paragraph [ref=f35e29]: 连接线表示推荐顺序，不限制课程自由进入。
+          - generic [ref=f35e30]:
+            - article [ref=f35e31]:
+              - generic "Module 1" [ref=f35e33]: "1"
+              - generic [ref=f35e34]:
+                - generic [ref=f35e35]
+                - heading "姓名、身份与语言背景" [level=3] [ref=f35e38]
+                - paragraph [ref=f35e39]: 礼貌询问并表达姓名、身份、来自哪里和正在学习的语言。
+                - paragraph [ref=f35e40]
+                - generic [ref=f35e42]
+            - article [ref=f35e45]:
+              - generic "Module 2" [ref=f35e47]: "2"
+              - generic [ref=f35e48]:
+                - generic [ref=f35e49]
+                - heading "数字与基础数量" [level=3] [ref=f35e52]
+                - paragraph [ref=f35e53]: 使用固有数词1～10和常用变形进行基础数量问答。
+                - button "查看模块" [ref=f35e55] [cursor=pointer]
+    - navigation "主导航" [ref=f35e56]:
+      - button "首页" [ref=f35e57] [cursor=pointer]
+      - button "学习" [ref=f35e58] [cursor=pointer]
+      - button "练习" [ref=f35e59] [cursor=pointer]
+      - button "进度" [ref=f35e60] [cursor=pointer]
+      - button "我的" [ref=f35e61] [cursor=pointer]
+    - status [ref=f35e62]

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nikigo 学习页 V3 / V4 对比</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Noto Sans SC", sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 36px; background: #f5f2fb; color: #211a2c; }
+    header { width: min(980px, 100%); margin: 0 auto 24px; }
+    h1 { margin: 0; font-size: 30px; letter-spacing: -.03em; }
+    p { margin: 8px 0 0; color: #686173; line-height: 1.6; }
+    .comparison { width: min(980px, 100%); margin: 0 auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: start; }
+    figure { margin: 0; padding: 16px; border: 1px solid #ded8e8; border-radius: 22px; background: white; }
+    figcaption { margin: 0 0 12px; font-size: 17px; font-weight: 850; }
+    figcaption span { display: block; margin-top: 3px; color: #686173; font-size: 13px; font-weight: 550; }
+    img { display: block; width: 100%; height: auto; border: 1px solid #e6e0f8; border-radius: 14px; }
+    @media (max-width: 720px) { body { padding: 20px; } .comparison { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>学习页 V3 与 V4</h1>
+    <p>相同的 Nikigo 学习内容，不同的信息入口：V3 先强调单课任务，V4 先建立 Stage 与 Module 路径。</p>
+  </header>
+  <main class="comparison">
+    <figure>
+      <figcaption>V3 · 当前场景任务优先<span>单课信息完整，但首屏路径关系较弱。</span></figcaption>
+      <img src="../nikigo-learn-v3-formal/learn-v3-formal-390-current.png" alt="Nikigo 学习页 V3 手机端截图" width="390" height="844">
+    </figure>
+    <figure>
+      <figcaption>V4 · Stage 到 Module 路径优先<span>先选阶段，再沿 Module 路径进入具体 Lesson。</span></figcaption>
+      <img src="evidence/learn-v4-390-stage-k1-overview.png" alt="Nikigo 学习页 V4 手机端截图" width="390" height="844">
+    </figure>
+  </main>
+</body>
+</html>

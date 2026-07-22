@@ -1,0 +1,67 @@
+- generic [ref=f5e23] [box=20,68,1160,1586]:
+  - generic [ref=f5e94] [box=20,68,1160,1586]:
+    - generic [ref=f5e95] [box=20,106,760,84]:
+      - heading "学习" [level=1] [ref=f5e96] [box=20,106,760,49]
+      - paragraph [ref=f5e97] [box=20,163,760,26]: 选择阶段，沿着清楚的Module路径继续学习。
+    - tablist "选择学习阶段" [ref=f5e98] [box=20,218,1160,64]:
+      - tab "阶段1 · 韩文基础 当前阶段" [active] [selected] [ref=f5e99] [cursor=pointer] [box=20,218,152,64]:
+        - text: 阶段1 · 韩文基础
+        - generic [ref=f5e100] [box=39,254,114,18]: 当前阶段
+      - tab "阶段2 · 基础沟通" [ref=f5e101] [cursor=pointer] [box=184,218,152,64]
+    - tabpanel [ref=f5e102] [box=20,314,1160,270]:
+      - generic [ref=f5e103] [box=63,378,660,142]:
+        - heading "阶段1 · 韩文基础" [level=2] [ref=f5e104] [box=63,378,660,43]
+        - paragraph [ref=f5e105] [box=63,434,620,29]: 认识韩文结构，建立基础拼读和常见发音规则意识，并完成第一轮问候场景综合检查。
+        - generic [ref=f5e106] [box=63,483,660,22]:
+          - generic [ref=f5e107] [box=63,483,65,22]: Stage进度
+          - generic [ref=f5e108] [box=645,483,78,22]: 0 / 11课完成
+        - progressbar "阶段1 · 韩文基础" [ref=f5e109] [box=63,514,660,6]
+    - region [ref=f5e110] [box=190,642,820,1012]:
+      - generic [ref=f5e111] [box=190,642,820,65]:
+        - heading "学习路径" [level=2] [ref=f5e112] [box=190,642,820,32]
+        - paragraph [ref=f5e113] [box=190,681,820,26]: 连接线表示推荐顺序，不限制课程自由进入。
+      - generic [ref=f5e114] [box=190,733,820,920]:
+        - article [ref=f5e115] [box=190,733,820,249]:
+          - generic "Module 1" [ref=f5e117] [box=205,846,34,34]: "1"
+          - generic [ref=f5e118] [box=353,756,632,203]:
+            - generic [ref=f5e119] [box=353,756,632,20]:
+              - generic [ref=f5e120] [box=353,756,47,20]: 正在学习
+              - generic [ref=f5e121] [box=926,756,59,20]: 0 / 3课完成
+            - heading "韩文地图与基础元音" [level=3] [ref=f5e122] [box=353,783,632,26]
+            - paragraph [ref=f5e123] [box=353,815,632,22]: 看懂韩文由辅音、元音和音节块组成；识别核心及易混元音，并把元音放入完整音节和初级词汇中。
+            - paragraph [ref=f5e124] [box=353,850,632,48]:
+              - generic [ref=f5e125] [box=353,850,632,19]: 第0课
+              - generic [ref=f5e126] [box=353,871,632,27]: 先认识韩文字母地图
+            - generic [ref=f5e127] [box=353,913,632,46]:
+              - link "开始学习" [ref=f5e128] [cursor=pointer] [box=353,913,104,46]:
+                - /url: lesson-00.html?lang=zh
+              - button "查看模块" [ref=f5e129] [cursor=pointer] [box=469,913,72,46]
+        - article [ref=f5e130] [box=190,1008,820,218]:
+          - generic "Module 2" [ref=f5e132] [box=205,1121,34,34]: "2"
+          - generic [ref=f5e133] [box=353,1031,632,172]:
+            - generic [ref=f5e134] [box=353,1031,632,20]:
+              - generic [ref=f5e135] [box=353,1031,36,20]: 可学习
+              - generic [ref=f5e136] [box=926,1031,59,20]: 0 / 4课完成
+            - heading "辅音、音节块与复合元音" [level=3] [ref=f5e137] [box=353,1058,632,26]
+            - paragraph [ref=f5e138] [box=353,1090,632,22]: 通过完整音节区分高频辅音和普通音、送气音、紧音，理解左右/上下音节块，并掌握复合元音的拼写结构。
+            - paragraph [ref=f5e139] [box=353,1123,632,19]: 1课音频准备中
+            - button "查看模块" [ref=f5e141] [cursor=pointer] [box=353,1157,94,46]
+        - article [ref=f5e142] [box=190,1252,820,188]:
+          - generic "Module 3" [ref=f5e144] [box=205,1365,34,34]: "3"
+          - generic [ref=f5e145] [box=353,1275,632,142]:
+            - generic [ref=f5e146] [box=353,1275,632,20]:
+              - generic [ref=f5e147] [box=353,1275,36,20]: 可学习
+              - generic [ref=f5e148] [box=926,1275,59,20]: 0 / 2课完成
+            - heading "收音与常见音变" [level=3] [ref=f5e149] [box=353,1302,632,26]
+            - paragraph [ref=f5e150] [box=353,1334,632,22]: 识别基础收音、七种代表收音，以及连音、鼻音化等常见音变。
+            - button "查看模块" [ref=f5e152] [cursor=pointer] [box=353,1371,94,46]
+        - article [ref=f5e153] [box=190,1466,820,188]:
+          - generic "Module 4" [ref=f5e155] [box=205,1579,34,34]: "4"
+          - generic [ref=f5e156] [box=353,1489,632,142]:
+            - generic [ref=f5e157] [box=353,1489,632,20]:
+              - generic [ref=f5e158] [box=353,1489,36,20]: 可学习
+              - generic [ref=f5e159] [box=926,1489,59,20]: 0 / 2课完成
+            - heading "综合应用与K0阶段挑战" [level=3] [ref=f5e160] [box=353,1516,632,26]
+            - paragraph [ref=f5e161] [box=353,1548,632,22]: 在问候与自我介绍场景中综合使用已学内容，并通过K0阶段挑战检查拼读、发音规则和场景理解。
+            - button "查看模块" [ref=f5e163] [cursor=pointer] [box=353,1585,94,46]
+  - status [box=586,772,28,20]
