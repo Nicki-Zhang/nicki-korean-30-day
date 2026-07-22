@@ -197,6 +197,179 @@
       "localStorageKeys": []
     }
   },
+  "localizedStates": [
+    {
+      "label": "390-lesson07-choice-zh",
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "htmlWidth": 390,
+      "bodyWidth": 390,
+      "bodyHeight": 844,
+      "overflow": false,
+      "undefinedText": false,
+      "smallTargets": [],
+      "localStorageKeys": []
+    },
+    {
+      "label": "390-lesson11-choice-zh",
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "htmlWidth": 390,
+      "bodyWidth": 390,
+      "bodyHeight": 844,
+      "overflow": false,
+      "undefinedText": false,
+      "smallTargets": [],
+      "localStorageKeys": []
+    },
+    {
+      "label": "390-lesson06-gate-zh",
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "htmlWidth": 390,
+      "bodyWidth": 390,
+      "bodyHeight": 851,
+      "overflow": false,
+      "undefinedText": false,
+      "smallTargets": [],
+      "localStorageKeys": []
+    },
+    {
+      "label": "390-lesson07-choice-en",
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "htmlWidth": 390,
+      "bodyWidth": 390,
+      "bodyHeight": 844,
+      "overflow": false,
+      "undefinedText": false,
+      "smallTargets": [],
+      "localStorageKeys": []
+    },
+    {
+      "label": "390-lesson11-choice-en",
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "htmlWidth": 390,
+      "bodyWidth": 390,
+      "bodyHeight": 844,
+      "overflow": false,
+      "undefinedText": false,
+      "smallTargets": [],
+      "localStorageKeys": []
+    },
+    {
+      "label": "390-lesson06-gate-en",
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "htmlWidth": 390,
+      "bodyWidth": 390,
+      "bodyHeight": 851,
+      "overflow": false,
+      "undefinedText": false,
+      "smallTargets": [],
+      "localStorageKeys": []
+    },
+    {
+      "label": "390-lesson07-choice-vi",
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "htmlWidth": 390,
+      "bodyWidth": 390,
+      "bodyHeight": 844,
+      "overflow": false,
+      "undefinedText": false,
+      "smallTargets": [],
+      "localStorageKeys": []
+    },
+    {
+      "label": "390-lesson11-choice-vi",
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "htmlWidth": 390,
+      "bodyWidth": 390,
+      "bodyHeight": 844,
+      "overflow": false,
+      "undefinedText": false,
+      "smallTargets": [],
+      "localStorageKeys": []
+    },
+    {
+      "label": "390-lesson06-gate-vi",
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "htmlWidth": 390,
+      "bodyWidth": 390,
+      "bodyHeight": 875,
+      "overflow": false,
+      "undefinedText": false,
+      "smallTargets": [],
+      "localStorageKeys": []
+    },
+    {
+      "label": "390-lesson07-choice-ja",
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "htmlWidth": 390,
+      "bodyWidth": 390,
+      "bodyHeight": 844,
+      "overflow": false,
+      "undefinedText": false,
+      "smallTargets": [],
+      "localStorageKeys": []
+    },
+    {
+      "label": "390-lesson11-choice-ja",
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "htmlWidth": 390,
+      "bodyWidth": 390,
+      "bodyHeight": 844,
+      "overflow": false,
+      "undefinedText": false,
+      "smallTargets": [],
+      "localStorageKeys": []
+    },
+    {
+      "label": "390-lesson06-gate-ja",
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "htmlWidth": 390,
+      "bodyWidth": 390,
+      "bodyHeight": 851,
+      "overflow": false,
+      "undefinedText": false,
+      "smallTargets": [],
+      "localStorageKeys": []
+    },
+    {
+      "label": "1440-lesson11-dialogue-en",
+      "innerWidth": 1440,
+      "innerHeight": 1024,
+      "htmlWidth": 1440,
+      "bodyWidth": 1440,
+      "bodyHeight": 1024,
+      "overflow": false,
+      "undefinedText": false,
+      "smallTargets": [],
+      "localStorageKeys": []
+    }
+  ],
+  "languageSwitch": {
+    "before": {
+      "lang": "zh-CN",
+      "step": "6",
+      "tokens": "저는",
+      "korean": "저는|이에요|저는|학생|하늘"
+    },
+    "after": {
+      "lang": "en",
+      "step": "6",
+      "tokens": "저는",
+      "korean": "저는|이에요|저는|학생|하늘",
+      "url": "http://127.0.0.1:4181/artifacts/nikigo-course-shell-v1/index.html?course=lesson11&state=build&lang=en"
+    }
+  },
   "interactions": {
     "keyboardChoiceFocused": true,
     "nativeChoiceControl": true,
@@ -220,6 +393,21 @@
     "1440-scenario.png",
     "1440-checkpoint.png",
     "1440-three-course-types.png",
+    "390-lesson07-choice-zh.png",
+    "390-lesson11-scenario-zh.png",
+    "390-lesson6-gate-zh.png",
+    "390-lesson07-choice-en.png",
+    "390-lesson11-scenario-en.png",
+    "390-lesson6-gate-en.png",
+    "390-lesson07-choice-vi.png",
+    "390-lesson11-scenario-vi.png",
+    "390-lesson6-gate-vi.png",
+    "390-lesson07-choice-ja.png",
+    "390-lesson11-scenario-ja.png",
+    "390-lesson6-gate-ja.png",
+    "1440-lesson11-dialogue-en.png",
+    "390-language-switch-before-zh.png",
+    "390-language-switch-after-en.png",
     "390-keyboard-wrong-feedback.png"
   ],
   "console": [],

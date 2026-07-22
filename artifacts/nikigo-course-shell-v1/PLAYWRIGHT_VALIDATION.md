@@ -34,6 +34,8 @@ Interaction checks:
 - The exit dialog opens with focus inside it and Escape closes it.
 - The ordered build exercise reaches its correct state through real controls.
 - `prefers-reduced-motion: reduce` removes meaningful animation duration without hiding state.
+- Mid-lesson language switching preserves the step, selected answer/feedback, build tokens, retry state, and Korean targets.
+- Every state across Lesson 7, Lesson 10, Lesson 11, and Lesson 6 renders in zh, en, vi, and ja.
 - Console errors/warnings: 0.
 - Failed network requests: 0.
 - External requests: 0.
@@ -51,7 +53,9 @@ The 390 px accessibility snapshot confirms this reading order:
 
 ## Real Chrome capture matrix
 
-`capture-and-validate.mjs` generated 14 evidence screenshots and audited 12 representative layout states. It also pressure-checked zh, en, vi, and ja at 390 px.
+`capture-and-validate.mjs` generated 29 evidence screenshots, audited 12 representative layout states, and captured 13 explicit localized states plus a before/after language switch. It also pressure-checked zh, en, vi, and ja at 390 px.
+
+`validate-course-shell-i18n.mjs` separately checks 112 course-state-language combinations, 44 Shell keys, 86 fixture keys, Korean target stability, strict missing-key failure, and in-place state preservation.
 
 All audited pages had no horizontal overflow, no `undefined` text, no visible control below 44 × 44 px, no prototype-written localStorage key, no console/network error, and no external request. The machine-readable result is in `BROWSER_VALIDATION.json`.
 

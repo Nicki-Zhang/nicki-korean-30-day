@@ -62,7 +62,7 @@ async function click(selector){const result=await evaluate(`(()=>{const node=doc
 async function audit(label){return evaluate(`(()=>{const controls=[...document.querySelectorAll('button,a,select')].filter(node=>node.getClientRects().length);return{label:${JSON.stringify(label)},innerWidth,innerHeight,htmlWidth:document.documentElement.scrollWidth,bodyWidth:document.body.scrollWidth,bodyHeight:document.body.scrollHeight,overflow:Math.max(document.documentElement.scrollWidth,document.body.scrollWidth)>innerWidth+2,undefinedText:document.body.innerText.includes('undefined'),smallTargets:controls.filter(node=>{const r=node.getBoundingClientRect();return r.width<44||r.height<44;}).map(node=>({text:node.textContent.trim().slice(0,40),width:Math.round(node.getBoundingClientRect().width),height:Math.round(node.getBoundingClientRect().height)})),localStorageKeys:Object.keys(localStorage)}})()`);
 }
 
-const results={browser:'Google Chrome',baseUrl,viewports:[],languages:{},interactions:{},screenshots:[],console:[],networkErrors:[],externalRequests:[],reducedMotion:false};
+const results={browser:'Google Chrome',baseUrl,viewports:[],languages:{},localizedStates:[],languageSwitch:{},interactions:{},screenshots:[],console:[],networkErrors:[],externalRequests:[],reducedMotion:false};
 const url=(course,state,lang='zh')=>`${baseUrl}/index.html?course=${course}&state=${state}&lang=${lang}`;
 
 try{
@@ -87,6 +87,22 @@ try{
 
   await viewport(390,844);
   for(const lang of ['zh','en','vi','ja']){await navigate(url('lesson11','intro',lang));results.languages[lang]=await audit(`390-${lang}`);}
+
+  const localizedCaptures=[];
+  for(const lang of ['zh','en','vi','ja']){
+    localizedCaptures.push(['lesson07','choice',lang,`390-lesson07-choice-${lang}.png`]);
+    localizedCaptures.push(['lesson11','choice',lang,`390-lesson11-scenario-${lang}.png`]);
+    localizedCaptures.push(['lesson06','gate',lang,`390-lesson6-gate-${lang}.png`]);
+  }
+  for(const [course,state,lang,name] of localizedCaptures){await navigate(url(course,state,lang));await screenshot(name);results.screenshots.push(name);results.localizedStates.push(await audit(`390-${course}-${state}-${lang}`));}
+  await viewport(1440,1024);await navigate(url('lesson11','dialogue','en'));await screenshot('1440-lesson11-dialogue-en.png');results.screenshots.push('1440-lesson11-dialogue-en.png');results.localizedStates.push(await audit('1440-lesson11-dialogue-en'));
+
+  await viewport(390,844);await navigate(url('lesson11','build','zh'));await click('[data-action="add-token"][data-token="저는"]');
+  results.languageSwitch.before=await evaluate(`({lang:document.documentElement.lang,step:document.querySelector('[data-step]').textContent,tokens:[...document.querySelectorAll('.placedToken')].map(node=>node.textContent).join('|'),korean:[...document.querySelectorAll('.tokenButton,.placedToken')].map(node=>node.textContent).join('|')})`);
+  await screenshot('390-language-switch-before-zh.png');results.screenshots.push('390-language-switch-before-zh.png');
+  await evaluate(`(()=>{const select=document.querySelector('[data-language]');select.value='en';select.dispatchEvent(new Event('change',{bubbles:true}));})()`);await delay(180);
+  results.languageSwitch.after=await evaluate(`({lang:document.documentElement.lang,step:document.querySelector('[data-step]').textContent,tokens:[...document.querySelectorAll('.placedToken')].map(node=>node.textContent).join('|'),korean:[...document.querySelectorAll('.tokenButton,.placedToken')].map(node=>node.textContent).join('|'),url:location.href})`);
+  await screenshot('390-language-switch-after-en.png');results.screenshots.push('390-language-switch-after-en.png');
 
   await navigate(url('lesson11','choice'));
   await evaluate(`document.querySelectorAll('.choiceButton')[1].focus()`);
@@ -128,6 +144,12 @@ try{
   results.externalRequests=requests.filter(request=>!request.startsWith('http://127.0.0.1:4181/')&&!request.startsWith('data:'));
   assert.ok(results.viewports.every(item=>!item.overflow&&!item.undefinedText&&item.smallTargets.length===0&&item.localStorageKeys.length===0),JSON.stringify(results.viewports));
   assert.ok(Object.values(results.languages).every(item=>!item.overflow&&!item.undefinedText&&item.smallTargets.length===0),JSON.stringify(results.languages));
+  assert.ok(results.localizedStates.every(item=>!item.overflow&&!item.undefinedText&&item.smallTargets.length===0),JSON.stringify(results.localizedStates));
+  assert.equal(results.languageSwitch.after.lang,'en');
+  assert.equal(results.languageSwitch.after.step,results.languageSwitch.before.step);
+  assert.equal(results.languageSwitch.after.tokens,results.languageSwitch.before.tokens);
+  assert.equal(results.languageSwitch.after.korean,results.languageSwitch.before.korean);
+  assert.ok(results.languageSwitch.after.url.includes('lang=en'));
   assert.equal(results.interactions.wrongFeedback,true);
   assert.equal(results.interactions.noAnswerLeak,true);
   assert.equal(results.interactions.keyboardChoiceFocused,true);

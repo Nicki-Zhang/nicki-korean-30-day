@@ -18,7 +18,7 @@
     <a class="wordmark" href="../../nikigo-app.html#courses" aria-label="Nikigo 学习页" translate="no">Nikigo</a>
     <div class="topbarActions">
       <label class="languageField">
-        <span class="srOnly">辅助语言</span>
+        <span class="srOnly" data-language-label>辅助语言</span>
         <select aria-label="辅助语言" data-language>
           <option value="zh">简体中文</option>
           <option value="en">English</option>
@@ -72,10 +72,11 @@
   </dialog>
 
   <div class="prototypeSwitcher" data-prototype-switcher hidden>
-    <label>课程<select data-course-switcher></select></label>
-    <label>状态<select data-state-switcher></select></label>
+    <label><span data-course-picker-label>课程</span><select data-course-switcher></select></label>
+    <label><span data-state-picker-label>状态</span><select data-state-switcher></select></label>
   </div>
 
+  <script src="course-shell-copy.js"></script>
   <script src="course-shell.js"></script>
 </body>
 </html>

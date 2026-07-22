@@ -8,6 +8,7 @@ This directory is an isolated design prototype. It does not load or modify forma
 - `SHELL_ARCHITECTURE.md`: Shell boundary, adapter contract, tokens, components, responsive behavior, and motion
 - `DESIGN_QA.md`: Taste, Frontend Design, Ponytail, UI, and Web Guidelines decisions
 - `PLAYWRIGHT_VALIDATION.md`: browser, accessibility, keyboard, responsive, network, and motion results
+- `I18N_DIAGNOSIS_AND_VALIDATION.md`: P0 mixed-language diagnosis, strict copy contract, and four-language evidence
 - `BROWSER_VALIDATION.json`: machine-readable Chrome validation output
 
 Evidence is stored in `evidence/`, deterministic motion frames in `motion-frames/`, and the isolated local-Chrome recording in `course-shell-motion-demo.mov`.
@@ -26,6 +27,12 @@ Supported course fixtures:
 - `lesson06`: required-audio gate
 
 Add `lab=1` to show the prototype-only course and state switcher. The switcher updates the URL only. It never writes `localStorage`.
+
+Run the dedicated four-language test with:
+
+```text
+node artifacts/nikigo-course-shell-v1/validate-course-shell-i18n.mjs
+```
 
 ## Evidence states
 
