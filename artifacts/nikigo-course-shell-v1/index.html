@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f5fc">
+  <title>Nikigo Course Shell V1</title>
+  <link rel="stylesheet" href="course-shell.css">
+</head>
+<body>
+  <a class="skipLink" href="#lessonContent" data-skip-link>跳到课程内容</a>
+
+  <header class="courseTopbar">
+    <button class="backToPath" type="button" data-action="exit" aria-label="返回学习路径">
+      <span aria-hidden="true">‹</span>
+      <span>学习路径</span>
+    </button>
+    <a class="wordmark" href="../../nikigo-app.html#courses" aria-label="Nikigo 学习页" translate="no">Nikigo</a>
+    <div class="topbarActions">
+      <label class="languageField">
+        <span class="srOnly">辅助语言</span>
+        <select aria-label="辅助语言" data-language>
+          <option value="zh">简体中文</option>
+          <option value="en">English</option>
+          <option value="vi">Tiếng Việt</option>
+          <option value="ja">日本語</option>
+        </select>
+      </label>
+      <button class="iconButton" type="button" data-action="exit" aria-label="退出课程">×</button>
+    </div>
+  </header>
+
+  <section class="courseProgress" aria-label="课程进度">
+    <div class="progressMeta">
+      <span data-phase>讲解</span>
+      <strong><span data-step>3</span> / <span data-total>13</span></strong>
+    </div>
+    <div class="progressTrack" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="23" data-progress-track>
+      <span data-progress-fill></span>
+    </div>
+  </section>
+
+  <div class="shellLayout">
+    <aside class="lessonContext" aria-label="课程上下文">
+      <div class="contextStage" data-stage>阶段1 · 韩文基础</div>
+      <h2 data-module>收音与常见音变</h2>
+      <p data-lesson>第7课 · 四个基础收音</p>
+      <ol class="phaseList" aria-label="教学阶段" data-phase-list></ol>
+    </aside>
+
+    <main class="lessonMain" id="lessonContent" tabindex="-1">
+      <div class="mobileContext" aria-label="当前课程位置">
+        <span data-mobile-stage>阶段1 · 韩文基础</span>
+        <strong data-mobile-lesson>第7课 · 四个基础收音</strong>
+      </div>
+      <section class="lessonSurface" aria-live="polite" data-lesson-surface></section>
+    </main>
+  </div>
+
+  <footer class="lessonActions" data-actions></footer>
+
+  <dialog class="exitDialog" data-exit-dialog aria-labelledby="exitTitle">
+    <form method="dialog">
+      <p class="dialogLabel" data-exit-label>离开课程</p>
+      <h2 id="exitTitle" data-exit-title>要返回学习路径吗？</h2>
+      <p data-exit-body>当前原型不会写入真实学习状态。正式 Shell 接入后，应先保存当前步骤再退出。</p>
+      <div class="dialogActions">
+        <button class="secondaryButton" value="cancel" data-exit-cancel>继续学习</button>
+        <button class="primaryButton" value="confirm" data-exit-confirm>返回学习路径</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="prototypeSwitcher" data-prototype-switcher hidden>
+    <label>课程<select data-course-switcher></select></label>
+    <label>状态<select data-state-switcher></select></label>
+  </div>
+
+  <script src="course-shell.js"></script>
+</body>
+</html>
