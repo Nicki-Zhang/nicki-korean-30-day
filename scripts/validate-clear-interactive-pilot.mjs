@@ -20,7 +20,7 @@ for(const marker of ['--canvas:#f7f7fb','--action:#4f46b8','--accent:#6657d9','-
 for(const source of [lessonTheme,shellCss])assert.doesNotMatch(source,/#287f60|#1d674c|#f6f7f4/i,'Loaded purple theme must not contain Ink & Jade palette tokens.');
 assert.match(shellCss,/linear-gradient\(128deg,#403a86/,'Dashboard hero must retain the restrained purple gradient.');
 assert.match(app,/id="streakMetric"/);assert.match(app,/id="xpMetric"/);assert.match(app,/id="weekMetric"/);
-assert.match(app,/<\/header>\s*<nav id="appNav"/,'Primary navigation must remain adjacent to the top shell for desktop and mobile placement.');
+assert.match(app,/<header class="top">[\s\S]*?<nav id="appNav"[\s\S]*?<\/header>\s*<main id="appMain">/,'Primary navigation must remain inside the top shell and before main content for desktop and mobile placement.');
 assert.match(lessonCss,/\.conceptChunk\[aria-pressed="true"\][\s\S]*translateY\(-3px\)/);
 assert.match(lessonCss,/--motion:180ms/);
 assert.match(lessonEngine,/NikigoAudio\?\.resolve\?\.\(audio\.text,audio\.audioType,audio\.lessonId\)/);

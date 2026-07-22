@@ -268,3 +268,33 @@ select:focus-visible {
     transition-duration:.01ms!important;
   }
 }
+
+/* Human UI refinement: keep the interaction engine, reduce empty canvas weight. */
+html,
+body { background:var(--canvas); }
+.lessonStage {
+  min-height:0;
+  margin-bottom:32px;
+  padding:26px 28px;
+  border-radius:16px;
+  box-shadow:0 10px 26px rgba(70,61,132,.06);
+}
+.lessonStage h1 {
+  max-width:720px;
+  font-size:clamp(32px,4.5vw,42px);
+}
+.goalList { margin-top:26px; }
+.lessonFoot { margin-top:32px; }
+.primaryAction,
+.inlineAction { box-shadow:none; }
+
+@media (max-width:760px) {
+  .lessonStage {
+    min-height:0;
+    margin-bottom:24px;
+    padding:22px 18px;
+    border-radius:16px;
+  }
+  .lessonStage h1 { font-size:32px; }
+  .lessonFoot { margin-top:26px; }
+}

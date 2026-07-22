@@ -1,0 +1,100 @@
+- generic [active] [ref=f42e1] [box=0,-60,390,1323]:
+  - generic [ref=f42e2] [box=0,-60,390,1323]:
+    - banner [ref=f42e3] [box=0,0,390,60]:
+      - button "返回学习首页" [ref=f42e4] [cursor=pointer] [box=16,8,66,44]: Nikigo
+      - generic [ref=f42e5] [box=204,7,170,46]:
+        - combobox "Choose interface language" [ref=f42e7] [box=214,8,109,44]:
+          - option "简体中文" [selected] [box=0,0,0,0]
+          - option "English" [box=0,0,0,0]
+          - option "Tiếng Việt" [box=0,0,0,0]
+          - option "日本語" [box=0,0,0,0]
+        - button "打开个人中心" [ref=f42e8] [cursor=pointer] [box=330,8,44,44]: "N"
+    - navigation "Primary navigation" [ref=f42e9] [box=12,772,366,64]:
+      - button "首页" [ref=f42e10] [cursor=pointer] [box=18,778,69,52]:
+        - generic [ref=f42e11] [box=47,783,10,17]: ⌂
+      - button "学习" [ref=f42e13] [cursor=pointer] [box=89,778,69,52]:
+        - generic [ref=f42e14] [box=116,783,15,17]: ▤
+      - button "练习" [ref=f42e16] [cursor=pointer] [box=160,778,69,52]:
+        - generic [ref=f42e17] [box=188,783,14,17]: ↻
+      - button "进度" [ref=f42e19] [cursor=pointer] [box=232,778,69,52]:
+        - generic [ref=f42e20] [box=261,783,10,17]: ◔
+      - button "我的" [ref=f42e22] [cursor=pointer] [box=303,778,69,52]:
+        - generic [ref=f42e23] [box=330,783,16,17]: ●
+    - generic [ref=f42e25] [box=0,0,390,1263]:
+      - generic [ref=f42e26] [box=16,16,358,441]:
+        - generic [ref=f42e27] [box=35,35,320,184]:
+          - generic [ref=f42e28] [box=35,35,320,21]: 下午好，Nicki
+          - heading "오늘도 한 걸음 더." [level=1] [ref=f42e29] [box=35,60,320,34]
+          - paragraph [ref=f42e30] [box=35,98,320,21]: 今天也向真实交流更进一步。
+          - generic [ref=f42e31] [box=35,133,320,86]:
+            - strong [ref=f42e32] [box=48,164,64,24]: 阶段1
+            - generic [ref=f42e33] [box=124,140,86,72]:
+              - text: 当前阶段韩文基础
+              - generic [ref=f42e34] [box=124,180,86,32]: 辅音、音节块与复合元音
+            - button "查看完整路径" [ref=f42e35] [cursor=pointer] [box=222,154,122,44]
+        - article [ref=f42e36] [box=35,237,320,201]:
+          - generic [ref=f42e37] [box=52,254,286,28]:
+            - generic [ref=f42e38] [box=52,257,45,23]: 下一步
+            - generic [ref=f42e39] [box=306,259,32,18]: 第3课
+          - generic [ref=f42e40] [box=52,291,286,130]:
+            - generic [ref=f42e41] [box=52,291,286,72]:
+              - paragraph [ref=f42e42] [box=52,291,286,26]: 기본 자음
+              - heading "高频基础辅音：通过完整音节学习" [level=3] [ref=f42e43] [box=52,320,286,21]
+              - paragraph [ref=f42e44] [box=52,344,286,19]: ㅂㅅㅇ · 完整音节 · 问候预览
+            - button "继续当前课程" [ref=f42e45] [cursor=pointer] [box=52,373,286,48]
+      - generic [ref=f42e46] [box=16,473,358,158]:
+        - generic [ref=f42e47] [box=17,474,178,78]:
+          - text: 连续学习
+          - generic [ref=f42e48] [box=30,515,152,23]: 6 天 🔥
+        - generic [ref=f42e49] [box=195,474,178,78]:
+          - text: 累计 XP
+          - generic [ref=f42e50] [box=209,515,151,23]: 100 XP
+        - generic [ref=f42e51] [box=17,552,178,78]:
+          - text: 今日目标
+          - generic [ref=f42e52] [box=30,594,152,23]: 10 min
+        - generic [ref=f42e53] [box=195,552,178,78]:
+          - text: 本周进度
+          - generic [ref=f42e54] [box=209,594,151,23]: 2 / 5
+      - generic [ref=f42e55] [box=16,647,358,504]:
+        - article [ref=f42e56] [box=16,647,358,150]:
+          - generic [ref=f42e57] [box=35,666,320,44]:
+            - heading "复习中心" [level=2] [ref=f42e58] [box=35,673,80,30]
+            - button "进入练习" [ref=f42e59] [cursor=pointer] [box=291,666,64,44]
+          - paragraph [ref=f42e60] [box=35,722,320,48]: 完成第一节课后，错题、收藏和到期复习会出现在这里。
+        - complementary [ref=f42e61] [box=16,813,358,338]:
+          - article [ref=f42e62] [box=16,813,358,338]:
+            - generic [ref=f42e63] [box=35,832,320,44]:
+              - heading "能力画像" [level=2] [ref=f42e64] [box=35,839,80,30]
+              - button "重新诊断" [ref=f42e65] [cursor=pointer] [box=291,832,64,44]
+            - generic [ref=f42e66] [box=35,888,320,244]:
+              - generic [ref=f42e67] [box=35,888,320,34]:
+                - generic [ref=f42e68] [box=35,889,74,33]:
+                  - text: 한글
+                  - generic [ref=f42e69] [box=35,907,74,15]: LIT
+                - emphasis [ref=f42e72] [box=325,896,30,18]: "42"
+              - generic [ref=f42e73] [box=35,930,320,34]:
+                - generic [ref=f42e74] [box=35,931,74,33]:
+                  - text: 듣기
+                  - generic [ref=f42e75] [box=35,949,74,15]: LIS
+                - emphasis [ref=f42e78] [box=325,938,30,18]: "28"
+              - generic [ref=f42e79] [box=35,972,320,34]:
+                - generic [ref=f42e80] [box=35,973,74,33]:
+                  - text: 어휘
+                  - generic [ref=f42e81] [box=35,991,74,15]: VOC
+                - emphasis [ref=f42e84] [box=325,980,30,18]: "34"
+              - generic [ref=f42e85] [box=35,1014,320,34]:
+                - generic [ref=f42e86] [box=35,1015,74,33]:
+                  - text: 문법
+                  - generic [ref=f42e87] [box=35,1033,74,15]: GRM
+                - emphasis [ref=f42e90] [box=325,1022,30,18]: "21"
+              - generic [ref=f42e91] [box=35,1056,320,34]:
+                - generic [ref=f42e92] [box=35,1057,74,33]:
+                  - text: 말하기
+                  - generic [ref=f42e93] [box=35,1075,74,15]: SPK
+                - emphasis [ref=f42e96] [box=325,1064,30,18]: "16"
+              - generic [ref=f42e97] [box=35,1098,320,34]:
+                - generic [ref=f42e98] [box=35,1099,74,33]:
+                  - text: 소통
+                  - generic [ref=f42e99] [box=35,1117,74,15]: COM
+                - emphasis [ref=f42e102] [box=325,1106,30,18]: "24"
+  - status [box=177,826,36,24]

@@ -1,0 +1,121 @@
+- generic [active] [ref=f130e1] [box=0,0,390,2115]:
+  - generic [ref=f130e2] [box=0,0,390,2115]:
+    - banner [ref=f130e3] [box=0,0,390,123]:
+      - button "返回学习首页" [ref=f130e4] [cursor=pointer] [box=14,8,66,44]: Nikigo
+      - generic [ref=f130e5] [box=214,7,162,46]:
+        - combobox "Choose interface language" [ref=f130e7] [box=224,8,101,44]:
+          - option "简体中文" [selected] [box=0,0,0,0]
+          - option "English" [box=0,0,0,0]
+          - option "Tiếng Việt" [box=0,0,0,0]
+          - option "日本語" [box=0,0,0,0]
+        - button "打开个人中心" [ref=f130e8] [cursor=pointer] [box=332,8,44,44]: "N"
+      - navigation "Primary navigation" [ref=f130e9] [box=14,70,362,53]:
+        - button "首页" [ref=f130e10] [cursor=pointer] [box=14,74,71,44]
+        - button "学习" [ref=f130e12] [cursor=pointer] [box=87,74,71,44]
+        - button "练习" [ref=f130e14] [cursor=pointer] [box=160,74,71,44]
+        - button "进度" [ref=f130e16] [cursor=pointer] [box=232,74,71,44]
+        - button "我的" [ref=f130e18] [cursor=pointer] [box=305,74,71,44]
+    - main [ref=f130e20] [box=0,123,390,1992]:
+      - generic [ref=f130e99] [box=0,123,390,1992]:
+        - generic [ref=f130e101] [box=16,143,358,98]:
+          - heading "学习" [level=1] [ref=f130e102] [box=16,143,358,45]
+          - paragraph [ref=f130e103] [box=16,194,358,47]: 按阶段与模块查看完整路径；所有已开放课程都可自由进入。
+        - generic [ref=f130e104] [box=16,261,358,1807]:
+          - group [ref=f130e105] [box=16,261,358,1651]:
+            - generic "当前阶段 阶段1 · 韩文基础 认识韩文结构，建立基础拼读和常见发音规则意识，并完成第一轮问候场景综合检查。 2/11课完成 −" [ref=f130e106] [cursor=pointer] [box=17,262,356,161]:
+              - generic [ref=f130e107] [box=35,278,320,91]:
+                - generic [ref=f130e108] [box=35,278,320,18]: 当前阶段
+                - strong [ref=f130e109] [box=35,299,320,26]: 阶段1 · 韩文基础
+                - emphasis [ref=f130e110] [box=35,329,320,39]: 认识韩文结构，建立基础拼读和常见发音规则意识，并完成第一轮问候场景综合检查。
+              - generic [ref=f130e111] [box=35,382,298,20]: 2/11课完成
+              - text: −
+            - generic [ref=f130e112] [box=17,422,356,1488]:
+              - group [ref=f130e113] [box=29,422,332,138]:
+                - generic "韩文地图与基础元音 看懂韩文由辅音、元音和音节块组成；识别核心及易混元音，并把元音放入完整音节和初级词汇中。 已完成 2/3 +" [ref=f130e114] [cursor=pointer] [box=29,423,332,137]:
+                  - generic [ref=f130e115] [box=31,439,328,67]:
+                    - strong [ref=f130e116] [box=31,439,328,23]: 韩文地图与基础元音
+                    - emphasis [ref=f130e117] [box=31,467,328,39]: 看懂韩文由辅音、元音和音节块组成；识别核心及易混元音，并把元音放入完整音节和初级词汇中。
+                  - generic [ref=f130e118] [box=31,521,306,18]: 已完成 2/3
+                  - text: +
+              - group [ref=f130e120] [box=29,560,332,1061]:
+                - generic "辅音、音节块与复合元音 通过完整音节区分高频辅音和普通音、送气音、紧音，理解左右/上下音节块，并掌握复合元音的拼写结构。 已完成 0/4 1课音频准备中 −" [ref=f130e121] [cursor=pointer] [box=29,561,332,148]:
+                  - generic [ref=f130e122] [box=31,577,328,67]:
+                    - strong [ref=f130e123] [box=31,577,328,23]: 辅音、音节块与复合元音
+                    - emphasis [ref=f130e124] [box=31,605,328,39]: 通过完整音节区分高频辅音和普通音、送气音、紧音，理解左右/上下音节块，并掌握复合元音的拼写结构。
+                  - generic [ref=f130e125] [box=31,654,306,39]:
+                    - generic [ref=f130e126] [box=31,654,59,18]: 已完成 0/4
+                    - generic [ref=f130e127] [box=31,675,80,18]: 1课音频准备中
+                  - text: −
+                - generic [ref=f130e128] [box=29,709,332,912]:
+                  - article [ref=f130e129] [box=29,709,332,238]:
+                    - generic [ref=f130e130] [box=31,725,328,141]:
+                      - heading "3. 高频基础辅音：通过完整音节学习" [level=2] [ref=f130e131] [box=31,725,328,26]
+                      - paragraph [ref=f130e132] [box=31,755,328,21]: ㅂㅅㅇ · 完整音节 · 问候预览
+                      - generic [ref=f130e133] [box=31,784,328,66]:
+                        - generic [ref=f130e134] [box=31,784,53,17]: 14 min
+                        - generic [ref=f130e135] [box=84,784,64,17]: +50 XP
+                        - generic [ref=f130e136] [box=148,784,55,17]: 进行中
+                        - generic [ref=f130e137] [box=31,808,328,17]: 开发预览 · 部分音频未发布
+                        - generic [ref=f130e138] [box=31,833,328,17]: 建议先学习第2课（仍可开始）
+                      - generic "38%" [ref=f130e139] [box=31,859,328,7]
+                    - link "继续" [ref=f130e141] [cursor=pointer] [box=31,878,328,54]:
+                      - /url: lesson-03.html?lang=zh
+                  - article [ref=f130e142] [box=29,947,332,222]:
+                    - generic [ref=f130e143] [box=31,963,328,125]:
+                      - heading "4. 听懂普通音、送气音和紧音" [level=2] [ref=f130e144] [box=31,963,328,26]
+                      - paragraph [ref=f130e145] [box=31,992,328,21]: 完整音节 · 气流对比 · 初步听辨
+                      - generic [ref=f130e146] [box=31,1021,328,66]:
+                        - generic [ref=f130e147] [box=31,1021,53,17]: 10 min
+                        - generic [ref=f130e148] [box=84,1021,64,17]: +50 XP
+                        - generic [ref=f130e149] [box=148,1021,67,17]: 尚未开始
+                        - generic [ref=f130e150] [box=31,1046,328,17]: 开发预览 · 部分音频未发布
+                        - generic [ref=f130e151] [box=31,1071,328,17]: 建议先学习第3课（仍可开始）
+                    - link "开始" [ref=f130e152] [cursor=pointer] [box=31,1100,328,54]:
+                      - /url: lesson-04.html?lang=zh
+                  - article [ref=f130e153] [box=29,1169,332,222]:
+                    - generic [ref=f130e154] [box=31,1185,328,125]:
+                      - heading "5. 看懂韩语音节块" [level=2] [ref=f130e155] [box=31,1185,328,26]
+                      - paragraph [ref=f130e156] [box=31,1214,328,21]: 左右结构 · 上下结构 · 拼合与拆分
+                      - generic [ref=f130e157] [box=31,1243,328,66]:
+                        - generic [ref=f130e158] [box=31,1243,53,17]: 10 min
+                        - generic [ref=f130e159] [box=84,1243,64,17]: +50 XP
+                        - generic [ref=f130e160] [box=148,1243,67,17]: 尚未开始
+                        - generic [ref=f130e161] [box=31,1268,328,17]: 开发预览 · 部分音频未发布
+                        - generic [ref=f130e162] [box=31,1293,328,17]: 建议先学习第4课（仍可开始）
+                    - link "开始" [ref=f130e163] [cursor=pointer] [box=31,1322,328,54]:
+                      - /url: lesson-05.html?lang=zh
+                  - article [ref=f130e164] [box=29,1391,332,222]:
+                    - generic [ref=f130e165] [box=31,1407,328,125]:
+                      - heading "6. 复合元音" [level=2] [ref=f130e166] [box=31,1407,328,26]
+                      - paragraph [ref=f130e167] [box=31,1436,328,21]: ㅒㅖㅘㅙㅚㅝㅞㅟㅢ · 拼写结构 · 无收音词汇
+                      - generic [ref=f130e168] [box=31,1465,328,66]:
+                        - generic [ref=f130e169] [box=31,1465,53,17]: 14 min
+                        - generic [ref=f130e170] [box=84,1465,64,17]: +50 XP
+                        - generic [ref=f130e171] [box=148,1465,67,17]: 尚未开始
+                        - generic [ref=f130e172] [box=31,1490,328,17]: 预览 · 音频准备中
+                        - generic [ref=f130e173] [box=31,1515,328,17]: 建议先学习第5课（仍可开始）
+                    - link "开始" [ref=f130e174] [cursor=pointer] [box=31,1544,328,54]:
+                      - /url: lesson-06.html?lang=zh
+              - group [ref=f130e175] [box=29,1621,332,138]:
+                - generic "收音与常见音变 识别基础收音、七种代表收音，以及连音、鼻音化等常见音变。 已完成 0/2 +" [ref=f130e176] [cursor=pointer] [box=29,1622,332,137]:
+                  - generic [ref=f130e177] [box=31,1638,328,67]:
+                    - strong [ref=f130e178] [box=31,1638,328,23]: 收音与常见音变
+                    - emphasis [ref=f130e179] [box=31,1666,328,39]: 识别基础收音、七种代表收音，以及连音、鼻音化等常见音变。
+                  - generic [ref=f130e180] [box=31,1720,306,18]: 已完成 0/2
+                  - text: +
+              - group [ref=f130e182] [box=29,1759,332,138]:
+                - generic "综合应用与K0阶段挑战 在问候与自我介绍场景中综合使用已学内容，并通过K0阶段挑战检查拼读、发音规则和场景理解。 已完成 0/2 +" [ref=f130e183] [cursor=pointer] [box=29,1760,332,137]:
+                  - generic [ref=f130e184] [box=31,1776,328,67]:
+                    - strong [ref=f130e185] [box=31,1776,328,23]: 综合应用与K0阶段挑战
+                    - emphasis [ref=f130e186] [box=31,1803,328,39]: 在问候与自我介绍场景中综合使用已学内容，并通过K0阶段挑战检查拼读、发音规则和场景理解。
+                  - generic [ref=f130e187] [box=31,1857,306,18]: 已完成 0/2
+                  - text: +
+          - group [ref=f130e189] [box=16,1925,358,142]:
+            - generic "阶段2 · 基础沟通 使用基础礼貌表达介绍姓名、身份、来源和学习语言，并在简单数量问答中使用固有数词。 0/3课完成 +" [ref=f130e190] [cursor=pointer] [box=17,1926,356,140]:
+              - generic [ref=f130e191] [box=35,1942,320,70]:
+                - strong [ref=f130e192] [box=35,1942,320,26]: 阶段2 · 基础沟通
+                - emphasis [ref=f130e193] [box=35,1973,320,39]: 使用基础礼貌表达介绍姓名、身份、来源和学习语言，并在简单数量问答中使用固有数词。
+              - generic [ref=f130e194] [box=35,2026,298,20]: 0/3课完成
+              - text: +
+            - text: + +
+  - status [box=177,826,36,24]

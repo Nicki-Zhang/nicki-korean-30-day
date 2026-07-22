@@ -1,4 +1,4 @@
-const CACHE = 'nikigo-v29-self-review-gate-product-architecture-01';
+const CACHE = 'nikigo-v30-self-review-gate-human-ui-refinement-01';
 const ASSETS = [
   './', './index.html', './nikigo-app.html', './app-state.js', './course-catalog.js',
   './content-registry.js', './content-type-map.js', './route-registry.js',

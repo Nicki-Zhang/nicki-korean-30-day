@@ -1,0 +1,126 @@
+- generic [active] [ref=f138e1] [box=0,0,1440,1639]:
+  - generic [ref=f138e2] [box=0,0,1440,1639]:
+    - banner [ref=f138e3] [box=80,0,1280,64]:
+      - button "返回学习首页" [ref=f138e4] [cursor=pointer] [box=104,10,91,44]: ✦ Nikigo
+      - generic [ref=f138e5] [box=1153,9,183,46]:
+        - combobox "Choose interface language" [ref=f138e7] [box=1166,10,117,44]:
+          - option "简体中文" [selected] [box=0,0,0,0]
+          - option "English" [box=0,0,0,0]
+          - option "Tiếng Việt" [box=0,0,0,0]
+          - option "日本語" [box=0,0,0,0]
+        - button "打开个人中心" [ref=f138e8] [cursor=pointer] [box=1292,10,44,44]: "N"
+      - navigation "Primary navigation" [ref=f138e9] [box=492,6,364,52]:
+        - button "首页" [ref=f138e10] [cursor=pointer] [box=496,10,68,44]
+        - button "学习" [ref=f138e12] [cursor=pointer] [box=568,10,68,44]
+        - button "练习" [ref=f138e14] [cursor=pointer] [box=640,10,68,44]
+        - button "进度" [ref=f138e16] [cursor=pointer] [box=712,10,68,44]
+        - button "我的" [ref=f138e18] [cursor=pointer] [box=784,10,68,44]
+    - main [ref=f138e20] [box=0,64,1440,1575]:
+      - text: − + − + + + + +
+      - generic [ref=f138e334] [box=96,64,1248,1575]:
+        - generic [ref=f138e336] [box=120,88,323,74]:
+          - heading "我的与设置" [level=1] [ref=f138e337] [box=120,88,323,45]
+          - paragraph [ref=f138e338] [box=120,139,323,23]: 让 Nikigo 按照你的语言、节奏和声音偏好工作。
+        - article [ref=f138e339] [box=120,182,1200,234]:
+          - generic [ref=f138e340] [box=145,207,1150,66]:
+            - generic [ref=f138e341] [box=145,207,66,66]: "N"
+            - generic [ref=f138e342] [box=228,208,153,64]:
+              - heading "Nicki" [level=2] [ref=f138e343] [box=228,208,153,36]
+              - paragraph [ref=f138e344] [box=228,249,153,18]: 游客账户 · 数据保存在本设备
+          - generic [ref=f138e345] [box=145,291,1150,82]:
+            - generic [ref=f138e346] [box=146,292,230,80]:
+              - generic [ref=f138e347] [box=160,306,202,18]: 当前学习路径
+              - generic [ref=f138e348] [box=160,329,202,29]: 阶段1 · 韩文基础
+            - generic [ref=f138e349] [box=376,292,230,80]:
+              - generic [ref=f138e350] [box=391,306,201,18]: 已完成课程
+              - generic [ref=f138e351] [box=391,329,201,29]: "2"
+            - generic [ref=f138e352] [box=605,292,230,80]:
+              - generic [ref=f138e353] [box=620,306,201,18]: 连续学习
+              - generic [ref=f138e354] [box=620,329,201,29]: 6 天
+            - generic [ref=f138e355] [box=835,292,230,80]:
+              - generic [ref=f138e356] [box=850,306,201,18]: 会员状态
+              - generic [ref=f138e357] [box=850,329,201,29]: Free
+            - generic [ref=f138e358] [box=1064,292,230,80]:
+              - generic [ref=f138e359] [box=1079,306,201,18]: 累计 XP
+              - generic [ref=f138e360] [box=1079,329,201,29]: "100"
+        - generic [ref=f138e361] [box=120,431,1200,212]:
+          - heading "个人资料" [level=2] [ref=f138e362] [box=143,456,1154,18]
+          - generic [ref=f138e363] [box=143,479,1154,81]:
+            - generic [ref=f138e364] [box=143,498,236,42]:
+              - generic [ref=f138e365] [box=143,498,236,21]: 昵称
+              - generic [ref=f138e366] [box=143,523,236,17]: 用于首页问候和学习档案，最多 24 个字符。
+            - generic [ref=f138e367] [box=991,495,306,48]:
+              - textbox "昵称 用于首页问候和学习档案，最多 24 个字符。" [ref=f138e368] [box=991,496,240,46]: Nicki
+              - button "保存" [ref=f138e369] [cursor=pointer] [box=1239,495,58,48]
+          - generic [ref=f138e370] [box=143,560,1154,76]:
+            - generic [ref=f138e371] [box=143,577,168,42]:
+              - generic [ref=f138e372] [box=143,577,168,21]: 头像
+              - generic [ref=f138e373] [box=143,602,168,17]: 选择昵称首字或一个学习图标。
+            - radiogroup "Avatar style" [ref=f138e374] [box=1045,576,252,44]:
+              - radio "使用昵称首字作为头像" [checked] [ref=f138e375] [cursor=pointer] [box=1045,576,44,44]: "N"
+              - radio "使用 🌱 作为头像" [ref=f138e376] [cursor=pointer] [box=1097,576,44,44]: 🌱
+              - radio "使用 📚 作为头像" [ref=f138e377] [cursor=pointer] [box=1149,576,44,44]: 📚
+              - radio "使用 ✨ 作为头像" [ref=f138e378] [cursor=pointer] [box=1201,576,44,44]: ✨
+              - radio "使用 🐰 作为头像" [ref=f138e379] [cursor=pointer] [box=1253,576,44,44]: 🐰
+        - generic [ref=f138e380] [box=120,658,1200,368]:
+          - heading "学习设置" [level=2] [ref=f138e381] [box=143,683,1154,18]
+          - generic [ref=f138e382] [box=143,706,1154,79]:
+            - generic [ref=f138e383] [box=143,724,216,42]:
+              - generic [ref=f138e384] [box=143,724,216,21]: 界面与讲解语言
+              - generic [ref=f138e385] [box=143,749,216,17]: 应用界面、翻译和学习提示使用的语言。
+            - combobox "Interface language" [ref=f138e386] [box=1161,722,137,46]:
+              - option "简体中文" [selected] [box=0,0,0,0]
+              - option "English" [box=0,0,0,0]
+              - option "Tiếng Việt" [box=0,0,0,0]
+              - option "日本語" [box=0,0,0,0]
+          - generic [ref=f138e387] [box=143,785,1154,79]:
+            - generic [ref=f138e388] [box=143,803,168,42]:
+              - generic [ref=f138e389] [box=143,803,168,21]: 每日学习目标
+              - generic [ref=f138e390] [box=143,828,168,17]: 选择一个能够长期坚持的时间。
+            - combobox "Daily learning goal" [ref=f138e391] [box=1184,801,113,46]:
+              - option "5 min" [box=0,0,0,0]
+              - option "10 min" [selected] [box=0,0,0,0]
+              - option "15 min" [box=0,0,0,0]
+              - option "20 min" [box=0,0,0,0]
+          - generic [ref=f138e392] [box=143,864,1154,79]:
+            - generic [ref=f138e393] [box=143,882,276,42]:
+              - generic [ref=f138e394] [box=143,882,276,21]: 韩语音频速度
+              - generic [ref=f138e395] [box=143,907,276,17]: 调速会保留原音高，初学时也建议定期听正常速度。
+            - combobox "Korean audio playback speed" [ref=f138e396] [box=1201,880,97,46]:
+              - option "0.8×" [box=0,0,0,0]
+              - option "1.0×" [selected] [box=0,0,0,0]
+              - option "1.2×" [box=0,0,0,0]
+          - generic [ref=f138e397] [box=143,943,1154,76]:
+            - generic [ref=f138e398] [box=143,960,240,42]:
+              - generic [ref=f138e399] [box=143,960,240,21]: 自动播放题目音频
+              - generic [ref=f138e400] [box=143,985,240,17]: 进入听力题时自动播放一次，随时可以关闭。
+            - switch "自动播放题目音频" [ref=f138e401] [cursor=pointer] [box=1241,959,56,44]
+        - generic [ref=f138e403] [box=120,1041,1200,459]:
+          - heading "账户、隐私与支持" [level=2] [ref=f138e404] [box=143,1066,1154,18]
+          - generic [ref=f138e405] [box=143,1089,1154,81]:
+            - generic [ref=f138e406] [box=143,1108,192,42]:
+              - generic [ref=f138e407] [box=143,1108,192,21]: 学习起点检查
+              - generic [ref=f138e408] [box=143,1133,192,17]: 重新评估不会删除已经完成的课程。
+            - button "重新诊断" [ref=f138e409] [cursor=pointer] [box=1207,1105,90,48]
+          - generic [ref=f138e410] [box=143,1170,1154,81]:
+            - generic [ref=f138e411] [box=143,1189,252,42]:
+              - generic [ref=f138e412] [box=143,1189,252,21]: 会员与购买
+              - generic [ref=f138e413] [box=143,1214,252,17]: 当前没有收费；正式购买后必须支持恢复购买。
+            - button "查看会员权益" [ref=f138e414] [cursor=pointer] [box=1175,1186,122,48]
+          - generic [ref=f138e415] [box=143,1251,1154,81]:
+            - generic [ref=f138e416] [box=143,1270,252,42]:
+              - generic [ref=f138e417] [box=143,1270,252,21]: 隐私与用户协议
+              - generic [ref=f138e418] [box=143,1295,252,17]: 真实账户上线前发布正式文本与账户删除说明。
+            - button "查看" [ref=f138e419] [cursor=pointer] [box=1239,1267,58,48]
+          - generic [ref=f138e420] [box=143,1332,1154,81]:
+            - generic [ref=f138e421] [box=143,1351,216,42]:
+              - generic [ref=f138e422] [box=143,1351,216,21]: 帮助与反馈
+              - generic [ref=f138e423] [box=143,1376,216,17]: 测试阶段请记录设备、页面和具体问题。
+            - button "反馈" [ref=f138e424] [cursor=pointer] [box=1239,1348,58,48]
+          - generic [ref=f138e425] [box=143,1413,1154,80]:
+            - generic [ref=f138e426] [box=143,1432,276,42]:
+              - generic [ref=f138e427] [box=143,1432,276,21]: 清除本机学习数据
+              - generic [ref=f138e428] [box=143,1457,276,17]: 游客数据无法从服务器恢复，此操作需要再次确认。
+            - button "清除" [ref=f138e429] [cursor=pointer] [box=1239,1429,58,48]
+        - paragraph [ref=f138e430] [box=120,1515,1200,49]: 当前测试版只在本机保存学习数据，不会创建真实账户或收取费用。
+  - status [box=702,1006,36,24]

@@ -1,0 +1,38 @@
+- generic [active] [ref=f137e1] [box=0,0,390,993]:
+  - banner [ref=f137e2] [box=0,0,390,60]:
+    - button "返回学习主页" [ref=f137e3] [cursor=pointer] [box=14,8,97,44]: ✦ Nikigo
+    - generic [ref=f137e4] [box=199,7,177,46]:
+      - generic [ref=f137e5] [box=199,7,124,46]:
+        - text: 🌐
+        - combobox "Interface language" [ref=f137e6] [box=206,8,116,44]:
+          - option "简体中文" [selected] [box=0,0,0,0]
+          - option "English" [box=0,0,0,0]
+          - option "Tiếng Việt" [box=0,0,0,0]
+          - option "日本語" [box=0,0,0,0]
+      - button "返回学习主页" [ref=f137e7] [cursor=pointer] [box=332,8,44,44]
+  - generic [ref=f137e10] [box=0,70,390,32]:
+    - generic [ref=f137e11] [box=14,70,362,16]:
+      - generic [ref=f137e12] [box=14,70,44,16]: 课程进度
+      - generic [ref=f137e13] [box=345,70,31,16]: 1 / 18
+    - progressbar [ref=f137e14] [box=14,94,362,8]
+  - main [ref=f137e15] [box=0,116,390,850]:
+    - generic [ref=f137e16] [box=14,116,362,850]:
+      - status [ref=f137e17] [box=33,141,324,67]: 音频待审核 · 本课仅供结构预览，课程尚未正式发布。
+      - generic [ref=f137e18] [box=33,234,82,16]: K0 · 第6课
+      - heading "看懂并拼出复合元音" [level=1] [ref=f137e19] [box=33,270,324,35]
+      - paragraph [ref=f137e20] [box=33,322,324,58]: 把已经认识的元音组合起来，读出完整音节，并通过拼写识别容易混淆的组合。
+      - generic [ref=f137e21] [box=33,404,324,268]:
+        - generic [ref=f137e22] [box=33,405,324,89]:
+          - generic [ref=f137e23] [box=33,419,324,30]: 看见结构
+          - text: 理解ㅗ、ㅜ、ㅡ如何与其他元音组合。
+        - generic [ref=f137e24] [box=33,494,324,89]:
+          - generic [ref=f137e25] [box=33,508,324,30]: 拼成音节
+          - text: 用不发音的ㅇ承载复合元音。
+        - generic [ref=f137e26] [box=33,583,324,89]:
+          - generic [ref=f137e27] [box=33,597,324,30]: 阅读真实词
+          - text: 只读没有收音的词，不提前学习CVC。
+      - generic [ref=f137e28] [box=33,696,324,110]: 本课只学习元音和CV音节，不出现收音。现代首尔韩语中有些拼写的发音非常接近，本课不会制造夸大的听辨差异。
+      - generic [ref=f137e29] [box=33,830,324,110]:
+        - button "← 返回" [ref=f137e30] [cursor=pointer] [box=33,891,324,49]
+        - button "继续 →" [ref=f137e31] [cursor=pointer] [box=33,830,324,49]
+  - status [box=178,817,34,24]

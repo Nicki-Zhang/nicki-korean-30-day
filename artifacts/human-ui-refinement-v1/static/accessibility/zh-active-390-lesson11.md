@@ -1,0 +1,43 @@
+- generic [active] [ref=f135e1] [box=0,0,390,854]:
+  - banner [ref=f135e2] [box=0,0,390,62]:
+    - button "Return to courses" [ref=f135e3] [cursor=pointer] [box=18,9,63,44]: Nikigo
+    - generic [ref=f135e5] [box=257,9,115,44]:
+      - generic [ref=f135e6] [box=256,8,1,1]: Interface language
+      - combobox "Interface language" [ref=f135e7] [box=257,9,115,44]:
+        - option "简体中文" [selected] [box=0,0,0,0]
+        - option "English" [box=0,0,0,0]
+        - option "Tiếng Việt" [box=0,0,0,0]
+        - option "日本語" [box=0,0,0,0]
+  - region "Lesson progress" [ref=f135e8] [box=16,80,358,36]:
+    - generic [ref=f135e9] [box=16,80,358,20]:
+      - generic [ref=f135e10] [box=16,80,73,20]: 8个学习阶段
+      - generic [ref=f135e11] [box=334,80,40,20]: 1 / 13
+    - progressbar [ref=f135e12] [box=16,110,358,6]
+  - main [ref=f135e21] [box=16,130,358,724]:
+    - generic [ref=f135e22] [box=16,130,358,640]:
+      - paragraph [ref=f135e23] [box=35,153,320,20]: K1 · 第11课
+      - heading "이름이 뭐예요?" [level=1] [ref=f135e24] [box=35,180,320,44]
+      - paragraph [ref=f135e25] [box=35,236,320,50]: 学习询问姓名、表达身份，并自然回应“很高兴见到你”。
+      - generic [ref=f135e26] [box=35,308,320,21]:
+        - generic [ref=f135e27] [box=35,308,176,21]: 8个视觉阶段 · 13个内部步骤
+        - generic [ref=f135e28] [box=229,308,50,21]: 约8分钟
+      - list "本课目标" [ref=f135e29] [box=35,355,320,231]:
+        - listitem [ref=f135e30] [box=35,356,320,77]:
+          - generic [ref=f135e31] [box=35,370,32,21]: "01"
+          - generic [ref=f135e32] [box=77,370,278,48]:
+            - strong [ref=f135e33] [box=77,370,278,24]: 问姓名
+            - generic [ref=f135e34] [box=77,396,278,22]: 使用固定问句
+        - listitem [ref=f135e35] [box=35,433,320,77]:
+          - generic [ref=f135e36] [box=35,447,32,21]: "02"
+          - generic [ref=f135e37] [box=77,447,278,48]:
+            - strong [ref=f135e38] [box=77,447,278,24]: 说身份
+            - generic [ref=f135e39] [box=77,473,278,22]: 名词＋이에요/예요
+        - listitem [ref=f135e40] [box=35,510,320,77]:
+          - generic [ref=f135e41] [box=35,524,32,21]: "03"
+          - generic [ref=f135e42] [box=77,524,278,48]:
+            - strong [ref=f135e43] [box=77,524,278,24]: 礼貌回应
+            - generic [ref=f135e44] [box=77,550,278,22]: 만나서 반가워요
+      - generic [ref=f135e45] [box=35,612,320,134]:
+        - button "返回" [disabled] [ref=f135e46] [cursor=pointer] [box=35,696,320,50]
+        - button "开始任务" [ref=f135e47] [cursor=pointer] [box=35,636,320,50]
+  - status [box=181,820,28,20]

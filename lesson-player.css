@@ -11,3 +11,64 @@
 
 .buildResult em{display:block;margin-top:7px;font-size:11px;font-style:normal;font-weight:850}
 .feedback strong,.feedback span,.feedback small{display:block}.feedback small{margin-top:7px;font-weight:650;line-height:1.55}
+
+/* Human UI refinement shared by the current foundation lessons. */
+body {
+  background:#f7f7fb;
+  color:#242335;
+  font-family:"Avenir Next","Segoe UI","Noto Sans KR","Noto Sans SC",system-ui,sans-serif;
+}
+.top { height:64px; }
+.languagePicker { padding-left:0; border-radius:12px; font-size:0; }
+.languagePicker select { min-height:44px; padding-left:12px; font-size:14px; }
+.homeButton { border-radius:12px; }
+.progressWrap { margin-top:10px; }
+.track i { background:#6657d9; }
+.stage { margin-top:20px; margin-bottom:40px; }
+body .card {
+  min-height:0;
+  padding:clamp(24px,4vw,38px);
+  border-color:#e5e3ef;
+  border-radius:18px;
+  box-shadow:0 10px 26px rgba(70,61,132,.06);
+}
+body .contrastCard,
+body .lesson06Card,
+body .lesson07Card { min-height:0; }
+.card h1 { max-width:780px; font-size:clamp(32px,4.2vw,48px); }
+.lead { max-width:760px; color:#6e6b7b; }
+.goals,
+body .conceptGrid {
+  gap:0;
+  margin:24px 0;
+  border-top:1px solid #e5e3ef;
+  border-bottom:1px solid #e5e3ef;
+}
+body .goal,
+body .concept {
+  padding:16px 18px;
+  border:0;
+  border-left:1px solid #e5e3ef;
+  border-radius:0;
+  background:transparent;
+}
+body .goal:first-child,
+body .concept:first-child { border-left:0; }
+.note { border-radius:12px; }
+.primary { box-shadow:none; }
+.foot { margin-top:24px; }
+
+@media(max-width:720px) {
+  .top { height:60px; }
+  .stage { margin-top:14px; margin-bottom:28px; }
+  body .card { padding:24px 18px; border-radius:16px; }
+  .card h1 { font-size:32px; }
+  .goals,
+  body .conceptGrid { border-bottom:0; }
+  body .goal,
+  body .concept {
+    padding:14px 0;
+    border-left:0;
+    border-bottom:1px solid #e5e3ef;
+  }
+}

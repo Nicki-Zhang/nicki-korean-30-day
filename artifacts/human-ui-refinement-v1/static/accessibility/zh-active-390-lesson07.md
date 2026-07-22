@@ -1,0 +1,40 @@
+- generic [active] [ref=f133e1] [box=0,0,390,993]:
+  - banner [ref=f133e2] [box=0,0,390,60]:
+    - button "返回课程主页" [ref=f133e3] [cursor=pointer] [box=14,8,97,44]: ✦ Nikigo
+    - generic [ref=f133e4] [box=199,7,177,46]:
+      - generic [ref=f133e5] [box=199,7,124,46]:
+        - text: 🌐
+        - combobox "Interface language" [ref=f133e6] [box=206,8,116,44]:
+          - option "简体中文" [selected] [box=0,0,0,0]
+          - option "English" [box=0,0,0,0]
+          - option "Tiếng Việt" [box=0,0,0,0]
+          - option "日本語" [box=0,0,0,0]
+      - button "返回课程主页" [ref=f133e7] [cursor=pointer] [box=332,8,44,44]
+  - generic [ref=f133e10] [box=0,70,390,32]:
+    - generic [ref=f133e11] [box=14,70,362,16]:
+      - generic [ref=f133e12] [box=14,70,44,16]: 课程进度
+      - generic [ref=f133e13] [box=345,70,31,16]: 1 / 13
+    - progressbar [ref=f133e14] [box=14,94,362,8]
+  - main [ref=f133e15] [box=0,116,390,849]:
+    - generic [ref=f133e16] [box=14,116,362,849]:
+      - status [ref=f133e17] [box=33,141,324,91]:
+        - strong [ref=f133e18] [box=50,155,290,20]: 开发预览 · 音频尚未发布
+        - text: 课程正文和练习可以完成；待审核音频保持禁用，不使用设备语音或文字替代。
+      - generic [ref=f133e19] [box=33,258,82,16]: K0 · 第7课
+      - heading "听懂并读出基础收音" [level=1] [ref=f133e20] [box=33,294,324,35]
+      - paragraph [ref=f133e21] [box=33,347,324,58]: 认识音节块底部的ㄴ、ㅁ、ㅇ、ㄹ，通过完整音节和真实词理解四种基础收尾。
+      - generic [ref=f133e22] [box=33,428,324,268]:
+        - generic [ref=f133e23] [box=33,429,324,89]:
+          - generic [ref=f133e24] [box=33,443,324,30]: 看懂位置
+          - text: 收音写在音节块底部。
+        - generic [ref=f133e25] [box=33,518,324,89]:
+          - generic [ref=f133e26] [box=33,532,324,30]: 读完整词
+          - text: 用산、몸、공、물学习，不读孤立收音。
+        - generic [ref=f133e27] [box=33,607,324,89]:
+          - generic [ref=f133e28] [box=33,621,324,30]: 收住结尾
+          - text: 不在n、m、ng、l后添加额外元音。
+      - generic [ref=f133e29] [box=33,720,324,86]: 辅音收音不能脱离音节自然发音，因此试听对象始终是完整音节或真实单词。
+      - generic [ref=f133e30] [box=33,830,324,110]:
+        - button "← 返回" [ref=f133e31] [cursor=pointer] [box=33,891,324,49]
+        - button "继续 →" [ref=f133e32] [cursor=pointer] [box=33,830,324,49]
+  - status [box=178,817,34,24]

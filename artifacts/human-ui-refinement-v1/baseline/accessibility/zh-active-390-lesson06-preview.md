@@ -1,0 +1,38 @@
+- generic [active] [ref=f46e1] [box=0,0,390,1087]:
+  - banner [ref=f46e2] [box=0,0,390,64]:
+    - button "返回学习主页" [ref=f46e3] [cursor=pointer] [box=14,10,90,44]: ✦ Nikigo
+    - generic [ref=f46e4] [box=172,10,204,44]:
+      - generic [ref=f46e5] [box=172,10,151,44]:
+        - text: 🌐
+        - combobox "Interface language" [ref=f46e6] [box=206,14,116,37]:
+          - option "简体中文" [selected] [box=0,0,0,0]
+          - option "English" [box=0,0,0,0]
+          - option "Tiếng Việt" [box=0,0,0,0]
+          - option "日本語" [box=0,0,0,0]
+      - button "返回学习主页" [ref=f46e7] [cursor=pointer] [box=332,10,44,44]
+  - generic [ref=f46e10] [box=0,68,390,31]:
+    - generic [ref=f46e11] [box=14,68,362,15]:
+      - generic [ref=f46e12] [box=14,68,44,15]: 课程进度
+      - generic [ref=f46e13] [box=347,68,29,15]: 1 / 18
+    - progressbar [ref=f46e14] [box=14,91,362,8]
+  - main [ref=f46e15] [box=0,116,390,911]:
+    - generic [ref=f46e16] [box=14,116,362,911]:
+      - status [ref=f46e17] [box=33,144,324,67]: 音频待审核 · 本课仅供结构预览，课程尚未正式发布。
+      - generic [ref=f46e18] [box=33,237,82,15]: K0 · 第6课
+      - heading "看懂并拼出复合元音" [level=1] [ref=f46e19] [box=33,270,324,37]
+      - paragraph [ref=f46e20] [box=33,325,324,58]: 把已经认识的元音组合起来，读出完整音节，并通过拼写识别容易混淆的组合。
+      - generic [ref=f46e21] [box=33,411,324,312]:
+        - generic [ref=f46e22] [box=33,411,324,96]:
+          - generic [ref=f46e23] [box=52,430,286,30]: 看见结构
+          - text: 理解ㅗ、ㅜ、ㅡ如何与其他元音组合。
+        - generic [ref=f46e24] [box=33,518,324,96]:
+          - generic [ref=f46e25] [box=52,537,286,30]: 拼成音节
+          - text: 用不发音的ㅇ承载复合元音。
+        - generic [ref=f46e26] [box=33,626,324,96]:
+          - generic [ref=f46e27] [box=52,645,286,30]: 阅读真实词
+          - text: 只读没有收音的词，不提前学习CVC。
+      - generic [ref=f46e28] [box=33,750,324,110]: 本课只学习元音和CV音节，不出现收音。现代首尔韩语中有些拼写的发音非常接近，本课不会制造夸大的听辨差异。
+      - generic [ref=f46e29] [box=33,890,324,109]:
+        - button "← 返回" [ref=f46e30] [cursor=pointer] [box=33,951,324,49]
+        - button "继续 →" [ref=f46e31] [cursor=pointer] [box=33,890,324,49]
+  - status [box=178,817,34,24]

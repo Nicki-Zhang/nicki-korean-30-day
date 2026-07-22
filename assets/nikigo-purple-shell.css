@@ -664,3 +664,295 @@
     transition-duration:.01ms!important;
   }
 }
+
+/* Human UI refinement: preserve the product shell while reducing template weight. */
+.purple-shell .top {
+  grid-template-columns:auto minmax(360px,1fr) auto;
+}
+.purple-shell .appNav {
+  position:static;
+  grid-column:2;
+  grid-row:1;
+  justify-self:center;
+  width:auto;
+  transform:none;
+  border-color:transparent;
+  background:transparent;
+}
+.purple-shell .appNav button {
+  min-width:68px;
+  border-radius:10px;
+}
+.purple-shell .taxonomyStage > summary:focus-visible,
+.purple-shell .taxonomyChapter > summary:focus-visible {
+  outline:3px solid rgba(79,70,184,.38);
+  outline-offset:-3px;
+}
+.purple-shell .appNav button span,
+.purple-shell .languagePicker > span,
+.purple-shell .courseIcon,
+.purple-shell .missionIcon { display:none; }
+.purple-shell .dashboard,
+.purple-shell .mainPage { padding-bottom:64px; }
+.purple-shell .dashHero {
+  grid-template-columns:minmax(0,.92fr) minmax(440px,1.08fr);
+  gap:20px;
+  padding:24px;
+  border-radius:18px;
+  box-shadow:0 12px 30px rgba(66,55,145,.14);
+}
+.purple-shell .pathBadge {
+  border-radius:12px;
+  background:rgba(255,255,255,.08);
+}
+.purple-shell .pathBadge button { border-radius:9px; }
+.purple-shell .heroContinue {
+  padding:18px;
+  border-radius:14px;
+  box-shadow:none;
+}
+.purple-shell .heroContinue .mission {
+  grid-template-columns:minmax(0,1fr) auto;
+}
+.purple-shell .metrics {
+  border-radius:14px;
+}
+.purple-shell .metric { padding-block:14px; }
+.purple-shell .panel,
+.purple-shell .progressTile,
+.purple-shell .progressPanel,
+.purple-shell .profileCard,
+.purple-shell .settingsGroup { border-radius:14px; }
+.purple-shell .clearReview,
+.purple-shell .practicePrimary { background:var(--nikigo-surface); }
+.purple-shell .dashGrid { grid-template-columns:minmax(0,1.18fr) minmax(300px,.82fr); }
+
+.purple-shell .taxonomyList { gap:14px; }
+.purple-shell .taxonomyStage {
+  border-radius:16px;
+}
+.purple-shell .taxonomyStage > summary {
+  min-height:72px;
+  padding:16px 18px;
+}
+.purple-shell .taxonomyChapters {
+  gap:0;
+  padding:0 18px 14px;
+}
+.purple-shell .taxonomyChapter,
+.purple-shell .taxonomyChapter.current {
+  border:0;
+  border-top:1px solid var(--nikigo-border);
+  border-radius:0;
+  background:transparent;
+}
+.purple-shell .taxonomyChapter > summary { padding:16px 2px; }
+.purple-shell .taxonomyChapter > summary::after { background:transparent; }
+.purple-shell .moduleLessons {
+  gap:0;
+  padding:0 0 8px;
+}
+.purple-shell .moduleLessons .courseRow {
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:18px;
+  margin:0;
+  padding:16px 2px;
+  border:0;
+  border-top:1px solid #efedf5;
+  border-radius:0;
+  background:transparent;
+}
+.purple-shell .moduleLessons .courseRow:hover { border-color:#d9d5e8; }
+.purple-shell .courseRow h2 { margin-bottom:4px; }
+.purple-shell .courseMeta {
+  display:flex;
+  gap:8px 0;
+  align-items:center;
+  margin-top:8px;
+}
+.purple-shell .courseMeta span {
+  padding:0 9px;
+  border-radius:0;
+  background:transparent;
+  font-size:12px;
+  line-height:1.4;
+}
+.purple-shell .courseMeta span:first-child { padding-left:0; }
+.purple-shell .courseMeta span + span { border-left:1px solid var(--nikigo-border); }
+.purple-shell .courseMeta .gate,
+.purple-shell .courseMeta .suggestion {
+  flex:1 0 100%;
+  padding:0;
+  border-left:0;
+}
+.purple-shell .courseMeta .gate { color:var(--nikigo-purple-deep); font-weight:750; }
+.purple-shell .courseMeta .suggestion { color:var(--nikigo-muted); }
+.purple-shell .courseAction { min-width:96px; }
+
+.purple-shell .practiceGrid { grid-template-columns:minmax(260px,.62fr) minmax(0,1.38fr); }
+.purple-shell .practicePrimary { border-top:3px solid var(--nikigo-purple); }
+.purple-shell .practicePrimary h2 { margin-top:10px; }
+.purple-shell .relearnList a { min-height:56px; }
+
+.purple-shell .progressGrid {
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:0;
+  overflow:hidden;
+  border:1px solid var(--nikigo-border);
+  border-radius:14px;
+  background:var(--nikigo-surface);
+}
+.purple-shell .progressTile,
+.purple-shell .progressTile:first-child {
+  border:0;
+  border-radius:0;
+  background:transparent;
+}
+.purple-shell .progressTile + .progressTile { border-left:1px solid var(--nikigo-border); }
+.purple-shell .progressPanel { margin-top:16px; }
+.purple-shell .progressStage + .progressStage {
+  margin-top:24px;
+  padding-top:22px;
+  border-top:2px solid var(--nikigo-border);
+}
+.purple-shell .progressStage > header {
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:14px;
+}
+.purple-shell .progressStage > header h2 { margin:0; font-size:20px; }
+.purple-shell .progressStage > header b { color:var(--nikigo-muted); font-size:12px; }
+.purple-shell .progressChapter + .progressChapter { margin-top:18px; }
+.purple-shell .progressChapter > h3 {
+  margin:0;
+  padding:10px 0;
+  border-bottom:1px solid var(--nikigo-border);
+  color:var(--nikigo-purple-dark);
+  font-size:15px;
+}
+.purple-shell .progressLesson { padding:12px 0; }
+.purple-shell .progressLesson h4 { margin:0 0 3px; font-size:14px; }
+.purple-shell .progressLesson .miniTrack { max-width:520px; }
+
+.purple-shell .profileSummary {
+  gap:0;
+  overflow:hidden;
+  border:1px solid var(--nikigo-border);
+  border-radius:12px;
+}
+.purple-shell .profileSummary div {
+  border-radius:0;
+  background:transparent;
+}
+.purple-shell .profileSummary div + div { border-left:1px solid var(--nikigo-border); }
+.purple-shell .settingsGroup h2 { letter-spacing:.04em; text-transform:none; }
+
+@media (max-width:960px) {
+  .purple-shell .top { grid-template-columns:auto minmax(300px,1fr) auto; }
+  .purple-shell .appNav button { min-width:58px; }
+  .purple-shell .dashHero { grid-template-columns:minmax(0,.82fr) minmax(380px,1.18fr); }
+}
+
+@media (max-width:780px) {
+  .purple-shell .top {
+    position:sticky;
+    top:0;
+    height:auto;
+    min-height:112px;
+    grid-template-columns:auto 1fr auto;
+    grid-template-rows:60px 52px;
+    padding:0 16px;
+    background:rgba(247,247,251,.98);
+  }
+  .purple-shell .topRight { grid-column:3; grid-row:1; }
+  .purple-shell .appNav {
+    position:static;
+    grid-column:1 / 4;
+    grid-row:2;
+    justify-self:stretch;
+    width:100%;
+    padding:3px 0 5px;
+    border:0;
+    border-top:1px solid var(--nikigo-border);
+    border-radius:0;
+    background:transparent;
+    box-shadow:none;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
+  .purple-shell .appNav button {
+    min-height:44px;
+    display:flex;
+    font-size:12px;
+  }
+  .purple-shell .appNav button span { display:none; }
+  .purple-shell .dashboard,
+  .purple-shell .mainPage { padding:20px 18px 48px; }
+  .purple-shell .dashHero {
+    grid-template-columns:1fr;
+    gap:16px;
+    padding:18px;
+    border-radius:16px;
+  }
+  .purple-shell .pathBadge {
+    grid-template-columns:auto minmax(0,1fr);
+    width:100%;
+    gap:10px 12px;
+    margin-top:14px;
+    padding:10px;
+  }
+  .purple-shell .pathBadge > span { min-width:0; }
+  .purple-shell .pathBadge button {
+    grid-column:1 / -1;
+    width:100%;
+  }
+  .purple-shell .heroContinue { padding:15px; }
+  .purple-shell .heroContinue .mission { grid-template-columns:1fr; }
+  .purple-shell .heroContinue .mission .primary { width:100%; }
+  .purple-shell .metrics { margin-block:12px; }
+  .purple-shell .dashGrid,
+  .purple-shell .practiceGrid { grid-template-columns:1fr; }
+  .purple-shell .taxonomyChapters { padding-inline:12px; }
+  .purple-shell .taxonomyStage > summary,
+  .purple-shell .taxonomyChapter > summary {
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    align-items:center;
+  }
+  .purple-shell .taxonomyStage > summary > span:first-child,
+  .purple-shell .taxonomyChapter > summary > span:first-child { grid-column:1 / -1; }
+  .purple-shell .taxonomyStage > summary > b,
+  .purple-shell .taxonomyChapter > summary > .moduleStatus { grid-column:1; grid-row:2; }
+  .purple-shell .taxonomyStage > summary::after,
+  .purple-shell .taxonomyChapter > summary::after { grid-column:2; grid-row:2; }
+  .purple-shell .taxonomyChapter > summary { padding-inline:2px; }
+  .purple-shell .moduleLessons { padding-inline:0; }
+  .purple-shell .moduleLessons .courseRow {
+    grid-template-columns:1fr;
+    gap:12px;
+    padding:15px 2px;
+  }
+  .purple-shell .moduleLessons .courseRow .courseAction,
+  .purple-shell .moduleLessons .courseRow > button { width:100%; }
+  .purple-shell .courseMeta { gap-block:6px; }
+  .purple-shell .progressGrid { grid-template-columns:1fr 1fr; }
+  .purple-shell .progressTile:first-child { grid-column:1 / -1; border-bottom:1px solid var(--nikigo-border); }
+  .purple-shell .progressTile:nth-child(2) { border-left:0; }
+  .purple-shell .progressStage > header { align-items:flex-start; flex-direction:column; gap:3px; }
+  .purple-shell .profileSummary { grid-template-columns:1fr 1fr; }
+  .purple-shell .profileSummary div { border-bottom:1px solid var(--nikigo-border); }
+  .purple-shell .profileSummary div:nth-child(odd) { border-left:0; }
+  .purple-shell .profileSummary div:last-child { border-bottom:0; }
+}
+
+@media (max-width:430px) {
+  .purple-shell .top { padding-inline:14px; }
+  .purple-shell .languagePicker { width:112px; }
+  .purple-shell .dashboard,
+  .purple-shell .mainPage { padding-inline:16px; }
+  .purple-shell .continueHeading { align-items:flex-start; }
+  .purple-shell .missionKorean { font-size:24px!important; }
+  .purple-shell .courseMeta span { font-size:12px; }
+}

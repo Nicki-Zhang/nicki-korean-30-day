@@ -1,0 +1,130 @@
+- generic [active] [ref=f138e1] [box=0,0,1440,1956]:
+  - generic [ref=f138e2] [box=0,0,1440,1956]:
+    - banner [ref=f138e3] [box=80,0,1280,64]:
+      - button "返回学习首页" [ref=f138e4] [cursor=pointer] [box=104,10,91,44]: ✦ Nikigo
+      - generic [ref=f138e5] [box=1153,9,183,46]:
+        - combobox "Choose interface language" [ref=f138e7] [box=1166,10,117,44]:
+          - option "简体中文" [selected] [box=0,0,0,0]
+          - option "English" [box=0,0,0,0]
+          - option "Tiếng Việt" [box=0,0,0,0]
+          - option "日本語" [box=0,0,0,0]
+        - button "打开个人中心" [ref=f138e8] [cursor=pointer] [box=1292,10,44,44]: "N"
+      - navigation "Primary navigation" [ref=f138e9] [box=492,6,364,52]:
+        - button "首页" [ref=f138e10] [cursor=pointer] [box=496,10,68,44]
+        - button "学习" [ref=f138e12] [cursor=pointer] [box=568,10,68,44]
+        - button "练习" [ref=f138e14] [cursor=pointer] [box=640,10,68,44]
+        - button "进度" [ref=f138e16] [cursor=pointer] [box=712,10,68,44]
+        - button "我的" [ref=f138e18] [cursor=pointer] [box=784,10,68,44]
+    - main [ref=f138e20] [box=0,64,1440,1892]:
+      - text: − + − + + + + +
+      - generic [ref=f138e219] [box=96,64,1248,1892]:
+        - generic [ref=f138e221] [box=120,88,285,74]:
+          - heading "学习进度" [level=1] [ref=f138e222] [box=120,88,285,45]
+          - paragraph [ref=f138e223] [box=120,139,285,23]: 查看已完成课程、经验值与当前学习节奏。
+        - generic [ref=f138e224] [box=120,182,1200,147]:
+          - article [ref=f138e225] [box=121,183,399,145]:
+            - text: 已完成课程
+            - strong [ref=f138e226] [box=141,235,359,45]: "2"
+            - paragraph [ref=f138e227] [box=141,288,359,20]: 共 14 节已开放课程
+          - article [ref=f138e228] [box=520,183,399,145]:
+            - text: 累计 XP
+            - strong [ref=f138e229] [box=541,235,358,45]: "100"
+            - paragraph [ref=f138e230] [box=541,288,358,20]: 完成课程和复习可以获得 XP。
+          - article [ref=f138e231] [box=920,183,399,145]:
+            - text: 本周目标
+            - strong [ref=f138e232] [box=941,235,358,45]: 2 / 5
+            - paragraph [ref=f138e233] [box=941,288,358,20]: 保持适合自己的节奏，不需要一次学太久。
+        - article [ref=f138e234] [box=120,345,1200,1547]:
+          - heading "课程进度" [level=2] [ref=f138e236] [box=141,372,84,32]
+          - generic [ref=f138e237] [box=141,422,1158,1449]:
+            - generic [ref=f138e238] [box=141,422,1158,1053]:
+              - generic [ref=f138e239] [box=141,422,1158,30]:
+                - heading "阶段1 · 韩文基础" [level=2] [ref=f138e240] [box=141,422,149,30]
+                - generic [ref=f138e241] [box=1235,430,64,18]: 2/11课完成
+              - generic [ref=f138e242] [box=141,466,1158,276]:
+                - heading "韩文地图与基础元音" [level=3] [ref=f138e243] [box=141,466,1158,44]
+                - generic [ref=f138e244] [box=141,509,1158,83]:
+                  - generic [ref=f138e245] [box=141,521,1100,58]:
+                    - heading "0. 先认识韩文字母地图" [level=4] [ref=f138e246] [box=141,521,1100,21]
+                    - paragraph [ref=f138e247] [box=141,545,1100,18]: 已完成
+                  - generic [ref=f138e250] [box=1253,538,46,24]: 100%
+                - generic [ref=f138e251] [box=141,592,1158,83]:
+                  - generic [ref=f138e252] [box=141,604,1100,58]:
+                    - heading "1. 核心元音 ㅏㅓㅗㅜㅡㅣ" [level=4] [ref=f138e253] [box=141,604,1100,21]
+                    - paragraph [ref=f138e254] [box=141,628,1100,18]: 已完成
+                  - generic [ref=f138e257] [box=1253,621,46,24]: 100%
+                - generic [ref=f138e258] [box=141,675,1158,66]:
+                  - generic [ref=f138e259] [box=141,687,1121,42]:
+                    - heading "2. 其余基础元音和易混元音" [level=4] [ref=f138e260] [box=141,687,1121,21]
+                    - paragraph [ref=f138e261] [box=141,711,1121,18]: 尚未开始
+                  - generic [ref=f138e262] [box=1274,696,25,24]: 0%
+              - generic [ref=f138e263] [box=141,759,1158,327]:
+                - heading "辅音、音节块与复合元音" [level=3] [ref=f138e264] [box=141,759,1158,44]
+                - generic [ref=f138e265] [box=141,803,1158,83]:
+                  - generic [ref=f138e266] [box=141,815,1111,58]:
+                    - heading "3. 高频基础辅音：通过完整音节学习" [level=4] [ref=f138e267] [box=141,815,1111,21]
+                    - paragraph [ref=f138e268] [box=141,839,1111,18]: 进行中
+                  - generic [ref=f138e271] [box=1264,832,35,24]: 38%
+                - generic [ref=f138e272] [box=141,886,1158,67]:
+                  - generic [ref=f138e273] [box=141,898,1121,42]:
+                    - heading "4. 听懂普通音、送气音和紧音" [level=4] [ref=f138e274] [box=141,898,1121,21]
+                    - paragraph [ref=f138e275] [box=141,922,1121,18]: 尚未开始
+                  - generic [ref=f138e276] [box=1274,907,25,24]: 0%
+                - generic [ref=f138e277] [box=141,953,1158,67]:
+                  - generic [ref=f138e278] [box=141,965,1121,42]:
+                    - heading "5. 看懂韩语音节块" [level=4] [ref=f138e279] [box=141,965,1121,21]
+                    - paragraph [ref=f138e280] [box=141,989,1121,18]: 尚未开始
+                  - generic [ref=f138e281] [box=1274,974,25,24]: 0%
+                - generic [ref=f138e282] [box=141,1020,1158,66]:
+                  - generic [ref=f138e283] [box=141,1032,1121,42]:
+                    - heading "6. 复合元音" [level=4] [ref=f138e284] [box=141,1032,1121,21]
+                    - paragraph [ref=f138e285] [box=141,1056,1121,18]: 尚未开始
+                  - generic [ref=f138e286] [box=1274,1041,25,24]: 0%
+              - generic [ref=f138e287] [box=141,1104,1158,177]:
+                - heading "收音与常见音变" [level=3] [ref=f138e288] [box=141,1104,1158,44]
+                - generic [ref=f138e289] [box=141,1147,1158,67]:
+                  - generic [ref=f138e290] [box=141,1159,1121,42]:
+                    - heading "7. 四个基础收音 ㄴㅁㅇㄹ" [level=4] [ref=f138e291] [box=141,1159,1121,21]
+                    - paragraph [ref=f138e292] [box=141,1183,1121,18]: 尚未开始
+                  - generic [ref=f138e293] [box=1274,1168,25,24]: 0%
+                - generic [ref=f138e294] [box=141,1214,1158,66]:
+                  - generic [ref=f138e295] [box=141,1226,1121,42]:
+                    - heading "8. 七种代表收音和常见音变" [level=4] [ref=f138e296] [box=141,1226,1121,21]
+                    - paragraph [ref=f138e297] [box=141,1250,1121,18]: 尚未开始
+                  - generic [ref=f138e298] [box=1274,1235,25,24]: 0%
+              - generic [ref=f138e299] [box=141,1298,1158,177]:
+                - heading "综合应用与K0阶段挑战" [level=3] [ref=f138e300] [box=141,1298,1158,44]
+                - generic [ref=f138e301] [box=141,1342,1158,67]:
+                  - generic [ref=f138e302] [box=141,1354,1121,42]:
+                    - heading "9. 场景韩语：问候与介绍" [level=4] [ref=f138e303] [box=141,1354,1121,21]
+                    - paragraph [ref=f138e304] [box=141,1378,1121,18]: 尚未开始
+                  - generic [ref=f138e305] [box=1274,1363,25,24]: 0%
+                - generic [ref=f138e306] [box=141,1409,1158,66]:
+                  - generic [ref=f138e307] [box=141,1421,1121,42]:
+                    - heading "10. K0阶段复习挑战" [level=4] [ref=f138e308] [box=141,1421,1121,21]
+                    - paragraph [ref=f138e309] [box=141,1445,1121,18]: 尚未开始
+                  - generic [ref=f138e310] [box=1274,1430,25,24]: 0%
+            - generic [ref=f138e311] [box=141,1499,1158,372]:
+              - generic [ref=f138e312] [box=141,1523,1158,30]:
+                - heading "阶段2 · 基础沟通" [level=2] [ref=f138e313] [box=141,1523,149,30]
+                - generic [ref=f138e314] [box=1243,1531,56,18]: 0/3课完成
+              - generic [ref=f138e315] [box=141,1567,1158,177]:
+                - heading "姓名、身份与语言背景" [level=3] [ref=f138e316] [box=141,1567,1158,44]
+                - generic [ref=f138e317] [box=141,1610,1158,67]:
+                  - generic [ref=f138e318] [box=141,1622,1121,42]:
+                    - heading "11. 姓名与身份" [level=4] [ref=f138e319] [box=141,1622,1121,21]
+                    - paragraph [ref=f138e320] [box=141,1646,1121,18]: 尚未开始
+                  - generic [ref=f138e321] [box=1274,1631,25,24]: 0%
+                - generic [ref=f138e322] [box=141,1677,1158,66]:
+                  - generic [ref=f138e323] [box=141,1689,1121,42]:
+                    - heading "12. 国家与语言" [level=4] [ref=f138e324] [box=141,1689,1121,21]
+                    - paragraph [ref=f138e325] [box=141,1713,1121,18]: 尚未开始
+                  - generic [ref=f138e326] [box=1274,1698,25,24]: 0%
+              - generic [ref=f138e327] [box=141,1761,1158,110]:
+                - heading "数字与基础数量" [level=3] [ref=f138e328] [box=141,1761,1158,44]
+                - generic [ref=f138e329] [box=141,1805,1158,66]:
+                  - generic [ref=f138e330] [box=141,1817,1121,42]:
+                    - heading "13. 固有数词1～10与基础数量" [level=4] [ref=f138e331] [box=141,1817,1121,21]
+                    - paragraph [ref=f138e332] [box=141,1841,1121,18]: 尚未开始
+                  - generic [ref=f138e333] [box=1274,1826,25,24]: 0%
+  - status [box=702,1006,36,24]

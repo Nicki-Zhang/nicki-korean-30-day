@@ -1,0 +1,44 @@
+- generic [active] [ref=f138e1] [box=0,0,1440,1024]:
+  - generic [ref=f138e2] [box=0,0,1440,1024]:
+    - banner [ref=f138e3] [box=80,0,1280,64]:
+      - button "返回学习首页" [ref=f138e4] [cursor=pointer] [box=104,10,91,44]: ✦ Nikigo
+      - generic [ref=f138e5] [box=1153,9,183,46]:
+        - combobox "Choose interface language" [ref=f138e7] [box=1166,10,117,44]:
+          - option "简体中文" [selected] [box=0,0,0,0]
+          - option "English" [box=0,0,0,0]
+          - option "Tiếng Việt" [box=0,0,0,0]
+          - option "日本語" [box=0,0,0,0]
+        - button "打开个人中心" [ref=f138e8] [cursor=pointer] [box=1292,10,44,44]: "N"
+      - navigation "Primary navigation" [ref=f138e9] [box=492,6,364,52]:
+        - button "首页" [ref=f138e10] [cursor=pointer] [box=496,10,68,44]
+        - button "学习" [ref=f138e12] [cursor=pointer] [box=568,10,68,44]
+        - button "练习" [ref=f138e14] [cursor=pointer] [box=640,10,68,44]
+        - button "进度" [ref=f138e16] [cursor=pointer] [box=712,10,68,44]
+        - button "我的" [ref=f138e18] [cursor=pointer] [box=784,10,68,44]
+    - main [ref=f138e20] [box=0,64,1440,460]:
+      - text: − + − + + + + +
+      - generic [ref=f138e195] [box=96,64,1248,460]:
+        - generic [ref=f138e197] [box=120,88,345,74]:
+          - heading "练习" [level=1] [ref=f138e198] [box=120,88,345,45]
+          - paragraph [ref=f138e199] [box=120,139,345,23]: 处理到期复习和错题，也可以重新学习已完成课程。
+        - generic [ref=f138e200] [box=120,182,1200,278]:
+          - article [ref=f138e201] [box=120,182,367,278]:
+            - generic [ref=f138e202] [box=143,207,321,48]:
+              - generic [ref=f138e203] [box=143,222,52,20]: 到期复习
+              - strong [ref=f138e204] [box=443,207,21,48]: "0"
+            - heading "复习中心" [level=2] [ref=f138e205] [box=143,265,321,33]
+            - paragraph [ref=f138e206] [box=143,312,321,45]: 目前没有到期复习，仍可进入复习中心查看全部项目。
+            - button "打开复习中心" [ref=f138e207] [cursor=pointer] [box=143,383,321,54]
+          - article [ref=f138e208] [box=503,182,817,252]:
+            - heading "重新学习" [level=2] [ref=f138e210] [box=526,212,84,32]
+            - paragraph [ref=f138e211] [box=526,263,771,22]: 从已完成课程中选择一课重新练习，重复完成不会再次获得课程 XP。
+            - generic [ref=f138e212] [box=526,300,771,112]:
+              - link "1. 核心元音 ㅏㅓㅗㅜㅡㅣ 复习" [ref=f138e213] [cursor=pointer] [box=526,300,771,56]:
+                - /url: lesson-01.html?lang=zh
+                - generic [ref=f138e214] [box=526,316,168,24]: 1. 核心元音 ㅏㅓㅗㅜㅡㅣ
+                - generic [ref=f138e215] [box=1271,318,26,20]: 复习
+              - link "0. 先认识韩文字母地图 复习" [ref=f138e216] [cursor=pointer] [box=526,356,771,56]:
+                - /url: lesson-00.html?lang=zh
+                - generic [ref=f138e217] [box=526,372,161,24]: 0. 先认识韩文字母地图
+                - generic [ref=f138e218] [box=1271,374,26,20]: 复习
+  - status [box=702,1006,36,24]

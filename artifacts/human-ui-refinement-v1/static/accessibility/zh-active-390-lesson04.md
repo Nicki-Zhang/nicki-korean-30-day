@@ -1,0 +1,34 @@
+- generic [active] [ref=f131e1] [box=0,0,390,844]:
+  - banner [ref=f131e2] [box=0,0,390,60]:
+    - button "返回学习主页" [ref=f131e3] [cursor=pointer] [box=14,8,97,44]: ✦ Nikigo
+    - generic [ref=f131e4] [box=199,7,177,46]:
+      - generic [ref=f131e5] [box=199,7,124,46]:
+        - text: 🌐
+        - combobox "Interface language" [ref=f131e6] [box=206,8,116,44]:
+          - option "简体中文" [selected] [box=0,0,0,0]
+          - option "English" [box=0,0,0,0]
+          - option "Tiếng Việt" [box=0,0,0,0]
+          - option "日本語" [box=0,0,0,0]
+      - button "返回学习主页" [ref=f131e7] [cursor=pointer] [box=332,8,44,44]
+  - generic [ref=f131e10] [box=0,70,390,32]:
+    - generic [ref=f131e11] [box=14,70,362,16]:
+      - generic [ref=f131e12] [box=14,70,44,16]: 课程进度
+      - generic [ref=f131e13] [box=345,70,31,16]: 1 / 15
+    - progressbar [ref=f131e14] [box=14,94,362,8]
+  - main [ref=f131e15] [box=0,116,390,629]:
+    - generic [ref=f131e16] [box=14,116,362,629]:
+      - generic [ref=f131e17] [box=33,145,91,16]: K0 · 10分钟
+      - heading "听懂普通音、送气音和紧音" [level=1] [ref=f131e18] [box=33,181,324,69]
+      - paragraph [ref=f131e19] [box=33,268,324,87]: 通过完整韩语音节，初步听出气流和紧张度的差别。完成一次练习只是建立起点，不代表已经完全掌握。
+      - generic [ref=f131e20] [box=33,378,324,268]:
+        - generic [ref=f131e21] [box=33,379,324,89]:
+          - generic [ref=f131e22] [box=33,393,324,30]: 👂 听完整音节
+          - text: 不播放孤立辅音裸音。
+        - generic [ref=f131e23] [box=33,468,324,89]:
+          - generic [ref=f131e24] [box=33,482,324,30]: 💨 比较气流
+          - text: 送气音有更明显的气流。
+        - generic [ref=f131e25] [box=33,557,324,89]:
+          - generic [ref=f131e26] [box=33,571,324,30]: ⚡ 感受紧张度
+          - text: 紧音先收紧，气流较少。
+      - button "继续 →" [ref=f131e28] [cursor=pointer] [box=45,670,312,49]
+  - status [box=178,817,34,24]
