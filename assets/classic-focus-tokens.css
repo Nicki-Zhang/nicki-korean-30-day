@@ -1,0 +1,35 @@
+:root {
+  --classic-brand: #6d4aff;
+  --classic-brand-deep: #5638d4;
+  --classic-brand-soft: #f4f0ff;
+  --classic-page: #fbfaff;
+  --classic-foundation-page: #f7f7fb;
+  --classic-surface: #fff;
+  --classic-ink: #211b3b;
+  --classic-muted: #746e8c;
+  --classic-line: #e7e2f2;
+  --classic-success: #237c58;
+  --classic-success-soft: #e9f7f0;
+  --classic-error: #a83b50;
+  --classic-error-soft: #fff0f2;
+  --classic-warning: #735711;
+  --classic-warning-soft: #fff8dd;
+  --classic-shadow: 0 28px 65px rgba(68, 56, 118, .08);
+  --classic-foundation-shadow: 0 10px 26px rgba(70, 61, 132, .06);
+  --classic-fast: 140ms;
+  --classic-base: 240ms;
+  --classic-ease: cubic-bezier(.2, .8, .2, 1);
+
+  /* Compatibility aliases used by the existing Lesson 7 content adapter. */
+  --p: var(--classic-brand);
+  --p2: #9c83ff;
+  --d: #30285e;
+  --ink: var(--classic-ink);
+  --muted: var(--classic-muted);
+  --line: var(--classic-line);
+  --lav: var(--classic-brand-soft);
+  --lime: #dff6aa;
+  --green: #2e9b68;
+  --red: #d75566;
+  --bg: var(--classic-page);
+}

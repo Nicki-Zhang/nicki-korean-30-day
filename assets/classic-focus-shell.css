@@ -1,0 +1,335 @@
+* { box-sizing: border-box; }
+
+html {
+  min-width: 320px;
+  background: var(--classic-page);
+  color: var(--classic-ink);
+  font-family: Inter, "Noto Sans KR", "Noto Sans SC", system-ui, sans-serif;
+}
+
+body.classicFocusShell {
+  min-height: 100dvh;
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--classic-page);
+  color: var(--classic-ink);
+}
+
+body.classicFocusFoundation { background: var(--classic-foundation-page); }
+
+.classicFocusShell button,
+.classicFocusShell select,
+.classicFocusShell a {
+  font: inherit;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(109, 74, 255, .14);
+}
+
+.classicFocusShell button { cursor: pointer; }
+.classicFocusShell button:disabled { cursor: not-allowed; opacity: .48; }
+
+.classicFocusShell button:focus-visible,
+.classicFocusShell a:focus-visible,
+.classicFocusShell select:focus-visible,
+.classicFocusShell [tabindex]:not([tabindex="-1"]):focus-visible {
+  outline: 3px solid rgba(109, 74, 255, .48);
+  outline-offset: 3px;
+}
+
+.classicFocusShell .srOnly {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.classicFocusShell .skipLink {
+  position: fixed;
+  z-index: 50;
+  top: 8px;
+  left: 8px;
+  min-height: 44px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  background: var(--classic-surface);
+  color: var(--classic-ink);
+  transform: translateY(-140%);
+  transition: transform var(--classic-fast) var(--classic-ease);
+}
+
+.classicFocusShell .skipLink:focus { transform: none; }
+
+.classicFocusShell .top {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1100px;
+  height: var(--classic-header-height, 72px);
+  margin: 0 auto;
+  padding: 0 22px;
+  gap: 18px;
+}
+
+.classicFocusShell .logo {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--classic-brand);
+  font-size: 23px;
+  font-weight: 950;
+  letter-spacing: -.04em;
+  white-space: nowrap;
+}
+
+.classicFocusShell .logo b { color: #f0b83e; font-size: 13px; }
+
+.classicFocusShell .lessonName {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--classic-muted);
+  font-size: 13px;
+  font-weight: 750;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.classicFocusShell .topActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.classicFocusShell .languagePicker {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.classicFocusShell .languagePicker select {
+  min-height: 44px;
+  padding: 8px 30px 8px 10px;
+  border: 1px solid var(--classic-line);
+  border-radius: 13px;
+  background: var(--classic-surface);
+  color: var(--classic-ink);
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.classicFocusShell .exitButton,
+.classicFocusShell .homeButton {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--classic-line);
+  border-radius: var(--classic-exit-radius, 50%);
+  background: var(--classic-surface);
+  color: var(--classic-brand-deep);
+}
+
+.classicFocusShell .homeButton svg { width: 21px; height: 21px; fill: currentColor; }
+
+.classicFocusShell .logo:hover,
+.classicFocusShell .exitButton:hover,
+.classicFocusShell .homeButton:hover,
+.classicFocusShell .languagePicker select:hover {
+  background: var(--classic-brand-soft);
+}
+
+.classicFocusShell .progressWrap {
+  width: 100%;
+  max-width: 930px;
+  height: 31px;
+  margin: var(--classic-progress-margin, 4px) auto 0;
+  padding: 0 22px;
+}
+
+.classicFocusShell .progressMeta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  color: var(--classic-muted);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.classicFocusShell .track {
+  width: 100%;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #e9e4f4;
+}
+
+.classicFocusShell .track i {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--classic-brand);
+  transition: width var(--classic-base) var(--classic-ease);
+}
+
+.classicFocusShell .stage {
+  width: 100%;
+  max-width: 1040px;
+  margin: var(--classic-stage-margin-top, 24px) auto var(--classic-stage-margin-bottom, 60px);
+  padding: 0 22px;
+}
+
+.classicFocusShell .classicFocusCard {
+  min-height: var(--classic-card-min-height, 520px);
+  padding: var(--classic-card-padding, 40px);
+  border: 1px solid var(--classic-line);
+  border-radius: var(--classic-card-radius, 30px);
+  background: var(--classic-surface);
+  box-shadow: var(--classic-card-shadow, var(--classic-shadow));
+  scroll-margin-top: 16px;
+}
+
+.classicFocusShell .classicFocusCard:focus-visible {
+  outline: 3px solid rgba(109, 74, 255, .48);
+  outline-offset: 4px;
+}
+
+.classicFocusShell .classicFocusStatus { border-radius: 14px; }
+
+.classicFocusShell .classicFocusFeedback {
+  border-radius: 14px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.classicFocusShell .classicFocusFeedback {
+  max-width: 760px;
+  margin-top: 14px;
+  padding: 12px 14px;
+  animation: classic-feedback-in var(--classic-base) var(--classic-ease) 1;
+}
+
+.classicFocusShell .classicFocusFeedback strong { display: block; margin-bottom: 3px; }
+.classicFocusShell .classicFocusFeedback.isCorrect,
+.classicFocusShell .classicFocusFeedback.good { background: var(--classic-success-soft); color: #165b40; }
+.classicFocusShell .classicFocusFeedback.isWrong,
+.classicFocusShell .classicFocusFeedback.try { background: var(--classic-error-soft); color: #7f2e3d; }
+
+.classicFocusShell .classicFocusActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.classicFocusShell .classicFocusActions button {
+  min-height: 49px;
+  padding: 13px 20px;
+  border-radius: 15px;
+  font-size: 16px;
+  font-weight: 850;
+}
+
+.classicFocusFoundation {
+  --classic-header-height: 64px;
+  --classic-progress-margin: 10px;
+  --classic-stage-margin-top: 20px;
+  --classic-stage-margin-bottom: 40px;
+  --classic-card-min-height: 0;
+  --classic-card-padding: clamp(24px, 4vw, 38px);
+  --classic-card-radius: 18px;
+  --classic-card-shadow: var(--classic-foundation-shadow);
+  --classic-exit-radius: 12px;
+}
+
+.classicFocusFoundation .languagePicker select { min-width: 116px; }
+
+@keyframes classic-feedback-in {
+  from { opacity: 0; transform: translateY(6px); }
+}
+
+@media (max-width: 767px) {
+  .classicFocusShell .top {
+    height: var(--classic-mobile-header-height, 64px);
+    padding: 0 14px;
+    gap: 10px;
+  }
+
+  .classicFocusShell .logo { font-size: 20px; }
+  .classicFocusShell .lessonName { display: none; }
+  .classicFocusShell .languagePicker select { max-width: 128px; }
+  .classicFocusShell .progressWrap { padding: 0 14px; }
+  .classicFocusShell .stage {
+    margin-top: var(--classic-mobile-stage-margin-top, 17px);
+    padding: 0 14px;
+  }
+
+  .classicFocusShell .classicFocusCard {
+    min-height: 0;
+    padding: var(--classic-mobile-card-padding, 24px 18px 27px);
+    border-radius: var(--classic-mobile-card-radius, 23px);
+  }
+
+  .classicFocusShell .classicFocusActions {
+    grid-template-columns: 1fr;
+    min-height: 109px;
+  }
+
+  .classicFocusShell .classicFocusActions .primaryAction,
+  .classicFocusShell .classicFocusActions .primary {
+    grid-row: 1;
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .classicFocusShell .classicFocusActions .backAction,
+  .classicFocusShell .classicFocusActions .ghost {
+    grid-row: 2;
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .classicFocusFoundation {
+    --classic-mobile-header-height: 60px;
+    --classic-mobile-stage-margin-top: 14px;
+    --classic-mobile-card-padding: 24px 18px;
+    --classic-mobile-card-radius: 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .classicFocusShell .top,
+  .classicFocusShell .progressWrap,
+  .classicFocusShell .stage {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .classicFocusShell .classicFocusCard {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .classicFocusShell .languagePicker select { max-width: 112px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .classicFocusShell *,
+  .classicFocusShell *::before,
+  .classicFocusShell *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

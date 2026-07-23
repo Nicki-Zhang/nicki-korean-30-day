@@ -66,7 +66,7 @@
     const audios=[...(step.audios||[]),...(step.audio?[step.audio]:[])];
     if(!audios.length)return'';
     const playable=audios.map(audio=>({audio,result:global.NikigoAudio?.resolve?.(audio.text,audio.audioType,audio.lessonId)})).filter(item=>item.result?.playable&&item.result.path);
-    if(!playable.length)return `<div class="audioReadiness" role="status"><strong>${escape(ui('audioPending'))}</strong><span>${escape(ui('audioCopy'))}</span></div>`;
+    if(!playable.length)return `<div class="audioReadiness classicFocusStatus" role="status"><strong>${escape(ui('audioPending'))}</strong><span>${escape(ui('audioCopy'))}</span></div>`;
     return `<div class="audioRow">${playable.map(({audio,result},index)=>`<button class="audioButton" type="button" data-action="audio" data-audio="${index}" data-src="${escape(result.path)}">${escape(tr(audio.label)||ui('audioPending'))}</button>`).join('')}</div>`;
   }
   function renderIntro(step){return `${header(step)}<ul class="introGoals">${step.items.map(item=>`<li><strong>${escape(tr(item.title))}</strong><span>${escape(tr(item.text))}</span></li>`).join('')}</ul>`;}
@@ -79,33 +79,59 @@
     }
     return `${header(step)}${step.items?.length?`<ul class="conceptList">${step.items.map(item=>`<li><strong>${escape(tr(item.title))}</strong><span class="koreanExample" lang="ko">${escape(item.korean||tr(item.text))}</span>${item.detail?`<span>${escape(tr(item.detail))}</span>`:''}</li>`).join('')}</ul>`:''}`;
   }
-  function feedback(step,answer){return `<section class="feedback ${answer.correct?'isCorrect':'isWrong'}" role="${answer.correct?'status':'alert'}"><strong>${escape(answer.correct?ui('correct'):ui('wrong'))}</strong><span>${escape(answer.correct?tr(step.explanation):tr(step.lead))}</span></section>`;}
+  function feedback(step,answer){return `<section class="feedback classicFocusFeedback ${answer.correct?'isCorrect':'isWrong'}" role="${answer.correct?'status':'alert'}"><strong>${escape(answer.correct?ui('correct'):ui('wrong'))}</strong><span>${escape(answer.correct?tr(step.explanation):tr(step.lead))}</span></section>`;}
   function renderChoice(step){const answer=session.answers[step.id];const context=step.context?.length?`<div class="dialogue">${step.context.map(line=>`<div class="bubble"><span class="speaker">${escape(ui('partner'))}</span><span class="korean" lang="ko">${escape(line.korean)}</span></div>`).join('')}</div>`:'';return `${header(step)}${context}${renderAudios(step)}<p class="neutralHint">${escape(ui('choose'))}</p><div class="choiceGrid" role="group" aria-label="${escape(tr(step.title))}">${step.options.map(option=>{const chosen=answer?.selected===option.id;const className=chosen?(answer.correct?'isCorrect':'isWrong'):'';return `<button class="choiceButton ${className}" type="button" data-action="answer" data-value="${escape(option.id)}" ${answer?'disabled':''}>${option.korean?`<span class="korean" lang="ko">${escape(option.korean)}</span>`:escape(tr(option.label))}</button>`;}).join('')}</div>${answer?feedback(step,answer):''}`;}
-  function renderMatch(step){const state=session.match[step.id]||{left:null,done:[],error:false};const done=new Set(state.done||[]);const answer=session.answers[step.id];return `${header(step)}<p class="neutralHint">${escape(ui('matchHint'))}</p><div class="matchGrid" role="group" aria-label="${escape(tr(step.title))}"><div class="matchColumn">${step.pairs.map(pair=>`<button class="matchButton ${state.left===pair.id?'isSelected':''} ${done.has(pair.id)?'isDone':''}" type="button" data-action="match-left" data-value="${pair.id}" ${done.has(pair.id)?'disabled':''}>${escape(pair.leftKorean)}</button>`).join('')}</div><div class="matchColumn">${[...step.pairs].reverse().map(pair=>`<button class="matchButton ${done.has(pair.id)?'isDone':''}" type="button" data-action="match-right" data-value="${pair.id}" ${done.has(pair.id)?'disabled':''}>${escape(tr(pair.right))}</button>`).join('')}</div></div>${state.error?`<section class="feedback isWrong" role="alert"><strong>${escape(ui('wrong'))}</strong><span>${escape(tr(step.retryPrompt||step.prompt||step.lead))}</span></section>`:''}${answer?feedback(step,answer):''}`;}
+  function renderMatch(step){const state=session.match[step.id]||{left:null,done:[],error:false};const done=new Set(state.done||[]);const answer=session.answers[step.id];return `${header(step)}<p class="neutralHint">${escape(ui('matchHint'))}</p><div class="matchGrid" role="group" aria-label="${escape(tr(step.title))}"><div class="matchColumn">${step.pairs.map(pair=>`<button class="matchButton ${state.left===pair.id?'isSelected':''} ${done.has(pair.id)?'isDone':''}" type="button" data-action="match-left" data-value="${pair.id}" ${done.has(pair.id)?'disabled':''}>${escape(pair.leftKorean)}</button>`).join('')}</div><div class="matchColumn">${[...step.pairs].reverse().map(pair=>`<button class="matchButton ${done.has(pair.id)?'isDone':''}" type="button" data-action="match-right" data-value="${pair.id}" ${done.has(pair.id)?'disabled':''}>${escape(tr(pair.right))}</button>`).join('')}</div></div>${state.error?`<section class="feedback classicFocusFeedback isWrong" role="alert"><strong>${escape(ui('wrong'))}</strong><span>${escape(tr(step.retryPrompt||step.prompt||step.lead))}</span></section>`:''}${answer?feedback(step,answer):''}`;}
   function renderBuild(step){const all=entries(step),state=session.build[step.id]||{order:[],selected:null},order=state.order||[],answer=session.answers[step.id],placed=order.map(key=>all.find(item=>item.key===key)).filter(Boolean),empty=Math.max(0,step.groups.length-placed.length);return `${header(step)}<div class="buildArea"><section class="answerZone ${answer?.correct?'isCorrect':''}" aria-label="${escape(ui('answerZone'))}"><div class="answerLabel"><span>${escape(ui('answerZone'))}</span><span>${placed.length}/${step.groups.length}</span></div><div class="answerSlots">${placed.map(item=>`<button class="placedToken" type="button" data-action="select-placed" data-value="${item.key}" aria-pressed="${state.selected===item.key}">${escape(item.korean)}</button>`).join('')}${Array.from({length:empty},()=>`<span class="emptySlot">${escape(ui('empty'))}</span>`).join('')}</div></section>${answer?feedback(step,answer):''}${answer?.correct?'':`<div class="buildControls"><button type="button" data-action="undo" ${order.length?'':'disabled'}>${escape(ui('undo'))}</button><button type="button" data-action="move-left" ${state.selected?'':'disabled'}>${escape(ui('moveLeft'))}</button><button type="button" data-action="move-right" ${state.selected?'':'disabled'}>${escape(ui('moveRight'))}</button></div><div><span class="bankLabel">${escape(ui('available'))}</span><div class="tokenBank">${all.map(item=>`<button class="tokenButton" type="button" data-action="add-token" data-value="${item.key}" ${order.includes(item.key)||order.length>=step.groups.length?'disabled':''}>${escape(item.korean)}</button>`).join('')}</div></div><button class="checkAction" type="button" data-action="check-build" ${order.length===step.groups.length?'':'disabled'}>${escape(ui('check'))}</button>`}</div>`;}
   function completeLesson(){if(session.completed)return Boolean(session.completionFirst);const before=global.NikigoState?.get?.()||{};const first=!before.completedLessons?.includes(config.id);global.NikigoState?.update?.(completionPatch,`${config.id}:complete`);session.completed=true;session.completionFirst=first;global.localStorage.setItem(SESSION_KEY,JSON.stringify(session));return first;}
-  function renderComplete(step){const first=completeLesson();return `<div class="completeView"><p class="eyebrow">${escape(ui('summary'))}</p><h1>${escape(tr(step.title))}</h1><p class="lead">${escape(tr(step.lead))}</p><p class="completePhrase" lang="ko">저는 하늘이에요.</p><ul class="masteryList"><li><strong lang="ko">이름이 뭐예요?</strong></li><li><strong lang="ko">이에요 / 예요</strong></li><li><strong lang="ko">만나서 반가워요.</strong></li></ul><div class="completionMeta"><strong>${escape(first?ui('xpFirst'):ui('xpRepeat'))}</strong><span>${escape(ui('saved'))}</span></div><nav class="lessonFoot completeActions" aria-label="${escape(ui('navigation'))}"><button class="primaryAction" type="button" data-action="next-lesson">${escape(ui('nextLesson'))}</button><button class="secondaryAction" type="button" data-action="review">${escape(ui('review'))}</button><button class="textAction" type="button" data-action="home">${escape(ui('courses'))}</button></nav></div>`;}
+  function renderComplete(step){const first=completeLesson();return `<div class="completeView"><p class="eyebrow">${escape(ui('summary'))}</p><h1>${escape(tr(step.title))}</h1><p class="lead">${escape(tr(step.lead))}</p><p class="completePhrase" lang="ko">저는 하늘이에요.</p><ul class="masteryList"><li><strong lang="ko">이름이 뭐예요?</strong></li><li><strong lang="ko">이에요 / 예요</strong></li><li><strong lang="ko">만나서 반가워요.</strong></li></ul><div class="completionMeta"><strong>${escape(first?ui('xpFirst'):ui('xpRepeat'))}</strong><span>${escape(ui('saved'))}</span></div><nav class="lessonFoot classicFocusActions completeActions" aria-label="${escape(ui('navigation'))}"><button class="primaryAction" type="button" data-action="next-lesson">${escape(ui('nextLesson'))}</button><button class="secondaryAction" type="button" data-action="review">${escape(ui('review'))}</button><button class="textAction" type="button" data-action="home">${escape(ui('courses'))}</button></nav></div>`;}
   function renderBody(step){if(step.type==='intro')return renderIntro(step);if(step.type==='concept'&&step.dialogue)return renderDialogue(step);if(step.type==='concept')return renderConcept(step);if(['choice','scenario'].includes(step.type))return renderChoice(step);if(step.type==='match')return renderMatch(step);if(step.type==='build')return renderBuild(step);return renderComplete(step);}
-  function renderFoot(step){if(step.type==='complete')return'';const done=stepDone(step),answer=session.answers[step.id];const retry=answer&&!answer.correct;const label=retry?ui('retry'):session.step===0?ui('start'):ui('continue');return `<nav class="lessonFoot" aria-label="${escape(ui('navigation'))}"><button class="backAction" type="button" data-action="back" ${session.step===0||session.retryMode?'disabled':''}>${escape(ui('back'))}</button><button class="primaryAction" type="button" data-action="${retry?'reset-answer':'next'}" ${done||retry?'':'disabled'}>${escape(label)}</button></nav>`;}
+  function renderFoot(step){if(step.type==='complete')return'';const done=stepDone(step),answer=session.answers[step.id];const retry=answer&&!answer.correct;const label=retry?ui('retry'):session.step===0?ui('start'):ui('continue');return `<nav class="lessonFoot classicFocusActions" aria-label="${escape(ui('navigation'))}"><button class="backAction" type="button" data-action="back" ${session.step===0||session.retryMode?'disabled':''}>${escape(ui('back'))}</button><button class="primaryAction" type="button" data-action="${retry?'reset-answer':'next'}" ${done||retry?'':'disabled'}>${escape(label)}</button></nav>`;}
+  function contentTypeFor(step){
+    if(session.retryMode)return'retry';
+    if(step.type==='intro')return'intro';
+    if(step.type==='concept'&&step.dialogue)return'dialogue';
+    if(step.type==='concept')return'explanation';
+    if(['choice','scenario'].includes(step.type))return'choice';
+    if(step.type==='match')return'matching';
+    if(step.type==='build')return'builder';
+    return'completion';
+  }
+  function audioAvailabilityFor(step){
+    const audios=[...(step.audios||[]),...(step.audio?[step.audio]:[])];
+    if(!audios.length)return'none';
+    const playable=audios.filter(audio=>global.NikigoAudio?.resolve?.(audio.text,audio.audioType,audio.lessonId)?.playable);
+    if(!playable.length)return'pending';
+    return playable.length===audios.length?'approved':'mixed';
+  }
   function render(){
     const step=current();
-    document.documentElement.lang=language==='zh'?'zh-CN':language;
-    languageSelect.value=language;
-    document.getElementById('skipLink').textContent=ui('skip');
-    document.getElementById('courseNavigation').setAttribute('aria-label',ui('navigation'));
-    document.getElementById('languageLabel').textContent=ui('language');
-    document.getElementById('lessonName').textContent=tr(config.name);
-    document.getElementById('progressLabel').textContent=ui('progress');
-    document.getElementById('progressCount').textContent=`${session.step+1} / ${config.steps.length}`;
     const percent=Math.round(session.step/(config.steps.length-1)*100);
-    const track=document.getElementById('progressTrack');track.setAttribute('aria-valuenow',String(percent));track.querySelector('i').style.width=`${percent}%`;
-    document.getElementById('homeLogo').setAttribute('aria-label',ui('leave'));
-    document.getElementById('homeButton').setAttribute('aria-label',ui('exit'));
+    shell.update({
+      lessonId:config.id,
+      currentStep:session.step+1,
+      totalSteps:config.steps.length,
+      language,
+      title:tr(config.name),
+      stepLabel:ui('progress'),
+      progress:percent,
+      canGoPrevious:session.step>0&&!session.retryMode,
+      canGoNext:stepDone(step),
+      audioAvailability:audioAvailabilityFor(step),
+      contentType:contentTypeFor(step),
+      navigationLabel:ui('navigation'),
+      languageLabel:ui('language'),
+      brandActionLabel:ui('leave'),
+      exitActionLabel:ui('exit'),
+      skipLabel:ui('skip')
+    });
     document.getElementById('exitDialogTitle').textContent=ui('exitTitle');
     document.getElementById('exitDialogCopy').textContent=ui('exitCopy');
     document.getElementById('exitCancelButton').textContent=ui('stay');
     document.getElementById('exitConfirmButton').textContent=ui('leave');
-    const retry=session.retryMode?`<div class="retryBanner"><strong>${escape(ui('retryMode'))}</strong><span>${escape(ui('remaining',{count:session.mistakes.length}))}</span></div>`:'';
+    const currentAnswer=session.answers[step.id];
+    document.getElementById('announcer').textContent=currentAnswer?(currentAnswer.correct?ui('correct'):ui('wrong')):'';
+    const retry=session.retryMode?`<div class="retryBanner classicFocusStatus"><strong>${escape(ui('retryMode'))}</strong><span>${escape(ui('remaining',{count:session.mistakes.length}))}</span></div>`:'';
     stage.innerHTML=`${retry}${renderBody(step)}${renderFoot(step)}`;
   }
 
@@ -140,9 +166,11 @@
   stage.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key))return;const button=event.target.closest('.choiceButton,.matchButton,.tokenButton,.conceptChunk,.placedToken');if(!button)return;const group=[...button.parentElement.querySelectorAll('button:not(:disabled)')],index=group.indexOf(button);if(index<0)return;event.preventDefault();const direction=['ArrowRight','ArrowDown'].includes(event.key)?1:-1;group[(index+direction+group.length)%group.length]?.focus();});
   function syncLanguageUrl(){const url=new URL(global.location.href);url.searchParams.set('lang',language);global.history.replaceState({nikigoStep:session.step},'',url);}
   function openExitDialog(){const dialog=document.getElementById('exitDialog');if(typeof dialog.showModal==='function')dialog.showModal();else if(global.confirm?.(ui('exitCopy')))global.location.href=learningPathUrl();}
-  languageSelect.addEventListener('change',event=>{language=LANGUAGES.includes(event.target.value)?event.target.value:'en';save();syncLanguageUrl();render();});
-  document.getElementById('homeButton').addEventListener('click',openExitDialog);
-  document.getElementById('homeLogo').addEventListener('click',openExitDialog);
+  const shell=global.NikigoClassicFocusShell.mount({
+    onLanguageChange(value){language=LANGUAGES.includes(value)?value:'en';save();syncLanguageUrl();render();},
+    onBrandAction:openExitDialog,
+    onExitAction:openExitDialog
+  });
   document.getElementById('exitConfirmButton').addEventListener('click',event=>{event.preventDefault();global.location.href=learningPathUrl();});
   document.getElementById('exitCancelButton').addEventListener('click',()=>document.getElementById('exitDialog').close());
   global.addEventListener('keydown',event=>{if(event.key!=='Escape')return;const dialog=document.getElementById('exitDialog');if(dialog.open)dialog.close();else openExitDialog();});

@@ -40,7 +40,7 @@
 
   const UI = {
     zh: {
-      lessonName:'第7课 · 基础收音', progress:'课程进度', home:'返回课程主页', back:'返回', next:'继续', finish:'完成课程',
+      lessonName:'第7课 · 基础收音', progress:'课程进度', navigation:'课程导航', language:'界面语言', skip:'跳到当前学习任务', home:'返回课程主页', back:'返回', next:'继续', finish:'完成课程',
       previewTitle:'开发预览 · 音频尚未发布', previewLead:'课程正文和练习可以完成；待审核音频保持禁用，不使用设备语音或文字替代。',
       introTag:'K0 · 第7课', introTitle:'听懂并读出基础收音', introLead:'认识音节块底部的ㄴ、ㅁ、ㅇ、ㄹ，通过完整音节和真实词理解四种基础收尾。',
       goal1:'看懂位置', goal1d:'收音写在音节块底部。', goal2:'读完整词', goal2d:'用산、몸、공、물学习，不读孤立收音。', goal3:'收住结尾', goal3d:'不在n、m、ng、l后添加额外元音。',
@@ -64,7 +64,7 @@
       completeTag:'K0 · 第7课完成', completeTitle:'第7课完成！', completeLead:'你已经理解基础收音的位置，并能拼合、拆分和识别산、몸、공、물。', xpEarned:'本次获得 +50 XP', xpClaimed:'首次完成奖励已领取，本次不重复发放XP', progressSaved:'学习进度已保存', reviewLesson:'重新学习本课', returnCourses:'返回课程主页'
     },
     en: {
-      lessonName:'Lesson 7 · Basic Batchim', progress:'Lesson progress', home:'Return to Courses', back:'Back', next:'Continue', finish:'Complete lesson',
+      lessonName:'Lesson 7 · Basic Batchim', progress:'Lesson progress', navigation:'Course navigation', language:'Interface language', skip:'Skip to the current learning task', home:'Return to Courses', back:'Back', next:'Continue', finish:'Complete lesson',
       previewTitle:'Development preview · Audio not released', previewLead:'You can complete the lesson content and activities. Unreviewed audio stays disabled; no device voice or text substitute is used.',
       introTag:'K0 · LESSON 7', introTitle:'Understand and read basic final consonants', introLead:'Meet ㄴ, ㅁ, ㅇ and ㄹ at the bottom of a syllable block through full syllables and real words.',
       goal1:'See the position', goal1d:'A final sits at the bottom of the block.', goal2:'Read full words', goal2d:'Learn with 산, 몸, 공 and 물—not isolated finals.', goal3:'Close the ending', goal3d:'Do not add a vowel after n, m, ng or l.',
@@ -88,7 +88,7 @@
       completeTag:'K0 · LESSON 7 COMPLETE', completeTitle:'Lesson 7 complete!', completeLead:'You understand where basic finals sit and can build, split and recognize 산, 몸, 공 and 물.', xpEarned:'You earned +50 XP this time', xpClaimed:'The first-completion reward was already claimed; no extra XP this time', progressSaved:'Learning progress saved', reviewLesson:'Review this lesson', returnCourses:'Return to Courses'
     },
     vi: {
-      lessonName:'Bài 7 · Batchim cơ bản', progress:'Tiến độ bài học', home:'Về trang khóa học', back:'Quay lại', next:'Tiếp tục', finish:'Hoàn thành bài',
+      lessonName:'Bài 7 · Batchim cơ bản', progress:'Tiến độ bài học', navigation:'Điều hướng bài học', language:'Ngôn ngữ giao diện', skip:'Chuyển đến nhiệm vụ học hiện tại', home:'Về trang khóa học', back:'Quay lại', next:'Tiếp tục', finish:'Hoàn thành bài',
       previewTitle:'Bản xem trước · Âm thanh chưa phát hành', previewLead:'Bạn có thể hoàn thành nội dung và bài tập. Âm thanh chưa duyệt vẫn bị vô hiệu; không dùng giọng thiết bị hoặc văn bản thay thế.',
       introTag:'K0 · BÀI 7', introTitle:'Hiểu và đọc âm cuối cơ bản', introLead:'Học ㄴ, ㅁ, ㅇ, ㄹ ở đáy khối âm tiết qua âm tiết đầy đủ và từ thật.',
       goal1:'Nhìn vị trí', goal1d:'Âm cuối nằm ở đáy khối.', goal2:'Đọc từ đầy đủ', goal2d:'Học bằng 산, 몸, 공, 물, không đọc âm cuối rời.', goal3:'Khép âm cuối', goal3d:'Không thêm nguyên âm sau n, m, ng, l.',
@@ -112,7 +112,7 @@
       completeTag:'K0 · HOÀN THÀNH BÀI 7', completeTitle:'Đã hoàn thành Bài 7!', completeLead:'Bạn hiểu vị trí âm cuối và có thể ghép, tách, nhận biết 산, 몸, 공, 물.', xpEarned:'Lần này bạn nhận +50 XP', xpClaimed:'Đã nhận thưởng lần hoàn thành đầu; lần này không cộng thêm XP', progressSaved:'Đã lưu tiến độ', reviewLesson:'Ôn lại bài này', returnCourses:'Về trang khóa học'
     },
     ja: {
-      lessonName:'第7課 · 基本パッチム', progress:'レッスン進捗', home:'コース一覧へ', back:'戻る', next:'続ける', finish:'レッスン完了',
+      lessonName:'第7課 · 基本パッチム', progress:'レッスン進捗', navigation:'コースナビゲーション', language:'表示言語', skip:'現在の学習課題へ移動', home:'コース一覧へ', back:'戻る', next:'続ける', finish:'レッスン完了',
       previewTitle:'開発プレビュー · 音声未公開', previewLead:'本文と練習は完了できます。未審査音声は無効のままで、端末音声や文字による代用は行いません。',
       introTag:'K0 · 第7課', introTitle:'基本パッチムを理解して読む', introLead:'音節ブロック下部のㄴ・ㅁ・ㅇ・ㄹを、完全な音節と実際の単語で学びます。',
       goal1:'位置を見る', goal1d:'パッチムはブロック下部にあります。', goal2:'単語全体を読む', goal2d:'孤立音ではなく산・몸・공・물で学びます。', goal3:'語尾を閉じる', goal3d:'n・m・ng・lの後に母音を足しません。',
@@ -184,8 +184,8 @@
     const completed=new Set(source.completedLessons||[]), first=!completed.has(LESSON_ID); completed.add(LESSON_ID);
     return {...source,completedLessons:[...completed],lessonProgress:{...(source.lessonProgress||{}),[LESSON_ID]:100},xp:(Number(source.xp)||0)+(first?50:0)};
   }
-  function footer({disabled=false,label=text('next'),action='next'}={}) { return `<div class="foot"><button class="ghost" data-action="back">← ${text('back')}</button><button class="primary" data-action="${action}" ${disabled?'disabled':''}>${label} →</button></div>`; }
-  function releaseNotice() { return `<aside class="lesson07Notice" role="status"><strong>${text('previewTitle')}</strong>${text('previewLead')}</aside>`; }
+  function footer({disabled=false,label=text('next'),action='next'}={}) { return `<div class="foot classicFocusActions"><button class="ghost" data-action="back">← ${text('back')}</button><button class="primary" data-action="${action}" ${disabled?'disabled':''}>${label} →</button></div>`; }
+  function releaseNotice() { return `<aside class="lesson07Notice classicFocusStatus" role="status"><strong>${text('previewTitle')}</strong>${text('previewLead')}</aside>`; }
   function audioButton(word) { return `<button class="audioUnavailable" type="button" disabled aria-disabled="true" aria-label="${text('listenWord',{word})} · ${text('audioUnavailable')}">${text('listenWord',{word})} · ${text('audioUnavailable')}</button>`; }
   function baseSyllableAudioButton() { return BASE_SYLLABLE_AUDIO?.playable ? `<button class="secondary" type="button" data-action="base-audio" aria-label="${text('listenWord',{word:'바'})}">▶ ${text('listenWord',{word:'바'})}</button>` : audioButton('바'); }
   function playBaseSyllableAudio() {
@@ -205,17 +205,17 @@
   }
   function renderCompare() { const actions={san:'compareN',mom:'compareM',gong:'compareNg',mul:'compareL'}; return `<span class="eyebrow">${text('compareTag')}</span><h1>${text('compareTitle')}</h1><p class="lead">${text('compareLead')}</p><div class="contrastTable">${EXAMPLES.map(item=>`<article class="contrastRow"><b>${item.word}</b><span>${item.final} ${item.ending}</span><span>${text(actions[item.id])}</span></article>`).join('')}</div>${footer()}`; }
   function allCorrect(questions,key) { return questions.every(q=>session[key][q.id]?.correct); }
-  function renderPractice(questions,key,action,promptKey) { return questions.map(q=>{ const answer=session[key][q.id]; return `<article class="practiceCard"><div class="practicePrompt">${promptKey?text(q.prompt):q.prompt}</div><div class="practiceOptions">${q.options.map(value=>`<button class="${answer?(value===q.correct?'correct':value===answer.choice?'wrong':''):''}" data-action="${action}" data-question="${q.id}" data-value="${value}" ${answer?.correct?'disabled':''}>${value}${answer&&value===q.correct?' ✓':answer&&value===answer.choice?' ✕':''}</button>`).join('')}</div>${answer?`<div class="feedback ${answer.correct?'good':'try'}"><strong>${answer.correct?text('correct'):text('incorrect',{answer:q.correct})}</strong></div>`:''}</article>`; }).join(''); }
+  function renderPractice(questions,key,action,promptKey) { return questions.map(q=>{ const answer=session[key][q.id]; return `<article class="practiceCard"><div class="practicePrompt">${promptKey?text(q.prompt):q.prompt}</div><div class="practiceOptions">${q.options.map(value=>`<button class="${answer?(value===q.correct?'correct':value===answer.choice?'wrong':''):''}" data-action="${action}" data-question="${q.id}" data-value="${value}" ${answer?.correct?'disabled':''}>${value}${answer&&value===q.correct?' ✓':answer&&value===answer.choice?' ✕':''}</button>`).join('')}</div>${answer?`<div class="feedback classicFocusFeedback ${answer.correct?'good':'try'}"><strong>${answer.correct?text('correct'):text('incorrect',{answer:q.correct})}</strong></div>`:''}</article>`; }).join(''); }
   function renderSplit() { return `<span class="eyebrow">${text('splitTag')}</span><h1>${text('splitTitle')}</h1><p class="lead">${text('splitLead')}</p><div class="practiceGrid">${renderPractice(SPLIT_QUESTIONS,'splitAnswers','split-answer',false)}</div>${footer({disabled:!allCorrect(SPLIT_QUESTIONS,'splitAnswers')})}`; }
   function buildResult() { return BUILD_MAP[`${session.base}+${session.final}`]||''; }
   function renderBuild() { const result=buildResult(),done=session.built.length===4; return `<span class="eyebrow">${text('buildTag')}</span><h1>${text('buildTitle')}</h1><p class="lead">${text('buildLead')}</p><div class="builderPanel"><div class="builderGroup"><label>${text('base')}</label><div class="builderChoices">${['사','모','고','무'].map(v=>`<button class="builderChoice ${session.base===v?'on':''}" data-action="builder-pick" data-kind="base" data-value="${v}" aria-pressed="${session.base===v}">${v}</button>`).join('')}</div></div><b class="builderOperator">+</b><div class="builderGroup"><label>${text('chooseFinal')}</label><div class="builderChoices">${['ㄴ','ㅁ','ㅇ','ㄹ'].map(v=>`<button class="builderChoice ${session.final===v?'on':''}" data-action="builder-pick" data-kind="final" data-value="${v}" aria-pressed="${session.final===v}">${v}</button>`).join('')}</div></div><b class="builderOperator">=</b><button class="builderResult" data-action="build" ${result?'':'disabled'} aria-label="${result?text('confirmBuild',{word:result}):text('invalidBuild')}"><strong>${result||'—'}</strong><small>${result?text('confirmBuild',{word:result}):text('invalidBuild')}</small></button></div><div class="repeatActions">${baseSyllableAudioButton()}</div><b>${text('built')}：</b><div class="builtWords">${session.built.map(word=>`<span>${word}</span>`).join('')||'—'}</div>${done?'':`<div class="note">${text('buildNeed')}</div>`}${footer({disabled:!done})}`; }
   function renderRecognize() { return `<span class="eyebrow">${text('recognizeTag')}</span><h1>${text('recognizeTitle')}</h1><p class="lead">${text('recognizeLead')}</p><div class="practiceGrid">${renderPractice(RECOGNIZE_QUESTIONS,'recognizeAnswers','recognize-answer',true)}</div>${footer({disabled:!allCorrect(RECOGNIZE_QUESTIONS,'recognizeAnswers')})}`; }
   function labelOption(value) { return OPTION_KEYS[value]?text(OPTION_KEYS[value]):value; }
-  function feedback(question,answer) { return answer?`<div class="feedback ${answer.correct?'good':'try'}"><strong>${answer.correct?text('correct'):text('incorrect',{answer:labelOption(question.correct)})}</strong><span>${text('correctAnswer')}：${labelOption(question.correct)}</span><span>${text(question.explain)}</span></div>`:''; }
+  function feedback(question,answer) { return answer?`<div class="feedback classicFocusFeedback ${answer.correct?'good':'try'}"><strong>${answer.correct?text('correct'):text('incorrect',{answer:labelOption(question.correct)})}</strong><span>${text('correctAnswer')}：${labelOption(question.correct)}</span><span>${text(question.explain)}</span></div>`:''; }
   function renderChallenge() {
     if(!session.challengeStarted)return `<span class="eyebrow">${text('challengeTag')}</span><h1>${text('challengeTitle')}</h1><p class="lead">${text('challengeLead')}</p>${footer({label:text('startChallenge'),action:'start-challenge'})}`;
     const q=CHALLENGE[session.challengeIndex], answer=session.challengeAnswers[q.id], options=session.optionOrders[q.id];
-    return `<div class="challengeHeader"><span class="eyebrow">${text('question')} · ${session.challengeIndex+1}/5</span><div class="questionDots">${CHALLENGE.map((_,i)=>`<i class="${i===session.challengeIndex?'on':''}"></i>`).join('')}</div></div><h1 class="challengePrompt">${text(q.prompt)}</h1><div class="challengeOptions">${options.map(value=>`<button class="challengeOption ${answer?(value===q.correct?'correct':value===answer.choice?'wrong':''):''}" data-action="challenge-answer" data-question="${q.id}" data-value="${value}" ${answer?'disabled':''}>${labelOption(value)}${answer&&value===q.correct?' ✓':answer&&value===answer.choice?' ✕':''}</button>`).join('')}</div>${feedback(q,answer)}<div class="foot"><button class="ghost" data-action="${session.challengeIndex>0?'previous-question':'back'}">← ${session.challengeIndex>0?text('previousQuestion'):text('back')}</button><button class="primary" data-action="${session.challengeIndex<4?'next-question':'next'}" ${answer?'':'disabled'}>${session.challengeIndex<4?text('nextQuestion'):text('next')} →</button></div>`;
+    return `<div class="challengeHeader"><span class="eyebrow">${text('question')} · ${session.challengeIndex+1}/5</span><div class="questionDots">${CHALLENGE.map((_,i)=>`<i class="${i===session.challengeIndex?'on':''}"></i>`).join('')}</div></div><h1 class="challengePrompt">${text(q.prompt)}</h1><div class="challengeOptions">${options.map(value=>`<button class="challengeOption ${answer?(value===q.correct?'correct':value===answer.choice?'wrong':''):''}" data-action="challenge-answer" data-question="${q.id}" data-value="${value}" ${answer?'disabled':''}>${labelOption(value)}${answer&&value===q.correct?' ✓':answer&&value===answer.choice?' ✕':''}</button>`).join('')}</div>${feedback(q,answer)}<div class="foot classicFocusActions"><button class="ghost" data-action="${session.challengeIndex>0?'previous-question':'back'}">← ${session.challengeIndex>0?text('previousQuestion'):text('back')}</button><button class="primary" data-action="${session.challengeIndex<4?'next-question':'next'}" ${answer?'':'disabled'}>${session.challengeIndex<4?text('nextQuestion'):text('next')} →</button></div>`;
   }
   function renderRetry() {
     const id=session.mistakes[0];
@@ -233,17 +233,43 @@
   function allowed(screen) { if(screen==='split')return allCorrect(SPLIT_QUESTIONS,'splitAnswers'); if(screen==='build')return session.built.length===4; if(screen==='recognize')return allCorrect(RECOGNIZE_QUESTIONS,'recognizeAnswers'); if(screen==='retry')return session.mistakes.length===0; return true; }
   function answerQuestion(key,questions,id,choice) { const q=questions.find(item=>item.id===id); if(!q||session[key][id]?.correct)return; session[key][id]={choice,correct:choice===q.correct}; }
   function render() {
-    document.documentElement.lang=language==='zh'?'zh-CN':language; document.getElementById('language').value=language; document.getElementById('lessonName').textContent=text('lessonName'); document.getElementById('progressLabel').textContent=text('progress');
-    for(const id of ['homeButton','homeLogo']){document.getElementById(id).setAttribute('aria-label',text('home'));document.getElementById(id).title=text('home');}
-    const percent=Math.round(session.step/(SCREENS.length-1)*100); document.getElementById('progressCount').textContent=`${session.step+1} / ${SCREENS.length}`; document.getElementById('progressBar').style.width=`${percent}%`; document.getElementById('progressTrack').setAttribute('aria-valuenow',String(percent));
     const screen=SCREENS[session.step], renderers={intro:renderIntro,structure:renderStructure,san:()=>renderExample('san'),mom:()=>renderExample('mom'),gong:()=>renderExample('gong'),mul:()=>renderExample('mul'),compare:renderCompare,split:renderSplit,build:renderBuild,recognize:renderRecognize,challenge:renderChallenge,retry:renderRetry,complete:renderComplete};
+    const percent=Math.round(session.step/(SCREENS.length-1)*100);
+    shell.update({
+      lessonId:LESSON_ID,
+      currentStep:session.step+1,
+      totalSteps:SCREENS.length,
+      language,
+      title:text('lessonName'),
+      stepLabel:text('progress'),
+      progress:percent,
+      canGoPrevious:session.step>0,
+      canGoNext:allowed(screen),
+      audioAvailability:'mixed',
+      contentType:screen==='intro'?'intro':screen==='structure'?'structure':['san','mom','gong','mul'].includes(screen)?'word':screen==='compare'?'comparison':['split','recognize','challenge'].includes(screen)?'choice':screen==='build'?'builder':screen==='retry'?'retry':'completion',
+      navigationLabel:text('navigation'),
+      languageLabel:text('language'),
+      brandActionLabel:text('home'),
+      exitActionLabel:text('home'),
+      skipLabel:text('skip')
+    });
     document.getElementById('lessonStage').innerHTML=`${releaseNotice()}${renderers[screen]()}`;
   }
   function goHome(){global.location.href=`nikigo-app.html?lang=${language}#courses`;}
+  const shell=global.NikigoClassicFocusShell.mount({
+    onLanguageChange(value){
+      language=LANGUAGES.includes(value)?value:'en';
+      profile=global.NikigoState?.update?.({interfaceLanguage:language,learningLanguage:language},'lesson-07:language')||profile;
+      saveSession();
+      render();
+    },
+    onBrandAction:goHome,
+    onExitAction:goHome
+  });
 
   document.addEventListener('click',event=>{
     const button=event.target.closest('button'); if(!button)return; const action=button.dataset.action;
-    if(button.id==='homeButton'||button.id==='homeLogo'||action==='home'){goHome();return;}
+    if(action==='home'){goHome();return;}
     if(action==='base-audio'){playBaseSyllableAudio();return;}
     if(action==='review'){session=blankSession();saveSession();render();global.scrollTo(0,0);return;}
     if(action==='back')session.step=Math.max(0,session.step-1);
@@ -261,7 +287,6 @@
     else if(action==='retry-next'){if(session.retryAnswers[button.dataset.question]?.correct){session.mistakes=session.mistakes.filter(id=>id!==button.dataset.question);delete session.retryAnswers[button.dataset.question];}}
     saveSession();render();global.scrollTo(0,0);
   });
-  document.getElementById('language').addEventListener('change',event=>{language=LANGUAGES.includes(event.target.value)?event.target.value:'en';profile=global.NikigoState?.update?.({interfaceLanguage:language,learningLanguage:language},'lesson-07:language')||profile;saveSession();render();});
   render();
 
   global.NikigoLesson07Test = Object.freeze({ lessonId:LESSON_ID, screens:[...SCREENS], examples:EXAMPLES, buildMap:BUILD_MAP, splitQuestions:SPLIT_QUESTIONS, recognizeQuestions:RECOGNIZE_QUESTIONS, challenge:CHALLENGE, ui:UI, blankSession, normalizeSession, completionPatch });
