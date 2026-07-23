@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "branch": "agent/nikigo-lesson-11-mission-v2-integration",
+  "baseHead": "54bd94aa7d2bb945e15144522675f717ef668df3",
+  "preview": "http://127.0.0.1:4185/lesson-11.html?lang=zh",
+  "stableSteps": 13,
+  "teachingPhases": 8,
+  "flow": {
+    "allStepsInOrder": true,
+    "requiredStepsSkipped": false,
+    "wrongFeedback": true,
+    "targetedRetry": true,
+    "buildExercise": true,
+    "refreshRestore": true,
+    "browserBackRestore": true,
+    "firstCompletionXp": 50,
+    "repeatCompletionXp": 0,
+    "v4Entry": true,
+    "v4ReturnLocation": true
+  },
+  "languages": ["zh", "en", "vi", "ja"],
+  "languageSwitchPreserves": ["step", "answers", "feedback", "mistakes", "korean"],
+  "viewports": {
+    "390x844": {"overflow": 0},
+    "430x932": {"overflow": 0},
+    "768x1024": {"overflow": 0},
+    "1440x1024": {"overflow": 0}
+  },
+  "accessibility": {
+    "keyboard": true,
+    "visibleFocus": true,
+    "ariaExpanded": true,
+    "escape": true,
+    "reducedMotion": true,
+    "touchTargets44": true
+  },
+  "audio": {
+    "playableLesson11": 0,
+    "pendingStatusInteractive": false,
+    "tts": false,
+    "externalRequests": 0,
+    "apiCost": 0
+  },
+  "consoleErrors": 0,
+  "consoleWarnings": 0,
+  "networkErrors": 0,
+  "visualP0P1P2": 0,
+  "tests": {
+    "npmTest": "PASS",
+    "architecture": "PASS",
+    "missionValidation": "PASS",
+    "gitDiffCheck": "PASS"
+  }
+}

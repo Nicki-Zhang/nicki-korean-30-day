@@ -1,0 +1,74 @@
+{
+  "status": "PASS",
+  "viewport": [
+    390,
+    844
+  ],
+  "trace": [
+    {
+      "step": "intro",
+      "retry": false
+    },
+    {
+      "step": "first-scene",
+      "retry": false
+    },
+    {
+      "step": "name-response",
+      "retry": false
+    },
+    {
+      "step": "phrase-role",
+      "retry": false
+    },
+    {
+      "step": "copula-rule",
+      "retry": false
+    },
+    {
+      "step": "build-name",
+      "retry": false
+    },
+    {
+      "step": "ending-choice",
+      "retry": false
+    },
+    {
+      "step": "identity-words",
+      "retry": false
+    },
+    {
+      "step": "meeting-flow",
+      "retry": false
+    },
+    {
+      "step": "build-identity",
+      "retry": false
+    },
+    {
+      "step": "reply-choice",
+      "retry": false
+    },
+    {
+      "step": "final-scene",
+      "retry": false
+    },
+    {
+      "step": "name-response",
+      "retry": true
+    },
+    {
+      "step": "complete",
+      "retry": false
+    }
+  ],
+  "final": {
+    "step": 12,
+    "mistakes": [],
+    "retryMode": false,
+    "completionFirst": true,
+    "xp": 50,
+    "completed": true
+  },
+  "movieSize": 1769909
+}
