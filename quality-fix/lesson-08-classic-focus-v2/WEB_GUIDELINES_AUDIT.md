@@ -28,4 +28,3 @@ Reviewed against the current Web Interface Guidelines after the runtime implemen
 ## Existing product behavior outside this change
 
 The application account password field produces a Chromium verbose advisory because it is not contained in a form. It is outside Lesson 8 and is not a console warning or error. Lesson 8 itself produces zero console warnings and errors.
-

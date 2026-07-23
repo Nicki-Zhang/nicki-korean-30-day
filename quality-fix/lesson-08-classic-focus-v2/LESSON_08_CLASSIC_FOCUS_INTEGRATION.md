@@ -76,4 +76,3 @@ See `screenshots/390-before-after-choice.png` for the strict before/after compar
 ## Audio boundary
 
 The real Lesson 8 configuration declares no audio. The formal page therefore renders no player, no audio-preparation notice, and makes no audio request.
-

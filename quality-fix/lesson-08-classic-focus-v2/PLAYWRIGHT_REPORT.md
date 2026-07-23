@@ -96,4 +96,3 @@ A clean Service Worker installation cached 133 declared resources. The cache con
 - `lesson-sprint-engine.js`
 
 All 133 declared Service Worker assets returned HTTP 200 during validation.
-
