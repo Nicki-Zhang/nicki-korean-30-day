@@ -1,6 +1,6 @@
 # Lesson 12 Classic Focus Browser Report
 
-Date: 2026-07-23  
+Date: 2026-07-23
 Preview: `http://127.0.0.1:4198/lesson-12.html?lang=zh`
 
 ## Covered flow
