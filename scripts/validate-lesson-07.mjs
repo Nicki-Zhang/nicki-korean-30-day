@@ -9,6 +9,7 @@ const manifest=JSON.parse(fs.readFileSync('audio/lesson-07/manifest.json','utf8'
 assert.match(html,/lesson-07\.css/);
 assert.match(html,/lesson-07\.js/);
 assert.match(html,/audio-catalog\.js/);
+assert.match(html,/assets\/classic-focus-shell\.js/);
 assert.doesNotMatch(source,/speechSynthesis|SpeechSynthesisUtterance/);
 assert.match(source,/resolve\?\.\('바','syllable',AUDIO_LESSON_ID\)/);
 assert.match(source,/if \(!BASE_SYLLABLE_AUDIO\?\.playable \|\| !BASE_SYLLABLE_AUDIO\.path\) return;/);
@@ -16,13 +17,15 @@ assert.doesNotMatch(source,/prerequisite|requiresCompletion|lockedTitle/);
 assert.match(css,/@media\s*\(max-width:\s*760px\)/);
 assert.match(css,/min-height:\s*44px/);
 
-const element=()=>({value:'',textContent:'',innerHTML:'',title:'',style:{},dataset:{},classList:{add(){},remove(){},toggle(){}},setAttribute(){},addEventListener(){}});
-const elements=new Map(['lessonStage','language','lessonName','progressLabel','progressCount','progressBar','progressTrack','homeButton','homeLogo','toast'].map(id=>[id,element()]));
-const documentStub={getElementById:id=>elements.get(id)||element(),addEventListener(){},documentElement:{lang:''}};
+const element=()=>({value:'',textContent:'',innerHTML:'',title:'',style:{},dataset:{},classList:{add(){},remove(){},toggle(){}},setAttribute(){},addEventListener(){},removeEventListener(){},querySelector(){return null;}});
+const elements=new Map(['lessonStage','language','lessonName','progressLabel','progressCount','progressBar','progressTrack','homeButton','homeLogo','skipLink','courseNavigation','languageLabel','toast'].map(id=>[id,element()]));
+elements.get('progressTrack').querySelector=()=>elements.get('progressBar');
+const documentStub={getElementById:id=>elements.get(id)||element(),querySelector:selector=>selector==='#progressTrack i'?elements.get('progressBar'):elements.get(selector.replace('#',''))||null,addEventListener(){},documentElement:{lang:''},body:{dataset:{}}};
 const storage=new Map();
 let profile={xp:200,completedLessons:['lesson-06'],lessonProgress:{'lesson-06':100,'lesson-07':31},interfaceLanguage:'zh',guest:true};
 const page={location:{search:'?lang=zh',href:''},navigator:{language:'zh'},document:documentStub,localStorage:{getItem:key=>storage.get(key)||null,setItem:(key,value)=>storage.set(key,String(value))},NikigoState:{get:()=>profile,update:(patch)=>{profile=typeof patch==='function'?patch(profile):{...profile,...patch};return profile;}},scrollTo(){}};
 page.window=page;
+vm.runInNewContext(fs.readFileSync('assets/classic-focus-shell.js','utf8'),{window:page,document:documentStub,TypeError},{filename:'assets/classic-focus-shell.js'});
 vm.runInNewContext(source,{window:page,document:documentStub,URLSearchParams},{filename:'lesson-07.js'});
 const api=page.NikigoLesson07Test;
 assert.ok(api);
