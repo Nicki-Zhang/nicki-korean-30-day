@@ -1,4 +1,4 @@
-const CACHE = 'nikigo-v33-self-review-gate-learning-page-v4-01';
+const CACHE = 'nikigo-v34-self-review-gate-lesson-11-mission-v2';
 const ASSETS = [
   './', './index.html', './nikigo-app.html', './app-state.js', './course-catalog.js',
   './content-registry.js', './content-type-map.js', './route-registry.js',
@@ -16,6 +16,7 @@ const ASSETS = [
   './lesson-12.html', './lesson-12.js', './lesson-13.html', './lesson-13.js',
   './lesson-sprint-engine.js', './lesson-sprint.css',
   './lesson-clear-interactive.js', './lesson-clear-interactive.css', './lesson-purple-interactive.css',
+  './lesson-11-mission-shell.js', './lesson-11-mission.css',
   './assets/nikigo-clear-shell.js', './assets/nikigo-product-shell.js', './assets/nikigo-purple-shell.css',
   './assets/nikigo-friendly-learning-path.css', './assets/nikigo-learn-v4.css?v=1', './assets/nikigo-learn-v4.js?v=1',
   './assets/nikigo-learn-v4/stage-k0.webp', './assets/nikigo-learn-v4/stage-k1.webp',

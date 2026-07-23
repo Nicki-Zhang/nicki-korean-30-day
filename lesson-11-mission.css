@@ -1,0 +1,234 @@
+:root {
+  --mission-page:#f7f6fb;
+  --mission-surface:#fff;
+  --mission-soft:#f1f1f6;
+  --mission-user:#f0ebff;
+  --mission-purple:#6941d7;
+  --mission-purple-hover:#5934bf;
+  --mission-purple-soft:#eee8ff;
+  --mission-line:#e5e2ea;
+  --mission-ink:#211a2b;
+  --mission-muted:#716b78;
+  --mission-success:#257653;
+  --mission-success-soft:#e8f7ee;
+  --mission-error:#a94338;
+  --mission-error-soft:#fff0ee;
+  --mission-focus:#2f6fed;
+  --mission-fast:140ms;
+  --mission-base:240ms;
+  --mission-ease:cubic-bezier(.2,.8,.2,1);
+}
+
+* { box-sizing:border-box; }
+.missionLesson11 { min-height:100%; margin:0; background:var(--mission-page); color:var(--mission-ink); overflow-x:hidden; }
+.missionLesson11 button,.missionLesson11 select { font:inherit; }
+.missionLesson11 button { cursor:pointer; }
+.missionLesson11 button:disabled { cursor:default; }
+.missionLesson11 :focus-visible { outline:3px solid var(--mission-focus); outline-offset:3px; }
+.skipLink { position:fixed; z-index:100; top:8px; left:8px; min-height:44px; padding:11px 14px; border-radius:12px; background:#fff; color:var(--mission-ink); transform:translateY(-140%); transition:transform var(--mission-fast) var(--mission-ease); }
+.skipLink:focus { transform:none; }
+
+.missionLesson11 .missionTop {
+  position:sticky;
+  z-index:40;
+  top:0;
+  display:grid;
+  grid-template-columns:44px auto minmax(72px,1fr) minmax(88px,auto) 44px;
+  align-items:center;
+  gap:8px;
+  min-height:60px;
+  padding:8px max(12px,env(safe-area-inset-right)) 8px max(12px,env(safe-area-inset-left));
+  border-bottom:1px solid rgba(55,40,79,.08);
+  background:rgba(247,246,251,.97);
+  backdrop-filter:saturate(120%) blur(8px);
+}
+.missionTop .iconButton { display:grid; place-items:center; width:44px; min-width:44px; height:44px; padding:0; border:0; border-radius:12px; background:transparent; color:var(--mission-ink); font-size:28px; font-weight:700; }
+.missionTop .iconButton:hover { background:var(--mission-purple-soft); color:var(--mission-purple); }
+.missionTop .wordmark { color:#2a1646; font-size:18px; line-height:1; letter-spacing:-.03em; }
+.headerProgress { justify-self:center; display:grid; justify-items:center; gap:3px; min-width:64px; color:var(--mission-muted); }
+.headerProgress>b { font-size:13px; line-height:1.2; font-variant-numeric:tabular-nums; }
+.headerProgressTrack { display:flex; width:56px; height:3px; gap:2px; overflow:hidden; border-radius:99px; background:#ddd8e7; }
+.headerProgressTrack i { display:block; flex:1; background:transparent; }
+.headerProgressTrack i.done,.headerProgressTrack i.current { background:var(--mission-purple); }
+.languagePicker { min-width:88px; }
+.languagePicker select { width:100%; min-width:88px; min-height:44px; padding:0 30px 0 10px; border:1px solid var(--mission-line); border-radius:12px; background:#fff; color:var(--mission-ink); font-size:14px; }
+
+.missionLesson11 .lessonCanvas { width:100%; max-width:none; min-height:calc(100vh - 60px); margin:0; padding:0; }
+.missionLesson11 .lessonStage { width:100%; max-width:none; margin:0; padding:0; border:0; background:transparent; box-shadow:none; }
+.missionJourney { width:min(calc(100% - 24px),760px); margin:0 auto; padding:10px 0 calc(104px + env(safe-area-inset-bottom)); }
+.missionContext { display:none; }
+.phaseRoute { display:grid; gap:12px; }
+.phaseCard { overflow:hidden; scroll-margin-top:72px; border:1px solid var(--mission-line); border-radius:22px; background:var(--mission-surface); }
+.phaseSummary {
+  display:grid;
+  grid-template-columns:50px minmax(0,1fr) 60px;
+  align-items:center;
+  gap:10px;
+  width:100%;
+  min-height:78px;
+  margin:0;
+  padding:10px 14px;
+  border:0;
+  background:transparent;
+  color:inherit;
+  text-align:left;
+}
+button.phaseSummary:hover { background:#faf9fd; }
+.phaseSummaryStatic { cursor:default; }
+.phaseNode { display:grid; place-items:center; width:50px; height:50px; border-radius:16px; background:var(--mission-purple-soft); color:var(--mission-purple); font-size:18px; font-weight:850; }
+.phaseCard.isComplete .phaseNode { background:var(--mission-success-soft); color:var(--mission-success); }
+.phaseCard.isCurrent .phaseNode { background:var(--mission-purple); color:#fff; }
+.phaseSummaryCopy { min-width:0; }
+.phaseSummaryLine { display:flex; align-items:baseline; flex-wrap:wrap; gap:5px; }
+.phaseSummaryLine strong { color:var(--mission-ink); font-size:18px; line-height:1.3; font-weight:750; letter-spacing:-.015em; }
+.phaseSummaryLine small { color:var(--mission-muted); font-size:13px; line-height:1.3; font-weight:500; }
+.phaseSummaryCopy p { display:-webkit-box; overflow:hidden; margin:5px 0 0; color:var(--mission-muted); font-size:14px; line-height:1.4; -webkit-box-orient:vertical; -webkit-line-clamp:2; }
+.phaseState { display:grid; place-items:center; min-width:60px; min-height:44px; padding:4px; border:1px solid #cfc5eb; border-radius:13px; color:var(--mission-purple); font-size:12px; line-height:1.25; font-weight:750; text-align:center; overflow-wrap:anywhere; }
+.phaseCard.isComplete .phaseState { border-color:transparent; color:var(--mission-success); }
+.phaseCard.isCurrent .phaseState { background:var(--mission-purple-soft); }
+.phaseWorkspace { padding:16px 18px 18px; border-top:1px solid var(--mission-line); }
+.phaseWorkspace[hidden] { display:none; }
+
+.previousTail { display:grid; gap:8px; margin:0 18px 18px; padding:16px 14px 0; border-top:1px solid var(--mission-line); }
+.previousTail strong { padding-left:12px; border-left:4px solid var(--mission-purple); font-size:15px; }
+.previousTail b { padding-left:16px; font-size:16px; }
+.previousTail p { margin:0; padding-left:16px; color:var(--mission-muted); font-size:15px; line-height:1.55; }
+.previousTail span { display:grid; place-items:center; min-height:44px; margin-top:4px; border-radius:13px; background:var(--mission-purple); color:#fff; font-size:14px; font-weight:750; }
+
+.currentTask { margin:0 0 14px; }
+.currentTask .eyebrow { margin:0 0 5px; color:var(--mission-purple); font-size:12px; line-height:1.3; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
+.currentTask h1 { margin:0; color:var(--mission-ink); font-size:20px; line-height:1.35; font-weight:760; letter-spacing:-.02em; }
+.currentTask h1.koreanTitle { font-size:24px; line-height:1.38; }
+.currentTask .lead { margin:6px 0 0; color:var(--mission-muted); font-size:15px; line-height:1.55; }
+.missionIntroTitle { margin:0 0 6px; font-size:26px; line-height:1.25; letter-spacing:-.025em; }
+.missionIntroKorean { margin:12px 0 0; padding:12px 14px; border-radius:15px; background:var(--mission-purple-soft); font-size:23px; line-height:1.4; font-weight:750; }
+
+.audioReadiness { display:grid; gap:3px; min-height:48px; margin:0 0 16px; padding:9px 14px; border:1px solid var(--mission-line); border-radius:13px; background:#faf9fd; }
+.audioReadiness strong { font-size:14px; line-height:1.35; }
+.audioReadiness span { color:var(--mission-muted); font-size:13px; line-height:1.4; }
+
+.missionDialogue { display:grid; gap:14px; margin:0 0 14px; }
+.missionBubble { width:84%; max-width:84%; padding:14px 16px; border-radius:18px 18px 18px 6px; background:var(--mission-soft); }
+.missionBubble.isUser { justify-self:end; width:max-content; max-width:68%; border-radius:18px 18px 6px 18px; background:var(--mission-user); }
+.missionBubble .speaker { position:static; display:block; width:auto; height:auto; margin:0 0 6px; border:0; border-radius:0; background:transparent; color:var(--mission-muted); font-size:12px; line-height:1.25; font-style:normal; }
+.missionBubble .korean { display:block; color:var(--mission-ink); font-size:20px; line-height:1.42; font-weight:700; letter-spacing:-.01em; }
+.missionBubble p { margin:8px 0 0; color:var(--mission-muted); font-size:15px; line-height:1.5; }
+.missionDialogue.isCompact { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin-bottom:14px; }
+.missionDialogue.isCompact .missionBubble,.missionDialogue.isCompact .missionBubble.isUser { justify-self:stretch; width:100%; max-width:none; padding:10px 12px; border-radius:14px; opacity:.86; }
+.missionDialogue.isCompact .missionBubble .korean { font-size:17px; line-height:1.35; }
+.missionDialogue.isCompact .missionBubble p { display:none; }
+
+.stageMeta { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; color:var(--mission-muted); font-size:13px; }
+.goalList,.masteryList { display:grid; gap:9px; margin:0; padding:0; list-style:none; }
+.goalList li,.masteryList li { display:grid; grid-template-columns:38px minmax(0,1fr); gap:10px; align-items:start; padding:10px 0; border-top:1px solid var(--mission-line); }
+.goalList li>b,.masteryList li>b { display:grid; place-items:center; width:36px; height:36px; border-radius:12px; background:var(--mission-purple-soft); color:var(--mission-purple); font-size:13px; }
+.goalList li strong,.goalList li span,.masteryList li strong { display:block; }
+.goalList li strong,.masteryList li strong { font-size:15px; line-height:1.4; }
+.goalList li span { margin-top:2px; color:var(--mission-muted); font-size:14px; line-height:1.45; }
+
+.neutralHint,.matchHint,.conceptPrompt { margin:10px 0; color:var(--mission-muted); font-size:14px; line-height:1.5; }
+.choiceGrid,.matchGrid,.conceptObjects,.ruleExamples,.tokenBank,.answerSlots { gap:9px; }
+.choiceButton,.matchButton,.conceptChunk,.tokenButton,.placedToken,.buildControls button,.inlineAction { min-height:48px; border-radius:13px; }
+.choiceButton { padding:11px 13px; border:1px solid var(--mission-line); background:#fff; color:var(--mission-ink); text-align:left; }
+.choiceButton:hover:not(:disabled),.choiceButton:focus-visible { border-color:var(--mission-purple); background:#faf8ff; }
+.choiceButton .korean { font-size:20px; line-height:1.4; }
+.choiceButton.isWrong { border-color:var(--mission-error); background:var(--mission-error-soft); }
+.choiceButton.isChosen { border-color:var(--mission-success); background:var(--mission-success-soft); }
+.matchGrid { grid-template-columns:1fr 1fr; }
+.matchButton,.conceptChunk,.tokenButton,.placedToken,.buildControls button { padding:10px 12px; border:1px solid var(--mission-line); background:#fff; color:var(--mission-ink); }
+.conceptObjects { grid-template-columns:repeat(3,1fr); }
+.conceptChunk strong { display:block; font-size:20px; }
+.conceptChunk span { display:block; margin-top:3px; color:var(--mission-muted); font-size:13px; }
+.conceptChunk[aria-pressed="true"] { border-color:var(--mission-purple); background:var(--mission-purple-soft); }
+.objectExplanation,.answerZone { margin:10px 0; padding:12px 14px; border-radius:15px; background:#f5f2fc; }
+.objectExplanation p { margin:5px 0 0; color:var(--mission-muted); font-size:15px; line-height:1.55; }
+.ruleExamples { grid-template-columns:1fr 1fr; }
+.ruleExample { padding:12px; border-top:1px solid var(--mission-line); }
+.ruleExample small,.ruleExample strong { display:block; }
+.ruleExample strong { margin-top:4px; font-size:20px; }
+.answerLabel { display:flex; justify-content:space-between; margin-bottom:8px; color:var(--mission-muted); font-size:13px; }
+.answerSlots,.tokenBank { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); }
+.emptySlot { display:grid; place-items:center; min-height:48px; border:1px dashed #cfc8dc; border-radius:13px; color:var(--mission-muted); font-size:13px; }
+.placedToken,.tokenButton { font-size:18px; }
+.buildControls { display:flex; gap:8px; margin:10px 0; }
+.buildControls button { flex:1; }
+.tokenBankLabel { display:block; margin:10px 0 6px; color:var(--mission-muted); font-size:13px; }
+.inlineAction { width:100%; margin-top:10px; border:1px solid var(--mission-purple); background:var(--mission-purple); color:#fff; font-size:15px; font-weight:750; }
+
+.feedback { margin-top:12px; padding:12px 14px; border:1px solid transparent; border-radius:15px; }
+.feedback.isCorrect { border-color:rgba(37,118,83,.25); background:var(--mission-success-soft); color:#174d38; }
+.feedback.isWrong { border-color:rgba(169,67,56,.25); background:var(--mission-error-soft); color:#762f28; }
+.feedbackHeader { display:flex; gap:8px; align-items:center; font-size:15px; font-weight:800; }
+.feedbackIcon { display:grid; place-items:center; width:26px; height:26px; border-radius:50%; background:currentColor; color:#fff; }
+.feedback p { margin:7px 0 0; font-size:14px; line-height:1.5; }
+.retryBanner { margin-bottom:12px; padding:10px 12px; border-radius:13px; background:#fff4d9; color:#735414; font-size:14px; }
+
+.completePhrase { margin:14px 0; padding:13px 15px; border-radius:15px; background:var(--mission-purple-soft); font-size:23px; line-height:1.4; font-weight:750; }
+.completionMeta { display:flex; justify-content:space-between; gap:12px; margin-top:14px; padding:12px 14px; border-radius:13px; background:var(--mission-purple); color:#fff; font-size:14px; }
+.nextPreview { color:var(--mission-muted); font-size:14px; line-height:1.55; }
+.completeActions { position:static!important; display:grid!important; grid-template-columns:1fr!important; margin-top:12px; padding:0!important; border:0!important; background:transparent!important; box-shadow:none!important; }
+
+.courseActions {
+  position:fixed;
+  z-index:35;
+  right:8px;
+  bottom:max(8px,env(safe-area-inset-bottom));
+  left:8px;
+  display:grid;
+  grid-template-columns:1fr 1.2fr 1fr;
+  gap:6px;
+  min-height:72px;
+  padding:8px;
+  border:1px solid var(--mission-line);
+  border-radius:18px;
+  background:rgba(255,255,255,.98);
+  box-shadow:0 10px 28px rgba(41,29,65,.14);
+}
+.courseActions button { min-width:0; min-height:48px; padding:0 5px; border-radius:13px; font-size:15px; line-height:1.2; font-weight:700; white-space:normal; }
+.courseActions .primaryAction { border:1px solid var(--mission-purple); background:var(--mission-purple); color:#fff; }
+.courseActions .primaryAction:hover:not(:disabled) { background:var(--mission-purple-hover); transform:translateY(-1px); }
+.courseActions .primaryAction:active:not(:disabled) { transform:scale(.98); }
+.courseActions .secondaryAction { border:1px solid transparent; background:#f1f1f5; color:var(--mission-ink); }
+.courseActions button:disabled { color:#8a8491; opacity:1; }
+
+.exitDialog { width:min(calc(100% - 32px),420px); padding:0; border:1px solid var(--mission-line); border-radius:20px; color:var(--mission-ink); box-shadow:0 24px 70px rgba(31,22,48,.22); }
+.exitDialog::backdrop { background:rgba(26,18,39,.42); }
+.exitDialog form { padding:20px; }
+.exitDialog h2 { margin:0; font-size:21px; line-height:1.3; }
+.exitDialog p { margin:8px 0 18px; color:var(--mission-muted); font-size:15px; line-height:1.55; }
+.dialogActions { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.dialogActions button { min-height:48px; border-radius:13px; font-size:15px; font-weight:700; }
+
+@media (max-width:410px) {
+  .missionTop .wordmark { font-size:17px; }
+  .languagePicker,.languagePicker select { min-width:84px; width:84px; }
+  .phaseSummary { padding-inline:12px; }
+}
+
+@media (min-width:700px) {
+  .missionJourney { width:min(calc(100% - 40px),820px); padding-top:20px; }
+  .phaseWorkspace { padding:18px 22px 22px; }
+  .courseActions { right:50%; left:auto; width:min(760px,calc(100% - 48px)); transform:translateX(50%); }
+}
+
+@media (min-width:1000px) {
+  .missionJourney { width:min(calc(100% - 48px),1120px); padding-top:28px; }
+  .missionContext { display:block; margin-bottom:20px; }
+  .missionContext p { margin:0; color:var(--mission-purple); font-size:13px; font-weight:750; }
+  .missionContext h1 { margin:5px 0 0; font-size:34px; line-height:1.25; letter-spacing:-.03em; }
+  .missionContext span { display:block; margin-top:6px; color:var(--mission-muted); font-size:16px; }
+  .phaseRoute { grid-template-columns:340px minmax(0,1fr); align-items:start; gap:10px 18px; }
+  .phaseCard { grid-column:1; }
+  .phaseCard.isCurrent { grid-column:2; grid-row:1 / span 8; }
+  .phaseSummary { grid-template-columns:50px minmax(0,1fr) 58px; }
+  .phaseWorkspace { padding:20px 24px 24px; }
+  .missionDialogue:not(.isCompact) .missionBubble .korean { font-size:26px; }
+  .missionDialogue:not(.isCompact) .missionBubble p { font-size:16px; }
+  .currentTask h1 { font-size:24px; }
+  .currentTask h1.koreanTitle { font-size:30px; }
+  .courseActions { right:calc(50% - 200px); width:700px; transform:translateX(50%); }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .missionLesson11 *, .missionLesson11 *::before, .missionLesson11 *::after { scroll-behavior:auto!important; animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; }
+}

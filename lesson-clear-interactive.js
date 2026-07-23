@@ -3,11 +3,13 @@
 
   const config = global.NikigoLessonConfig;
   if (!config || config.id !== 'lesson-11') throw new Error('Nikigo Clear Interactive requires lesson-11.');
+  const mission = global.NikigoLesson11Mission;
+  if (!mission) throw new Error('Nikigo Mission Journey presentation adapter is required.');
 
   global.NikigoCurrentLesson = Object.freeze({lessonId:config.id});
   const LANGUAGES = ['zh','en','vi','ja'];
   const SESSION_KEY = `nikigoLessonSession:${config.id}`;
-  const PHASE_BY_STEP = [0,1,1,2,3,4,4,5,5,6,6,7,7];
+  const PHASE_BY_STEP = config.steps.map(step=>mission.phaseForStep(step.id));
   const COPY = {
     zh:{progress:'8个学习阶段',home:'课程',back:'返回',next:'继续',start:'开始任务',finish:'完成课程',correct:'正确',incorrect:'再观察一下结构',choiceHint:'选择一个回答。错误时不会提前显示答案。',matchHint:'先选择一个韩语表达，再选择它的作用。',build:'检查',audio:'播放音频',audioPending:'精确approved音频尚不可用',audioError:'音频加载失败',retry:'错题重练',remaining:'还需答对 {count} 项',xpEarned:'首次完成 +50 XP',xpClaimed:'重复完成 +0 XP',saved:'进度已保存',reviewLesson:'重新学习',returnCourses:'返回课程',nextLesson:'下一站：国家与语言',dialogueNext:'显示下一句',dialogueReady:'对话已完整展开',inspect:'点击词块，观察它在句子里的作用',topic:'话题',name:'姓名',ending:'结尾',topicExplain:'저는先建立“我”的话题，后面再补充介绍内容。',nameExplain:'하늘是虚构姓名，放在话题之后。',endingExplain:'이에요礼貌地完成陈述；하늘有받침ㄹ，所以使用이에요。',answerZone:'你的句子',available:'可用词块',undo:'撤销',moveLeft:'左移',moveRight:'右移',selectPlaced:'选择已放置的词块后再调整顺序。',wrongHint:'先观察哪一块建立话题，再判断哪一块完成介绍。答案不会在这里直接显示。',correctWhy:'结构成立：저는先建立话题，姓名或身份放在中间，礼貌结尾完成陈述。',matched:'已配对',goals:'本课目标',stages:'8个视觉阶段 · 13个内部步骤',time:'约8分钟',mastered:'掌握总结',masteryAsk:'询问对方姓名：이름이 뭐예요?',masteryEnding:'根据받침选择이에요 / 예요',masteryIntro:'介绍姓名与中性身份',nextPreview:'下一课学习固定表达“___에서 왔어요?”，说明来自哪个国家。',firstMeet:'第一次见面时，用韩语介绍自己',coreKorean:'이름이 뭐예요?',openingLead:'学习询问姓名、表达身份，并自然回应“很高兴见到你”。',empty:'空位',checkReady:'句子已填满，可以检查。'},
     en:{progress:'8 learning stages',home:'Courses',back:'Back',next:'Continue',start:'Start task',finish:'Complete lesson',correct:'Correct',incorrect:'Look at the structure again',choiceHint:'Choose one response. A wrong choice never reveals the answer.',matchHint:'Choose a Korean expression, then choose its role.',build:'Check',audio:'Play audio',audioPending:'Exact approved audio is unavailable',audioError:'Audio failed to load',retry:'Mistake review',remaining:'Correct {count} more item(s)',xpEarned:'First completion +50 XP',xpClaimed:'Repeat completion +0 XP',saved:'Progress saved',reviewLesson:'Review again',returnCourses:'Return to courses',nextLesson:'Next: Countries and Languages',dialogueNext:'Show next line',dialogueReady:'The full dialogue is now visible',inspect:'Select a chunk to inspect its role in the sentence',topic:'Topic',name:'Name',ending:'Ending',topicExplain:'저는 establishes “me” as the topic before the introduction continues.',nameExplain:'하늘 is a fictional name placed after the topic.',endingExplain:'이에요 completes a polite statement. 하늘 ends in ㄹ, so it takes 이에요.',answerZone:'Your sentence',available:'Available chunks',undo:'Undo',moveLeft:'Move left',moveRight:'Move right',selectPlaced:'Select a placed chunk before changing its order.',wrongHint:'Find the chunk that establishes the topic, then the chunk that completes the introduction. The final order is not shown.',correctWhy:'The structure works: 저는 sets the topic, the name or identity sits in the middle, and the polite ending completes the statement.',matched:'Matched',goals:'Lesson goals',stages:'8 visual stages · 13 internal steps',time:'About 8 minutes',mastered:'Mastery summary',masteryAsk:'Ask a name: 이름이 뭐예요?',masteryEnding:'Choose 이에요 / 예요 from the final consonant',masteryIntro:'Introduce a name and neutral identity',nextPreview:'Next, learn the fixed pattern “___에서 왔어요?” to say where someone comes from.',firstMeet:'Introduce yourself in Korean at a first meeting',coreKorean:'이름이 뭐예요?',openingLead:'Ask a name, state an identity, and respond naturally with “nice to meet you.”',empty:'Empty slot',checkReady:'The sentence is full and ready to check.'},
@@ -47,6 +49,7 @@
 
   const tr = value => typeof value === 'string' ? value : value?.[language] ?? value?.en ?? '';
   const ui = key => COPY[language][key];
+  const missionUi = key => mission.languageCopy(language)[key];
   const format = (value,data) => String(value).replace(/\{(\w+)\}/g,(_,key)=>data[key]??'');
   const escape = value => String(value??'').replace(/[&<>"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[char]));
   const current = () => config.steps[session.step];
@@ -68,19 +71,22 @@
   function audioResult(audio){return global.NikigoAudio?.resolve?.(audio.text,audio.audioType,audio.lessonId);}
 
   function header(step,korean=false) {
-    return `<p class="eyebrow">${escape(tr(step.tag))}</p><h1${korean?' class="koreanTitle"':''}>${escape(korean?ui('coreKorean'):tr(step.title))}</h1><p class="lead">${escape(step.id==='intro'?ui('openingLead'):tr(step.lead))}</p>`;
+    return `<section class="currentTask"><p class="eyebrow">${escape(tr(step.tag))}</p><h1${korean?' class="koreanTitle"':''}>${escape(korean?ui('coreKorean'):tr(step.title))}</h1><p class="lead">${escape(step.id==='intro'?ui('openingLead'):tr(step.lead))}</p></section>`;
   }
   function renderAudios(step) {
     const audios=[...(step.audios||[]),...(step.audio?[step.audio]:[])];
     if(!audios.length)return '';
-    return `<div class="audioRow">${audios.map((audio,index)=>{const result=audioResult(audio);const playable=Boolean(result?.playable&&result.path);return `<button class="audioButton" type="button" data-action="audio" data-audio="${index}" ${playable?'':'disabled aria-disabled="true"'}>${escape(playable?(tr(audio.label)||ui('audio')):ui('audioPending'))}</button>`;}).join('')}</div>`;
+    const resolved=audios.map(audio=>({audio,result:audioResult(audio)}));
+    const playable=resolved.filter(item=>item.result?.playable&&item.result.path);
+    if(!playable.length) return `<div class="audioReadiness" role="status"><strong>${escape(missionUi('audioPending'))}</strong><span>${escape(missionUi('audioPendingCopy'))}</span></div>`;
+    return `<div class="audioRow">${playable.map(({audio},index)=>`<button class="audioButton" type="button" data-action="audio" data-audio="${index}">${escape(tr(audio.label)||ui('audio'))}</button>`).join('')}</div>`;
   }
   function renderIntro(step) {
-    return `${header(step,true)}<div class="stageMeta"><span><b>${escape(ui('stages'))}</b></span><span>${escape(ui('time'))}</span></div><ol class="goalList" aria-label="${escape(ui('goals'))}">${step.items.map((item,index)=>`<li><b>0${index+1}</b><div><strong>${escape(tr(item.title))}</strong><span>${escape(tr(item.text))}</span></div></li>`).join('')}</ol>`;
+    return `<section class="currentTask"><p class="eyebrow">${escape(missionUi('stageContext'))} · ${escape(missionUi('moduleContext'))}</p><h1 class="missionIntroTitle">${escape(tr(step.module))}</h1><p class="lead">${escape(tr(step.title))}</p><p class="missionIntroKorean" lang="ko">${escape(ui('coreKorean'))}</p></section><div class="stageMeta"><span><b>${escape(ui('stages'))}</b></span><span>${escape(ui('time'))}</span></div><ol class="goalList" aria-label="${escape(ui('goals'))}">${step.items.map((item,index)=>`<li><b>0${index+1}</b><div><strong>${escape(tr(item.title))}</strong><span>${escape(tr(item.text))}</span></div></li>`).join('')}</ol>`;
   }
   function renderDialogue(step) {
     const visible=Math.max(1,Math.min(step.dialogue.length,session.dialogue[step.id]||1));
-    return `${header(step)}<div class="dialogue" aria-label="Dialogue">${step.dialogue.map((line,index)=>`<div class="dialogueLine ${line.role==='B'?'fromB':''} ${index<visible?'isVisible':''} ${index===visible-1?'isCurrent':''}" ${index>=visible?'hidden':''}>${line.role==='B'?`<div class="speech"><span class="korean">${escape(line.korean)}</span><p>${escape(tr(line.translation))}</p></div><span class="speaker" aria-label="Speaker ${escape(line.role)}">${escape(line.role)}</span>`:`<span class="speaker" aria-label="Speaker ${escape(line.role)}">${escape(line.role)}</span><div class="speech"><span class="korean">${escape(line.korean)}</span><p>${escape(tr(line.translation))}</p></div>`}</div>`).join('')}</div>${renderAudios(step)}${visible<step.dialogue.length?`<button class="inlineAction" type="button" data-action="dialogue-next">${escape(ui('dialogueNext'))}</button>`:`<p class="neutralHint">${escape(ui('dialogueReady'))}</p>`}`;
+    return `${step.id==='first-scene'?'':header(step)}${renderAudios(step)}<div class="missionDialogue" aria-label="${escape(missionUi('dialogueHistory'))}">${step.dialogue.map((line,index)=>`<div class="missionBubble ${line.role==='B'?'isUser':''}" ${index>=visible?'hidden':''}><span class="speaker">${escape(line.role==='B'?missionUi('you'):missionUi('partner'))}</span><span class="korean" lang="ko">${escape(line.korean)}</span><p>${escape(tr(line.translation))}</p></div>`).join('')}</div>${visible<step.dialogue.length?`<button class="inlineAction" type="button" data-action="dialogue-next">${escape(ui('dialogueNext'))}</button>`:`<p class="neutralHint">${escape(ui('dialogueReady'))}</p>`}`;
   }
   function renderConcept(step) {
     if(step.id==='copula-rule') {
@@ -93,7 +99,7 @@
   }
   function renderChoice(step) {
     const answer=session.answers[step.id];
-    const context=step.context?.length?`<div class="dialogue">${step.context.map(line=>`<div class="dialogueLine isVisible isCurrent"><span class="speaker">${escape(line.role)}</span><div class="speech"><span class="korean">${escape(line.korean)}</span></div></div>`).join('')}</div>`:'';
+    const context=step.context?.length?`<div class="missionDialogue">${step.context.map(line=>`<div class="missionBubble"><span class="speaker">${escape(missionUi('partner'))}</span><span class="korean" lang="ko">${escape(line.korean)}</span></div>`).join('')}</div>`:'';
     return `${header(step)}${context}${renderAudios(step)}<p class="neutralHint">${escape(ui('choiceHint'))}</p><div class="choiceGrid">${step.options.map(option=>{const chosen=answer?.selected===option.id;const cls=chosen?(answer.correct?'isChosen':'isWrong'):'';return `<button class="choiceButton ${cls}" type="button" data-action="answer" data-value="${escape(option.id)}" ${answer?'disabled':''}>${option.korean?`<span class="korean">${escape(option.korean)}</span>`:escape(tr(option.label))}</button>`;}).join('')}</div>${answer?renderFeedback(answer.correct,step):''}`;
   }
   function renderMatch(step) {
@@ -139,10 +145,43 @@
     if(step.type==='build') return renderBuild(step);
     return '';
   }
-  function foot(step) {
+  function phaseIndexes(phaseIndex){return mission.phaseStepIndexes(config,phaseIndex);}
+  function phaseStart(phaseIndex){return phaseIndexes(phaseIndex)[0]??0;}
+  function phaseEnd(phaseIndex){return phaseIndexes(phaseIndex).at(-1)??0;}
+  function conversationHistory(step) {
+    if(['intro','first-scene','meeting-flow','complete'].includes(step.id)) return '';
+    const dialogue=config.steps.find(item=>item.id==='first-scene')?.dialogue||[];
+    return `<div class="missionDialogue isCompact" aria-label="${escape(missionUi('dialogueHistory'))}">${dialogue.slice(0,2).map(line=>`<div class="missionBubble ${line.role==='B'?'isUser':''}"><span class="speaker">${escape(line.role==='B'?missionUi('you'):missionUi('partner'))}</span><span class="korean" lang="ko">${escape(line.korean)}</span><p>${escape(tr(line.translation))}</p></div>`).join('')}</div>`;
+  }
+  function previousTail() {
+    const intro=config.steps[0];
+    return `<div class="previousTail"><strong>${escape(missionUi('previousTask'))}</strong><b>${escape(tr(intro.title))}</b><p>${escape(tr(intro.lead))}</p><span>${escape(missionUi('previousDone'))}</span></div>`;
+  }
+  function phaseSummary(phase,index,currentPhase) {
+    const complete=index<currentPhase;
+    const currentPhaseCard=index===currentPhase;
+    const state=complete?missionUi('complete'):currentPhaseCard?missionUi('collapse'):missionUi('upcoming');
+    const body=`<span class="phaseNode" aria-hidden="true">${complete?'✓':index+1}</span><span class="phaseSummaryCopy"><span class="phaseSummaryLine"><strong>${escape(tr(phase.name))}</strong><small>· ${phase.minutes} ${escape(missionUi('minutes'))}</small></span><p>${escape(tr(phase.goal))}</p></span><span class="phaseState">${escape(state)}</span>`;
+    if(currentPhaseCard) return `<button class="phaseSummary" type="button" data-action="toggle-current" aria-expanded="true">${body}</button>`;
+    if(complete) return `<button class="phaseSummary" type="button" data-action="phase-back" data-step="${phaseStart(index)}" aria-label="${escape(tr(phase.name))}: ${escape(missionUi('complete'))}">${body}</button>`;
+    return `<div class="phaseSummary phaseSummaryStatic" aria-label="${escape(tr(phase.name))}: ${escape(missionUi('upcoming'))}">${body}</div>`;
+  }
+  function courseActions(step,currentPhase) {
+    if(step.type==='complete') return '';
     const done=stepDone(step);
-    if(step.type==='build'&&!session.answers[step.id]?.correct)return `<div class="lessonFoot single"><button class="secondaryAction" data-action="back" ${session.retryMode?'disabled':''}>${escape(ui('back'))}</button></div>`;
-    return `<div class="lessonFoot"><button class="secondaryAction" data-action="back" ${session.step===0||session.retryMode?'disabled':''}>${escape(ui('back'))}</button><button class="primaryAction" data-action="next" ${done?'':'disabled'}>${escape(session.step===config.steps.length-2?ui('finish'):session.step===0?ui('start'):ui('next'))}</button></div>`;
+    const atPhaseEnd=session.step===phaseEnd(currentPhase);
+    const label=session.step===0?ui('start'):atPhaseEnd?missionUi('completePhase'):missionUi('continue');
+    return `<nav class="courseActions" aria-label="${escape(missionUi('courseNavigation'))}"><button class="secondaryAction" type="button" data-action="previous-phase" ${currentPhase===0||session.retryMode?'disabled':''}>${escape(missionUi('previous'))}</button><button class="primaryAction" type="button" data-action="next" ${done?'':'disabled'}>${escape(label)}</button><button class="secondaryAction" type="button" data-action="next-phase" ${!done||!atPhaseEnd?'disabled':''}>${escape(missionUi('next'))}</button></nav>`;
+  }
+  function renderMission(step,retry) {
+    const currentPhase=PHASE_BY_STEP[session.step]??0;
+    const cards=mission.phases.map((phase,index)=>{
+      const classes=['phaseCard',index<currentPhase?'isComplete':'',index===currentPhase?'isCurrent':''].filter(Boolean).join(' ');
+      const tail=currentPhase===1&&index===0?previousTail():'';
+      const workspace=index===currentPhase?`<div class="phaseWorkspace">${retry}${conversationHistory(step)}${step.type==='complete'?renderComplete(step):renderBody(step)}</div>`:'';
+      return `<article class="${classes}" data-phase="${escape(phase.id)}">${phaseSummary(phase,index,currentPhase)}${tail}${workspace}</article>`;
+    }).join('');
+    return `<div class="missionJourney"><header class="missionContext"><p>${escape(missionUi('stageContext'))} · ${escape(missionUi('moduleContext'))}</p><h1>${escape(tr(config.steps[0].module))}</h1><span>${escape(tr(config.name))}</span></header><section class="phaseRoute" aria-label="${escape(ui('progress'))}">${cards}</section>${courseActions(step,currentPhase)}</div>`;
   }
   function updateProgress() {
     const phase=PHASE_BY_STEP[session.step]??7;
@@ -157,15 +196,22 @@
     languageSelect.value=language;
     document.getElementById('lessonName').textContent=tr(config.name);
     document.getElementById('progressLabel').textContent=ui('progress');
-    document.getElementById('homeButton').textContent=ui('home');
+    document.getElementById('missionTop').setAttribute('aria-label',missionUi('courseNavigation'));
+    document.getElementById('homeLogo').setAttribute('aria-label',missionUi('exit'));
+    document.getElementById('homeButton').setAttribute('aria-label',missionUi('exit'));
+    document.getElementById('languageLabel').textContent=ui('progress');
+    document.getElementById('exitDialogTitle').textContent=missionUi('exitTitle');
+    document.getElementById('exitDialogCopy').textContent=missionUi('exitCopy');
+    document.getElementById('exitCancelButton').textContent=missionUi('stay');
+    document.getElementById('exitConfirmButton').textContent=missionUi('exit');
     updateProgress();
-    if(step.type==='complete'){stage.innerHTML=renderComplete(step);return;}
     const retry=session.retryMode?`<div class="retryBanner">${escape(ui('retry'))} · <span>${escape(format(ui('remaining'),{count:session.mistakes.length}))}</span></div>`:'';
-    stage.innerHTML=`${retry}${renderBody(step)}${foot(step)}`;
+    stage.innerHTML=renderMission(step,retry);
   }
   function clearStepAnswer(step) { delete session.answers[step.id]; }
   function beginRetry(){session.retryQueue=[...session.mistakes];session.retryMode=session.retryQueue.length>0;if(session.retryMode){session.step=config.steps.findIndex(step=>step.id===session.retryQueue[0]);for(const id of session.retryQueue){delete session.answers[id];delete session.match[id];delete session.build[id];}}save();render();}
-  function navigateToStep(nextStep,push=true){session.step=Math.max(0,Math.min(config.steps.length-1,nextStep));save();if(push)global.history.pushState({nikigoStep:session.step},'',global.location.href);render();global.scrollTo({top:0,behavior:'instant'});}
+  function scrollCurrentPhase(){global.requestAnimationFrame?.(()=>document.querySelector('.phaseCard.isCurrent')?.scrollIntoView({block:'start',behavior:'auto'}));}
+  function navigateToStep(nextStep,push=true){session.step=Math.max(0,Math.min(config.steps.length-1,nextStep));save();if(push)global.history.pushState({nikigoStep:session.step},'',global.location.href);render();scrollCurrentPhase();}
   function next(){const step=current();if(!stepDone(step))return;if(session.retryMode){if(session.mistakes.length){session.retryQueue=[...session.mistakes];const index=config.steps.findIndex(item=>item.id===session.retryQueue[0]);for(const id of session.retryQueue){delete session.answers[id];delete session.match[id];delete session.build[id];}navigateToStep(index);}else{session.retryMode=false;navigateToStep(config.steps.length-1);}return;}if(session.step===config.steps.length-2&&session.mistakes.length){beginRetry();return;}navigateToStep(session.step+1);}
   function moveBuild(step,direction){const state=session.build[step.id]||{order:[],selected:null};const index=state.order.indexOf(state.selected);const target=index+direction;if(index<0||target<0||target>=state.order.length)return;[state.order[index],state.order[target]]=[state.order[target],state.order[index]];session.build[step.id]=state;clearStepAnswer(step);save();render();}
   function handleBuild(step,action,value){const state=session.build[step.id]||{order:[],selected:null};state.order=Array.isArray(state.order)?state.order:[];if(action==='add-token'&&!state.order.includes(value)&&state.order.length<step.groups.length){state.order.push(value);state.selected=value;}else if(action==='select-placed'){state.selected=value;}else if(action==='undo'){state.order.pop();state.selected=state.order.at(-1)||null;}session.build[step.id]=state;clearStepAnswer(step);save();render();}
@@ -175,7 +221,11 @@
     const step=current(); const action=button.dataset.action;
     if(action==='next')next();
     else if(action==='back')navigateToStep(session.step-1);
-    else if(action==='home'||action==='home-logo')global.location.href=`nikigo-app.html?lang=${language}#courses`;
+    else if(action==='toggle-current'){const workspace=button.closest('.phaseCard')?.querySelector('.phaseWorkspace');const expanded=button.getAttribute('aria-expanded')==='true';button.setAttribute('aria-expanded',String(!expanded));button.querySelector('.phaseState').textContent=missionUi(expanded?'open':'collapse');if(workspace)workspace.hidden=expanded;}
+    else if(action==='phase-back')navigateToStep(Number(button.dataset.step)||0);
+    else if(action==='previous-phase'){const phase=PHASE_BY_STEP[session.step]??0;navigateToStep(phaseStart(Math.max(0,phase-1)));}
+    else if(action==='next-phase'){const phase=PHASE_BY_STEP[session.step]??0;if(session.step===phaseEnd(phase)&&stepDone(step))next();}
+    else if(action==='home'||action==='home-logo')openExitDialog();
     else if(action==='next-lesson')global.location.href=`lesson-12.html?lang=${language}`;
     else if(action==='review'){session=blankSession();save();global.history.replaceState({nikigoStep:0},'',global.location.href);render();global.scrollTo(0,0);}
     else if(action==='dialogue-next'){session.dialogue[step.id]=Math.min(step.dialogue.length,(session.dialogue[step.id]||1)+1);save();render();}
@@ -195,10 +245,15 @@
     const group=[...button.parentElement.querySelectorAll(button.classList.contains('conceptChunk')?'.conceptChunk':button.classList.contains('tokenButton')?'.tokenButton':button.classList.contains('placedToken')?'.placedToken':button.classList.contains('choiceButton')?'.choiceButton':'.matchButton')].filter(item=>!item.disabled);
     const index=group.indexOf(button);if(index<0)return;event.preventDefault();group[(index+(event.key==='ArrowRight'?1:-1)+group.length)%group.length]?.focus();
   });
-  languageSelect.addEventListener('change',event=>{language=LANGUAGES.includes(event.target.value)?event.target.value:'en';save();render();});
-  document.getElementById('homeButton').addEventListener('click',()=>{global.location.href=`nikigo-app.html?lang=${language}#courses`;});
-  document.getElementById('homeLogo').addEventListener('click',()=>{global.location.href=`nikigo-app.html?lang=${language}#courses`;});
-  global.addEventListener('popstate',event=>{if(Number.isInteger(event.state?.nikigoStep)){session.step=Math.max(0,Math.min(config.steps.length-1,event.state.nikigoStep));save();render();}});
+  function learningPathUrl(){return `nikigo-app.html?lang=${language}&learnStage=K1&learnModule=k1-identity-and-language-background#courses`;}
+  function syncLanguageUrl(){const url=new URL(global.location.href);url.searchParams.set('lang',language);global.history.replaceState({nikigoStep:session.step},'',url);}
+  function openExitDialog(){const dialog=document.getElementById('exitDialog');if(typeof dialog.showModal==='function')dialog.showModal();else if(global.confirm?.(missionUi('exitCopy')))global.location.href=learningPathUrl();}
+  languageSelect.addEventListener('change',event=>{language=LANGUAGES.includes(event.target.value)?event.target.value:'en';save();syncLanguageUrl();render();});
+  document.getElementById('homeButton').addEventListener('click',openExitDialog);
+  document.getElementById('homeLogo').addEventListener('click',openExitDialog);
+  document.getElementById('exitConfirmButton').addEventListener('click',event=>{event.preventDefault();global.location.href=learningPathUrl();});
+  document.getElementById('exitCancelButton').addEventListener('click',()=>document.getElementById('exitDialog').close());
+  global.addEventListener('popstate',event=>{if(Number.isInteger(event.state?.nikigoStep)){session.step=Math.max(0,Math.min(config.steps.length-1,event.state.nikigoStep));save();render();scrollCurrentPhase();}});
   global.history.replaceState({nikigoStep:session.step},'',global.location.href);
   render();
 })(window);
