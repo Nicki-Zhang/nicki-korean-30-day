@@ -1,2 +1,650 @@
-.lesson05Stage,.lesson05Card,.blockExamples,.builderPanel,.splitGrid,.challengeOptions{width:100%;min-width:0;max-width:100%}.lesson05Stage{max-width:1040px}.lesson05Card{min-height:610px}.lesson05Card h1,.lesson05Card h2{overflow-wrap:break-word;word-break:normal}.centered{text-align:center;margin-left:auto;margin-right:auto}.conceptHero{display:grid;grid-template-columns:minmax(0,1fr) minmax(230px,.75fr);gap:24px;align-items:center;margin:26px 0}.conceptVisual{display:grid;place-items:center;min-height:230px;border:1px solid #ddd3ff;border-radius:28px;background:linear-gradient(145deg,#f5f1ff,#fff)}.bigBlock{font-size:clamp(86px,13vw,142px);font-weight:950;line-height:1;color:var(--d)}.blockBadge{display:inline-flex;align-items:center;min-height:34px;padding:7px 11px;border-radius:999px;background:var(--lav);color:var(--p);font-size:12px;font-weight:900}.ruleList{display:grid;gap:12px}.ruleItem{padding:15px 17px;border:1px solid var(--line);border-radius:17px;background:#fff;line-height:1.55}.blockExamples{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:24px 0}.blockExample{display:grid;gap:12px;min-width:0;padding:20px;border:1px solid var(--line);border-radius:22px;background:#fff;text-align:center}.blockParts{font-size:20px;font-weight:850;color:var(--muted)}.blockResult{font-size:64px;font-weight:950;line-height:1.05;color:var(--d)}.layoutDiagram{display:grid;place-items:center;gap:4px;width:88px;height:88px;margin:auto;border:3px solid #d8cdff;border-radius:20px;background:#faf8ff;color:var(--p);font-weight:950}.layoutDiagram.left{grid-template-columns:1fr 1fr}.layoutDiagram.top{grid-template-rows:1fr 1fr}.exampleAudio{min-height:46px;border:0;border-radius:14px;padding:10px 12px;background:var(--p);color:#fff;font-weight:900;cursor:pointer}.exampleAudio:disabled{background:#eeeaf4;color:#817893;cursor:not-allowed}.practicePrompt{font-size:clamp(27px,4vw,40px);line-height:1.35;margin:24px 0}.challengeOptions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:22px 0}.challengeOption{min-width:0;min-height:60px;border:1px solid var(--line);border-radius:17px;background:#fff;padding:14px;color:var(--ink);font-size:17px;font-weight:850;cursor:pointer;overflow-wrap:anywhere}.challengeOption.correct{border-color:#3b9e70;background:#eaf8f1}.challengeOption.wrong{border-color:#cf6675;background:#fff0f2}.challengeOption:disabled{cursor:default}.challengeOption span{display:block;margin-top:5px;font-size:12px;color:var(--muted)}.feedback{display:grid;gap:7px}.feedback strong,.feedback span{display:block}.placeholderCallout{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;margin:24px 0;padding:22px;border:1px solid #f0df9f;border-radius:22px;background:#fff8dd;color:#735711}.placeholderCallout .symbol{font-size:66px;font-weight:950;line-height:1}.builderPanel{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(150px,.8fr);gap:13px;align-items:end;margin:26px 0}.builderGroup{display:grid;gap:9px}.builderGroup label{font-size:12px;color:var(--muted);font-weight:900}.builderChoices{display:grid;grid-template-columns:repeat(3,minmax(44px,1fr));gap:8px}.builderChoice{min-width:44px;min-height:48px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);font-size:23px;font-weight:950;cursor:pointer}.builderChoice.on{border-color:var(--p);background:var(--lav);color:var(--p);box-shadow:inset 0 0 0 1px var(--p)}.builderOperator{align-self:center;color:#948aa9;font-size:28px;font-weight:950}.builderResult{min-height:126px;border:0;border-radius:23px;background:linear-gradient(145deg,var(--d),var(--p));color:#fff;display:grid;place-items:center;text-align:center;padding:12px;cursor:pointer}.builderResult strong{font-size:62px;line-height:1}.builderResult small{display:block;margin-top:7px}.builderTargets,.builtSyllables{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}.builderTargets span,.builtSyllables span{padding:7px 11px;border-radius:999px;background:#f1edff;color:#5b42bf;font-weight:850}.splitGrid{display:grid;gap:13px;margin:24px 0}.splitQuestion{display:grid;grid-template-columns:110px minmax(0,1fr);gap:15px;align-items:center;padding:18px;border:1px solid var(--line);border-radius:20px}.splitSyllable{font-size:58px;font-weight:950;text-align:center;color:var(--d)}.splitOptions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.splitOptions button{min-width:0;min-height:48px;border:1px solid var(--line);border-radius:13px;background:#fff;color:var(--ink);font-weight:850;cursor:pointer;overflow-wrap:anywhere}.splitOptions button.correct{border-color:#3b9e70;background:#eaf8f1}.splitOptions button.wrong{border-color:#cf6675;background:#fff0f2}.challengeHeader{display:flex;align-items:center;justify-content:space-between;gap:12px}.questionDots{display:flex;gap:6px}.questionDots i{width:9px;height:9px;border-radius:50%;background:#ddd7e8}.questionDots i.on{background:var(--p)}.retryBadge{padding:13px 15px;border-radius:15px;background:#fff8dd;color:#735711;font-weight:850}.summaryList{display:grid;gap:11px;margin:24px 0}.summaryList div{padding:15px 17px;border-radius:16px;background:var(--lav);font-weight:800}.completeMark{width:100px;height:100px;margin:8px auto 20px;border-radius:30px;background:linear-gradient(135deg,var(--d),var(--p));color:var(--lime);display:grid;place-items:center;font-size:48px}.audioNote{margin:16px 0;color:var(--muted);font-size:12px;line-height:1.55}.lockedPanel{text-align:center;padding:30px 10px}.lockedPanel .completeMark{color:#fff}.foot .primary,.foot .secondary,.foot .ghost{min-height:48px}
-@media(max-width:760px){html,body{width:100%;max-width:100%;overflow-x:hidden}.top,.progressWrap,.stage{width:100%;min-width:0;max-width:100%;margin-left:auto;margin-right:auto}.lesson05Card{min-height:0}.conceptHero{grid-template-columns:1fr}.conceptVisual{min-height:180px}.blockExamples{grid-template-columns:1fr}.builderPanel{grid-template-columns:1fr}.builderOperator{display:none}.builderResult{min-height:110px}.splitQuestion{grid-template-columns:1fr}.splitOptions,.challengeOptions{grid-template-columns:1fr}.foot{flex-wrap:wrap}.foot .ghost{order:2;width:100%}}
+.classicFocusSyllable {
+  --lesson5-focus: var(--classic-brand);
+  --lesson5-focus-soft: var(--classic-brand-soft);
+  --lesson5-structure: #30285e;
+}
+
+.classicFocusSyllable .lesson05Stage {
+  max-width: 900px;
+}
+
+.classicFocusSyllable .lesson05Card {
+  min-width: 0;
+}
+
+.classicFocusSyllable .lesson05Card h1,
+.classicFocusSyllable .lesson05Card h2,
+.classicFocusSyllable .lesson05Card p {
+  margin: 0;
+}
+
+.classicFocusSyllable .lesson05Card h1 {
+  max-width: 23ch;
+  color: var(--classic-ink);
+  font-size: clamp(27px, 4.4vw, 38px);
+  line-height: 1.18;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+
+.classicFocusSyllable .lesson05Card h2 {
+  color: var(--classic-ink);
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.classicFocusSyllable .eyebrow {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: var(--classic-brand);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.classicFocusSyllable .lead {
+  max-width: 64ch;
+  margin-top: 9px !important;
+  color: var(--classic-muted);
+  font-size: 16px;
+  line-height: 1.58;
+  text-wrap: pretty;
+}
+
+.classicFocusSyllable .centered,
+.classicFocusSyllable .center {
+  margin-right: auto !important;
+  margin-left: auto !important;
+  text-align: center;
+}
+
+.classicFocusSyllable .goals,
+.classicFocusSyllable .ruleList,
+.classicFocusSyllable .summaryList {
+  display: grid;
+  gap: 0;
+  margin-top: 21px;
+}
+
+.classicFocusSyllable .goal,
+.classicFocusSyllable .ruleItem,
+.classicFocusSyllable .summaryList > div {
+  padding: 13px 0;
+  border-bottom: 1px solid var(--classic-line);
+}
+
+.classicFocusSyllable .goal:last-child,
+.classicFocusSyllable .ruleItem:last-child,
+.classicFocusSyllable .summaryList > div:last-child {
+  border-bottom: 0;
+}
+
+.classicFocusSyllable .goal b,
+.classicFocusSyllable .goal span {
+  display: block;
+}
+
+.classicFocusSyllable .goal span {
+  margin-top: 4px;
+  color: var(--classic-muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.classicFocusSyllable .note,
+.classicFocusSyllable .audioNote,
+.classicFocusSyllable .retryBadge {
+  margin-top: 18px;
+  padding: 11px 13px;
+  border-radius: 12px;
+  background: var(--classic-brand-soft);
+  color: #55458d;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.classicFocusSyllable .classicFocusDiagram {
+  display: grid;
+  grid-template-columns: minmax(0, 224px) minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+  width: 100%;
+}
+
+.classicFocusSyllable .conceptHero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 22px;
+  margin-top: 23px;
+}
+
+.classicFocusSyllable .conceptHero:has(.classicFocusDiagram) {
+  grid-template-columns: 1fr;
+}
+
+.classicFocusSyllable .syllableDiagram {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr auto;
+  width: min(100%, 224px);
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 2px solid #d9d0f8;
+  border-radius: 19px;
+  background: #fff;
+}
+
+.classicFocusSyllable .syllableDiagram.isTop {
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr auto;
+}
+
+.classicFocusSyllable .syllableCell {
+  display: grid;
+  min-width: 0;
+  place-items: center;
+  padding: 10px;
+  border-right: 1px solid #e4def6;
+  color: var(--lesson5-structure);
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+  font-size: clamp(42px, 11vw, 68px);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.classicFocusSyllable .syllableDiagram.isTop .syllableCell {
+  border-right: 0;
+  border-bottom: 1px solid #e4def6;
+}
+
+.classicFocusSyllable .syllableCell.isCurrent {
+  background: var(--lesson5-focus-soft);
+  color: var(--lesson5-focus);
+  box-shadow: inset 0 0 0 2px var(--lesson5-focus);
+}
+
+.classicFocusSyllable .syllableBottom {
+  grid-column: 1 / -1;
+  min-height: 38px;
+  padding: 9px 10px;
+  background: #f7f5fb;
+  color: var(--classic-muted);
+  font-size: 12px;
+  font-weight: 750;
+  text-align: center;
+}
+
+.classicFocusSyllable .diagramEquation {
+  display: grid;
+  gap: 8px;
+  color: var(--lesson5-structure);
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+}
+
+.classicFocusSyllable .diagramEquation span {
+  font-size: 28px;
+  font-weight: 850;
+}
+
+.classicFocusSyllable .diagramEquation strong {
+  color: var(--lesson5-focus);
+  font-size: 54px;
+  line-height: 1;
+}
+
+.classicFocusSyllable .placeholderCallout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: center;
+  margin-top: 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--classic-line);
+}
+
+.classicFocusSyllable .placeholderCallout .symbol {
+  display: grid;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  border-radius: 15px;
+  background: var(--classic-brand-soft);
+  color: var(--classic-brand);
+  font-size: 30px;
+  font-weight: 850;
+}
+
+.classicFocusSyllable .placeholderCallout p {
+  margin-top: 4px;
+  color: var(--classic-muted);
+  line-height: 1.5;
+}
+
+.classicFocusSyllable .blockExamples {
+  display: grid;
+  gap: 0;
+  margin-top: 20px;
+}
+
+.classicFocusSyllable .blockExample {
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  min-width: 0;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--classic-line);
+}
+
+.classicFocusSyllable .blockExample:last-child {
+  border-bottom: 0;
+}
+
+.classicFocusSyllable .blockExample .layoutDiagram {
+  display: none;
+}
+
+.classicFocusSyllable .blockParts {
+  color: var(--classic-muted);
+  font-size: 15px;
+}
+
+.classicFocusSyllable .blockResult {
+  grid-column: 1;
+  grid-row: 1;
+  color: var(--lesson5-structure);
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+  font-size: 34px;
+  font-weight: 850;
+  text-align: center;
+}
+
+.classicFocusSyllable .exampleAudio {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 9px 12px;
+  border: 1px solid var(--classic-line);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--classic-brand-deep);
+  font-weight: 800;
+}
+
+.classicFocusSyllable .exampleAudio:not(:disabled):hover {
+  background: var(--classic-brand-soft);
+}
+
+.classicFocusSyllable .conceptVisual:has(.bigBlock) {
+  display: grid;
+  place-items: center;
+  min-height: 126px;
+  margin-top: 18px;
+  border: 1px solid var(--classic-line);
+  border-radius: 16px;
+  background: #faf9fd;
+}
+
+.classicFocusSyllable .bigBlock {
+  color: var(--lesson5-structure);
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+  font-size: 58px;
+  font-weight: 850;
+}
+
+.classicFocusSyllable .challengeOptions,
+.classicFocusSyllable .splitOptions,
+.classicFocusSyllable .builderChoices {
+  display: grid;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.classicFocusSyllable .challengeOptions {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.classicFocusSyllable .challengeOption,
+.classicFocusSyllable .splitOptions button,
+.classicFocusSyllable .builderChoice {
+  min-width: 0;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid var(--classic-line);
+  border-radius: 13px;
+  background: #fff;
+  color: var(--classic-ink);
+  font-size: 16px;
+  font-weight: 780;
+  overflow-wrap: anywhere;
+}
+
+.classicFocusSyllable .builderChoice[aria-pressed="true"],
+.classicFocusSyllable .builderChoice.on {
+  border-color: var(--classic-brand);
+  background: var(--classic-brand-soft);
+  color: var(--classic-brand-deep);
+  box-shadow: inset 0 0 0 1px var(--classic-brand);
+}
+
+.classicFocusSyllable .challengeOption.correct,
+.classicFocusSyllable .splitOptions button.correct {
+  border-color: #6bb795;
+  background: var(--classic-success-soft);
+  color: #165b40;
+}
+
+.classicFocusSyllable .challengeOption.wrong,
+.classicFocusSyllable .splitOptions button.wrong {
+  border-color: #d58c99;
+  background: var(--classic-error-soft);
+  color: #7f2e3d;
+}
+
+.classicFocusSyllable .feedback {
+  display: grid;
+  gap: 3px;
+}
+
+.classicFocusSyllable .builderPanel {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto minmax(130px, .9fr);
+  gap: 10px;
+  align-items: end;
+  margin-top: 22px;
+}
+
+.classicFocusSyllable .builderGroup {
+  display: grid;
+  gap: 8px;
+}
+
+.classicFocusSyllable .builderGroup label {
+  color: var(--classic-muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.classicFocusSyllable .builderChoices {
+  grid-template-columns: repeat(2, minmax(48px, 1fr));
+  margin: 0;
+}
+
+.classicFocusSyllable .builderChoice {
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+  font-size: 21px;
+}
+
+.classicFocusSyllable .builderOperator {
+  align-self: center;
+  color: var(--classic-muted);
+  font-size: 24px;
+  font-weight: 850;
+}
+
+.classicFocusSyllable .builderResult {
+  display: grid;
+  min-height: 112px;
+  place-items: center;
+  padding: 12px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--classic-brand);
+  color: #fff;
+}
+
+.classicFocusSyllable .builderResult strong {
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+  font-size: 44px;
+}
+
+.classicFocusSyllable .builtSyllables,
+.classicFocusSyllable .builderTargets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 9px 0 18px;
+}
+
+.classicFocusSyllable .builtSyllables span,
+.classicFocusSyllable .builderTargets span {
+  min-width: 44px;
+  padding: 9px 11px;
+  border-radius: 11px;
+  background: var(--classic-brand-soft);
+  color: var(--classic-brand-deep);
+  font-size: 20px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.classicFocusSyllable .builderPanel + div:has(> .builderTargets) {
+  display: none;
+}
+
+.classicFocusSyllable div:has(> .builtSyllables) > b {
+  display: none;
+}
+
+.classicFocusSyllable .splitGrid {
+  display: grid;
+  gap: 0;
+  margin-top: 20px;
+}
+
+.classicFocusSyllable .splitQuestion {
+  min-width: 0;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--classic-line);
+}
+
+.classicFocusSyllable .splitQuestion:last-child {
+  border-bottom: 0;
+}
+
+.classicFocusSyllable .splitSyllable {
+  color: var(--lesson5-structure);
+  font-size: 36px;
+  font-weight: 850;
+}
+
+.classicFocusSyllable .splitOptions {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 12px;
+}
+
+.classicFocusSyllable .challengeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.classicFocusSyllable .questionDots {
+  display: flex;
+  gap: 5px;
+}
+
+.classicFocusSyllable .questionDots i {
+  width: 18px;
+  height: 5px;
+  border-radius: 99px;
+  background: var(--classic-line);
+}
+
+.classicFocusSyllable .questionDots i.on {
+  background: var(--classic-brand);
+}
+
+.classicFocusSyllable .practicePrompt {
+  margin-top: 8px !important;
+}
+
+.classicFocusSyllable .challengeHero,
+.classicFocusSyllable .complete {
+  max-width: 590px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.classicFocusSyllable .challengeIcon,
+.classicFocusSyllable .completeMark {
+  display: grid;
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 18px;
+  place-items: center;
+  border-radius: 20px;
+  background: var(--classic-brand-soft);
+  color: var(--classic-brand);
+  font-size: 31px;
+  font-weight: 900;
+}
+
+.classicFocusSyllable .rewards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 22px;
+}
+
+.classicFocusSyllable .reward {
+  padding: 9px 12px;
+  border-radius: 10px;
+  background: #f7f5fb;
+  color: var(--classic-muted);
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.classicFocusSyllable .classicFocusActions {
+  margin-top: 28px;
+}
+
+.classicFocusSyllable .classicFocusActions .primary,
+.classicFocusSyllable .classicFocusActions .ghost,
+.classicFocusSyllable .classicFocusActions .secondary {
+  min-height: 49px;
+  padding: 13px 20px;
+  border-radius: 15px;
+  font-size: 16px;
+  font-weight: 850;
+}
+
+.classicFocusSyllable .classicFocusActions .primary {
+  border: 1px solid var(--classic-brand);
+  background: var(--classic-brand);
+  color: #fff;
+}
+
+.classicFocusSyllable .classicFocusActions .ghost,
+.classicFocusSyllable .classicFocusActions .secondary {
+  border: 1px solid var(--classic-line);
+  background: #fff;
+  color: var(--classic-ink);
+}
+
+.classicFocusSyllable .toast {
+  position: fixed;
+  z-index: 20;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  left: 50%;
+  padding: 11px 15px;
+  border-radius: 13px;
+  background: var(--classic-ink);
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 14px);
+  transition: opacity var(--classic-fast) var(--classic-ease), transform var(--classic-fast) var(--classic-ease);
+}
+
+.classicFocusSyllable .toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.classicFocusSyllable button:active {
+  transform: scale(.98);
+}
+
+@media (max-width: 767px) {
+  .classicFocusSyllable .lesson05Card h1 {
+    font-size: 27px;
+  }
+
+  .classicFocusSyllable .classicFocusDiagram {
+    grid-template-columns: minmax(0, 150px) minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .classicFocusSyllable .syllableCell {
+    font-size: 44px;
+  }
+
+  .classicFocusSyllable .diagramEquation span {
+    font-size: 22px;
+  }
+
+  .classicFocusSyllable .diagramEquation strong {
+    font-size: 42px;
+  }
+
+  .classicFocusSyllable .builderPanel {
+    grid-template-columns: 1fr auto 1fr;
+  }
+
+  .classicFocusSyllable .builderPanel .builderResult {
+    grid-column: 1 / -1;
+    min-height: 86px;
+  }
+
+  .classicFocusSyllable .splitOptions {
+    grid-template-columns: 1fr;
+  }
+
+  .classicFocusSyllable .blockExample {
+    grid-template-columns: 54px minmax(0, 1fr) auto;
+  }
+}
+
+@media (max-width: 420px) {
+  .classicFocusSyllable .classicFocusDiagram {
+    grid-template-columns: 132px minmax(0, 1fr);
+    gap: 13px;
+  }
+
+  .classicFocusSyllable .syllableCell {
+    font-size: 38px;
+  }
+
+  .classicFocusSyllable .syllableBottom {
+    min-height: 32px;
+    padding: 7px 6px;
+    font-size: 11px;
+  }
+
+  .classicFocusSyllable .challengeOptions {
+    grid-template-columns: 1fr;
+  }
+
+  .classicFocusSyllable .blockExample {
+    gap: 9px;
+  }
+
+  .classicFocusSyllable .exampleAudio {
+    padding-inline: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .classicFocusSyllable *,
+  .classicFocusSyllable *::before,
+  .classicFocusSyllable *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

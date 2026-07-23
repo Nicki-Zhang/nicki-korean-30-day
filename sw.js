@@ -1,4 +1,4 @@
-const CACHE = 'nikigo-v41-self-review-gate-classic-focus-lesson-12';
+const CACHE = 'nikigo-v42-self-review-gate-classic-focus-lesson-05';
 const ASSETS = [
   './', './index.html', './nikigo-app.html', './app-state.js', './course-catalog.js',
   './content-registry.js', './content-type-map.js', './route-registry.js',
@@ -8,8 +8,9 @@ const ASSETS = [
   './review-catalog.js', './lesson-00.html', './lesson-00.js?v=22-audio-batch-02b', './lesson-01.html',
   './lesson-02.html', './lesson-03.html', './lesson-04.html', './lesson-engine.js',
   './lesson-player.css', './player-privacy.css', './lesson-consonant-contrast.html', './lesson-consonant-contrast.js',
-  './lesson-consonant-contrast.css', './lesson-05.html', './lesson-05.js',
-  './lesson-05.css', './lesson-06.html', './lesson-06.js', './lesson-06.css',
+  './lesson-consonant-contrast.css', './lesson-05.html', './lesson-05.js?v=classic-focus-v1',
+  './lesson-05.css?v=classic-focus-v1', './lesson-05-classic-focus.js?v=classic-focus-v1',
+  './lesson-06.html', './lesson-06.js', './lesson-06.css',
   './lesson-07.html', './lesson-07.js', './lesson-07.css',
   './lesson-08.html', './lesson-08.js', './lesson-08-classic-focus.js', './lesson-08-classic-focus.css',
   './lesson-09.html', './lesson-09.js',
