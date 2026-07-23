@@ -13,9 +13,9 @@ for(const [index,config] of configs.entries()){
   const html=fs.readFileSync(`${expected}.html`,'utf8');
   const engineMarkers=expected==='lesson-11'
     ? ['lesson-11-classic-focus.js','lesson-11-classic-focus.css']
-    : expected==='lesson-13'
-      ? ['lesson-sprint-engine.js','lesson-13-classic-focus.js','lesson-13-classic-focus.css']
-      : ['lesson-sprint-engine.js','lesson-sprint.css'];
+    : expected==='lesson-12'
+      ? ['lesson-sprint-engine.js','lesson-12-classic-focus.js','lesson-12-classic-focus.css']
+      : ['lesson-sprint-engine.js','lesson-13-classic-focus.js','lesson-13-classic-focus.css'];
   for(const marker of [`${expected}.js`,...engineMarkers,'audio-catalog.js','assets/nikigo-mark.svg'])assert.ok(html.includes(marker),`${expected}.html missing ${marker}`);
 }
 

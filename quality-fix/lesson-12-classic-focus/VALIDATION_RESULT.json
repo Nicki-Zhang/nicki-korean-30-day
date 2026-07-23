@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "lesson-12",
+  "branch": "agent/nikigo-lesson-12-classic-focus-integration",
+  "baseline": "9a8ad21f249b9d86d26a120523b9cdecb947414e",
+  "preview": "http://127.0.0.1:4198/lesson-12.html?lang=zh",
+  "steps": {
+    "expected": 13,
+    "observed": 13,
+    "uniqueStableIds": 13,
+    "completeFlow": true,
+    "skippedSteps": 0
+  },
+  "interaction": {
+    "dialogue": true,
+    "matching": true,
+    "choice": true,
+    "builder": true,
+    "scenario": true,
+    "correctFeedback": true,
+    "incorrectFeedback": true,
+    "wrongIdsPreserved": true,
+    "targetedRetry": true,
+    "appStateReviewItemChanged": false,
+    "firstCompletionXp": 50,
+    "repeatCompletionXp": 0
+  },
+  "audio": {
+    "requestsDeclared": 1,
+    "approved": 0,
+    "playable": 0,
+    "pending": 0,
+    "missing": 1,
+    "playableControls": 0,
+    "audioElements": 0,
+    "audioNetworkRequests": 0,
+    "ttsRequests": 0,
+    "externalRequests": 0,
+    "completionGate": false
+  },
+  "scroll": {
+    "sameStepForcedTop": false,
+    "builderFeedbackScrollY": 355,
+    "realStepChangeScrollY": 0,
+    "feedbackVisible": true,
+    "feedbackFocused": true
+  },
+  "languages": {
+    "checked": ["zh", "en", "vi", "ja"],
+    "stepPreserved": true,
+    "selectionPreserved": true,
+    "feedbackPreserved": true,
+    "koreanTargetPreserved": true,
+    "mixedAuxiliaryLanguage": false
+  },
+  "responsive": {
+    "390x844": {"horizontalOverflow": 0, "minimumControlPx": 44},
+    "430x932": {"horizontalOverflow": 0, "minimumControlPx": 44},
+    "768x1024": {"horizontalOverflow": 0, "minimumControlPx": 44},
+    "1440x1024": {"horizontalOverflow": 0, "minimumControlPx": 44, "taskCardWidthPx": 856}
+  },
+  "navigation": {
+    "refreshRestoredState": true,
+    "browserBackRestoredState": true,
+    "v4ModuleReturn": true,
+    "returnStage": "K1",
+    "returnModule": "k1-identity-and-language-background"
+  },
+  "accessibility": {
+    "keyboard": true,
+    "escape": true,
+    "visibleFocus": true,
+    "aria": true,
+    "reducedMotionCss": true
+  },
+  "serviceWorker": {
+    "cacheName": "nikigo-v41-self-review-gate-classic-focus-lesson-12",
+    "assets": 136,
+    "http200": 136,
+    "failures": 0
+  },
+  "tests": {
+    "npmTest": "pass",
+    "architecture": "pass",
+    "diffCheck": "pass"
+  },
+  "browser": {
+    "runtimeErrors": 0,
+    "consoleWarnings": 0,
+    "networkErrors": 0,
+    "apiCost": 0
+  },
+  "protected": {
+    "courseCatalogChanged": false,
+    "appStateChanged": false,
+    "audioCatalogChanged": false,
+    "sprintBusinessEngineChanged": false,
+    "audioFilesChanged": false,
+    "approvedAudioCount": 54,
+    "otherLessonsChanged": false,
+    "mainChanged": false
+  }
+}

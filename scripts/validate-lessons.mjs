@@ -93,7 +93,7 @@ for (const [index, item] of (catalog || []).entries()) {
   if (['lesson-08','lesson-09','lesson-10','lesson-11','lesson-12','lesson-13'].includes(stableId)) {
     const html = fs.readFileSync(file, 'utf8');
     const isClassicFocus = stableId === 'lesson-11';
-    const isClassicSprint = stableId === 'lesson-08' || stableId === 'lesson-13';
+    const isClassicSprint = stableId === 'lesson-08' || stableId === 'lesson-12' || stableId === 'lesson-13';
     const expectedEngine = isClassicFocus ? 'lesson-11-classic-focus.js' : 'lesson-sprint-engine.js';
     const expectedStyles = isClassicFocus
       ? 'lesson-11-classic-focus.css'
