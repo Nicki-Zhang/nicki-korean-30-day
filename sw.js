@@ -1,4 +1,4 @@
-const CACHE = 'nikigo-v40-self-review-gate-classic-focus-lesson-13';
+const CACHE = 'nikigo-v41-self-review-gate-classic-focus-lesson-12';
 const ASSETS = [
   './', './index.html', './nikigo-app.html', './app-state.js', './course-catalog.js',
   './content-registry.js', './content-type-map.js', './route-registry.js',
@@ -14,7 +14,9 @@ const ASSETS = [
   './lesson-08.html', './lesson-08.js', './lesson-08-classic-focus.js', './lesson-08-classic-focus.css',
   './lesson-09.html', './lesson-09.js',
   './lesson-10.html', './lesson-10.js', './lesson-11.html', './lesson-11.js',
-  './lesson-12.html', './lesson-12.js', './lesson-13.html', './lesson-13.js',
+  './lesson-12.html', './lesson-12.js',
+  './lesson-12-classic-focus.js?v=1', './lesson-12-classic-focus.css?v=1',
+  './lesson-13.html', './lesson-13.js',
   './lesson-13-classic-focus.js?v=2', './lesson-13-classic-focus.css?v=2',
   './lesson-sprint-engine.js', './lesson-sprint.css',
 	  './lesson-clear-interactive.js', './lesson-clear-interactive.css', './lesson-purple-interactive.css',

@@ -1,0 +1,296 @@
+.classicFocusSprint {
+  --classic-card-padding: clamp(26px, 4vw, 38px);
+  --classic-mobile-card-padding: 22px 18px 24px;
+}
+
+.classicFocusSprint .sprintStage { max-width: 900px; }
+.classicFocusSprint .sprintCard { display: flex; flex-direction: column; }
+
+.classicFocusSprint .modulePill {
+  display: inline-flex;
+  width: max-content;
+  max-width: 100%;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--classic-brand-soft);
+  color: var(--classic-brand-deep);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.classicFocusSprint .tag {
+  margin: 14px 0 7px;
+  color: var(--classic-brand);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.classicFocusSprint h1 {
+  max-width: 760px;
+  margin: 0;
+  color: var(--classic-ink);
+  font-size: clamp(28px, 4vw, 38px);
+  line-height: 1.18;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+
+.classicFocusSprint .lead {
+  max-width: 720px;
+  margin: 12px 0 0;
+  color: var(--classic-muted);
+  font-size: 16px;
+  line-height: 1.62;
+  text-wrap: pretty;
+}
+
+.classicFocusSprint .learningGrid,
+.classicFocusSprint .optionGrid,
+.classicFocusSprint .matchGrid,
+.classicFocusSprint .partGroups,
+.classicFocusSprint .dialogue {
+  display: grid;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.classicFocusSprint .learningGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.classicFocusSprint .learningItem {
+  min-width: 0;
+  padding: 15px;
+  border-radius: 15px;
+  background: var(--classic-brand-soft);
+}
+.classicFocusSprint .learningItem strong { display: block; margin-bottom: 6px; }
+.classicFocusSprint .learningItem p { margin: 6px 0 0; color: var(--classic-muted); line-height: 1.5; }
+
+.classicFocusSprint .korean {
+  font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-size: clamp(24px, 4vw, 34px);
+  font-weight: 850;
+  line-height: 1.32;
+  word-break: keep-all;
+}
+
+.classicFocusSprint .ruleTable {
+  width: 100%;
+  margin: 18px 0;
+  border-collapse: separate;
+  border-spacing: 0 7px;
+}
+.classicFocusSprint .ruleTable th {
+  padding: 0 11px 3px;
+  color: var(--classic-muted);
+  font-size: 12px;
+  text-align: left;
+}
+.classicFocusSprint .ruleTable td { padding: 11px 12px; background: var(--classic-brand-soft); }
+.classicFocusSprint .ruleTable td:first-child { border-radius: 12px 0 0 12px; }
+.classicFocusSprint .ruleTable td:last-child { border-radius: 0 12px 12px 0; }
+
+.classicFocusSprint .optionGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.classicFocusSprint .option,
+.classicFocusSprint .matchButton,
+.classicFocusSprint .partButton {
+  min-height: 48px;
+  padding: 11px 14px;
+  border: 1px solid var(--classic-line);
+  border-radius: 14px;
+  background: var(--classic-surface);
+  color: var(--classic-ink);
+  font-weight: 800;
+  overflow-wrap: anywhere;
+  touch-action: manipulation;
+}
+.classicFocusSprint .option:hover,
+.classicFocusSprint .matchButton:hover,
+.classicFocusSprint .partButton:hover { border-color: var(--classic-brand); }
+.classicFocusSprint .matchButton.selected,
+.classicFocusSprint .partButton.selected {
+  border-color: var(--classic-brand);
+  background: var(--classic-brand-soft);
+  color: var(--classic-brand-deep);
+}
+.classicFocusSprint .option.correct,
+.classicFocusSprint .matchButton.done {
+  border-color: var(--classic-success);
+  background: var(--classic-success-soft);
+}
+.classicFocusSprint .option.correct::after,
+.classicFocusSprint .matchButton.done::after { content: " ✓"; }
+.classicFocusSprint .option.wrong {
+  border-color: var(--classic-error);
+  background: var(--classic-error-soft);
+}
+.classicFocusSprint .option.wrong::after { content: " ×"; }
+
+.classicFocusSprint .matchGrid { grid-template-columns: 1fr 1fr; }
+.classicFocusSprint .matchColumn { display: grid; gap: 9px; min-width: 0; }
+.classicFocusSprint .partGroups { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.classicFocusSprint .partGroup {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid var(--classic-line);
+  border-radius: 15px;
+}
+.classicFocusSprint .partGroup small { color: var(--classic-muted); font-weight: 800; }
+.classicFocusSprint .buildResult {
+  min-height: 82px;
+  display: grid;
+  place-items: center;
+  margin: 14px 0;
+  border-radius: 16px;
+  background: var(--classic-brand-soft);
+  color: var(--classic-brand-deep);
+}
+.classicFocusSprint .buildResult strong {
+  font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-size: 38px;
+  word-break: keep-all;
+}
+.classicFocusSprint [data-action="confirm-build"] {
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 16px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--classic-brand);
+  color: #fff;
+  font-weight: 800;
+  touch-action: manipulation;
+}
+
+.classicFocusScenario .dialogue { gap: 12px; }
+.classicFocusScenario .bubble {
+  max-width: 84%;
+  padding: 13px 15px;
+  border-radius: 16px;
+  background: #f2f0f6;
+  line-height: 1.5;
+}
+.classicFocusScenario .bubble.b {
+  max-width: 72%;
+  margin-left: auto;
+  background: var(--classic-brand-soft);
+}
+.classicFocusScenario .bubble b {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--classic-brand);
+  font-size: 12px;
+}
+.classicFocusScenario .bubble .korean {
+  font-size: clamp(20px, 3vw, 26px);
+  line-height: 1.42;
+}
+.classicFocusScenario .bubble p {
+  margin: 7px 0 0;
+  color: var(--classic-muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.classicFocusAudioStatus {
+  display: flex;
+  width: max-content;
+  max-width: 100%;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0 4px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--classic-brand-soft);
+  color: var(--classic-muted);
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.4;
+}
+.classicFocusAudioStatus::before {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--classic-muted);
+  content: "";
+}
+
+.classicFocusSprint .feedback { display: grid; gap: 3px; }
+.classicFocusSprint .retryBanner {
+  display: grid;
+  gap: 3px;
+  margin-bottom: 14px;
+  padding: 11px 13px;
+  border-radius: 13px;
+  background: var(--classic-warning-soft);
+  color: var(--classic-warning);
+  font-weight: 800;
+}
+
+.classicFocusSprint .foot {
+  margin-top: auto;
+  padding-top: 24px;
+}
+.classicFocusSprint .foot .secondary {
+  border: 1px solid var(--classic-line);
+  background: var(--classic-surface);
+  color: var(--classic-ink);
+}
+.classicFocusSprint .foot .primary {
+  border: 0;
+  background: var(--classic-brand);
+  color: #fff;
+}
+
+.classicFocusSprint .completeMark {
+  width: 74px;
+  height: 74px;
+  margin: 4px auto 16px;
+  display: grid;
+  place-items: center;
+  border-radius: 21px;
+  background: var(--classic-brand);
+  color: #fff;
+  font-size: 36px;
+}
+.classicFocusSprint .center { margin-right: auto; margin-left: auto; text-align: center; }
+.classicFocusSprint .toast {
+  position: fixed;
+  z-index: 20;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  left: 50%;
+  padding: 11px 15px;
+  border-radius: 13px;
+  background: var(--classic-ink);
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 14px);
+  transition: opacity var(--classic-fast) var(--classic-ease), transform var(--classic-fast) var(--classic-ease);
+}
+.classicFocusSprint .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+@media (max-width: 767px) {
+  .classicFocusSprint h1 { font-size: 28px; }
+  .classicFocusSprint .learningGrid,
+  .classicFocusSprint .optionGrid,
+  .classicFocusSprint .partGroups { grid-template-columns: 1fr; }
+  .classicFocusSprint .ruleTable { font-size: 14px; }
+  .classicFocusSprint .ruleTable td { padding: 10px; }
+  .classicFocusScenario .bubble { max-width: 88%; }
+  .classicFocusScenario .bubble.b { max-width: 72%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .classicFocusSprint *,
+  .classicFocusSprint *::before,
+  .classicFocusSprint *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
