@@ -1,4 +1,4 @@
-const CACHE = 'nikigo-v36-self-review-gate-classic-focus-shared-core';
+const CACHE = 'nikigo-v37-self-review-gate-classic-focus-lesson-04';
 const ASSETS = [
   './', './index.html', './nikigo-app.html', './app-state.js', './course-catalog.js',
   './content-registry.js', './content-type-map.js', './route-registry.js',

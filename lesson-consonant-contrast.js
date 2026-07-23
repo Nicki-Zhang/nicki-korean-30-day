@@ -13,7 +13,7 @@
 
   const UI = {
     zh: {
-      lessonName:'第4课 · 听懂普通音、送气音和紧音', progress:'课程进度', home:'返回学习主页', back:'返回', next:'继续', finish:'完成课程',
+      lessonName:'第4课 · 听懂普通音、送气音和紧音', progress:'课程进度', navigation:'课程导航', language:'界面语言', skip:'跳到当前学习任务', home:'返回学习路径', back:'返回', next:'继续', finish:'完成课程',
       introTag:'K0 · 10分钟', introTitle:'听懂普通音、送气音和紧音', introLead:'通过完整韩语音节，初步听出气流和紧张度的差别。完成一次练习只是建立起点，不代表已经完全掌握。',
       goal1:'听完整音节', goal1d:'不播放孤立辅音裸音。', goal2:'比较气流', goal2d:'送气音有更明显的气流。', goal3:'感受紧张度', goal3d:'紧音先收紧，气流较少。',
       conceptTitle:'三个类别，关注两件事', conceptLead:'先听气流强弱，再感受口腔和喉部是否收紧。', plain:'普通音', aspirated:'送气音', tense:'紧音',
@@ -28,7 +28,7 @@
       audioDisclosure:'只播放精确匹配且已审核的托管音频。', resumed:'已恢复上次学习位置。', aiVoice:'精确审核音频不可用', noVoice:'此处没有可用的精确审核音频。', pendingNext:'课程主页还有更多内容可继续学习'
     },
     en: {
-      lessonName:'Lesson 4 · Plain, Aspirated, and Tense Sounds', progress:'Course progress', home:'Return to learning home', back:'Back', next:'Continue', finish:'Complete lesson',
+      lessonName:'Lesson 4 · Plain, Aspirated, and Tense Sounds', progress:'Course progress', navigation:'Course navigation', language:'Interface language', skip:'Skip to the current learning task', home:'Return to the learning path', back:'Back', next:'Continue', finish:'Complete lesson',
       introTag:'K0 · 10 MIN', introTitle:'Hear Plain, Aspirated, and Tense Sounds', introLead:'Use complete Korean syllables to begin hearing differences in airflow and tension. One lesson builds a starting point; it does not mean complete mastery.',
       goal1:'Hear full syllables', goal1d:'No isolated consonant sounds.', goal2:'Compare airflow', goal2d:'Aspirated sounds release more air.', goal3:'Feel tension', goal3d:'Tense sounds begin tight with less airflow.',
       conceptTitle:'Three categories, two things to notice', conceptLead:'Listen for airflow first, then notice whether the mouth and throat tighten.', plain:'Plain', aspirated:'Aspirated', tense:'Tense', plainConcept:'Natural airflow; at word onset it can fall between familiar voiced and voiceless sounds.', aspiratedConcept:'A clear puff follows the release. Hold a hand in front of your mouth to feel it.', tenseConcept:'The throat and mouth tighten first; the release is short and strong with less air.',
@@ -39,7 +39,7 @@
       completeTitle:'Lesson 4 complete', completeLead:'You completed a first round of plain, aspirated, and tense contrasts. You can review the lesson at any time.', xp:'You earned +50 XP this time', xpClaimed:'The first-completion reward was already claimed; no extra XP this time', earned:'Progress saved', returnCourses:'Return to Courses', reviewLesson:'Review this lesson', audioDisclosure:'Only exact approved hosted audio is played.', resumed:'Your previous position was restored.', aiVoice:'Exact approved audio unavailable', noVoice:'No exact approved audio is available here.', pendingNext:'More lessons are available'
     },
     vi: {
-      lessonName:'Bài 4 · Âm thường, bật hơi và căng', progress:'Tiến độ bài học', home:'Về trang học tập', back:'Quay lại', next:'Tiếp tục', finish:'Hoàn thành bài',
+      lessonName:'Bài 4 · Âm thường, bật hơi và căng', progress:'Tiến độ bài học', navigation:'Điều hướng bài học', language:'Ngôn ngữ giao diện', skip:'Chuyển đến nhiệm vụ học hiện tại', home:'Trở về lộ trình học', back:'Quay lại', next:'Tiếp tục', finish:'Hoàn thành bài',
       introTag:'K0 · 10 PHÚT', introTitle:'Nghe âm thường, bật hơi và căng', introLead:'Dùng âm tiết tiếng Hàn đầy đủ để bước đầu nghe sự khác nhau về luồng hơi và độ căng. Một bài học chỉ tạo nền tảng, không có nghĩa là đã thành thạo hoàn toàn.',
       goal1:'Nghe âm tiết đầy đủ', goal1d:'Không phát phụ âm trần đứng riêng.', goal2:'So sánh luồng hơi', goal2d:'Âm bật hơi có luồng hơi rõ hơn.', goal3:'Cảm nhận độ căng', goal3d:'Âm căng siết trước và ít hơi hơn.',
       conceptTitle:'Ba loại, chú ý hai điểm', conceptLead:'Trước hết nghe độ mạnh của luồng hơi, sau đó cảm nhận miệng và cổ họng có siết lại hay không.', plain:'Âm thường', aspirated:'Âm bật hơi', tense:'Âm căng', plainConcept:'Luồng hơi tự nhiên; ở đầu từ có thể nằm giữa âm hữu thanh và vô thanh quen thuộc.', aspiratedConcept:'Có luồng hơi rõ sau khi bật âm; đặt tay trước miệng để cảm nhận.', tenseConcept:'Cổ họng và khoang miệng siết trước; âm bật ngắn, mạnh và ít hơi hơn.',
@@ -50,7 +50,7 @@
       completeTitle:'Đã hoàn thành Bài 4', completeLead:'Bạn đã hoàn thành vòng đầu so sánh âm thường, bật hơi và căng. Bạn có thể ôn lại bài bất cứ lúc nào.', xp:'Lần này bạn nhận +50 XP', xpClaimed:'Đã nhận thưởng lần đầu; lần này không cộng thêm XP', earned:'Đã lưu tiến độ', returnCourses:'Trở về Bài học', reviewLesson:'Ôn lại bài này', audioDisclosure:'Chỉ phát tệp âm thanh lưu trữ đã duyệt và khớp chính xác.', resumed:'Đã khôi phục vị trí học trước đó.', aiVoice:'Không có âm thanh chính xác đã duyệt', noVoice:'Tại đây chưa có âm thanh chính xác đã duyệt.', pendingNext:'Có thêm bài học để tiếp tục'
     },
     ja: {
-      lessonName:'第4課 · 平音・激音・濃音', progress:'レッスン進捗', home:'学習ホームへ戻る', back:'戻る', next:'続ける', finish:'レッスン完了',
+      lessonName:'第4課 · 平音・激音・濃音', progress:'レッスン進捗', navigation:'コースナビゲーション', language:'表示言語', skip:'現在の学習課題へ移動', home:'学習パスへ戻る', back:'戻る', next:'続ける', finish:'レッスン完了',
       introTag:'K0 · 10分', introTitle:'平音・激音・濃音を聞き分ける', introLead:'完全な韓国語音節で、気流と緊張度の違いを初めて聞き分けます。1回の学習は出発点であり、完全習得を意味しません。',
       goal1:'完全な音節を聞く', goal1d:'子音だけの裸の音は再生しません。', goal2:'気流を比べる', goal2d:'激音は気流がより明確です。', goal3:'緊張度を感じる', goal3d:'濃音は先に締め、気流が少なめです。',
       conceptTitle:'3つの種類、2つの注目点', conceptLead:'まず気流の強さを聞き、次に口と喉が締まるかを感じます。', plain:'平音', aspirated:'激音', tense:'濃音', plainConcept:'自然な気流。語頭では、身近な有声音と無声音の中間に聞こえることがあります。', aspiratedConcept:'破裂後に明確な気流があります。口の前に手を置いて感じてみましょう。', tenseConcept:'喉と口腔を先に締め、短く強く破裂し、気流は少なめです。',
@@ -195,7 +195,7 @@
   function showToast(message) { const toast=document.getElementById('toast'); toast.textContent=message; toast.classList.add('show'); global.setTimeout(()=>toast.classList.remove('show'),1800); }
 
   function footer({nextDisabled=false,nextLabel=null,back=true}={}) {
-    return `<div class="foot">${back?`<button class="ghost" data-action="back">← ${text('back')}</button>`:'<span></span>'}<button class="primary" data-action="next" ${nextDisabled?'disabled':''}>${nextLabel||text('next')} →</button></div>`;
+    return `<div class="foot classicFocusActions">${back?`<button class="ghost" data-action="back">← ${text('back')}</button>`:'<span aria-hidden="true"></span>'}<button class="primary" data-action="next" ${nextDisabled?'disabled':''}>${nextLabel||text('next')} →</button></div>`;
   }
   function renderIntro() {
     return `<span class="eyebrow">${text('introTag')}</span><h1>${text('introTitle')}</h1><p class="lead">${text('introLead')}</p>${session.step>0?`<p class="resumeNote">${text('resumed')}</p>`:''}<div class="goals"><div class="goal"><b>👂 ${text('goal1')}</b><span>${text('goal1d')}</span></div><div class="goal"><b>💨 ${text('goal2')}</b><span>${text('goal2d')}</span></div><div class="goal"><b>⚡ ${text('goal3')}</b><span>${text('goal3d')}</span></div></div>${footer({back:false})}`;
@@ -209,7 +209,8 @@
     const embeddedQuiz=group.id==='s'?renderQuestion(QUESTIONS.qs,false,true):'';
     const hints=group.items.map(item=>`<div class="approxRow"><b>${item.syllable}</b><span>${categoryLabel(item.category)}</span>${item.approximation?`<span>${text('approximationLabel')}：${item.approximation}</span>`:''}<small>${categoryTip(item.category)}</small></div>`).join('');
     const sequenceReady=group.sequence.every(value=>HOSTED_AUDIO[value]);
-    return `<span class="eyebrow">${group.sequence.join(' / ')}</span><h1>${sequence}</h1><p class="lead">${text('groupLead')}</p><div class="contrastGrid" style="--contrast-count:${group.items.length}">${cards}</div><button class="sequenceButton" data-action="sequence" data-sequence="${group.sequence.join(',')}" aria-label="${sequenceReady?text('listenSequence',{sequence}):text('audioNotReleased')}" ${sequenceReady?'':'disabled aria-disabled="true"'}>▶ ${sequenceReady?text('listenSequence',{sequence}):text('audioNotReleased')}</button><details class="romanDetails"><summary>${text('romanSummary')}</summary><div class="approxList">${hints}</div><p>${text('romanNote')}</p></details>${sequenceReady?'':`<p class="audioDisclosure">ⓘ ${text('audioNotReleased')}</p>`}${embeddedQuiz}${footer()}`;
+    const nextDisabled=group.id==='s'&&!session.answers.qs;
+    return `<span class="eyebrow">${group.sequence.join(' / ')}</span><h1>${sequence}</h1><p class="lead">${text('groupLead')}</p><div class="contrastGrid" style="--contrast-count:${group.items.length}">${cards}</div><button class="sequenceButton" data-action="sequence" data-sequence="${group.sequence.join(',')}" aria-label="${sequenceReady?text('listenSequence',{sequence}):text('audioNotReleased')}" ${sequenceReady?'':'disabled aria-disabled="true"'}>▶ ${sequenceReady?text('listenSequence',{sequence}):text('audioNotReleased')}</button><details class="romanDetails"><summary>${text('romanSummary')}</summary><div class="approxList">${hints}</div><p>${text('romanNote')}</p></details>${sequenceReady?'':`<p class="audioDisclosure">ⓘ ${text('audioNotReleased')}</p>`}${embeddedQuiz}${footer({nextDisabled})}`;
   }
   function renderQuestion(question, retry=false, embedded=false) {
     const answer=retry?retryFeedback:session.answers[question.id]; const options=session.optionOrders[question.id]||question.options; const playerState=questionPlayerStates.get(question.id)||'initial'; const player=questionPlayerModel(question,playerState,Boolean(answer));
@@ -217,17 +218,18 @@
     const optionButtons=options.map(option=>{let cls='';if(answer){if(option===question.correct)cls='correct';else if(option===answer.choice)cls='wrong';}return `<button class="quizOption ${cls}" data-action="${retry?'retry-answer':'answer'}" data-question="${question.id}" data-value="${option}" ${answer||!audioReady?'disabled aria-disabled="true"':''}>${optionLabel(option)}${answer&&option===question.correct?' ✓':answer&&option===answer.choice?' ✕':''}</button>`;}).join('');
     const category=SOUND_CATEGORY[question.correct]||question.correct;
     const reveal=answer?`<div class="answerReveal"><b>${text('transcriptLabel')}：${player.transcript}</b><span>${text('categoryResult')}：${categoryLabel(player.category)}</span><span>${text('correctAnswerLabel')}：${optionLabel(player.correctAnswer)}</span><span>${text('teachingPointLabel')}：${categoryDetail(category)}</span></div>`:'';
-    const feedback=answer?`<div class="feedback ${answer.correct?'good':'try'}" role="status"><strong>${text(answer.correct?'correct':'incorrect',{detail:categoryDetail(category)})}</strong>${answer.correct?'':`<span>${text('answerWas',{answer:optionLabel(question.correct)})}</span>`}${retry&&!answer.correct?`<button class="replayButton" data-action="retry-again" data-question="${question.id}">↻ ${text('retryAgain')}</button>`:`<button class="replayButton" data-action="question-audio" data-question="${question.id}" aria-label="${text('playerAriaReplay')}">▶ ${text('playerReplay')}</button>`}</div>`:'';
+    const feedback=answer?`<div class="feedback classicFocusFeedback ${answer.correct?'good':'try'}" role="status"><strong>${text(answer.correct?'correct':'incorrect',{detail:categoryDetail(category)})}</strong>${answer.correct?'':`<span>${text('answerWas',{answer:optionLabel(question.correct)})}</span>`}${retry&&!answer.correct?`<button class="replayButton" data-action="retry-again" data-question="${question.id}">↻ ${text('retryAgain')}</button>`:`<button class="replayButton" data-action="question-audio" data-question="${question.id}" aria-label="${text('playerAriaReplay')}">▶ ${text('playerReplay')}</button>`}</div>`:'';
     return `${embedded?'<hr class="sectionDivider">':`<span class="eyebrow">${text('quizTag')}</span>`}<${embedded?'h2':'h1'}>${questionInstruction(question)}</${embedded?'h2':'h1'}><div class="questionAudioPlayer quizAudio" data-player-state="${playerState}"><button class="soundPlay" data-action="question-audio" data-question="${question.id}" aria-label="${audioReady?player.aria:text('audioNotReleased')}" ${audioReady?'':'disabled aria-disabled="true"'}>▶ ${audioReady?player.label:text('audioNotReleased')}</button>${playerState==='error'?`<p class="playerError" role="status">${text('playerError')}</p>`:''}</div>${embedded||audioReady?'':`<p class="testAudioDisclosure">ⓘ ${text('audioNotReleased')}</p>`}<div class="quizOptions">${optionButtons}</div>${feedback}${reveal}`;
   }
   function renderQuiz(questionId) {
     const question=QUESTIONS[questionId]; const answered=Boolean(session.answers[questionId]);
-    return `${renderQuestion(question)}<p class="note">${text('previewOnly')}</p>${footer()}`;
+    const previewNote=question.audio.every(value=>HOSTED_AUDIO[value])?'':`<p class="note">${text('previewOnly')}</p>`;
+    return `${renderQuestion(question)}${previewNote}${footer({nextDisabled:!answered})}`;
   }
   function renderRetry() {
     const pending=session.mistakes[0];
     if(!pending)return `<span class="eyebrow">13 · K0</span><h1>${text('retryTitle')}</h1><p class="lead">${text('retryLead')}</p><div class="note">✓ ${text('retryEmpty')}</div>${footer()}`;
-    return `<span class="eyebrow">13 · K0</span><h1>${text('retryTitle')}</h1><p class="lead">${text('retryLead')}</p><div class="retryBadge"><b>${text('retryRemaining',{count:session.mistakes.length})}</b></div>${renderQuestion(QUESTIONS[pending],true)}${footer({nextDisabled:true})}`;
+    return `<span class="eyebrow">13 · K0</span><h1>${text('retryTitle')}</h1><p class="lead">${text('retryLead')}</p><div class="retryBadge"><b>${text('retryRemaining',{count:session.mistakes.length})}</b></div>${renderQuestion(QUESTIONS[pending],true,true)}${footer({nextDisabled:true})}`;
   }
   function renderSummary() {
     return `<span class="eyebrow">14 · K0</span><h1>${text('summaryTitle')}</h1><p class="lead">${text('summaryLead')}</p><div class="summaryList"><div>① ${text('summary1')}</div><div>② ${text('summary2')}</div><div>③ ${text('summary3')}</div><div>④ ${text('summary4')}</div></div>${footer({nextLabel:text('finish')})}`;
@@ -244,10 +246,41 @@
     if(Object.keys(HOSTED_AUDIO).length<14){previewSkipped=true;session.previewSkipped=true;saveSession()} completeLesson();
     return `<div class="complete"><div class="completeMark">✓</div><span class="eyebrow">K0 · COMPLETE</span><h1>${text('completeTitle')}</h1><p class="lead centered">${text('completeLead')}</p><div class="rewards"><span class="reward">✦ ${text(completionAwardedThisView?'xp':'xpClaimed')}</span><span class="reward">✓ ${text('earned')}</span><span class="reward">✓ ${text('pendingNext')}</span></div><div class="repeatActions"><button class="secondary" data-action="review">↻ ${text('reviewLesson')}</button><button class="primary" data-action="home">${text('returnCourses')} →</button></div></div>`;
   }
+  function contentTypeForScreen(type) {
+    if(type==='intro')return'intro';
+    if(type==='concept'||type==='summary')return'explanation';
+    if(type==='group')return'comparison';
+    if(type==='quiz')return'choice';
+    if(type==='retry')return'retry';
+    return'completion';
+  }
+  function canAdvance(type,id) {
+    if(type==='quiz')return Boolean(session.answers[id]);
+    if(type==='group'&&id==='s')return Boolean(session.answers.qs);
+    if(type==='retry')return session.mistakes.length===0;
+    return true;
+  }
   function render() {
     const [type,id]=SCREENS[session.step]; const stage=document.getElementById('lessonStage');
-    document.documentElement.lang=language==='zh'?'zh-CN':language; document.getElementById('language').value=language; document.getElementById('lessonName').textContent=text('lessonName'); document.getElementById('progressLabel').textContent=text('progress');
-    const percent=Math.round(session.step/(SCREENS.length-1)*100); document.getElementById('progressCount').textContent=`${session.step+1} / ${SCREENS.length}`; document.getElementById('progressBar').style.width=`${percent}%`; document.getElementById('progressTrack').setAttribute('aria-valuenow',String(percent)); document.getElementById('homeButton').setAttribute('aria-label',text('home')); document.getElementById('homeButton').title=text('home'); document.getElementById('homeLogo').setAttribute('aria-label',text('home'));
+    const percent=Math.round(session.step/(SCREENS.length-1)*100);
+    shell.update({
+      lessonId:LESSON_ID,
+      currentStep:session.step+1,
+      totalSteps:SCREENS.length,
+      language,
+      title:text('lessonName'),
+      stepLabel:text('progress'),
+      progress:percent,
+      canGoPrevious:session.step>0,
+      canGoNext:canAdvance(type,id),
+      audioAvailability:Object.keys(HOSTED_AUDIO).length===14?'approved':'mixed',
+      contentType:contentTypeForScreen(type),
+      navigationLabel:text('navigation'),
+      languageLabel:text('language'),
+      brandActionLabel:text('home'),
+      exitActionLabel:text('home'),
+      skipLabel:text('skip')
+    });
     if(type==='intro')stage.innerHTML=renderIntro(); if(type==='concept')stage.innerHTML=renderConcept(); if(type==='group')stage.innerHTML=renderGroup(id); if(type==='quiz')stage.innerHTML=renderQuiz(id); if(type==='retry')stage.innerHTML=renderRetry(); if(type==='summary')stage.innerHTML=renderSummary(); if(type==='complete')stage.innerHTML=renderComplete();
     if(type==='quiz'&&profile.autoplayAudio===true&&!autoplayed.has(session.step)&&QUESTIONS[id].audio.every(value=>HOSTED_AUDIO[value])){autoplayed.add(session.step);global.setTimeout(()=>playQuestionAudio(QUESTIONS[id],true),250);}
   }
@@ -256,11 +289,23 @@
     if(retry){retryFeedback={choice:value,correct};if(correct){session=applyRetryAnswer(session,question,value);retryFeedback=null;saveSession();}render();return;}
     session=applyAnswer(session,question,value); saveSession(); render();
   }
-  function goHome(){stopAudio();global.location.href=`nikigo-app.html?lang=${language}#courses`;}
+  function learningPathUrl(){return `nikigo-app.html?lang=${language}&learnStage=K0&learnModule=k0-consonants-syllables-compound-vowels#courses`;}
+  function goHome(){stopAudio();global.location.href=learningPathUrl();}
+  function syncLanguageUrl(){const url=new URL(global.location.href);url.searchParams.set('lang',language);global.history?.replaceState?.({nikigoStep:session.step},'',url);}
+  const shell=global.NikigoClassicFocusShell.mount({
+    onLanguageChange(value){
+      language=LANGUAGES.includes(value)?value:'en';
+      saveSession();
+      syncLanguageUrl();
+      render();
+    },
+    onBrandAction:goHome,
+    onExitAction:goHome
+  });
 
   document.addEventListener('click',event=>{
     const button=event.target.closest('button');if(!button)return;const action=button.dataset.action;
-    if(button.id==='homeButton'||button.id==='homeLogo'||action==='home'){goHome();return;}
+    if(action==='home'){goHome();return;}
     if(action==='play'){stopAudio();playSequence([button.dataset.syllable]);return;}
     if(action==='sequence'){stopAudio();playSequence(button.dataset.sequence.split(','));return;}
     if(action==='question-audio'){stopAudio();const question=QUESTIONS[button.dataset.question];if(question)playQuestionAudio(question);return;}
@@ -269,9 +314,9 @@
     if(action==='retry-again'){retryFeedback=null;stopAudio();const question=QUESTIONS[button.dataset.question];render();if(question)playQuestionAudio(question);return;}
     if(action==='review'){stopAudio();session=blankSession();retryFeedback=null;saveSession();render();global.scrollTo(0,0);return;}
     if(action==='back'){stopAudio();session.step=Math.max(0,session.step-1);retryFeedback=null;saveSession();render();global.scrollTo(0,0);return;}
-    if(action==='next'){stopAudio();if(Object.keys(HOSTED_AUDIO).length<14)session.previewSkipped=true;session.step=Math.min(SCREENS.length-1,session.step+1);retryFeedback=null;saveSession();render();global.scrollTo(0,0);}
+    if(action==='next'){const [type,id]=SCREENS[session.step];if(!canAdvance(type,id))return;stopAudio();if(Object.keys(HOSTED_AUDIO).length<14)session.previewSkipped=true;session.step=Math.min(SCREENS.length-1,session.step+1);retryFeedback=null;saveSession();render();global.scrollTo(0,0);document.getElementById('lessonStage').focus({preventScroll:true});}
   });
-  document.getElementById('language').addEventListener('change',event=>{language=LANGUAGES.includes(event.target.value)?event.target.value:'en';saveSession();render();});
+  global.addEventListener('keydown',event=>{if(event.key==='Escape')goHome();});
   global.NikigoContrastLesson=Object.freeze({LESSON_ID,GROUPS,QUESTIONS,SCREENS,UI,HOSTED_AUDIO,blankSession,applyAnswer,applyRetryAnswer,completionPatch,neutralPlayerCopy,questionPlayerModel,getSession:()=>JSON.parse(JSON.stringify(session))});
   render();
 })(window);
