@@ -11,7 +11,7 @@ const configs=['lesson-11.js','lesson-12.js','lesson-13.js'].map(loadConfig);
 for(const [index,config] of configs.entries()){
   const expected=`lesson-${index+11}`;assert.equal(config.id,expected);assert.equal(config.displayNumber,index+11);assert.equal(config.steps.length,13,`${expected} must have 13 steps`);assert.equal(new Set(config.steps.map(step=>step.id)).size,13);assert.equal(config.steps.at(-1).type,'complete');assert.ok(config.steps.some(step=>step.type==='choice'||step.type==='scenario'));assert.ok(config.steps.some(step=>step.type==='match'));assert.ok(config.steps.some(step=>step.type==='build'));validateLocalized(config,config.id);
   const html=fs.readFileSync(`${expected}.html`,'utf8');
-  const engineMarkers=expected==='lesson-11'?['lesson-clear-interactive.js','lesson-clear-interactive.css']:['lesson-sprint-engine.js','lesson-sprint.css'];
+  const engineMarkers=expected==='lesson-11'?['lesson-11-classic-focus.js','lesson-11-classic-focus.css']:['lesson-sprint-engine.js','lesson-sprint.css'];
   for(const marker of [`${expected}.js`,...engineMarkers,'audio-catalog.js','assets/nikigo-mark.svg'])assert.ok(html.includes(marker),`${expected}.html missing ${marker}`);
 }
 

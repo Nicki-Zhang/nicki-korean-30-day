@@ -3,17 +3,17 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 
 const html=fs.readFileSync('lesson-11.html','utf8');
-const lessonCss=fs.readFileSync('lesson-clear-interactive.css','utf8');
+const lessonCss=fs.readFileSync('lesson-11-classic-focus.css','utf8');
 const lessonTheme=fs.readFileSync('lesson-purple-interactive.css','utf8');
-const lessonEngine=fs.readFileSync('lesson-clear-interactive.js','utf8');
-const missionShell=fs.readFileSync('lesson-11-mission-shell.js','utf8');
+const lessonEngine=fs.readFileSync('lesson-11-classic-focus.js','utf8');
 const shellCss=fs.readFileSync('assets/nikigo-purple-shell.css','utf8');
 const friendlyCss=fs.readFileSync('assets/nikigo-friendly-learning-path.css','utf8');
 const shellJs=fs.readFileSync('assets/nikigo-clear-shell.js','utf8');
 const app=fs.readFileSync('nikigo-app.html','utf8');
 const worker=fs.readFileSync('sw.js','utf8');
 
-for(const marker of ['lesson-clear-interactive.css','lesson-purple-interactive.css','lesson-11-mission.css','lesson-11-mission-shell.js','lesson-clear-interactive.js','audio-catalog.js','lesson-11.js'])assert.ok(html.includes(marker),`Lesson 11 pilot missing ${marker}`);
+for(const marker of ['lesson-11-classic-focus.css','lesson-11-classic-focus.js','audio-catalog.js','lesson-11.js'])assert.ok(html.includes(marker),`Lesson 11 Classic Focus missing ${marker}`);
+for(const rejected of ['lesson-11-mission.css','lesson-11-mission-shell.js','lesson-clear-interactive.js'])assert.ok(!html.includes(rejected),`Lesson 11 must not load rejected presentation ${rejected}`);
 assert.ok(app.includes('assets/nikigo-purple-shell.css'));
 assert.ok(app.includes('assets/nikigo-friendly-learning-path.css'));
 assert.ok(app.includes('assets/nikigo-clear-shell.js'));
@@ -22,23 +22,23 @@ for(const marker of ['--nikigo-purple:#6657d9','--nikigo-purple-deep:#4f46b8','-
 for(const marker of ['--friendly-brand-900:#2b1747','--friendly-gradient:linear-gradient','--friendly-text-korean','--friendly-radius-xl','--friendly-duration-normal','min-height:44px','prefers-reduced-motion'])assert.ok(friendlyCss.includes(marker),`Friendly learning path token or accessibility rule missing: ${marker}`);
 for(const marker of ['.friendly-shell .learningHero','.friendly-shell .learningStatus','.friendly-shell .dashboardJourney','.friendly-shell .taxonomyChapter.current','.friendly-shell .moduleLessons .courseRow'])assert.ok(friendlyCss.includes(marker),`Friendly learning component missing: ${marker}`);
 assert.doesNotMatch(friendlyCss,/transition:\s*all/i,'Friendly learning path must use property-specific transitions.');
-for(const marker of ['--canvas:#f7f7fb','--action:#4f46b8','--accent:#6657d9','--success:#257653','--error:#a94338','min-height:44px','prefers-reduced-motion'])assert.ok(lessonTheme.includes(marker),`Purple lesson token or accessibility rule missing: ${marker}`);
+for(const marker of ['--classic-brand:#6d4aff','--classic-page:#fbfaff','--classic-success:#237c58','--classic-error:#a83b50','min-height:44px','prefers-reduced-motion'])assert.ok(lessonCss.includes(marker),`Classic Focus token or accessibility rule missing: ${marker}`);
 for(const source of [lessonTheme,shellCss])assert.doesNotMatch(source,/#287f60|#1d674c|#f6f7f4/i,'Loaded purple theme must not contain Ink & Jade palette tokens.');
 assert.match(shellCss,/linear-gradient\(128deg,#403a86/,'Dashboard hero must retain the restrained purple gradient.');
 assert.match(app,/id="streakMetric"/);assert.match(app,/id="xpMetric"/);assert.match(app,/id="weekMetric"/);
 assert.match(app,/<header class="top">[\s\S]*?<nav id="appNav"[\s\S]*?<\/header>\s*<main id="appMain"[^>]*>/,'Primary navigation must remain inside the top shell and before main content for desktop and mobile placement.');
-assert.match(lessonCss,/\.conceptChunk\[aria-pressed="true"\][\s\S]*translateY\(-3px\)/);
-assert.match(lessonCss,/--motion:180ms/);
+assert.match(lessonCss,/\.conceptChunk\[aria-pressed="true"\]/);
+assert.match(lessonCss,/--classic-base:240ms/);
 assert.match(lessonEngine,/NikigoAudio\?\.resolve\?\.\(audio\.text,audio\.audioType,audio\.lessonId\)/);
-assert.match(lessonEngine,/if\(!result\?\.playable\|\|!result\.path\)return/);
+assert.match(lessonEngine,/filter\(item=>item\.result\?\.playable&&item\.result\.path\)/);
 assert.doesNotMatch(lessonEngine,/speechSynthesis|SpeechSynthesisUtterance|webkitSpeech|text-to-speech/i);
 assert.doesNotMatch(lessonEngine,/option\.id===step\.correct|step\.correct\)[\s\S]{0,120}isCorrect/, 'Wrong feedback must not reveal the correct option.');
-for(const marker of ['wrongHint','history.pushState','popstate','completionPatch','beginRetry','move-left','move-right','prefers-reduced-motion'])assert.ok(`${lessonEngine}\n${lessonCss}\n${lessonTheme}`.includes(marker),`Pilot interaction missing ${marker}`);
+for(const marker of ['history.pushState','popstate','completionPatch','beginRetry','move-left','move-right','prefers-reduced-motion'])assert.ok(`${lessonEngine}\n${lessonCss}`.includes(marker),`Classic Focus interaction missing ${marker}`);
 for(const marker of ['저는 하늘이에요.','저는 하늘 이에요']){
   if(marker.includes(' 하늘 ')) assert.ok(!`${lessonEngine}\n${shellJs}\n${app}`.includes(marker),'Invalid Korean spacing entered the pilot.');
   else assert.ok(lessonEngine.includes(marker),'Canonical Korean sentence missing.');
 }
-for(const asset of ['./lesson-clear-interactive.js','./lesson-clear-interactive.css','./lesson-purple-interactive.css','./assets/nikigo-clear-shell.js','./assets/nikigo-purple-shell.css','./assets/nikigo-friendly-learning-path.css'])assert.ok(worker.includes(asset),`Service Worker missing ${asset}`);
+for(const asset of ['./lesson-11-classic-focus.js','./lesson-11-classic-focus.css','./assets/nikigo-clear-shell.js','./assets/nikigo-purple-shell.css','./assets/nikigo-friendly-learning-path.css'])assert.ok(worker.includes(asset),`Service Worker missing ${asset}`);
 
 const context={window:{}};context.window.window=context.window;
 vm.runInNewContext(fs.readFileSync('lesson-11.js','utf8'),context,{filename:'lesson-11.js'});
@@ -46,16 +46,15 @@ const config=context.window.NikigoLessonConfig;
 assert.equal(config.id,'lesson-11');assert.equal(config.steps.length,13);
 
 const noop=()=>{};
-function element(){return {textContent:'',innerHTML:'',value:'',children:Array.from({length:8},()=>({className:''})),dataset:{},classList:{add:noop,remove:noop},setAttribute:noop,addEventListener:noop,querySelectorAll:()=>[]};}
-const elements=new Map(['lessonStage','language','lessonName','progressLabel','progressCount','progressTrack','homeButton','homeLogo','toast'].map(id=>[id,element()]));
+function element(){return {textContent:'',innerHTML:'',value:'',style:{},dataset:{},open:false,classList:{add:noop,remove:noop},setAttribute:noop,addEventListener:noop,querySelector:()=>({style:{}}),querySelectorAll:()=>[],focus:noop,close:noop,showModal:noop};}
+const elements=new Map(['lessonStage','language','lessonName','progressLabel','progressCount','progressTrack','homeButton','homeLogo','skipLink','courseNavigation','announcer','exitDialog','exitDialogTitle','exitDialogCopy','exitCancelButton','exitConfirmButton'].map(id=>[id,element()]));
 const document={getElementById:id=>elements.get(id)||element(),documentElement:{lang:''}};
 const storage=new Map();let profile={xp:100,completedLessons:[],lessonProgress:{},interfaceLanguage:'en'};
 const history={replaceState:noop,pushState:noop};
 const window={window:null,document,NikigoLessonConfig:config,NikigoAudio:{resolve:()=>({playable:false,path:null})},NikigoState:{get:()=>profile,update:patch=>{profile=typeof patch==='function'?patch(profile):{...profile,...patch};return profile;}},localStorage:{getItem:key=>storage.get(key)||null,setItem:(key,value)=>storage.set(key,String(value))},location:{search:'?lang=en',href:'http://localhost/lesson-11.html'},history,addEventListener:noop,scrollTo:noop};window.window=window;
-vm.runInNewContext(missionShell,{window},{filename:'lesson-11-mission-shell.js'});
-vm.runInNewContext(lessonEngine,{window,document,URLSearchParams,setTimeout,clearTimeout,Audio:class{}},{filename:'lesson-clear-interactive.js'});
+vm.runInNewContext(lessonEngine,{window,document,URL,URLSearchParams,setTimeout,clearTimeout,Audio:class{}},{filename:'lesson-11-classic-focus.js'});
 const api=window.NikigoSprintLessonTest;
-assert.equal(api.phaseByStep.length,13);assert.equal(api.phaseByStep.at(-1),7);
+assert.equal(api.config.steps.length,13);
 const first=api.completionPatch(profile);assert.equal(first.xp,150);assert.ok(first.completedLessons.includes('lesson-11'));assert.equal(api.completionPatch(first).xp,150);
 const restored=api.normalizeSession({...api.blankSession(),step:8,mistakes:['build-name'],retryQueue:['build-name'],retryMode:true,dialogue:{'first-scene':3}});
 assert.equal(restored.step,8);assert.equal(restored.retryMode,true);assert.equal(restored.dialogue['first-scene'],3);

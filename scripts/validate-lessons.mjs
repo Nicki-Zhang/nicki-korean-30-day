@@ -92,9 +92,9 @@ for (const [index, item] of (catalog || []).entries()) {
 
   if (['lesson-08','lesson-09','lesson-10','lesson-11','lesson-12','lesson-13'].includes(stableId)) {
     const html = fs.readFileSync(file, 'utf8');
-    const isClearInteractivePilot = stableId === 'lesson-11';
-    const expectedEngine = isClearInteractivePilot ? 'lesson-clear-interactive.js' : 'lesson-sprint-engine.js';
-    const expectedStyles = isClearInteractivePilot ? 'lesson-clear-interactive.css' : 'lesson-sprint.css';
+    const isClassicFocus = stableId === 'lesson-11';
+    const expectedEngine = isClassicFocus ? 'lesson-11-classic-focus.js' : 'lesson-sprint-engine.js';
+    const expectedStyles = isClassicFocus ? 'lesson-11-classic-focus.css' : 'lesson-sprint.css';
     if (!html.includes(`${stableId}.js`)) errors.push(`${file} does not load its lesson configuration.`);
     if (!html.includes(expectedEngine)) errors.push(`${file} does not load its expected lesson engine.`);
     if (!html.includes(expectedStyles)) errors.push(`${file} does not load its expected lesson styles.`);
