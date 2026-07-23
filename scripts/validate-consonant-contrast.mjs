@@ -18,6 +18,12 @@ const manifest = JSON.parse(fs.readFileSync('audio/k0-consonant-contrast/manifes
 assert.match(html,/lesson-consonant-contrast\.js/);
 assert.match(html,/lesson-consonant-contrast\.css/);
 assert.match(html,/course-catalog\.js/);
+for (const asset of ['assets/classic-focus-tokens.css','assets/classic-focus-shell.css','assets/classic-focus-shell.js']) {
+  assert.match(html,new RegExp(asset.replaceAll('.','\\.')),`Lesson 4 must load ${asset}`);
+}
+assert.match(html,/classicFocusShell classicFocusPronunciation/);
+assert.match(html,/classicFocusCard contrastCard/);
+assert.match(html,/role="progressbar" aria-labelledby="progressLabel progressCount"/);
 assert.match(css,/@media\(max-width:760px\)/);
 for (const selector of ['.soundPlay','.sequenceButton','.quizOption']) assert.match(css,new RegExp(selector.replace('.','\\.')));
 
@@ -43,12 +49,15 @@ const elements = new Map(['lessonStage','language','lessonName','progressLabel',
 const storage = new Map();
 const oldProfile = {xp:120,completedLessons:['lesson-02'],lessonProgress:{'lesson-03':66},weeklyProgress:2,audioRate:0.9,autoplayAudio:false,interfaceLanguage:'ja',guest:true};
 let profile = JSON.parse(JSON.stringify(oldProfile));
+const shellUpdates = [];
 const documentStub = {getElementById:id=>elements.get(id)||element(),addEventListener(){},documentElement:{lang:''}};
 const lessonWindow = {
   location:{search:'?lang=en',href:''},navigator:{language:'en'},document:documentStub,
+  history:{replaceState(){}},
   localStorage:{getItem:key=>storage.get(key)||null,setItem:(key,value)=>storage.set(key,String(value))},
   NikigoState:{get:()=>profile,update:(patch)=>{profile=typeof patch==='function'?patch(profile):{...profile,...patch};return profile;}},
-  setTimeout(){},scrollTo(){},NikigoAudio:{lessons:{},canPlayAudio(){return false}}
+  setTimeout(){},scrollTo(){},addEventListener(){},NikigoAudio:{lessons:{},canPlayAudio(){return false}},
+  NikigoClassicFocusShell:{mount(){return {update(viewModel){shellUpdates.push(viewModel);}};}}
 };
 lessonWindow.window=lessonWindow;
 vm.runInNewContext(source,{window:lessonWindow,document:documentStub,URLSearchParams,Audio:class{}},{filename:'lesson-consonant-contrast.js'});
@@ -59,6 +68,10 @@ assert.equal(api.SCREENS.length,15);
 assert.equal(api.GROUPS.length,5);
 assert.equal(Object.keys(api.QUESTIONS).length,6);
 assert.equal(Object.keys(api.HOSTED_AUDIO).length,0,'The empty-catalog UI fixture must not invent hosted files.');
+assert.equal(shellUpdates.at(-1).lessonId,'lesson-04');
+assert.equal(shellUpdates.at(-1).totalSteps,15);
+assert.equal(shellUpdates.at(-1).contentType,'intro');
+assert.equal(shellUpdates.at(-1).audioAvailability,'mixed');
 assert.deepEqual(JSON.parse(JSON.stringify(api.GROUPS.flatMap(group=>group.items.map(item=>[item.symbol,item.category,item.syllable])))),expected.map(item=>item.slice(0,3)));
 for(const item of api.GROUPS.flatMap(group=>group.items))assert.doesNotMatch(item.approximation,/[^\x20-\x7E]/,`${item.syllable} approximation must use cross-device plain text`);
 const englishKeys=Object.keys(api.UI.en);
@@ -97,6 +110,12 @@ assert.doesNotMatch(source,/playSequence\(\s*\[['"][ㄱ-ㅎ]['"]\]\s*\)/u);
 assert.match(source,/global\.setTimeout\(next,260\)/);
 assert.match(source,/min\(SCREENS\.length-1/);
 assert.match(source,/HOSTED_AUDIO\[item\.syllable\]\?text\('listenSound'/);
+assert.match(source,/NikigoClassicFocusShell\.mount/);
+assert.match(source,/shell\.update\(\{/);
+assert.match(source,/function contentTypeForScreen\(type\)/);
+assert.match(source,/audioAvailability:Object\.keys\(HOSTED_AUDIO\)\.length===14\?'approved':'mixed'/);
+assert.match(source,/if\(type==='quiz'\)return Boolean\(session\.answers\[id\]\)/);
+assert.match(source,/if\(type==='group'&&id==='s'\)return Boolean\(session\.answers\.qs\)/);
 assert.doesNotMatch(source,/speechSynthesis|SpeechSynthesisUtterance|getVoices/);
 const workflow=fs.readFileSync('.github/workflows/generate-lesson-audio.yml','utf8');
 assert.match(workflow,/audio-batch-01/);

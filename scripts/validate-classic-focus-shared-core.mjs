@@ -6,19 +6,22 @@ const read = file => fs.readFileSync(file, 'utf8');
 const shellSource = read('assets/classic-focus-shell.js');
 const tokens = read('assets/classic-focus-tokens.css');
 const shellCss = read('assets/classic-focus-shell.css');
+const lesson4Html = read('lesson-04.html');
 const lesson7Html = read('lesson-07.html');
 const lesson11Html = read('lesson-11.html');
+const lesson4 = read('lesson-consonant-contrast.js');
 const lesson7 = read('lesson-07.js');
 const lesson11 = read('lesson-11-classic-focus.js');
 const worker = read('sw.js');
 
-for (const html of [lesson7Html, lesson11Html]) {
+for (const html of [lesson4Html, lesson7Html, lesson11Html]) {
   for (const asset of ['assets/classic-focus-tokens.css', 'assets/classic-focus-shell.css', 'assets/classic-focus-shell.js']) {
     assert.ok(html.includes(asset), `Shared Core consumer missing ${asset}`);
   }
   assert.match(html, /classicFocusShell/);
   assert.match(html, /classicFocusCard/);
 }
+assert.match(lesson4Html, /classicFocusPronunciation/);
 assert.match(lesson7Html, /classicFocusFoundation/);
 assert.match(lesson11Html, /classicFocusScenario/);
 
@@ -136,13 +139,15 @@ assert.equal(elements.get('lessonStage').dataset.canGoNext, 'false');
 listeners.get('language:change')({ target: { value: 'ja' } });
 assert.equal(changedLanguage, 'ja');
 
-for (const source of [lesson7, lesson11]) {
+for (const source of [lesson4, lesson7, lesson11]) {
   assert.match(source, /NikigoClassicFocusShell\.mount/);
   assert.match(source, /shell\.update\(\{/);
   for (const field of api.requiredFields) assert.ok(source.includes(`${field}:`) || source.includes(`${field},`), `Adapter missing explicit ${field}`);
 }
+assert.match(lesson4, /audioAvailability:Object\.keys\(HOSTED_AUDIO\)\.length===14\?'approved':'mixed'/);
+assert.match(lesson4, /function contentTypeForScreen\(type\)/);
 assert.match(lesson7, /audioAvailability:'mixed'/);
 assert.match(lesson11, /audioAvailabilityFor\(step\)/);
 assert.doesNotMatch(shellSource, /title\.includes|textContent.*contentType|innerText.*contentType/);
 
-console.log('Validated Classic Focus Shared Core: explicit adapter contract, presentation-only boundary, dual-lesson loading, responsive/a11y shell, and offline resources.');
+console.log('Validated Classic Focus Shared Core: explicit adapter contract, presentation-only boundary, three-lesson loading, responsive/a11y shell, and offline resources.');

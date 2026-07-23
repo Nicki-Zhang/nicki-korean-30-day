@@ -54,9 +54,11 @@ const documentStub = { getElementById:id => elements.get(id) || element(), addEv
 const contrastSource = fs.readFileSync('lesson-consonant-contrast.js', 'utf8');
 const contrastWindow = {
   location:{search:'?lang=zh',href:''}, navigator:{language:'zh'}, document:documentStub,
+  history:{replaceState(){}},
   localStorage:{getItem(){return null;},setItem(){}},
   NikigoState:{get:()=>({completedLessons:[],lessonProgress:{},audioRate:1,autoplayAudio:false}),update:value=>value},
-  setTimeout(){}, scrollTo(){}, speechSynthesis:null
+  setTimeout(){}, scrollTo(){}, addEventListener(){}, speechSynthesis:null,
+  NikigoClassicFocusShell:{mount(){return {update(){}};}}
 };
 contrastWindow.window = contrastWindow;
 vm.runInNewContext(contrastSource, {window:contrastWindow,document:documentStub,URLSearchParams,Audio:class{},SpeechSynthesisUtterance:class{}}, {filename:'lesson-consonant-contrast.js'});
@@ -144,7 +146,7 @@ const privacyCss = fs.readFileSync('player-privacy.css','utf8');
 assert.match(privacyCss, /overflow-wrap:\s*anywhere/);
 assert.match(privacyCss, /@media\s*\(max-width:\s*600px\)/);
 const worker = fs.readFileSync('sw.js','utf8');
-assert.match(worker, /nikigo-v\d+-self-review-gate/);
+assert.match(worker, /nikigo-v\d+-self-review-gate-classic-focus-lesson-04/);
 assert.match(worker, /\.\/player-privacy\.css/);
 
 console.log(`Validated answer privacy for ${genericAudioQuestions + 6} course audio questions and ${reviewListenCount} review listening items across ${states.length} states and ${languages.length} languages; checked ${soundItems.length + contrastItems.length} approximation hints.`);

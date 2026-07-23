@@ -61,7 +61,7 @@ const source=fs.readFileSync('lesson-consonant-contrast.js','utf8');
 const element=()=>({value:'',textContent:'',innerHTML:'',title:'',style:{},dataset:{},classList:{add(){},remove(){},toggle(){}},setAttribute(){},addEventListener(){}});
 const elements=new Map(['lessonStage','language','lessonName','progressLabel','progressCount','progressBar','progressTrack','homeButton','homeLogo','toast'].map(id=>[id,element()]));
 const documentStub={getElementById:id=>elements.get(id)||element(),addEventListener(){},documentElement:{lang:''}};
-const context={window:{location:{search:'?lang=en',href:''},navigator:{language:'en'},document:documentStub,localStorage:{getItem(){return null;},setItem(){}},NikigoState:{get(){return{};},update(value){return value;}},NikigoAudio:audio,setTimeout(){},scrollTo(){}},document:documentStub,URLSearchParams,Audio:class{}};
+const context={window:{location:{search:'?lang=en',href:''},history:{replaceState(){}},navigator:{language:'en'},document:documentStub,localStorage:{getItem(){return null;},setItem(){}},NikigoState:{get(){return{};},update(value){return value;}},NikigoAudio:audio,NikigoClassicFocusShell:{mount(){return{update(){}};}},setTimeout(){},scrollTo(){},addEventListener(){}},document:documentStub,URLSearchParams,Audio:class{}};
 context.window.window=context.window;
 vm.runInNewContext(source,context,{filename:'lesson-consonant-contrast.js'});
 const hosted=JSON.parse(JSON.stringify(context.window.NikigoContrastLesson.HOSTED_AUDIO));
