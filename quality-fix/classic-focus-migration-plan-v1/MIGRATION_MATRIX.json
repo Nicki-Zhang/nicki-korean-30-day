@@ -1,0 +1,1263 @@
+{
+  "schemaVersion": "nikigo-classic-focus-migration-matrix-v1",
+  "generatedAt": "2026-07-23",
+  "baseCommit": "5a99cf4326e9d4a08f684492b4d72a65c462b556",
+  "taxonomyVersion": "nikigo-taxonomy-v1",
+  "scope": {
+    "lessonIds": [
+      "lesson-00",
+      "lesson-01",
+      "lesson-02",
+      "lesson-03",
+      "lesson-04",
+      "lesson-05",
+      "lesson-06",
+      "lesson-07",
+      "lesson-08",
+      "lesson-09",
+      "lesson-10",
+      "lesson-11",
+      "lesson-12",
+      "lesson-13"
+    ],
+    "runtimeChangesAllowed": false,
+    "verifiedClassicFocusReferences": [
+      "lesson-04",
+      "lesson-07",
+      "lesson-11"
+    ]
+  },
+  "methodology": {
+    "sources": [
+      "course-catalog.js",
+      "stage-chapter-taxonomy.js",
+      "app-state.js",
+      "audio-catalog.js",
+      "lesson-00.html through lesson-13.html",
+      "lesson runtime JavaScript and CSS",
+      "Classic Focus shared-core contract and validation",
+      "existing architecture and taxonomy documents",
+      "real browser inspection at 390x844"
+    ],
+    "audioCounting": "Counts represent independent runtime audio request slots or exact semantic targets exposed by the course. Repeated UI requests are counted when they are separate course actions. Catalog rows are not double-counted globally; therefore per-course playable request counts can exceed the 54 unique approved catalog rows.",
+    "playableDefinition": "An exact speechText, audioType, and lesson namespace match that resolves to an approved local catalog entry and a local file.",
+    "missingDefinition": "No exact approved or pending catalog match for the runtime request.",
+    "browserCoverage": {
+      "allEntriesLoaded": true,
+      "languagesExercised": [
+        "zh",
+        "en",
+        "vi",
+        "ja"
+      ],
+      "horizontalOverflowAt390": false,
+      "externalRuntimeResourcesObserved": false,
+      "deepChecks": [
+        "lesson-04",
+        "lesson-06",
+        "lesson-07",
+        "lesson-10",
+        "lesson-11"
+      ]
+    }
+  },
+  "sharedCoreCoverage": {
+    "supportedShellResponsibilities": [
+      "design tokens and responsive course canvas",
+      "course header",
+      "language control presentation and event contract",
+      "current-step and total-step progress",
+      "single-step learning container",
+      "compact status messaging",
+      "back and continue action region",
+      "correct and incorrect feedback presentation",
+      "focus, keyboard, and reduced-motion behavior"
+    ],
+    "declaredContentTypes": [
+      "intro",
+      "explanation",
+      "structure",
+      "word",
+      "comparison",
+      "dialogue",
+      "choice",
+      "matching",
+      "builder",
+      "feedback",
+      "retry",
+      "completion"
+    ],
+    "verifiedInteractionTypes": [
+      "single choice",
+      "audio contrast choice",
+      "matching",
+      "syllable and phrase builder",
+      "dialogue reveal",
+      "targeted retry",
+      "immediate correct and incorrect feedback"
+    ],
+    "verifiedAudioStates": [
+      "approved and playable",
+      "mixed playable and pending",
+      "pending and disabled",
+      "missing and fail-closed",
+      "no-audio course state"
+    ],
+    "uncoveredOrNotYetShared": [
+      "non-linear Hangul map and letter detail drawer",
+      "guided sound grid and listen-first self-check",
+      "split or decompose renderer",
+      "syllable-block diagram renderer",
+      "explicit listening renderer",
+      "ordered scene sequence renderer",
+      "checkpoint aggregation and result summary",
+      "compound-vowel formula and near-spelling comparison",
+      "available-content-complete gate presentation contract"
+    ],
+    "mustRemainInLessonAdapter": [
+      "explicit mapping from real step identity to content type",
+      "course-specific content markup",
+      "question and option rendering",
+      "audio request descriptors",
+      "checkpoint grouping labels",
+      "course-specific restoration state"
+    ],
+    "mustNeverEnterSharedCore": [
+      "answers and correctness rules",
+      "course content and Korean target text",
+      "XP calculation and awarding",
+      "ReviewItem creation and retry scheduling",
+      "app-state migration",
+      "audio approval decisions",
+      "Lesson 6 completion gate",
+      "recommendation logic",
+      "step identity inferred from titles or visible text"
+    ]
+  },
+  "lessons": [
+    {
+      "lessonId": "lesson-00",
+      "entry": "lesson-00.html",
+      "displayOrder": 0,
+      "titleZh": "先认识韩文字母地图",
+      "taxonomy": {
+        "stageId": "K0",
+        "stageLabelZh": "阶段1 · 韩文基础",
+        "moduleNameZh": "韩文地图与基础元音",
+        "chapterId": "k0-hangul-map-and-vowels",
+        "moduleDisplayOrder": 0,
+        "lessonDisplayOrder": 0
+      },
+      "realStepCount": null,
+      "flowModel": "one non-linear orientation surface; no numbered linear steps",
+      "stableIdentity": {
+        "lessonId": "lesson-00",
+        "sessionKey": null,
+        "stateIdentity": "profile hangulLevel, recommendation, lessonProgress, and completedLessons"
+      },
+      "engine": "lesson-00.js with hangul-sound-data.js",
+      "currentTemplate": "non-linear Hangul map using lesson-player.css",
+      "contentTypes": [
+        "orientation-map",
+        "letter-grid",
+        "letter-detail",
+        "syllable-demo",
+        "starting-level-choice"
+      ],
+      "mustAnswerGate": false,
+      "targetedRetry": false,
+      "xp": {
+        "firstCompletion": 0,
+        "repeatCompletion": 0
+      },
+      "fourLanguageCompleteness": "complete",
+      "restore": "profile-level starting-point state; no linear step session",
+      "audio": {
+        "requestCount": 59,
+        "approved": 31,
+        "playable": 31,
+        "pending": 0,
+        "missing": 28,
+        "completionGate": false,
+        "notes": "Dynamic per-letter actions: vowel carrier, letter name, and example syllable. Missing actions remain disabled."
+      },
+      "sharedCoreFit": "special-prototype",
+      "newAdapter": "non-linear orientation adapter",
+      "rendererExpansion": [
+        "Hangul map",
+        "letter detail",
+        "starting-level selector"
+      ],
+      "migrationRisk": "high",
+      "recommendedBatch": "C2",
+      "acceptanceFocus": [
+        "do not force a numbered single-step flow",
+        "retain profile starting-point choice",
+        "preserve dynamic exact audio resolution",
+        "keyboard access across the letter map"
+      ]
+    },
+    {
+      "lessonId": "lesson-01",
+      "entry": "lesson-01.html",
+      "displayOrder": 1,
+      "titleZh": "核心元音 ㅏㅓㅗㅜㅡㅣ",
+      "taxonomy": {
+        "stageId": "K0",
+        "stageLabelZh": "阶段1 · 韩文基础",
+        "moduleNameZh": "韩文地图与基础元音",
+        "chapterId": "k0-hangul-map-and-vowels",
+        "moduleDisplayOrder": 0,
+        "lessonDisplayOrder": 1
+      },
+      "realStepCount": 15,
+      "flowModel": "intro, vowel and consonant teaching, builder, three practices, repeat, challenge intro, five quiz screens, completion",
+      "stableIdentity": {
+        "lessonId": "lesson-01",
+        "sessionKey": "nikigoLessonSession:lesson-01",
+        "stepIdentity": "ordered lesson-engine screen index"
+      },
+      "engine": "lesson-engine.js with inline Lesson 1 config",
+      "currentTemplate": "legacy lesson-player single-step course",
+      "contentTypes": [
+        "intro",
+        "explanation",
+        "structure",
+        "builder",
+        "choice",
+        "listening",
+        "feedback",
+        "completion"
+      ],
+      "mustAnswerGate": true,
+      "targetedRetry": "ReviewItem creation and immediate feedback; no dedicated in-course retry screen",
+      "xp": {
+        "firstCompletion": 50,
+        "repeatCompletion": 0
+      },
+      "fourLanguageCompleteness": "complete",
+      "restore": "step, option order, and answers restored by stable session key",
+      "audio": {
+        "requestCount": 12,
+        "approved": 12,
+        "playable": 12,
+        "pending": 0,
+        "missing": 0,
+        "completionGate": false
+      },
+      "sharedCoreFit": "requires-renderer",
+      "newAdapter": "legacy foundation adapter",
+      "rendererExpansion": [
+        "guided sound grid",
+        "listen-first self-check"
+      ],
+      "migrationRisk": "medium",
+      "recommendedBatch": "B2",
+      "acceptanceFocus": [
+        "retain 15-screen order",
+        "do not expose quiz answers before response",
+        "preserve exact audio controls",
+        "retain ReviewItem output"
+      ]
+    },
+    {
+      "lessonId": "lesson-02",
+      "entry": "lesson-02.html",
+      "displayOrder": 2,
+      "titleZh": "其余基础元音和易混元音",
+      "taxonomy": {
+        "stageId": "K0",
+        "stageLabelZh": "阶段1 · 韩文基础",
+        "moduleNameZh": "韩文地图与基础元音",
+        "chapterId": "k0-hangul-map-and-vowels",
+        "moduleDisplayOrder": 0,
+        "lessonDisplayOrder": 2
+      },
+      "realStepCount": 16,
+      "flowModel": "Lesson 1 foundation flow plus a real-word teaching screen",
+      "stableIdentity": {
+        "lessonId": "lesson-02",
+        "sessionKey": "nikigoLessonSession:lesson-02",
+        "stepIdentity": "ordered lesson-engine screen index"
+      },
+      "engine": "lesson-engine.js with inline Lesson 2 config",
+      "currentTemplate": "legacy lesson-player single-step course",
+      "contentTypes": [
+        "intro",
+        "explanation",
+        "structure",
+        "word",
+        "builder",
+        "choice",
+        "listening",
+        "feedback",
+        "completion"
+      ],
+      "mustAnswerGate": true,
+      "targetedRetry": "ReviewItem creation and immediate feedback; no dedicated in-course retry screen",
+      "xp": {
+        "firstCompletion": 50,
+        "repeatCompletion": 0
+      },
+      "fourLanguageCompleteness": "complete",
+      "restore": "step, option order, and answers restored by stable session key",
+      "audio": {
+        "requestCount": 13,
+        "approved": 12,
+        "playable": 12,
+        "pending": 1,
+        "missing": 0,
+        "completionGate": false,
+        "notes": "리 remains pending and fail-closed."
+      },
+      "sharedCoreFit": "requires-renderer",
+      "newAdapter": "legacy foundation and word adapter",
+      "rendererExpansion": [
+        "guided sound grid",
+        "listen-first self-check",
+        "compact word-reading row"
+      ],
+      "migrationRisk": "medium",
+      "recommendedBatch": "B2",
+      "acceptanceFocus": [
+        "retain 16-screen order",
+        "preserve the pending 리 control",
+        "keep word decoding and listening in one context",
+        "retain ReviewItem output"
+      ]
+    },
+    {
+      "lessonId": "lesson-03",
+      "entry": "lesson-03.html",
+      "displayOrder": 3,
+      "titleZh": "高频基础辅音：通过完整音节学习",
+      "taxonomy": {
+        "stageId": "K0",
+        "stageLabelZh": "阶段1 · 韩文基础",
+        "moduleNameZh": "辅音、音节块与复合元音",
+        "chapterId": "k0-consonants-syllables-compound-vowels",
+        "moduleDisplayOrder": 1,
+        "lessonDisplayOrder": 0
+      },
+      "realStepCount": 17,
+      "flowModel": "foundation flow plus word, greeting phrase, practice, listening challenge, and completion",
+      "stableIdentity": {
+        "lessonId": "lesson-03",
+        "sessionKey": "nikigoLessonSession:lesson-03",
+        "stepIdentity": "ordered lesson-engine screen index"
+      },
+      "engine": "lesson-engine.js with inline Lesson 3 config",
+      "currentTemplate": "legacy lesson-player single-step course",
+      "contentTypes": [
+        "intro",
+        "explanation",
+        "structure",
+        "word",
+        "dialogue",
+        "builder",
+        "choice",
+        "listening",
+        "feedback",
+        "completion"
+      ],
+      "mustAnswerGate": true,
+      "targetedRetry": "ReviewItem creation and immediate feedback; no dedicated in-course retry screen",
+      "xp": {
+        "firstCompletion": 50,
+        "repeatCompletion": 0
+      },
+      "fourLanguageCompleteness": "complete",
+      "restore": "step, option order, and answers restored by stable session key",
+      "audio": {
+        "requestCount": 11,
+        "approved": 11,
+        "playable": 11,
+        "pending": 0,
+        "missing": 0,
+        "completionGate": false
+      },
+      "sharedCoreFit": "requires-renderer",
+      "newAdapter": "legacy foundation-to-scenario adapter",
+      "rendererExpansion": [
+        "guided phrase or dialogue",
+        "explicit listening state"
+      ],
+      "migrationRisk": "medium",
+      "recommendedBatch": "B3",
+      "acceptanceFocus": [
+        "retain 17-screen order",
+        "keep phrase teaching distinct from open conversation",
+        "preserve listening and ReviewItem behavior"
+      ]
+    },
+    {
+      "lessonId": "lesson-04",
+      "entry": "lesson-04.html",
+      "displayOrder": 4,
+      "titleZh": "听懂普通音、送气音和紧音",
+      "taxonomy": {
+        "stageId": "K0",
+        "stageLabelZh": "阶段1 · 韩文基础",
+        "moduleNameZh": "辅音、音节块与复合元音",
+        "chapterId": "k0-consonants-syllables-compound-vowels",
+        "moduleDisplayOrder": 1,
+        "lessonDisplayOrder": 1
+      },
+      "realStepCount": 15,
+      "stepIds": [
+        "intro",
+        "concept",
+        "group-g",
+        "quiz-qg",
+        "group-d",
+        "quiz-qd",
+        "group-b",
+        "quiz-qb",
+        "group-j",
+        "quiz-qj",
+        "group-s",
+        "quiz-qall",
+        "retry",
+        "summary",
+        "complete"
+      ],
+      "stableIdentity": {
+        "lessonId": "lesson-04",
+        "sessionKey": "nikigoLessonSession:lesson-04",
+        "stepIdentity": "explicit stable step IDs"
+      },
+      "engine": "lesson-consonant-contrast.js",
+      "currentTemplate": "Classic Focus shared shell with Lesson 4 adapter",
+      "contentTypes": [
+        "intro",
+        "explanation",
+        "comparison",
+        "listening",
+        "choice",
+        "feedback",
+        "retry",
+        "completion"
+      ],
+      "mustAnswerGate": true,
+      "targetedRetry": true,
+      "xp": {
+        "firstCompletion": 50,
+        "repeatCompletion": 0
+      },
+      "fourLanguageCompleteness": "complete",
+      "restore": "explicit step ID, answers, retry, and audio interaction state",
+      "audio": {
+        "requestCount": 14,
+        "approved": 14,
+        "playable": 14,
+        "pending": 0,
+        "missing": 0,
+        "completionGate": false,
+        "notes": "All 14 exact local files were previously verified HTTP 200."
+      },
+      "sharedCoreFit": "verified",
+      "newAdapter": "none; reference implementation",
+      "rendererExpansion": [],
+      "migrationRisk": "low",
+      "recommendedBatch": "verified-reference",
+      "acceptanceFocus": [
+        "reference for approved audio and comparison controls",
+        "reference for answer gate and scroll preservation",
+        "must remain visually unchanged"
+      ]
+    },
+    {
+      "lessonId": "lesson-05",
+      "entry": "lesson-05.html",
+      "displayOrder": 5,
+      "titleZh": "看懂韩语音节块",
+      "taxonomy": {
+        "stageId": "K0",
+        "stageLabelZh": "阶段1 · 韩文基础",
+        "moduleNameZh": "辅音、音节块与复合元音",
+        "chapterId": "k0-consonants-syllables-compound-vowels",
+        "moduleDisplayOrder": 1,
+        "lessonDisplayOrder": 2
+      },
+      "realStepCount": 16,
+      "stepIds": [
+        "intro",
+        "block",
+        "left-concept",
+        "left-examples",
+        "left-practice",
+        "top-concept",
+        "top-examples",
+        "top-practice",
+        "ieung-concept",
+        "ieung-examples",
+        "builder",
+        "split",
+        "challenge",
+        "retry",
+        "summary",
+        "complete"
+      ],
+      "stableIdentity": {
+        "lessonId": "lesson-05",
+        "sessionKey": "nikigoLessonSession:lesson-05",
+        "stepIdentity": "explicit ordered screen IDs"
+      },
+      "engine": "lesson-05.js",
+      "currentTemplate": "custom syllable-block single-step course",
+      "contentTypes": [
+        "intro",
+        "explanation",
+        "structure",
+        "word",
+        "comparison",
+        "builder",
+        "split",
+        "choice",
+        "retry",
+        "completion"
+      ],
+      "mustAnswerGate": true,
+      "targetedRetry": true,
+      "xp": {
+        "firstCompletion": 50,
+        "repeatCompletion": 0
+      },
+      "fourLanguageCompleteness": "complete",
+      "restore": "step, builder, split, challenge, and retry state by stable session key",
+      "audio": {
+        "requestCount": 10,
+        "approved": 10,
+        "playable": 10,
+        "pending": 0,
+        "missing": 0,
+        "completionGate": false,
+        "notes": "Ten exact target syllables resolve locally. The current engine builds a local file map at startup; migration must preserve exact matching and fail-closed behavior."
+      },
+      "sharedCoreFit": "requires-renderer",
+      "newAdapter": "syllable-block foundation adapter",
+      "rendererExpansion": [
+        "syllable-block diagram",
+        "split or decompose interaction"
+      ],
+      "migrationRisk": "medium",
+      "recommendedBatch": "B1",
+      "acceptanceFocus": [
+        "do not flatten left-right and top-bottom structures",
+        "preserve builder state",
+        "preserve targeted retry",
+        "verify all exact audio controls"
+      ]
+    },
+    {
+      "lessonId": "lesson-06",
+      "entry": "lesson-06.html",
+      "displayOrder": 6,
+      "titleZh": "复合元音",
+      "taxonomy": {
+        "stageId": "K0",
+        "stageLabelZh": "阶段1 · 韩文基础",
+        "moduleNameZh": "辅音、音节块与复合元音",
+        "chapterId": "k0-consonants-syllables-compound-vowels",
+        "moduleDisplayOrder": 1,
+        "lessonDisplayOrder": 3
+      },
+      "realStepCount": 18,
+      "stepIds": [
+        "intro",
+        "review",
+        "structure",
+        "oa",
+        "ueo",
+        "i-family",
+        "combine-practice",
+        "carrier",
+        "builder",
+        "split",
+        "near-group",
+        "spelling-practice",
+        "extended",
+        "words",
+        "challenge",
+        "retry",
+        "summary",
+        "complete"
+      ],
+      "stableIdentity": {
+        "lessonId": "lesson-06",
+        "sessionKey": "nikigoLessonSession:lesson-06",
+        "stepIdentity": "explicit ordered screen IDs"
+      },
+      "engine": "lesson-06.js",
+      "currentTemplate": "custom compound-vowel single-step preview course",
+      "contentTypes": [
+        "intro",
+        "explanation",
+        "structure",
+        "comparison",
+        "builder",
+        "split",
+        "word",
+        "choice",
+        "retry",
+        "completion-preview"
+      ],
+      "mustAnswerGate": true,
+      "targetedRetry": true,
+      "xp": {
+        "configuredFirstCompletion": 50,
+        "currentFormalAward": 0,
+        "repeatCompletion": 0,
+        "reason": "required-audio completion gate is closed"
+      },
+      "fourLanguageCompleteness": "complete",
+      "restore": "step and interaction state by stable session key; formal completion remains withheld",
+      "audio": {
+        "requestCount": 15,
+        "approved": 0,
+        "playable": 0,
+        "pending": 15,
+        "missing": 0,
+        "completionGate": true,
+        "gateState": "closed",
+        "auxiliaryStatus": "available-content-complete"
+      },
+      "sharedCoreFit": "special-gate",
+      "newAdapter": "compound-vowel preview and completion-gate adapter",
+      "rendererExpansion": [
+        "compound formula",
+        "near-spelling comparison",
+        "available-content-complete status"
+      ],
+      "migrationRisk": "high",
+      "recommendedBatch": "Special Gate",
+      "acceptanceFocus": [
+        "retain free entry",
+        "never award formal completion or XP while gate is closed",
+        "retain 3/4 module presentation and one audio-preparing lesson",
+        "do not block Lesson 7 or later lessons",
+        "recompute formal completion when approved audio becomes available"
+      ]
+    },
+    {
+      "lessonId": "lesson-07",
+      "entry": "lesson-07.html",
+      "displayOrder": 7,
+      "titleZh": "四个基础收音 ㄴㅁㅇㄹ",
+      "taxonomy": {
+        "stageId": "K0",
+        "stageLabelZh": "阶段1 · 韩文基础",
+        "moduleNameZh": "收音与常见音变",
+        "chapterId": "k0-batchim-and-sound-changes",
+        "moduleDisplayOrder": 2,
+        "lessonDisplayOrder": 0
+      },
+      "realStepCount": 13,
+      "stepIds": [
+        "intro",
+        "structure",
+        "san",
+        "mom",
+        "gong",
+        "mul",
+        "compare",
+        "split",
+        "build",
+        "recognize",
+        "challenge",
+        "retry",
+        "complete"
+      ],
+      "stableIdentity": {
+        "lessonId": "lesson-07",
+        "sessionKey": "nikigoLessonSession:lesson-07",
+        "stepIdentity": "explicit stable step IDs"
+      },
+      "engine": "lesson-07.js",
+      "currentTemplate": "Classic Focus shared shell with Foundation adapter",
+      "contentTypes": [
+        "intro",
+        "structure",
+        "word",
+        "comparison",
+        "split",
+        "builder",
+        "choice",
+        "feedback",
+        "retry",
+        "completion"
+      ],
+      "mustAnswerGate": true,
+      "targetedRetry": true,
+      "xp": {
+        "firstCompletion": 50,
+        "repeatCompletion": 0
+      },
+      "fourLanguageCompleteness": "complete",
+      "restore": "step, builder, selected answers, feedback, and retry state",
+      "audio": {
+        "requestCount": 5,
+        "approved": 1,
+        "playable": 1,
+        "pending": 4,
+        "missing": 0,
+        "completionGate": false,
+        "notes": "The exact legacy syllable 바 is playable. The four Lesson 7 word recordings remain pending and disabled."
+      },
+      "sharedCoreFit": "verified",
+      "newAdapter": "none; reference implementation",
+      "rendererExpansion": [],
+      "migrationRisk": "low",
+      "recommendedBatch": "verified-reference",
+      "acceptanceFocus": [
+        "reference for foundation structure, split, and builder",
+        "preserve mixed playable and pending audio",
+        "must remain visually unchanged"
+      ]
+    },
+    {
+      "lessonId": "lesson-08",
+      "entry": "lesson-08.html",
+      "displayOrder": 8,
+      "titleZh": "七种代表收音和常见音变",
+      "taxonomy": {
+        "stageId": "K0",
+        "stageLabelZh": "阶段1 · 韩文基础",
+        "moduleNameZh": "收音与常见音变",
+        "chapterId": "k0-batchim-and-sound-changes",
+        "moduleDisplayOrder": 2,
+        "lessonDisplayOrder": 1
+      },
+      "realStepCount": 15,
+      "stepIds": [
+        "intro",
+        "seven",
+        "closure",
+        "group-match",
+        "group-choice",
+        "linking-rule",
+        "link-choice",
+        "link-match",
+        "nasal-rule",
+        "nasal-choice",
+        "recognize-rule",
+        "rule-choice",
+        "rule-match",
+        "final-check",
+        "complete"
+      ],
+      "stableIdentity": {
+        "lessonId": "lesson-08",
+        "sessionKey": "nikigoLessonSession:lesson-08",
+        "stepIdentity": "explicit Sprint config step IDs"
+      },
+      "engine": "lesson-sprint-engine.js with Lesson 8 config",
+      "currentTemplate": "Sprint single-step course",
+      "contentTypes": [
+        "intro",
+        "explanation",
+        "matching",
+        "choice",
+        "scenario",
+        "feedback",
+        "retry",
+        "completion"
+      ],
+      "mustAnswerGate": true,
+      "targetedRetry": true,
+      "xp": {
+        "firstCompletion": 50,
+        "repeatCompletion": 0
+      },
+      "fourLanguageCompleteness": "complete",
+      "restore": "explicit step ID, option order, answers, wrong IDs, and retry mode",
+      "audio": {
+        "requestCount": 0,
+        "approved": 0,
+        "playable": 0,
+        "pending": 0,
+        "missing": 0,
+        "completionGate": false
+      },
+      "sharedCoreFit": "direct-with-adapter",
+      "newAdapter": "Sprint-to-Classic presentation adapter",
+      "rendererExpansion": [],
+      "migrationRisk": "low",
+      "recommendedBatch": "A1",
+      "acceptanceFocus": [
+        "preserve all 15 explicit step IDs",
+        "map concept and scenario explicitly, never from titles",
+        "preserve Sprint retry mode and ReviewItems",
+        "validate no-audio presentation"
+      ]
+    },
+    {
+      "lessonId": "lesson-09",
+      "entry": "lesson-09.html",
+      "displayOrder": 9,
+      "titleZh": "场景韩语：问候与介绍",
+      "taxonomy": {
+        "stageId": "K0",
+        "stageLabelZh": "阶段1 · 韩文基础",
+        "moduleNameZh": "综合应用与K0阶段挑战",
+        "chapterId": "k0-integrated-use-and-checkpoint",
+        "moduleDisplayOrder": 3,
+        "lessonDisplayOrder": 0
+      },
+      "realStepCount": 15,
+      "stepIds": [
+        "intro",
+        "scene",
+        "greeting",
+        "greeting-choice",
+        "greeting-match",
+        "intro-pattern",
+        "intro-build",
+        "intro-choice",
+        "ask-name",
+        "phrase-match",
+        "scene-order",
+        "listen-hello",
+        "role-choice",
+        "integrated",
+        "complete"
+      ],
+      "stableIdentity": {
+        "lessonId": "lesson-09",
+        "sessionKey": "nikigoLessonSession:lesson-09",
+        "stepIdentity": "explicit Sprint config step IDs"
+      },
+      "engine": "lesson-sprint-engine.js with Lesson 9 config",
+      "currentTemplate": "Sprint single-step course",
+      "contentTypes": [
+        "intro",
+        "explanation",
+        "dialogue",
+        "matching",
+        "builder",
+        "choice",
+        "scenario",
+        "listening",
+        "feedback",
+        "retry",
+        "completion"
+      ],
+      "mustAnswerGate": true,
+      "targetedRetry": true,
+      "xp": {
+        "firstCompletion": 50,
+        "repeatCompletion": 0
+      },
+      "fourLanguageCompleteness": "complete",
+      "restore": "explicit step ID, option order, answers, wrong IDs, and retry mode",
+      "audio": {
+        "requestCount": 6,
+        "approved": 4,
+        "playable": 4,
+        "pending": 0,
+        "missing": 2,
+        "completionGate": false,
+        "notes": "Approved actions reuse exact 안녕하세요 and 안녕 records. 저는 민지예요 and 이름이 뭐예요 have no exact approved record and fail closed."
+      },
+      "sharedCoreFit": "requires-renderer",
+      "newAdapter": "Sprint scenario and listening adapter",
+      "rendererExpansion": [
+        "explicit listening state",
+        "ordered scene sequence"
+      ],
+      "migrationRisk": "medium",
+      "recommendedBatch": "B3",
+      "acceptanceFocus": [
+        "preserve scene order and dialogue role",
+        "show only four exact playable audio actions",
+        "keep two missing requests fail-closed",
+        "preserve targeted retry"
+      ]
+    },
+    {
+      "lessonId": "lesson-10",
+      "entry": "lesson-10.html",
+      "displayOrder": 10,
+      "titleZh": "K0阶段复习挑战",
+      "taxonomy": {
+        "stageId": "K0",
+        "stageLabelZh": "阶段1 · 韩文基础",
+        "moduleNameZh": "综合应用与K0阶段挑战",
+        "chapterId": "k0-integrated-use-and-checkpoint",
+        "moduleDisplayOrder": 3,
+        "lessonDisplayOrder": 1
+      },
+      "realStepCount": 15,
+      "stepIds": [
+        "intro",
+        "vowel-match",
+        "build-ba",
+        "contrast",
+        "listen-ba",
+        "final-map",
+        "final-match",
+        "linking",
+        "nasal",
+        "change-check",
+        "scene-review",
+        "phrase-match",
+        "intro-build",
+        "final-scenario",
+        "complete"
+      ],
+      "stableIdentity": {
+        "lessonId": "lesson-10",
+        "sessionKey": "nikigoLessonSession:lesson-10",
+        "stepIdentity": "explicit Sprint config step IDs"
+      },
+      "engine": "lesson-sprint-engine.js with Lesson 10 config",
+      "currentTemplate": "Sprint single-step checkpoint",
+      "contentTypes": [
+        "intro",
+        "matching",
+        "builder",
+        "choice",
+        "listening",
+        "explanation",
+        "scenario",
+        "checkpoint",
+        "feedback",
+        "retry",
+        "completion"
+      ],
+      "mustAnswerGate": true,
+      "targetedRetry": true,
+      "xp": {
+        "firstCompletion": 50,
+        "repeatCompletion": 0
+      },
+      "fourLanguageCompleteness": "complete",
+      "restore": "explicit step ID, option order, answers, wrong IDs, retry mode, and checkpoint progress",
+      "audio": {
+        "requestCount": 1,
+        "approved": 1,
+        "playable": 1,
+        "pending": 0,
+        "missing": 0,
+        "completionGate": false,
+        "notes": "The exact 바 syllable resolves to an approved local record."
+      },
+      "sharedCoreFit": "checkpoint-prototype-required",
+      "newAdapter": "checkpoint adapter",
+      "rendererExpansion": [
+        "checkpoint grouping",
+        "checkpoint result summary"
+      ],
+      "migrationRisk": "high",
+      "recommendedBatch": "C1",
+      "acceptanceFocus": [
+        "prototype before runtime integration",
+        "retain 15 explicit step IDs and all gates",
+        "preserve cross-topic retry and result semantics",
+        "do not turn checkpoint grouping into access control"
+      ]
+    },
+    {
+      "lessonId": "lesson-11",
+      "entry": "lesson-11.html",
+      "displayOrder": 11,
+      "titleZh": "姓名与身份",
+      "taxonomy": {
+        "stageId": "K1",
+        "stageLabelZh": "阶段2 · 基础沟通",
+        "moduleNameZh": "姓名、身份与语言背景",
+        "chapterId": "k1-identity-and-language-background",
+        "moduleDisplayOrder": 0,
+        "lessonDisplayOrder": 0
+      },
+      "realStepCount": 13,
+      "stepIds": [
+        "intro",
+        "first-scene",
+        "name-response",
+        "phrase-role",
+        "copula-rule",
+        "build-name",
+        "ending-choice",
+        "identity-words",
+        "meeting-flow",
+        "build-identity",
+        "reply-choice",
+        "final-scene",
+        "complete"
+      ],
+      "stableIdentity": {
+        "lessonId": "lesson-11",
+        "sessionKey": "nikigoLessonSession:lesson-11",
+        "stepIdentity": "explicit stable step IDs"
+      },
+      "engine": "lesson-11-classic-focus.js with lesson-11.js content config",
+      "currentTemplate": "Classic Focus shared shell with Scenario adapter",
+      "contentTypes": [
+        "intro",
+        "explanation",
+        "dialogue",
+        "matching",
+        "builder",
+        "choice",
+        "feedback",
+        "retry",
+        "completion"
+      ],
+      "mustAnswerGate": true,
+      "targetedRetry": true,
+      "xp": {
+        "firstCompletion": 50,
+        "repeatCompletion": 0
+      },
+      "fourLanguageCompleteness": "complete",
+      "restore": "stable step, dialogue reveal, selection, builder, feedback, retry, and language state",
+      "audio": {
+        "requestCount": 1,
+        "approved": 0,
+        "playable": 0,
+        "pending": 0,
+        "missing": 1,
+        "completionGate": false,
+        "notes": "The exact Lesson 11 sentence has no approved audio. The formal page shows one compact preparing status and no fake player."
+      },
+      "sharedCoreFit": "verified",
+      "newAdapter": "none; reference implementation",
+      "rendererExpansion": [],
+      "migrationRisk": "low",
+      "recommendedBatch": "verified-reference",
+      "acceptanceFocus": [
+        "reference for scenario, dialogue reveal, builder, and retry",
+        "preserve zero-playable-audio fail-closed state",
+        "must not reintroduce Mission Journey"
+      ]
+    },
+    {
+      "lessonId": "lesson-12",
+      "entry": "lesson-12.html",
+      "displayOrder": 12,
+      "titleZh": "国家与语言",
+      "taxonomy": {
+        "stageId": "K1",
+        "stageLabelZh": "阶段2 · 基础沟通",
+        "moduleNameZh": "姓名、身份与语言背景",
+        "chapterId": "k1-identity-and-language-background",
+        "moduleDisplayOrder": 0,
+        "lessonDisplayOrder": 1
+      },
+      "realStepCount": 13,
+      "flowModel": "Sprint scenario flow with concept, matching, builder, choice, scenario, retry, and completion",
+      "stableIdentity": {
+        "lessonId": "lesson-12",
+        "sessionKey": "nikigoLessonSession:lesson-12",
+        "stepIdentity": "explicit Sprint config step IDs"
+      },
+      "engine": "lesson-sprint-engine.js with Lesson 12 config",
+      "currentTemplate": "Sprint single-step course",
+      "contentTypes": [
+        "intro",
+        "explanation",
+        "dialogue",
+        "matching",
+        "builder",
+        "choice",
+        "scenario",
+        "feedback",
+        "retry",
+        "completion"
+      ],
+      "mustAnswerGate": true,
+      "targetedRetry": true,
+      "xp": {
+        "firstCompletion": 50,
+        "repeatCompletion": 0
+      },
+      "fourLanguageCompleteness": "complete",
+      "restore": "explicit step ID, option order, answers, wrong IDs, and retry mode",
+      "audio": {
+        "requestCount": 1,
+        "approved": 0,
+        "playable": 0,
+        "pending": 0,
+        "missing": 1,
+        "completionGate": false,
+        "notes": "어느 나라에서 왔어요 has no exact approved record and remains fail-closed."
+      },
+      "sharedCoreFit": "direct-with-adapter",
+      "newAdapter": "Sprint-to-Classic scenario adapter",
+      "rendererExpansion": [],
+      "migrationRisk": "low",
+      "recommendedBatch": "A2",
+      "acceptanceFocus": [
+        "preserve all 13 explicit steps",
+        "show missing audio without a fake player",
+        "preserve targeted retry and four-language state"
+      ]
+    },
+    {
+      "lessonId": "lesson-13",
+      "entry": "lesson-13.html",
+      "displayOrder": 13,
+      "titleZh": "固有数词1～10与基础数量",
+      "taxonomy": {
+        "stageId": "K1",
+        "stageLabelZh": "阶段2 · 基础沟通",
+        "moduleNameZh": "数字与基础数量",
+        "chapterId": "k1-numbers-and-quantities",
+        "moduleDisplayOrder": 1,
+        "lessonDisplayOrder": 0
+      },
+      "realStepCount": 13,
+      "flowModel": "Sprint number flow with concept, matching, choice, builder, scenario, retry, and completion",
+      "stableIdentity": {
+        "lessonId": "lesson-13",
+        "sessionKey": "nikigoLessonSession:lesson-13",
+        "stepIdentity": "explicit Sprint config step IDs"
+      },
+      "engine": "lesson-sprint-engine.js with Lesson 13 config",
+      "currentTemplate": "Sprint single-step course",
+      "contentTypes": [
+        "intro",
+        "explanation",
+        "matching",
+        "choice",
+        "builder",
+        "scenario",
+        "feedback",
+        "retry",
+        "completion"
+      ],
+      "mustAnswerGate": true,
+      "targetedRetry": true,
+      "xp": {
+        "firstCompletion": 50,
+        "repeatCompletion": 0
+      },
+      "fourLanguageCompleteness": "complete",
+      "restore": "explicit step ID, option order, answers, wrong IDs, and retry mode",
+      "audio": {
+        "requestCount": 0,
+        "approved": 0,
+        "playable": 0,
+        "pending": 0,
+        "missing": 0,
+        "completionGate": false
+      },
+      "sharedCoreFit": "direct-with-adapter",
+      "newAdapter": "Sprint-to-Classic number adapter",
+      "rendererExpansion": [],
+      "migrationRisk": "low",
+      "recommendedBatch": "A2",
+      "acceptanceFocus": [
+        "preserve all 13 explicit steps",
+        "preserve number transformations and builder state",
+        "retain no-audio presentation and targeted retry"
+      ]
+    }
+  ],
+  "batches": [
+    {
+      "id": "A1",
+      "kind": "low-risk direct integration",
+      "lessons": [
+        "lesson-08"
+      ],
+      "stopCondition": "Lesson 8 retains all 15 stable steps, retry and +50/+0 behavior; Classic Focus reference lessons show no P0/P1 parity regression."
+    },
+    {
+      "id": "A2",
+      "kind": "low-risk direct integration",
+      "lessons": [
+        "lesson-12",
+        "lesson-13"
+      ],
+      "stopCondition": "Both 13-step flows retain exact state and retry behavior; Lesson 12 remains fail-closed for missing audio and Lesson 13 remains no-audio."
+    },
+    {
+      "id": "B1",
+      "kind": "new reusable renderer",
+      "lessons": [
+        "lesson-05"
+      ],
+      "stopCondition": "Syllable-block diagram and split renderer are proven reusable without moving builder answers or course judgment into Shared Core."
+    },
+    {
+      "id": "B2",
+      "kind": "legacy foundation adapter and renderer",
+      "lessons": [
+        "lesson-01",
+        "lesson-02"
+      ],
+      "stopCondition": "Guided sound grid and self-check retain exact audio gates, all screen counts, ReviewItems, and four-language restoration."
+    },
+    {
+      "id": "B3",
+      "kind": "guided phrase and listening renderer",
+      "lessons": [
+        "lesson-03",
+        "lesson-09"
+      ],
+      "stopCondition": "Phrase, dialogue, ordered scene, and listening states retain exact playable and missing audio behavior with no engine rewrite."
+    },
+    {
+      "id": "C1",
+      "kind": "checkpoint prototype then integration",
+      "lessons": [
+        "lesson-10"
+      ],
+      "stopCondition": "An isolated checkpoint prototype proves aggregation, targeted retry, completion summary, and all 15 stable steps before runtime integration."
+    },
+    {
+      "id": "C2",
+      "kind": "non-linear orientation prototype then integration",
+      "lessons": [
+        "lesson-00"
+      ],
+      "stopCondition": "The non-linear map and starting-point profile behavior are preserved without inventing numbered steps or a fake XP flow."
+    },
+    {
+      "id": "Special Gate",
+      "kind": "gated preview integration",
+      "lessons": [
+        "lesson-06"
+      ],
+      "stopCondition": "All 18 steps remain accessible, all 15 pending audio controls stay fail-closed, formal completion and XP remain withheld, and Lesson 7 remains reachable."
+    },
+    {
+      "id": "Final",
+      "kind": "cross-course hardening",
+      "lessons": [
+        "lesson-00",
+        "lesson-01",
+        "lesson-02",
+        "lesson-03",
+        "lesson-04",
+        "lesson-05",
+        "lesson-06",
+        "lesson-07",
+        "lesson-08",
+        "lesson-09",
+        "lesson-10",
+        "lesson-11",
+        "lesson-12",
+        "lesson-13"
+      ],
+      "stopCondition": "All course routes, state restoration, audio gates, XP, retries, languages, responsive layouts, and Service Worker resources pass a full regression matrix."
+    }
+  ],
+  "recommendedNextPilot": {
+    "lessonId": "lesson-08",
+    "batch": "A1",
+    "reasons": [
+      "It has a real 15-step single-step Sprint flow and no audio requests.",
+      "Its content types are already expressible by the existing lesson engine and current Shared Core shell contract.",
+      "It tests an explicit Sprint-to-Classic adapter without introducing new business logic.",
+      "It provides a low-risk proof before scenario audio, custom diagrams, checkpoints, or Lesson 6 gating are touched."
+    ]
+  },
+  "estimatedStages": {
+    "postApprovalImplementationAndValidationStages": 9,
+    "includingThisAuditStage": 10,
+    "note": "Stages are approval and stop boundaries, not time estimates."
+  }
+}
