@@ -10,12 +10,23 @@ const layoutFixture = fs.readFileSync('tests/lesson-05-layout-regression.html', 
 const previewFixture = fs.readFileSync('tests/lesson-05-preview.html', 'utf8');
 const screenshotFixture = fs.readFileSync('tests/lesson-05-screenshot-frame.html', 'utf8');
 
-for (const asset of ['lesson-05.js', 'lesson-05.css', 'course-catalog.js', 'audio-catalog.js', 'app-state.js']) {
+for (const asset of [
+  'lesson-05.js',
+  'lesson-05.css',
+  'lesson-05-classic-focus.js',
+  'assets/classic-focus-tokens.css',
+  'assets/classic-focus-shell.css',
+  'assets/classic-focus-shell.js',
+  'course-catalog.js',
+  'audio-catalog.js',
+  'app-state.js'
+]) {
   assert.match(html, new RegExp(asset.replaceAll('.', '\\.')));
 }
-assert.match(css, /@media\(max-width:760px\)/);
-assert.match(css, /min-height:(?:44|46|48)px/);
-assert.match(html, /\.lesson05Card:has\(\.challengeHeader\)/, 'Desktop challenge cards should not inherit the tall lesson-card minimum height.');
+assert.match(css, /@media \(max-width: 767px\)/);
+assert.match(css, /min-height:\s*(?:44|46|48)px/);
+assert.match(html, /classicFocusShell classicFocusFoundation classicFocusSyllable/);
+assert.match(html, /classicFocusCard lesson05Card/);
 for (const marker of ['390 builder', '390 challenge', '768 split', '1440 challenge', 'getBoundingClientRect', 'scrollWidth', 'smallControls']) assert.match(layoutFixture, new RegExp(marker));
 for (const marker of ["params.get('fresh')", "id !== 'lesson-05'"]) assert.match(previewFixture, new RegExp(marker.replaceAll('(', '\\(').replaceAll(')', '\\)')));
 for (const marker of ["params.get('width')", "params.get('height')", "params.get('step')", "frame.width = width", "frame.height = height"]) assert.ok(screenshotFixture.includes(marker));

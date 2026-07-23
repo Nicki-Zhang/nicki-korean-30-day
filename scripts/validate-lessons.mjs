@@ -86,7 +86,10 @@ for (const [index, item] of (catalog || []).entries()) {
     if (!html.includes(`${customBase}.js`)) errors.push(`${file} does not load its course engine.`);
     if (!html.includes(`${customBase}.css`)) errors.push(`${file} does not load its course styles.`);
     if (!html.includes('course-catalog.js')) errors.push(`${file} does not load course-catalog.js.`);
-    if (!html.includes('lesson-player.css')) errors.push(`${file} does not use the shared visual system.`);
+    const usesSharedVisualSystem = stableId === 'lesson-05'
+      ? html.includes('assets/classic-focus-shell.css')
+      : html.includes('lesson-player.css');
+    if (!usesSharedVisualSystem) errors.push(`${file} does not use the shared visual system.`);
     continue;
   }
 

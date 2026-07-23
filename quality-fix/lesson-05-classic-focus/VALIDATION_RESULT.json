@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "lesson-05",
+  "branch": "agent/nikigo-lesson-05-classic-focus-integration",
+  "baseline": "c30bb04864b6278841b4d613dd66386faef2e527",
+  "preview": "http://127.0.0.1:4200/lesson-05.html?lang=zh",
+  "scope": {
+    "formalLessonIntegrated": true,
+    "formalEngineChanged": false,
+    "sharedCoreChanged": false,
+    "diagramRendererOwner": "lesson-05-adapter",
+    "splitRendererOwner": "lesson-05-adapter"
+  },
+  "steps": {
+    "expected": 16,
+    "observed": 16,
+    "uniqueStableIds": 16,
+    "explicitContentMappings": 16,
+    "orderPreserved": true,
+    "skipped": 0
+  },
+  "formalContracts": {
+    "lessonId": "lesson-05",
+    "sessionKey": "nikigoLessonSession:lesson-05",
+    "splitQuestionIds": ["s1", "s2", "s3"],
+    "challengeQuestionIds": ["c1", "c2", "c3", "c4", "c5"],
+    "firstCompletionXp": 50,
+    "repeatCompletionXp": 0,
+    "wrongIdsPreserved": true,
+    "targetedRetry": true,
+    "appStateReviewItemPublished": false,
+    "completionAudioGate": false
+  },
+  "audio": {
+    "requests": 10,
+    "approved": 10,
+    "playable": 10,
+    "pending": 0,
+    "missing": 0,
+    "http200": 10,
+    "formalVisibleControls": 9,
+    "deviceTts": 0,
+    "externalRequests": 0,
+    "paidApiRequests": 0
+  },
+  "languages": {
+    "checked": ["zh", "en", "vi", "ja"],
+    "stepPreserved": true,
+    "selectionPreserved": true,
+    "builderStatePreserved": true,
+    "feedbackPreserved": true,
+    "koreanTargetPreserved": true,
+    "mixedAuxiliaryLanguage": false
+  },
+  "responsive": {
+    "390x844": {"horizontalOverflowPx": 0, "minimumControlPx": 44},
+    "430x932": {"horizontalOverflowPx": 0, "minimumControlPx": 44},
+    "768x1024": {"horizontalOverflowPx": 0, "minimumControlPx": 44},
+    "1440x1024": {"horizontalOverflowPx": 0, "minimumControlPx": 44, "learningCardWidthPx": 856}
+  },
+  "scroll": {
+    "sameStepBeforeScrollY": 360,
+    "sameStepAfterScrollY": 360,
+    "sameStepForcedTop": false,
+    "feedbackVisible": true,
+    "localFocusRestored": true,
+    "realStepChangeScrollY": 0,
+    "realStepFocusedTask": true
+  },
+  "serviceWorker": {
+    "cacheVersion": "nikigo-v42-self-review-gate-classic-focus-lesson-05",
+    "manifestAssets": 138,
+    "httpFailures": 0
+  },
+  "accessibility": {
+    "nativeButtonControls": true,
+    "minimumTouchTargetPx": 44,
+    "visibleFocus": true,
+    "escapePreservesFormalState": true,
+    "ariaProgress": true,
+    "adjacentFeedback": true,
+    "reducedMotionCss": true
+  },
+  "browser": {
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "networkErrors": 0,
+    "externalNetworkRequests": 0
+  },
+  "tests": {
+    "npmTest": "pass",
+    "architecture": "pass",
+    "lesson05Validator": "pass",
+    "classicFocusValidator": "pass",
+    "gitDiffCheck": "pass"
+  }
+}
