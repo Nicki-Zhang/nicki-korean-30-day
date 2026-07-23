@@ -256,6 +256,28 @@
     document.getElementById('lessonStage').innerHTML=`${releaseNotice()}${renderers[screen]()}`;
   }
   function goHome(){global.location.href=`nikigo-app.html?lang=${language}#courses`;}
+  const IN_PLACE_ACTIONS=new Set(['split-answer','recognize-answer','builder-pick','build','challenge-answer','retry-answer','retry-reset']);
+  const INTERACTION_KEYS=['action','question','value','kind'];
+  function captureInteractionAnchor(button){
+    return{
+      scrollTop:global.scrollY||0,
+      viewportTop:button.getBoundingClientRect?.().top,
+      signature:Object.fromEntries(INTERACTION_KEYS.map(key=>[key,button.dataset[key]||'']))
+    };
+  }
+  function restoreInteractionAnchor(anchor){
+    const stage=document.getElementById('lessonStage');
+    const target=[...stage.querySelectorAll('button[data-action]')].find(button=>INTERACTION_KEYS.every(key=>(button.dataset[key]||'')===anchor.signature[key]));
+    if(target&&Number.isFinite(anchor.viewportTop)){
+      if(!target.disabled)target.focus({preventScroll:true});
+      else stage.focus({preventScroll:true});
+      const delta=target.getBoundingClientRect().top-anchor.viewportTop;
+      global.scrollTo({top:Math.max(0,anchor.scrollTop+delta),behavior:'auto'});
+      return;
+    }
+    stage.focus({preventScroll:true});
+    global.scrollTo({top:anchor.scrollTop,behavior:'auto'});
+  }
   const shell=global.NikigoClassicFocusShell.mount({
     onLanguageChange(value){
       language=LANGUAGES.includes(value)?value:'en';
@@ -272,6 +294,7 @@
     if(action==='home'){goHome();return;}
     if(action==='base-audio'){playBaseSyllableAudio();return;}
     if(action==='review'){session=blankSession();saveSession();render();global.scrollTo(0,0);return;}
+    const anchor=IN_PLACE_ACTIONS.has(action)?captureInteractionAnchor(button):null;
     if(action==='back')session.step=Math.max(0,session.step-1);
     else if(action==='next'){const screen=SCREENS[session.step];if(!allowed(screen))return;session.step=Math.min(SCREENS.length-1,session.step+1);}
     else if(action==='split-answer')answerQuestion('splitAnswers',SPLIT_QUESTIONS,button.dataset.question,button.dataset.value);
@@ -285,7 +308,10 @@
     else if(action==='retry-answer'){const q=CHALLENGE.find(item=>item.id===button.dataset.question);if(q&&!session.retryAnswers[q.id])session.retryAnswers[q.id]={choice:button.dataset.value,correct:button.dataset.value===q.correct};}
     else if(action==='retry-reset')delete session.retryAnswers[button.dataset.question];
     else if(action==='retry-next'){if(session.retryAnswers[button.dataset.question]?.correct){session.mistakes=session.mistakes.filter(id=>id!==button.dataset.question);delete session.retryAnswers[button.dataset.question];}}
-    saveSession();render();global.scrollTo(0,0);
+    else return;
+    saveSession();render();
+    if(anchor)restoreInteractionAnchor(anchor);
+    else global.scrollTo(0,0);
   });
   render();
 
