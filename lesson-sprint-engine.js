@@ -96,11 +96,24 @@
   }
   function render(){
     const step=current();document.documentElement.lang=language==='zh'?'zh-CN':language;languageSelect.value=language;document.getElementById('lessonName').textContent=tr(config.name);document.getElementById('progressLabel').textContent=ui('progress');document.getElementById('progressCount').textContent=`${session.step+1} / ${config.steps.length}`;const percent=(session.step/(config.steps.length-1))*100;document.getElementById('progressBar').style.width=`${percent}%`;document.getElementById('progressTrack').setAttribute('aria-valuenow',String(Math.round(percent)));
+    global.NikigoSprintClassicFocusAdapter?.update?.({
+      lessonId:config.id,
+      stepId:step.id,
+      stepType:step.type,
+      currentStep:session.step+1,
+      totalSteps:config.steps.length,
+      language,
+      title:tr(config.name),
+      stepLabel:ui('progress'),
+      progress:percent,
+      canGoPrevious:session.step>0&&!session.retryMode,
+      canGoNext:stepDone(step)
+    });
     if(step.type==='complete'){
-      const first=completeLesson();stage.innerHTML=`<div class="completeMark">✓</div><p class="tag center">${escape(tr(step.tag))}</p><h1 class="center">${escape(tr(step.title))}</h1><p class="lead center">${escape(tr(step.lead))}</p><div class="feedback good center"><b>${escape(first?ui('xpEarned'):ui('xpClaimed'))}</b><span>${escape(ui('saved'))}</span></div><div class="foot"><button class="secondary" data-action="review">↻ ${escape(ui('reviewLesson'))}</button><button class="primary" data-action="home">${escape(ui('returnCourses'))}</button></div>`;return;
+      const first=completeLesson();stage.innerHTML=`<div class="completeMark">✓</div><p class="tag center">${escape(tr(step.tag))}</p><h1 class="center">${escape(tr(step.title))}</h1><p class="lead center">${escape(tr(step.lead))}</p><div class="feedback good center"><b>${escape(first?ui('xpEarned'):ui('xpClaimed'))}</b><span>${escape(ui('saved'))}</span></div><div class="foot"><button class="secondary" data-action="review">↻ ${escape(ui('reviewLesson'))}</button><button class="primary" data-action="home">${escape(ui('returnCourses'))}</button></div>`;global.NikigoSprintClassicFocusAdapter?.afterRender?.();return;
     }
     const retry=session.retryMode?`<div class="retryBanner">${escape(ui('retry'))} · ${escape(format(ui('remaining'),{count:session.mistakes.length}))}</div>`:'';
-    stage.innerHTML=`${retry}<span class="modulePill">${escape(tr(step.module))}</span><p class="tag">${escape(tr(step.tag))}</p><h1>${escape(tr(step.title))}</h1><p class="lead">${escape(tr(step.lead))}</p>${renderBody(step)}<div class="foot"><button class="secondary" data-action="back" ${session.step===0||session.retryMode?'disabled':''}>${escape(ui('back'))}</button><button class="primary" data-action="next" ${stepDone(step)?'':'disabled'}>${escape(session.step===config.steps.length-2?ui('finish'):ui('next'))}</button></div>`;
+    stage.innerHTML=`${retry}<span class="modulePill">${escape(tr(step.module))}</span><p class="tag">${escape(tr(step.tag))}</p><h1>${escape(tr(step.title))}</h1><p class="lead">${escape(tr(step.lead))}</p>${renderBody(step)}<div class="foot"><button class="secondary" data-action="back" ${session.step===0||session.retryMode?'disabled':''}>${escape(ui('back'))}</button><button class="primary" data-action="next" ${stepDone(step)?'':'disabled'}>${escape(session.step===config.steps.length-2?ui('finish'):ui('next'))}</button></div>`;global.NikigoSprintClassicFocusAdapter?.afterRender?.();
   }
   stage.addEventListener('click',event=>{
     const button=event.target.closest('button');if(!button)return;const step=current();const action=button.dataset.action;

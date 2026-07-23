@@ -1,1 +1,49 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#6d4aff"><title>Nikigo · Lesson 8</title><link rel="icon" href="assets/nikigo-mark.svg" type="image/svg+xml"><link rel="stylesheet" href="lesson-sprint.css"></head><body><header class="top"><button class="logo" id="homeLogo" type="button"><b>✦</b> Nikigo</button><span class="lessonName" id="lessonName"></span><div class="topActions"><label class="languagePicker">🌐<select id="language" aria-label="Interface language"><option value="zh">简体中文</option><option value="en">English</option><option value="vi">Tiếng Việt</option><option value="ja">日本語</option></select></label><button class="homeButton" id="homeButton" type="button" aria-label="Home">⌂</button></div></header><div class="progressWrap"><div class="progressMeta"><span id="progressLabel"></span><b id="progressCount"></b></div><div class="track" id="progressTrack" role="progressbar" aria-valuemin="0" aria-valuemax="100"><i id="progressBar"></i></div></div><main class="stage"><section class="sprintCard" id="lessonStage" aria-live="polite"></section></main><div class="toast" id="toast" role="status" aria-live="polite"></div><script src="app-state.js"></script><script src="audio-catalog.js"></script><script src="lesson-08.js"></script><script src="lesson-sprint-engine.js"></script></body></html>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#6d4aff">
+  <title>Nikigo · Lesson 8</title>
+  <link rel="icon" href="assets/nikigo-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/classic-focus-tokens.css">
+  <link rel="stylesheet" href="assets/classic-focus-shell.css">
+  <link rel="stylesheet" href="lesson-08-classic-focus.css">
+</head>
+<body class="classicFocusShell classicFocusFoundation classicFocusSprint">
+  <a class="skipLink" id="skipLink" href="#lessonStage"></a>
+  <header class="top" id="courseNavigation">
+    <button class="logo" id="homeLogo" type="button" translate="no"><b aria-hidden="true">✦</b> Nikigo</button>
+    <span class="lessonName" id="lessonName"></span>
+    <div class="topActions">
+      <label class="languagePicker">
+        <span aria-hidden="true">🌐</span>
+        <span class="srOnly" id="languageLabel">Interface language</span>
+        <select id="language" aria-labelledby="languageLabel">
+          <option value="zh">简体中文</option>
+          <option value="en">English</option>
+          <option value="vi">Tiếng Việt</option>
+          <option value="ja">日本語</option>
+        </select>
+      </label>
+      <button class="homeButton" id="homeButton" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 2.8 10.7a1 1 0 0 0 1.2 1.6l.9-.7V20a1 1 0 0 0 1 1h4.2v-5.8h3.8V21H18a1 1 0 0 0 1-1v-8.4l.9.7a1 1 0 1 0 1.2-1.6L12 3.2Z"/></svg>
+      </button>
+    </div>
+  </header>
+  <div class="progressWrap">
+    <div class="progressMeta"><span id="progressLabel"></span><b id="progressCount"></b></div>
+    <div class="track" id="progressTrack" role="progressbar" aria-labelledby="progressLabel progressCount" aria-valuemin="0" aria-valuemax="100"><i id="progressBar"></i></div>
+  </div>
+  <main class="stage sprintStage">
+    <section class="classicFocusCard sprintCard" id="lessonStage" aria-live="polite" tabindex="-1"></section>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app-state.js"></script>
+  <script src="audio-catalog.js"></script>
+  <script src="lesson-08.js"></script>
+  <script src="assets/classic-focus-shell.js"></script>
+  <script src="lesson-08-classic-focus.js"></script>
+  <script src="lesson-sprint-engine.js"></script>
+</body>
+</html>
