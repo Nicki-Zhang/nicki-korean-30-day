@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "status": "pass",
+  "branch": "agent/nikigo-lesson-13-classic-focus-integration",
+  "baseline": "abe48fcdaadeb188ff7b669a6b9e6cb4eff96103",
+  "previewUrl": "http://127.0.0.1:4197/lesson-13.html?lang=zh",
+  "lesson": {
+    "lessonId": "lesson-13",
+    "entry": "lesson-13.html",
+    "engine": "lesson-sprint-engine.js",
+    "stepCount": 13,
+    "sessionKey": "nikigoLessonSession:lesson-13",
+    "audioRequests": 0,
+    "completionAudioGate": false,
+    "stepMapping": [
+      {"stepId": "intro", "sourceType": "intro", "contentType": "intro"},
+      {"stepId": "one-five", "sourceType": "concept", "contentType": "explanation"},
+      {"stepId": "match-one-five", "sourceType": "match", "contentType": "matching"},
+      {"stepId": "six-ten", "sourceType": "concept", "contentType": "explanation"},
+      {"stepId": "identify-eight", "sourceType": "choice", "contentType": "choice"},
+      {"stepId": "match-six-ten", "sourceType": "match", "contentType": "matching"},
+      {"stepId": "counter-forms", "sourceType": "concept", "contentType": "explanation"},
+      {"stepId": "match-counter", "sourceType": "match", "contentType": "matching"},
+      {"stepId": "build-one", "sourceType": "build", "contentType": "builder"},
+      {"stepId": "how-many", "sourceType": "scenario", "contentType": "choice"},
+      {"stepId": "five-ten", "sourceType": "match", "contentType": "matching"},
+      {"stepId": "final-challenge", "sourceType": "scenario", "contentType": "choice"},
+      {"stepId": "complete", "sourceType": "complete", "contentType": "completion"}
+    ]
+  },
+  "functional": {
+    "completeFlow": true,
+    "noSkippedSteps": true,
+    "answerNotLeaked": true,
+    "matching": true,
+    "choice": true,
+    "builder": true,
+    "scenario": true,
+    "correctFeedback": true,
+    "errorFeedback": true,
+    "wrongIdsPreserved": true,
+    "targetedRetry": true,
+    "reviewItemPublication": "not-present-in-sealed-sprint-engine",
+    "firstCompletionXp": 50,
+    "repeatCompletionXp": 0,
+    "languages": ["zh", "en", "vi", "ja"],
+    "languageSwitchPreservedState": true,
+    "refreshRestoredState": true,
+    "browserBackRestoredModule": true
+  },
+  "scroll": {
+    "sameStepBuilder": {"before": 260, "after": 260, "feedbackVisible": true},
+    "realStepChange": {"before": 260, "after": 0, "focusedElement": "lessonStage"}
+  },
+  "responsive": [
+    {"width": 390, "height": 844, "horizontalOverflow": 0, "minimumTargetPx": 44},
+    {"width": 430, "height": 932, "horizontalOverflow": 0, "minimumTargetPx": 44},
+    {"width": 768, "height": 1024, "horizontalOverflow": 0, "minimumTargetPx": 44},
+    {"width": 1440, "height": 1024, "horizontalOverflow": 0, "minimumTargetPx": 44}
+  ],
+  "browser": {
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "networkErrors": 0,
+    "externalRequests": 0,
+    "audioRequests": 0,
+    "apiRequests": 0,
+    "serviceWorkerCachedUrls": 134,
+    "serviceWorkerFetchFailures": 0
+  },
+  "tests": {
+    "npmTest": "pass",
+    "architecture": "pass",
+    "diffCheck": "pass",
+    "lesson13Validator": "pass"
+  },
+  "protectedHashes": {
+    "course-catalog.js": "63d0c4353883ee560e3f08775570e4d5092a6d95ea0653b358a67a90ab49b730",
+    "app-state.js": "aa4ad0b06782ae58466a8f49bc3020ea0d6b25d1ec209ca25d26005c7bee6c1e",
+    "audio-catalog.js": "107ddd9abac3824ad735de633763adbdac7b82bedbb5b97ea434741cc695fb7f",
+    "lesson-sprint-engine.js": "22f77c54bc51fff0100d841827034c6e03680c1373d9eb12e2434a4cc238dc77",
+    "audioAggregate": "40eefa5da3fa20050d404acd205f28d129a9a02db9f9355e8a3509d63bee9c9e"
+  }
+}
