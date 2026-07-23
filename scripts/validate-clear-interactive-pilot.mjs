@@ -6,13 +6,14 @@ const html=fs.readFileSync('lesson-11.html','utf8');
 const lessonCss=fs.readFileSync('lesson-clear-interactive.css','utf8');
 const lessonTheme=fs.readFileSync('lesson-purple-interactive.css','utf8');
 const lessonEngine=fs.readFileSync('lesson-clear-interactive.js','utf8');
+const missionShell=fs.readFileSync('lesson-11-mission-shell.js','utf8');
 const shellCss=fs.readFileSync('assets/nikigo-purple-shell.css','utf8');
 const friendlyCss=fs.readFileSync('assets/nikigo-friendly-learning-path.css','utf8');
 const shellJs=fs.readFileSync('assets/nikigo-clear-shell.js','utf8');
 const app=fs.readFileSync('nikigo-app.html','utf8');
 const worker=fs.readFileSync('sw.js','utf8');
 
-for(const marker of ['lesson-clear-interactive.css','lesson-purple-interactive.css','lesson-clear-interactive.js','audio-catalog.js','lesson-11.js'])assert.ok(html.includes(marker),`Lesson 11 pilot missing ${marker}`);
+for(const marker of ['lesson-clear-interactive.css','lesson-purple-interactive.css','lesson-11-mission.css','lesson-11-mission-shell.js','lesson-clear-interactive.js','audio-catalog.js','lesson-11.js'])assert.ok(html.includes(marker),`Lesson 11 pilot missing ${marker}`);
 assert.ok(app.includes('assets/nikigo-purple-shell.css'));
 assert.ok(app.includes('assets/nikigo-friendly-learning-path.css'));
 assert.ok(app.includes('assets/nikigo-clear-shell.js'));
@@ -51,6 +52,7 @@ const document={getElementById:id=>elements.get(id)||element(),documentElement:{
 const storage=new Map();let profile={xp:100,completedLessons:[],lessonProgress:{},interfaceLanguage:'en'};
 const history={replaceState:noop,pushState:noop};
 const window={window:null,document,NikigoLessonConfig:config,NikigoAudio:{resolve:()=>({playable:false,path:null})},NikigoState:{get:()=>profile,update:patch=>{profile=typeof patch==='function'?patch(profile):{...profile,...patch};return profile;}},localStorage:{getItem:key=>storage.get(key)||null,setItem:(key,value)=>storage.set(key,String(value))},location:{search:'?lang=en',href:'http://localhost/lesson-11.html'},history,addEventListener:noop,scrollTo:noop};window.window=window;
+vm.runInNewContext(missionShell,{window},{filename:'lesson-11-mission-shell.js'});
 vm.runInNewContext(lessonEngine,{window,document,URLSearchParams,setTimeout,clearTimeout,Audio:class{}},{filename:'lesson-clear-interactive.js'});
 const api=window.NikigoSprintLessonTest;
 assert.equal(api.phaseByStep.length,13);assert.equal(api.phaseByStep.at(-1),7);
