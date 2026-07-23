@@ -93,11 +93,13 @@ for (const [index, item] of (catalog || []).entries()) {
   if (['lesson-08','lesson-09','lesson-10','lesson-11','lesson-12','lesson-13'].includes(stableId)) {
     const html = fs.readFileSync(file, 'utf8');
     const isClassicFocus = stableId === 'lesson-11';
+    const isClassicSprint = stableId === 'lesson-08';
     const expectedEngine = isClassicFocus ? 'lesson-11-classic-focus.js' : 'lesson-sprint-engine.js';
-    const expectedStyles = isClassicFocus ? 'lesson-11-classic-focus.css' : 'lesson-sprint.css';
+    const expectedStyles = isClassicFocus ? 'lesson-11-classic-focus.css' : isClassicSprint ? 'lesson-08-classic-focus.css' : 'lesson-sprint.css';
     if (!html.includes(`${stableId}.js`)) errors.push(`${file} does not load its lesson configuration.`);
     if (!html.includes(expectedEngine)) errors.push(`${file} does not load its expected lesson engine.`);
     if (!html.includes(expectedStyles)) errors.push(`${file} does not load its expected lesson styles.`);
+    if (isClassicSprint && !html.includes('lesson-08-classic-focus.js')) errors.push(`${file} does not load its Sprint-to-Classic adapter.`);
     if (!html.includes('audio-catalog.js')) errors.push(`${file} does not load the strict audio catalog.`);
     continue;
   }

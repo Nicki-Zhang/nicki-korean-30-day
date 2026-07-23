@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "lesson-08",
+  "entry": "lesson-08.html",
+  "branch": "agent/nikigo-lesson-08-classic-focus-integration-v2",
+  "baseline": "e863d5a0ad04a5a65a2b4b3d7e9469a5e5b69f31",
+  "status": "passed",
+  "runtime": {
+    "engine": "lesson-sprint-engine.js",
+    "adapter": "lesson-08-classic-focus.js",
+    "stableStepCount": 15,
+    "uniqueStepCount": 15,
+    "audioRequests": 0,
+    "completionGate": false,
+    "firstCompletionXp": 50,
+    "repeatCompletionXp": 0
+  },
+  "flow": {
+    "visitedAllStableSteps": true,
+    "requiredStepsCannotBeSkipped": true,
+    "correctFeedback": true,
+    "incorrectFeedback": true,
+    "targetedRetry": true,
+    "wrongIdsPreservedByEngine": true,
+    "reviewItemBehaviorPreserved": true,
+    "refreshRecovery": true,
+    "browserBackRecovery": true,
+    "v4ModuleRoundTrip": true
+  },
+  "scroll": {
+    "sameStepForcedScrollCalls": 0,
+    "sameStepFeedbackVisible": true,
+    "trueStepChangeTopScrollCalls": 1,
+    "trueStepChangeTaskFocused": true,
+    "keyboardAnswerFeedbackFocused": true
+  },
+  "languages": {
+    "tested": ["zh", "en", "vi", "ja"],
+    "stepPreserved": true,
+    "selectionPreserved": true,
+    "feedbackPreserved": true,
+    "koreanTargetPreserved": true,
+    "documentLanguageSynchronized": true,
+    "mixedAuxiliaryCopy": false
+  },
+  "viewports": [
+    {"width": 390, "height": 844, "horizontalOverflow": 0},
+    {"width": 430, "height": 932, "horizontalOverflow": 0},
+    {"width": 768, "height": 1024, "horizontalOverflow": 0},
+    {"width": 1440, "height": 1024, "horizontalOverflow": 0}
+  ],
+  "accessibility": {
+    "minimumTouchTargetCssPixels": 44,
+    "keyboard": true,
+    "visibleFocus": true,
+    "escape": true,
+    "aria": true,
+    "prefersReducedMotion": true
+  },
+  "network": {
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "networkErrors": 0,
+    "externalRequests": 0,
+    "apiRequests": 0,
+    "cost": 0
+  },
+  "serviceWorker": {
+    "declaredAssets": 133,
+    "declaredAssetsHttp200": 133,
+    "requiredLessonAssetsCached": true
+  },
+  "tests": {
+    "npmTest": "passed",
+    "architecture": "passed",
+    "diffCheck": "passed"
+  },
+  "protectedFilesChanged": false,
+  "committed": false,
+  "pushed": false,
+  "deployed": false
+}
