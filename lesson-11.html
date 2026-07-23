@@ -6,38 +6,35 @@
   <meta name="theme-color" content="#6657D9">
   <title>Nikigo · Lesson 11</title>
   <link rel="icon" href="assets/nikigo-mark.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="lesson-clear-interactive.css">
-  <link rel="stylesheet" href="lesson-purple-interactive.css">
-  <link rel="stylesheet" href="lesson-11-mission.css">
+  <link rel="stylesheet" href="lesson-11-classic-focus.css">
 </head>
-<body class="missionLesson11">
-  <a class="skipLink" href="#lessonStage">Skip to lesson content</a>
-  <header class="lessonTop missionTop" id="missionTop" aria-label="Course navigation">
-    <button class="iconButton" id="homeLogo" type="button" aria-label="Return to learning path">‹</button>
-    <strong class="wordmark" translate="no">Nikigo</strong>
-    <span class="lessonName srOnly" id="lessonName"></span>
-    <div class="headerProgress" aria-label="Lesson progress">
-      <b id="progressCount"></b>
-      <div class="headerProgressTrack" id="progressTrack" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-      </div>
-      <span class="srOnly" id="progressLabel"></span>
+<body class="classicFocusLesson11">
+  <a class="skipLink" id="skipLink" href="#lessonStage">Skip to lesson content</a>
+  <header class="top" id="courseNavigation" aria-label="Course navigation">
+    <button class="logo" id="homeLogo" type="button" translate="no">Nikigo</button>
+    <span class="lessonName" id="lessonName"></span>
+    <div class="topActions">
+      <label class="languagePicker">
+        <span class="srOnly" id="languageLabel">Interface language</span>
+        <select id="language" aria-labelledby="languageLabel">
+          <option value="zh">简体中文</option>
+          <option value="en">English</option>
+          <option value="vi">Tiếng Việt</option>
+          <option value="ja">日本語</option>
+        </select>
+      </label>
+      <button class="exitButton" id="homeButton" type="button" aria-label="Exit lesson">×</button>
     </div>
-    <label class="languagePicker">
-      <span class="srOnly" id="languageLabel">Interface language</span>
-      <select id="language" aria-label="Interface language">
-        <option value="zh">简体中文</option>
-        <option value="en">English</option>
-        <option value="vi">Tiếng Việt</option>
-        <option value="ja">日本語</option>
-      </select>
-    </label>
-    <button class="iconButton" id="homeButton" type="button" aria-label="Exit lesson">×</button>
   </header>
-  <main class="lessonCanvas">
-    <section class="lessonStage" id="lessonStage" aria-live="polite"></section>
+
+  <div class="progressWrap">
+    <div class="progressMeta"><span id="progressLabel"></span><b id="progressCount"></b></div>
+    <div class="track" id="progressTrack" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div>
+  </div>
+
+  <main class="stage">
+    <section class="classicCard" id="lessonStage" tabindex="-1"></section>
   </main>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <dialog class="exitDialog" id="exitDialog" aria-labelledby="exitDialogTitle">
     <form method="dialog">
       <h2 id="exitDialogTitle"></h2>
@@ -48,10 +45,10 @@
       </div>
     </form>
   </dialog>
+  <div class="srOnly" id="announcer" role="status" aria-live="polite"></div>
   <script src="app-state.js"></script>
   <script src="audio-catalog.js"></script>
   <script src="lesson-11.js"></script>
-  <script src="lesson-11-mission-shell.js"></script>
-  <script src="lesson-clear-interactive.js"></script>
+  <script src="lesson-11-classic-focus.js"></script>
 </body>
 </html>
