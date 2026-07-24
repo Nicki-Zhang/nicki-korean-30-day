@@ -91,3 +91,40 @@ The formal Lesson 11 keeps the approved Classic Focus structure:
 ## Result
 
 final result: passed
+
+---
+
+# Homepage Visual Polish V1 — Design QA
+
+## Comparison basis
+
+- Source: the approved revised Homepage Visual Polish V1 prototype.
+- Implementation: formal Dashboard driven by the existing product architecture and state selectors.
+- Same-state comparisons:
+  - `quality-fix/homepage-visual-polish-formal/evidence/comparison-390-setup-prototype-formal.png`
+  - `quality-fix/homepage-visual-polish-formal/evidence/comparison-390-active-prototype-formal.png`
+  - `quality-fix/homepage-visual-polish-formal/evidence/comparison-390-partial-prototype-formal.png`
+  - `quality-fix/homepage-visual-polish-formal/evidence/comparison-768-active-prototype-formal.png`
+  - `quality-fix/homepage-visual-polish-formal/evidence/comparison-1440-active-prototype-formal.png`
+- State fixtures exist only in isolated validation contexts. Product source reads real selectors and never imports the prototype.
+
+## Visual review
+
+- Header, welcome hierarchy, context row, hero composition, status strip and mobile navigation preserve the approved layout specification.
+- Desktop and mobile both expose the approved five-entry navigation with consistent line icons and visible labels.
+- The language chevron is part of the control at every breakpoint, with a measured 16.34px right inset.
+- The mobile Stage → Module → Lesson locator is horizontal, with all three node centers on the same axis and the connecting rule centered through them.
+- The 0% setup state shows Stage and Module as context and setup as current; it has no false completion mark.
+- Active and partial states are bound to explicit course/session identity, not title or DOM inference.
+- The primary action remains the only highest-weight action.
+- No oversized title, card wall, decorative shadow, glass effect or additional visual direction was introduced.
+- Four-language checks found no clipping or horizontal overflow.
+
+## Severity review
+
+- P0: none.
+- P1: none.
+- P2: none.
+- Expected data-bound differences: course-specific Korean hero text is omitted when no approved catalog field exists. This is intentional fail-closed behavior, not a visual fixture fallback.
+
+final result: passed
