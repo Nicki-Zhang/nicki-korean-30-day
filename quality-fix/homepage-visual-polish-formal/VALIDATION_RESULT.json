@@ -1,0 +1,3402 @@
+{
+  "generatedAt": "2026-07-24T15:46:20.694Z",
+  "baseUrl": "http://127.0.0.1:4204",
+  "baseline": "bccf01b622ddcc0af839ceadf7a28a4f5891e515",
+  "states": [
+    "setup",
+    "active",
+    "partial"
+  ],
+  "viewports": [
+    {
+      "width": 390,
+      "height": 844
+    },
+    {
+      "width": 430,
+      "height": 932
+    },
+    {
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "width": 1440,
+      "height": 1024
+    }
+  ],
+  "languages": [
+    "zh",
+    "en",
+    "vi",
+    "ja"
+  ],
+  "results": [
+    {
+      "state": "setup",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "language": "zh",
+      "url": "http://127.0.0.1:4204/nikigo-app.html?lang=zh#dashboard",
+      "lang": "zh-CN",
+      "overflow": 0,
+      "pageHeight": 1592,
+      "nav": [
+        {
+          "target": "dashboard",
+          "text": "首页",
+          "current": "page",
+          "icon": true,
+          "rect": {
+            "x": 10,
+            "y": 790,
+            "width": 72.390625,
+            "height": 48,
+            "right": 82.390625,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "courses",
+          "text": "学习",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 84.390625,
+            "y": 790,
+            "width": 72.40625,
+            "height": 48,
+            "right": 156.796875,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "practice",
+          "text": "练习",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 158.796875,
+            "y": 790,
+            "width": 72.390625,
+            "height": 48,
+            "right": 231.1875,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "progress",
+          "text": "进度",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 233.1875,
+            "y": 790,
+            "width": 72.40625,
+            "height": 48,
+            "right": 305.59375,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "profile",
+          "text": "我的",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 307.59375,
+            "y": 790,
+            "width": 72.40625,
+            "height": 48,
+            "right": 380,
+            "bottom": 838
+          }
+        }
+      ],
+      "mission": {
+        "title": "完成学习设置",
+        "action": "开始设置",
+        "korean": "",
+        "progress": 0
+      },
+      "locator": {
+        "labels": [
+          "学习上下文\n阶段\n韩文基础",
+          "学习上下文\n模块\n韩文地图与基础元音",
+          "当前\n课程\n学习设置"
+        ],
+        "states": [
+          "context",
+          "context",
+          "current"
+        ],
+        "current": [
+          null,
+          null,
+          "step"
+        ],
+        "centers": [
+          {
+            "x": 89,
+            "y": 587.671875
+          },
+          {
+            "x": 195,
+            "y": 587.671875
+          },
+          {
+            "x": 301,
+            "y": 587.671875
+          }
+        ],
+        "axisError": 0
+      },
+      "chevron": {
+        "display": "block",
+        "rightInset": 16.3431396484375,
+        "select": {
+          "x": 251,
+          "y": 10,
+          "width": 122,
+          "height": 44,
+          "right": 373,
+          "bottom": 54
+        }
+      },
+      "smallTargets": [],
+      "primaryCount": 1,
+      "hero": {
+        "x": 18,
+        "y": 223.3125,
+        "width": 354,
+        "height": 460.546875,
+        "right": 372,
+        "bottom": 683.859375
+      },
+      "welcome": {
+        "x": 18,
+        "y": 86,
+        "width": 354,
+        "height": 119.3125,
+        "right": 372,
+        "bottom": 205.3125
+      },
+      "mobileNav": true,
+      "reducedMotion": "1e-05s"
+    },
+    {
+      "state": "active",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "language": "zh",
+      "url": "http://127.0.0.1:4204/nikigo-app.html?lang=zh#dashboard",
+      "lang": "zh-CN",
+      "overflow": 0,
+      "pageHeight": 1413,
+      "nav": [
+        {
+          "target": "dashboard",
+          "text": "首页",
+          "current": "page",
+          "icon": true,
+          "rect": {
+            "x": 10,
+            "y": 790,
+            "width": 72.390625,
+            "height": 48,
+            "right": 82.390625,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "courses",
+          "text": "学习",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 84.390625,
+            "y": 790,
+            "width": 72.40625,
+            "height": 48,
+            "right": 156.796875,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "practice",
+          "text": "练习",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 158.796875,
+            "y": 790,
+            "width": 72.390625,
+            "height": 48,
+            "right": 231.1875,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "progress",
+          "text": "进度",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 233.1875,
+            "y": 790,
+            "width": 72.40625,
+            "height": 48,
+            "right": 305.59375,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "profile",
+          "text": "我的",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 307.59375,
+            "y": 790,
+            "width": 72.40625,
+            "height": 48,
+            "right": 380,
+            "bottom": 838
+          }
+        }
+      ],
+      "mission": {
+        "title": "固有数词1～10与基础数量",
+        "action": "继续当前课程",
+        "korean": "고유어 수 1–10",
+        "progress": 40
+      },
+      "locator": {
+        "labels": [
+          "学习上下文\n阶段\n基础沟通",
+          "学习上下文\n模块\n数字与基础数量",
+          "当前\n课程\n第13课"
+        ],
+        "states": [
+          "context",
+          "context",
+          "current"
+        ],
+        "current": [
+          null,
+          null,
+          "step"
+        ],
+        "centers": [
+          {
+            "x": 89,
+            "y": 605.609375
+          },
+          {
+            "x": 195,
+            "y": 605.609375
+          },
+          {
+            "x": 301,
+            "y": 605.609375
+          }
+        ],
+        "axisError": 0
+      },
+      "chevron": {
+        "display": "block",
+        "rightInset": 16.3431396484375,
+        "select": {
+          "x": 251,
+          "y": 10,
+          "width": 122,
+          "height": 44,
+          "right": 373,
+          "bottom": 54
+        }
+      },
+      "smallTargets": [],
+      "primaryCount": 1,
+      "hero": {
+        "x": 18,
+        "y": 223.3125,
+        "width": 354,
+        "height": 458.1875,
+        "right": 372,
+        "bottom": 681.5
+      },
+      "welcome": {
+        "x": 18,
+        "y": 86,
+        "width": 354,
+        "height": 119.3125,
+        "right": 372,
+        "bottom": 205.3125
+      },
+      "mobileNav": true,
+      "reducedMotion": "1e-05s"
+    },
+    {
+      "state": "active",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "language": "en",
+      "url": "http://127.0.0.1:4204/nikigo-app.html?lang=en#dashboard",
+      "lang": "en",
+      "overflow": 0,
+      "pageHeight": 1578,
+      "nav": [
+        {
+          "target": "dashboard",
+          "text": "Home",
+          "current": "page",
+          "icon": true,
+          "rect": {
+            "x": 10,
+            "y": 790,
+            "width": 72.390625,
+            "height": 48,
+            "right": 82.390625,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "courses",
+          "text": "Learn",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 84.390625,
+            "y": 790,
+            "width": 72.40625,
+            "height": 48,
+            "right": 156.796875,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "practice",
+          "text": "Practice",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 158.796875,
+            "y": 790,
+            "width": 72.390625,
+            "height": 48,
+            "right": 231.1875,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "progress",
+          "text": "Progress",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 233.1875,
+            "y": 790,
+            "width": 72.40625,
+            "height": 48,
+            "right": 305.59375,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "profile",
+          "text": "Me",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 307.59375,
+            "y": 790,
+            "width": 72.40625,
+            "height": 48,
+            "right": 380,
+            "bottom": 838
+          }
+        }
+      ],
+      "mission": {
+        "title": "Native Korean Numbers 1–10 and Basic Quantities",
+        "action": "Continue current course",
+        "korean": "고유어 수 1–10",
+        "progress": 40
+      },
+      "locator": {
+        "labels": [
+          "Learning context\nStage\nEssential Korean",
+          "Learning context\nModule\nNumbers and Basic Quantities",
+          "Current\nLesson\nLesson 13"
+        ],
+        "states": [
+          "context",
+          "context",
+          "current"
+        ],
+        "current": [
+          null,
+          null,
+          "step"
+        ],
+        "centers": [
+          {
+            "x": 89,
+            "y": 654.984375
+          },
+          {
+            "x": 195,
+            "y": 654.984375
+          },
+          {
+            "x": 301,
+            "y": 654.984375
+          }
+        ],
+        "axisError": 0
+      },
+      "chevron": {
+        "display": "block",
+        "rightInset": 16.3431396484375,
+        "select": {
+          "x": 251,
+          "y": 10,
+          "width": 122,
+          "height": 44,
+          "right": 373,
+          "bottom": 54
+        }
+      },
+      "smallTargets": [],
+      "primaryCount": 1,
+      "hero": {
+        "x": 18,
+        "y": 247.5,
+        "width": 354,
+        "height": 523.96875,
+        "right": 372,
+        "bottom": 771.46875
+      },
+      "welcome": {
+        "x": 18,
+        "y": 86,
+        "width": 354,
+        "height": 143.5,
+        "right": 372,
+        "bottom": 229.5
+      },
+      "mobileNav": true,
+      "reducedMotion": "1e-05s"
+    },
+    {
+      "state": "active",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "language": "vi",
+      "url": "http://127.0.0.1:4204/nikigo-app.html?lang=vi#dashboard",
+      "lang": "vi",
+      "overflow": 0,
+      "pageHeight": 1549,
+      "nav": [
+        {
+          "target": "dashboard",
+          "text": "Trang chủ",
+          "current": "page",
+          "icon": true,
+          "rect": {
+            "x": 10,
+            "y": 790,
+            "width": 72.390625,
+            "height": 48,
+            "right": 82.390625,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "courses",
+          "text": "Học",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 84.390625,
+            "y": 790,
+            "width": 72.40625,
+            "height": 48,
+            "right": 156.796875,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "practice",
+          "text": "Luyện tập",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 158.796875,
+            "y": 790,
+            "width": 72.390625,
+            "height": 48,
+            "right": 231.1875,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "progress",
+          "text": "Tiến độ",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 233.1875,
+            "y": 790,
+            "width": 72.40625,
+            "height": 48,
+            "right": 305.59375,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "profile",
+          "text": "Cá nhân",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 307.59375,
+            "y": 790,
+            "width": 72.40625,
+            "height": 48,
+            "right": 380,
+            "bottom": 838
+          }
+        }
+      ],
+      "mission": {
+        "title": "Số thuần Hàn 1–10 và số lượng cơ bản",
+        "action": "Tiếp tục bài học hiện tại",
+        "korean": "고유어 수 1–10",
+        "progress": 40
+      },
+      "locator": {
+        "labels": [
+          "Bối cảnh học tập\nGiai đoạn\nGiao tiếp tiếng Hàn cơ bản",
+          "Bối cảnh học tập\nMô-đun\nSố và số lượng cơ bản",
+          "Hiện tại\nBài học\nBài 13"
+        ],
+        "states": [
+          "context",
+          "context",
+          "current"
+        ],
+        "current": [
+          null,
+          null,
+          "step"
+        ],
+        "centers": [
+          {
+            "x": 89,
+            "y": 654.984375
+          },
+          {
+            "x": 195,
+            "y": 654.984375
+          },
+          {
+            "x": 301,
+            "y": 654.984375
+          }
+        ],
+        "axisError": 0
+      },
+      "chevron": {
+        "display": "block",
+        "rightInset": 16.3431396484375,
+        "select": {
+          "x": 251,
+          "y": 10,
+          "width": 122,
+          "height": 44,
+          "right": 373,
+          "bottom": 54
+        }
+      },
+      "smallTargets": [],
+      "primaryCount": 1,
+      "hero": {
+        "x": 18,
+        "y": 247.5,
+        "width": 354,
+        "height": 523.96875,
+        "right": 372,
+        "bottom": 771.46875
+      },
+      "welcome": {
+        "x": 18,
+        "y": 86,
+        "width": 354,
+        "height": 143.5,
+        "right": 372,
+        "bottom": 229.5
+      },
+      "mobileNav": true,
+      "reducedMotion": "1e-05s"
+    },
+    {
+      "state": "active",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "language": "ja",
+      "url": "http://127.0.0.1:4204/nikigo-app.html?lang=ja#dashboard",
+      "lang": "ja",
+      "overflow": 0,
+      "pageHeight": 1481,
+      "nav": [
+        {
+          "target": "dashboard",
+          "text": "ホーム",
+          "current": "page",
+          "icon": true,
+          "rect": {
+            "x": 10,
+            "y": 790,
+            "width": 72.390625,
+            "height": 48,
+            "right": 82.390625,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "courses",
+          "text": "学習",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 84.390625,
+            "y": 790,
+            "width": 72.40625,
+            "height": 48,
+            "right": 156.796875,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "practice",
+          "text": "練習",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 158.796875,
+            "y": 790,
+            "width": 72.390625,
+            "height": 48,
+            "right": 231.1875,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "progress",
+          "text": "進捗",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 233.1875,
+            "y": 790,
+            "width": 72.40625,
+            "height": 48,
+            "right": 305.59375,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "profile",
+          "text": "設定",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 307.59375,
+            "y": 790,
+            "width": 72.40625,
+            "height": 48,
+            "right": 380,
+            "bottom": 838
+          }
+        }
+      ],
+      "mission": {
+        "title": "固有数詞1～10と基本数量",
+        "action": "現在のコースを続ける",
+        "korean": "고유어 수 1–10",
+        "progress": 40
+      },
+      "locator": {
+        "labels": [
+          "学習コンテキスト\nステージ\n韓国語の基本コミュニケーション",
+          "学習コンテキスト\nモジュール\n数字と基本的な数量",
+          "現在\nレッスン\n第13課"
+        ],
+        "states": [
+          "context",
+          "context",
+          "current"
+        ],
+        "current": [
+          null,
+          null,
+          "step"
+        ],
+        "centers": [
+          {
+            "x": 89,
+            "y": 629.796875
+          },
+          {
+            "x": 195,
+            "y": 629.796875
+          },
+          {
+            "x": 301,
+            "y": 629.796875
+          }
+        ],
+        "axisError": 0
+      },
+      "chevron": {
+        "display": "block",
+        "rightInset": 16.3431396484375,
+        "select": {
+          "x": 251,
+          "y": 10,
+          "width": 122,
+          "height": 44,
+          "right": 373,
+          "bottom": 54
+        }
+      },
+      "smallTargets": [],
+      "primaryCount": 1,
+      "hero": {
+        "x": 18,
+        "y": 247.5,
+        "width": 354,
+        "height": 478.484375,
+        "right": 372,
+        "bottom": 725.984375
+      },
+      "welcome": {
+        "x": 18,
+        "y": 86,
+        "width": 354,
+        "height": 143.5,
+        "right": 372,
+        "bottom": 229.5
+      },
+      "mobileNav": true,
+      "reducedMotion": "1e-05s"
+    },
+    {
+      "state": "active",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "language": "zh",
+      "url": "http://127.0.0.1:4204/nikigo-app.html?lang=zh#dashboard",
+      "lang": "zh-CN",
+      "overflow": 0,
+      "pageHeight": 1420,
+      "nav": [
+        {
+          "target": "dashboard",
+          "text": "首页",
+          "current": "page",
+          "icon": true,
+          "rect": {
+            "x": 10,
+            "y": 878,
+            "width": 80.390625,
+            "height": 48,
+            "right": 90.390625,
+            "bottom": 926
+          }
+        },
+        {
+          "target": "courses",
+          "text": "学习",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 92.390625,
+            "y": 878,
+            "width": 80.40625,
+            "height": 48,
+            "right": 172.796875,
+            "bottom": 926
+          }
+        },
+        {
+          "target": "practice",
+          "text": "练习",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 174.796875,
+            "y": 878,
+            "width": 80.390625,
+            "height": 48,
+            "right": 255.1875,
+            "bottom": 926
+          }
+        },
+        {
+          "target": "progress",
+          "text": "进度",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 257.1875,
+            "y": 878,
+            "width": 80.40625,
+            "height": 48,
+            "right": 337.59375,
+            "bottom": 926
+          }
+        },
+        {
+          "target": "profile",
+          "text": "我的",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 339.59375,
+            "y": 878,
+            "width": 80.40625,
+            "height": 48,
+            "right": 420,
+            "bottom": 926
+          }
+        }
+      ],
+      "mission": {
+        "title": "固有数词1～10与基础数量",
+        "action": "继续当前课程",
+        "korean": "고유어 수 1–10",
+        "progress": 40
+      },
+      "locator": {
+        "labels": [
+          "学习上下文\n阶段\n基础沟通",
+          "学习上下文\n模块\n数字与基础数量",
+          "当前\n课程\n第13课"
+        ],
+        "states": [
+          "context",
+          "context",
+          "current"
+        ],
+        "current": [
+          null,
+          null,
+          "step"
+        ],
+        "centers": [
+          {
+            "x": 95.65625,
+            "y": 612.625
+          },
+          {
+            "x": 214.984375,
+            "y": 612.625
+          },
+          {
+            "x": 334.328125,
+            "y": 612.625
+          }
+        ],
+        "axisError": 0
+      },
+      "chevron": {
+        "display": "block",
+        "rightInset": 16.3431396484375,
+        "select": {
+          "x": 291,
+          "y": 10,
+          "width": 122,
+          "height": 44,
+          "right": 413,
+          "bottom": 54
+        }
+      },
+      "smallTargets": [],
+      "primaryCount": 1,
+      "hero": {
+        "x": 18,
+        "y": 226.765625,
+        "width": 394,
+        "height": 461.75,
+        "right": 412,
+        "bottom": 688.515625
+      },
+      "welcome": {
+        "x": 18,
+        "y": 86,
+        "width": 394,
+        "height": 122.765625,
+        "right": 412,
+        "bottom": 208.765625
+      },
+      "mobileNav": true,
+      "reducedMotion": "1e-05s"
+    },
+    {
+      "state": "active",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "language": "en",
+      "url": "http://127.0.0.1:4204/nikigo-app.html?lang=en#dashboard",
+      "lang": "en",
+      "overflow": 0,
+      "pageHeight": 1535,
+      "nav": [
+        {
+          "target": "dashboard",
+          "text": "Home",
+          "current": "page",
+          "icon": true,
+          "rect": {
+            "x": 10,
+            "y": 878,
+            "width": 80.390625,
+            "height": 48,
+            "right": 90.390625,
+            "bottom": 926
+          }
+        },
+        {
+          "target": "courses",
+          "text": "Learn",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 92.390625,
+            "y": 878,
+            "width": 80.40625,
+            "height": 48,
+            "right": 172.796875,
+            "bottom": 926
+          }
+        },
+        {
+          "target": "practice",
+          "text": "Practice",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 174.796875,
+            "y": 878,
+            "width": 80.390625,
+            "height": 48,
+            "right": 255.1875,
+            "bottom": 926
+          }
+        },
+        {
+          "target": "progress",
+          "text": "Progress",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 257.1875,
+            "y": 878,
+            "width": 80.40625,
+            "height": 48,
+            "right": 337.59375,
+            "bottom": 926
+          }
+        },
+        {
+          "target": "profile",
+          "text": "Me",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 339.59375,
+            "y": 878,
+            "width": 80.40625,
+            "height": 48,
+            "right": 420,
+            "bottom": 926
+          }
+        }
+      ],
+      "mission": {
+        "title": "Native Korean Numbers 1–10 and Basic Quantities",
+        "action": "Continue current course",
+        "korean": "고유어 수 1–10",
+        "progress": 40
+      },
+      "locator": {
+        "labels": [
+          "Learning context\nStage\nEssential Korean",
+          "Learning context\nModule\nNumbers and Basic Quantities",
+          "Current\nLesson\nLesson 13"
+        ],
+        "states": [
+          "context",
+          "context",
+          "current"
+        ],
+        "current": [
+          null,
+          null,
+          "step"
+        ],
+        "centers": [
+          {
+            "x": 95.65625,
+            "y": 662
+          },
+          {
+            "x": 214.984375,
+            "y": 662
+          },
+          {
+            "x": 334.328125,
+            "y": 662
+          }
+        ],
+        "axisError": 0
+      },
+      "chevron": {
+        "display": "block",
+        "rightInset": 16.3431396484375,
+        "select": {
+          "x": 291,
+          "y": 10,
+          "width": 122,
+          "height": 44,
+          "right": 413,
+          "bottom": 54
+        }
+      },
+      "smallTargets": [],
+      "primaryCount": 1,
+      "hero": {
+        "x": 18,
+        "y": 250.953125,
+        "width": 394,
+        "height": 507.234375,
+        "right": 412,
+        "bottom": 758.1875
+      },
+      "welcome": {
+        "x": 18,
+        "y": 86,
+        "width": 394,
+        "height": 146.953125,
+        "right": 412,
+        "bottom": 232.953125
+      },
+      "mobileNav": true,
+      "reducedMotion": "1e-05s"
+    },
+    {
+      "state": "active",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "language": "vi",
+      "url": "http://127.0.0.1:4204/nikigo-app.html?lang=vi#dashboard",
+      "lang": "vi",
+      "overflow": 0,
+      "pageHeight": 1488,
+      "nav": [
+        {
+          "target": "dashboard",
+          "text": "Trang chủ",
+          "current": "page",
+          "icon": true,
+          "rect": {
+            "x": 10,
+            "y": 878,
+            "width": 80.390625,
+            "height": 48,
+            "right": 90.390625,
+            "bottom": 926
+          }
+        },
+        {
+          "target": "courses",
+          "text": "Học",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 92.390625,
+            "y": 878,
+            "width": 80.40625,
+            "height": 48,
+            "right": 172.796875,
+            "bottom": 926
+          }
+        },
+        {
+          "target": "practice",
+          "text": "Luyện tập",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 174.796875,
+            "y": 878,
+            "width": 80.390625,
+            "height": 48,
+            "right": 255.1875,
+            "bottom": 926
+          }
+        },
+        {
+          "target": "progress",
+          "text": "Tiến độ",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 257.1875,
+            "y": 878,
+            "width": 80.40625,
+            "height": 48,
+            "right": 337.59375,
+            "bottom": 926
+          }
+        },
+        {
+          "target": "profile",
+          "text": "Cá nhân",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 339.59375,
+            "y": 878,
+            "width": 80.40625,
+            "height": 48,
+            "right": 420,
+            "bottom": 926
+          }
+        }
+      ],
+      "mission": {
+        "title": "Số thuần Hàn 1–10 và số lượng cơ bản",
+        "action": "Tiếp tục bài học hiện tại",
+        "korean": "고유어 수 1–10",
+        "progress": 40
+      },
+      "locator": {
+        "labels": [
+          "Bối cảnh học tập\nGiai đoạn\nGiao tiếp tiếng Hàn cơ bản",
+          "Bối cảnh học tập\nMô-đun\nSố và số lượng cơ bản",
+          "Hiện tại\nBài học\nBài 13"
+        ],
+        "states": [
+          "context",
+          "context",
+          "current"
+        ],
+        "current": [
+          null,
+          null,
+          "step"
+        ],
+        "centers": [
+          {
+            "x": 95.65625,
+            "y": 636.8125
+          },
+          {
+            "x": 214.984375,
+            "y": 636.8125
+          },
+          {
+            "x": 334.328125,
+            "y": 636.8125
+          }
+        ],
+        "axisError": 0
+      },
+      "chevron": {
+        "display": "block",
+        "rightInset": 16.3431396484375,
+        "select": {
+          "x": 291,
+          "y": 10,
+          "width": 122,
+          "height": 44,
+          "right": 413,
+          "bottom": 54
+        }
+      },
+      "smallTargets": [],
+      "primaryCount": 1,
+      "hero": {
+        "x": 18,
+        "y": 250.953125,
+        "width": 394,
+        "height": 482.046875,
+        "right": 412,
+        "bottom": 733
+      },
+      "welcome": {
+        "x": 18,
+        "y": 86,
+        "width": 394,
+        "height": 146.953125,
+        "right": 412,
+        "bottom": 232.953125
+      },
+      "mobileNav": true,
+      "reducedMotion": "1e-05s"
+    },
+    {
+      "state": "active",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "language": "ja",
+      "url": "http://127.0.0.1:4204/nikigo-app.html?lang=ja#dashboard",
+      "lang": "ja",
+      "overflow": 0,
+      "pageHeight": 1465,
+      "nav": [
+        {
+          "target": "dashboard",
+          "text": "ホーム",
+          "current": "page",
+          "icon": true,
+          "rect": {
+            "x": 10,
+            "y": 878,
+            "width": 80.390625,
+            "height": 48,
+            "right": 90.390625,
+            "bottom": 926
+          }
+        },
+        {
+          "target": "courses",
+          "text": "学習",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 92.390625,
+            "y": 878,
+            "width": 80.40625,
+            "height": 48,
+            "right": 172.796875,
+            "bottom": 926
+          }
+        },
+        {
+          "target": "practice",
+          "text": "練習",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 174.796875,
+            "y": 878,
+            "width": 80.390625,
+            "height": 48,
+            "right": 255.1875,
+            "bottom": 926
+          }
+        },
+        {
+          "target": "progress",
+          "text": "進捗",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 257.1875,
+            "y": 878,
+            "width": 80.40625,
+            "height": 48,
+            "right": 337.59375,
+            "bottom": 926
+          }
+        },
+        {
+          "target": "profile",
+          "text": "設定",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 339.59375,
+            "y": 878,
+            "width": 80.40625,
+            "height": 48,
+            "right": 420,
+            "bottom": 926
+          }
+        }
+      ],
+      "mission": {
+        "title": "固有数詞1～10と基本数量",
+        "action": "現在のコースを続ける",
+        "korean": "고유어 수 1–10",
+        "progress": 40
+      },
+      "locator": {
+        "labels": [
+          "学習コンテキスト\nステージ\n韓国語の基本コミュニケーション",
+          "学習コンテキスト\nモジュール\n数字と基本的な数量",
+          "現在\nレッスン\n第13課"
+        ],
+        "states": [
+          "context",
+          "context",
+          "current"
+        ],
+        "current": [
+          null,
+          null,
+          "step"
+        ],
+        "centers": [
+          {
+            "x": 95.65625,
+            "y": 636.8125
+          },
+          {
+            "x": 214.984375,
+            "y": 636.8125
+          },
+          {
+            "x": 334.328125,
+            "y": 636.8125
+          }
+        ],
+        "axisError": 0
+      },
+      "chevron": {
+        "display": "block",
+        "rightInset": 16.3431396484375,
+        "select": {
+          "x": 291,
+          "y": 10,
+          "width": 122,
+          "height": 44,
+          "right": 413,
+          "bottom": 54
+        }
+      },
+      "smallTargets": [],
+      "primaryCount": 1,
+      "hero": {
+        "x": 18,
+        "y": 250.953125,
+        "width": 394,
+        "height": 482.046875,
+        "right": 412,
+        "bottom": 733
+      },
+      "welcome": {
+        "x": 18,
+        "y": 86,
+        "width": 394,
+        "height": 146.953125,
+        "right": 412,
+        "bottom": 232.953125
+      },
+      "mobileNav": true,
+      "reducedMotion": "1e-05s"
+    },
+    {
+      "state": "active",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "language": "zh",
+      "url": "http://127.0.0.1:4204/nikigo-app.html?lang=zh#dashboard",
+      "lang": "zh-CN",
+      "overflow": 0,
+      "pageHeight": 1391,
+      "nav": [
+        {
+          "target": "dashboard",
+          "text": "首页",
+          "current": "page",
+          "icon": true,
+          "rect": {
+            "x": 10,
+            "y": 970,
+            "width": 148,
+            "height": 48,
+            "right": 158,
+            "bottom": 1018
+          }
+        },
+        {
+          "target": "courses",
+          "text": "学习",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 160,
+            "y": 970,
+            "width": 148,
+            "height": 48,
+            "right": 308,
+            "bottom": 1018
+          }
+        },
+        {
+          "target": "practice",
+          "text": "练习",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 310,
+            "y": 970,
+            "width": 148,
+            "height": 48,
+            "right": 458,
+            "bottom": 1018
+          }
+        },
+        {
+          "target": "progress",
+          "text": "进度",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 460,
+            "y": 970,
+            "width": 148,
+            "height": 48,
+            "right": 608,
+            "bottom": 1018
+          }
+        },
+        {
+          "target": "profile",
+          "text": "我的",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 610,
+            "y": 970,
+            "width": 148,
+            "height": 48,
+            "right": 758,
+            "bottom": 1018
+          }
+        }
+      ],
+      "mission": {
+        "title": "固有数词1～10与基础数量",
+        "action": "继续当前课程",
+        "korean": "고유어 수 1–10",
+        "progress": 40
+      },
+      "locator": {
+        "labels": [
+          "学习上下文\n阶段\n基础沟通",
+          "学习上下文\n模块\n数字与基础数量",
+          "当前\n课程\n第13课"
+        ],
+        "states": [
+          "context",
+          "context",
+          "current"
+        ],
+        "current": [
+          null,
+          null,
+          "step"
+        ],
+        "centers": [
+          {
+            "x": 160.65625,
+            "y": 679.203125
+          },
+          {
+            "x": 383.984375,
+            "y": 679.203125
+          },
+          {
+            "x": 607.3125,
+            "y": 679.203125
+          }
+        ],
+        "axisError": 0
+      },
+      "chevron": {
+        "display": "block",
+        "rightInset": 16.3431396484375,
+        "select": {
+          "x": 553,
+          "y": 10,
+          "width": 140,
+          "height": 44,
+          "right": 693,
+          "bottom": 54
+        }
+      },
+      "smallTargets": [],
+      "primaryCount": 1,
+      "hero": {
+        "x": 24,
+        "y": 253.53125,
+        "width": 720,
+        "height": 509.5625,
+        "right": 744,
+        "bottom": 763.09375
+      },
+      "welcome": {
+        "x": 24,
+        "y": 96,
+        "width": 720,
+        "height": 135.53125,
+        "right": 744,
+        "bottom": 231.53125
+      },
+      "mobileNav": true,
+      "reducedMotion": "1e-05s"
+    },
+    {
+      "state": "active",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "language": "en",
+      "url": "http://127.0.0.1:4204/nikigo-app.html?lang=en#dashboard",
+      "lang": "en",
+      "overflow": 0,
+      "pageHeight": 1391,
+      "nav": [
+        {
+          "target": "dashboard",
+          "text": "Home",
+          "current": "page",
+          "icon": true,
+          "rect": {
+            "x": 10,
+            "y": 970,
+            "width": 148,
+            "height": 48,
+            "right": 158,
+            "bottom": 1018
+          }
+        },
+        {
+          "target": "courses",
+          "text": "Learn",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 160,
+            "y": 970,
+            "width": 148,
+            "height": 48,
+            "right": 308,
+            "bottom": 1018
+          }
+        },
+        {
+          "target": "practice",
+          "text": "Practice",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 310,
+            "y": 970,
+            "width": 148,
+            "height": 48,
+            "right": 458,
+            "bottom": 1018
+          }
+        },
+        {
+          "target": "progress",
+          "text": "Progress",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 460,
+            "y": 970,
+            "width": 148,
+            "height": 48,
+            "right": 608,
+            "bottom": 1018
+          }
+        },
+        {
+          "target": "profile",
+          "text": "Me",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 610,
+            "y": 970,
+            "width": 148,
+            "height": 48,
+            "right": 758,
+            "bottom": 1018
+          }
+        }
+      ],
+      "mission": {
+        "title": "Native Korean Numbers 1–10 and Basic Quantities",
+        "action": "Continue current course",
+        "korean": "고유어 수 1–10",
+        "progress": 40
+      },
+      "locator": {
+        "labels": [
+          "Learning context\nStage\nEssential Korean",
+          "Learning context\nModule\nNumbers and Basic Quantities",
+          "Current\nLesson\nLesson 13"
+        ],
+        "states": [
+          "context",
+          "context",
+          "current"
+        ],
+        "current": [
+          null,
+          null,
+          "step"
+        ],
+        "centers": [
+          {
+            "x": 160.65625,
+            "y": 679.203125
+          },
+          {
+            "x": 383.984375,
+            "y": 679.203125
+          },
+          {
+            "x": 607.3125,
+            "y": 679.203125
+          }
+        ],
+        "axisError": 0
+      },
+      "chevron": {
+        "display": "block",
+        "rightInset": 16.3431396484375,
+        "select": {
+          "x": 553,
+          "y": 10,
+          "width": 140,
+          "height": 44,
+          "right": 693,
+          "bottom": 54
+        }
+      },
+      "smallTargets": [],
+      "primaryCount": 1,
+      "hero": {
+        "x": 24,
+        "y": 253.53125,
+        "width": 720,
+        "height": 509.5625,
+        "right": 744,
+        "bottom": 763.09375
+      },
+      "welcome": {
+        "x": 24,
+        "y": 96,
+        "width": 720,
+        "height": 135.53125,
+        "right": 744,
+        "bottom": 231.53125
+      },
+      "mobileNav": true,
+      "reducedMotion": "1e-05s"
+    },
+    {
+      "state": "active",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "language": "vi",
+      "url": "http://127.0.0.1:4204/nikigo-app.html?lang=vi#dashboard",
+      "lang": "vi",
+      "overflow": 0,
+      "pageHeight": 1419,
+      "nav": [
+        {
+          "target": "dashboard",
+          "text": "Trang chủ",
+          "current": "page",
+          "icon": true,
+          "rect": {
+            "x": 10,
+            "y": 970,
+            "width": 148,
+            "height": 48,
+            "right": 158,
+            "bottom": 1018
+          }
+        },
+        {
+          "target": "courses",
+          "text": "Học",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 160,
+            "y": 970,
+            "width": 148,
+            "height": 48,
+            "right": 308,
+            "bottom": 1018
+          }
+        },
+        {
+          "target": "practice",
+          "text": "Luyện tập",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 310,
+            "y": 970,
+            "width": 148,
+            "height": 48,
+            "right": 458,
+            "bottom": 1018
+          }
+        },
+        {
+          "target": "progress",
+          "text": "Tiến độ",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 460,
+            "y": 970,
+            "width": 148,
+            "height": 48,
+            "right": 608,
+            "bottom": 1018
+          }
+        },
+        {
+          "target": "profile",
+          "text": "Cá nhân",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 610,
+            "y": 970,
+            "width": 148,
+            "height": 48,
+            "right": 758,
+            "bottom": 1018
+          }
+        }
+      ],
+      "mission": {
+        "title": "Số thuần Hàn 1–10 và số lượng cơ bản",
+        "action": "Tiếp tục bài học hiện tại",
+        "korean": "고유어 수 1–10",
+        "progress": 40
+      },
+      "locator": {
+        "labels": [
+          "Bối cảnh học tập\nGiai đoạn\nGiao tiếp tiếng Hàn cơ bản",
+          "Bối cảnh học tập\nMô-đun\nSố và số lượng cơ bản",
+          "Hiện tại\nBài học\nBài 13"
+        ],
+        "states": [
+          "context",
+          "context",
+          "current"
+        ],
+        "current": [
+          null,
+          null,
+          "step"
+        ],
+        "centers": [
+          {
+            "x": 160.65625,
+            "y": 679.203125
+          },
+          {
+            "x": 383.984375,
+            "y": 679.203125
+          },
+          {
+            "x": 607.3125,
+            "y": 679.203125
+          }
+        ],
+        "axisError": 0
+      },
+      "chevron": {
+        "display": "block",
+        "rightInset": 16.3431396484375,
+        "select": {
+          "x": 553,
+          "y": 10,
+          "width": 140,
+          "height": 44,
+          "right": 693,
+          "bottom": 54
+        }
+      },
+      "smallTargets": [],
+      "primaryCount": 1,
+      "hero": {
+        "x": 24,
+        "y": 253.53125,
+        "width": 720,
+        "height": 509.5625,
+        "right": 744,
+        "bottom": 763.09375
+      },
+      "welcome": {
+        "x": 24,
+        "y": 96,
+        "width": 720,
+        "height": 135.53125,
+        "right": 744,
+        "bottom": 231.53125
+      },
+      "mobileNav": true,
+      "reducedMotion": "1e-05s"
+    },
+    {
+      "state": "active",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "language": "ja",
+      "url": "http://127.0.0.1:4204/nikigo-app.html?lang=ja#dashboard",
+      "lang": "ja",
+      "overflow": 0,
+      "pageHeight": 1391,
+      "nav": [
+        {
+          "target": "dashboard",
+          "text": "ホーム",
+          "current": "page",
+          "icon": true,
+          "rect": {
+            "x": 10,
+            "y": 970,
+            "width": 148,
+            "height": 48,
+            "right": 158,
+            "bottom": 1018
+          }
+        },
+        {
+          "target": "courses",
+          "text": "学習",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 160,
+            "y": 970,
+            "width": 148,
+            "height": 48,
+            "right": 308,
+            "bottom": 1018
+          }
+        },
+        {
+          "target": "practice",
+          "text": "練習",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 310,
+            "y": 970,
+            "width": 148,
+            "height": 48,
+            "right": 458,
+            "bottom": 1018
+          }
+        },
+        {
+          "target": "progress",
+          "text": "進捗",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 460,
+            "y": 970,
+            "width": 148,
+            "height": 48,
+            "right": 608,
+            "bottom": 1018
+          }
+        },
+        {
+          "target": "profile",
+          "text": "設定",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 610,
+            "y": 970,
+            "width": 148,
+            "height": 48,
+            "right": 758,
+            "bottom": 1018
+          }
+        }
+      ],
+      "mission": {
+        "title": "固有数詞1～10と基本数量",
+        "action": "現在のコースを続ける",
+        "korean": "고유어 수 1–10",
+        "progress": 40
+      },
+      "locator": {
+        "labels": [
+          "学習コンテキスト\nステージ\n韓国語の基本コミュニケーション",
+          "学習コンテキスト\nモジュール\n数字と基本的な数量",
+          "現在\nレッスン\n第13課"
+        ],
+        "states": [
+          "context",
+          "context",
+          "current"
+        ],
+        "current": [
+          null,
+          null,
+          "step"
+        ],
+        "centers": [
+          {
+            "x": 160.65625,
+            "y": 679.203125
+          },
+          {
+            "x": 383.984375,
+            "y": 679.203125
+          },
+          {
+            "x": 607.3125,
+            "y": 679.203125
+          }
+        ],
+        "axisError": 0
+      },
+      "chevron": {
+        "display": "block",
+        "rightInset": 16.3431396484375,
+        "select": {
+          "x": 553,
+          "y": 10,
+          "width": 140,
+          "height": 44,
+          "right": 693,
+          "bottom": 54
+        }
+      },
+      "smallTargets": [],
+      "primaryCount": 1,
+      "hero": {
+        "x": 24,
+        "y": 253.53125,
+        "width": 720,
+        "height": 509.5625,
+        "right": 744,
+        "bottom": 763.09375
+      },
+      "welcome": {
+        "x": 24,
+        "y": 96,
+        "width": 720,
+        "height": 135.53125,
+        "right": 744,
+        "bottom": 231.53125
+      },
+      "mobileNav": true,
+      "reducedMotion": "1e-05s"
+    },
+    {
+      "state": "active",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "language": "zh",
+      "url": "http://127.0.0.1:4204/nikigo-app.html?lang=zh#dashboard",
+      "lang": "zh-CN",
+      "overflow": 0,
+      "pageHeight": 1186,
+      "nav": [
+        {
+          "target": "dashboard",
+          "text": "首页",
+          "current": "page",
+          "icon": true,
+          "rect": {
+            "x": 454.25,
+            "y": 12,
+            "width": 81.125,
+            "height": 44,
+            "right": 535.375,
+            "bottom": 56
+          }
+        },
+        {
+          "target": "courses",
+          "text": "学习",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 539.375,
+            "y": 12,
+            "width": 83,
+            "height": 44,
+            "right": 622.375,
+            "bottom": 56
+          }
+        },
+        {
+          "target": "practice",
+          "text": "练习",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 626.375,
+            "y": 12,
+            "width": 83,
+            "height": 44,
+            "right": 709.375,
+            "bottom": 56
+          }
+        },
+        {
+          "target": "progress",
+          "text": "进度",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 713.375,
+            "y": 12,
+            "width": 81.125,
+            "height": 44,
+            "right": 794.5,
+            "bottom": 56
+          }
+        },
+        {
+          "target": "profile",
+          "text": "我的",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 798.5,
+            "y": 12,
+            "width": 79.234375,
+            "height": 44,
+            "right": 877.734375,
+            "bottom": 56
+          }
+        }
+      ],
+      "mission": {
+        "title": "固有数词1～10与基础数量",
+        "action": "继续当前课程",
+        "korean": "고유어 수 1–10",
+        "progress": 40
+      },
+      "locator": {
+        "labels": [
+          "学习上下文\n阶段\n基础沟通",
+          "学习上下文\n模块\n数字与基础数量",
+          "当前\n课程\n第13课"
+        ],
+        "states": [
+          "context",
+          "context",
+          "current"
+        ],
+        "current": [
+          null,
+          null,
+          "step"
+        ],
+        "centers": [
+          {
+            "x": 937.625,
+            "y": 331.5625
+          },
+          {
+            "x": 937.625,
+            "y": 397.5625
+          },
+          {
+            "x": 937.625,
+            "y": 463.5625
+          }
+        ],
+        "axisError": 0
+      },
+      "chevron": {
+        "display": "block",
+        "rightInset": 16.3431396484375,
+        "select": {
+          "x": 1115,
+          "y": 12,
+          "width": 140,
+          "height": 44,
+          "right": 1255,
+          "bottom": 56
+        }
+      },
+      "smallTargets": [],
+      "primaryCount": 1,
+      "hero": {
+        "x": 130,
+        "y": 244.171875,
+        "width": 1180,
+        "height": 342.078125,
+        "right": 1310,
+        "bottom": 586.25
+      },
+      "welcome": {
+        "x": 130,
+        "y": 104,
+        "width": 1180,
+        "height": 118.171875,
+        "right": 1310,
+        "bottom": 222.171875
+      },
+      "mobileNav": false,
+      "reducedMotion": "1e-05s"
+    },
+    {
+      "state": "active",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "language": "en",
+      "url": "http://127.0.0.1:4204/nikigo-app.html?lang=en#dashboard",
+      "lang": "en",
+      "overflow": 0,
+      "pageHeight": 1186,
+      "nav": [
+        {
+          "target": "dashboard",
+          "text": "Home",
+          "current": "page",
+          "icon": true,
+          "rect": {
+            "x": 414.515625,
+            "y": 12,
+            "width": 95.828125,
+            "height": 44,
+            "right": 510.34375,
+            "bottom": 56
+          }
+        },
+        {
+          "target": "courses",
+          "text": "Learn",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 514.34375,
+            "y": 12,
+            "width": 92.46875,
+            "height": 44,
+            "right": 606.8125,
+            "bottom": 56
+          }
+        },
+        {
+          "target": "practice",
+          "text": "Practice",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 610.8125,
+            "y": 12,
+            "width": 108.390625,
+            "height": 44,
+            "right": 719.203125,
+            "bottom": 56
+          }
+        },
+        {
+          "target": "progress",
+          "text": "Progress",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 723.203125,
+            "y": 12,
+            "width": 113.5625,
+            "height": 44,
+            "right": 836.765625,
+            "bottom": 56
+          }
+        },
+        {
+          "target": "profile",
+          "text": "Me",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 840.765625,
+            "y": 12,
+            "width": 76.71875,
+            "height": 44,
+            "right": 917.484375,
+            "bottom": 56
+          }
+        }
+      ],
+      "mission": {
+        "title": "Native Korean Numbers 1–10 and Basic Quantities",
+        "action": "Continue current course",
+        "korean": "고유어 수 1–10",
+        "progress": 40
+      },
+      "locator": {
+        "labels": [
+          "Learning context\nStage\nEssential Korean",
+          "Learning context\nModule\nNumbers and Basic Quantities",
+          "Current\nLesson\nLesson 13"
+        ],
+        "states": [
+          "context",
+          "context",
+          "current"
+        ],
+        "current": [
+          null,
+          null,
+          "step"
+        ],
+        "centers": [
+          {
+            "x": 937.625,
+            "y": 331.5625
+          },
+          {
+            "x": 937.625,
+            "y": 397.5625
+          },
+          {
+            "x": 937.625,
+            "y": 463.5625
+          }
+        ],
+        "axisError": 0
+      },
+      "chevron": {
+        "display": "block",
+        "rightInset": 16.3431396484375,
+        "select": {
+          "x": 1115,
+          "y": 12,
+          "width": 140,
+          "height": 44,
+          "right": 1255,
+          "bottom": 56
+        }
+      },
+      "smallTargets": [],
+      "primaryCount": 1,
+      "hero": {
+        "x": 130,
+        "y": 244.171875,
+        "width": 1180,
+        "height": 342.078125,
+        "right": 1310,
+        "bottom": 586.25
+      },
+      "welcome": {
+        "x": 130,
+        "y": 104,
+        "width": 1180,
+        "height": 118.171875,
+        "right": 1310,
+        "bottom": 222.171875
+      },
+      "mobileNav": false,
+      "reducedMotion": "1e-05s"
+    },
+    {
+      "state": "active",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "language": "vi",
+      "url": "http://127.0.0.1:4204/nikigo-app.html?lang=vi#dashboard",
+      "lang": "vi",
+      "overflow": 0,
+      "pageHeight": 1186,
+      "nav": [
+        {
+          "target": "dashboard",
+          "text": "Trang chủ",
+          "current": "page",
+          "icon": true,
+          "rect": {
+            "x": 388.375,
+            "y": 12,
+            "width": 120.734375,
+            "height": 44,
+            "right": 509.109375,
+            "bottom": 56
+          }
+        },
+        {
+          "target": "courses",
+          "text": "Học",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 513.109375,
+            "y": 12,
+            "width": 81.59375,
+            "height": 44,
+            "right": 594.703125,
+            "bottom": 56
+          }
+        },
+        {
+          "target": "practice",
+          "text": "Luyện tập",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 598.703125,
+            "y": 12,
+            "width": 121.53125,
+            "height": 44,
+            "right": 720.234375,
+            "bottom": 56
+          }
+        },
+        {
+          "target": "progress",
+          "text": "Tiến độ",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 724.234375,
+            "y": 12,
+            "width": 105.640625,
+            "height": 44,
+            "right": 829.875,
+            "bottom": 56
+          }
+        },
+        {
+          "target": "profile",
+          "text": "Cá nhân",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 833.875,
+            "y": 12,
+            "width": 109.734375,
+            "height": 44,
+            "right": 943.609375,
+            "bottom": 56
+          }
+        }
+      ],
+      "mission": {
+        "title": "Số thuần Hàn 1–10 và số lượng cơ bản",
+        "action": "Tiếp tục bài học hiện tại",
+        "korean": "고유어 수 1–10",
+        "progress": 40
+      },
+      "locator": {
+        "labels": [
+          "Bối cảnh học tập\nGiai đoạn\nGiao tiếp tiếng Hàn cơ bản",
+          "Bối cảnh học tập\nMô-đun\nSố và số lượng cơ bản",
+          "Hiện tại\nBài học\nBài 13"
+        ],
+        "states": [
+          "context",
+          "context",
+          "current"
+        ],
+        "current": [
+          null,
+          null,
+          "step"
+        ],
+        "centers": [
+          {
+            "x": 937.625,
+            "y": 331.5625
+          },
+          {
+            "x": 937.625,
+            "y": 397.5625
+          },
+          {
+            "x": 937.625,
+            "y": 463.5625
+          }
+        ],
+        "axisError": 0
+      },
+      "chevron": {
+        "display": "block",
+        "rightInset": 16.3431396484375,
+        "select": {
+          "x": 1115,
+          "y": 12,
+          "width": 140,
+          "height": 44,
+          "right": 1255,
+          "bottom": 56
+        }
+      },
+      "smallTargets": [],
+      "primaryCount": 1,
+      "hero": {
+        "x": 130,
+        "y": 244.171875,
+        "width": 1180,
+        "height": 342.078125,
+        "right": 1310,
+        "bottom": 586.25
+      },
+      "welcome": {
+        "x": 130,
+        "y": 104,
+        "width": 1180,
+        "height": 118.171875,
+        "right": 1310,
+        "bottom": 222.171875
+      },
+      "mobileNav": false,
+      "reducedMotion": "1e-05s"
+    },
+    {
+      "state": "active",
+      "viewport": {
+        "width": 1440,
+        "height": 1024
+      },
+      "language": "ja",
+      "url": "http://127.0.0.1:4204/nikigo-app.html?lang=ja#dashboard",
+      "lang": "ja",
+      "overflow": 0,
+      "pageHeight": 1186,
+      "nav": [
+        {
+          "target": "dashboard",
+          "text": "ホーム",
+          "current": "page",
+          "icon": true,
+          "rect": {
+            "x": 451.96875,
+            "y": 12,
+            "width": 91.34375,
+            "height": 44,
+            "right": 543.3125,
+            "bottom": 56
+          }
+        },
+        {
+          "target": "courses",
+          "text": "学習",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 547.3125,
+            "y": 12,
+            "width": 81.125,
+            "height": 44,
+            "right": 628.4375,
+            "bottom": 56
+          }
+        },
+        {
+          "target": "practice",
+          "text": "練習",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 632.4375,
+            "y": 12,
+            "width": 79.234375,
+            "height": 44,
+            "right": 711.671875,
+            "bottom": 56
+          }
+        },
+        {
+          "target": "progress",
+          "text": "進捗",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 715.671875,
+            "y": 12,
+            "width": 81.125,
+            "height": 44,
+            "right": 796.796875,
+            "bottom": 56
+          }
+        },
+        {
+          "target": "profile",
+          "text": "設定",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 800.796875,
+            "y": 12,
+            "width": 79.234375,
+            "height": 44,
+            "right": 880.03125,
+            "bottom": 56
+          }
+        }
+      ],
+      "mission": {
+        "title": "固有数詞1～10と基本数量",
+        "action": "現在のコースを続ける",
+        "korean": "고유어 수 1–10",
+        "progress": 40
+      },
+      "locator": {
+        "labels": [
+          "学習コンテキスト\nステージ\n韓国語の基本コミュニケーション",
+          "学習コンテキスト\nモジュール\n数字と基本的な数量",
+          "現在\nレッスン\n第13課"
+        ],
+        "states": [
+          "context",
+          "context",
+          "current"
+        ],
+        "current": [
+          null,
+          null,
+          "step"
+        ],
+        "centers": [
+          {
+            "x": 937.625,
+            "y": 331.5625
+          },
+          {
+            "x": 937.625,
+            "y": 397.5625
+          },
+          {
+            "x": 937.625,
+            "y": 463.5625
+          }
+        ],
+        "axisError": 0
+      },
+      "chevron": {
+        "display": "block",
+        "rightInset": 16.3431396484375,
+        "select": {
+          "x": 1115,
+          "y": 12,
+          "width": 140,
+          "height": 44,
+          "right": 1255,
+          "bottom": 56
+        }
+      },
+      "smallTargets": [],
+      "primaryCount": 1,
+      "hero": {
+        "x": 130,
+        "y": 244.171875,
+        "width": 1180,
+        "height": 342.078125,
+        "right": 1310,
+        "bottom": 586.25
+      },
+      "welcome": {
+        "x": 130,
+        "y": 104,
+        "width": 1180,
+        "height": 118.171875,
+        "right": 1310,
+        "bottom": 222.171875
+      },
+      "mobileNav": false,
+      "reducedMotion": "1e-05s"
+    },
+    {
+      "state": "partial",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "language": "zh",
+      "url": "http://127.0.0.1:4204/nikigo-app.html?lang=zh#dashboard",
+      "lang": "zh-CN",
+      "overflow": 0,
+      "pageHeight": 1698,
+      "nav": [
+        {
+          "target": "dashboard",
+          "text": "首页",
+          "current": "page",
+          "icon": true,
+          "rect": {
+            "x": 10,
+            "y": 790,
+            "width": 72.390625,
+            "height": 48,
+            "right": 82.390625,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "courses",
+          "text": "学习",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 84.390625,
+            "y": 790,
+            "width": 72.40625,
+            "height": 48,
+            "right": 156.796875,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "practice",
+          "text": "练习",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 158.796875,
+            "y": 790,
+            "width": 72.390625,
+            "height": 48,
+            "right": 231.1875,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "progress",
+          "text": "进度",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 233.1875,
+            "y": 790,
+            "width": 72.40625,
+            "height": 48,
+            "right": 305.59375,
+            "bottom": 838
+          }
+        },
+        {
+          "target": "profile",
+          "text": "我的",
+          "current": null,
+          "icon": true,
+          "rect": {
+            "x": 307.59375,
+            "y": 790,
+            "width": 72.40625,
+            "height": 48,
+            "right": 380,
+            "bottom": 838
+          }
+        }
+      ],
+      "mission": {
+        "title": "看懂韩语音节块",
+        "action": "继续当前课程",
+        "korean": "음절 블록",
+        "progress": 60
+      },
+      "locator": {
+        "labels": [
+          "学习上下文\n阶段\n韩文基础",
+          "学习上下文\n模块\n辅音、音节块与复合元音",
+          "当前\n课程\n第5课"
+        ],
+        "states": [
+          "context",
+          "context",
+          "current"
+        ],
+        "current": [
+          null,
+          null,
+          "step"
+        ],
+        "centers": [
+          {
+            "x": 89,
+            "y": 605.609375
+          },
+          {
+            "x": 195,
+            "y": 605.609375
+          },
+          {
+            "x": 301,
+            "y": 605.609375
+          }
+        ],
+        "axisError": 0
+      },
+      "chevron": {
+        "display": "block",
+        "rightInset": 16.3431396484375,
+        "select": {
+          "x": 251,
+          "y": 10,
+          "width": 122,
+          "height": 44,
+          "right": 373,
+          "bottom": 54
+        }
+      },
+      "smallTargets": [],
+      "primaryCount": 1,
+      "hero": {
+        "x": 18,
+        "y": 223.3125,
+        "width": 354,
+        "height": 478.484375,
+        "right": 372,
+        "bottom": 701.796875
+      },
+      "welcome": {
+        "x": 18,
+        "y": 86,
+        "width": 354,
+        "height": 119.3125,
+        "right": 372,
+        "bottom": 205.3125
+      },
+      "mobileNav": true,
+      "reducedMotion": "1e-05s"
+    }
+  ],
+  "routeResults": [
+    {
+      "target": "courses",
+      "hash": "#courses",
+      "current": "page"
+    },
+    {
+      "target": "practice",
+      "hash": "#practice",
+      "current": "page"
+    },
+    {
+      "target": "progress",
+      "hash": "#progress",
+      "current": "page"
+    },
+    {
+      "target": "profile",
+      "hash": "#profile",
+      "current": "page"
+    },
+    {
+      "target": "dashboard",
+      "hash": "#dashboard",
+      "current": "page"
+    }
+  ],
+  "history": {
+    "back": "#profile",
+    "refresh": "#profile"
+  },
+  "serviceWorker": {
+    "count": 138,
+    "allHttp200": true,
+    "assets": [
+      {
+        "asset": "./",
+        "status": 200
+      },
+      {
+        "asset": "./index.html",
+        "status": 200
+      },
+      {
+        "asset": "./nikigo-app.html",
+        "status": 200
+      },
+      {
+        "asset": "./app-state.js",
+        "status": 200
+      },
+      {
+        "asset": "./course-catalog.js",
+        "status": 200
+      },
+      {
+        "asset": "./content-registry.js",
+        "status": 200
+      },
+      {
+        "asset": "./content-type-map.js",
+        "status": 200
+      },
+      {
+        "asset": "./route-registry.js",
+        "status": 200
+      },
+      {
+        "asset": "./recommendation-policy.js",
+        "status": 200
+      },
+      {
+        "asset": "./progress-selectors.js",
+        "status": 200
+      },
+      {
+        "asset": "./audio-readiness.js",
+        "status": 200
+      },
+      {
+        "asset": "./stage-chapter-taxonomy.js",
+        "status": 200
+      },
+      {
+        "asset": "./hangul-sound-data.js",
+        "status": 200
+      },
+      {
+        "asset": "./audio-catalog.js",
+        "status": 200
+      },
+      {
+        "asset": "./review.html",
+        "status": 200
+      },
+      {
+        "asset": "./review.css",
+        "status": 200
+      },
+      {
+        "asset": "./review-catalog.js",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-00.html",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-00.js?v=22-audio-batch-02b",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-01.html",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-02.html",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-03.html",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-04.html",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-engine.js",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-player.css",
+        "status": 200
+      },
+      {
+        "asset": "./player-privacy.css",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-consonant-contrast.html",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-consonant-contrast.js",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-consonant-contrast.css",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-05.html",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-05.js?v=classic-focus-v1",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-05.css?v=classic-focus-v1",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-05-classic-focus.js?v=classic-focus-v1",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-06.html",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-06.js",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-06.css",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-07.html",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-07.js",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-07.css",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-08.html",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-08.js",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-08-classic-focus.js",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-08-classic-focus.css",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-09.html",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-09.js",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-10.html",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-10.js",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-11.html",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-11.js",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-12.html",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-12.js",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-12-classic-focus.js?v=1",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-12-classic-focus.css?v=1",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-13.html",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-13.js",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-13-classic-focus.js?v=2",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-13-classic-focus.css?v=2",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-sprint-engine.js",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-sprint.css",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-clear-interactive.js",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-clear-interactive.css",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-purple-interactive.css",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-11-classic-focus.js",
+        "status": 200
+      },
+      {
+        "asset": "./lesson-11-classic-focus.css",
+        "status": 200
+      },
+      {
+        "asset": "./assets/classic-focus-tokens.css",
+        "status": 200
+      },
+      {
+        "asset": "./assets/classic-focus-shell.css",
+        "status": 200
+      },
+      {
+        "asset": "./assets/classic-focus-shell.js",
+        "status": 200
+      },
+      {
+        "asset": "./assets/nikigo-clear-shell.js",
+        "status": 200
+      },
+      {
+        "asset": "./assets/nikigo-product-shell.js",
+        "status": 200
+      },
+      {
+        "asset": "./assets/nikigo-purple-shell.css",
+        "status": 200
+      },
+      {
+        "asset": "./assets/nikigo-friendly-learning-path.css",
+        "status": 200
+      },
+      {
+        "asset": "./assets/nikigo-learn-v4.css?v=1",
+        "status": 200
+      },
+      {
+        "asset": "./assets/nikigo-learn-v4.js?v=1",
+        "status": 200
+      },
+      {
+        "asset": "./assets/nikigo-learn-v4/stage-k0.webp",
+        "status": 200
+      },
+      {
+        "asset": "./assets/nikigo-learn-v4/stage-k1.webp",
+        "status": 200
+      },
+      {
+        "asset": "./assets/nikigo-learn-v4/module-k0-map-vowels.webp",
+        "status": 200
+      },
+      {
+        "asset": "./assets/nikigo-learn-v4/module-k0-consonants-syllables.webp",
+        "status": 200
+      },
+      {
+        "asset": "./assets/nikigo-learn-v4/module-k0-batchim-sound.webp",
+        "status": 200
+      },
+      {
+        "asset": "./assets/nikigo-learn-v4/module-k0-checkpoint.webp",
+        "status": 200
+      },
+      {
+        "asset": "./assets/nikigo-learn-v4/module-k1-identity.webp",
+        "status": 200
+      },
+      {
+        "asset": "./assets/nikigo-learn-v4/module-k1-numbers.webp",
+        "status": 200
+      },
+      {
+        "asset": "./assets/nikigo-mark.svg",
+        "status": 200
+      },
+      {
+        "asset": "./favicon.ico",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-00/yo.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-00/yu.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-00/ha.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-05/geu.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/k0-consonant-contrast/ga.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/k0-consonant-contrast/ka.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/k0-consonant-contrast/kka.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/k0-consonant-contrast/da.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/k0-consonant-contrast/ta.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/k0-consonant-contrast/tta.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/k0-consonant-contrast/ba.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/k0-consonant-contrast/pa.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/k0-consonant-contrast/ppa.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/k0-consonant-contrast/ja.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/k0-consonant-contrast/cha.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/k0-consonant-contrast/jja.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/k0-consonant-contrast/sa.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/k0-consonant-contrast/ssa.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-01/a.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-01/eo.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-01/o.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-01/u.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-01/ga.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-01/na.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-01/geo-v2.wav",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-01/go-v2.wav",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-01/gu-v2.wav",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-01/neo-v2.wav",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-01/no-v2.wav",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-01/nu-v2.wav",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-02/eu.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-02/i.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-02/ae.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-02/e.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-02/da.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-02/di.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-02/ra.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-02/ma.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-02/mi.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-02/namu.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-02/dari.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-02/meori.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-03/ya.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-03/yeo.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-03/ba.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-03/byeo.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-03/sa.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-03/syeo.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-03/a.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-03/bada.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-03/saram.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-03/annyeong.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-03/annyeonghaseyo.mp3",
+        "status": 200
+      },
+      {
+        "asset": "./audio/lesson-04/ba-v2.wav",
+        "status": 200
+      },
+      {
+        "asset": "./manifest.webmanifest",
+        "status": 200
+      }
+    ]
+  },
+  "consoleIssues": [],
+  "networkIssues": [],
+  "externalRequests": [],
+  "apiRequests": 0,
+  "fees": 0
+}
