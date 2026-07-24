@@ -1,4 +1,4 @@
-const CACHE = 'nikigo-v43-self-review-gate-purple-alignment-v1';
+const CACHE = 'nikigo-v44-self-review-gate-homepage-visual-polish-v1';
 const ASSETS = [
   './', './index.html', './nikigo-app.html', './app-state.js', './course-catalog.js',
   './content-registry.js', './content-type-map.js', './route-registry.js',
