@@ -1,0 +1,84 @@
+{
+  "result": "pass-with-inherited-target-size-note",
+  "branch": "agent/nikigo-purple-alignment-formal",
+  "base": "4c2bc7b917ed7940e0b0be14036e9ab8bb8f2194",
+  "preview": "http://127.0.0.1:4202/",
+  "brandPrimary": "#6D4AFF",
+  "contrastWhiteOnPrimary": 5.15,
+  "geometry": {
+    "comparisons": 24,
+    "passed": 24,
+    "differences": 0,
+    "routes": 8,
+    "viewports": [
+      "390x844",
+      "768x1024",
+      "1440x1024"
+    ]
+  },
+  "languages": {
+    "checked": [
+      "zh",
+      "en",
+      "vi",
+      "ja"
+    ],
+    "pageLanguageChecks": 28,
+    "horizontalOverflow": 0,
+    "visibleTruncation": 0
+  },
+  "browser": {
+    "consoleWarnings": 0,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "httpErrors": 0,
+    "externalRequests": 0,
+    "serviceWorkerAssets": 138,
+    "serviceWorkerAssetsHttp200": 138,
+    "cacheName": "nikigo-v43-self-review-gate-purple-alignment-v1"
+  },
+  "accessibility": {
+    "focusRing": "3px solid rgba(109, 74, 255, 0.48)",
+    "stageKeyboardNavigation": true,
+    "ariaCurrent": true,
+    "ariaSelected": true,
+    "reducedMotion": true,
+    "modifiedAppShellTargetsAtLeast44": true,
+    "inheritedCompactHeaderExceptions": [
+      "review-logo",
+      "review-language",
+      "diagnostic-logo",
+      "diagnostic-language"
+    ]
+  },
+  "courseProtection": {
+    "lessons": [
+      "lesson-04",
+      "lesson-05",
+      "lesson-07",
+      "lesson-08",
+      "lesson-11",
+      "lesson-12",
+      "lesson-13"
+    ],
+    "byteIdenticalScreenshotPairs": 7,
+    "classicFocusSourceChanges": 0
+  },
+  "protectedData": {
+    "courseCatalogChanged": false,
+    "appStateChanged": false,
+    "audioCatalogChanged": false,
+    "approvedAudioCount": 54,
+    "audioFilesChanged": 0,
+    "courseBusinessEnginesChanged": false
+  },
+  "tests": {
+    "npmTest": "pass",
+    "architecture": "pass",
+    "purpleAlignmentValidator": "pass",
+    "gitDiffCheck": "pass"
+  },
+  "apiRequests": 0,
+  "cost": 0
+}
