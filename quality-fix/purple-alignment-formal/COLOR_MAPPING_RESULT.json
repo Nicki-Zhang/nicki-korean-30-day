@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "status": "applied-locally",
+  "base": "4c2bc7b917ed7940e0b0be14036e9ab8bb8f2194",
+  "brandTokens": {
+    "brand-primary": "#6D4AFF",
+    "brand-hover": "#5638D4",
+    "brand-active": "#452BB5",
+    "brand-soft": "#F4F0FF",
+    "brand-subtle": "#FBFAFF",
+    "brand-border": "#DDD3FF",
+    "brand-focus": "rgba(109,74,255,.48)",
+    "brand-text": "#5638D4",
+    "brand-on-primary": "#FFFFFF",
+    "supporting-violet": "#9C83FF"
+  },
+  "mappedSurfaces": [
+    "dashboard-hero",
+    "primary-actions",
+    "app-navigation",
+    "stage-module-lesson-emphasis",
+    "learning-path",
+    "progress",
+    "links",
+    "focus",
+    "review-center",
+    "diagnostic",
+    "onboarding"
+  ],
+  "semanticColorsPreserved": [
+    "success",
+    "error",
+    "warning",
+    "pending-audio",
+    "disabled",
+    "neutral",
+    "destructive"
+  ],
+  "classicFocusChanged": false,
+  "layoutChanged": false,
+  "unmappedNewPurpleDiscovered": false
+}
