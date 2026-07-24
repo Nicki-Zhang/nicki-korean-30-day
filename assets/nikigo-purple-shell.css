@@ -1,13 +1,22 @@
 :root {
-  --nikigo-purple:#6657d9;
-  --nikigo-purple-deep:#4f46b8;
-  --nikigo-purple-dark:#3f387f;
-  --nikigo-purple-soft:#f2f0ff;
-  --nikigo-canvas:#f7f7fb;
+  --brand-primary:#6d4aff;
+  --brand-hover:#5638d4;
+  --brand-active:#452bb5;
+  --brand-soft:#f4f0ff;
+  --brand-subtle:#fbfaff;
+  --brand-border:#ddd3ff;
+  --brand-focus:rgba(109,74,255,.48);
+  --brand-text:#5638d4;
+  --brand-on-primary:#ffffff;
+  --nikigo-purple:var(--brand-primary);
+  --nikigo-purple-deep:var(--brand-hover);
+  --nikigo-purple-dark:var(--brand-text);
+  --nikigo-purple-soft:var(--brand-soft);
+  --nikigo-canvas:var(--brand-subtle);
   --nikigo-surface:#ffffff;
-  --nikigo-ink:#242335;
-  --nikigo-muted:#6e6b7b;
-  --nikigo-border:#e5e3ef;
+  --nikigo-ink:#211b3b;
+  --nikigo-muted:#746e8c;
+  --nikigo-border:#e7e2f2;
   --nikigo-success:#257653;
   --nikigo-error:#a94338;
   --nikigo-radius:18px;
@@ -15,19 +24,19 @@
 
 .purple-shell {
   --p:var(--nikigo-purple);
-  --p2:#7a6ce3;
+  --p2:#9c83ff;
   --d:var(--nikigo-purple-dark);
   --ink:var(--nikigo-ink);
   --muted:var(--nikigo-muted);
   --line:var(--nikigo-border);
   --lav:var(--nikigo-purple-soft);
-  --lime:#e7e4ff;
+  --lime:var(--brand-border);
   --green:var(--nikigo-success);
   --bg:var(--nikigo-canvas);
   min-width:0;
   overflow-x:hidden;
   background:
-    radial-gradient(circle at 8% 2%,rgba(102,87,217,.08),transparent 26rem),
+    radial-gradient(circle at 8% 2%,rgba(109,74,255,.08),transparent 26rem),
     var(--nikigo-canvas);
   color:var(--nikigo-ink);
   font-family:"Avenir Next","Segoe UI","Noto Sans KR","Noto Sans SC",system-ui,sans-serif;
@@ -47,7 +56,7 @@
 .purple-shell a:focus-visible,
 .purple-shell select:focus-visible,
 .purple-shell input:focus-visible {
-  outline:3px solid rgba(79,70,184,.38)!important;
+  outline:3px solid var(--brand-focus)!important;
   outline-offset:3px!important;
 }
 
@@ -73,14 +82,14 @@
 .purple-shell .logo {
   min-height:44px;
   padding:0;
-  color:var(--nikigo-purple-deep);
+  color:var(--brand-primary);
   font-size:22px;
   font-weight:800;
   letter-spacing:-.035em;
   white-space:nowrap;
 }
 
-.purple-shell .logo b { margin-right:4px; color:#8175e6; font-size:13px; }
+.purple-shell .logo b { margin-right:4px; color:#9c83ff; font-size:13px; }
 .purple-shell .logo small { display:none; }
 .purple-shell .topRight { grid-column:3; display:flex; align-items:center; gap:8px; }
 .purple-shell .languagePicker {
@@ -157,12 +166,13 @@
   font-weight:750;
 }
 .purple-shell .primary {
-  border:1px solid var(--nikigo-purple-deep);
-  background:var(--nikigo-purple-deep);
-  color:#fff;
-  box-shadow:0 8px 22px rgba(79,70,184,.18);
+  border:1px solid var(--brand-primary);
+  background:var(--brand-primary);
+  color:var(--brand-on-primary);
+  box-shadow:0 8px 22px rgba(109,74,255,.18);
 }
-.purple-shell .primary:hover { background:#453ca8; }
+.purple-shell .primary:hover { border-color:var(--brand-hover); background:var(--brand-hover); }
+.purple-shell .primary:active { border-color:var(--brand-active); background:var(--brand-active); }
 .purple-shell .secondary,
 .purple-shell .courseAction.secondary {
   border:1px solid var(--nikigo-border);
@@ -188,7 +198,7 @@
   padding:28px;
   border:1px solid rgba(255,255,255,.28);
   border-radius:24px;
-  background:linear-gradient(128deg,#403a86 0%,#574db8 54%,#6c5bd4 100%);
+  background:linear-gradient(128deg,#5638d4 0%,#6d4aff 54%,#9c83ff 100%);
   color:#fff;
   box-shadow:0 18px 42px rgba(66,55,145,.18);
 }

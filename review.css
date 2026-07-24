@@ -2,3 +2,14 @@
 @media(max-width:720px){.top{height:64px;padding:0 14px}.sessionTitle{display:none}.languagePicker select{max-width:116px}.progressWrap,.stage{padding-left:14px;padding-right:14px}.stage{margin-top:17px}.card{padding:27px 18px;border-radius:23px}.reviewStats{grid-template-columns:1fr 1fr}.reviewStat:last-child{grid-column:1/-1}.options{grid-template-columns:1fr}.foot{align-items:stretch}.foot .primary{flex:1}.questionCue{min-height:112px}}
 .logo:focus-visible,.homeButton:focus-visible,.languagePicker:focus-within,button:focus-visible,select:focus-visible{outline:3px solid #b7a7ff;outline-offset:3px}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+/* Purple Alignment V1: standalone review page shares the product brand roles. */
+:root{--brand-primary:#6d4aff;--brand-hover:#5638d4;--brand-active:#452bb5;--brand-soft:#f4f0ff;--brand-subtle:#fbfaff;--brand-border:#ddd3ff;--brand-focus:rgba(109,74,255,.48);--brand-text:#5638d4;--brand-on-primary:#fff;--p:var(--brand-primary);--d:var(--brand-hover);--lav:var(--brand-soft);--bg:var(--brand-subtle)}
+body{background:radial-gradient(circle at 8% 8%,var(--brand-soft),transparent 28%),radial-gradient(circle at 94% 90%,#eaf9c9,transparent 23%),var(--brand-subtle)}
+.homeButton:hover{border-color:var(--brand-border);background:var(--brand-soft)}
+.track i{background:linear-gradient(90deg,var(--brand-primary),#9c83ff)}
+.questionCue,.completeIcon{background:linear-gradient(145deg,var(--brand-hover),var(--brand-primary))}
+.audioBtn{border-color:var(--brand-border);background:var(--brand-soft)}
+.note{border-color:var(--brand-border);background:var(--brand-soft);color:var(--brand-text)}
+.primary:hover{background:var(--brand-hover)}
+.primary:active{background:var(--brand-active)}
+.logo:focus-visible,.homeButton:focus-visible,.languagePicker:focus-within,button:focus-visible,select:focus-visible{outline-color:var(--brand-focus)}

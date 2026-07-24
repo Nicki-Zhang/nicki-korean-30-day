@@ -2,27 +2,27 @@
    Formal presentation layer for the app shell, Dashboard and Learn views. */
 
 :root {
-  --friendly-brand-900:#2b1747;
-  --friendly-brand-800:#3f246d;
-  --friendly-brand-700:#5433a3;
-  --friendly-brand-600:#6848c8;
-  --friendly-brand-500:#8064d8;
-  --friendly-brand-200:#d8cff5;
-  --friendly-brand-100:#ece7fb;
-  --friendly-brand-050:#f6f3fd;
-  --friendly-canvas:#f8f7fc;
+  --friendly-brand-900:var(--brand-text);
+  --friendly-brand-800:var(--brand-text);
+  --friendly-brand-700:var(--brand-text);
+  --friendly-brand-600:var(--brand-primary);
+  --friendly-brand-500:#9c83ff;
+  --friendly-brand-200:var(--brand-border);
+  --friendly-brand-100:var(--brand-soft);
+  --friendly-brand-050:var(--brand-subtle);
+  --friendly-canvas:var(--brand-subtle);
   --friendly-surface:#ffffff;
-  --friendly-ink:#201a29;
-  --friendly-muted:#706a7a;
-  --friendly-subtle:#9690a0;
-  --friendly-border:rgba(52,31,80,.12);
+  --friendly-ink:#211b3b;
+  --friendly-muted:#746e8c;
+  --friendly-subtle:#948da8;
+  --friendly-border:#e7e2f2;
   --friendly-success:#237553;
   --friendly-success-soft:#eaf6f0;
   --friendly-reminder:#9a5a13;
   --friendly-reminder-soft:#fff4df;
   --friendly-locked:#716b79;
   --friendly-error:#a13e3a;
-  --friendly-gradient:linear-gradient(135deg,#4b2b85 0%,#6442bd 54%,#7761c7 100%);
+  --friendly-gradient:linear-gradient(135deg,#5638d4 0%,#6d4aff 54%,#9c83ff 100%);
 
   --friendly-font-sans:"Avenir Next","Noto Sans KR","Apple SD Gothic Neo","PingFang SC","Hiragino Sans",system-ui,sans-serif;
   --friendly-font-korean:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",var(--friendly-font-sans);
@@ -83,7 +83,7 @@ body.friendly-shell {
   left:8px;
   padding:10px 14px;
   border-radius:var(--friendly-radius-sm);
-  background:var(--friendly-brand-900);
+  background:var(--brand-primary);
   color:#fff;
   transform:translateY(-150%);
   transition:transform var(--friendly-duration-fast) var(--friendly-ease);
@@ -99,7 +99,7 @@ body.friendly-shell {
 .friendly-shell a:focus-visible,
 .friendly-shell select:focus-visible,
 .friendly-shell summary:focus-visible {
-  outline:3px solid rgba(104,72,200,.48)!important;
+  outline:3px solid var(--brand-focus)!important;
   outline-offset:3px!important;
 }
 
@@ -128,7 +128,7 @@ body.friendly-shell {
   min-width:82px;
   min-height:44px;
   padding:0;
-  color:var(--friendly-brand-900);
+  color:var(--brand-primary);
   font-size:1.35rem;
   font-weight:800;
   letter-spacing:-.035em;
@@ -206,17 +206,46 @@ body.friendly-shell {
   text-decoration:none;
 }
 .friendly-shell .primary {
-  border:1px solid var(--friendly-brand-900);
-  background:var(--friendly-brand-900);
-  color:#fff;
+  border:1px solid var(--brand-primary);
+  background:var(--brand-primary);
+  color:var(--brand-on-primary);
   box-shadow:var(--friendly-shadow-button);
 }
-.friendly-shell .primary:hover { background:#211036; }
+.friendly-shell .primary:hover { border-color:var(--brand-hover); background:var(--brand-hover); }
+.friendly-shell .primary:active { border-color:var(--brand-active); background:var(--brand-active); }
 .friendly-shell .secondary {
   border:1px solid var(--friendly-border);
   background:var(--friendly-surface);
   color:var(--friendly-brand-800);
   box-shadow:none;
+}
+
+/* Color-only alignment for the existing onboarding surfaces. */
+.friendly-shell .eyebrow::before {
+  background:#9c83ff;
+  box-shadow:0 0 0 5px var(--brand-soft);
+}
+.friendly-shell .phone {
+  background:linear-gradient(150deg,var(--brand-hover),var(--brand-primary));
+  box-shadow:0 40px 80px rgba(86,56,212,.21);
+}
+.friendly-shell .authArt {
+  background:linear-gradient(145deg,var(--brand-hover),var(--brand-primary));
+}
+.friendly-shell .field input:focus,
+.friendly-shell .field select:focus {
+  border-color:var(--brand-primary);
+  box-shadow:0 0 0 3px rgba(109,74,255,.12);
+}
+.friendly-shell .track i {
+  background:linear-gradient(90deg,var(--brand-primary),#9c83ff);
+}
+.friendly-shell .diagnosisCard {
+  border-color:var(--brand-border);
+  background:linear-gradient(135deg,var(--brand-soft),var(--friendly-surface));
+}
+.friendly-shell .ability i b {
+  background:linear-gradient(90deg,var(--brand-primary),#9c83ff);
 }
 
 /* Dashboard */
